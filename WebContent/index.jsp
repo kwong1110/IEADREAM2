@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>이어드림</title>
+<title>광</title>
 </head>
 <body>
 	<!-- 메인 메뉴로 연결  -->
