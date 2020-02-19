@@ -1,4 +1,4 @@
-package src.questionBoard.faq.model.dao;
+package questionBoard.faq.model.dao;
 
 import static common.JDBCTemplate.close;
 

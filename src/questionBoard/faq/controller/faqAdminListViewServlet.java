@@ -1,4 +1,4 @@
-package src.questionBoard.faq.controller;
+package questionBoard.faq.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
