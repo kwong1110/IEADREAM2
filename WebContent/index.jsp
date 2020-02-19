@@ -4,12 +4,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>광윤임!박소현!!</title>
+<title>이어드림</title>
 </head>
 <body>
 	<!-- 메인 메뉴로 연결  -->
 	<div>
-		<%-- <%@ include file="views/common/mainmenu.jsp" %> --%>
+		<%@ include file="views/common/mainmenu.jsp" %>
 	</div>
 	
 	<%-- <li>
