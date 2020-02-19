@@ -8,55 +8,29 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
+import account.model.vo.Account;
 import questionBoard.question.model.dao.QuestionDAO;
 import questionBoard.question.model.vo.Question;
 
 public class QuestionService {
 
-	/*
-	 * public int getListCount() { Connection conn = getConnection(); int result =
-	 * new QuestionDAO().getListCount(conn); close(conn); return result; }
-	 */
+	
+	  public int getListCount() { 
+		  Connection conn = getConnection();
+		  int result = new QuestionDAO().getListCount(conn);
+		  close(conn); 
+		  return result; 
+	  }
+	 
 
-	/*
-	  public ArrayList<Question> selectList(int currentPage) { Connection conn =
-	  getConnection(); ArrayList<Question> list = new
-	  QuestionDAO().selectList(conn, currentPage); close(conn); return list; }
-	  
-	  페이징 지움
-	 */
-	public ArrayList<Question> selectList() {
-		Connection conn = getConnection();
-		ArrayList<Question> list = new QuestionDAO().selectList(conn);
-		close(conn);
-		return list;
-	}
+	
+	  public ArrayList<Question> selectList(int currentPage) {
+		  Connection conn = getConnection();
+		  ArrayList<Question> list = new QuestionDAO().selectList(conn, currentPage); 
+		  close(conn);
+		  return list; 
+	  }
 
-/*	public int insertQuestion(Question question, String category) {
-		Connection conn = getConnection();
-		QuestionDAO dao = new QuestionDAO();
-		int result = dao.insertQuestion(conn, question, category);
-		
-		if(result > 0) {
-			commit(conn);
-		} else{
-			rollback(conn);
-		}
-		return result;
-	}
-*/
-/*	public int updateQuestion(Question question, String category) {
-		Connection conn = getConnection();
-		QuestionDAO dao = new QuestionDAO();
-		int result = dao.updateQuestion(conn, question, category);
-		if(result>0) {
-			commit(conn);
-		} else {
-			rollback(conn);
-		}
-		return result;
-	}
-*/
 	public Question selectQuestion(int postNo) {
 		Connection conn = getConnection();
 		QuestionDAO dao = new QuestionDAO();
@@ -113,4 +87,37 @@ public class QuestionService {
 			}
 			return result;
 		}
+
+
+
+	public String selectUserId(int postNo) {
+		Connection conn = getConnection();
+		QuestionDAO dao = new QuestionDAO();
+		
+		String result = dao.selectUserId(conn, postNo);
+		if(result != null) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+		}
+
+
+
+	public ArrayList<Question> insertReply(Question q) {
+		Connection conn = getConnection();
+		QuestionDAO dao = new QuestionDAO();// 두번 왔다갔다 할거기 때문에
+		
+		int result = dao.insertReply(conn, q);
+		ArrayList<Question> list = null;
+		if(result>0) {
+			commit(conn);
+			list = dao.selectReplyList(conn, q.getPostNo());
+		}else {
+			rollback(conn);
+		}
+		return list;
+	}
 	}
