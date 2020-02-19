@@ -1,4 +1,4 @@
-package src.questionBoard.faq.model.service;
+package questionBoard.faq.model.service;
 
 import static common.JDBCTemplate.*;
 import static common.JDBCTemplate.getConnection;
