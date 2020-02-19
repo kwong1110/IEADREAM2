@@ -3,6 +3,13 @@
 <%@ page import= "java.util.ArrayList, questionBoard.question.model.vo.*" %>
 <%
 	ArrayList<Question> list = (ArrayList<Question>)request.getAttribute("list");
+	PageInfo pi = (PageInfo)request.getAttribute("pi");
+	
+	int listCount = pi.getListCount();
+	int currentPage = pi.getCurrentPage();
+	int maxPage = pi.getMaxPage();
+	int startPage = pi.getStartPage();
+	int endPage = pi.getEndPage();
 %> 
 <!DOCTYPE html>
 <html>
@@ -47,7 +54,6 @@
 							<th width="100px">카테고리</th>
 							<th width="150px">제목</th>
 							<th width="100px">답변 여부</th>
-							<!-- <th width="170px">수정</th> -->
 							<th width="170px">문의 날짜</th>
 						</tr>
 						<% if(list.isEmpty()){ %>
@@ -55,33 +61,70 @@
 							<td colspan="5">조회된 문의사항이 없습니다.</td>
 						</tr>
 						<% } else{
-							for(Question q : list){ %>
+							for(Question q : list){%>
+							<%	if(loginUser.getGrade()==0 || loginUser.getUserNo()== q.getUserNo()){ %>
 						<tr>
 							<td><%= q.getPostNo() %><input type = "hidden" value='<%= q.getPostNo() %>'></td>
 							<td><%= q.getCategory() %></td>
 							<td><%= q.getTitle() %></td>
 							
 							<!-- 답변 완료 메시지 물어보기 -->
-							
 							<% if(q.getAnswerChecked()=='N'){ %>
 							<td>미답변</td>
 							<% } else{  %>
 							<td>답변 완료</td>
 							<%} %>
-							 <td><%= q.getCreateDate() %></td>
-							
-							<%-- <td><input type="button" onclick='location.href="<%= request.getContextPath() %>/views/questionBoard/question/questionUpdateForm.jsp"' value="수정"></td> --%>
+							<td><%= q.getCreateDate() %></td>
 						</tr>
-						<%		}
-							}%>
+					<%		}
+						}
+						}
+					%>
 					</table>
-				<div class='searchArea' align='right'>
-					<%-- <% if(loginUser != null){ %> --%>
-					<button onclick='location.href="views/questionBoard/question/questionInsertForm.jsp"' id="insertBtn">작성하기</button>
-					<%-- <% } %> --%>
+				</div>
+				
+				<!-- 페이징 -->
+				<div class='pagingArea' align='center'>
+					<% if(!list.isEmpty()){ %>
+					<!-- 맨 처음으로 가는 버튼 -->
+					<button onclick="location.href='<%= request.getContextPath() %>/list.qu?currentPage=1'">&lt;&lt;</button>
+					<!-- 이전 페이지로  가는 버튼 -->
+					<button onclick="location.href='<%= request.getContextPath() %>/list.qu?currentPage=<%= currentPage-1 %>'" id="beforeBtn">&lt;</button>
+					<script>
+						if(<%= currentPage %> <= 1){
+							var before = $('#beforeBtn');
+							before.attr('disabled','true');
+						}
+					</script>
+					<!-- 10개의 페이지 목록 버튼 -->
+					<% for(int p = startPage; p <= endPage; p++){ %>
+						<% if(p == currentPage){ %>
+							<button id="choosen" disabled><%= p %></button>
+						<% } else { %>
+							<button id="numBtn" onclick="location.href='<%=request.getContextPath() %>/list.qu?currentPage=<%= p %>'"><%= p %></button>
+						<% } %>
+					<% } %>
+					
+					<!-- 다음 페이지로 가는 버튼 -->
+					<button onclick="location.href='<%= request.getContextPath() %>/list.qu?currentPage=<%= currentPage + 1 %>'" id="afterBtn">&gt;</button>
+					<script>
+						if(<%= currentPage %> >= <%= maxPage %>){
+							var after= $("#afterBtn");
+							after.attr('disabled','true');
+						}
+					</script>
+					
+					<!-- 맨 끝으로 가는 버튼 -->
+					<button onclick="location.href='<%= request.getContextPath() %>/list.qu?currentPage=<%= maxPage %>'">&gt;&gt;</button>			
+					
+					<% } %>
+					<div class='btnBox' align='right'>
+						<% if(loginUser != null){ %>
+						<button onclick='location.href="views/questionBoard/question/questionInsertForm.jsp"' id="insertBtn">작성하기</button>
+						<% } %> 
+					</div>
 				</div>
 			</div>
-		</div>
 		</div>
 	</div>
 	<script>
@@ -92,18 +135,15 @@
 				$(this).parent().css('background','none');
 			}).click(function(){
 				var postNo = $(this).parent().children().children('input').val();
-				location.href='<%= request.getContextPath() %>/detail.qu?postNo=' + postNo;
-				<%-- // 로그인 한 사람만 상세보기 이용할 수 있게 하기
+				<%--location.href='<%= request.getContextPath() %>/detail.qu?postNo=' + postNo;
+				 // 로그인 한 사람만 상세보기 이용할 수 있게 하기
+				<%if(loginUser != null){ %>		|| loginUser.getUserNo()== question.getUserNo()--%>
 				<%if(loginUser != null){ %>
-					location.href='<%= request.getContextPath() %>/detail.bo?bid=' + bid;
+					location.href='<%= request.getContextPath() %>/detail.qu?postNo=' + postNo;
 				<% } else { %>
 					alert('회원만 이용할 수 있는 서비스 입니다.');
-				<% } %> --%>
-				
+				<% } %> 
 			});
-			/* $('#updateBtn').click(function(){
-				<button onclick='location.href="views/board/boardInsertForm.jsp"'>작성하기</button>
-			}); */
 		});
 		
 	</script>

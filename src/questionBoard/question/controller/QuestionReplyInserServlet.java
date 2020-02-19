@@ -1,28 +1,31 @@
 package questionBoard.question.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import questionBoard.question.model.service.QuestionService;
 import questionBoard.question.model.vo.Question;
 
 /**
- * Servlet implementation class QuestionDetailServlet
+ * Servlet implementation class QuestionReplyInserServlet
  */
-@WebServlet("/detail.qu")
-public class QuestionDetailServlet extends HttpServlet {
+@WebServlet("/insertReply.qu")
+public class QuestionReplyInserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public QuestionDetailServlet() {
+    public QuestionReplyInserServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,23 +34,21 @@ public class QuestionDetailServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String answerContent  = request.getParameter("answerContent");
 		int postNo = Integer.parseInt(request.getParameter("postNo"));
 		
-		Question question = new QuestionService().selectQuestion(postNo);
-		String userId = new QuestionService().selectUserId(postNo);
-		String page = null;
-		if(question != null) {
-			page = "views/questionBoard/question/questionDetailView.jsp";
-			request.setAttribute("question", question);
-			request.setAttribute("userId", userId);
-			
-		}else {
-			page = "views/common/errorPage.jsp";
-			request.setAttribute("msg", "문의글 상세조회에 실패하였습니다.");
-		}
-		RequestDispatcher view = request.getRequestDispatcher(page);
-		view.forward(request, response);
-	
+		Question q = new Question();
+		q.setAnswerContent(answerContent);
+		q.setPostNo(postNo);
+		
+		ArrayList<Question> list = new QuestionService().insertReply(q);
+		response.setContentType("application/json; charset=UTF-8");
+		//new Gson().toJson(list, response.getWriter());//list를 response.getWriter를 통해서 보내겠다.
+		
+		// 데이트 형식을 맞추기 위해 
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+		gson.toJson(list, response.getWriter());
+		
 	}
 
 	/**

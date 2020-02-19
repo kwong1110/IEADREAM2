@@ -54,20 +54,57 @@ public class QuestionDAO {
 		return result;
 	}
 
-	/*
-	 * public ArrayList<Question> selectList(Connection conn, int currentPage) {
-	 * PreparedStatement pstmt = null; ResultSet rset =null; ArrayList<Question>
-	 * list = null; int posts = 10;
-	 * 
-	 * int startRow = (currentPage -1) * posts +1; int endRow = startRow + posts -1;
-	 * 
-	 * String query = prop.getProperty("selectList");
-	 * 
-	 * try { pstmt = conn.prepareStatement(query);
-	 * 
-	 * } catch (SQLException e) { e.printStackTrace(); } return list; }
-	 */
 	
+	  public ArrayList<Question> selectList(Connection conn, int currentPage) {
+		  PreparedStatement pstmt = null; 
+		  ResultSet rset =null; 
+		  ArrayList<Question> list = null; 
+		  
+		  int posts = 10;
+		  int startRow = (currentPage -1) * posts +1;
+		  int endRow = startRow + posts -1;
+	  
+		  String query = prop.getProperty("selectList");
+	  
+	  try {
+		  pstmt = conn.prepareStatement(query);
+		  pstmt.setInt(1, startRow);
+		  pstmt.setInt(2, endRow);
+		  
+		  rset = pstmt.executeQuery();
+		  list = new ArrayList<Question>();
+			
+			while(rset.next()) {
+				
+			 list.add(new Question(rset.getInt("POST_NO"), 
+					 				rset.getInt("USER_NO"),
+					 				rset.getString("category"), 
+					 				rset.getDate("CREATE_DATE"),
+					 				rset.getString("title"), 
+								  	rset.getString("content"),
+									rset.getString("ANSWER_CHECKED").charAt(0), 
+									rset.getString("ANSWER_CONTENT"),
+									rset.getDate("ANSWER_DATE"), 
+									rset.getString("deleted").charAt(0)));
+									
+			 
+			System.out.println(list);
+			}
+		  
+	  } catch (SQLException e) { 
+		  e.printStackTrace(); 
+	  } finally {
+		close(rset);
+		close(pstmt);
+	  }
+	  
+	  return list;
+	  
+	}
+	 
+	  
+	  
+	/* 페이징 뺀 selectList
 	public ArrayList<Question> selectList(Connection conn) {
 		Statement stmt = null;
 		ResultSet rset =null;
@@ -84,16 +121,6 @@ public class QuestionDAO {
 			list = new ArrayList<Question>();
 			
 			while(rset.next()) {
-				
-				/*
-				 * Question q = new Question(rset.getInt("postNo"), rset.getInt("userNo"),
-				 * rset.getString("category"), rset.getDate("createDate"),
-				 * rset.getString("title"), rset.getString("content"),
-				 * rset.getString("answerChecked"), rset.getString("answerContent"),
-				 * rset.getDate("answerDate"), rset.getString("deleted").charAt(0));
-				 */
-				  
-				  
 				
 				 list.add(new Question(rset.getInt("POST_NO"), 
 						 				rset.getInt("USER_NO"),
@@ -116,6 +143,8 @@ public class QuestionDAO {
 		}
 		return list;
 	}
+*/
+
 
 /*	public int insertQuestion(Connection conn, Question question, String category) {
 		PreparedStatement pstmt = null;
@@ -188,6 +217,7 @@ public class QuestionDAO {
 										rs.getDate("ANSWER_DATE"), 
 										rs.getString("deleted").charAt(0));
 			}
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -224,10 +254,10 @@ public class QuestionDAO {
 		
 		try {
 			pstmt = conn.prepareStatement(query);
-			//pstmt.setInt(1, question.getUserNo());
-			pstmt.setString(1, question.getCategory());
-			pstmt.setString(2, question.getTitle());
-			pstmt.setString(3, question.getContent());
+			pstmt.setInt(1, question.getUserNo());
+			pstmt.setString(2, question.getCategory());
+			pstmt.setString(3, question.getTitle());
+			pstmt.setString(4, question.getContent());
 			
 			result = pstmt.executeUpdate();
 			
@@ -262,6 +292,78 @@ public class QuestionDAO {
 			
 			return result;
 		}
+
+	public String selectUserId(Connection conn, int postNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String userId = null;
+		String query = prop.getProperty("selecUserId");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, postNo);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				userId = rs.getString("user_name");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return userId;
+	}
+
+	public int insertReply(Connection conn, Question q) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("insertReply");
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, q.getAnswerContent());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return 0;
+	}
+
+	public ArrayList<Question> selectReplyList(Connection conn, int postNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ArrayList<Question> list = null;
+		
+		String query = prop.getProperty("selectReplyList");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, postNo);
+			
+			rs = pstmt.executeQuery();
+			list = new ArrayList<Question>();
+			
+			if(rs.next()) {
+				list.add(new Question(rs.getString("answerChecked").charAt(0),
+										rs.getString("answerContent"),
+										rs.getDate("answerDate")));
+				
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return list;
+	}
 	
 	
 }

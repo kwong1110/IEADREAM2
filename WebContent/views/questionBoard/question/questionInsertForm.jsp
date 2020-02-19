@@ -22,7 +22,7 @@
 		text-align: center;
 		border:none;
 	}
-	#cancleBtn{
+	#cancelBtn{
 		border-radius: 10px;
 		background:rgb(230, 141, 150);
 		padding: 10px;
@@ -67,7 +67,7 @@
 					<br>
 					<div align="center">
 						<button type="submit" id="insertBtn">등록하기</button>
-						<input type="button" id="cancleBtn" onclick="location.href='<%= request.getContextPath() %>/list.qu'" value="취소">
+						<input type="button" id="cancelBtn" onclick="location.href='<%= request.getContextPath() %>/list.qu'" value="취소">
 					</div>
 					</form>
 				</div>	
