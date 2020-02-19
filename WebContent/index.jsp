@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>광윤!</title>
+<title>광윤임!</title>
 </head>
 <body>
 	<!-- 메인 메뉴로 연결  -->
