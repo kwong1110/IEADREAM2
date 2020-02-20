@@ -36,7 +36,7 @@ public class faqAdminDetailServlet extends HttpServlet {
 		
 		String page = null;
 		if(faq != null) {
-			page = "views/questionBoard/faqAdminUpdateForm.jsp";
+			page = "views/questionBoard/faq/faqAdminUpdateForm.jsp";
 			request.setAttribute("faq", faq);
 		} else {
 			page = "views/common/errorPage.jsp";

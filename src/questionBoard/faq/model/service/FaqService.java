@@ -66,4 +66,18 @@ public class FaqService {
 		return faq;
 	}
 
+	public int updateFaq(Faq faq) {
+		Connection conn = getConnection();
+		FaqDAO dao = new FaqDAO();
+		
+		int result = dao.updateFaq(conn, faq);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		return result;
+	}
+
 }

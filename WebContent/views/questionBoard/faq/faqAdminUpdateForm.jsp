@@ -3,7 +3,8 @@
 <%
 	request.setCharacterEncoding("utf-8");
 	Faq faq = (Faq)request.getAttribute("faq");
- 	
+	
+	
 	String category = faq.getCategory();
 	String[] selected = new String[4];
 	
@@ -50,7 +51,8 @@
 						<table class="table">
 							<tr>
 								<td>
-									<input type="text" size="50" class="title" name="title" value="<%= faq.getPostNo() %>">
+									<input type="hidden" name = postNo value="<%= faq.getPostNo() %>">
+									<input type="text" size="50" class="title" name="title" value="<%= faq.getTitle() %>">
 								</td>
 								<td>
 									<div>
@@ -85,7 +87,6 @@
 			</div>
 		</div>
 	</div>
-
 	
 </body>
 </html>
