@@ -1,7 +1,6 @@
 package questionBoard.faq.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,19 +11,18 @@ import javax.servlet.http.HttpServletResponse;
 
 import questionBoard.faq.model.service.FaqService;
 import questionBoard.faq.model.vo.Faq;
-import questionBoard.faq.model.vo.PageInfo;
 
 /**
- * Servlet implementation class faqAdminListViewServlet
+ * Servlet implementation class faqAdminDetailServlet
  */
-@WebServlet("/adminList.faq")
-public class faqAdminListViewServlet extends HttpServlet {
+@WebServlet("/faqDetail.faq")
+public class faqAdminDetailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public faqAdminListViewServlet() {
+    public faqAdminDetailServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,43 +31,16 @@ public class faqAdminListViewServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");
+		String num = request.getParameter("no"); // list에서 num에 게시글 번호를 받아옴
+		Faq faq = new FaqService().selectAdminDetail(num); // 글 번호를 매개변수로 불러올 faq 객체 저장
 		
-		FaqService service = new FaqService();
-		
-		
-		/* 페이징 */
-		int listCount = service.getListCount();
-		
-		int currentPage;
-		int limit;
-		int maxPage;
-		int startPage;
-		int endPage;
-		
-		currentPage = 1;
-		if(request.getParameter("currentPage") != null) {
-			currentPage = Integer.parseInt(request.getParameter("currentPage"));
-		}
-		
-		limit = 10;
-		maxPage = (int)((double)listCount / limit + 0.9);
-		startPage = ((int)((double)currentPage/limit + 0.9)-1)*limit+1;
-		endPage = startPage + limit - 1;
-		if(maxPage < endPage) {endPage = maxPage;}
-		
-		PageInfo pi = new PageInfo(currentPage, listCount, limit, maxPage, startPage, endPage);
-		
-		/* 리스트 불러오기 */
-		ArrayList<Faq> list = service.selectAdminList(currentPage);
 		String page = null;
-		if(list != null) {
-			page = "views/questionBoard/faq/faqAdminListView.jsp";
-			request.setAttribute("list", list);
-			request.setAttribute("pi", pi);
+		if(faq != null) {
+			page = "views/questionBoard/faq/faqAdminUpdateForm.jsp";
+			request.setAttribute("faq", faq);
 		} else {
 			page = "views/common/errorPage.jsp";
-			request.setAttribute("msg", "FAQ 목록 조회에 실패했습니다.");
+			request.setAttribute("msg", "게시글 상세보기에 실패하였습니다.");
 		}
 		RequestDispatcher view = request.getRequestDispatcher(page);
 		view.forward(request, response);
