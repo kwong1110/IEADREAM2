@@ -65,7 +65,7 @@
 					</div>
 					
 					<!-- 페이징 -->
-			<%-- 		<div class="pagingArea" align="center">
+			 		<div class="pagingArea" align="center">
 						<%if(!list.isEmpty()) { %>
 							<!-- 이전 페이지 -->
 							<button onclick="location.href='<%= request.getContextPath() %>/adminList.faq?currentPage=<%= currentPage-1 %>'" id="beforeBtn">&lt;</button>
@@ -76,13 +76,12 @@
 								}
 							</script>
 							
-							<!-- 5개 페이지 목록 -->
+							<!-- 10개 페이지 목록 -->
 							<% for(int p = startPage; p <= endPage; p++) { 
-									if(p == currentPage) {
-							%>
+									if(p == currentPage) { %>
 										<button id="choosen" disabled><%= p %></button>
 							<%		} else { %>
-										<button id="numBtn" onclick="loaction.href='<%= request.getContextPath() %>/adminList.faq?currentPage=<%= p %>'"><%= p %></button>
+										<button id="numBtn" onclick="location.href='<%= request.getContextPath() %>/adminList.faq?currentPage=<%= p %>'"><%= p %></button>
 							<%		} %>
 							<% } %>
 						
@@ -97,75 +96,8 @@
 						
 						
 						<% } %>
-					</div> --%>
-					
-					<!-- 페이징 시험 -->
-					<div class='pagingArea' align='center'>
-						<%
-							if (!list.isEmpty()) {
-						%>
-						<!-- 맨 처음으로 -->
-						<button
-							onclick="location.href='<%=request.getContextPath()%>/adminList.faq?currentPage=1'">&lt;&lt;</button>
-
-						<!-- 이전 페이지로 -->
-						<button
-							onclick="location.href='<%=request.getContextPath()%>/adminList.faq?currentPage=<%=currentPage - 1%>'"
-							id="beforeBtn">&lt;</button>
-						<script>
-							if (
-						<%=currentPage%>
-							<= 1) {
-								var before = $('#beforeBtn');
-								before.attr('disabled', 'true');
-							}
-						</script>
-
-						<!-- 10개의 페이지 목록 -->
-						<%
-							for (int p = startPage; p <= endPage; p++) {
-						%>
-						<%
-							if (p == currentPage) {
-						%>
-						<button id="choosen" disabled><%=p%></button>
-						<%
-							} else {
-						%>
-						<button id="numBtn"
-							onclick="location.href='<%=request.getContextPath()%>/adminList.faq?currentPage=<%=p%>'"><%=p%></button>
-						<%
-							}
-						%>
-						<%
-							}
-						%>
-
-						<!-- 다음 페이지로 -->
-						<button
-							onclick="location.href='<%=request.getContextPath()%>/adminList.faq?currentPage=<%=currentPage + 1%>'"
-							id="afterBtn">&gt;</button>
-						<script>
-							if (
-						<%=currentPage%>
-							>=
-						<%=maxPage%>
-							) {
-								var after = $("#afterBtn");
-								after.attr('disabled', 'true');
-							}
-						</script>
-
-						<!-- 맨 끝으로 -->
-						<button
-							onclick="location.href='<%=request.getContextPath()%>/adminList.faq?currentPage=<%=maxPage%>'">&gt;&gt;</button>
-
-						<%
-							}
-						%>
-						
 					</div>
-					<!-- 페이징 시험 끝 -->
+					
 				</div>
 			</div>
 		</div>
