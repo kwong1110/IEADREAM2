@@ -95,21 +95,45 @@ public class adminDAO {
 		return list;
 	}
 
-	public ArrayList<Account> searchMmList(Connection conn, String memGrade, String sCategory, String sWord) {
+	public ArrayList<Account> searchMmList(Connection conn, int currentPage, String memGrade, String sCategory, String sWord) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		ArrayList<Account> search = null;
-		sWord = "%" + sWord + "%";
-		System.out.println("adminDAO sWord 변수 확인 : " + sWord);
 		
-		String query = prop.getProperty("searchList");
+		//System.out.println("adminDAO sWord 변수 확인 : " + sWord);
+		
+		int posts = 10;		// 한 페이지에 보여질 게시글 개수 
+		
+		int startRow = (currentPage - 1) * posts + 1;
+		int endRow = startRow + posts - 1;
+		
+		String query = "";
+		switch(sCategory) {
+		case "USER_NAME": query = prop.getProperty("searchNameList"); break;
+		case "USER_NO": query = prop.getProperty("searchNoList"); break;
+		case "ID": query = prop.getProperty("searchIDList"); break;
+		}
+		
+		if(memGrade.equals("0,1,2")) {
+			switch(sCategory) {
+			case "USER_NAME": query = prop.getProperty("allSearchNameList"); break;
+			case "USER_NO": query = prop.getProperty("allSearchNoList"); break;
+			case "ID": query = prop.getProperty("allSearchIDList"); break;
+			}
+		}
 		
 		try {
 			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, memGrade);
-			pstmt.setString(2, sCategory);
-			pstmt.setString(3, sWord);
-			
+			if(!memGrade.equals("0,1,2")) {
+				pstmt.setString(1, memGrade);
+				pstmt.setString(2, "%" + sWord + "%");					
+				pstmt.setInt(3, startRow);
+				pstmt.setInt(4, endRow);
+			}else {
+				pstmt.setString(1, "%" + sWord + "%");					
+				pstmt.setInt(2, startRow);
+				pstmt.setInt(3, endRow);
+			}
 			rset = pstmt.executeQuery();
 			search = new ArrayList<Account>();
 			
@@ -129,6 +153,8 @@ public class adminDAO {
 			close(rset);
 			close(pstmt);
 		}
+		
+		System.out.println(search);
 		
 		return search;
 	}
