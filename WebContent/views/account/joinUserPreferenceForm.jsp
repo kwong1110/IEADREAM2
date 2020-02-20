@@ -69,7 +69,7 @@
       text-align: right;
     }
 
-    #bodyer{
+    .outer{
       background-color: white;
       text-align: center;
       display:block;
@@ -95,7 +95,7 @@
       font-weight : 400;
       padding-top: 20px;
     }*/
-    main{
+    .main{
       background-color: whites;
       text-align: left;
       max-width:1200px;
@@ -202,24 +202,24 @@
     </div>
   </header>
 
-  <div id ="bodyer">
+  <div id ="outer">
     <div class="wrapper">
-      <main>
+      <div class ="main">
         <section class="pageTitle">
           <label>이상형 정보 입력</label>
         </section>
         <section>
-          <form>
+          <form action="">
             <section id="items">
               <table>
                 <tr class="itemBox">
                   <td class="itemName" id="">나이(만)</td>
                   <td>
-                    <label><input type="radio" name="height" value="">- 5세 이상</label>
-                    <label><input type="radio" name="height" value="">- 4세 이내</label>
-                    <label><input type="radio" name="height" value="">+- 1년 이내</label>
-                    <label><input type="radio" name="height" value="">+ 4세 이내</label>
-                    <label><input type="radio" name="height" value="">+ 5세 이상</label>
+                    <label><input type="radio" name="height" value="-2">연하</label>
+                    <label><input type="radio" name="height" value="-1">1~3년 연하</label>
+                    <label><input type="radio" name="height" value="0">동갑</label>
+                    <label><input type="radio" name="height" value="1">1~3년 연상</label>
+                    <label><input type="radio" name="height" value="2">연상</label>
                   </td>
                   <td>
                     <select class="itemPriority" name="중요도">
@@ -232,13 +232,13 @@
                 <tr class="itemBox">
                   <td class="itemName" id="">키 (cm)</td>
                   <td>
-                    <label><input type="radio" name="height" value="160이하">160 이하</label>
-                    <label><input type="radio" name="height" value="160-165">160~165</label>
-                    <label><input type="radio" name="height" value="165-175">165~170</label>
-                    <label><input type="radio" name="height" value="170-175">170~175</label>
-                    <label><input type="radio" name="height" value="175-180">175~180</label>
-                    <label><input type="radio" name="height" value="185-185">180~185</label>
-                    <label><input type="radio" name="height" value="185이상">185 이상</label>
+                  	<label><input type="radio" name="height" value="1">160 이하</label>
+                    <label><input type="radio" name="height" value="2">160~165</label>
+                    <label><input type="radio" name="height" value="3">165~170</label>
+                    <label><input type="radio" name="height" value="4">170~175</label>
+                    <label><input type="radio" name="height" value="5">175~180</label>
+                    <label><input type="radio" name="height" value="6">180~185</label>
+                    <label><input type="radio" name="height" value="7">185 이상</label>
                   </td>
                   <td>
                     <select class="itemPriority" name="중요도">
@@ -251,11 +251,11 @@
                 <tr class="itemBox">
                   <td class="itemName" id="">체형</tdclass="itemName" id="">
                   <td>
-                    <label><input type="radio" name="body" value="">마름</label>
-                    <label><input type="radio" name="body" value="">보통</label>
-                    <label><input type="radio" name="body" value="">근육질</label>
-                    <label><input type="radio" name="body" value="">글래머</label>
-                    <label><input type="radio" name="body" value="">통통</label>
+                    <label><input type="radio" name="body" value="slim">마름</label>
+                    <label><input type="radio" name="body" value="normal">보통</label>
+                    <label><input type="radio" name="body" value="muscular">근육질</label>
+                    <label><input type="radio" name="body" value="glamour">글래머</label>
+                    <label><input type="radio" name="body" value="chubby">통통</label>
                   </td>
                   <td>
                     <select class="itemPriority" name="중요도">
@@ -268,12 +268,12 @@
                 <tr class="itemBox">
                   <td class="itemName" id="">스타일</td class="itemName" id="">
                   <td>
-                    <label><input type="radio" name="style" value="">귀여움</label>
-                    <label><input type="radio" name="style" value="">지적임</label>
-                    <label><input type="radio" name="style" value="">섹시함</label>
-                    <label><input type="radio" name="style" value="">따뜻함</label>
-                    <label><input type="radio" name="style" value="">우아함</label>
-                    <label><input type="radio" name="style" value="">터프함</label>
+                    <label><input type="radio" name="style" value="cute">귀여운</label>
+                    <label><input type="radio" name="style" value="intellect">지적인</label>
+                    <label><input type="radio" name="style" value="sexy">섹시한</label>
+                    <label><input type="radio" name="style" value="warm">따뜻한</label>
+                    <label><input type="radio" name="style" value="elegant">우아한</label>
+                    <label><input type="radio" name="style" value="tough">터프한</label>
                   </td>
                   <td>
                     <select class="itemPriority" name="중요도">
@@ -303,10 +303,10 @@
                 <tr class="itemBox">
                   <td class="itemName" id="">음주 습관</td class="itemName" id="">
                   <td>
-                    <label><input type="radio" name="drink" value="">주 3회</label>
-                    <label><input type="radio" name="drink" value="">주 1회</label>
-                    <label><input type="radio" name="drink" value="">월 1회</label>
-                    <label><input type="radio" name="drink" value="">안 마심</label>
+                    <label><input type="radio" name="drink" value="1w3">주 3회</label>
+                    <label><input type="radio" name="drink" value="1w1">주 1회</label>
+                    <label><input type="radio" name="drink" value="1m1">월 1회</label>
+                    <label><input type="radio" name="drink" value="none">안 마심</label>
                   </td>
                   <td>
                     <select class="itemPriority" name="중요도">
@@ -319,8 +319,8 @@
                 <tr class="itemBox">
                   <td class="itemName" id="">흡연 여부</td class="itemName" id="">
                   <td>
-                    <label><input type="radio" name="smoke" value="">흡연</label>
-                    <label><input type="radio" name="smoke" value="">비흡연</label>
+                    <label><input type="radio" name="smoke" value="smoker">흡연</label>
+                    <label><input type="radio" name="smoke" value="none">비흡연</label>
                   </td>
                   <td>
                     <select class="itemPriority" name="중요도">
@@ -333,14 +333,14 @@
                 <tr class="itemBox">
                   <td class="itemName" id="">직업</td class="itemName" id="">
                   <td>
-                    <label><input type="radio" name="job" value="">학생</label>
-                    <label><input type="radio" name="job" value="">사무직</label>
-                    <label><input type="radio" name="job" value="">연구직</label>
-                    <label><input type="radio" name="job" value="">교육직</label>
-                    <label><input type="radio" name="job" value="">예술</label>
-                    <label><input type="radio" name="job" value="">서비스</label>
-                    <label><input type="radio" name="job" value="">전문직</label>
-                    <label><input type="radio" name="job" value="">기타</label>
+                    <label><input type="radio" name="job" value="student">학생</label>
+                    <label><input type="radio" name="job" value="office">사무직</label>
+                    <label><input type="radio" name="job" value="research">연구직</label>
+                    <label><input type="radio" name="job" value="education">교육직</label>
+                    <label><input type="radio" name="job" value="art">예술</label>
+                    <label><input type="radio" name="job" value="service">서비스</label>
+                    <label><input type="radio" name="job" value="profession">전문직</label>
+                    <label><input type="radio" name="job" value="etc">기타</label>
                   </td>
                   <td>
                     <select class="itemPriority" name="중요도">
@@ -353,11 +353,11 @@
                 <tr class="itemBox">
                   <td class="itemName" id="">최종 학력</td class="itemName" id="">
                   <td>
-                    <label><input type="radio" name="scholar" value="">고졸</label>
-                    <label><input type="radio" name="scholar" value="">초대졸</label>
-                    <label><input type="radio" name="scholar" value="">대졸</label>
-                    <label><input type="radio" name="scholar" value="">석사</label>
-                    <label><input type="radio" name="scholar" value="">박사</label>
+                    <label><input type="radio" name="scholar" value="high">고졸</label>
+                    <label><input type="radio" name="scholar" value="associate">초대졸</label>
+                    <label><input type="radio" name="scholar" value="bachelor">대졸</label>
+                    <label><input type="radio" name="scholar" value="master">석사</label>
+                    <label><input type="radio" name="scholar" value="doctor">박사</label>
                   </td>
                   <td>
                     <select class="itemPriority" name="중요도">
@@ -371,14 +371,11 @@
                   <td class="itemName" id="">거주 지역</td>
                   <td>
                     <label><input type="radio" name="region" value="seoul">수도권</label>
-                    <label><input type="radio" name="region" value="seoul">강원</label>
-                    <label><input type="radio" name="region" value="seoul">충북</label>
-                    <label><input type="radio" name="region" value="seoul">충남</label>
-                    <label><input type="radio" name="region" value="seoul">전북</label>
-                    <label><input type="radio" name="region" value="seoul">전남</label>
-                    <label><input type="radio" name="region" value="seoul">경북</label>
-                    <label><input type="radio" name="region" value="seoul">경남</label>
-                    <label><input type="radio" name="region" value="seoul">제주</label>
+                    <label><input type="radio" name="region" value="gangwon">강원</label>
+                    <label><input type="radio" name="region" value="chungcheong">충청</label>
+                    <label><input type="radio" name="region" value="jeonla">전라</label>
+                    <label><input type="radio" name="region" value="gyeongsang">경상</label>
+                    <label><input type="radio" name="region" value="jeju">제주</label>
           
                   </td>
                   <td>
@@ -392,26 +389,26 @@
                 <tr class="itemBox">
                   <td class="itemName" id="">관심 분야</td class="itemName" id="">
                   <td>
-                    <label><input type="checkbox" name="interest" value="" disabled="true">영화&드라마</label>
-                    <label><input type="checkbox" name="interest" value="" disabled="true">연극&뮤지컬</label>
-                    <label><input type="checkbox" name="interest" value="" disabled="true">만화&서브컬처</label>
-                    <label><input type="checkbox" name="interest" value="" disabled="true">사진&영상 촬영</label>
-                    <label><input type="checkbox" name="interest" value="" disabled="true">독서</label>
-                    <label><input type="checkbox" name="interest" value="" disabled="true">음악 감상</label>
-                    <label><input type="checkbox" name="interest" value="" disabled="true">노래&춤</label>
-                    <label><input type="checkbox" name="interest" value="" disabled="true">악기 연주</label>
-                    <label><input type="checkbox" name="interest" value="" disabled="true">요리&음식</label>
-                    <label><input type="checkbox" name="interest" value="" disabled="true">여행&캠핑</label>
-                    <label><input type="checkbox" name="interest" value="" disabled="true">운동</label>
-                    <label><input type="checkbox" name="interest" value="" disabled="true">스포츠 경기</label>
-                    <label><input type="checkbox" name="interest" value="" disabled="true">비디오 게임</label>
-                    <label><input type="checkbox" name="interest" value="" disabled="true">보드게임</label>
-                    <label><input type="checkbox" name="interest" value="" disabled="true">SNS</label>
-                    <label><input type="checkbox" name="interest" value="" disabled="true">술&모임</label>
-                    <label><input type="checkbox" name="interest" value="" disabled="true">뷰티&패션</label>
-                    <label><input type="checkbox" name="interest" value="" disabled="true">반려동물</label>
-                    <label><input type="checkbox" name="interest" value="" disabled="true">DIY</label>
-                    <label><input type="checkbox" name="interest" value="" disabled="true">재테크</label>
+                    <label><input type="checkbox" name="interest" value="movie" >영화&드라마</label>
+                    <label><input type="checkbox" name="interest" value="musical" >연극&뮤지컬</label>
+                    <label><input type="checkbox" name="interest" value="comic" >만화&서브컬처</label>
+                    <label><input type="checkbox" name="interest" value="picture" >사진&영상 촬영</label>
+                    <label><input type="checkbox" name="interest" value="books" >독서</label>
+                    <label><input type="checkbox" name="interest" value="music" >음악 감상</label>
+                    <label><input type="checkbox" name="interest" value="sing" >노래&춤</label>
+                    <label><input type="checkbox" name="interest" value="instrument" >악기 연주</label>
+                    <label><input type="checkbox" name="interest" value="cook" >요리&음식</label>
+                    <label><input type="checkbox" name="interest" value="camp" >여행&캠핑</label>
+                    <label><input type="checkbox" name="interest" value="exercise" >운동</label>
+                    <label><input type="checkbox" name="interest" value="sports" >스포츠 경기</label>
+                    <label><input type="checkbox" name="interest" value="vgame" >비디오 게임</label>
+                    <label><input type="checkbox" name="interest" value="bgame" >보드게임</label>
+                    <label><input type="checkbox" name="interest" value="sns" >SNS</label>
+                    <label><input type="checkbox" name="interest" value="drink" >술&모임</label>
+                    <label><input type="checkbox" name="interest" value="beauty" >뷰티&패션</label>
+                    <label><input type="checkbox" name="interest" value="pet" >반려동물</label>
+                    <label><input type="checkbox" name="interest" value="diy" >DIY</label>
+                    <label><input type="checkbox" name="interest" value="money" >재테크</label>
                   </td>
                   <td>
                     <select class="itemPriority" name="중요도">
@@ -428,7 +425,7 @@
             </section>
           </form>
         </section>
-      </main>
+      </div>
     </div>
   </div>
   <footer>

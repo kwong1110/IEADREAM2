@@ -3,16 +3,16 @@ package idealType.model.vo;
 import java.util.Date;
 
 
-public class Recommend {
+public class Match {
 	private int userNo;			
 	private int targetNo;		
-	private Date RecommendDate;		
+	private Date matchDate;		
 	private char status;	
 
-	public Recommend(int userNo, int targetNo, Date RecommendDate, char status) {
+	public Match(int userNo, int targetNo, Date matchDate, char status) {
 		this.userNo = userNo;
 		this.targetNo = targetNo;
-		this.RecommendDate = RecommendDate;
+		this.matchDate = matchDate;
 		this.status = status;
 	}
 	
@@ -33,12 +33,12 @@ public class Recommend {
 		this.targetNo = targetNo;
 	}
 
-	public Date getRecommendDate() {
-		return RecommendDate;
+	public Date getmatchDate() {
+		return matchDate;
 	}
 
-	public void setRecommendDate(Date RecommendDate) {
-		this.RecommendDate = RecommendDate;
+	public void setmatchDate(Date matchDate) {
+		this.matchDate = matchDate;
 	}
 
 	public void setStatus(char status) {
