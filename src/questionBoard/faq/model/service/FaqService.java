@@ -80,4 +80,20 @@ public class FaqService {
 		return result;
 	}
 
+	public int deleteFaq(int no) {
+		Connection conn = getConnection();
+		
+		FaqDAO dao = new FaqDAO();
+		
+		int result = dao.deleteFaq(conn, no);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+
 }

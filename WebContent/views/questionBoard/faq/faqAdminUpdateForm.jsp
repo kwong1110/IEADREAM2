@@ -80,13 +80,22 @@
 						<div class="btnBox" align="center">
 							<button type="submit" id="updateFaqBtn">수정</button>
 							<div onclick="location.href='javaxcript:history.go(-1);'" id="cancelBtn">취소</div>
-							<button type="button" onclick="location.href='<%= request.getContextPath() %>/delete.faq'">삭제</button>
+							<button type="button" onclick="deleteFaq();" id="deleteBtn">삭제</button>
 						</div>
 					</form>
 				</div>
 			</div>
 		</div>
 	</div>
+	
+	<script>
+		function deleteFaq() {
+			var del = confirm("해당 FAQ를 삭제하시겠습니까?");
+			if(del) {
+				location.href='<%= request.getContextPath() %>/delete.faq?no=' +'<%= faq.getPostNo() %>';
+			}
+		}
+	</script>
 	
 </body>
 </html>
