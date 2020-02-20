@@ -99,7 +99,7 @@
 							</ul>
 						</li>
 						
-						<li class="s-menu"><span onclick="">마이페이지</span>
+						<li class="s-menu" id="myPage"><span onclick="">마이페이지</span>
 							<ul class="dept01">							
 								<li id="nop"><a href="<%=request.getContextPath()%>/views/myPage/user/memberGradeUpForm.jsp">정회원 등업</a></li>
 								<li id="nop"><a href="">기본정보</a></li>
@@ -111,6 +111,18 @@
 								<li id="nop">
 									<a href="<%=request.getContextPath()%>/list.hh">하트 히스토리</a>
 								</li>
+								<% if(loginUser != null && loginUser.getGrade() == 0){ %>
+									<br>
+									<li id="nop">
+										<a href="<%=request.getContextPath()%>/manage.mem">회원 관리</a>
+									</li>
+									<li id="nop">
+										<a href="<%=request.getContextPath()%>/views/myPage/admin/boardManageForm.jsp">게시물 관리</a>
+									</li>
+									<li id="nop">
+										<a href="<%=request.getContextPath()%>/views/myPage/admin/partyManageForm.jsp">파티 관리</a>
+									</li>
+								<% } %>
 							</ul>
 						</li>
 						<% if(loginUser == null) { %>
@@ -171,25 +183,7 @@
 				alert(msg);
 			}
 		});
-		
-		
-		<%-- var adminLogin = <%= loginUser.getGrade() %>;
-		
-		$(function(){
-			if(adminLogin == 0){
-				<li id="nop">
-					<a href="<%=request.getContextPath()%>/views/myPage/admin/memberManageForm.jsp">회원 관리</a>
-				</li>
-				<li id="nop">
-					<a href="<%=request.getContextPath()%>/views/myPage/admin/boardManageForm.jsp">게시물 관리</a>
-				</li>
-				<li id="nop">
-					<a href="<%=request.getContextPath()%>/views/myPage/admin/PartyManageForm.jsp">파티 관리</a>
-				</li>
 				
-			}
-		}); --%>
-		
 	</script>
 </body>
 </html>
