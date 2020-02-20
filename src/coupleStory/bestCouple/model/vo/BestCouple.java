@@ -10,16 +10,28 @@ public class BestCouple {
 	private Date createDate;
 	private int hit;
 	private char deleted;
+	private int boardNo;
 	
 	public BestCouple() {}
 
-	public BestCouple(int postNo, String title, String content, Date createDate, int hit, char deleted) {
+	public BestCouple(int postNo, String title, String content, Date createDate, int hit, char deleted, int boardNo) {
 		this.postNo = postNo;
 		this.title = title;
 		this.content = content;
 		this.createDate = createDate;
 		this.hit = hit;
 		this.deleted = deleted;
+		this.boardNo = boardNo;
+	}
+	
+	public BestCouple(int postNo, String title, Date createDate, int hit, char deleted, int boardNo) {
+		super();
+		this.postNo = postNo;
+		this.title = title;
+		this.createDate = createDate;
+		this.hit = hit;
+		this.deleted = deleted;
+		this.boardNo = boardNo;	
 	}
 
 	public int getPostNo() {
@@ -68,5 +80,14 @@ public class BestCouple {
 
 	public void setDeleted(char deleted) {
 		this.deleted = deleted;
-	}	
+	}
+
+	public int getBoardNo() {
+		return boardNo;
+	}
+
+	public void setBoardNo(int boardNo) {
+		this.boardNo = boardNo;
+	}
+	
 }

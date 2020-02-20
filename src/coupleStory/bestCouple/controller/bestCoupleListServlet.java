@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import common.PageInfo;
 import coupleStory.bestCouple.model.service.bestCoupleService;
 import coupleStory.bestCouple.model.vo.BestCouple;
 
@@ -33,14 +34,39 @@ public class bestCoupleListServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		bestCoupleService bcService = new bestCoupleService();
 		
-		ArrayList<BestCouple> bcList = bcService.selectBcList();
+		int listCount = bcService.getListCount();
+		
+		int limit;
+		int currentPage;
+		int maxPage;
+		int startPage;
+		int endPage;
+		
+		currentPage = 1;
+		
+		if(request.getParameter("currentPage") != null) {
+			currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		}
+		
+		limit = 3;
+		
+		maxPage = (int)((double)listCount/limit + 0.9);
+		startPage = (((int)((double)currentPage/limit + 0.9)) - 1) * limit + 1;
+		endPage = startPage + limit -1;
+		if(maxPage < endPage) {
+			endPage = maxPage;
+		}
+		
+		PageInfo pi = new PageInfo(currentPage, listCount, limit, maxPage, startPage, endPage);
+		
+		ArrayList<BestCouple> bcList = bcService.selectBcList(currentPage);
 		
 		String page = null;
 		if(bcList != null) {
 			request.setAttribute("bcList", bcList);
 			page = "views/coupleStory/bestCouple/bestCoupleListForm.jsp";
 		} else {
-			request.setAttribute("msg", "이달의 베스트 커플 게시판 조회에 실패하였습니다.");
+			request.setAttribute("msg", "[이달의 베스트 커플] 게시판 조회에 실패하였습니다.");
 			page = "views/common/errorPage.jsp";
 		}
 		

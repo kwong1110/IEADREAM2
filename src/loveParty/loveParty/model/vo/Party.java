@@ -12,10 +12,11 @@ public class Party {
 	private int maxIn;
 	private String thumb;
 	private String poster;
+	private int boardNo;
 	
 	public Party() {}
 
-	public Party(int partyNo, String title, Date partyDate, int mIn, int fIn, int maxIn, String thumb, String poster) {
+	public Party(int partyNo, String title, Date partyDate, int mIn, int fIn, int maxIn, String thumb, String poster, int boardNo) {
 		this.partyNo = partyNo;
 		this.title = title;
 		this.partyDate = partyDate;
@@ -24,6 +25,7 @@ public class Party {
 		this.maxIn = maxIn;
 		this.thumb = thumb;
 		this.poster = poster;
+		this.boardNo = boardNo;
 	}
 
 	public int getPartyNo() {
@@ -89,4 +91,13 @@ public class Party {
 	public void setPoster(String poster) {
 		this.poster = poster;
 	}
+
+	public int getBoardNo() {
+		return boardNo;
+	}
+
+	public void setBoardNo(int boardNo) {
+		this.boardNo = boardNo;
+	}
+	
 }

@@ -11,10 +11,11 @@ public class WeAreCouple {
 	private Date createDate;
 	private int hit;
 	private char deleted;
+	private int boardNo;
 	
 	public WeAreCouple() {}
 
-	public WeAreCouple(int postNo, int userNo, String title, String content, Date createDate, int hit, char deleted) {
+	public WeAreCouple(int postNo, int userNo, String title, String content, Date createDate, int hit, char deleted, int boardNo) {
 		this.postNo = postNo;
 		this.userNo = userNo;
 		this.title = title;
@@ -22,6 +23,7 @@ public class WeAreCouple {
 		this.createDate = createDate;
 		this.hit = hit;
 		this.deleted = deleted;
+		this.boardNo = boardNo;
 	}
 
 	public int getPostNo() {
@@ -78,5 +80,14 @@ public class WeAreCouple {
 
 	public void setDeleted(char deleted) {
 		this.deleted = deleted;
-	}	
+	}
+
+	public int getBoardNo() {
+		return boardNo;
+	}
+
+	public void setBoardNo(int boardNo) {
+		this.boardNo = boardNo;
+	}
+	
 }
