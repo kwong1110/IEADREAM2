@@ -67,19 +67,19 @@
 							<div class="midBox">
 								<div class="searchMenu">회원 등급</div>
 								<div>
-									<input type="radio" name="memGrade" value="all">전체 
-									<input type="radio" name="memGrade" value="mem1">준회원
-									<input type="radio" name="memGrade" value="mem2">정회원 
-									<input type="radio" name="memGrade" value="memW">등업대기
+									<input type="radio" name="memGrade" value="0,1,2">전체 
+									<input type="radio" name="memGrade" value="1">준회원
+									<input type="radio" name="memGrade" value="2">정회원 
+									<input type="radio" name="memGrade" value="4">등업대기
 								</div>
 							</div>
 							<div class="midBox">
 								<div class="searchMenu">검색어</div>
 								<div>
 									<select class="search" id="sCategory">
-										<option value="name">이름</option>
-										<option value="userNum">회원번호</option>
-										<option value="userId">아이디</option>
+										<option value="USER_NAME">이름</option>
+										<option value="USER_NO">회원번호</option>
+										<option value="ID">아이디</option>
 									</select>
 									<input placeholder="검색어를 입력하세요!" class="search search2" type="text" id="sWord">
 									<button class="defaultBtn searchBtn" type="button" id="SearchBtn">검색</button>
@@ -180,20 +180,26 @@
 		
 		$('#SearchBtn').click(function(){
 				// 검색버튼을 클릭했다는걸 알려주는 변수 (서블릿 전달 용도)
-			var sBtn = 1;
+			/* var sBtn = 1;
 					// 0일때, 처음 페이지 불러오기!
-					// 1일때, 검색 작동!
+					// 1일때, 검색 작동! */
 		
 				// 1.검색범위(회원등급)와 2.검색종류와 3.검색어 받기
+			$('tbody').hide();
 			var memGrade = $('input[name="memGrade"]:checked').val();;
 			var sCategory = $("#sCategory option:selected").val();
 			var sWord = $("#sWord").val();
 				
-			// console.log(sBtn, memGrade, sCategory, sWord);
+			console.log(memGrade, sCategory, sWord);
 			$.ajax({
-				url: '<%= request.getContextPath() %>/manage.mem',
+				url: '<%= request.getContextPath() %>/search.mem',
 				type: 'post',
-				data: {sBtn: sBtn, memGrade: memGrade, sCategory: sCategory, sWord: sWord}
+				data: {memGrade: memGrade, sCategory: sCategory, sWord: sWord},
+				success: function(data){
+					for(var i in data){
+						cosole.log(i)
+					}
+				}
 			});
 		});
 	</script>

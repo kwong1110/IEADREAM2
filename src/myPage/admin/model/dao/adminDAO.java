@@ -94,4 +94,44 @@ public class adminDAO {
 		
 		return list;
 	}
+
+	public ArrayList<Account> searchMmList(Connection conn, String memGrade, String sCategory, String sWord) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Account> search = null;
+		sWord = "%" + sWord + "%";
+		System.out.println("adminDAO sWord 변수 확인 : " + sWord);
+		
+		String query = prop.getProperty("searchList");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, memGrade);
+			pstmt.setString(2, sCategory);
+			pstmt.setString(3, sWord);
+			
+			rset = pstmt.executeQuery();
+			search = new ArrayList<Account>();
+			
+			while(rset.next()) {
+				Account a = new Account(rset.getInt("USER_NO"),
+										rset.getInt("GRADE"),
+										rset.getString("ID"),
+										rset.getString("GENDER").charAt(0),
+										rset.getString("USER_NAME"),
+										rset.getString("PHONE"),
+										rset.getString("DELETED").charAt(0));
+				search.add(a);	
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return search;
+	}
+
+	
 }
