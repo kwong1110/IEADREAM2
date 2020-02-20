@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import account.model.vo.Account;
 import questionBoard.question.model.service.QuestionService;
 import questionBoard.question.model.vo.Question;
 
@@ -38,14 +39,14 @@ public class QuetionInsertServlet extends HttpServlet {
 		String category = request.getParameter("category");
 		String title = request.getParameter("title");
 		String content = request.getParameter("content");
-		// String id =
-		// (Account)request.getSession().getAttribute("loginUser")).getUserId();
+		//String userId = request.getParameter("userId");
+		int userNo = ((Account)request.getSession().getAttribute("loginUser")).getUserNo();
 
 		Question question = new Question();
 		question.setCategory(category);
 		question.setTitle(title);
 		question.setContent(content);
-		// question.set
+		question.setUserNo(userNo);
 		/* int result = new QuestionService().insertQuestion(question, category); */
 		int result = new QuestionService().insertQuestion(question);
 

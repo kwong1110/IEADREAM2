@@ -31,8 +31,15 @@ public class Question {
 		this.deleted = deleted;
 	}
 
+	
 
 
+	public Question(char answerChecked, String answerContent, Date answerDate) {
+		super();
+		this.answerChecked = answerChecked;
+		this.answerContent = answerContent;
+		this.answerDate = answerDate;
+	}
 
 	public int getPostNo() {
 		return postNo;
@@ -113,4 +120,7 @@ public class Question {
 	public void setDeleted(char deleted) {
 		this.deleted = deleted;
 	}
+
+	
+	
 }

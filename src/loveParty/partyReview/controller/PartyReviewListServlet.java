@@ -10,13 +10,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-<<<<<<< HEAD
-import loveParty.partyReview.model.vo.PartyReview;
-=======
+
 import common.PageInfo;
 import loveParty.partyReview.model.service.PartyReviewService;
 import loveParty.partyReview.model.vo.PartyReviewList;
->>>>>>> branch 'master' of https://github.com/kwong1110/IeaDream.git
 
 /**
  * Servlet implementation class PartyReviewListServlet
@@ -37,7 +34,7 @@ public class PartyReviewListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-<<<<<<< HEAD
+/*<<<<<<< HEAD
 		PartyReviewServive service = new PartyReviewServive();
 
 	      ArrayList<PartyReview> list = service.selectList();
@@ -52,7 +49,7 @@ public class PartyReviewListServlet extends HttpServlet {
 	      
 	      RequestDispatcher view = request.getRequestDispatcher(page);
 	      view.forward(request, response);
-=======
+=======*/
 		PartyReviewService service = new PartyReviewService();
 		
 		int listCount = service.getListCount();
@@ -95,7 +92,6 @@ public class PartyReviewListServlet extends HttpServlet {
 		RequestDispatcher view = request.getRequestDispatcher(page);
 		view.forward(request, response);
 		
->>>>>>> branch 'master' of https://github.com/kwong1110/IeaDream.git
 	}
 
 	/**
