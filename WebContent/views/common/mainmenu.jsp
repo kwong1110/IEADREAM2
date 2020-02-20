@@ -116,7 +116,7 @@
 						<% if(loginUser == null) { %>
 						<li>
 							<span id="loginBtn" onclick="login();" style="font-size: 10px; padding: 10px;">login</span> 
-							<span id="MemberJoinBtn" onclick="memberJoin();" style="font-size: 10px; padding: 10px;">sign in</span>
+							<span id="MemberJoinBtn" onclick="memberJoin();" style="font-size: 10px; padding: 10px;">sign up</span>
 						</li>
 						<% } else { %>
 						<li style="width: 10%; height: 10%">

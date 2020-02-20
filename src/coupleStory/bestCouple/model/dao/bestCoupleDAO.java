@@ -1,12 +1,14 @@
 package coupleStory.bestCouple.model.dao;
 
-import static common.JDBCTemplate.*;
-
-
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Properties;
+
+import coupleStory.bestCouple.model.vo.BestCouple;
 
 public class bestCoupleDAO {
 	private Properties prop = new Properties();
@@ -21,5 +23,19 @@ public class bestCoupleDAO {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+public ArrayList selectBcList() {
+		
+		Statement stmt = null;
+		ResultSet rset = null;
+		ArrayList<BestCouple> list = null;
+		
+		String query = prop.getProperty("selectBList");
+		
+		
+		
+		
+		return null;
 	}
 }
