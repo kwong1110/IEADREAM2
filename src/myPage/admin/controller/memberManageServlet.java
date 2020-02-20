@@ -1,6 +1,7 @@
 package myPage.admin.controller;
 
 import java.io.IOException;
+
 import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
@@ -58,11 +59,29 @@ public class memberManageServlet extends HttpServlet {
 		
 		PageInfo pi = new PageInfo(currentPage, listCount, limit, maxPage, startPage, endPage);
 		
-		ArrayList<Account> list = service.selectMmList(currentPage);
+		
+		// sBtn(검색버튼 on/off), memGrade(회원등급), sCategory(검색카테고리), sWord(검색어) 받아오기
+		int sBtn = 0;
+			// 1: 처음 페이지,  0: 검색시
+		String memGrade = request.getParameter("memGrade");
+		String sCategory = request.getParameter("sCategory");
+		String sWord = request.getParameter("sWord");
+		if(memGrade != null) {
+			sBtn = Integer.parseInt(request.getParameter("sBtn"));
+		}
+		
+		ArrayList<Account> list = null;
+		if(sBtn == 0) {
+			list = service.selectMmList(currentPage);
+		} else {
+			list = service.searchMmList(currentPage);
+		}
+		
+		System.out.println(pi);
 		
 		String page = null;
 		if(list != null) {
-			page = "views/admin/memberManageForm.jsp";
+			page = "views/myPage/admin/memberManageForm.jsp";
 			request.setAttribute("list", list);
 			request.setAttribute("pi", pi);
 		} else {
