@@ -31,8 +31,29 @@ public class QuestionDAO {
 		}
 	}
 
-	public int getListCount(Connection conn) {
-		Statement stmt = null;
+	public int getListCount(Connection conn, String userNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int result =0;
+		
+		String query = prop.getProperty("getListCount");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, userNo);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return result;
+	/*	Statement stmt = null;
 		ResultSet rs = null;
 		int result =0;
 		
@@ -51,11 +72,11 @@ public class QuestionDAO {
 			close(rs);
 			close(stmt);
 		}
-		return result;
+		return result; */
 	}
 
 	
-	  public ArrayList<Question> selectList(Connection conn, int currentPage) {
+	  public ArrayList<Question> selectList(Connection conn, int currentPage, String userNo) {
 		  PreparedStatement pstmt = null; 
 		  ResultSet rset =null; 
 		  ArrayList<Question> list = null; 
@@ -68,8 +89,9 @@ public class QuestionDAO {
 	  
 	  try {
 		  pstmt = conn.prepareStatement(query);
-		  pstmt.setInt(1, startRow);
-		  pstmt.setInt(2, endRow);
+		  pstmt.setString(1, userNo);
+		  pstmt.setInt(2, startRow);
+		  pstmt.setInt(3, endRow);
 		  
 		  rset = pstmt.executeQuery();
 		  list = new ArrayList<Question>();
@@ -193,7 +215,7 @@ public class QuestionDAO {
 		return result;
 	}
 */
-	public Question selectQuestion(Connection conn, int postNo) {
+	public Question selectQuestion(Connection conn, int post) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		Question question = null;
@@ -202,7 +224,7 @@ public class QuestionDAO {
 		
 		try {
 			pstmt = conn.prepareStatement(query);
-			pstmt.setInt(1, postNo);
+			pstmt.setInt(1, post);
 			rs = pstmt.executeQuery();
 			
 			if(rs.next()) {
@@ -293,7 +315,7 @@ public class QuestionDAO {
 			return result;
 		}
 
-	public String selectUserId(Connection conn, int postNo) {
+	public String selectUserId(Connection conn, String postNo) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String userId = null;
@@ -301,7 +323,7 @@ public class QuestionDAO {
 		
 		try {
 			pstmt = conn.prepareStatement(query);
-			pstmt.setInt(1, postNo);
+			pstmt.setString(1, postNo);
 			rs = pstmt.executeQuery();
 			
 			if(rs.next()) {

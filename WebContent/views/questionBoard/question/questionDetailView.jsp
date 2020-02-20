@@ -112,9 +112,10 @@
 							<table id="replyTable">
 								<tr>
 									<th id="manager" rowspan ="1">관리자</th>
-									<td id="Mcommand" rowspan = "3" colspan="4" align= center>
+									<td id="Mcommand" name = "answerContent"rowspan = "3" colspan="4" align= center>
+									
 									<% if(q.getAnswerContent() != null) { %>
-										<%= q.getAnswerContent() %>
+										<input type="text" value ="<%= q.getAnswerContent() %>" readonly>
 									<% } else { %>
 										관리자가 아직 답변을 달지 않았습니다.
 									<% } %>
@@ -156,11 +157,12 @@
 				success: function(data){
 					$replyTable = $('#replyTable');
 					
+					for(var key in data){
 					var $tr= $('<tr>');
 					var $writerTd = $('<td>').text('관리자');
 					var $contentTd = $('<td>').text(data[key].answerContent);
 					var $dateTd = $('<td>').text(data[key].answerDate);
-					
+					}
 					$tr.append($writerTd);
 					$tr.append($contentTd);
 					$tr.append($dateTd);
