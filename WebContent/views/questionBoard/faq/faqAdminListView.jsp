@@ -111,7 +111,8 @@
 				$(this).parent().css('background','none');
 			}).click(function() {
 				var num = $(this).parent().children().eq(0).text();
-				location.href='<%=request.getContextPath()%>/faqUpdate.faq?no=' + num;
+				console.log(num);
+				location.href='<%=request.getContextPath()%>/faqDetail.faq?no=' + num;
 			});
 		});
 	</script>

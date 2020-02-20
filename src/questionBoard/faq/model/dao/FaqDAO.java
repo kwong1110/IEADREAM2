@@ -141,4 +141,33 @@ public class FaqDAO {
 		return list;
 	}
 
+	public Faq selectAdminDetail(Connection conn, int num) {
+		PreparedStatement pstmt = null; //글 번호를 쿼리문에 넣어야 하기 때문에 pstmt 사용
+		ResultSet rs = null;
+		Faq faq = null;
+		
+		String query = prop.getProperty("selectAdminDetail");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, num);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				faq = new Faq(rs.getInt("post_no"),
+							  rs.getString("category"),
+							  rs.getString("title"),
+							  rs.getString("content"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return faq;
+		
+	}
+
 }
