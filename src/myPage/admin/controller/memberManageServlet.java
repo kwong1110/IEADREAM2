@@ -1,7 +1,6 @@
 package myPage.admin.controller;
 
 import java.io.IOException;
-
 import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
@@ -10,6 +9,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import account.model.vo.Account;
 import common.PageInfo;
@@ -59,26 +61,12 @@ public class memberManageServlet extends HttpServlet {
 		
 		PageInfo pi = new PageInfo(currentPage, listCount, limit, maxPage, startPage, endPage);
 		
-		
-		// sBtn(검색버튼 on/off), memGrade(회원등급), sCategory(검색카테고리), sWord(검색어) 받아오기
-		int sBtn = 0;
-			// 1: 처음 페이지,  0: 검색시
-		String memGrade = request.getParameter("memGrade");
-		String sCategory = request.getParameter("sCategory");
-		String sWord = request.getParameter("sWord");
-		if(memGrade != null) {
-			sBtn = Integer.parseInt(request.getParameter("sBtn"));
-		}
-		
 		ArrayList<Account> list = null;
-		if(sBtn == 0) {
-			list = service.selectMmList(currentPage);
-		} else {
-			list = service.searchMmList(currentPage);
-		}
+
+		list = service.selectMmList(currentPage);
 		
 		System.out.println(pi);
-		
+				
 		String page = null;
 		if(list != null) {
 			page = "views/myPage/admin/memberManageForm.jsp";
