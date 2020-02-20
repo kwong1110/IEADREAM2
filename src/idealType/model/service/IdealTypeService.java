@@ -43,10 +43,6 @@ public class IdealTypeService {
 		선형 방식?
 		매칭 후에도 데이터는 유지됨
 		
-		
-		
-		
-		
 	 */
 	
 

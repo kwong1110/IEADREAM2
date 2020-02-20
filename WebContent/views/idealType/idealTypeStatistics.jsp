@@ -69,7 +69,7 @@
       text-align: right;
     }
 
-    #bodyer{
+    .outer{
       background-color: white;
       text-align: center;
       display:block;
@@ -95,7 +95,7 @@
       font-weight : 400;
       padding-top: 20px;
     }
-    main{
+    .main{
       background-color: whites;
       text-align: left;
       max-width:1025px;
@@ -154,6 +154,9 @@
     .itemValueName{
         margin: 0px 15px;
         line-height: 60px;
+    }
+    .itemSync{
+    	display: block;
     }
     .itemCheck{
       width:50px;
@@ -219,7 +222,7 @@
     </div>
   </header>
 
-  <div id ="bodyer">
+  <div class ="outer">
     <div class="wrapper">
       <nav>
         <div  class="mainCategory">
@@ -232,7 +235,7 @@
           <a href="">이상형의 이상형</a>
         </div>
       </nav>
-      <main>
+      <div class ="main">
         <section style="clear:left;">
           <p style="font-weight: 550; font-size: 16pt;">이상형의 이상형</p>
         </section>
@@ -256,7 +259,7 @@
                   <label>itemValue</label>
                 </div>
                 <div>
-                  <label style="display:block;">55%</label>
+                  <label class="itemSync" id="">0%</label>
                   <image width="50px" height="50px"></image>
                 </div>
               </div>
@@ -700,7 +703,7 @@
             </div>
           </article>
         </section>
-      </main>
+      </div>
     </div>
   </div>
   <footer>

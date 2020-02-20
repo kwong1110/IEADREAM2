@@ -69,7 +69,7 @@
       text-align: right;
     }
 
-    #bodyer{
+    .outer{
       background-color: white;
       text-align: center;
       display:block;
@@ -95,7 +95,7 @@
       font-weight : 400;
       padding-top: 20px;
     }
-    main{
+    .main{
       background-color: whites;
       text-align: left;
       max-width:1025px;
@@ -212,7 +212,7 @@
     </div>
   </header>
 
-  <div id ="bodyer">
+  <div class ="outer">
     <div class="wrapper">
       <nav>
         <div  class="mainCategory">
@@ -225,7 +225,7 @@
           <a href="">이상형의 이상형</a>
         </div>
       </nav>
-      <main>
+      <div class="main">
         <section class="pageTitle">
           <label>이상형 추천</label>
         </section>
@@ -300,19 +300,19 @@
             </div>
             <div class="itemBox">
                 <div class="itemName" id="">관심분야</div>
-                <div class="itemValue" id="interest">영화</div>
+                <div class="itemValue" id="interest1">영화</div>
             </div>
             <div class="itemBox">
                 <div class="itemName" id="">관심분야</div>
-                <div class="itemValue" id="interest">음악</div>
+                <div class="itemValue" id="interest2">음악</div>
             </div>
             <div class="itemBox">
                 <div class="itemName" id="">관심분야</div>
-                <div class="itemValue" id="interest">악기</div>
+                <div class="itemValue" id="interest3">악기</div>
             </div>
             <div class="itemBox">
                 <div class="itemName" id="">관심분야</div>
-                <div class="itemValue" id="interest">외국어</div>
+                <div class="itemValue" id="interest4">외국어</div>
             </div>
         </article>
         </section>
@@ -327,9 +327,10 @@
             <image width="50px" height="100px"></image>
           </div>
         </section>
-      </main>
+      </div>
     </div>
   </div>
+
   <footer>
     <div class="wrapper" style="display:inline-block;">
       <div style="float:left; margin:20px;">
