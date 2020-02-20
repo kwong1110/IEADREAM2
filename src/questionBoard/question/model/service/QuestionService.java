@@ -121,4 +121,22 @@ public class QuestionService {
 		}
 		return list;
 	}
+
+
+
+	 public int MgetListCount() { 
+		  Connection conn = getConnection();
+		  int result = new QuestionDAO().MgetListCount(conn);
+		  close(conn); 
+		  return result; 
+	  }
+	 
+
+	
+	  public ArrayList<Question> MselectList(int currentPage) {
+		  Connection conn = getConnection();
+		  ArrayList<Question> list = new QuestionDAO().MselectList(conn, currentPage); 
+		  close(conn);
+		  return list; 
+	  }
 	}
