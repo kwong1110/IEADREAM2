@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import coupleStory.bestCouple.model.dao.bestCoupleDAO;
 import coupleStory.bestCouple.model.vo.BestCouple;
+import photo.model.vo.Photo;
 
 public class bestCoupleService {
 	
@@ -20,14 +21,25 @@ public class bestCoupleService {
 		
 		return result;
 	}
-	
-	public ArrayList<BestCouple> selectBcList(int currentPage) {
+
+	public ArrayList<BestCouple> selectbcList(int currentPage) {
 		Connection conn = getConnection();
 		bestCoupleDAO bcDAO = new bestCoupleDAO();
+		ArrayList<BestCouple> bcList = null;
 		
-		ArrayList<BestCouple> bcList = bcDAO.selectBcList(conn, currentPage);
+		bcList = bcDAO.selectbcList(conn, currentPage);
 		
 		return bcList;
 	}
 
+	public ArrayList<Photo> selectpList() {
+		Connection conn = getConnection();
+		bestCoupleDAO bcDAO = new bestCoupleDAO();
+		ArrayList<Photo> pList = null;
+		
+		pList = bcDAO.selectpList(conn);
+		
+		return pList;
+	}
+	
 }

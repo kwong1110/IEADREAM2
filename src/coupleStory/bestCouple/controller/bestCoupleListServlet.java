@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import common.PageInfo;
 import coupleStory.bestCouple.model.service.bestCoupleService;
 import coupleStory.bestCouple.model.vo.BestCouple;
+import photo.model.vo.Photo;
 
 /**
  * Servlet implementation class bestCoupleListServlet
@@ -59,14 +60,17 @@ public class bestCoupleListServlet extends HttpServlet {
 		
 		PageInfo pi = new PageInfo(currentPage, listCount, limit, maxPage, startPage, endPage);
 		
-		ArrayList<BestCouple> bcList = bcService.selectBcList(currentPage);
+		ArrayList<BestCouple> bcList = bcService.selectbcList(currentPage);
+		ArrayList<Photo> pList = bcService.selectpList();
 		
 		String page = null;
-		if(bcList != null) {
+		if(bcList != null && pList != null) {
 			request.setAttribute("bcList", bcList);
+			request.setAttribute("pList", pList);
+			request.setAttribute("pi", pi);
 			page = "views/coupleStory/bestCouple/bestCoupleListForm.jsp";
 		} else {
-			request.setAttribute("msg", "[ÀÌ´ŞÀÇ º£½ºÆ® Ä¿ÇÃ] °Ô½ÃÆÇ Á¶È¸¿¡ ½ÇÆĞÇÏ¿´½À´Ï´Ù.");
+			request.setAttribute("msg", "[ì´ë‹¬ì˜ ë² ìŠ¤íŠ¸ ì»¤í”Œ] ê²Œì‹œíŒ ì¡°íšŒì— ì‹¤íŒ¨í•˜ì˜€ìŠµë‹ˆë‹¤.");
 			page = "views/common/errorPage.jsp";
 		}
 		
