@@ -23,14 +23,14 @@
 		margin-bottom: 60px;
 	}
 	
-	.joinForm td {
-		padding-bottom: 4%;
-	}
-	
-	table{
+	.table{
 		margin-top: 5%;
 		margin-left: 25%;
 		font-family: "만화진흥원체";
+	}
+	
+	.table td {
+		padding-bottom: 4%;
 	}
 	
 	.btnBox{
@@ -90,47 +90,49 @@
 				<div class="main">
 					<div class="pageTitle"><h1>회원가입</h1></div>
 					<form action="<%= request.getContextPath() %>/insert.ac" method="post" class="joinForm" name="joinForm" onsubmit="return validate();">
-						<table>
-							<tr>
-								<td>아이디</td>
-								<td><input type="text" name="joinUserId" id="joinUserId" class="box" placeholder=" 6~12자의 영문,숫자" required></td>
-								<td><button type="button" id="dubtn" class="defaultBtn" onclick="checkId();">중복체크</button></td>
-							</tr>
-							<tr>
-								<td>비밀번호</td>
-								<td><input type="password" name="joinUserPwd" id="joinUserPwd" class="box" placeholder=" 8~15자의 영문,숫자,특수문자 " maxlength="15" required></td>
-								<td style="width:200px"><label id="pwdResult1" class="msg"></label></td>
-							</tr>
-							<tr>
-								<td>비밀번호 확인</td>
-								<td><input type="password" name="joinUserPwd2" id="joinUserPwd2" class="box" maxlength="15" required></td>
-								<td><label id="pwdResult2" class="msg"></label></td>
-							</tr>
-							<tr>
-								<td>이름</td>
-								<td><input type="text" name="userName" id="userName" class="box" required></td>
-								<td><label id="nameResult" class="msg"></label></td>
-							</tr>
-							<tr>
-								<td>휴대전화</td>
-								<td><input type="tel" name="phone" placeholder="  (-없이)01012345678" class="box" required></td>
-							</tr>
-							<tr>
-								<td>이메일</td>
-									<td><input type="email" name="email" class="box" required></td>
-							</tr>
-							<tr>
-								<td>성별</td>
-								<td>
-									<label><input type="radio" name="gender" value="M" class="rdbox" required checked>남자</label>
-									<label><input type="radio" name="gender" value="F" class="rdbox" required>여자</label>
-								</td>
-							</tr>
-							<tr>
-								<td>생년월일</td>
-								<td><input type="date" name="birth" class="box" required></td>
-							</tr>
-						</table>
+						<div class="table">
+							<table>
+								<tr>
+									<td>아이디</td>
+									<td><input type="text" name="joinUserId" id="joinUserId" class="box" placeholder=" 6~12자의 영문,숫자" required></td>
+									<td><button type="button" id="dubtn" class="defaultBtn" onclick="checkId();">중복체크</button></td>
+								</tr>
+								<tr>
+									<td>비밀번호</td>
+									<td><input type="password" name="joinUserPwd" id="joinUserPwd" class="box" placeholder=" 8~15자의 영문,숫자,특수문자 " maxlength="15" required></td>
+									<td style="width:200px"><label id="pwdResult1" class="msg"></label></td>
+								</tr>
+								<tr>
+									<td>비밀번호 확인</td>
+									<td><input type="password" name="joinUserPwd2" id="joinUserPwd2" class="box" maxlength="15" required></td>
+									<td><label id="pwdResult2" class="msg"></label></td>
+								</tr>
+								<tr>
+									<td>이름</td>
+									<td><input type="text" name="userName" id="userName" class="box" required></td>
+									<td><label id="nameResult" class="msg"></label></td>
+								</tr>
+								<tr>
+									<td>휴대전화</td>
+									<td><input type="tel" name="phone" placeholder="  (-없이)01012345678" class="box" required></td>
+								</tr>
+								<tr>
+									<td>이메일</td>
+										<td><input type="email" name="email" class="box" required></td>
+								</tr>
+								<tr>
+									<td>성별</td>
+									<td>
+										<label><input type="radio" name="gender" value="M" class="rdbox" required checked>남자</label>
+										<label><input type="radio" name="gender" value="F" class="rdbox" required>여자</label>
+									</td>
+								</tr>
+								<tr>
+									<td>생년월일</td>
+									<td><input type="date" name="birth" class="box" required></td>
+								</tr>
+							</table>
+						</div>
 						
 						<div class="btnBox">
 							<button type="submit" id="joinBtn" class="defaultBtn btnC" value="1단계완료">다음단계</button>
