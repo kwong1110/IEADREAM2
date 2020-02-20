@@ -93,7 +93,11 @@
 						</li>
 						<li class="s-menu"><span onclick="goQuestionBoard();">문의게시판</span>
 							<ul class="dept01">
-								<li id="nop"><a href="<%=request.getContextPath() %>/list.qu">1:1</a></li>
+								<% if(loginUser != null){ %>
+									<li id="nop"><a href="<%=request.getContextPath() %>/list.qu?userNo=<%= loginUser.getUserNo() %>">1:1</a></li>
+								<% } else {%>
+									<li id="nop"><a href="<%=request.getContextPath() %>/list.qu">1:1</a></li>
+								<% } %>
 								<li id="nop"><a href="<%=request.getContextPath() %>/list.faq">FAQ</a></li>
 								<li id="nop"><a href="<%=request.getContextPath() %>/adminList.faq">FAQ-admin</a></li>
 							</ul>

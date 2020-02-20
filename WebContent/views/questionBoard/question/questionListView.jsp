@@ -4,18 +4,21 @@
 <%
 	ArrayList<Question> list = (ArrayList<Question>)request.getAttribute("list");
 	PageInfo pi = (PageInfo)request.getAttribute("pi");
-	
 	int listCount = pi.getListCount();
 	int currentPage = pi.getCurrentPage();
 	int maxPage = pi.getMaxPage();
 	int startPage = pi.getStartPage();
 	int endPage = pi.getEndPage();
+	
+	
 %> 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="<%= request.getContextPath() %>/css/common.css">
+<link rel="stylesheet" href="<%= request.getContextPath() %>/css/board.css">
 <style>
 	.outer{
 		width: 800px; height: 500px; background: rgba(255, 255, 255, 0.4); border: 5px solid white;
@@ -43,17 +46,21 @@
 	<%@ include file="../../common/mainmenu.jsp" %>
 	<div class="outer">
 		<div class="wrapper">
+			<%-- <nav>
+				<%@ include file="../../common/questionPageLeftmenu.jsp" %>
+			</nav> --%>
 			<div class="main">
 				<div class="pageTitle">
-					<h1>1:1 문의게시판</h1>
+					<h2>1:1 문의게시판</h2>
 				</div>
 				<div class="tableArea">
+				
 					<table id="listArea">
 						<tr>
-							<th width="90px">번호</th>
+							<th width="70px">번호</th>
 							<th width="100px">카테고리</th>
-							<th width="150px">제목</th>
-							<th width="100px">답변 여부</th>
+							<th width="270px">제목</th>
+							<th width="140px">답변 여부</th>
 							<th width="170px">문의 날짜</th>
 						</tr>
 						<% if(list.isEmpty()){ %>
@@ -87,9 +94,9 @@
 				<div class='pagingArea' align='center'>
 					<% if(!list.isEmpty()){ %>
 					<!-- 맨 처음으로 가는 버튼 -->
-					<button onclick="location.href='<%= request.getContextPath() %>/list.qu?currentPage=1'">&lt;&lt;</button>
+					<button onclick="location.href='<%= request.getContextPath() %>/list.qu?userNo=<%= loginUser.getUserNo()%>&currentPage=1'">&lt;&lt;</button>
 					<!-- 이전 페이지로  가는 버튼 -->
-					<button onclick="location.href='<%= request.getContextPath() %>/list.qu?currentPage=<%= currentPage-1 %>'" id="beforeBtn">&lt;</button>
+					<button onclick="location.href='<%= request.getContextPath() %>/list.qu?userNo=<%= loginUser.getUserNo()%>&currentPage=<%= currentPage-1 %>'" id="beforeBtn">&lt;</button>
 					<script>
 						if(<%= currentPage %> <= 1){
 							var before = $('#beforeBtn');
@@ -101,12 +108,12 @@
 						<% if(p == currentPage){ %>
 							<button id="choosen" disabled><%= p %></button>
 						<% } else { %>
-							<button id="numBtn" onclick="location.href='<%=request.getContextPath() %>/list.qu?currentPage=<%= p %>'"><%= p %></button>
+							<button id="numBtn" onclick="location.href='<%=request.getContextPath() %>/list.qu?userNo=<%= loginUser.getUserNo()%>&currentPage=<%= p %>'"><%= p %></button>
 						<% } %>
 					<% } %>
 					
 					<!-- 다음 페이지로 가는 버튼 -->
-					<button onclick="location.href='<%= request.getContextPath() %>/list.qu?currentPage=<%= currentPage + 1 %>'" id="afterBtn">&gt;</button>
+					<button onclick="location.href='<%= request.getContextPath() %>/list.qu?userNo=<%= loginUser.getUserNo()%>&currentPage=<%= currentPage + 1 %>'" id="afterBtn">&gt;</button>
 					<script>
 						if(<%= currentPage %> >= <%= maxPage %>){
 							var after= $("#afterBtn");
@@ -115,7 +122,7 @@
 					</script>
 					
 					<!-- 맨 끝으로 가는 버튼 -->
-					<button onclick="location.href='<%= request.getContextPath() %>/list.qu?currentPage=<%= maxPage %>'">&gt;&gt;</button>			
+					<button onclick="location.href='<%= request.getContextPath() %>/list.qu?userNo=<%= loginUser.getUserNo()%>&currentPage=<%= maxPage %>'">&gt;&gt;</button>			
 					
 					<% } %>
 					<div class='btnBox' align='right'>
@@ -135,9 +142,6 @@
 				$(this).parent().css('background','none');
 			}).click(function(){
 				var postNo = $(this).parent().children().children('input').val();
-				<%--location.href='<%= request.getContextPath() %>/detail.qu?postNo=' + postNo;
-				 // 로그인 한 사람만 상세보기 이용할 수 있게 하기
-				<%if(loginUser != null){ %>		|| loginUser.getUserNo()== question.getUserNo()--%>
 				<%if(loginUser != null){ %>
 					location.href='<%= request.getContextPath() %>/detail.qu?postNo=' + postNo;
 				<% } else { %>

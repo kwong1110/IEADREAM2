@@ -33,10 +33,13 @@ public class QuestionListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		QuestionService service = new QuestionService();
+		 QuestionService service = new QuestionService();
 		
-		
-		  int listCount = service.getListCount();
+		  String userNo = request.getParameter("userNo");
+		  
+		  System.out.println(userNo);
+		  
+		  int listCount = service.getListCount(userNo);
 		 
 		  int currentPage; 
 		  int limit; 
@@ -61,13 +64,13 @@ public class QuestionListServlet extends HttpServlet {
 		  
 		  PageInfo pi = new PageInfo(currentPage, listCount, limit, maxPage, startPage,endPage);
 		 
-		  ArrayList<Question> list = service.selectList(currentPage);
+		  ArrayList<Question> list = service.selectList(currentPage, userNo);
 		  
 		  String page = null; 
 		  if(list != null) { 
-			  page = "views/questionBoard/question/questionListView.jsp";
+			 page = "views/questionBoard/question/questionListView.jsp";
 			  request.setAttribute("list", list); 
-			  request.setAttribute("pi", pi); 
+			  request.setAttribute("pi", pi);
 		  } else {
 			  page= "views/common/errorPage.jsp"; 
 			  request.setAttribute("msg","게시판 조회에 실패하였습니다.");
@@ -76,19 +79,7 @@ public class QuestionListServlet extends HttpServlet {
 			view.forward(request, response);
 		 
 	}
-	/*	ArrayList<Question> list = service.selectList();
-		
-		String page = null;
-		if(list != null) {
-			page= "views/questionBoard/question/questionListView.jsp";
-			request.setAttribute("list", list);
-		} else {
-			page= "views/common/errorPage.jsp";
-			request.setAttribute("msg", "게시판 조회에 실패하였습니다.");
-		}
-		RequestDispatcher view = request.getRequestDispatcher(page);
-		view.forward(request, response);
-	} */
+
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
