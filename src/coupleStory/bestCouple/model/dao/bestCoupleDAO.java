@@ -1,6 +1,7 @@
 package coupleStory.bestCouple.model.dao;
 
 import static common.JDBCTemplate.close;
+
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -13,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import coupleStory.bestCouple.model.vo.BestCouple;
+import photo.model.vo.Photo;
 
 public class bestCoupleDAO {
 	private Properties prop = new Properties();
@@ -54,19 +56,17 @@ public class bestCoupleDAO {
 		
 		return result;
 	}
-	
-	public ArrayList selectBcList(Connection conn, int currentPage) {
-		
+
+	public ArrayList<BestCouple> selectbcList(Connection conn, int currentPage) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		ArrayList<BestCouple> bcList = null;
 		
 		int posts = 3;
-		
 		int startRow = (currentPage - 1) * posts + 1;
-		int endRow = startRow + posts -1;
+		int endRow = startRow + posts - 1;
 		
-		String query = prop.getProperty("selectBList");
+		String query = prop.getProperty("selectbcList");
 		//SELECT * FROM BCLIST WHERE RNUM BETWEEN ? AND ?
 		
 		try {
@@ -81,9 +81,7 @@ public class bestCoupleDAO {
 				BestCouple bc = new BestCouple(rset.getInt("POST_NO"),
 												rset.getString("TITLE"),
 												rset.getDate("CREATE_DATE"),
-												rset.getInt("HIT"),
-												rset.getString("DELETE").charAt(0));
-				
+												rset.getInt("HIT"));
 				bcList.add(bc);
 			}
 			
@@ -93,9 +91,39 @@ public class bestCoupleDAO {
 			close(rset);
 			close(pstmt);
 		}
-		
+	
 		return bcList;
 	}
 
-
+	public ArrayList<Photo> selectpList(Connection conn) {
+		Statement stmt = null;
+		ResultSet rset = null;
+		
+		ArrayList<Photo> pList = null;
+		
+		String query = prop.getProperty("selectpList");
+		//SELECT * FROM PHOTO WHERE DELETED='N' AND FILE_LEVEL=0 AND BOARD_NO=1;
+		
+		try {
+			stmt = conn.createStatement();
+			rset = stmt.executeQuery(query);
+			
+			pList = new ArrayList<Photo>();
+			
+			while(rset.next()) {
+				pList.add(new Photo(rset.getInt("POST_NO"),
+									rset.getInt("BOARD_NO"),
+									rset.getString("CHANGE_NAME")));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(stmt);
+		}
+		
+		return pList;
+	}
+	
 }
