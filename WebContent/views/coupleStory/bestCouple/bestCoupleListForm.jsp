@@ -1,5 +1,11 @@
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="coupleStory.bestCouple.model.vo.*" %>    
+    
+<%
+	ArrayList<BestCouple> bcList = (ArrayList<BestCouple>)request.getAttribute("bcList");
+%>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -172,13 +178,24 @@
 					</div>
 					
 					<div class="contents">
+					<% 
+						for(int i = 0; i < bcList.size(); i++){
+							BestCouple bc = bcList.get(i);
+					%>
 						<div class="contn" id="contn1">
 							<div class="img" id="img1">
 								<a href="#" style="width:inherit; height:inherit;">
 								</a>
 							</div>
 							<div class="text">
-								<p id="text1">하루하루가 행복해요~</p>
+								<input type="hidden" value="<%= bc.getPostNo() %>">
+								<p id="text1">
+								<%-- 	<%
+										for(int i = 0; i < bcList.size(); i++){
+											
+										}
+									%> --%>
+								</p>
 								<p id="text2">박보검</p>
 								<p id="text3">2020-01-18</p>
 							</div>
@@ -209,7 +226,7 @@
 						
 						<div class="clear-both"></div>
 						
-						<div class="sc-footer">
+						<!-- <div class="sc-footer">
 							<div class="button">
 								<button>&lt;</button>
 								<button>1</button>
@@ -217,12 +234,13 @@
 								<button>3</button>
 								<button>&gt;</button>
 							</div>
-						</div>
+						</div> -->
 						
 						<!-- 관리자용 업로드 버튼 -->
 					<!-- <div>
 							<a href="#"><button class="uploadbtn">UPLOAD</button></a>
 						</div> -->
+					<% } %>
 					</div>
 				</div>	
 			</div>
