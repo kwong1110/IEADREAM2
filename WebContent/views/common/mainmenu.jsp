@@ -99,7 +99,9 @@
 									<li id="nop"><a href="<%=request.getContextPath() %>/list.qu">1:1</a></li>
 								<% } %>
 								<li id="nop"><a href="<%=request.getContextPath() %>/list.faq">FAQ</a></li>
-								<li id="nop"><a href="<%=request.getContextPath() %>/adminList.faq">FAQ-admin</a></li>
+								<% if(loginUser != null && loginUser.getGrade() == 0){ %>
+								<li id="nop"><a href="<%=request.getContextPath() %>/adminList.faq">FAQ 관리</a></li>
+								<% } %>
 							</ul>
 						</li>
 						
