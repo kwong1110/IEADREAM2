@@ -36,7 +36,7 @@ public class UpdateUserInfoServlet extends HttpServlet {
 		int height = Integer.parseInt(request.getParameter("height"));
 		String shape = request.getParameter("shape");
 		String style = request.getParameter("style");
-		String region = request.getParameter("region");
+		int region = Integer.parseInt(request.getParameter("region"));
 		String religion = request.getParameter("religion");
 		int scholar = Integer.parseInt(request.getParameter("scholar"));
 		String job = request.getParameter("job");
@@ -52,7 +52,7 @@ public class UpdateUserInfoServlet extends HttpServlet {
 		ui.setScholar(scholar);
 		ui.setJob(job);
 		ui.setDrink(drink);
-		ui.setSmoke(smoke);	
+		ui.setSmoke(smoke);
 		
 		
 	}

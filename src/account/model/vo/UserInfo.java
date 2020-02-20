@@ -10,7 +10,7 @@ public class UserInfo {
 	private int height;			// 키
 	private String shape;		// 체형
 	private String style;		// 스타일
-	private String region;		// 거주지역
+	private int region;		// 거주지역
 	private String religion;	// 종교
 	private int scholar;		// 학력
 	private String job;			// 직업
@@ -20,7 +20,7 @@ public class UserInfo {
 	
 	public UserInfo() {}
 
-	public UserInfo(int userNo, String thumb, String hello, int height, String shape, String style, String region,
+	public UserInfo(int userNo, String thumb, String hello, int height, String shape, String style, int region,
 			String religion, int scholar, String job, int drink, int smoke, ArrayList<String> interest) {
 		super();
 		this.userNo = userNo;
@@ -86,11 +86,11 @@ public class UserInfo {
 		this.style = style;
 	}
 
-	public String getRegion() {
+	public int getRegion() {
 		return region;
 	}
 
-	public void setRegion(String region) {
+	public void setRegion(int region) {
 		this.region = region;
 	}
 

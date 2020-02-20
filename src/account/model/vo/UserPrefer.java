@@ -14,7 +14,7 @@ public class UserPrefer {
 	private int stylePRI;
 	private int age;			// 나이
 	private int agePRI;
-	private String region;		// 거주지역
+	private int region;		// 거주지역
 	private int regionPRI;
 	private String religion;	// 종교
 	private int religionPRI;
@@ -31,7 +31,7 @@ public class UserPrefer {
 	public UserPrefer() {}
 
 	public UserPrefer(int userNo, int height, int heightPRI, String shape, int shapePRI, String style, int stylePRI,
-			int age, int agePRI, String region, int regionPRI, String religion, int religionPRI, int scholar,
+			int age, int agePRI, int region, int regionPRI, String religion, int religionPRI, int scholar,
 			int scholarPRI, String job, int jobPRI, int drink, int drinkPRI, int smoke, int smokePRI, int interestPRI) {
 		super();
 		this.userNo = userNo;
@@ -130,11 +130,11 @@ public class UserPrefer {
 		this.agePRI = agePRI;
 	}
 
-	public String getRegion() {
+	public int getRegion() {
 		return region;
 	}
 
-	public void setRegion(String region) {
+	public void setRegion(int region) {
 		this.region = region;
 	}
 

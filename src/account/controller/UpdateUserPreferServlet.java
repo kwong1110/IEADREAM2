@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import account.model.vo.UserPrefer;
+
 /**
  * Servlet implementation class UpdateUserPreferServlet
  */
@@ -27,9 +29,31 @@ public class UpdateUserPreferServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		request.setCharacterEncoding("UTF-8");
+		request.setCharacterEncoding("UTF-8");		
 		
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		UserPrefer up = new UserPrefer();
+		
+		int height = Integer.parseInt(request.getParameter("height"));
+		String shape = request.getParameter("shape");
+		String style = request.getParameter("style");
+		int region = Integer.parseInt(request.getParameter("region"));
+		String religion = request.getParameter("religion");
+		int scholar = Integer.parseInt(request.getParameter("scholar"));
+		String job = request.getParameter("job");
+		int drink = Integer.parseInt(request.getParameter("drink"));
+		int smoke = Integer.parseInt(request.getParameter("smoke"));
+		String[] interest = request.getParameterValues("interest");
+		
+		up.setHeight(height);
+		up.setShape(shape);
+		up.setStyle(style);
+		up.setRegion(region);
+		up.setReligion(religion);
+		up.setScholar(scholar);
+		up.setJob(job);
+		up.setDrink(drink);
+		up.setSmoke(smoke);
+		
 	}
 
 	/**
