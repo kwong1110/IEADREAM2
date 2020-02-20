@@ -122,7 +122,7 @@
 									</td>
 									<% if(loginUser.getGrade() == 0){ %> 
 									<td><input type="button"  id="addReply" value="등록"></td>
-									<td><input type="button" onclick="location.href='<%= request.getContextPath() %>/list.qu'" id="menuBtn" value="수정" ></td>
+									<td><input type="button" onclick="location.href='<%= request.getContextPath() %>/list.qu?userNo=<%= loginUser.getUserNo()%>'" id="menuBtn" value="수정" ></td>
 									<td><input type="button" onclick="deleteBoard();" id="deleteBtn" value="삭제"></td>
 								<% } %> 
 								</tr>
@@ -130,7 +130,7 @@
 						</div>
 						<div class="btnBox">
 							<input type="submit" id="updateBtn" value="수정">
-							<input type="button" onclick="location.href='<%= request.getContextPath() %>/list.qu'" id="menuBtn" value="메뉴로" >
+							<input type="button" onclick="location.href='<%= request.getContextPath() %>/list.qu?userNo=<%= loginUser.getUserNo()%>'" id="menuBtn" value="메뉴로" >
 							<input type="button" onclick="deleteBoard();" id="deleteBtn" value="삭제">
 						</div>
 					</form>
@@ -147,13 +147,13 @@
 			}
 		}
 		
-		$('#addReply').click(function(){
+		<%-- $('#addReply').click(function(){
 			var postNo = <%= q.getPostNo() %>;
 			var answerContent = $('#Mcommand').val();
 			$.ajax({
 				url: '<%= request.getContextPath() %>/insertReply.qu',
-				type='post',
-				data: {postNo : postNo, content:content},
+				type: 'post',
+				data: {postNo: postNo, content:content},
 				success: function(data){
 					$replyTable = $('#replyTable');
 					
@@ -170,8 +170,8 @@
 					
 				}
 			});
-			
-		});
+			 
+		});--%>
 	</script>
 </body>
 </html>

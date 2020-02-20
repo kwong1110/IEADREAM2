@@ -4,7 +4,6 @@
 <%
 	ArrayList<Question> list = (ArrayList<Question>)request.getAttribute("list");
 	PageInfo pi = (PageInfo)request.getAttribute("pi");
-	
 	int listCount = pi.getListCount();
 	int currentPage = pi.getCurrentPage();
 	int maxPage = pi.getMaxPage();
@@ -47,9 +46,9 @@
 	<%@ include file="../../common/mainmenu.jsp" %>
 	<div class="outer">
 		<div class="wrapper">
-			<nav>
+			<%-- <nav>
 				<%@ include file="../../common/questionPageLeftmenu.jsp" %>
-			</nav>
+			</nav> --%>
 			<div class="main">
 				<div class="pageTitle">
 					<h2>1:1 문의게시판</h2>
@@ -95,9 +94,9 @@
 				<div class='pagingArea' align='center'>
 					<% if(!list.isEmpty()){ %>
 					<!-- 맨 처음으로 가는 버튼 -->
-					<button onclick="location.href='<%= request.getContextPath() %>/list.qu?currentPage=1'">&lt;&lt;</button>
+					<button onclick="location.href='<%= request.getContextPath() %>/list.qu?userNo=<%= loginUser.getUserNo()%>&currentPage=1'">&lt;&lt;</button>
 					<!-- 이전 페이지로  가는 버튼 -->
-					<button onclick="location.href='<%= request.getContextPath() %>/list.qu?currentPage=<%= currentPage-1 %>'" id="beforeBtn">&lt;</button>
+					<button onclick="location.href='<%= request.getContextPath() %>/list.qu?userNo=<%= loginUser.getUserNo()%>&currentPage=<%= currentPage-1 %>'" id="beforeBtn">&lt;</button>
 					<script>
 						if(<%= currentPage %> <= 1){
 							var before = $('#beforeBtn');
@@ -109,12 +108,12 @@
 						<% if(p == currentPage){ %>
 							<button id="choosen" disabled><%= p %></button>
 						<% } else { %>
-							<button id="numBtn" onclick="location.href='<%=request.getContextPath() %>/list.qu?currentPage=<%= p %>'"><%= p %></button>
+							<button id="numBtn" onclick="location.href='<%=request.getContextPath() %>/list.qu?userNo=<%= loginUser.getUserNo()%>&currentPage=<%= p %>'"><%= p %></button>
 						<% } %>
 					<% } %>
 					
 					<!-- 다음 페이지로 가는 버튼 -->
-					<button onclick="location.href='<%= request.getContextPath() %>/list.qu?currentPage=<%= currentPage + 1 %>'" id="afterBtn">&gt;</button>
+					<button onclick="location.href='<%= request.getContextPath() %>/list.qu?userNo=<%= loginUser.getUserNo()%>&currentPage=<%= currentPage + 1 %>'" id="afterBtn">&gt;</button>
 					<script>
 						if(<%= currentPage %> >= <%= maxPage %>){
 							var after= $("#afterBtn");
@@ -123,7 +122,7 @@
 					</script>
 					
 					<!-- 맨 끝으로 가는 버튼 -->
-					<button onclick="location.href='<%= request.getContextPath() %>/list.qu?currentPage=<%= maxPage %>'">&gt;&gt;</button>			
+					<button onclick="location.href='<%= request.getContextPath() %>/list.qu?userNo=<%= loginUser.getUserNo()%>&currentPage=<%= maxPage %>'">&gt;&gt;</button>			
 					
 					<% } %>
 					<div class='btnBox' align='right'>

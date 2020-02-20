@@ -68,9 +68,9 @@ public class QuestionListServlet extends HttpServlet {
 		  
 		  String page = null; 
 		  if(list != null) { 
-			  page = "views/questionBoard/question/questionListView.jsp";
+			 page = "views/questionBoard/question/questionListView.jsp";
 			  request.setAttribute("list", list); 
-			  request.setAttribute("pi", pi); 
+			  request.setAttribute("pi", pi);
 		  } else {
 			  page= "views/common/errorPage.jsp"; 
 			  request.setAttribute("msg","게시판 조회에 실패하였습니다.");
