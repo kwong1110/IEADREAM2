@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>로그인</title>
+<title>로그인 </title>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/common.css">
 <style>
 .inputBox{
