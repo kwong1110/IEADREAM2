@@ -15,16 +15,16 @@ import questionBoard.question.model.vo.PageInfo;
 import questionBoard.question.model.vo.Question;
 
 /**
- * Servlet implementation class QuestionListServlet
+ * Servlet implementation class AdminQuestionList
  */
-@WebServlet("/list.qu")
-public class QuestionListServlet extends HttpServlet {
+@WebServlet("/Mlist.qu")
+public class AdminQuestionListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public QuestionListServlet() {
+    public AdminQuestionListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,12 +34,9 @@ public class QuestionListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		 QuestionService service = new QuestionService();
-		
-		  String userNo = request.getParameter("userNo");
+			
 		  
-		  System.out.println(userNo);
-		  
-		  int listCount = service.getListCount(userNo);
+		  int listCount = service.MgetListCount();
 		 
 		  int currentPage; 
 		  int limit; 
@@ -64,7 +61,7 @@ public class QuestionListServlet extends HttpServlet {
 		  
 		  PageInfo pi = new PageInfo(currentPage, listCount, limit, maxPage, startPage,endPage);
 		 
-		  ArrayList<Question> list = service.selectList(currentPage, userNo);
+		  ArrayList<Question> list = service.MselectList(currentPage);
 		  
 		  String page = null; 
 		  if(list != null) { 
@@ -79,7 +76,6 @@ public class QuestionListServlet extends HttpServlet {
 			view.forward(request, response);
 		 
 	}
-
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

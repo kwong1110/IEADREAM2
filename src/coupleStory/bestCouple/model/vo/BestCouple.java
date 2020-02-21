@@ -33,6 +33,14 @@ public class BestCouple {
 		this.deleted = deleted;
 		this.boardNo = boardNo;	
 	}
+	
+	public BestCouple(int postNo, String title, Date createDate, int hit) {
+		super();
+		this.postNo = postNo;
+		this.title = title;
+		this.createDate = createDate;
+		this.hit = hit;
+	}
 
 	public int getPostNo() {
 		return postNo;
