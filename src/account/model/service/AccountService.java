@@ -66,4 +66,21 @@ public class AccountService {
 			System.out.println(loginUser);
 			return loginUser;
 	}
+
+
+	// 아이디 찾기 Service
+	public Account searchid(Account account) {
+		Connection conn = getConnection();
+		
+		AccountDAO aDAO = new AccountDAO();
+		Account findId = aDAO.searchid(account, conn);
+		close(conn);
+		
+		System.out.println(findId);
+		
+		return findId;
+	}
+	
 }
+
+	

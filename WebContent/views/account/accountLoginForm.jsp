@@ -56,7 +56,8 @@ button {
 			            <div>
 			            <button type="submit" class="defaultBtn loginBtn" onclick="location.href='<%= request.getContextPath() %>/login.me'">로그인</button> 
 			            </div>
-			            <button type ="button" class="defaultBtn">아이디 찾기</button>
+			            <button type ="button" class="defaultBtn" onclick="location.href='searchidForm'">아이디 찾기</button>
+			            <!-- 아이디 찾기 눌렀을때 searchidForm 으로 넘어 가기... -->
 			            <button type ="button" class="defaultBtn">비밀번호 찾기</button>
 			            <button type ="button" class="defaultBtn">회원가입</button>
 		            </div>
