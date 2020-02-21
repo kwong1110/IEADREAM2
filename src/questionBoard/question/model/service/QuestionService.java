@@ -15,28 +15,29 @@ import questionBoard.question.model.vo.Question;
 public class QuestionService {
 
 	
-	  public int getListCount() { 
+	  public int getListCount(String userNo) { 
 		  Connection conn = getConnection();
-		  int result = new QuestionDAO().getListCount(conn);
+		  int result = new QuestionDAO().getListCount(conn, userNo);
 		  close(conn); 
 		  return result; 
 	  }
 	 
 
 	
-	  public ArrayList<Question> selectList(int currentPage) {
+	  public ArrayList<Question> selectList(int currentPage, String userNo) {
 		  Connection conn = getConnection();
-		  ArrayList<Question> list = new QuestionDAO().selectList(conn, currentPage); 
+		  ArrayList<Question> list = new QuestionDAO().selectList(conn, currentPage, userNo); 
 		  close(conn);
 		  return list; 
 	  }
 
-	public Question selectQuestion(int postNo) {
+	public Question selectQuestion(String postNo) {
 		Connection conn = getConnection();
 		QuestionDAO dao = new QuestionDAO();
-
+		
+		int post = Integer.parseInt(postNo);
 		Question q = null;
-		q= dao.selectQuestion(conn, postNo);
+		q= dao.selectQuestion(conn, post);
 		if(q != null) {
 			commit(conn);
 		}else {
@@ -90,7 +91,7 @@ public class QuestionService {
 
 
 
-	public String selectUserId(int postNo) {
+	public String selectUserId(String postNo) {
 		Connection conn = getConnection();
 		QuestionDAO dao = new QuestionDAO();
 		
@@ -120,4 +121,22 @@ public class QuestionService {
 		}
 		return list;
 	}
+
+
+
+	 public int MgetListCount() { 
+		  Connection conn = getConnection();
+		  int result = new QuestionDAO().MgetListCount(conn);
+		  close(conn); 
+		  return result; 
+	  }
+	 
+
+	
+	  public ArrayList<Question> MselectList(int currentPage) {
+		  Connection conn = getConnection();
+		  ArrayList<Question> list = new QuestionDAO().MselectList(conn, currentPage); 
+		  close(conn);
+		  return list; 
+	  }
 	}

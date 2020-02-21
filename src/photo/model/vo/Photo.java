@@ -22,6 +22,13 @@ public class Photo {
 		this.fileLevel = fileLevel;
 		this.deleted = deleted;
 	}
+	
+	public Photo(int photoNo, int boardNo, String changeName) {
+		super();
+		this.photoNo = photoNo;
+		this.boardNo = boardNo;
+		this.changeName = changeName;
+	}
 
 	public int getPhotoNo() {
 		return photoNo;

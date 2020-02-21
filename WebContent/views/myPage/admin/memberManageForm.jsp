@@ -3,6 +3,7 @@
 <%@ page import="account.model.vo.*, common.*, java.util.ArrayList" %>
 <%
 	ArrayList<Account> list = (ArrayList<Account>)request.getAttribute("list");
+	
 	PageInfo pi = (PageInfo)request.getAttribute("pi");
 	
 	int listCount = pi.getListCount();
@@ -21,13 +22,6 @@
 <script type="text/javascript" src="<%= request.getContextPath() %>/js/SelectAll.js"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <style>
-	input[type='radio']{
-	  appearance: none;
-	  width: 0.9rem;
-	  height: 0.9rem;
-	  border-radius: 0%;
-	  margin-right: 0.1rem;
-	}
 </style>
 </head>
 <body>
@@ -62,7 +56,7 @@
 					<h2>회원 관리</h2>
 				</div>
 				<div class="contents">
-					<form method="get">
+					<form method="get" action="<%= request.getContextPath() %>/manage.mem">
 						<div class="topBox">
 							<div class="midBox">
 								<div class="searchMenu">회원 등급</div>
@@ -76,13 +70,13 @@
 							<div class="midBox">
 								<div class="searchMenu">검색어</div>
 								<div>
-									<select class="search" id="sCategory">
+									<select class="search" name="sCategory">
 										<option value="USER_NAME">이름</option>
 										<option value="USER_NO">회원번호</option>
 										<option value="ID">아이디</option>
 									</select>
-									<input placeholder="검색어를 입력하세요!" class="search search2" type="text" id="sWord">
-									<button class="defaultBtn searchBtn" type="button" id="SearchBtn">검색</button>
+									<input placeholder="검색어를 입력하세요!" class="search search2" type="text" name="sWord">
+									<button class="defaultBtn searchBtn" type="submit" id="SearchBtn">검색</button>
 								</div>
 							</div>
 						</div>
@@ -103,7 +97,7 @@
 							<tbody>
 								<% if(list.isEmpty()){ %>
 								<tr>
-									<td colspan="6">조회된 리스트가 없습니다.</td>
+									<td colspan="9">조회된 리스트가 없습니다.</td>
 								</tr>
 								<% } else{ 
 										for(Account a : list){
@@ -117,7 +111,7 @@
 									<td><%= a.getUserName() %></td>
 									<td><%= a.getPhone() %></td>
 									<td><%= a.getGrade() %></td>
-									<td><%= a.getGrade() %></td>
+									<td><%= a.getDeleted() %></td>
 									<td><%= a.getDeleted() %></td>
 								</tr>			
 								<% 		}
@@ -176,7 +170,9 @@
 	<script>
 		$(function(){
 			$('.memberManage').addClass('on')
-		});
+		});		
+		
+		<%-- var searchList;
 		
 		$('#SearchBtn').click(function(){
 				// 검색버튼을 클릭했다는걸 알려주는 변수 (서블릿 전달 용도)
@@ -185,7 +181,7 @@
 					// 1일때, 검색 작동! */
 		
 				// 1.검색범위(회원등급)와 2.검색종류와 3.검색어 받기
-			$('tbody').hide();
+			//$('tbody').hide(); - aJax 작동 테스트
 			var memGrade = $('input[name="memGrade"]:checked').val();;
 			var sCategory = $("#sCategory option:selected").val();
 			var sWord = $("#sWord").val();
@@ -196,11 +192,10 @@
 				type: 'post',
 				data: {memGrade: memGrade, sCategory: sCategory, sWord: sWord},
 				success: function(data){
-					for(var i in data){
-						cosole.log(i)
-					}
-				}
+					alert('조회 성공했습니다!');
+					
+				} 
 			});
-		});
+		}); --%>
 	</script>
 </html>

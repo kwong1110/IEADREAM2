@@ -88,50 +88,34 @@
 								</tr>
 							</tbody>
 						</table>
-						<%-- <div id="replyArea">
-							<table id="replyTable">
-							<% if(q.getAnswerContent() != null) { %>
-								<tr>
-									<th id="manager" rowspan ="1">관리자</th>
-									<td id="Mcommand" rowspan = "3" colspan="4" align= center>
-									
-										<%= q.getAnswerContent() %>
-									<% } else { %>
-										
-									<% } %>
-									</td>
-									<% if(loginUser.getGrade() == 0){ %> 
-									<td><input type="button"  id="addReply" value="등록"></td>
-									<td><input type="button" onclick="location.href='<%= request.getContextPath() %>/list.qu'" id="menuBtn" value="수정" ></td>
-									<td><input type="button" onclick="deleteBoard();" id="deleteBtn" value="삭제"></td>
-								<% } %> 
-								</tr>
-							</table>
-						</div> --%>
+					
 						<div id="replyArea">
 							<table id="replyTable">
 								<tr>
 									<th id="manager" rowspan ="1">관리자</th>
 									<td id="Mcommand" rowspan = "3" colspan="4" align= center>
+									
 									<% if(q.getAnswerContent() != null) { %>
-										<%= q.getAnswerContent() %>
+										<input type="text" name = "answerContent" value ="<%= q.getAnswerContent() %>">
 									<% } else { %>
 										관리자가 아직 답변을 달지 않았습니다.
 									<% } %>
 									</td>
 									<% if(loginUser.getGrade() == 0){ %> 
-									<td><input type="button"  id="addReply" value="등록"></td>
-									<td><input type="button" onclick="location.href='<%= request.getContextPath() %>/list.qu'" id="menuBtn" value="수정" ></td>
+									<td><input type="button"  id="updateBtn" class="addReply" value="등록"></td>
+									<td><input type="button" onclick="location.href='<%= request.getContextPath() %>/list.qu?userNo=<%= loginUser.getUserNo()%>'" id="menuBtn" value="수정" ></td>
 									<td><input type="button" onclick="deleteBoard();" id="deleteBtn" value="삭제"></td>
 								<% } %> 
 								</tr>
 							</table>
 						</div>
+						<% if(loginUser.getGrade() != 0){ %> 
 						<div class="btnBox">
 							<input type="submit" id="updateBtn" value="수정">
-							<input type="button" onclick="location.href='<%= request.getContextPath() %>/list.qu'" id="menuBtn" value="메뉴로" >
+							<input type="button" onclick="location.href='<%= request.getContextPath() %>/list.qu?userNo=<%= loginUser.getUserNo()%>'" id="menuBtn" value="메뉴로" >
 							<input type="button" onclick="deleteBoard();" id="deleteBtn" value="삭제">
 						</div>
+						<% } %> 
 					</form>
 				 </div>
 		 	 </div>	
@@ -146,30 +130,28 @@
 			}
 		}
 		
-		$('#addReply').click(function(){
+		 $('#addReply').click(function(){
 			var postNo = <%= q.getPostNo() %>;
 			var answerContent = $('#Mcommand').val();
 			$.ajax({
 				url: '<%= request.getContextPath() %>/insertReply.qu',
-				type='post',
-				data: {postNo : postNo, content:content},
+				type: 'post',
+				data: {postNo: postNo, content:content},
 				success: function(data){
 					$replyTable = $('#replyTable');
 					
+					for(var key in data){
 					var $tr= $('<tr>');
 					var $writerTd = $('<td>').text('관리자');
 					var $contentTd = $('<td>').text(data[key].answerContent);
 					var $dateTd = $('<td>').text(data[key].answerDate);
-					
+					}
 					$tr.append($writerTd);
 					$tr.append($contentTd);
 					$tr.append($dateTd);
 					$replyTable.append($tr);
-					
 				}
 			});
-			
-		});
 	</script>
 </body>
 </html>
