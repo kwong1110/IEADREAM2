@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>로그인 </title>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/common.css">
 <style>
 .inputBox{
@@ -45,18 +45,19 @@ button {
 		            <div class="loginBox">
 		            	<div>
 		                <label>&nbsp;&nbsp;&nbsp;아이디</label>
-		                <input type="text" class="inputBox" name="userId" id="userId" placeholder="ID">
+		                <input type="text" class="inputBox" name="userId" id="userId2" placeholder="ID">
 		                </div>
 		                <div>
 		                <label>비밀번호</label>
-		                <input type="password" class="inputBox" name="userPwd" id="userPwd" placeholder="Password" >
+		                <input type="password" class="inputBox" name="userPwd" id="userPwd2" placeholder="Password" >
 		                </div>
 		            </div>
 		            <div class="btnBox">		            
 			            <div>
 			            <button type="submit" class="defaultBtn loginBtn" onclick="location.href='<%= request.getContextPath() %>/login.me'">로그인</button> 
 			            </div>
-			            <button type ="button" class="defaultBtn">아이디 찾기</button>
+			            <button type ="button" class="defaultBtn" onclick="location.href='searchidForm'">아이디 찾기</button>
+			            <!-- 아이디 찾기 눌렀을때 searchidForm 으로 넘어 가기... -->
 			            <button type ="button" class="defaultBtn">비밀번호 찾기</button>
 			            <button type ="button" class="defaultBtn">회원가입</button>
 		            </div>
@@ -66,14 +67,14 @@ button {
 	</div>
 	<script>
 		function validate(){
-			if($('#userId').val().trim().length == 0){
+			if($('#userId2').val().trim().length == 0){
 				alert('아이디를 입력해주세요.');
 				$('#userId').focus();
 				
 				return false;
 			}
 			
-			if($('#userPwd').val().trim().length == 0){
+			if($('#userPwd2').val().trim().length == 0){
 				alert('비밀번호를 입력해주세요.');
 				$('#userPwd').focus();
 				

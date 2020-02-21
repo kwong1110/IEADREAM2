@@ -43,9 +43,6 @@ public class InsertAccountServlet extends HttpServlet {
 		String gender = request.getParameter("gender");
 		String birth = request.getParameter("birth");
 		
-		char gend = '\u0000';
-		gend = gender.charAt(0);
-		
 		Date bir = null;
 		if(birth != null) {
 			String[] birthArr = birth.split("-");
@@ -57,7 +54,7 @@ public class InsertAccountServlet extends HttpServlet {
 			bir = new Date(new GregorianCalendar(year, month, day).getTimeInMillis());
 		}
 		
-		Account a = new Account(userId, userPwd, gend, userName, phone, email, bir);
+		Account a = new Account(userId, userPwd, gender, userName, phone, email, bir);
 		int result = new AccountService().insertAccount(a);
 		
 		

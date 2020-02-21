@@ -5,20 +5,18 @@
 */
 
 	/* 게시판 부분 박스 (박스가 2개 존재하는 게시판)*/
-#topBox{
+.topBox{
 	margin-bottom: 20px;
 	background: #c7eef2;
 	border: 2px solid #b1e8ed;
 	border-radius: 10px;
 	color: #595c5c;
 	font-weight: bold;
-	display: flex;
-  	justify-content: center;
-  	align-items: center;
   	padding: 20px;
 }
 	
 .midBox{
+	display: block;
   	padding: 5px;
 }
 
@@ -59,9 +57,10 @@ table>tbody>tr>td {
 	padding: 15px;
 }
 
-th{
+.mainBoard>thead>tr>th{
 	border-bottom: 1px solid #b1e8ed;
 	padding: 15px;
+	
 }
 
 .mainBoard {

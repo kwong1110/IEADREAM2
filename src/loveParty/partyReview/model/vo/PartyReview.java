@@ -4,32 +4,35 @@ import java.sql.Date;
 
 public class PartyReview {
 
-	private int postNo;		// 게시글 번호
+	private int postNo;// 게시글 번호
+	private int photoNo;
 	private int partyNo;
 	private int userNo;
 	private String title;
 	private String content;
 	private Date createDate;
 	private int hit;
-	private String partyPhoto;
 	private char deleted;
+	private int boardNo;
+	private String changeName;
 	
 	public PartyReview() {}
 
-	public PartyReview(int postNo, int partyNo, int userNo, String title, String content, Date createDate, int hit,
-			String partyPhoto, char deleted) {
+	public PartyReview(int postNo, int photoNo, int partyNo, int userNo, String title, String content, Date createDate,
+			int hit, char deleted, int boardNo, String changeName) {
+		super();
 		this.postNo = postNo;
+		this.photoNo = photoNo;
 		this.partyNo = partyNo;
 		this.userNo = userNo;
 		this.title = title;
 		this.content = content;
 		this.createDate = createDate;
 		this.hit = hit;
-		this.partyPhoto = partyPhoto;
 		this.deleted = deleted;
+		this.boardNo = boardNo;
+		this.changeName = changeName;
 	}
-	
-	
 
 	public int getPostNo() {
 		return postNo;
@@ -37,6 +40,14 @@ public class PartyReview {
 
 	public void setPostNo(int postNo) {
 		this.postNo = postNo;
+	}
+
+	public int getPhotoNo() {
+		return photoNo;
+	}
+
+	public void setPhotoNo(int photoNo) {
+		this.photoNo = photoNo;
 	}
 
 	public int getPartyNo() {
@@ -86,14 +97,6 @@ public class PartyReview {
 	public void setHit(int hit) {
 		this.hit = hit;
 	}
-	
-	public String getPartyPhoto() {
-		return partyPhoto;
-	}
-
-	public void setPartyPhoto(String partyPhoto) {
-		this.partyPhoto = partyPhoto;
-	}
 
 	public char getDeleted() {
 		return deleted;
@@ -102,4 +105,22 @@ public class PartyReview {
 	public void setDeleted(char deleted) {
 		this.deleted = deleted;
 	}
+
+	public int getBoardNo() {
+		return boardNo;
+	}
+
+	public void setBoardNo(int boardNo) {
+		this.boardNo = boardNo;
+	}
+
+	public String getChangeName() {
+		return changeName;
+	}
+
+	public void setChangeName(String changeName) {
+		this.changeName = changeName;
+	}
+
+
 }

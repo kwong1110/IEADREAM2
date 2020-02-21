@@ -28,4 +28,13 @@ public class adminService {
 		return list;
 	}
 
+	public ArrayList<Account> searchMmList(int currentPage, String memGrade, String sCategory, String sWord) {
+		Connection conn = getConnection();
+		ArrayList<Account> search = new adminDAO().searchMmList(conn, currentPage,memGrade, sCategory, sWord);
+		close(conn);
+		
+		return search;
+	}
+	
+
 }

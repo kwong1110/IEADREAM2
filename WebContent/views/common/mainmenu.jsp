@@ -93,13 +93,22 @@
 						</li>
 						<li class="s-menu"><span onclick="goQuestionBoard();">문의게시판</span>
 							<ul class="dept01">
+								<% if(loginUser != null && loginUser.getGrade() != 0){ %>
+									<li id="nop"><a href="<%=request.getContextPath() %>/list.qu?userNo=<%= loginUser.getUserNo() %>">1:1</a></li>
+								<% } else if(loginUser != null && loginUser.getGrade() == 0){%>
+									<li id="nop"><a href="<%=request.getContextPath() %>/Mlist.qu">1:1</a></li>
+								<% }else{%>
 								<li id="nop"><a href="<%=request.getContextPath() %>/list.qu">1:1</a></li>
+								<% } %>
+								
 								<li id="nop"><a href="<%=request.getContextPath() %>/list.faq">FAQ</a></li>
-								<li id="nop"><a href="<%=request.getContextPath() %>/adminList.faq">FAQ-admin</a></li>
+								<% if(loginUser != null && loginUser.getGrade() == 0){ %>
+								<li id="nop"><a href="<%=request.getContextPath() %>/adminList.faq">FAQ 관리</a></li>
+								<% } %>
 							</ul>
 						</li>
 						
-						<li class="s-menu"><span onclick="">마이페이지</span>
+						<li class="s-menu" id="myPage"><span onclick="">마이페이지</span>
 							<ul class="dept01">							
 								<li id="nop"><a href="<%=request.getContextPath()%>/views/myPage/user/memberGradeUpForm.jsp">정회원 등업</a></li>
 								<li id="nop"><a href="">기본정보</a></li>
@@ -111,12 +120,24 @@
 								<li id="nop">
 									<a href="<%=request.getContextPath()%>/list.hh">하트 히스토리</a>
 								</li>
+								<% if(loginUser != null && loginUser.getGrade() == 0){ %>
+									<br>
+									<li id="nop">
+										<a href="<%=request.getContextPath()%>/manage.mem">회원 관리</a>
+									</li>
+									<li id="nop">
+										<a href="<%=request.getContextPath()%>/views/myPage/admin/boardManageForm.jsp">게시물 관리</a>
+									</li>
+									<li id="nop">
+										<a href="<%=request.getContextPath()%>/views/myPage/admin/partyManageForm.jsp">파티 관리</a>
+									</li>
+								<% } %>
 							</ul>
 						</li>
 						<% if(loginUser == null) { %>
 						<li>
 							<span id="loginBtn" onclick="login();" style="font-size: 10px; padding: 10px;">login</span> 
-							<span id="MemberJoinBtn" onclick="memberJoin();" style="font-size: 10px; padding: 10px;">sign in</span>
+							<span id="MemberJoinBtn" onclick="memberJoin();" style="font-size: 10px; padding: 10px;">sign up</span>
 						</li>
 						<% } else { %>
 						<li style="width: 10%; height: 10%">
@@ -171,25 +192,7 @@
 				alert(msg);
 			}
 		});
-		
-		
-		<%-- var adminLogin = <%= loginUser.getGrade() %>;
-		
-		$(function(){
-			if(adminLogin == 0){
-				<li id="nop">
-					<a href="<%=request.getContextPath()%>/views/myPage/admin/memberManageForm.jsp">회원 관리</a>
-				</li>
-				<li id="nop">
-					<a href="<%=request.getContextPath()%>/views/myPage/admin/boardManageForm.jsp">게시물 관리</a>
-				</li>
-				<li id="nop">
-					<a href="<%=request.getContextPath()%>/views/myPage/admin/PartyManageForm.jsp">파티 관리</a>
-				</li>
 				
-			}
-		}); --%>
-		
 	</script>
 </body>
 </html>

@@ -29,7 +29,29 @@
 	<div class="outer">
 		<div class="wrapper">
 			<nav>
-				<%@ include file="../../common/myPageLeftmenu.jsp" %>
+				<div class="nav">
+					<div class="leftMenuTitle">마이페이지</div>
+					<ul>
+						<li class="leftMenu memberGradeUp"><a href="<%= request.getContextPath() %>/views/myPage/user/memberGradeUpForm.jsp">정회원 등업</a></li>
+						<li class="leftMenu"><a href="">기본정보</a></li>
+						<li class="leftMenu"><a href="">나의 프로필</a></li>
+						<li class="leftMenu"><a href="">이상형 정보</a></li>
+						<li class="leftMenu "><a href="">작성글 조회</a></li>			
+						<li class="leftMenu heartHistory"><a href="<%= request.getContextPath() %>/list.hh">하트 히스토리</a></li>
+						<% if(loginUser != null && loginUser.getGrade() == 0){ %>
+						<br>
+						<li class="leftMenu admin memberManage">
+							<a href="<%=request.getContextPath()%>/manage.mem">회원 관리</a>
+						</li>
+						<li class="leftMenu admin boardManage">
+							<a href="<%=request.getContextPath()%>/views/myPage/admin/boardManageForm.jsp">게시물 관리</a>
+						</li>
+						<li class="leftMenu admin partyManage">
+							<a href="<%=request.getContextPath()%>/views/myPage/admin/partyManageForm.jsp">파티 관리</a>
+						</li>
+						<% } %>
+					</ul>
+				</div>
 			</nav>
 			<div class="main">
 				<div class="pageTitle">
@@ -81,7 +103,7 @@
 										</ul>
 									</td>
 									<td>
-										<input type="button" class="defaultBtn subBtn" value="데이트 장소 추천" onclick="location.href=/list.hhd">
+										<input type="button" class="defaultBtn subBtn" value="데이트 장소 추천" onclick="">
 									</td>
 									<td>남은 기간 표시</td>
 								</tr>			

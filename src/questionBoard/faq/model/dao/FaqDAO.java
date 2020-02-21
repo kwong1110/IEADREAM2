@@ -141,4 +141,75 @@ public class FaqDAO {
 		return list;
 	}
 
+	public Faq selectAdminDetail(Connection conn, int num) {
+		PreparedStatement pstmt = null; //글 번호를 쿼리문에 넣어야 하기 때문에 pstmt 사용
+		ResultSet rs = null;
+		Faq faq = null;
+		
+		String query = prop.getProperty("selectAdminDetail");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, num);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				faq = new Faq(rs.getInt("post_no"),
+							  rs.getString("category"),
+							  rs.getString("title"),
+							  rs.getString("content"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return faq;
+		
+	}
+
+	public int updateFaq(Connection conn, Faq faq) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("updateFaq");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, faq.getCategory());
+			pstmt.setString(2, faq.getTitle());
+			pstmt.setString(3, faq.getContent());
+			pstmt.setInt(4, faq.getPostNo());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public int deleteFaq(Connection conn, int num) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("deleteFaq");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			
+			pstmt.setInt(1, num);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
 }

@@ -25,6 +25,7 @@ public class Faq {
 		this.title = title;
 		this.content = content;
 	}
+	
 
 	public Faq(int postNo, String category, String title) {
 		super();
@@ -32,6 +33,7 @@ public class Faq {
 		this.category = category;
 		this.title = title;
 	}
+
 
 	public int getPostNo() {
 		return postNo;

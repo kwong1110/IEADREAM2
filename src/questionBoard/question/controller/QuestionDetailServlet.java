@@ -31,8 +31,8 @@ public class QuestionDetailServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int postNo = Integer.parseInt(request.getParameter("postNo"));
-		
+		//int postNo = Integer.parseInt(request.getParameter("postNo"));
+		String postNo = request.getParameter("postNo");
 		Question question = new QuestionService().selectQuestion(postNo);
 		String userId = new QuestionService().selectUserId(postNo);
 		String page = null;

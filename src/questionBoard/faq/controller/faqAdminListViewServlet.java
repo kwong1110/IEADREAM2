@@ -41,15 +41,21 @@ public class faqAdminListViewServlet extends HttpServlet {
 		/* 페이징 */
 		int listCount = service.getListCount();
 		
-		int currentPage = 1;
+		int currentPage;
+		int limit;
+		int maxPage;
+		int startPage;
+		int endPage;
+		
+		currentPage = 1;
 		if(request.getParameter("currentPage") != null) {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		}
 		
-		int limit = 5;
-		int maxPage = (int)((double)listCount / limit + 0.9);
-		int startPage = ((int)((double)currentPage/limit + 0.9)-1)*limit+1;
-		int endPage = startPage + limit - 1;
+		limit = 10;
+		maxPage = (int)((double)listCount / limit + 0.9);
+		startPage = ((int)((double)currentPage/limit + 0.9)-1)*limit+1;
+		endPage = startPage + limit - 1;
 		if(maxPage < endPage) {endPage = maxPage;}
 		
 		PageInfo pi = new PageInfo(currentPage, listCount, limit, maxPage, startPage, endPage);

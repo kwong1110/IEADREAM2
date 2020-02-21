@@ -17,6 +17,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="<%= request.getContextPath() %>/css/common.css">
 <style>
 		.pagingArea button{border-radius: 15px; background: #D5D5D5;}
 	
@@ -65,7 +66,7 @@
 					</div>
 					
 					<!-- 페이징 -->
-			<%-- 		<div class="pagingArea" align="center">
+			 		<div class="pagingArea" align="center">
 						<%if(!list.isEmpty()) { %>
 							<!-- 이전 페이지 -->
 							<button onclick="location.href='<%= request.getContextPath() %>/adminList.faq?currentPage=<%= currentPage-1 %>'" id="beforeBtn">&lt;</button>
@@ -76,13 +77,12 @@
 								}
 							</script>
 							
-							<!-- 5개 페이지 목록 -->
+							<!-- 10개 페이지 목록 -->
 							<% for(int p = startPage; p <= endPage; p++) { 
-									if(p == currentPage) {
-							%>
+									if(p == currentPage) { %>
 										<button id="choosen" disabled><%= p %></button>
 							<%		} else { %>
-										<button id="numBtn" onclick="loaction.href='<%= request.getContextPath() %>/adminList.faq?currentPage=<%= p %>'"><%= p %></button>
+										<button id="numBtn" onclick="location.href='<%= request.getContextPath() %>/adminList.faq?currentPage=<%= p %>'"><%= p %></button>
 							<%		} %>
 							<% } %>
 						
@@ -97,75 +97,8 @@
 						
 						
 						<% } %>
-					</div> --%>
-					
-					<!-- 페이징 시험 -->
-					<div class='pagingArea' align='center'>
-						<%
-							if (!list.isEmpty()) {
-						%>
-						<!-- 맨 처음으로 -->
-						<button
-							onclick="location.href='<%=request.getContextPath()%>/adminList.faq?currentPage=1'">&lt;&lt;</button>
-
-						<!-- 이전 페이지로 -->
-						<button
-							onclick="location.href='<%=request.getContextPath()%>/adminList.faq?currentPage=<%=currentPage - 1%>'"
-							id="beforeBtn">&lt;</button>
-						<script>
-							if (
-						<%=currentPage%>
-							<= 1) {
-								var before = $('#beforeBtn');
-								before.attr('disabled', 'true');
-							}
-						</script>
-
-						<!-- 10개의 페이지 목록 -->
-						<%
-							for (int p = startPage; p <= endPage; p++) {
-						%>
-						<%
-							if (p == currentPage) {
-						%>
-						<button id="choosen" disabled><%=p%></button>
-						<%
-							} else {
-						%>
-						<button id="numBtn"
-							onclick="location.href='<%=request.getContextPath()%>/adminList.faq?currentPage=<%=p%>'"><%=p%></button>
-						<%
-							}
-						%>
-						<%
-							}
-						%>
-
-						<!-- 다음 페이지로 -->
-						<button
-							onclick="location.href='<%=request.getContextPath()%>/adminList.faq?currentPage=<%=currentPage + 1%>'"
-							id="afterBtn">&gt;</button>
-						<script>
-							if (
-						<%=currentPage%>
-							>=
-						<%=maxPage%>
-							) {
-								var after = $("#afterBtn");
-								after.attr('disabled', 'true');
-							}
-						</script>
-
-						<!-- 맨 끝으로 -->
-						<button
-							onclick="location.href='<%=request.getContextPath()%>/adminList.faq?currentPage=<%=maxPage%>'">&gt;&gt;</button>
-
-						<%
-							}
-						%>
-						
 					</div>
-					<!-- 페이징 시험 끝 -->
+					
 				</div>
 			</div>
 		</div>
@@ -179,7 +112,8 @@
 				$(this).parent().css('background','none');
 			}).click(function() {
 				var num = $(this).parent().children().eq(0).text();
-				location.href='<%=request.getContextPath()%>/faqUpdate.faq?no=' + num;
+				console.log(num);
+				location.href='<%=request.getContextPath()%>/faqDetail.faq?no=' + num;
 			});
 		});
 	</script>

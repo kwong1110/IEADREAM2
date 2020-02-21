@@ -10,6 +10,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import account.model.vo.Account;
 import common.PageInfo;
 import myPage.admin.model.service.adminService;
@@ -58,11 +61,27 @@ public class memberManageServlet extends HttpServlet {
 		
 		PageInfo pi = new PageInfo(currentPage, listCount, limit, maxPage, startPage, endPage);
 		
-		ArrayList<Account> list = service.selectMmList(currentPage);
+		ArrayList<Account> list = null;
+
+		list = service.selectMmList(currentPage);
 		
+		// 폼에서 name속성이 안넘어오면 getParameter() 시 null이 리턴됨
+		// 폼에서 name속성은 넘어오는데 value가 없으면 ""(빈문자열)이 리턴됨
+		
+			// sBtn(검색버튼 on/off), memGrade(회원등급), sCategory(검색카테고리), sWord(검색어) 받아오기
+		String memGrade = request.getParameter("memGrade");
+		String sCategory = request.getParameter("sCategory");
+		String sWord = request.getParameter("sWord");
+		
+		System.out.println("search.mem 확인 !: " + memGrade + sCategory + sWord);
+		
+		if(memGrade != null && sCategory != null && sWord != null) {
+			list = service.searchMmList(currentPage, memGrade, sCategory, sWord);
+		}
+    
 		String page = null;
 		if(list != null) {
-			page = "views/admin/memberManageForm.jsp";
+			page = "views/myPage/admin/memberManageForm.jsp";
 			request.setAttribute("list", list);
 			request.setAttribute("pi", pi);
 		} else {

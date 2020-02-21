@@ -1,5 +1,20 @@
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="coupleStory.bestCouple.model.vo.*, photo.model.vo.*, common.*" %>    
+    
+<%
+	ArrayList<BestCouple> bcList = (ArrayList<BestCouple>)request.getAttribute("bcList");
+	ArrayList<Photo> pList = (ArrayList<Photo>)request.getAttribute("pList");
+	
+	PageInfo pi = (PageInfo)request.getAttribute("pi");
+	
+	int listCount = pi.getListCount();
+	int currentPage = pi.getCurrentPage();
+	int maxPage = pi.getMaxPage();
+	int startPage = pi.getStartPage();
+	int endPage = pi.getEndPage();
+%>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,10 +28,8 @@
 		margin: 60px 0 20px 0;
 	}
 	
-	.month{
+	.option{
 		padding: 3px 7px 6px 7px;
-		margin-left: 68%;
-		margin-bottom: 4px;
 		background: #e75a82;
 		border: none;
 		color: white;
@@ -25,6 +38,15 @@
 		cursor: pointer;
 		text-shadow: 0 1px 1px rgba(0,0,0,.3);
 		box-shadow: 0 1px 2px rgba(0,0,0,.2);
+	}
+	
+	.optiondiv{
+		display: inline-block;
+	}
+	
+	.optionbox{
+		margin-left: 61.3%;
+		margin-bottom: .4%;
 	}
 	
 	.contents{
@@ -124,6 +146,14 @@
 		font-weight: border;
 	} */
 	
+	.pagingArea button{border-radius: 15px; background: #D5D5D5;}
+	.searchArea{margin-right: 50px;}
+	.searchArea button{background: #D1B2FF; border-radius: 5px; color: white; width: 80px; heigth: 25px; text-align: center;}
+	button:hover{cursor: pointer;}
+	#numBtn{background: #B2CCFF;}
+	#choosen{background: #FFD8D8;}
+	#listArea{margin: auto;}
+	
 </style>
 </head>
 <body>
@@ -134,75 +164,102 @@
 				<div class="main">
 					<div class="pageTitle"><h1>이달의 베스트 커플</h1></div>
 					
-					<div>
-						<select class="month">
-							<option>1월</option>
-							<option>2월</option>
-							<option>3월</option>
-							<option>4월</option>
-							<option>5월</option>
-							<option>6월</option>
-							<option>7월</option>
-							<option>8월</option>
-							<option>9월</option>
-							<option>10월</option>
-							<option>11월</option>
-							<option>12월</option>
-						</select>
+					<div class="optionbox">
+						<div class="optiondiv">
+							<select  class="option">
+								<option>-----</option>
+								<option>2019년</option>
+								<option>2020년</option>
+								<option>2021년</option>
+								<option>2022년</option>
+							</select>					
+						</div>
+						
+						<div class="optiondiv">
+							<select class="option">
+								<option>-----</option>
+								<option>1월</option>
+								<option>2월</option>
+								<option>3월</option>
+								<option>4월</option>
+								<option>5월</option>
+								<option>6월</option>
+								<option>7월</option>
+								<option>8월</option>
+								<option>9월</option>
+								<option>10월</option>
+								<option>11월</option>
+								<option>12월</option>
+							</select>
+						</div>
 					</div>
 					
 					<div class="contents">
+					<% 
+						for(int i = 0; i < bcList.size(); i++){
+							BestCouple bc = bcList.get(i);
+					%>
 						<div class="contn" id="contn1">
 							<div class="img" id="img1">
-								<a href="#" style="width:inherit; height:inherit;">
-								</a>
+								<% 
+									for(int j = 0; j < pList.size(); j++){
+										Photo p = pList.get(j);		
+								%>
+									<% if(bc.getPostNo() == p.getPhotoNo()){ %>
+										<img src="<%= request.getContextPath() %>/photo_uploadFiles/<%= p.getChangeName() %>" style="width:inherit; height:inherit;">
+									<% } %>
+								<% } %>
 							</div>
 							<div class="text">
-								<p id="text1">하루하루가 행복해요~</p>
+								<input type="hidden" value="<%= bc.getPostNo() %>">
+								<p id="text1"><%= bc.getTitle() %></p>
 								<p id="text2">박보검</p>
-								<p id="text3">2020-01-18</p>
+								<p id="text3"><%= bc.getCreateDate() %></p>
 							</div>
 						</div>
-						<div class="contn" id="contn2">
-							<div class="img" id="img2">
-								<a href="#" style="width:inherit; height:inherit;">
-								</a>
-							</div>
-							<div class="text">
-								<p id="text1">이어드림 사랑합니다ㅠ</p>
-								<p id="text2">박소현</p>
-								<p id="text3">2020-02-03</p>
-							</div>
-						</div>
-						<div class="contn" id="contn3">
-							<div class="img" id="img3">
-								<a href="#" style="width:inherit; height:inherit;">
-								</a>
-							</div>
-							<div class="text">
-								<p id="text1">30일째 연애중입니다</p>
-								<p id="text2">정해인</p>
-								<p id="text3">2020-01-31</p>
-							</div>
-						</div>
-						
-						
+							
+						<% } %>
 						<div class="clear-both"></div>
 						
-						<div class="sc-footer">
-							<div class="button">
-								<button>&lt;</button>
-								<button>1</button>
-								<button>2</button>
-								<button>3</button>
-								<button>&gt;</button>
-							</div>
+						 <div class="sc-footer">
+						 	<% if(!bcList.isEmpty()) { %> <!-- && !pList.isEmpty() -->
+								<div class="button">
+									<button onclick="location.href='<%= request.getContextPath() %>/list.bc?currentPage=1'">&lt;&lt;</button>
+									
+									<button onclick="location.href='<%= request.getContextPath() %>/list.bc?currentPage=<%= currentPage-1 %>'" id="beforeBtn">&lt;</button>
+									<script>
+										if(<%= currentPage %> <= 1){
+											var before = $('#beforeBtn');
+											before.attr('disabled', 'true');
+										}
+									</script>
+									
+									<% for(int p = startPage; p <= endPage; p++) { %>
+										<% if(p == currentPage) { %>
+											<button id="choosen" disabled><%= p %></button>
+										<% } else{ %>
+											<button id="numBtn" onclick="location.href='<%= request.getContextPath() %>/list.bc?currentPage=<%= p %>'"><%= p %></button>
+										<% } %>	
+									<% } %>
+									
+									<button onclick="location.href='<%= request.getContextPath() %>/list.bc?currentPage=<%= currentPage + 1%>'" id="afterBtn">&gt;</button>
+									<script>
+										if(<%= currentPage %> >= <%= maxPage %>){
+											var after = $("#afterBtn");
+											after.attr('disabled', 'true');
+										}
+									</script>
+								
+									<button onclick="location.href='<%= request.getContextPath() %>/list.bc?currentPage=<%= maxPage %>'">&gt;&gt;</button>
+								</div>
+							<% } %>
 						</div>
 						
 						<!-- 관리자용 업로드 버튼 -->
 					<!-- <div>
 							<a href="#"><button class="uploadbtn">UPLOAD</button></a>
 						</div> -->
+					
 					</div>
 				</div>	
 			</div>
