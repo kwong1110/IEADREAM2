@@ -78,7 +78,7 @@ public class memberManageServlet extends HttpServlet {
 		if(memGrade != null && sCategory != null && sWord != null) {
 			list = service.searchMmList(currentPage, memGrade, sCategory, sWord);
 		}
-		
+    
 		String page = null;
 		if(list != null) {
 			page = "views/myPage/admin/memberManageForm.jsp";
