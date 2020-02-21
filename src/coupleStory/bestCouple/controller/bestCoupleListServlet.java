@@ -63,6 +63,8 @@ public class bestCoupleListServlet extends HttpServlet {
 		ArrayList<BestCouple> bcList = bcService.selectbcList(currentPage);
 		ArrayList<Photo> pList = bcService.selectpList();
 		
+		System.out.println(pList);
+		
 		String page = null;
 		if(bcList != null && pList != null) {
 			request.setAttribute("bcList", bcList);
