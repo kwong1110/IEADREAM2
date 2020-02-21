@@ -2,7 +2,7 @@ package myPage.user.model.vo;
 
 import java.sql.Date;
 
-public class Recommend {
+public class Match {
 
 	private int userNo;
 	private int targetNo;
@@ -10,9 +10,9 @@ public class Recommend {
 	private Date matchDate;
 	private char matchDelete;
 	
-	public Recommend() {}
+	public Match() {}
 
-	public Recommend(int userNo, int targetNo, String matchStatus, Date matchDate, char matchDelete) {
+	public Match(int userNo, int targetNo, String matchStatus, Date matchDate, char matchDelete) {
 		this.userNo = userNo;
 		this.targetNo = targetNo;
 		this.matchStatus = matchStatus;
