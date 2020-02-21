@@ -11,6 +11,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Properties;
 
+import javax.security.auth.login.AccountException;
+
 import account.model.vo.Account;
 
 public class AccountDAO {
@@ -144,4 +146,70 @@ public class AccountDAO {
 		System.out.println("DAO : " + loginUser);
 		return loginUser;
 	}
+
+	
+	// 아이디 찾기 DAO
+	public Account searchid(Account account, Connection conn) {
+		Account result = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = prop.getProperty("searchid");
+		
+		
+		try	{
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, account.getId());
+			pstmt.setString(2, account.getEmail());
+			
+			rset = pstmt.executeQuery();
+					
+			if(rset.next()) {
+				result = new Account();
+				
+				result.setId(rset.getString("id"));
+			}
+			System.out.println(result);
+			
+		}catch(Exception e) { 
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	//비밀번호 찾기 DAO
+	public Account searchPwd(Connection conn, Account account){
+		Account result = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String query = prop.getProperty("searchpwd");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, account.getId());
+			pstmt.setString(2, account.getPassword());
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				result = new Account();
+				result.setPassword(rset.getString("password"));
+				
+			}
+			
+		}catch(Exception e) { 
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
 }
+	
+
