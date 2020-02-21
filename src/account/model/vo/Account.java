@@ -7,18 +7,18 @@ public class Account {
 	private int grade;
 	private String id;
 	private String password;
-	private char gender;
+	private String gender;
 	private String userName;
 	private String phone;
 	private String email;
 	private Date birth;
-	private char deleted;
+	private String deleted;
 	private String interest;	// 관심분야(DB상 다른 테이블)
 	
 	public Account() {}
 
-	public Account(int userNo, int grade, String id, String password, char gender, String userName, String phone,
-			String email, Date birth, char deleted, String interest) {
+	public Account(int userNo, int grade, String id, String password, String gender, String userName, String phone,
+			String email, Date birth, String deleted, String interest) {
 		this.userNo = userNo;
 		this.grade = grade;
 		this.id = id;
@@ -32,7 +32,7 @@ public class Account {
 		this.interest = interest;
 	}
 
-	public Account(int userNo, int grade, String id, char gender, String userName, String phone, char deleted) {
+	public Account(int userNo, int grade, String id, String gender, String userName, String phone, String deleted) {
 		this.userNo = userNo;
 		this.grade = grade;
 		this.id = id;
@@ -51,7 +51,7 @@ public class Account {
 		this.email = email;
 	}
 	
-	public Account(String id, String password, char gender, String userName, String phone, String email, Date birth) {
+	public Account(String id, String password, String gender, String userName, String phone, String email, Date birth) {
 		super();
 		this.id = id;
 		this.password = password;
@@ -69,8 +69,8 @@ public class Account {
 	
 	
 	
-	public Account(int userNo, int grade, String id, String password, char gender, String userName, String phone,
-			String email, Date birth, char deleted) {
+	public Account(int userNo, int grade, String id, String password, String gender, String userName, String phone,
+			String email, Date birth, String deleted) {
 		this.userNo = userNo;
 		this.grade = grade;
 		this.id = id;
@@ -115,11 +115,11 @@ public class Account {
 		this.password = password;
 	}
 
-	public char getGender() {
+	public String getGender() {
 		return gender;
 	}
 
-	public void setGender(char gender) {
+	public void setGender(String gender) {
 		this.gender = gender;
 	}
 
@@ -155,11 +155,11 @@ public class Account {
 		this.birth = birth;
 	}
 
-	public char getDeleted() {
+	public String getDeleted() {
 		return deleted;
 	}
 
-	public void setDeleted(char deleted) {
+	public void setDeleted(String deleted) {
 		this.deleted = deleted;
 	}
 

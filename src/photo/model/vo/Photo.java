@@ -85,4 +85,12 @@ public class Photo {
 	public void setDeleted(char deleted) {
 		this.deleted = deleted;
 	}
+
+	@Override
+	public String toString() {
+		return "Photo [photoNo=" + photoNo + ", boardNo=" + boardNo + ", originName=" + originName + ", changeName="
+				+ changeName + ", filePath=" + filePath + ", fileLevel=" + fileLevel + ", deleted=" + deleted + "]";
+	}
+	
+	
 }

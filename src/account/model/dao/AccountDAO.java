@@ -90,7 +90,7 @@ public class AccountDAO {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, a.getId());
 			pstmt.setString(2, a.getPassword());
-			pstmt.setString(3, String.valueOf(a.getGender()));
+			pstmt.setString(3, a.getGender());
 			pstmt.setString(4, a.getUserName());
 			pstmt.setString(5, a.getPhone());
 			pstmt.setString(6, a.getEmail());
@@ -128,12 +128,12 @@ public class AccountDAO {
 									   rset.getInt("grade"), 
 									   rset.getString("id"),
 									   rset.getString("password"),
-									   rset.getString("gender").charAt(0),
+									   rset.getString("gender"),
 									   rset.getString("user_name"),
 									   rset.getString("phone"),
 									   rset.getString("email"),
 									   rset.getDate("birth"),
-									   rset.getString("deleted").charAt(0));
+									   rset.getString("deleted"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
