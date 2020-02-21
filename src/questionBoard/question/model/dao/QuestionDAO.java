@@ -259,6 +259,7 @@ public class QuestionDAO {
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, q.getAnswerContent());
+			pstmt.setInt(2, q.getPostNo());
 			
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -369,6 +370,25 @@ public class QuestionDAO {
 	  
 	  return list;
 	  
+	}
+
+	public int MdeleteQuestion(Connection conn, int postNo) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("MdeleteQuestion");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, postNo);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
 	}
 	
 	

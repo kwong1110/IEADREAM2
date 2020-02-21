@@ -139,4 +139,21 @@ public class QuestionService {
 		  close(conn);
 		  return list; 
 	  }
+
+
+
+	public int MdeleteQuestion(int postNo) {
+		Connection conn = getConnection();
+		QuestionDAO dao = new QuestionDAO();
+
+		int result = 0;
+
+		result = dao.MdeleteQuestion(conn, postNo);
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		return result;
+	}
 	}

@@ -161,9 +161,10 @@
 						<button onclick="location.href='<%= request.getContextPath() %>/Mlist.qu?currentPage=<%= maxPage %>'">&gt;&gt;</button>			
 						<% } %>
 					<% } %>
+					
 					<div class='searchArea' align='right'>
 						<% if(loginUser != null){ %>
-						<button onclick='location.href="views/board/boardInsertForm.jsp"'>작성하기</button>
+						<button onclick='location.href="views/questionBoard/question/questionInsertForm.jsp"'>작성하기</button>
 						<% } %>
 					</div>
 				</div>
@@ -178,11 +179,14 @@
 				$(this).parent().css('background','none');
 			}).click(function(){
 				var postNo = $(this).parent().children().children('input').val();
-				<%if(loginUser != null){ %>
+				<%if(loginUser != null && loginUser.getGrade()!=0){ %>
 					location.href='<%= request.getContextPath() %>/detail.qu?postNo=' + postNo;
-				<% } else { %>
+				<% } else if(loginUser != null && loginUser.getGrade()==0){ %>
+					location.href='<%= request.getContextPath() %>/Mdetail.qu?postNo=' + postNo;
+				<% } else{%> 
 					alert('회원만 이용할 수 있는 서비스 입니다.');
 				<% } %> 
+
 			});
 		});
 		
