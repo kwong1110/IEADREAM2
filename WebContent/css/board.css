@@ -57,9 +57,10 @@ table>tbody>tr>td {
 	padding: 15px;
 }
 
-th{
+.mainBoard>thead>tr>th{
 	border-bottom: 1px solid #b1e8ed;
 	padding: 15px;
+	
 }
 
 .mainBoard {

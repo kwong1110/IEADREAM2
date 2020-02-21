@@ -56,7 +56,7 @@
 					<h2>회원 관리</h2>
 				</div>
 				<div class="contents">
-					<form method="get" action="<%= request.getContextPath() %>/manage.mem">
+					<form method="post" action="<%= request.getContextPath() %>/manage.mem" id="searchBox">
 						<div class="topBox">
 							<div class="midBox">
 								<div class="searchMenu">회원 등급</div>
@@ -80,7 +80,9 @@
 								</div>
 							</div>
 						</div>
-						<table class="mainBoard">
+					</form>
+					<form method="post">
+						<table class="mainBoard" id="memManageForm">
 							<thead>
 								<tr>
 									<th><input type="checkbox" id="all" onclick="checkAll();"></th>
@@ -105,10 +107,10 @@
 								<tr>
 									<td><input type="checkbox" name="checkselect"
 										onclick="checkDetail()"></td>
-									<td><%= a.getUserNo() %><input type="hidden" value='<%= a.getUserNo() %>'></td>
+									<td><%= a.getUserNo() %><input type="hidden" value='<%= a.getUserNo() %>' name='userNo'></td>
 									<td><%= a.getUserNo() %></td>
-									<td><%= a.getId() %></td>
-									<td><%= a.getUserName() %></td>
+									<td><%= a.getId() %><input type="hidden" value='<%= a.getId() %>' name='userId'></td>
+									<td><%= a.getUserName() %><input type="hidden" value='<%= a.getUserName() %>' name='userName'></td>
 									<td><%= a.getPhone() %></td>
 									<td><%= a.getGrade() %></td>
 									<td><%= a.getDeleted() %></td>
@@ -119,9 +121,9 @@
 								%>
 							</tbody>
 						</table>
-						<div id="btnBox btnC">
-							<button type="submit" class="defaultBtn">등급 변경</button>
-							<button type="submit" class="defaultBtn">탈퇴 처리</button>
+						<div class="btnBox btnC">
+							<button type="button" class="defaultBtn" id="updateBtn" onclick="updateMember();">등급 변경</button>
+							<button type="button" class="defaultBtn" id="deleteBtn" onclick="deleteMember();">탈퇴 처리</button>
 						</div>
 					</form>
 					
@@ -171,6 +173,27 @@
 		$(function(){
 			$('.memberManage').addClass('on')
 		});		
+		
+		$('#SearchBtn').click(function(){
+			if($('input[name="memGrade"]:checked').val() == null){
+				event.preventDefault();
+				alert("회원등급을 선택해주세요!");
+			};			
+		});
+		
+		function updateMember(){
+			$('#memManageForm').attr('action', '<%= request.getContextPath() %>/views/myPage/memberUpdateForm.jsp');
+			$('#memManageForm').submit();
+		}
+		
+		function deleteMember(){
+			var bool = confirm('정말로 삭제하시겠습니까?');
+			if(bool){
+				$('#memManageForm').attr('action', '<%= request.getContextPath() %>/');
+				$('#memManageForm').submit();
+			}
+		}
+		
 		
 		<%-- var searchList;
 		

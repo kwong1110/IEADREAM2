@@ -154,8 +154,6 @@ public class adminDAO {
 			close(pstmt);
 		}
 		
-		System.out.println(search);
-		
 		return search;
 	}
 

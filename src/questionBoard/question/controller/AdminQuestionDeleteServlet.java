@@ -13,14 +13,14 @@ import questionBoard.question.model.service.QuestionService;
 /**
  * Servlet implementation class QuestionDeleteServlet
  */
-@WebServlet("/delete.qu")
-public class QuestionDeleteServlet extends HttpServlet {
+@WebServlet("/Mdelete.qu")
+public class AdminQuestionDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public QuestionDeleteServlet() {
+    public AdminQuestionDeleteServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,13 +30,11 @@ public class QuestionDeleteServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int postNo = Integer.parseInt(request.getParameter("postNo"));
-		String userNo = request.getParameter("userNo");
-		int result = new QuestionService().deleteQuestion(postNo);
-		String page =null;
+		
+		int result = new QuestionService().MdeleteQuestion(postNo);
+		
 		if(result > 0) {
-			page = "/list.qu";
-			request.setAttribute("userNo", userNo);
-			//response.sendRedirect("list.qu");
+			response.sendRedirect("Mlist.qu");
 		} else {
 			request.setAttribute("msg", "게시글 삭제에 실패하였습니다.");
 			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
