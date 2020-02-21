@@ -111,7 +111,7 @@ public class bestCoupleDAO {
 			pList = new ArrayList<Photo>();
 			
 			while(rset.next()) {
-				pList.add(new Photo(rset.getInt("POST_NO"),
+				pList.add(new Photo(rset.getInt("PHOTO_NO"),
 									rset.getInt("BOARD_NO"),
 									rset.getString("CHANGE_NAME")));
 			}

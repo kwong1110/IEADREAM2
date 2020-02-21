@@ -1,33 +1,27 @@
-package photo.model.vo;
+package board.model.vo;
 
 public class Photo {
-	
-	private int photoNo;
-	private int boardNo;
+	private int postNo; // 게시물 번호(한 게시물에 사잔이 여러개일 경우 중복 번호가 있을 수 있음)
+	private int photoNo; // 사진 번호
 	private String originName;
 	private String changeName;
 	private String filePath;
 	private int fileLevel;
-	private char deleted;
+	private String deleted;
 	
 	public Photo() {}
 
-	public Photo(int photoNo, int boardNo, String originName, String changeName, String filePath, int fileLevel,
-			char deleted) {
+	// 전체생성자
+	public Photo(int photoNo, int postNo, String originName, String changeName, String filePath, int fileLevel,
+			String deleted) {
+		super();
 		this.photoNo = photoNo;
-		this.boardNo = boardNo;
+		this.postNo = postNo;
 		this.originName = originName;
 		this.changeName = changeName;
 		this.filePath = filePath;
 		this.fileLevel = fileLevel;
 		this.deleted = deleted;
-	}
-	
-	public Photo(int photoNo, int boardNo, String changeName) {
-		super();
-		this.photoNo = photoNo;
-		this.boardNo = boardNo;
-		this.changeName = changeName;
 	}
 
 	public int getPhotoNo() {
@@ -38,12 +32,12 @@ public class Photo {
 		this.photoNo = photoNo;
 	}
 
-	public int getBoardNo() {
-		return boardNo;
+	public int getPostNo() {
+		return postNo;
 	}
 
-	public void setBoardNo(int boardNo) {
-		this.boardNo = boardNo;
+	public void setPostNo(int postNo) {
+		this.postNo = postNo;
 	}
 
 	public String getOriginName() {
@@ -78,19 +72,12 @@ public class Photo {
 		this.fileLevel = fileLevel;
 	}
 
-	public char getDeleted() {
+	public String getDeleted() {
 		return deleted;
 	}
 
-	public void setDeleted(char deleted) {
+	public void setDeleted(String deleted) {
 		this.deleted = deleted;
 	}
-
-	@Override
-	public String toString() {
-		return "Photo [photoNo=" + photoNo + ", boardNo=" + boardNo + ", originName=" + originName + ", changeName="
-				+ changeName + ", filePath=" + filePath + ", fileLevel=" + fileLevel + ", deleted=" + deleted + "]";
-	}
-	
 	
 }

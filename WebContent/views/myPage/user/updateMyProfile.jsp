@@ -18,6 +18,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="<%= request.getContextPath() %>/css/common.css">
 <style>
 	*{box-sizing: border-box;}
 	.content{width: 100%; height: 100%;}    

@@ -17,6 +17,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="<%= request.getContextPath() %>/css/common.css">
 <style>
 		.pagingArea button{border-radius: 15px; background: #D5D5D5;}
 	
