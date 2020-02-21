@@ -13,21 +13,17 @@
 	border-radius: 10px;
 	margin: 4px;
 }
-
 .loginBox{
 	margin-top: 35px;
 	text-align: center;
 }
-
 .loginBtn{
 	width: 300px;
 }
-
 .loginTitle{
 	text-align: center;
 	margin: 20px;
 }
-
 button {
 	margin: 4px;
 }
