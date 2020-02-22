@@ -35,9 +35,26 @@ public class memberManageServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		response.setContentType("text/html; charset=UTF-8");
+		
 		adminService service = new adminService();
 		
-		int listCount = service.getListCount();	// 게시판 리스트 개수
+		// 폼에서 name속성이 안넘어오면 getParameter() 시 null이 리턴됨
+		// 폼에서 name속성은 넘어오는데 value가 없으면 ""(빈문자열)이 리턴됨
+		// sBtn(검색버튼 on/off), memGrade(회원등급), sCategory(검색카테고리), sWord(검색어) 받아오기
+		String memGrade = request.getParameter("memGrade");
+		String sCategory = request.getParameter("sCategory");
+		String sWord = request.getParameter("sWord");
+		String search = request.getParameter("search");
+		
+		int listCount = 0;
+		
+		listCount = service.getListCount();	// 게시판 리스트 개수
+		
+		if(memGrade != null && sCategory != null && sWord != null && search != null) {
+			listCount = service.getSearchListCount(memGrade, sCategory, sWord);
+		}
 		
 		int currentPage;	// 현재 페이지 표시
 		int limit;			// 한 페이지에 표시될 페이징 수
@@ -45,10 +62,12 @@ public class memberManageServlet extends HttpServlet {
 		int startPage;		// 페이징 된 페이지 중 시작 페이지
 		int endPage;		// 페이징 된 페이지 중 마지막 페이지
 		
+		
 		currentPage = 1;
 		if(request.getParameter("currentPage") != null) {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		}
+		
 		
 		limit = 10;
 		
@@ -62,28 +81,25 @@ public class memberManageServlet extends HttpServlet {
 		PageInfo pi = new PageInfo(currentPage, listCount, limit, maxPage, startPage, endPage);
 		
 		ArrayList<Account> list = null;
+		
 
 		list = service.selectMmList(currentPage);
-		
-		// 폼에서 name속성이 안넘어오면 getParameter() 시 null이 리턴됨
-		// 폼에서 name속성은 넘어오는데 value가 없으면 ""(빈문자열)이 리턴됨
-		
-			// sBtn(검색버튼 on/off), memGrade(회원등급), sCategory(검색카테고리), sWord(검색어) 받아오기
-		String memGrade = request.getParameter("memGrade");
-		String sCategory = request.getParameter("sCategory");
-		String sWord = request.getParameter("sWord");
-		
+				
 		System.out.println("search.mem 확인 !: " + memGrade + sCategory + sWord);
 		
-		if(memGrade != null && sCategory != null && sWord != null) {
+		if(memGrade != null && sCategory != null && sWord != null && search != null) {
 			list = service.searchMmList(currentPage, memGrade, sCategory, sWord);
 		}
-    
+		
 		String page = null;
 		if(list != null) {
 			page = "views/myPage/admin/memberManageForm.jsp";
 			request.setAttribute("list", list);
 			request.setAttribute("pi", pi);
+			request.setAttribute("memGrade", memGrade);
+			request.setAttribute("sCategory", sCategory);
+			request.setAttribute("sWord", sWord);
+			request.setAttribute("search", search);
 		} else {
 			page = "views/common/errorPage.jsp";
 			request.setAttribute("msg", "게시판 조회에 실패하였습니다.");

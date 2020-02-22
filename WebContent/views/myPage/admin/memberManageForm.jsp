@@ -2,15 +2,24 @@
     pageEncoding="UTF-8"%>
 <%@ page import="account.model.vo.*, common.*, java.util.ArrayList" %>
 <%
+	response.setContentType("text/html; charset=UTF-8");
+	
 	ArrayList<Account> list = (ArrayList<Account>)request.getAttribute("list");
 	
 	PageInfo pi = (PageInfo)request.getAttribute("pi");
+	
+	String memGrade = request.getParameter("memGrade");
+	String sCategory = request.getParameter("sCategory");
+	String sWord = request.getParameter("sWord");
+	String search = request.getParameter("search");
 	
 	int listCount = pi.getListCount();
 	int currentPage = pi.getCurrentPage();
 	int maxPage = pi.getMaxPage();
 	int startPage = pi.getStartPage();
 	int endPage = pi.getEndPage();
+	
+	String viewGrade = "";
 %>
 <!DOCTYPE html>
 <html>
@@ -56,7 +65,7 @@
 					<h2>회원 관리</h2>
 				</div>
 				<div class="contents">
-					<form method="post" action="<%= request.getContextPath() %>/manage.mem" id="searchBox">
+					<form method="get" action="<%= request.getContextPath() %>/manage.mem" id="searchBox">
 						<div class="topBox">
 							<div class="midBox">
 								<div class="searchMenu">회원 등급</div>
@@ -76,12 +85,13 @@
 										<option value="ID">아이디</option>
 									</select>
 									<input placeholder="검색어를 입력하세요!" class="search search2" type="text" name="sWord">
+									<input type="hidden" name="search" value="on">
 									<button class="defaultBtn searchBtn" type="submit" id="SearchBtn">검색</button>
 								</div>
 							</div>
 						</div>
 					</form>
-					<form method="post">
+					<form method="get">
 						<table class="mainBoard" id="memManageForm">
 							<thead>
 								<tr>
@@ -92,28 +102,33 @@
 									<th>이름</th>
 									<th>연락처</th>
 									<th>회원등급</th>
-									<th>가입비 유무</th>
 									<th>탈퇴 유무</th>
 								</tr>
 							</thead>
 							<tbody>
 								<% if(list.isEmpty()){ %>
 								<tr>
-									<td colspan="9">조회된 리스트가 없습니다.</td>
+									<td colspan="8">조회된 목록이 없습니다.</td>
 								</tr>
 								<% } else{ 
 										for(Account a : list){
 								%>		
 								<tr>
-									<td><input type="checkbox" name="checkselect"
-										onclick="checkDetail()"></td>
+									<td><input type="checkbox" name="checkselect" value="<%= a.getUserNo() %>,<%= a.getUserName() %>" onclick="checkDetail()"></td>
 									<td><%= a.getUserNo() %><input type="hidden" value='<%= a.getUserNo() %>' name='userNo'></td>
 									<td><%= a.getUserNo() %></td>
 									<td><%= a.getId() %><input type="hidden" value='<%= a.getId() %>' name='userId'></td>
 									<td><%= a.getUserName() %><input type="hidden" value='<%= a.getUserName() %>' name='userName'></td>
 									<td><%= a.getPhone() %></td>
-									<td><%= a.getGrade() %></td>
-									<td><%= a.getDeleted() %></td>
+									<td>
+										<% switch(a.getGrade()) {
+										case 0: viewGrade = "관리자"; break;
+										case 1: viewGrade = "준회원"; break;
+										case 2: viewGrade = "정회원"; break;
+										case 4: viewGrade = "결제 대기"; break;
+										} %>
+										<%= viewGrade %>
+									</td>
 									<td><%= a.getDeleted() %></td>
 								</tr>			
 								<% 		}
@@ -128,40 +143,80 @@
 					</form>
 					
 					<div class='pagingArea' align="center">
-					<% if(!list.isEmpty() && maxPage != 1){ %>
-					<!-- 맨 처음으로 -->
-					<button onclick="location.href='<%= request.getContextPath() %>/manage.mem?currentPage=1'">&lt;&lt;</button>
-			
-					<!-- 이전 페이지로 -->
-					<button onclick="location.href='<%= request.getContextPath() %>/manage.mem?currentPage=<%= currentPage-1 %>'" id="beforeBtn">&lt;</button>
-					<script>
-						if(<%= currentPage %> <= 1){
-							var before = $('#beforeBtn');
-							before.attr('disabled', 'true');
-						}
-					</script>
+					<!-- 검색결과 페이징 -->
+					<% if(search != null){ %>
+						<% if(!list.isEmpty() && maxPage != 1){ %>
+							<!-- 맨 처음으로 -->
+							<button onclick="location.href='<%= request.getContextPath() %>/manage.mem?currentPage=1&memGrade=<%= memGrade %>&sCategory=<%= sCategory %>&sWord=<%= sWord %>&search=<%= search %>'">&lt;&lt;</button>
 					
-					
-					<!-- 10개의 페이지 목록 -->
-					<% for(int p = startPage; p <= endPage; p++){ %>
-						<% if(p == currentPage){%>
-							<button id="choosen" disabled><%= p %></button>
-						<% } else{ %>
-							<button id="numBtn" onclick="location.href='<%= request.getContextPath() %>/manage.mem?currentPage=<%= p %>'"><%= p %></button>
+							<!-- 이전 페이지로 -->
+							<button onclick="location.href='<%= request.getContextPath() %>/manage.mem?currentPage=<%= currentPage-1 %>&memGrade=<%= memGrade %>&sCategory=<%= sCategory %>&sWord=<%= sWord %>&search=<%= search %>'" id="beforeBtn">&lt;</button>
+							<script>
+								if(<%= currentPage %> <= 1){
+									var before = $('#beforeBtn');
+									before.attr('disabled', 'true');
+								}
+							</script>
+							
+							
+							<!-- 10개의 페이지 목록 -->
+							<% for(int p = startPage; p <= endPage; p++){ %>
+								<% if(p == currentPage){%>
+									<button id="choosen" disabled><%= p %></button>
+								<% } else{ %>
+									<button id="numBtn" onclick="location.href='<%= request.getContextPath() %>/manage.mem?currentPage=<%= p %>&memGrade=<%= memGrade %>&sCategory=<%= sCategory %>&sWord=<%= sWord %>&search=<%= search %>'"><%= p %></button>
+								<% } %>
+							<% } %>
+							
+							<!-- 다음 페이지로 -->
+							<button onclick="location.href='<%= request.getContextPath() %>/manage.mem?currentPage=<%= currentPage + 1 %>&memGrade=<%= memGrade %>&sCategory=<%= sCategory %>&sWord=<%= sWord %>&search=<%= search %>'" id="afterBtn">&gt;</button>
+							<script>
+								if(<%= currentPage %> >= <%= maxPage %>){
+									var after = $("#afterBtn");
+									after.attr('disabled', 'true');
+								}
+							</script>			
+							
+							<!-- 맨 끝으로 -->
+							<button onclick="location.href='<%= request.getContextPath() %>/manage.mem?currentPage=<%= maxPage %>&memGrade=<%= memGrade %>&sCategory=<%= sCategory %>&sWord=<%= sWord %>&search=<%= search %>'">&gt;&gt;</button>						
 						<% } %>
-					<% } %>
+					<% } else { %>
+						<!-- 첫 화면 페이징 -->
+						<% if(!list.isEmpty() && maxPage != 1){ %>
+							<!-- 맨 처음으로 -->
+							<button onclick="location.href='<%= request.getContextPath() %>/manage.mem?currentPage=1'">&lt;&lt;</button>
 					
-					<!-- 다음 페이지로 -->
-					<button onclick="location.href='<%= request.getContextPath() %>/manage.mem?currentPage=<%= currentPage + 1 %>'" id="afterBtn">&gt;</button>
-					<script>
-						if(<%= currentPage %> >= <%= maxPage %>){
-							var after = $("#afterBtn");
-							after.attr('disabled', 'true');
-						}
-					</script>			
-					
-					<!-- 맨 끝으로 -->
-					<button onclick="location.href='<%= request.getContextPath() %>/manage.mem?currentPage=<%= maxPage %>'">&gt;&gt;</button>						
+							<!-- 이전 페이지로 -->
+							<button onclick="location.href='<%= request.getContextPath() %>/manage.mem?currentPage=<%= currentPage-1 %>'" id="beforeBtn">&lt;</button>
+							<script>
+								if(<%= currentPage %> <= 1){
+									var before = $('#beforeBtn');
+									before.attr('disabled', 'true');
+								}
+							</script>
+							
+							
+							<!-- 10개의 페이지 목록 -->
+							<% for(int p = startPage; p <= endPage; p++){ %>
+								<% if(p == currentPage){%>
+									<button id="choosen" disabled><%= p %></button>
+								<% } else{ %>
+									<button id="numBtn" onclick="location.href='<%= request.getContextPath() %>/manage.mem?currentPage=<%= p %>'"><%= p %></button>
+								<% } %>
+							<% } %>
+							
+							<!-- 다음 페이지로 -->
+							<button onclick="location.href='<%= request.getContextPath() %>/manage.mem?currentPage=<%= currentPage + 1 %>'" id="afterBtn">&gt;</button>
+							<script>
+								if(<%= currentPage %> >= <%= maxPage %>){
+									var after = $("#afterBtn");
+									after.attr('disabled', 'true');
+								}
+							</script>			
+							
+							<!-- 맨 끝으로 -->
+							<button onclick="location.href='<%= request.getContextPath() %>/manage.mem?currentPage=<%= maxPage %>'">&gt;&gt;</button>						
+						<% } %>
 					<% } %>
 					</div>
 				</div>
@@ -178,21 +233,52 @@
 			if($('input[name="memGrade"]:checked').val() == null){
 				event.preventDefault();
 				alert("회원등급을 선택해주세요!");
-			};			
+			};
 		});
 		
 		function updateMember(){
-			$('#memManageForm').attr('action', '<%= request.getContextPath() %>/views/myPage/memberUpdateForm.jsp');
-			$('#memManageForm').submit();
+			
+			var checkList = [];
+			
+			if($("input:checkbox[name='checkselect']:checked").val() == null){
+				alert("등급을 변경할 회원을 선택해주세요!");
+			}else {
+				$("input:checkbox[name='checkselect']:checked").each(function() {
+					checkList.push($(this).val());			
+				});
+					// 체크박스 체크된 값의 value를 checkList에 저장한다.
+				
+					
+				// 새로열리는 창 크기 및 위치 설정
+				var popLeft = Math.ceil(( window.screen.width - 400 )/2);
+				var popTop = Math.ceil(( window.screen.height - 500 )/2);
+				
+				window.open("views/myPage/admin/memberUpdateForm.jsp?checkList="+checkList, "updateMember", "width=400, height=500, "+ ", left=" + popLeft + ", top="+ popTop); 	
+			};
 		}
 		
 		function deleteMember(){
-			var bool = confirm('정말로 삭제하시겠습니까?');
-			if(bool){
+			var checkList = [];
+			
+			if($("input:checkbox[name='checkselect']:checked").val() == null){
+				alert("탈퇴할 회원을 선택해주세요!");
+			}else {
+				$("input:checkbox[name='checkselect']:checked").each(function() {
+					checkList.push($(this).val());			
+				});
+					// 체크박스 체크된 값의 value를 checkList에 저장한다.
+				
+					
+				// 새로열리는 창 크기 및 위치 설정
+				var popLeft = Math.ceil(( window.screen.width - 400 )/2);
+				var popTop = Math.ceil(( window.screen.height - 500 )/2);
+				
 				$('#memManageForm').attr('action', '<%= request.getContextPath() %>/');
 				$('#memManageForm').submit();
-			}
+				window.open("views/myPage/admin/?????????.jsp?checkList="+checkList, "updateMember", "width=400, height=500, "+ ", left=" + popLeft + ", top="+ popTop); 	
+			};
 		}
+		
 		
 		
 		<%-- var searchList;
