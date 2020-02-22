@@ -33,7 +33,10 @@ public class searchMemberServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-			
+		
+		// 실패
+		
+	/*		
 			// sBtn(검색버튼 on/off), memGrade(회원등급), sCategory(검색카테고리), sWord(검색어) 받아오기
 		String memGrade = request.getParameter("memGrade");
 		String sCategory = request.getParameter("sCategory");
@@ -48,9 +51,8 @@ public class searchMemberServlet extends HttpServlet {
 		
 		new Gson().toJson(search, response.getWriter());
 		
-		
+	*/	
 	}
-
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
