@@ -13,6 +13,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import board.model.vo.BestCouple;
 import board.model.vo.Board;
 import board.model.vo.Photo;
 
@@ -130,5 +131,82 @@ public class bestCoupleDAO {
 		
 		return pList;
 	}
+
+	public int insertbcBoard(Connection conn, Board b) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("insertbcBoard");
+		//INSERT INTO BOARD VALUES(SEQ_POSTNO.NEXTVAL, ?, 1, ?, ?, SYSDATE, DEFAULT, DEFAULT);
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, b.getUserNo());
+			pstmt.setString(2, b.getTitle());
+			pstmt.setString(3, b.getContent());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
 	
+	public int insertbcBestCouple(Connection conn, BestCouple bc) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("insertbcBestCouple");
+		//INSERT INTO BEST_COUPLE VALUES(SEQ_POSTNO.CURRVAL, ?, ?, ?, ?)
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, bc.getmName());
+			pstmt.setString(2, bc.getfName());
+			pstmt.setInt(3, bc.getDtPeriod());
+			pstmt.setString(4, bc.getFvDate());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int insertbcPhoto(Connection conn, ArrayList<Photo> photoList) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("insertbcPhoto");
+		//INSERT INTO PHOTO VALUES(SEQ_PHOTONO.NEXTVAL, SEQ_POSTNO.CURRVAL, ?, ?, ?, ?, DEFAULT)
+		
+		try {
+			for(int i = 0; i < photoList.size(); i++) {
+				Photo p = photoList.get(i);
+				
+				pstmt = conn.prepareStatement(query);
+				pstmt.setString(1, p.getOriginName());
+				pstmt.setString(2, p.getChangeName());
+				pstmt.setString(3, p.getFilePath());
+				pstmt.setInt(4, p.getFileLevel());
+				
+				result += pstmt.executeUpdate();
+			}
+				
+		} catch (SQLException e) {
+				e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
 }

@@ -56,7 +56,7 @@
 		background: rgba(255, 255, 255, 0.4);
 		box-shadow: 3px 3px 3px 3px gray;
 		margin-left: 23px;
-		margin-bottom: 60px;
+		margin-bottom: 40px;
 	}
 	
 	.contn{
@@ -75,16 +75,6 @@
 		position: relative;
 		margin-bottom: 20px;
 		cursor: pointer;
-	}
-	
-	#img1{
-		background-image: url("../../../images/common/flower1.PNG");
-	}
-	#img2{
-		background-image: url("../../../images/common/flower2.PNG");
-	}
-	#img3{
-		background-image: url("../../../images/common/flower3.PNG");
 	}
 		
 	.peoNum > p {
@@ -136,17 +126,16 @@
 		margin: 0 auto;
 	}
 	
-	/* 관리자용 업로드 버튼 */
-	/* .uploadbtn{
+	.uploadbtn{
 		width: 9%;
 		height: 28px;
-		margin-left: 89%;
+		margin-left: 32%;
 		background: #e75a82;
 		color: white;
 		font-weight: border;
-	} */
+	}
 	
-	.pagingArea button{border-radius: 15px; background: #D5D5D5;}
+	.sc-footer button{border-radius: 15px; background: #D5D5D5;}
 	.searchArea{margin-right: 50px;}
 	.searchArea button{background: #D1B2FF; border-radius: 5px; color: white; width: 80px; heigth: 25px; text-align: center;}
 	button:hover{cursor: pointer;}
@@ -205,8 +194,8 @@
 									for(int j = 0; j < pList.size(); j++){
 										Photo p = pList.get(j);		
 								%>
-									<% if(bc.getPostNo() == p.getPhotoNo()){ %>
-										<img src="<%= request.getContextPath() %>/photo_uploadFiles/<%= p.getChangeName() %>" style="width:inherit; height:inherit;">
+									<% if(bc.getPostNo() == p.getPostNo()){ %>
+										<img src="<%= request.getContextPath() %>/photo_uploadFiles/<%= p.getChangeName() %>" width="200px" height="150px">
 									<% } %>
 								<% } %>
 							</div>
@@ -222,7 +211,7 @@
 						<div class="clear-both"></div>
 						
 						 <div class="sc-footer">
-						 	<% if(!bcList.isEmpty()) { %> <!-- && !pList.isEmpty() -->
+						 	<% if(!bcList.isEmpty()) { %>
 								<div class="button">
 									<button onclick="location.href='<%= request.getContextPath() %>/list.bc?currentPage=1'">&lt;&lt;</button>
 									
@@ -254,12 +243,10 @@
 								</div>
 							<% } %>
 						</div>
-						
-						<!-- 관리자용 업로드 버튼 -->
-					<!-- <div>
-							<a href="#"><button class="uploadbtn">UPLOAD</button></a>
-						</div> -->
+					</div>
 					
+					<div>
+						<button class="uploadbtn" onclick='location.href="views/coupleStory/bestCouple/bestCoupleInsertForm.jsp"'>UPLOAD</button>
 					</div>
 				</div>	
 			</div>
