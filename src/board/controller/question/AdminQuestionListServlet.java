@@ -1,5 +1,4 @@
-package questionBoard.question.controller;
-
+package board.controller.question;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -10,9 +9,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import questionBoard.question.model.service.QuestionService;
-import questionBoard.question.model.vo.PageInfo;
-import questionBoard.question.model.vo.Question;
+import board.model.service.QuestionService;
+import board.model.vo.Board;
+import board.model.vo.Reply;
+import common.PageInfo;
 
 /**
  * Servlet implementation class AdminQuestionList
@@ -35,7 +35,6 @@ public class AdminQuestionListServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		 QuestionService service = new QuestionService();
 			
-		  
 		  int listCount = service.MgetListCount();
 		 
 		  int currentPage; 
@@ -61,13 +60,22 @@ public class AdminQuestionListServlet extends HttpServlet {
 		  
 		  PageInfo pi = new PageInfo(currentPage, listCount, limit, maxPage, startPage,endPage);
 		 
-		  ArrayList<Question> list = service.MselectList(currentPage);
+		 // ArrayList list = service.MselectList(currentPage);
 		  
+		  ArrayList<Board>  board = service.selectBList(currentPage);
+		  
+		  ArrayList<Reply> reply = service.selectRList();
+		
+		  System.out.println("reply"+reply);
+		  //ArrayList<Reply> r =service.MselectList(currentPage);
+		 // System.out.println(rlist);
 		  String page = null; 
-		  if(list != null) { 
-			 page = "views/questionBoard/question/questionListView.jsp";
-			  request.setAttribute("list", list); 
+		  if(board != null) { 
+			 page = "views/questionBoard/question/adminQuestionListView.jsp";
+			 
+			  request.setAttribute("board", board); 
 			  request.setAttribute("pi", pi);
+			  request.setAttribute("reply", reply);
 		  } else {
 			  page= "views/common/errorPage.jsp"; 
 			  request.setAttribute("msg","게시판 조회에 실패하였습니다.");

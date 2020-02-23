@@ -1,9 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="java.util.ArrayList, loveParty.partyReview.model.vo.*" %>
-<%@ page import="common.*" %>
+<%@ page import="java.util.ArrayList, board.model.vo.*,common.*" %>
 <%
-	ArrayList<PartyReviewList> list = (ArrayList<PartyReviewList>)request.getAttribute("list");
+	ArrayList<Board> list = (ArrayList<Board>)request.getAttribute("list");
 	PageInfo pi = (PageInfo)request.getAttribute("pi");
 	
 	int listCount = pi.getListCount();
@@ -83,13 +82,13 @@
 								<td colspan="5">조회된 파티 리뷰가 없습니다.</td>
 							</tr>
 						<% } else{
-								for(PartyReviewList p : list){ %>
+								for(Board b : list){ %>
 							<tr>
-								<td><%= p.getPostNo() %><input type="hidden" value='<%=p.getPostNo() %>'></td>
-								<td><%= p.getTitle() %></td>
-								<td><%= p.getUserName() %></td>
-								<td><%= p.getHit() %></td>
-								<td><%= p.getCreateDate() %></td>
+								<td><%= b.getPostNo() %><input type="hidden" value='<%=b.getPostNo() %>'></td>
+								<td><%= b.getTitle() %></td>
+								<td><%= b.getUserId() %></td>
+								<td><%= b.getHit() %></td>
+								<td><%= b.getCreateDate() %></td>
 							</tr>
 						<% 		} 
 							}%>
@@ -159,11 +158,11 @@
 				var postNo = $(this).parent().children().children('input').val();
 				location.href='<%= request.getContextPath() %>/detail.pr?postNo=' + postNo;
 				// 로그인 한 사람만 상세보기 이용할 수 있게 하기
-				<%-- <%if(loginUser != null){ %>
+				<%if(loginUser != null){ %>
 					location.href='<%= request.getContextPath() %>/detail.pr?postNo=' + postNo;
-				<%-- <% } else { %>
+				 <% } else { %>
 					alert('회원만 이용할 수 있는 서비스 입니다.');
-				<% } %> --%>
+				<% } %> 
 			});
 		});
 	</script>

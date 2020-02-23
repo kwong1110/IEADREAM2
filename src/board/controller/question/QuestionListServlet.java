@@ -1,5 +1,4 @@
-package questionBoard.question.controller;
-
+package board.controller.question;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -10,9 +9,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import questionBoard.question.model.service.QuestionService;
-import questionBoard.question.model.vo.PageInfo;
-import questionBoard.question.model.vo.Question;
+import board.model.service.QuestionService;
+import board.model.vo.Board;
+import board.model.vo.Reply;
+import common.PageInfo;
 
 /**
  * Servlet implementation class QuestionListServlet
@@ -64,13 +64,22 @@ public class QuestionListServlet extends HttpServlet {
 		  
 		  PageInfo pi = new PageInfo(currentPage, listCount, limit, maxPage, startPage,endPage);
 		 
-		  ArrayList<Question> list = service.selectList(currentPage, userNo);
+		  //ArrayList<Board> list = service.selectList(currentPage, userNo);
+		  
+		  ArrayList<Board>  board = service.selectQBList(currentPage, userNo);
+		  
+		  ArrayList<Reply> reply = service.selectQRList(currentPage,userNo);
+		  System.out.println("board" + board);
+		  System.out.println("reply"+reply);
+		  
+		  
 		  
 		  String page = null; 
-		  if(list != null) { 
+		  if(board != null) { 
 			 page = "views/questionBoard/question/questionListView.jsp";
-			  request.setAttribute("list", list); 
+			  request.setAttribute("board", board); 
 			  request.setAttribute("pi", pi);
+			  request.setAttribute("reply", reply);
 		  } else {
 			  page= "views/common/errorPage.jsp"; 
 			  request.setAttribute("msg","게시판 조회에 실패하였습니다.");

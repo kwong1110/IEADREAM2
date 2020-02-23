@@ -1,4 +1,4 @@
-package loveParty.partyReview.model.service;
+package board.model.service;
 
 import static common.JDBCTemplate.close;
 import static common.JDBCTemplate.getConnection;
@@ -12,10 +12,10 @@ import loveParty.partyReview.model.vo.PartyReviewList;
 
 public class PartyReviewService {
 
-	public ArrayList<PartyReviewList> selectList( int currentPage) {
+	public ArrayList<Board> selectList( int currentPage) {
 		Connection conn = getConnection();
 		
-		ArrayList<PartyReviewList> list = new PartyReviewDAO().selectList(conn,currentPage);
+		ArrayList<Board> list = new PartyReviewDAO().selectList(conn,currentPage);
 		close(conn);
 		return list;
 	}

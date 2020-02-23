@@ -6,7 +6,6 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -14,6 +13,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import board.model.vo.Board;
 import loveParty.partyReview.model.vo.PartyReviewList;
 
 public class PartyReviewDAO {
@@ -94,10 +94,10 @@ public class PartyReviewDAO {
 		return list;
 	}
 
-	public ArrayList<PartyReviewList> selectImage(Connection conn, int postNo) {
+	public ArrayList<Board> selectImage(Connection conn, int postNo) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		ArrayList<PartyReviewList> list = null;
+		ArrayList<Board> list = null;
 		
 		String query = prop.getProperty("selectImage");
 		
@@ -106,17 +106,17 @@ public class PartyReviewDAO {
 			pstmt.setInt(1, postNo);
 			
 			rs = pstmt.executeQuery();
-			list = new ArrayList<PartyReviewList>();
+			list = new ArrayList<Board>();
 			
 			while(rs.next()) {
-				PartyReviewList prl = new PartyReviewList();
-				prl.setPostNo(rs.getInt("postNo"));
-				prl.setPartyNo(rs.getInt("partyNo"));
-				prl.setUserName(rs.getString("userName"));
-				prl.setTitle(rs.getString("title"));
-				prl.setContent(rs.getString("content"));
-				prl.setCreateDate(rs.getDate("createDate"));
-				prl.setHit(rs.getInt("hit"));
+				Board board = new Board();
+				board.setPostNo(rs.getInt("postNo"));
+				board.setPartyNo(rs.getInt("partyNo"));
+				board.setUserName(rs.getString("userName"));
+				board.setTitle(rs.getString("title"));
+				board.setContent(rs.getString("content"));
+				board.setCreateDate(rs.getDate("createDate"));
+				board.setHit(rs.getInt("hit"));
 				prl.setPartyPhoto(rs.getString("partyPhoto"));
 				prl.setDeleted(rs.getString("deleted").charAt(0));
 			list.add(prl);
