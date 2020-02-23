@@ -1,4 +1,4 @@
-package coupleStory.bestCouple.controller;
+package board.controller.bestCouple;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -9,10 +9,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import board.model.service.bestCoupleService;
+import board.model.vo.Board;
+import board.model.vo.Photo;
 import common.PageInfo;
-import coupleStory.bestCouple.model.service.bestCoupleService;
-import coupleStory.bestCouple.model.vo.BestCouple;
-import photo.model.vo.Photo;
 
 /**
  * Servlet implementation class bestCoupleListServlet
@@ -60,7 +60,7 @@ public class bestCoupleListServlet extends HttpServlet {
 		
 		PageInfo pi = new PageInfo(currentPage, listCount, limit, maxPage, startPage, endPage);
 		
-		ArrayList<BestCouple> bcList = bcService.selectbcList(currentPage);
+		ArrayList<Board> bcList = bcService.selectbcList(currentPage);
 		ArrayList<Photo> pList = bcService.selectpList();
 		
 		System.out.println(pList);

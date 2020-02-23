@@ -1,4 +1,4 @@
-package coupleStory.bestCouple.model.service;
+package board.model.service;
 
 import static common.JDBCTemplate.close;
 import static common.JDBCTemplate.getConnection;
@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 import board.model.dao.bestCoupleDAO;
 import board.model.vo.Board;
-import photo.model.vo.Photo;
+import board.model.vo.Photo;
 
 public class bestCoupleService {
 	
@@ -41,4 +41,4 @@ public class bestCoupleService {
 		
 		return pList;
 	}
-}
+}	

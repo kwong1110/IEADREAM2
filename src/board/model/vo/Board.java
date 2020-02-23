@@ -74,6 +74,17 @@ public class Board {
 		this.partyNo = partyNo;
 	}
 	
+	// 베스트 커플
+	public Board(int postNo, int userNo, String title, Date createDate, int hit) {
+		super();
+		this.postNo = postNo;
+		this.userNo = userNo;
+		this.title = title;
+		this.createDate = createDate;
+		this.hit = hit;
+	}
+
+
 	public int getPostNo() {
 		return postNo;
 	}
