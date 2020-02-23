@@ -1,10 +1,10 @@
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="coupleStory.bestCouple.model.vo.*, photo.model.vo.*, common.*" %>    
+<%@ page import="board.model.vo.*, common.*" %>    
     
 <%
-	ArrayList<BestCouple> bcList = (ArrayList<BestCouple>)request.getAttribute("bcList");
+	ArrayList<Board> bcList = (ArrayList<Board>)request.getAttribute("bcList");
 	ArrayList<Photo> pList = (ArrayList<Photo>)request.getAttribute("pList");
 	
 	PageInfo pi = (PageInfo)request.getAttribute("pi");
@@ -197,7 +197,7 @@
 					<div class="contents">
 					<% 
 						for(int i = 0; i < bcList.size(); i++){
-							BestCouple bc = bcList.get(i);
+							Board bc = bcList.get(i);
 					%>
 						<div class="contn" id="contn1">
 							<div class="img" id="img1">
