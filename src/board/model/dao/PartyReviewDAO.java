@@ -1,4 +1,4 @@
-package loveParty.partyReview.model.dao;
+package board.model.dao;
 
 import static common.JDBCTemplate.close;
 
@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import board.model.vo.Board;
-import loveParty.partyReview.model.vo.PartyReviewList;
 
 public class PartyReviewDAO {
 	private Properties prop = new Properties();
@@ -54,46 +53,44 @@ public class PartyReviewDAO {
 		
 		return result;
 	}
-	
-	public ArrayList<PartyReviewList> selectList(Connection conn, int currentPage) {
-		PreparedStatement pstmt = null;
-		ArrayList<PartyReviewList> list = null;
-		ResultSet rset = null;
-		int posts = 10;
-		
-		int startRow = (currentPage -1)*posts + 1;
-		int endRow = startRow + posts -1;
-		
-		String query = prop.getProperty("selectList");
-		
-		try {
-			pstmt = conn.prepareStatement(query);
-			pstmt.setInt(1, startRow);
-			pstmt.setInt(2, endRow);
-			list = new ArrayList<PartyReviewList>();
-			rset = pstmt.executeQuery();
-			while(rset.next()) {
-				 list.add(new PartyReviewList(rset.getInt("POST_NO"), 
-			 					rset.getInt("PARTY_NO"),
-			 					  rset.getString("user_name"),
-								  rset.getString("title"), 
-								  rset.getString("content"),
-								  rset.getDate("create_date"), 
-								  rset.getInt("hit"),
-								  rset.getString("PARTY_PHOTO"),
-								  rset.getString("deleted").charAt(0)));
-				 	System.out.println(list);
+	// 리스트 뷰
+		public ArrayList<Board> selectList(Connection conn, int currentPage) {
+			PreparedStatement pstmt = null;
+			ArrayList<Board> list = null;
+			ResultSet rset = null;
+			int posts = 10;
+			
+			int startRow = (currentPage -1)*posts + 1;
+			int endRow = startRow + posts -1;
+			
+			String query = prop.getProperty("selectList");
+			
+			try {
+				pstmt = conn.prepareStatement(query);
+				pstmt.setInt(1, startRow);
+				pstmt.setInt(2, endRow);
+				list = new ArrayList<Board>();
+				rset = pstmt.executeQuery();
+				while(rset.next()) {
+					 list.add(new Board(rset.getInt("BOARD_NO"),
+							 rset.getInt("POST_NO"), 
+			 				rset.getString("ID"), 
+			 				rset.getString("title"), 
+						  	rset.getDate("CREATE_DATE"),
+						  	rset.getInt("hit")));
+					 	System.out.println(list);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(rset);
+				close(pstmt);
 			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(rset);
-			close(pstmt);
+			
+			return list;
 		}
-		
-		return list;
-	}
 
+	
 	public ArrayList<Board> selectImage(Connection conn, int postNo) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
