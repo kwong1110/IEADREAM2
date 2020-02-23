@@ -6,9 +6,8 @@ import static common.JDBCTemplate.getConnection;
 import java.sql.Connection;
 import java.util.ArrayList;
 
+import board.model.dao.PartyReviewDAO;
 import board.model.vo.Board;
-import loveParty.partyReview.model.dao.PartyReviewDAO;
-import loveParty.partyReview.model.vo.PartyReviewList;
 
 public class PartyReviewService {
 

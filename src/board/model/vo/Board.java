@@ -58,7 +58,7 @@ public class Board {
 		this.category = category;
 	}
 	
-	// 파티 리뷰
+	// 파티 리뷰 1
 	public Board(int boardNo, int postNo, int userNo, String userId, String title, String content, Date createDate,
 			int hit, String deleted, int partyNo) {
 		super();
@@ -73,11 +73,23 @@ public class Board {
 		this.deleted = deleted;
 		this.partyNo = partyNo;
 	}
+	//파티 리뷰 2(리스트 뷰)
+	public Board(int boardNo, int postNo, String userId, String title, Date createDate, int hit) {
+		super();
+		this.boardNo = boardNo;
+		this.postNo = postNo;
+		this.userId = userId;
+		this.title = title;
+		this.createDate = createDate;
+		this.hit = hit;
+	}
 	
 	public int getPostNo() {
 		return postNo;
 	}
 
+
+	
 
 	public void setPostNo(int postNo) {
 		this.postNo = postNo;
