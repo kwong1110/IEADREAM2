@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import= "questionBoard.question.model.vo.Question"%>
+    pageEncoding="UTF-8" import= "board.model.vo.*"%>
 
 <%
 	request.setCharacterEncoding("UTF-8");
-	String category = request.getParameter("category");
+	/* String category = request.getParameter("category");
 	System.out.println(category);
 	String[] selected = new String[5];
 	switch(category){
@@ -22,8 +22,18 @@
 	case "기타":
 		selected[4] = "selected";
 		break;
+	} */
+	
+	int category = Integer.parseInt(request.getParameter("category"));
+	String[] selected = new String[5];
+	for(int i =0; i<selected.length; i++){
+		if(category == (i+1)){
+			selected[i] = "selected";
+		}else{
+			selected[i] = "";
+		}
 	}
-	 
+	
 %>
 <!DOCTYPE html>
 <html>
@@ -77,12 +87,12 @@
 							<td>
 							<select name="category" id="category">
 									<option>--------</option>
-									<option value="서비스" <%= selected[0] %>>서비스</option>
-									<option value="파티" <%= selected[1] %>>파티</option>
-									<option value="결제" <%= selected[2] %>>결제</option>
-									<option value="회원/등급" <%= selected[3] %>>회원/등급</option>
-									<option value="기타" <%= selected[4] %>>기타</option>
-								</select>
+									<option value="1" <%= selected[0] %>>결제</option>
+									<option value="2" <%= selected[1] %>>파티</option>
+									<option value="3" <%= selected[2] %>>서비스</option>
+									<option value="4" <%= selected[3] %>>회원/등급</option>
+									<option value="5" <%= selected[4] %>>기타</option>
+							</select>
 							</td>	
 						</tr>
 						<tr>

@@ -1,4 +1,4 @@
-package questionBoard.question.controller;
+package board.controller.question;
 
 import java.io.IOException;
 
@@ -9,8 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import questionBoard.question.model.service.QuestionService;
-import questionBoard.question.model.vo.Question;
+import board.model.service.QuestionService;
+import board.model.vo.Board;
+import board.model.vo.Reply;
 
 /**
  * Servlet implementation class QuestionDetailServlet
@@ -33,13 +34,15 @@ public class QuestionDetailServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//int postNo = Integer.parseInt(request.getParameter("postNo"));
 		String postNo = request.getParameter("postNo");
-		Question question = new QuestionService().selectQuestion(postNo);
-		String userId = new QuestionService().selectUserId(postNo);
+		Board board = new QuestionService().selectBoardDetail(postNo);
+		Reply reply = new QuestionService().selectReplyDetail(postNo);
+		
+		
 		String page = null;
-		if(question != null) {
+		if(board != null) {
 			page = "views/questionBoard/question/questionDetailView.jsp";
-			request.setAttribute("question", question);
-			request.setAttribute("userId", userId);
+			request.setAttribute("board", board);
+			request.setAttribute("reply", reply);
 			
 		}else {
 			page = "views/common/errorPage.jsp";

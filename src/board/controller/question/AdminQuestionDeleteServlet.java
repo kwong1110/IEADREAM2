@@ -1,7 +1,6 @@
-package questionBoard.question.controller;
+package board.controller.question;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,23 +8,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
-import questionBoard.question.model.service.QuestionService;
-import questionBoard.question.model.vo.Question;
+import board.model.service.QuestionService;
 
 /**
- * Servlet implementation class QuestionReplyInserServlet
+ * Servlet implementation class QuestionDeleteServlet
  */
-@WebServlet("/insertReply.qu")
-public class QuestionReplyInserServlet extends HttpServlet {
+@WebServlet("/Mdelete.qu")
+public class AdminQuestionDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public QuestionReplyInserServlet() {
+    public AdminQuestionDeleteServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,21 +29,17 @@ public class QuestionReplyInserServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String answerContent  = request.getParameter("answerContent");
 		int postNo = Integer.parseInt(request.getParameter("postNo"));
 		
-		Question q = new Question();
-		q.setAnswerContent(answerContent);
-		q.setPostNo(postNo);
+		int result = new QuestionService().MdeleteQuestion(postNo);
 		
-		ArrayList<Question> list = new QuestionService().insertReply(q);
-		response.setContentType("application/json; charset=UTF-8");
-		//new Gson().toJson(list, response.getWriter());//list를 response.getWriter를 통해서 보내겠다.
-		
-		// 데이트 형식을 맞추기 위해 
-		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
-		gson.toJson(list, response.getWriter());
-		
+		if(result > 0) {
+			response.sendRedirect("Mlist.qu");
+		} else {
+			request.setAttribute("msg", "게시글 삭제에 실패하였습니다.");
+			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
+		}
+	
 	}
 
 	/**
