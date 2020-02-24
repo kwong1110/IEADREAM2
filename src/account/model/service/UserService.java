@@ -1,10 +1,13 @@
-package ui.model.service;
 
 import static common.JDBCTemplate.*;
 
 import java.sql.Connection;
-import ui.model.dao.UserInfoDAO;
-import ui.model.vo.UserInfo;
+
+import account.model.dao.UserPreferDAO;
+import account.model.dao.UserInfoDAO;
+import account.model.vo.UserPrefer;
+import account.model.vo.UserInfo;
+
 
 public class UserService {
 	
@@ -27,7 +30,7 @@ public class UserService {
 		UserInfoDAO uiDAO = new UserInfoDAO();
 		int result = uiDAO.updateUserInfo(conn, ui);
 
-		if(result) {
+		if(result > 0) {
 			commit(conn);
 		} else {
 			rollback(conn);
@@ -38,20 +41,12 @@ public class UserService {
 	
 	public int insertUserInterest(UserInfo ui) {
 		Connection conn = getConnection();
-		UserPreferDAO uiDAO = new UserInfoDAO();
-
-		int r[] = new int[ui.Interest.size()];
-		int result = true;
-
-		for (i=0; i<ui.Interest.size();i++){
-			UserInterest ut[i] = new UserInterest();
-			ut[i].setUserNo(ui.getUserNO());
-			ut[i].setInterest(ui.Interest[i]);
-
-			r[i] = uiDAO.insertInterst(conn, ut[i]);
-			if(r[i] <= 0){ result = -1; }
+		UserInfoDAO uiDAO = new UserInfoDAO();
+		int[] rs = uiDAO.insertInterest(conn, ui.getUserNo(), ui.getInterest());
+		int result = 1;
+		for (int i=0;i<rs.length;i++){
+			if(rs[i] <= 0){result = 0;} 
 		}
-		
 		if(result > 0) {
 			commit(conn);
 		} else {
@@ -62,10 +57,10 @@ public class UserService {
 	}
 	public int deleteUserInterest(UserInfo ui) [
 		Connection conn = getConnection();
-		UserInfoDAO uiDAO=new UserInfoDAO();
-		int result = uiDAO.deleteUserInterest(conn, ui);
+		UserInfoDAO uiDAO = new UserInfoDAO();
+		int result = uiDAO.deleteInterest(conn, ui.getUserNo());
 
-		if(result) {
+		if(result>0) {
 			commit(conn);
 		} else {
 			rollback(conn);

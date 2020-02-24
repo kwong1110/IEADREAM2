@@ -25,8 +25,6 @@ public class UserInfoDAO {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	
-	
 	}
 	public int insertUserInfo(Connection conn, UserInfo ui) {
 		PreparedStatement pstmt = null;
@@ -77,7 +75,7 @@ public class UserInfoDAO {
 			pstmt.setString(9, ui.getJob());
 			pstmt.setInt(10, ui.getDrink());
 			pstmt.setInt(11, ui.getSmoke());
-			pstmt.setInt(12, up.getUserNo());
+			pstmt.setInt(12, ui.getUserNo());
 			
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -88,17 +86,22 @@ public class UserInfoDAO {
 		return result;
 	}
 	
-	public int insertInterest(Connection conn, UserInterest ut) {
+	public int[] insertInterest(Connection conn, int userNo, String[] interest) {
 		PreparedStatement pstmt = null;
 		String query = prop.getProperty("insertInterest");
-		int result= 0;
+		int[] result = null;
 		
 		try {
 			pstmt = conn.prepareStatement(query);
-			pstmt.setInt(1, ut.getUserNo());
-			pstmt.setString(2, ut.getInterest());
 			
-			result = pstmt.executeUpdate();
+			for(int i = 0; i < interest.length; i++) {
+				pstmt.setInt(1, userNo);
+				pstmt.setString(2, interest[i]);
+				pstmt.addBatch();
+				pstmt.clearParameters();
+			}
+			pstmt.executeBatch();
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -107,15 +110,14 @@ public class UserInfoDAO {
 		return result;
 	}
 	
-	public int deleteInterest(Connection conn, UserInfo ui) {
+	public int deleteInterest(Connection conn, int userNo) {
 		PreparedStatement pstmt = null;
 		String query = prop.getProperty("deleteInterest");
 		int result= 0;
 		
 		try {
 			pstmt = conn.prepareStatement(query);
-			pstmt.setInt(1, ui.getUserNo()));
-			pstmt.setString(2, ui.getInterest());
+			pstmt.setInt(1, userNo);
 
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {

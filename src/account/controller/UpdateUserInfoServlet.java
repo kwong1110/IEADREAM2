@@ -1,6 +1,8 @@
 package account.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -8,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import account.model.vo.UserInfo;
+import account.model.service.UserService;
 
 /**
  * Servlet implementation class UpdateUserInfoServlet
@@ -32,8 +35,8 @@ public class UpdateUserInfoServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		
 		int userNo = ((Account)request.getSession().getAttribute("loginUser")).getUserNo();
-		String Thumb = request.getParameter("thumb");
-		String Hello = request.getParameter("hello");
+		String thumb = request.getParameter("thumb");
+		String hello = request.getParameter("hello");
 		int height = Integer.parseInt(request.getParameter("height"));
 		String shape = request.getParameter("shape");
 		String style = request.getParameter("style");
@@ -61,11 +64,14 @@ public class UpdateUserInfoServlet extends HttpServlet {
 		ui.setSmoke(smoke);
 		ui.setInterest(interest);
 
-		int result = new UserService().updateUserInfo(ui);
-		int result2 = new UserService().insertUserInterest(ui);
+		UserService us= new UserService();
+
+		int result1 = us.updateUserInfo(ui);
+		int result2 = us.deleteUserInterest(ui);
+		int result3 = us.insertUserInterest(ui);
 		
 		String page = null;
-		if(result > 0) {
+		if(result1 > 0 && result2 > 0 && result3 > 0) {
 			page = "views/account/joinUserPreferenceForm.jsp";
 		} else {
 			page = "views/common/errorPage.jsp";

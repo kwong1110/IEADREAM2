@@ -9,8 +9,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Properties;
-
-import account.model.vo.UserInfo;
 import account.model.vo.UserPrefer;
 
 
