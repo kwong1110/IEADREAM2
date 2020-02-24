@@ -111,7 +111,7 @@
 						<li class="s-menu" id="myPage"><span onclick="">마이페이지</span>
 							<ul class="dept01">							
 								<li id="nop"><a href="<%=request.getContextPath()%>/views/myPage/user/memberGradeUpForm.jsp">정회원 등업</a></li>
-								<li id="nop"><a href="">기본정보</a></li>
+								<li id="nop"><a href="<%= request.getContextPath()%>/selectProfile.mp">기본정보</a></li>
 								<li id="nop"><a href="">나의 프로필</a></li>
 								<li id="nop"><a href="">이상형 정보</a></li>
 								<li id="nop">
