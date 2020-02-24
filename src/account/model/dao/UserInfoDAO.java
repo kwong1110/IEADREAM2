@@ -77,7 +77,6 @@ public class UserInfoDAO {
 			pstmt.setString(9, ui.getJob());
 			pstmt.setInt(10, ui.getDrink());
 			pstmt.setInt(11, ui.getSmoke());
-
 			pstmt.setInt(12, up.getUserNo());
 			
 			result = pstmt.executeUpdate();
