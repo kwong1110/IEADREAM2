@@ -35,15 +35,16 @@ public class QuestionUpdateServlet extends HttpServlet {
 		
 		int postNo = Integer.parseInt(request.getParameter("postNo"));
 		String title = request.getParameter("title");
-		int category = Integer.parseInt(request.getParameter("category"));
+		String category = request.getParameter("category");
 		String content = request.getParameter("content");
 		
 		Board board = new Board();
 		board.setPostNo(postNo);
 		board.setTitle(title);
+		board.setCategory(category);
 		board.setContent(content);
 		
-		int result = new QuestionService().updateQuestion(board, category);
+		int result = new QuestionService().updateQuestion(board);
 		
 		String page = null;
 		if(result>0) {

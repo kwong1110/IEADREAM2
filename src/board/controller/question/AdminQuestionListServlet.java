@@ -60,15 +60,12 @@ public class AdminQuestionListServlet extends HttpServlet {
 		  
 		  PageInfo pi = new PageInfo(currentPage, listCount, limit, maxPage, startPage,endPage);
 		 
-		 // ArrayList list = service.MselectList(currentPage);
 		  
 		  ArrayList<Board>  board = service.selectBList(currentPage);
 		  
 		  ArrayList<Reply> reply = service.selectRList();
 		
 		  System.out.println("reply"+reply);
-		  //ArrayList<Reply> r =service.MselectList(currentPage);
-		 // System.out.println(rlist);
 		  String page = null; 
 		  if(board != null) { 
 			 page = "views/questionBoard/question/adminQuestionListView.jsp";

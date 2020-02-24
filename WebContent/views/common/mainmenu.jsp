@@ -88,7 +88,7 @@
 						<li class="s-menu"><span onclick="goCoupleStory();">커플이야기</span>
 							<ul class="dept01">
 								<li id="nop"><a href="<%= request.getContextPath() %>/list.bc">베스트 커플</a></li>
-								<li id="nop"><a href="">우리 커플 됐어요</a></li>
+								<li id="nop"><a href="<%= request.getContextPath() %>/list.wac">우리 커플 됐어요</a></li>
 							</ul>
 						</li>
 						<li class="s-menu"><span onclick="goQuestionBoard();">문의게시판</span>
