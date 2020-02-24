@@ -10,6 +10,7 @@ public class Reply {
 	private String answerChecked; // 답변 여부
 	private Date answerDate; //답변 날짜
 	
+	public Reply() {}
 	// 전체생성자
 	public Reply(int postNo, int userNo, int userId, String answerContent, String answerChecked, Date answerDate) {
 		super();
@@ -20,6 +21,24 @@ public class Reply {
 		this.answerChecked = answerChecked;
 		this.answerDate = answerDate;
 	}
+	
+	
+	public Reply(int postNo, String answerContent, String answerChecked, Date answerDate) {
+		super();
+		this.postNo = postNo;
+		this.answerContent = answerContent;
+		this.answerChecked = answerChecked;
+		this.answerDate = answerDate;
+	}
+
+
+	public Reply(String answerContent, String answerChecked, Date answerDate) {
+		super();
+		this.answerContent = answerContent;
+		this.answerChecked = answerChecked;
+		this.answerDate = answerDate;
+	}
+
 
 	public int getPostNo() {
 		return postNo;

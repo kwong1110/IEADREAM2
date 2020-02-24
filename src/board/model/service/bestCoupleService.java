@@ -1,14 +1,15 @@
-package coupleStory.bestCouple.model.service;
+package board.model.service;
 
-import static common.JDBCTemplate.close;
+import static common.JDBCTemplate.*;
 import static common.JDBCTemplate.getConnection;
 
 import java.sql.Connection;
 import java.util.ArrayList;
 
 import board.model.dao.bestCoupleDAO;
+import board.model.vo.BestCouple;
 import board.model.vo.Board;
-import photo.model.vo.Photo;
+import board.model.vo.Photo;
 
 public class bestCoupleService {
 	
@@ -41,4 +42,23 @@ public class bestCoupleService {
 		
 		return pList;
 	}
-}
+
+	public int insertPhoto(Board b, BestCouple bc, ArrayList<Photo> photoList) {
+		Connection conn = getConnection();
+		
+		bestCoupleDAO bcDAO = new bestCoupleDAO();
+		
+		int result1 = bcDAO.insertbcBoard(conn, b);
+		int result2 = bcDAO.insertbcBestCouple(conn, bc);
+		int result3 = bcDAO.insertbcPhoto(conn, photoList);
+		
+		if(result1 > 0 && result2 > 0 && result3 > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		return result1;
+	}
+
+}	
