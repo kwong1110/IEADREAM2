@@ -1,5 +1,13 @@
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="board.model.vo.*"%>
+    
+<%
+	Board b = (Board)request.getAttribute("b");
+	BestCouple bc = (BestCouple)request.getAttribute("bc");
+	ArrayList<Photo> pList = (ArrayList<Photo>)request.getAttribute("pList");
+	Photo titlePt = pList.get(0);
+%>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -55,15 +63,39 @@
 	}
 	
 	.text1{
-		font-size: 25px;
 		color: white;
-		font-weight: bold;
 		background: pink;
 		height: 50px;
 		margin: 65px 1px 20px;
 		line-height: 200%;
 		box-shadow: 1px 1px 10px red;
 		border-radius: 20px;
+		text-align: center;
+	}
+	
+	.nameinput{
+		background: transparent;
+		border: none;
+		outline: none;
+		font-size: 25px;
+		color: white;
+		width: 80px;
+		font-weight: bold;
+	}
+	
+	#nameinput1{
+		text-align: right;
+		margin-right: 2%;
+	}
+	
+	#nameinput2{
+		text-align: left;
+	}
+	
+	.heart{
+		font-size: 25px;
+		display: inline-block;
+		margin-right: 1%;
 	}
 	
 	.text2{
@@ -73,17 +105,37 @@
 		line-height: 170%;
 		margin: 40px 1px 0;
 	}
-	.p2{display: inline-block; color: pink;}
+	.perinput{
+		background: transparent;
+		border: none;
+		outline: none;
+		font-size: 21px;
+		color: white;
+		width: 50px;
+		text-align: right;
+		margin: 0 1% 0 4%;
+	}
 	
 	.text3{
 		height: 30px;
 		font-size: 17px;
-		color: pink;
+		color: white;
 		line-height: 170%;
-		margin: 0px 1px 0;
+		margin: 0px 1px 0 45px;
+		text-align: center;
 	}
-	.p3{display: inline-block; color: #e75a82;}
 	
+	.dateinput{
+		background: transparent;
+		border: none;
+		outline: none;
+		font-size: 17px;
+		color: #e75a82;
+		text-align: center;
+		margin: 0 1% 0 1%;
+		color: #e75a82;
+	}
+
 	.parag2{
 		height: 268px;
 		boxing-size: border-box;
@@ -102,11 +154,19 @@
 		width: 90%;
 		height: 200px;
 		text-align: center;
-		margin: 4% auto;
 		line-height: 23px;
+		margin: 3%;
 	}
 	.text4{
+		width: 105%;
+		height: 210px;
 		text-align: left;
+		resize: none;
+		background: transparent;
+		border: none;
+		font-family: 만화진흥원체;
+		font-size: 15px;
+		outline: none;
 	}
 	
 	.img2{
@@ -130,34 +190,50 @@
 </style>
 </head>
 <body>
+	<%@ include file="../../common/mainmenu.jsp" %>
 	<section>
 		<h1 class="title">이달의 베스트 커플</h1>
-		
-		<div class="main">
-			<div class="parag1">
-				<div class="img1"><img class="parag1-img" src="../../../images/common/couple1.jpg"></div>
-				<div class="contn1">
-					<div class="text1"> 윤 한 빈 &#9829; 박 소 현 </div>
-					<div class="text2">연애기간 : &nbsp;<p class="p2">12 일</p></div>
-					<div class="text3">즐겨하는 데이트 : &nbsp;<p class="p3">영화보기</p></div>
+		<form action="<%= request.getContextPath() %>/views/coupleStory/bestCouple/bestCoupleUpdateForm.jsp">
+			<div class="main">
+				<div class="parag1">
+					<input type="hidden" name="title" value="<%= b.getTitle() %>">
+					<div class="img1">
+						<img class="parag1-img" src="<%= request.getContextPath() %>/photo_uploadFiles/<%= titlePt.getChangeName() %>">
+					</div>
+					<div class="contn1">
+						<div class="text1">
+							<input class="nameinput" id="nameinput1" name="mName" value="<%= bc.getmName() %>"><div class="heart">&#9829;</div>
+							<input class="nameinput" id="nameinput2" name="fName" value="<%= bc.getfName() %>">
+						</div>
+						<div class="text2">연애기간 :<input class="perinput" name="dtPeriod" value="<%= bc.getDtPeriod() %>">일</div>
+						<div class="text3">즐겨하는 데이트 :<input class="dateinput" name="fvDate" value="<%= bc.getFvDate() %>"></div>
+					</div>
+				</div>
+				
+				<div class="parag2">
+					<div class="contn2">
+						<div class="text4box">
+							<textarea class="text4" name="content" readonly><%= b.getContent() %></textarea>
+						</div>
+					</div>
+					<div class="img2">
+						<img class="parag2-img detailPhoto" id="detailPhoto" src="<%= request.getContextPath()%>/photo_uploadFiles/<%= pList.get(1).getChangeName() %>">
+					</div>
 				</div>
 			</div>
 			
-			<div class="parag2">
-				<div class="contn2">
-					<div class="text4box">
-						<p class="text4">안녕하세요.<br>
-						저희는 연애한지 12일 된 풋풋한 새내기 커플입니다!<br>
-						.<br>.<br>.<br>
-						이어드림 덕분에 드디어 운명의 상대를 만난 것 같아요ㅠㅠ<br>
-						솔로분들!!<br>
-						다들 이어드림하세요~~</p>
-					</div>
-				</div>
-				<div class="img2"><img class="parag2-img" src="../../../images/common/couple2.jpg"></div>
+			<div class="btnBox">
+				<% if(loginUser != null && loginUser.getUserNo() == b.getUserNo()) { %>
+					<button type="submit" id="updateBtn">수정</button>
+					<button type="submit" id="deleteBtn" onclick="deletePt();">삭제</button>
+				<% } %>
 			</div>
-		</div>
-		
+			
+			
+			
+			
+			
+		</form>
 	</section>
 </body>
 </html>

@@ -1,12 +1,33 @@
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	String title = request.getParameter("title");
+	String mName = request.getParameter("mName");
+	String fName = request.getParameter("fName");
+	int dtPeriod = Integer.parseInt(request.getParameter("dtPeriod"));
+	String fvDate = request.getParameter("fvDate");
+	String content = request.getParameter("content");
+	
+	ArrayList<String> photos = new ArrayList<String>();
+	for(int i = 1; i < 2; i++){
+		photos.add(request.getParameter(""));
+	}
+	
+	
+	
+	
+	
+	
+%>    
+    
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" href="css/reset.css" />
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<title>이어드림_베스트커플_글작성</title>
+<title>이어드림_베스트커플_글수정</title>
 <style>
 	.title{
 		padding: 10px 0 10px 30px;
@@ -102,11 +123,12 @@
 		<div class="outer">
 			<div class="wrapper">
 				<h1 class="title">이달의 베스트 커플</h1>
-				<form action="<%= request.getContextPath() %>/insert.bc" method="post" encType="multipart/form-data">
+				<form action="<%= request.getContextPath() %>/update.bc" method="post" encType="multipart/form-data">
 					<div class="main">
 						<div class="subj">
 							<div id="subjtitle">제목</div>
-							<input type="text" name="title" id="subjbox">
+							<input type="hidden" name="postNo" value="<%= request.getParameter("pNo") %>">
+							<input type="text" name="title" id="subjbox" value="<%= title %>">
 						</div>
 						
 						<div class="contn1">
@@ -114,36 +136,36 @@
 								<div class="label">
 									<label>남자 이름 : </label>
 								</div>
-								<input type="text" name="mName" class="bx"><br>
+								<input type="text" name="mName" class="bx" value="<%= mName %>"><br>
 								
 								<div class="label">
 									<label>여자 이름 : </label>
 								</div>
-								<input type="text" name="fName" class="bx"><br>
+								<input type="text" name="fName" class="bx" value="<%= fName %>"><br>
 								
 								<div class="label">
 									<label>연애 기간 : </label>
 								</div>
-								<input type="number" name="dtPeriod" min="1" value="1" class="bx">&nbsp;일<br>
+								<input type="number" name="dtPeriod" min="1" value="<%= dtPeriod %>" class="bx">&nbsp;일<br>
 								
 								<div class="label">
 									<label>즐겨하는 데이트 : </label>
 								</div>
-								<input type="text" name="fvDate" maxlength="12" placeholder="12자이내로 입력하세요.">
+								<input type="text" name="fvDate" maxlength="12" value="<%= fvDate %>">
 							</div>
 						</div>
 						
-						<textarea class="contn2" name="content" placeholder="내용을 자유롭게 입력해주세요."></textarea>
+						<textarea class="contn2" name="content"><%= content %></textarea>
 						
 						<div class="file">
-							<input type="file" name="photo1" multiple="multiple" id="file1"><br>
+							<input type="file" name="photo1" multiple="multiple" id="file1" value="<%= %>"><br>
 							<input type="file" name="photo2" multiple="multiple">
 						</div>
 					</div>
 					
 					<div class="btnBox">
-						<button type="submit" class="submit">등록</button>
-						<button type="reset" onclick="location.href='<%= request.getContextPath() %>/list.bc'">취소</button>
+						<button type="submit" class="submit">완료</button>
+						<button type="reset" onclick="location.href='<%= request.getContextPath() %>/detail.bc'">취소</button>
 					</div>	
 				</form>
 			</div>
