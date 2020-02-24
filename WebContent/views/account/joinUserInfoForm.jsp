@@ -216,11 +216,11 @@
                 <tr>
                   <td class="itemName" id="">체형</td>
                   <td>
-                    <label><input type="radio" name="body" value="slim">마름</label>
-                    <label><input type="radio" name="body" value="normal">보통</label>
-                    <label><input type="radio" name="body" value="muscular">근육질</label>
-                    <label><input type="radio" name="body" value="glamour">글래머</label>
-                    <label><input type="radio" name="body" value="chubby">통통</label>
+                    <label><input type="radio" name="shape" value="slim">마름</label>
+                    <label><input type="radio" name="shape" value="normal">보통</label>
+                    <label><input type="radio" name="shape" value="chubby">통통</label>
+                    <label><input type="radio" name="shape" value="muscular">근육질</label>
+                    <label><input type="radio" name="shape" value="glamour">글래머</label>
                   </td>
                 </tr>
                 <tr>

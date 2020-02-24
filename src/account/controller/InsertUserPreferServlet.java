@@ -1,4 +1,4 @@
-package account.controller;
+ackage account.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -32,6 +32,7 @@ public class UpdateUserPreferServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");		
 		
 		int userNo = ((Account)request.getSession().getAttribute("loginUser")).getUserNo();
+		
 		int height = Integer.parseInt(request.getParameter("height"));
 		int heightPri = Integer.parseInt(request.getParameter("heightPri"));
 		String shape = request.getParameter("shape");
@@ -79,7 +80,7 @@ public class UpdateUserPreferServlet extends HttpServlet {
 		up.setSmokePri(smokePri);
 		up.setInterestPri(interestPri);
 
-		int result = new UserService().updateUserPrefer(up);
+		int result = new UserService().insertUserPrefer(up);
 		
 		String page = null;
 		if(result > 0) {

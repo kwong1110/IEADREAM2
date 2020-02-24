@@ -28,11 +28,12 @@ public class UpdateUserInfoServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
 		request.setCharacterEncoding("UTF-8");
 		
-		UserInfo ui = new UserInfo();
-		
+		int userNo = ((Account)request.getSession().getAttribute("loginUser")).getUserNo();
+		String Thumb = request.getParameter("thumb");
+		String Hello = request.getParameter("hello");
 		int height = Integer.parseInt(request.getParameter("height"));
 		String shape = request.getParameter("shape");
 		String style = request.getParameter("style");
@@ -44,6 +45,11 @@ public class UpdateUserInfoServlet extends HttpServlet {
 		int smoke = Integer.parseInt(request.getParameter("smoke"));
 		String[] interest = request.getParameterValues("interest");
 		
+		UserInfo ui = new UserInfo();
+
+		ui.setUserNo(userNo);
+		ui.setThumb(thumb);
+		ui.setHello(hello);
 		ui.setHeight(height);
 		ui.setShape(shape);
 		ui.setStyle(style);
@@ -53,7 +59,21 @@ public class UpdateUserInfoServlet extends HttpServlet {
 		ui.setJob(job);
 		ui.setDrink(drink);
 		ui.setSmoke(smoke);
+		ui.setInterest(interest);
+
+		int result = new UserService().updateUserInfo(ui);
+		int result2 = new UserService().insertUserInterest(ui);
 		
+		String page = null;
+		if(result > 0) {
+			page = "views/account/joinUserPreferenceForm.jsp";
+		} else {
+			page = "views/common/errorPage.jsp";
+			request.setAttribute("msg", "정보 수정에 실패하였습니다.");
+		}
+		
+		RequestDispatcher view = request.getRequestDispatcher(page);
+		view.forward(request, response);
 		
 	}
 
