@@ -31,7 +31,7 @@
 .main{
 	position:absolute;
   	top:15%;
-  	left:20%;
+  	left:21%;
 }
 
 .botBox{
@@ -39,16 +39,22 @@
 	padding: 10px;
 	border-radius: 10px;
 }
+.deleteCheck{
+	margin: 10px;
+	font-weight: bold;
+	font-size: 15px;
+	color: red;
+}
 </style>
 </head>
 <body>
 	<div class="main">
-		<form action="<%= request.getContextPath() %>/manageUpdate.mem" method="get">
+		<form action="<%= request.getContextPath() %>/" method="get">
 			<table class="mainBoard">
 				<thead>
 					<tr>
-						<th>이름</th>
-						<th>회원번호</th>
+						<th>게시글 번호</th>
+						<th>아이디</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -60,19 +66,12 @@
 						<td style="display:none;"><input type="hidden" name="userNo" value="<%= noArr[i] %>"></td>
 					</tr>
 				<% } %>
-					<tr>
-						<td colspan="2"> 
-							<div class="botBox">
-								<b>변경 등급 :</b>
-								<select name="checkCategory" class="search">
-									<option value="1">준회원</option>
-									<option value="2">정회원</option>
-								</select>
-							</div>
-						</td>
-					</tr>
 				</tbody>
 			</table>
+			<div class="deleteCheck">
+				<div>총 <%=nameArr.length %>개 의 게시글삭제를 </div>
+				<div>정말로 진행 하시겠습니까?</div>
+			</div>
 			<div class="btnBox">
 				<button class="defaultBtn" type="submit">확인</button>
 				<button class="defaultBtn" type="button" onclick="window.close();">취소</button>
