@@ -45,36 +45,13 @@
 				<div class="pageTitle">
 					<h1>회사 소개</h1>
 				</div>
-			</div>
-		</div>
-	</div>
-	<div class="container">
-
-		<section class="content">
-			<main>
-				<div> <h1 style="padding: 5px;">회사 소개</h1> </div>
 				<div class="article" style="width: 100%; text-align: center;"><img id="company_pic" src="../img/IMG_5526.jpg"> 로고 넣기 </div>
-				<div class="article" id="hi" style="clear: both; padding: 5px; width: 100%; text-align: center;"> 
+				<div>
 					저희 희사는 연애를 어쩌구 쌍방 따봉 어쩌구 념념 강아지 귀엽죠 9살이라는게 안믿겨지죠 내용은 넘어가는게 아니고
 					자동으로 본문 크기에 따라 달라진답니다 멋지죠 <br>가운데정렬<br>이에요
 				</div>
-			</main>
-			<nav>
-				<div style="border-right: 1px solid rgb(136, 136, 136);">
-					<div style="margin-top: 10px; color: rgb(51, 51, 51); font-size: 20px; padding-left: 40px;">
-						<h2> 이어드림 </h2>
-					</div>
-					<div>
-						<ul class="quickmenu">
-							<li><a class="subCategory" href="">회사 소개</a></li>
-							<li><a class="subCategory" href="">CEO 소개</a></li>
-							<li><a class="subCategory" href="">오시는 길</a></li>
-						</ul>
-					</div>
-				</div>
-			</nav>
-		</section>
-
+			</div>
+		</div>
 	</div>
 </body>
 </html>
