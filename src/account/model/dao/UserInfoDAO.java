@@ -17,7 +17,7 @@ public class UserInfoDAO {
 	private Properties prop = new Properties();
 	
 	public UserInfoDAO() {
-		String fileName = AccountDAO.class.getResource("/sql/account/account-query.properties").getPath();
+		String fileName = UserInfoDAO.class.getResource("/sql/account/account-query.properties").getPath();
 		try {
 			prop.load(new FileReader(fileName));
 		} catch (FileNotFoundException e) {

@@ -1,14 +1,15 @@
 package account.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import account.model.vo.Account;
 import account.model.vo.UserInfo;
 import account.model.service.UserService;
 
@@ -24,7 +25,6 @@ public class UpdateUserInfoServlet extends HttpServlet {
      */
     public UpdateUserInfoServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -33,6 +33,7 @@ public class UpdateUserInfoServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		request.setCharacterEncoding("UTF-8");
+
 		
 		int userNo = ((Account)request.getSession().getAttribute("loginUser")).getUserNo();
 		String thumb = request.getParameter("thumb");
@@ -87,7 +88,6 @@ public class UpdateUserInfoServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

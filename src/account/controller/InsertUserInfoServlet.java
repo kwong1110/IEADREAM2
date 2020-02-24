@@ -1,6 +1,8 @@
 package account.controller;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -8,20 +10,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import account.model.vo.UserInfo;
+import account.model.vo.Account;
+import account.model.service.UserService;
 
 /**
- * Servlet implementation class UpdateUserInfoServlet
+ * Servlet implementation class InsertUserInfoServlet
  */
-@WebServlet("/update.ui")
-public class UpdateUserInfoServlet extends HttpServlet {
+@WebServlet("/insert.ui")
+public class InsertUserInfoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UpdateUserInfoServlet() {
+    public InsertUserInfoServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -33,9 +36,8 @@ public class UpdateUserInfoServlet extends HttpServlet {
 		
 		
 		int userNo = ((Account)request.getSession().getAttribute("loginUser")).getUserNo();
-
-		String Thumb = request.getParameter("thumb");
-		String Hello = request.getParameter("hello");
+		String thumb = request.getParameter("thumb");
+		String hello = request.getParameter("hello");
 		int height = Integer.parseInt(request.getParameter("height"));
 		String shape = request.getParameter("shape");
 		String style = request.getParameter("style");
@@ -82,7 +84,6 @@ public class UpdateUserInfoServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 
