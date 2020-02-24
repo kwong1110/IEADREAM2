@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import account.model.vo.Account;
+import board.model.vo.Board;
 
 public class adminDAO {
 	private Properties prop = new Properties();
@@ -237,5 +238,211 @@ public class adminDAO {
 		}
 		
 		return result;
+	}
+
+	public int deleteMem(Connection conn, String[] userNo) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("deleteMem");
+		
+		try {
+			for(int i = 0; i < userNo.length; i++) {
+				pstmt = conn.prepareStatement(query);
+				pstmt.setString(1, userNo[i]);
+				
+				result = pstmt.executeUpdate();
+				
+				if(result > 0) {
+					commit(conn);
+				} else {
+					rollback(conn);
+					break;
+				}
+			}			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int getBListCount(Connection conn) {
+		Statement stmt = null;
+		ResultSet rset = null;
+		
+		int result = 0;
+		
+		String query = prop.getProperty("getBListCount");
+		
+		try {
+			stmt = conn.createStatement();
+			rset = stmt.executeQuery(query);
+			
+			if(rset.next()) {
+				result = rset.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(stmt);
+		}
+		
+		return result;
+	}
+
+	public int getSearchBListCount(Connection conn, String bCategory, String sCategory, String sWord) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		int result = 0;
+		
+		String query = "";
+		switch(sCategory) {
+		case "B_NAME": query = prop.getProperty("searchBNameListCount"); break;
+		case "B_DATE": query = prop.getProperty("searchBDateListCount"); break;
+		case "ID": query = prop.getProperty("searchBIDListCount"); break;
+		}
+		
+		if(bCategory.equals("1,2,3,4,5")) {
+			switch(sCategory) {
+			case "B_NAME": query = prop.getProperty("allSearchBNameListCount"); break;
+			case "B_DATE": query = prop.getProperty("allSearchBDateListCount"); break;
+			case "ID": query = prop.getProperty("allSearchIDListCount"); break;
+			}
+		}
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			
+			if(bCategory.equals("1,2,3,4,5")) {
+				pstmt.setString(1, "%" + sWord + "%");					
+			}else {
+				pstmt.setString(1, bCategory);
+				pstmt.setString(2, "%" + sWord + "%");
+			}
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				result = rset.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public ArrayList<Board> selectBList(Connection conn, int currentPage) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Board> list = null;
+		
+		int posts = 10;		// 한 페이지에 보여질 게시글 개수 
+		
+		int startRow = (currentPage - 1) * posts + 1;
+		int endRow = startRow + posts - 1;
+		
+		String query = prop.getProperty("selectBList");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			
+			rset = pstmt.executeQuery();
+			list = new ArrayList<Board>();
+			
+			while(rset.next()) {
+				Board b = new Board();
+				b.setPostNo(rset.getInt("POST_NO"));
+				b.setUserId(rset.getString("ID"));
+				b.setBoardNo(rset.getInt("BOARD_NO"));
+				b.setTitle(rset.getString("TITLE"));
+				b.setCreateDate(rset.getDate("CREATE_DATE"));
+				
+				list.add(b);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+	}
+
+	public ArrayList<Board> searchBList(Connection conn, int currentPage, String bCategory, String sCategory,
+			String sWord) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Board> search = null;
+		
+		//System.out.println("adminDAO sWord 변수 확인 : " + sWord);
+		
+		int posts = 10;		// 한 페이지에 보여질 게시글 개수 
+		
+		int startRow = (currentPage - 1) * posts + 1;
+		int endRow = startRow + posts - 1;
+		
+		String query = "";
+		switch(sCategory) {
+		case "B_NAME": query = prop.getProperty("searchBNameList"); break;
+		case "B_DATE": query = prop.getProperty("searchBDateList"); break;
+		case "ID": query = prop.getProperty("searchBIDList"); break;
+		}
+		
+		if(bCategory.equals("1,2,3,4,5")) {
+			switch(sCategory) {
+			case "B_NAME": query = prop.getProperty("allSearchBNameList"); break;
+			case "B_DATE": query = prop.getProperty("allSearchBDateList"); break;
+			case "ID": query = prop.getProperty("allSearchBIDList"); break;
+			}
+		}
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			
+			if(!bCategory.equals("1,2,3,4,5")) {
+				pstmt.setString(1, bCategory);
+				pstmt.setString(2, "%" + sWord + "%");					
+				pstmt.setInt(3, startRow);
+				pstmt.setInt(4, endRow);
+			}else {
+				pstmt.setString(1, "%" + sWord + "%");					
+				pstmt.setInt(2, startRow);
+				pstmt.setInt(3, endRow);
+			}
+			
+			rset = pstmt.executeQuery();
+			search = new ArrayList<Board>();
+			
+			while(rset.next()) {
+				Board b = new Board();
+
+				b.setPostNo(rset.getInt("POST_NO"));
+				b.setUserId(rset.getString("ID"));
+				b.setBoardNo(rset.getInt("BOARD_NO"));
+				b.setTitle(rset.getString("TITLE"));
+				b.setCreateDate(rset.getDate("CREATE_DATE"));
+				
+				search.add(b);	
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return search;
 	}	
 }

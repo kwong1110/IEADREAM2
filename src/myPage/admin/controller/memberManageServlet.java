@@ -42,7 +42,7 @@ public class memberManageServlet extends HttpServlet {
 		
 		// 폼에서 name속성이 안넘어오면 getParameter() 시 null이 리턴됨
 		// 폼에서 name속성은 넘어오는데 value가 없으면 ""(빈문자열)이 리턴됨
-		// sBtn(검색버튼 on/off), memGrade(회원등급), sCategory(검색카테고리), sWord(검색어) 받아오기
+		// search(검색버튼 on/off), memGrade(회원등급), sCategory(검색카테고리), sWord(검색어) 받아오기
 		String memGrade = request.getParameter("memGrade");
 		String sCategory = request.getParameter("sCategory");
 		String sWord = request.getParameter("sWord");

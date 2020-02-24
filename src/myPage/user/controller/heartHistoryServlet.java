@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import common.PageInfo;
 import myPage.user.model.service.userService;
-import myPage.user.model.vo.Recommend;
+import myPage.user.model.vo.Match;
 
 /**
  * Servlet implementation class heartHistoryServlet
@@ -57,7 +57,7 @@ public class heartHistoryServlet extends HttpServlet {
 		
 		PageInfo pi = new PageInfo(currentPage, listCount, limit, maxPage, startPage, endPage);
 		
-		ArrayList<Recommend> list = service.selectHhList(currentPage);
+		ArrayList<Match> list = service.selectHhList(currentPage);
 		
 		/*for(Recommend r : list){
 			System.out.println(r.getUserNo() + r.getTargetNo() + r.getMatchStatus() + r.getMatchDate() + r.getMatchDelete());

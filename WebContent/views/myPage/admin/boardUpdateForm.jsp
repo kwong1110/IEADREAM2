@@ -31,7 +31,7 @@
 .main{
 	position:absolute;
   	top:15%;
-  	left:20%;
+  	left:21%;
 }
 
 .botBox{
@@ -43,12 +43,12 @@
 </head>
 <body>
 	<div class="main">
-		<form action="<%= request.getContextPath() %>/manageUpdate.mem" method="get">
+		<form action="<%= request.getContextPath() %>/" method="get">
 			<table class="mainBoard">
 				<thead>
 					<tr>
-						<th>이름</th>
-						<th>회원번호</th>
+						<th>게시글 번호</th>
+						<th>아이디</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -61,15 +61,6 @@
 					</tr>
 				<% } %>
 					<tr>
-						<td colspan="2"> 
-							<div class="botBox">
-								<b>변경 등급 :</b>
-								<select name="checkCategory" class="search">
-									<option value="1">준회원</option>
-									<option value="2">정회원</option>
-								</select>
-							</div>
-						</td>
 					</tr>
 				</tbody>
 			</table>
