@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import = "java.util.ArrayList, questionBoard.faq.model.vo.*" %>
+<%@ page import = "java.util.ArrayList, board.model.vo.*, common.*" %>
 <% 
-	ArrayList<Faq> list = (ArrayList<Faq>)request.getAttribute("list"); 
+	ArrayList<Board> list = (ArrayList<Board>)request.getAttribute("list"); 
 	
 	PageInfo pi = (PageInfo)request.getAttribute("pi");
 	
@@ -48,12 +48,12 @@
 						</tr>
 						<%
 							} else {
-								for (Faq faq : list) {
+								for (Board board : list) {
 						%>
 									<tr>
-										<td><%= faq.getPostNo() %></td>
-										<td><%= faq.getCategory() %></td>
-										<td><%= faq.getTitle() %></td>
+										<td><%= board.getPostNo() %></td>
+										<td><%= board.getCategory() %></td>
+										<td><%= board.getTitle() %></td>
 									</tr>
 						<%
 								}

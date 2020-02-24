@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import board.model.vo.Board;
 import questionBoard.faq.model.service.FaqService;
-import questionBoard.faq.model.vo.Faq;
 import questionBoard.faq.model.vo.PageInfo;
 
 /**
@@ -61,7 +61,7 @@ public class faqAdminListViewServlet extends HttpServlet {
 		PageInfo pi = new PageInfo(currentPage, listCount, limit, maxPage, startPage, endPage);
 		
 		/* 리스트 불러오기 */
-		ArrayList<Faq> list = service.selectAdminList(currentPage);
+		ArrayList<Board> list = service.selectAdminList(currentPage);
 		String page = null;
 		if(list != null) {
 			page = "views/questionBoard/faq/faqAdminListView.jsp";

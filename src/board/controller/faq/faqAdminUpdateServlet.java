@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import board.model.vo.Board;
 import questionBoard.faq.model.service.FaqService;
-import questionBoard.faq.model.vo.Faq;
 
 /**
  * Servlet implementation class faqAdminUpdateServlet
@@ -37,13 +37,13 @@ public class faqAdminUpdateServlet extends HttpServlet {
 		String title = request.getParameter("title");
 		String content = request.getParameter("con");
 		
-		Faq faq = new Faq();
-		faq.setPostNo(postNo);
-		faq.setCategory(category);
-		faq.setTitle(title);
-		faq.setContent(content);
+		Board board = new Board();
+		board.setPostNo(postNo);
+		board.setCategory(category);
+		board.setTitle(title);
+		board.setContent(content);
 		
-		int result = new FaqService().updateFaq(faq);
+		int result = new FaqService().updateFaq(board);
 		
 		String page = null;
 		if(result > 0) {
