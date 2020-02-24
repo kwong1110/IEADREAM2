@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import board.model.service.FaqService;
 import board.model.vo.Board;
-import questionBoard.faq.model.service.FaqService;
 
 /**
  * Servlet implementation class faqAdminDetailServlet

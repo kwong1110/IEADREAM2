@@ -13,7 +13,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Properties;
 
-import questionBoard.faq.model.vo.Faq;
+import board.model.vo.Board;
 
 public class FaqDAO {
 
@@ -30,10 +30,10 @@ public class FaqDAO {
 		}
 	}
 
-	public ArrayList<Faq> selectList(Connection conn) {
+	public ArrayList<Board> selectList(Connection conn) {
 		Statement stmt = null;
 		ResultSet rs = null;
-		ArrayList<Faq> list = null;
+		ArrayList<Board> list = null;
 		
 		String query = prop.getProperty("selectFaqList");
 		
@@ -41,14 +41,14 @@ public class FaqDAO {
 			stmt = conn.createStatement();
 			rs = stmt.executeQuery(query);
 			
-			list = new ArrayList<Faq>();
+			list = new ArrayList<Board>();
 			
 			while(rs.next()) {
-				Faq faq = new Faq(rs.getInt("post_no"),
-							  rs.getString("category"),
+				Board board = new Board(rs.getInt("post_no"),
 							  rs.getString("title"),
-							  rs.getString("content"));
-				list.add(faq);
+							  rs.getString("content"),
+							  rs.getString("category"));
+				list.add(board);
 			}
 			
 		} catch (SQLException e) {
@@ -60,7 +60,7 @@ public class FaqDAO {
 		return list;
 	}
 
-	public int faqInsert(Connection conn, Faq faq, String category) {
+	public int faqInsert(Connection conn, Board board) {
 		PreparedStatement pstmt = null;
 		int result = 0;
 		
@@ -69,9 +69,9 @@ public class FaqDAO {
 		try {
 			pstmt = conn.prepareStatement(query);
 			
-			pstmt.setString(1, category);
-			pstmt.setString(2, faq.getTitle());
-			pstmt.setString(3, faq.getContent());
+			pstmt.setString(1, board.getTitle());
+			pstmt.setString(2, board.getContent());
+			pstmt.setString(3, board.getCategory());
 			
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -105,10 +105,10 @@ public class FaqDAO {
 		return result;
 	}
 
-	public ArrayList<Faq> selectAdminList(Connection conn, int currentPage) {
+	public ArrayList<Board> selectAdminList(Connection conn, int currentPage) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		ArrayList<Faq> list = null;
+		ArrayList<Board> list = null;
 		
 		int posts = 10;
 		
@@ -123,14 +123,14 @@ public class FaqDAO {
 			pstmt.setInt(2, endRow);
 			
 			rs = pstmt.executeQuery();
-			list = new ArrayList<Faq>();
+			list = new ArrayList<Board>();
 			
 			while(rs.next()) {
-				Faq faq = new Faq(rs.getInt("post_no"),
-								  rs.getString("category"),
-								  rs.getString("title"));
+				Board board = new Board(rs.getInt("post_no"),
+								  rs.getString("title"),
+								  rs.getString("category"));
 				
-				list.add(faq);
+				list.add(board);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -141,10 +141,10 @@ public class FaqDAO {
 		return list;
 	}
 
-	public Faq selectAdminDetail(Connection conn, int num) {
+	public Board selectAdminDetail(Connection conn, int num) {
 		PreparedStatement pstmt = null; //글 번호를 쿼리문에 넣어야 하기 때문에 pstmt 사용
 		ResultSet rs = null;
-		Faq faq = null;
+		Board board = null;
 		
 		String query = prop.getProperty("selectAdminDetail");
 		
@@ -155,10 +155,10 @@ public class FaqDAO {
 			rs = pstmt.executeQuery();
 			
 			if(rs.next()) {
-				faq = new Faq(rs.getInt("post_no"),
-							  rs.getString("category"),
+				board = new Board(rs.getInt("post_no"),
 							  rs.getString("title"),
-							  rs.getString("content"));
+							  rs.getString("content"),
+							  rs.getString("category"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -166,11 +166,11 @@ public class FaqDAO {
 			close(rs);
 			close(pstmt);
 		}
-		return faq;
+		return board;
 		
 	}
 
-	public int updateFaq(Connection conn, Faq faq) {
+	public int updateFaq(Connection conn, Board board) {
 		PreparedStatement pstmt = null;
 		int result = 0;
 		
@@ -178,10 +178,10 @@ public class FaqDAO {
 		
 		try {
 			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, faq.getCategory());
-			pstmt.setString(2, faq.getTitle());
-			pstmt.setString(3, faq.getContent());
-			pstmt.setInt(4, faq.getPostNo());
+			pstmt.setString(1, board.getCategory());
+			pstmt.setString(2, board.getTitle());
+			pstmt.setString(3, board.getContent());
+			pstmt.setInt(4, board.getPostNo());
 			
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {

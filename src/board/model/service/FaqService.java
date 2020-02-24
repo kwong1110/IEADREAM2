@@ -1,32 +1,34 @@
 package board.model.service;
 
-import static common.JDBCTemplate.*;
+import static common.JDBCTemplate.close;
+import static common.JDBCTemplate.commit;
 import static common.JDBCTemplate.getConnection;
+import static common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 import java.util.ArrayList;
 
-import questionBoard.faq.model.dao.FaqDAO;
-import questionBoard.faq.model.vo.Faq;
+import board.model.dao.FaqDAO;
+import board.model.vo.Board;
 
 public class FaqService {
 
-	public ArrayList<Faq> selectList() {
+	public ArrayList<Board> selectList() {
 		Connection conn = getConnection();
 		
-		ArrayList<Faq> list = new FaqDAO().selectList(conn);
+		ArrayList<Board> list = new FaqDAO().selectList(conn);
 		
 		close(conn);
 		
 		return list;
 	}
 
-	public int faqInsert(Faq faq, String category) {
+	public int faqInsert(Board board) {
 		Connection conn = getConnection();
 		
 		FaqDAO dao = new FaqDAO();
 		
-		int result = dao.faqInsert(conn, faq, category);
+		int result = dao.faqInsert(conn, board);
 		
 		if(result > 0) {
 			commit(conn);
@@ -44,33 +46,33 @@ public class FaqService {
 		return result;
 	}
 
-	public ArrayList<Faq> selectAdminList(int currentPage) {
+	public ArrayList<Board> selectAdminList(int currentPage) {
 		Connection conn = getConnection();
-		ArrayList<Faq> list = new FaqDAO().selectAdminList(conn, currentPage);
+		ArrayList<Board> list = new FaqDAO().selectAdminList(conn, currentPage);
 		close(conn);
 		return list;
 	}
 
-	public Faq selectAdminDetail(String num) {
+	public Board selectAdminDetail(String num) {
 		Connection conn = getConnection();
 		FaqDAO dao = new FaqDAO();
-		Faq faq = null;
+		Board board = null;
 		
 		int number = Integer.parseInt(num);
-		faq = dao.selectAdminDetail(conn, number); //dao 에 conn객체와 num매개변수를 넘김
-		if(faq != null) {
+		board = dao.selectAdminDetail(conn, number); //dao 에 conn객체와 num매개변수를 넘김
+		if(board != null) {
 			commit(conn);
 		} else {
 			rollback(conn);
 		}
-		return faq;
+		return board;
 	}
 
-	public int updateFaq(Faq faq) {
+	public int updateFaq(Board board) {
 		Connection conn = getConnection();
 		FaqDAO dao = new FaqDAO();
 		
-		int result = dao.updateFaq(conn, faq);
+		int result = dao.updateFaq(conn, board);
 		
 		if(result > 0) {
 			commit(conn);

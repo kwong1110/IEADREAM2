@@ -67,15 +67,15 @@
 								</td>
 								<td>
 									<div>
-										<input type="text" size="10" class="cate" value="카테고리">
+										<input type="text" size="10" class="cate" value="카테고리" style="border: none;"readonly>
 									</div>
 								</td>
 								<td>
 									<select class="select" name="category">
 										<option value="결제" <%= selected[0] %>>결제</option>
 										<option value="파티" <%= selected[1] %>>파티</option>
-										<option value="회원" <%= selected[2] %>>서비스</option>
-										<option value="서비스" <%= selected[3] %>>회원/등급</option>
+										<option value="서비스" <%= selected[2] %>>서비스</option>
+										<option value="회원/등급" <%= selected[3] %>>회원/등급</option>
 										<option value="기타" <%= selected[4] %>>기타</option>
 									</select>
 								</td>
@@ -91,7 +91,7 @@
 						
 						<div class="btnBox" align="center">
 							<button type="submit" id="updateFaqBtn">수정</button>
-							<div onclick="location.href='javaxcript:history.go(-1);'" id="cancelBtn">취소</div>
+							<div onclick="location.href='javascript:history.go(-1);'" id="cancelBtn">취소</div>
 							<button type="button" onclick="deleteFaq();" id="deleteBtn">삭제</button>
 						</div>
 					</form>

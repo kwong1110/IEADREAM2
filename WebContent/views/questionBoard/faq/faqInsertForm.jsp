@@ -40,8 +40,8 @@
 									<select class="select" name="category">
 										<option value="결제">결제</option>
 										<option value="파티">파티</option>
-										<option value="회원">서비스</option>
-										<option value="서비스">회원/등급</option>
+										<option value="서비스">서비스</option>
+										<option value="회원/등급">회원/등급</option>
 										<option value="기타">기타</option>
 									</select>
 								</td>
