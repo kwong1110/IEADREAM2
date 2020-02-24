@@ -9,21 +9,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import account.model.vo.UserPrefer;
 import account.model.vo.Account;
-import account.model.vo.UserInfo;
 import account.model.service.UserService;
 
 /**
- * Servlet implementation class UpdateUserInfoServlet
+ * Servlet implementation class InsertUserPreferServlet
  */
-@WebServlet("/update.ui")
-public class UpdateUserInfoServlet extends HttpServlet {
+@WebServlet("/insert.up")
+public class InsertUserPreferServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UpdateUserInfoServlet() {
+    public InsertUserPreferServlet() {
         super();
     }
 
@@ -31,49 +31,62 @@ public class UpdateUserInfoServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		request.setCharacterEncoding("UTF-8");
-
+		request.setCharacterEncoding("UTF-8");		
 		
 		int userNo = ((Account)request.getSession().getAttribute("loginUser")).getUserNo();
-		String thumb = request.getParameter("thumb");
-		String hello = request.getParameter("hello");
-		int height = Integer.parseInt(request.getParameter("height"));
-		String shape = request.getParameter("shape");
-		String style = request.getParameter("style");
-		int region = Integer.parseInt(request.getParameter("region"));
-		String religion = request.getParameter("religion");
-		int scholar = Integer.parseInt(request.getParameter("scholar"));
-		String job = request.getParameter("job");
-		int drink = Integer.parseInt(request.getParameter("drink"));
-		int smoke = Integer.parseInt(request.getParameter("smoke"));
-		String[] interest = request.getParameterValues("interest");
 		
-		UserInfo ui = new UserInfo();
+		int height = Integer.parseInt(request.getParameter("height"));
+		int heightPri = Integer.parseInt(request.getParameter("heightPri"));
+		String shape = request.getParameter("shape");
+		int shapePri = Integer.parseInt(request.getParameter("shapePri"));
+		String style = request.getParameter("style");
+		int stylePri = Integer.parseInt(request.getParameter("stylePri"));
+		int age = Integer.parseInt(request.getParameter("age"));
+		int agePri = Integer.parseInt(request.getParameter("agePri"));
+		int region = Integer.parseInt(request.getParameter("region"));
+		int regionPri = Integer.parseInt(request.getParameter("regionPri"));
+		String religion = request.getParameter("religion");
+		int religionPri = Integer.parseInt(request.getParameter("religionPri"));
+		int scholar = Integer.parseInt(request.getParameter("scholar"));
+		int scholarPri = Integer.parseInt(request.getParameter("scholarPri"));
+		String job = request.getParameter("job");
+		int jobPri = Integer.parseInt(request.getParameter("jobPri"));
+		int drink = Integer.parseInt(request.getParameter("drink"));
+		int drinkPri = Integer.parseInt(request.getParameter("drinkPri"));
+		int smoke = Integer.parseInt(request.getParameter("smoke"));
+		int smokePri = Integer.parseInt(request.getParameter("smokePri"));
+		int interestPri = Integer.parseInt(request.getParameter("interestPri"));
 
-		ui.setUserNo(userNo);
-		ui.setThumb(thumb);
-		ui.setHello(hello);
-		ui.setHeight(height);
-		ui.setShape(shape);
-		ui.setStyle(style);
-		ui.setRegion(region);
-		ui.setReligion(religion);
-		ui.setScholar(scholar);
-		ui.setJob(job);
-		ui.setDrink(drink);
-		ui.setSmoke(smoke);
-		ui.setInterest(interest);
+		UserPrefer up = new UserPrefer();
 
-		UserService us= new UserService();
+		up.setUserNo(userNo);
+		up.setHeight(height);
+		up.setHeightPri(heightPri);
+		up.setShape(shape);
+		up.setShapePri(shapePri);
+		up.setStyle(style);
+		up.setStylePri(stylePri);
+		up.setAge(age);
+		up.setAgePri(agePri);
+		up.setRegion(region);
+		up.setRegionPri(regionPri);
+		up.setReligion(religion);
+		up.setReligionPri(religionPri);
+		up.setScholar(scholar);
+		up.setScholarPri(scholarPri);
+		up.setJob(job);
+		up.setJobPri(jobPri);
+		up.setDrink(drink);
+		up.setDrinkPri(drinkPri);
+		up.setSmoke(smoke);
+		up.setSmokePri(smokePri);
+		up.setInterestPri(interestPri);
 
-		int result1 = us.updateUserInfo(ui);
-		int result2 = us.deleteUserInterest(ui);
-		int result3 = us.insertUserInterest(ui);
+		int result = new UserService().insertUserPrefer(up);
 		
 		String page = null;
-		if(result1 > 0 && result2 > 0 && result3 > 0) {
-			page = "views/account/joinUserPreferenceForm.jsp";
+		if(result > 0) {
+			page = "";
 		} else {
 			page = "views/common/errorPage.jsp";
 			request.setAttribute("msg", "정보 수정에 실패하였습니다.");
@@ -81,7 +94,6 @@ public class UpdateUserInfoServlet extends HttpServlet {
 		
 		RequestDispatcher view = request.getRequestDispatcher(page);
 		view.forward(request, response);
-		
 	}
 
 	/**

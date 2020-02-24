@@ -9,21 +9,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import account.model.vo.Account;
 import account.model.vo.UserInfo;
+import account.model.vo.Account;
 import account.model.service.UserService;
 
 /**
- * Servlet implementation class UpdateUserInfoServlet
+ * Servlet implementation class InsertUserInfoServlet
  */
-@WebServlet("/update.ui")
-public class UpdateUserInfoServlet extends HttpServlet {
+@WebServlet("/insert.ui")
+public class InsertUserInfoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UpdateUserInfoServlet() {
+    public InsertUserInfoServlet() {
         super();
     }
 
@@ -33,7 +33,7 @@ public class UpdateUserInfoServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		request.setCharacterEncoding("UTF-8");
-
+		
 		
 		int userNo = ((Account)request.getSession().getAttribute("loginUser")).getUserNo();
 		String thumb = request.getParameter("thumb");
@@ -65,14 +65,10 @@ public class UpdateUserInfoServlet extends HttpServlet {
 		ui.setSmoke(smoke);
 		ui.setInterest(interest);
 
-		UserService us= new UserService();
-
-		int result1 = us.updateUserInfo(ui);
-		int result2 = us.deleteUserInterest(ui);
-		int result3 = us.insertUserInterest(ui);
+		int result = new UserService().insertUserInfo(ui);
 		
 		String page = null;
-		if(result1 > 0 && result2 > 0 && result3 > 0) {
+		if(result > 0) {
 			page = "views/account/joinUserPreferenceForm.jsp";
 		} else {
 			page = "views/common/errorPage.jsp";
