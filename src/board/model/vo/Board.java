@@ -84,23 +84,28 @@ public class Board {
 		this.hit = hit;
 	}
 	
-	// 베스트 커플
-	public Board(int postNo, int userNo, String title, Date createDate, int hit) {
+	// 베스트 커플1
+	public Board(int postNo, String userId, String title, Date createDate, int hit) {
 		super();
 		this.postNo = postNo;
-		this.userNo = userNo;
+		this.userId = userId;
 		this.title = title;
 		this.createDate = createDate;
 		this.hit = hit;
+	}
+	
+	// 베스트 커플2
+	public Board(int postNo, String title, String content) {
+		super();
+		this.postNo = postNo;
+		this.title = title;
+		this.content = content;
 	}
 
 
 	public int getPostNo() {
 		return postNo;
 	}
-
-
-	
 
 	public void setPostNo(int postNo) {
 		this.postNo = postNo;
@@ -184,6 +189,13 @@ public class Board {
 
 	public void setPartyNo(int partyNo) {
 		this.partyNo = partyNo;
+	}
+
+	@Override
+	public String toString() {
+		return "Board [boardNo=" + boardNo + ", postNo=" + postNo + ", userNo=" + userNo + ", userId=" + userId
+				+ ", title=" + title + ", content=" + content + ", createDate=" + createDate + ", hit=" + hit
+				+ ", deleted=" + deleted + ", category=" + category + ", partyNo=" + partyNo + "]";
 	}
 	
 	
