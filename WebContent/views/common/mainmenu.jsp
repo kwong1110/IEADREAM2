@@ -67,7 +67,7 @@
 						<li class="s-menu"><span onclick="goIeaDream();">이어드림</span>
 							<ul class="dept01">
 								<li id="nop"><a href="<%=request.getContextPath()%>/views/ieaDream/aboutCEO.jsp">CEO소개</a></li>
-								<li id="nop"><a href="">회사 소개</a></li>
+								<li id="nop"><a href="<%=request.getContextPath()%>/views/ieaDream/aboutUs.jsp">회사 소개</a></li>
 								<li id="nop"><a href="<%=request.getContextPath()%>/views/ieaDream/wayToCome.jsp">오시는 길</a></li>
 							</ul>
 						</li>

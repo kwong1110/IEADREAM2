@@ -98,4 +98,29 @@ public class FaqService {
 		return result;
 	}
 
+	public int getListSearchCount(String search) {
+		Connection conn = getConnection();
+		FaqDAO dao = new FaqDAO();
+		
+		int result = dao.getListSearchCount(conn, search);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+
+	public ArrayList<Board> selectSearchAdminList(int currentPage, String search) {
+		Connection conn = getConnection();
+		FaqDAO dao = new FaqDAO();
+		
+		ArrayList<Board> list = dao.selectSearchAdminList(conn, currentPage, search);
+
+		close(conn);
+		return list;
+	}
+
 }

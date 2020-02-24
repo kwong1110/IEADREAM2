@@ -3,7 +3,7 @@
 <%@ page import = "java.util.ArrayList, board.model.vo.*, common.*" %>
 <% 
 	ArrayList<Board> list = (ArrayList<Board>)request.getAttribute("list"); 
-	
+
 	PageInfo pi = (PageInfo)request.getAttribute("pi");
 	
 	int listCount = pi.getListCount();
@@ -62,43 +62,41 @@
 					</table>
 					
 					<div class="btnBox">
+						<button id="searchBtn" onclick="search();">검색</button><input name="searchCon" id="searchCon" type="text" width="30">
 						<button onclick="location.href='views/questionBoard/faq/faqInsertForm.jsp'" id="writeFaqBtn">글쓰기</button>
 					</div>
 					
-					<!-- 페이징 -->
-			 		<div class="pagingArea" align="center">
-						<%if(!list.isEmpty()) { %>
-							<!-- 이전 페이지 -->
-							<button onclick="location.href='<%= request.getContextPath() %>/adminList.faq?currentPage=<%= currentPage-1 %>'" id="beforeBtn">&lt;</button>
-							<script>
-								if(<%= currentPage %> <= 1) {
-									var before = $('#beforeBtn');
-									before.attr('disabled', 'true');
-								}
-							</script>
+					<!-- 일반 페이징 -->
+				 		<div class="pagingArea" align="center">
+							<%if(!list.isEmpty()) { %>
+								<!-- 이전 페이지 -->
+								<button onclick="location.href='<%= request.getContextPath() %>/adminList.faq?currentPage=<%= currentPage-1 %>'" id="beforeBtn">&lt;</button>
+								<script>
+									if(<%= currentPage %> <= 1) {
+										var before = $('#beforeBtn');
+										before.attr('disabled', 'true');
+									}
+								</script>
+								
+								<!-- 10개 페이지 목록 -->
+								<% for(int p = startPage; p <= endPage; p++) { 
+										if(p == currentPage) { %>
+											<button id="choosen" disabled><%= p %></button>
+								<%		} else { %>
+											<button id="numBtn" onclick="location.href='<%= request.getContextPath() %>/adminList.faq?currentPage=<%= p %>'"><%= p %></button>
+								<%		} %>
+								<% } %>
 							
-							<!-- 10개 페이지 목록 -->
-							<% for(int p = startPage; p <= endPage; p++) { 
-									if(p == currentPage) { %>
-										<button id="choosen" disabled><%= p %></button>
-							<%		} else { %>
-										<button id="numBtn" onclick="location.href='<%= request.getContextPath() %>/adminList.faq?currentPage=<%= p %>'"><%= p %></button>
-							<%		} %>
+								<!-- 다음 페이지 -->
+								<button onclick="location.href='<%= request.getContextPath() %>/adminList.faq?currentPage=<%= currentPage+1 %>'" id="nextBtn">&gt;</button>
+								<script>
+									if(<%= currentPage %> >= <%= maxPage %>) {
+										var next = $('#nextBtn');
+										next.attr('disabled', 'true');
+									}
+								</script>
 							<% } %>
-						
-							<!-- 다음 페이지 -->
-							<button onclick="location.href='<%= request.getContextPath() %>/adminList.faq?currentPage=<%= currentPage+1 %>'" id="nextBtn">&gt;</button>
-							<script>
-								if(<%= currentPage %> >= <%= maxPage %>) {
-									var next = $('#nextBtn');
-									next.attr('disabled', 'true');
-								}
-							</script>
-						
-						
-						<% } %>
-					</div>
-					
+						</div>
 				</div>
 			</div>
 		</div>
@@ -116,6 +114,12 @@
 				location.href='<%=request.getContextPath()%>/faqDetail.faq?no=' + num;
 			});
 		});
+		
+		function search() {
+			var searchWord = $('#searchCon').val()
+			
+			location.href='<%= request.getContextPath() %>/search.faq?searchWord='+searchWord;
+		}
 	</script>
 </body>
 </html>

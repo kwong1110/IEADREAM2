@@ -212,4 +212,62 @@ public class FaqDAO {
 		return result;
 	}
 
+	public int getListSearchCount(Connection conn, String search) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("getListSearchCount");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			
+			pstmt.setString(1, "%"+search+"%");
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public ArrayList<Board> selectSearchAdminList(Connection conn, int currentPage, String search) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ArrayList<Board> list = null;
+		
+		int posts = 10;
+		
+		int startRow = (currentPage -1) * posts + 1;
+		int endRow = startRow + posts -1;
+		
+		String query = prop.getProperty("selectSearchAdminList");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			pstmt.setString(3, "%"+search+"%");
+			
+			rs = pstmt.executeQuery();
+			list = new ArrayList<Board>();
+			
+			while(rs.next()) {
+				Board board = new Board(rs.getInt("post_no"),
+								  rs.getString("title"),
+								  rs.getString("category"));
+				
+				list.add(board);
+				System.out.println(rs.getInt("post_no"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return list;
+	}
+
 }

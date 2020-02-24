@@ -39,6 +39,15 @@
 		<%@ include file="../../views/common/mainmenu.jsp" %>
 	</div>
 	
+	<div class="outer">
+		<div class="wrapper">
+			<div class="main">
+				<div class="pageTitle">
+					<h1>회사 소개</h1>
+				</div>
+			</div>
+		</div>
+	</div>
 	<div class="container">
 
 		<section class="content">
