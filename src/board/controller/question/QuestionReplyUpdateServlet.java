@@ -1,4 +1,4 @@
-package myPage.admin.controller;
+package board.controller.question;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -10,21 +10,22 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
-import account.model.vo.Account;
-import myPage.admin.model.service.adminService;
+import board.model.service.QuestionService;
+import board.model.vo.Reply;
 
 /**
- * Servlet implementation class searchMemberServlet
+ * Servlet implementation class QuestionReplyUpdateServlet
  */
-@WebServlet("/search.mem")
-public class searchMemberServlet extends HttpServlet {
+@WebServlet("/updateReply.qu")
+public class QuestionReplyUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public searchMemberServlet() {
+    public QuestionReplyUpdateServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,30 +34,27 @@ public class searchMemberServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String answerContent  = request.getParameter("answerContent");
+		int postNo = Integer.parseInt(request.getParameter("postNo"));
 		
-		// 실패
+		Reply r = new Reply();
+		r.setAnswerContent(answerContent);
+		r.setPostNo(postNo);
 		
-	/*		
-			// sBtn(검색버튼 on/off), memGrade(회원등급), sCategory(검색카테고리), sWord(검색어) 받아오기
-		String memGrade = request.getParameter("memGrade");
-		String sCategory = request.getParameter("sCategory");
-		String sWord = request.getParameter("sWord");
-		
-		ArrayList<Account> search = new adminService().searchMmList(memGrade, sCategory, sWord);
-		for(Account s : search) {
-			System.out.println("search list 객체 확인 : " + s);
-		}
-		
+		ArrayList<Reply> list = new QuestionService().updateReply(r);
 		response.setContentType("application/json; charset=UTF-8");
+		//new Gson().toJson(list, response.getWriter());//list를 response.getWriter를 통해서 보내겠다.
 		
-		new Gson().toJson(search, response.getWriter());
-		
-	*/	
+		// 데이트 형식을 맞추기 위해 
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+		gson.toJson(list, response.getWriter());
 	}
+
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

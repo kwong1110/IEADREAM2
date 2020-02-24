@@ -1,6 +1,8 @@
 package myPage.admin.model.dao;
 
 import static common.JDBCTemplate.close;
+import static common.JDBCTemplate.commit;
+import static common.JDBCTemplate.rollback;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -55,11 +57,59 @@ public class adminDAO {
 		
 		return result;
 	}
+	
+	public int getSearchListCount(Connection conn, String memGrade, String sCategory, String sWord) {
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		int result = 0;
+		
+		String query = "";
+		switch(sCategory) {
+		case "USER_NAME": query = prop.getProperty("searchNameListCount"); break;
+		case "USER_NO": query = prop.getProperty("searchNoListCount"); break;
+		case "ID": query = prop.getProperty("searchIDListCount"); break;
+		}
+		
+		if(memGrade.equals("0,1,2")) {
+			switch(sCategory) {
+			case "USER_NAME": query = prop.getProperty("allSearchNameListCount"); break;
+			case "USER_NO": query = prop.getProperty("allSearchNoListCount"); break;
+			case "ID": query = prop.getProperty("allSearchIDListCount"); break;
+			}
+		}
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			
+			if(memGrade.equals("0,1,2")) {
+				pstmt.setString(1, "%" + sWord + "%");					
+			}else {
+				pstmt.setString(1, memGrade);
+				pstmt.setString(2, "%" + sWord + "%");
+			}
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				result = rset.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return result;		
+	}
 
 	public ArrayList<Account> selectMmList(Connection conn, int currentPage) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		ArrayList<Account> list = null;
+		
 		int posts = 10;		// 한 페이지에 보여질 게시글 개수 
 		
 		int startRow = (currentPage - 1) * posts + 1;
@@ -79,10 +129,10 @@ public class adminDAO {
 				Account a = new Account(rset.getInt("USER_NO"),
 										rset.getInt("GRADE"),
 										rset.getString("ID"),
-										rset.getString("GENDER").charAt(0),
+										rset.getString("GENDER"),
 										rset.getString("USER_NAME"),
 										rset.getString("PHONE"),
-										rset.getString("DELETED").charAt(0));
+										rset.getString("DELETED"));
 				list.add(a);	
 			}
 		} catch (SQLException e) {
@@ -124,6 +174,7 @@ public class adminDAO {
 		
 		try {
 			pstmt = conn.prepareStatement(query);
+			
 			if(!memGrade.equals("0,1,2")) {
 				pstmt.setString(1, memGrade);
 				pstmt.setString(2, "%" + sWord + "%");					
@@ -134,6 +185,7 @@ public class adminDAO {
 				pstmt.setInt(2, startRow);
 				pstmt.setInt(3, endRow);
 			}
+			
 			rset = pstmt.executeQuery();
 			search = new ArrayList<Account>();
 			
@@ -141,10 +193,10 @@ public class adminDAO {
 				Account a = new Account(rset.getInt("USER_NO"),
 										rset.getInt("GRADE"),
 										rset.getString("ID"),
-										rset.getString("GENDER").charAt(0),
+										rset.getString("GENDER"),
 										rset.getString("USER_NAME"),
 										rset.getString("PHONE"),
-										rset.getString("DELETED").charAt(0));
+										rset.getString("DELETED"));
 				search.add(a);	
 			}
 		} catch (SQLException e) {
@@ -157,5 +209,33 @@ public class adminDAO {
 		return search;
 	}
 
-	
+	public int updateGrade(Connection conn, String checkCategory, String[] userNo) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("updateGrade");
+		
+		try {
+			for(int i = 0; i < userNo.length; i++) {
+				pstmt = conn.prepareStatement(query);
+				pstmt.setString(1, checkCategory);
+				pstmt.setString(2, userNo[i]);
+				
+				result = pstmt.executeUpdate();
+				
+				if(result > 0) {
+					commit(conn);
+				} else {
+					rollback(conn);
+					break;
+				}
+			}			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}	
 }

@@ -1,10 +1,22 @@
 <%@page import="oracle.net.aso.a"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="questionBoard.question.model.vo.*, account.model.vo.*, java.util.ArrayList"%>
+    pageEncoding="UTF-8" import="board.model.vo.*, account.model.vo.*, java.util.ArrayList"%>
 <%
-	Question q = (Question)request.getAttribute("question");
+	Board b = (Board)request.getAttribute("board");
+	Reply r = (Reply)request.getAttribute("reply");
+	
 	Account a = (Account)request.getAttribute("account");
 	String userId = (String)request.getAttribute("userId");
+	
+	String category = b.getCategory();
+	int categoryInt = 0;
+	switch(category){
+	case "결제" : categoryInt = 1; break;
+	case "파티" : categoryInt = 2; break;
+	case "서비스" : categoryInt = 3; break;
+	case "회원/등급" : categoryInt = 4; break;
+	case "기타" : categoryInt = 5; break;
+	}
 %>
 <!DOCTYPE html>
 <html>
@@ -64,26 +76,26 @@
 								<tr>
 									<th width=10%>제목</th>
 									<td width=30%>
-										<input type ="hidden" value ="<%= q.getPostNo() %>" name = "postNo">
-										<input type="hidden" id="title" name = "title" value="<%= q.getTitle() %>"><%= q.getTitle() %>							
+										<input type ="hidden" value ="<%= b.getPostNo() %>" name = "postNo">
+										<input type="hidden" id="title" name = "title" value="<%= b.getTitle() %>"><%= b.getTitle() %>							
 									</td>
 									<% if(loginUser.getGrade() == 0) {%>
 									<th>작성자</th>
 									<td>
-										<%= userId %>
+										<%= b.getUserId() %>
 									</td>
 									<% } %>
 									<th width=20% id="category">카테고리</th>
 									<td>
-										<%= q.getCategory() %>
-										<input type="hidden" value="<%= q.getCategory() %>" name="category">
+										<%= category %>
+										<input type="hidden" value="<%= categoryInt %>" name="category">
 									</td>
 								</tr>
 							</thead>
 							<tbody>
 								<tr>
 									<td colspan="4">
-										<textarea rows="15" cols="60" name="content" style="resize:none; width: 100%; height: 30%;"  readonly ><%= q.getContent() %></textarea>
+										<textarea rows="15" cols="60" name="content" style="resize:none; width: 100%; height: 30%;"  readonly ><%= b.getContent() %></textarea>
 									</td>
 								</tr>
 							</tbody>
@@ -94,17 +106,12 @@
 								<tr>
 									<th id="manager" rowspan ="1">관리자</th>
 									<td id="Mcommand" rowspan = "3" colspan="4" align= center>
-										<% if(q.getAnswerContent() != null) { %>
-											<input type="text" name = "answerContent" value ="<%= q.getAnswerContent() %>">
+										<% if(r.getAnswerContent() != null) { %>
+											<input type="text" name = "answerContent" value ="<%= r.getAnswerContent() %>">
 										<% } else { %>
 											관리자가 아직 답변을 달지 않았습니다.
 										<% } %>
 									</td>
-									<% if(loginUser.getGrade() == 0){ %> 
-									<td><input type="button"  id="updateBtn" class="addReply" value="등록"></td>
-									<td><input type="button" onclick="location.href='<%= request.getContextPath() %>/list.qu?userNo=<%= loginUser.getUserNo()%>'" id="menuBtn" value="수정" ></td>
-									<td><input type="button" onclick="deleteBoard();" id="deleteBtn" value="삭제"></td>
-								<% } %> 
 								</tr>
 							</table>
 						</div>
@@ -129,29 +136,6 @@
 			}
 		}
 		
-	<%-- 	 $('#addReply').click(function(){
-			var postNo = <%= q.getPostNo() %>;
-			var answerContent = $('#Mcommand').val();
-			$.ajax({
-				url: '<%= request.getContextPath() %>/insertReply.qu',
-				type: 'post',
-				data: {postNo: postNo, content:content},
-				success: function(data){
-					$replyTable = $('#replyTable');
-					
-					for(var key in data){
-					var $tr= $('<tr>');
-					var $writerTd = $('<td>').text('관리자');
-					var $contentTd = $('<td>').text(data[key].answerContent);
-					var $dateTd = $('<td>').text(data[key].answerDate);
-					}
-					$tr.append($writerTd);
-					$tr.append($contentTd);
-					$tr.append($dateTd);
-					$replyTable.append($tr);
-				}
-			});
-		 }); --%>
 	</script>
 </body>
 </html>

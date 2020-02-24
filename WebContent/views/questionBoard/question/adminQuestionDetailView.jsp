@@ -1,10 +1,10 @@
 <%@page import="oracle.net.aso.a"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="questionBoard.question.model.vo.*, account.model.vo.*, java.util.ArrayList"%>
+    pageEncoding="UTF-8" import="board.model.vo.*, account.model.vo.*, java.util.ArrayList"%>
 <%
-	Question q = (Question)request.getAttribute("question");
-	Account a = (Account)request.getAttribute("account");
-	String userId = (String)request.getAttribute("userId");
+	Board b = (Board)request.getAttribute("board");
+	Reply r = (Reply)request.getAttribute("reply");
+	//String userId = (String)request.getAttribute("userId");
 %>
 <!DOCTYPE html>
 <html>
@@ -64,26 +64,26 @@
 								<tr>
 									<th width=10%>제목</th>
 									<td width=30%>
-										<input type ="hidden" value ="<%= q.getPostNo() %>" name = "postNo">
-										<input type="hidden" id="title" name = "title" value="<%= q.getTitle() %>"><%= q.getTitle() %>							
+										<input type ="hidden" value ="<%= b.getPostNo() %>" name = "postNo">
+										<input type="hidden" id="title" name = "title" value="<%= b.getTitle() %>"><%= b.getTitle() %>							
 									</td>
 									<% if(loginUser.getGrade() == 0) {%>
 									<th>작성자</th>
 									<td>
-										<%= userId %>
+										<%= b.getUserId() %>
 									</td>
 									<% } %>
 									<th width=20% id="category">카테고리</th>
 									<td>
-										<%= q.getCategory() %>
-										<input type="hidden" value="<%= q.getCategory() %>" name="category">
+										<%= b.getCategory() %>
+										<input type="hidden" value="<%= b.getCategory() %>" name="category">
 									</td>
 								</tr>
 							</thead>
 							<tbody>
 								<tr>
 									<td colspan="4">
-										<textarea rows="15" cols="60" name="content" style="resize:none; width: 100%; height: 30%;"  readonly ><%= q.getContent() %></textarea>
+										<textarea rows="15" cols="60" name="content" style="resize:none; width: 100%; height: 30%;"  readonly ><%= b.getContent() %></textarea>
 									</td>
 								</tr>
 							</tbody>
@@ -93,22 +93,31 @@
 							<table id="replyTable">
 								<tr>
 									<th id="manager" rowspan ="1">관리자</th>
-									
-										<% if(q.getAnswerContent() != null) { %>
+										<% if(r.getAnswerContent() == null) { %>
 										<td id="Mcommand" rowspan = "3" colspan="4" align= center>
-											<textarea name = "answerContent" readonly><%= q.getAnswerContent() %></textarea>
-											<%-- <input type="text" name = "answerContent" readonly value ="<%= q.getAnswerContent() %>"> --%>
+											<textarea id="insertReply" placeholder="답변을 남겨주세요."></textarea>
 										</td>
 										<% } else { %>
 										<td id="Mcommand" rowspan = "3" colspan="4" align= center>
-											<textarea id="insertReply" placeholder="답변을 남겨주세요."><%= q.getAnswerContent() %></textarea>
+											<textarea id="reply" name ="answerContent" readonly><%= r.getAnswerContent() %></textarea>
 										<% } %>
+										
+										<%-- <% if(r.getAnswerContent() != null) { %>
+										<td id="Mcommand" rowspan = "3" colspan="4" align= center>
+											<textarea name = "answerContent" readonly><%= r.getAnswerContent() %></textarea>
+											<input type="text" name = "answerContent" readonly value ="<%= q.getAnswerContent() %>">
+										</td>
+										<% } else { %>
+										<td id="Mcommand" rowspan = "3" colspan="4" align= center>
+											<textarea id="insertReply" placeholder="답변을 남겨주세요."><%= r.getAnswerContent() %></textarea>
+										<% } %> --%>
 										</td>
 									<td><input type="button" id="insertBtn" class="addReply" value="등록"></td>
-									<td><input type="button" id="updateBtn" value="수정" ></td>
+									<td><input type="button" id="updateBtn" class="addReply" value="수정" ></td>
 									<td><input type="button" onclick="deleteReply();" id="deleteBtn" value="삭제"></td>
 								</tr>
 							</table>
+							<input type="button" onclick="location.href='<%= request.getContextPath() %>/Mlist.qu?'" id="menuBtn" value="메뉴로" >
 						</div>
 					</form>
 				 </div>
@@ -125,9 +134,31 @@
 			}
 		}
 
-		
+			$('#updateBtn').click(function(){
+				$('#reply').removeAttr("readonly");
+				var postNo = <%= b.getPostNo() %>;
+				var answerContent = $('#insertReply').val();
+				$.ajax({
+					url: '<%= request.getContextPath() %>/insertReply.qu',
+					type: 'post',
+					data: {postNo: postNo, answerContent:answerContent},
+					success: function(data){
+						$replyTable = $('#replyTable');
+						
+						for(var key in data){
+						var $tr= $('<tr>');
+						var $writerTd = $('<td>').text('관리자');
+						var $contentTd = $('<td>').text(data[key].answerContent);
+						var $dateTd = $('<td>').text(data[key].answerDate);
+						}
+					
+					}
+				}); 
+			   });
+			
+			
 		   $('.addReply').click(function(){
-			var postNo = <%= q.getPostNo() %>;
+			var postNo = <%= b.getPostNo() %>;
 			var answerContent = $('#insertReply').val();
 			$.ajax({
 				url: '<%= request.getContextPath() %>/insertReply.qu',
@@ -146,6 +177,28 @@
 				}
 			}); 
 		   });
+		   
+	<%-- 	   $('.updateReply').click(function(){
+				var postNo = <%= b.getPostNo() %>;
+				var answerContent = $('#updateReply').val();
+				$.ajax({
+					url: '<%= request.getContextPath() %>/updateReply.qu',
+					type: 'post',
+					data: {postNo: postNo, answerContent:answerContent},
+					success: function(data){
+						$replyTable = $('#replyTable');
+						
+						for(var key in data){
+						var $tr= $('<tr>');
+						var $writerTd = $('<td>').text('관리자');
+						var $contentTd = $('<td>').text(data[key].answerContent);
+						var $dateTd = $('<td>').text(data[key].answerDate);
+						}
+					
+					}
+				}); 
+			   }); --%>
+			   
 	</script>
 </body>
 </html>
