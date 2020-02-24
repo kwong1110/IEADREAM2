@@ -1,4 +1,4 @@
-package board.controller.faq;
+package myPage.user.controller;
 
 import java.io.IOException;
 
@@ -8,21 +8,21 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import board.model.service.FaqService;
-import board.model.vo.Board;
+import account.model.vo.Account;
 
 /**
- * Servlet implementation class faqAdminUpdateServlet
+ * Servlet implementation class checkPwdforDelete
  */
-@WebServlet("/faqUpdate.faq")
-public class faqAdminUpdateServlet extends HttpServlet {
+@WebServlet("/checkPwdForDelete.mp")
+public class checkPwdforDelete extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public faqAdminUpdateServlet() {
+    public checkPwdforDelete() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,26 +31,19 @@ public class faqAdminUpdateServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");
-		int postNo = Integer.parseInt(request.getParameter("postNo"));
-		String category = request.getParameter("category");
-		String title = request.getParameter("title");
-		String content = request.getParameter("con");
+		HttpSession session = request.getSession();
 		
-		Board board = new Board();
-		board.setPostNo(postNo);
-		board.setCategory(category);
-		board.setTitle(title);
-		board.setContent(content);
-		
-		int result = new FaqService().updateFaq(board);
+		String id = ((Account)session.getAttribute("loginUser")).getId();
+		String myPass = ((Account)session.getAttribute("loginUser")).getPassword();
+		String chkPass = request.getParameter("password");
 		
 		String page = null;
-		if(result > 0) {
-			page = "/adminList.faq";
-		} else {
+		if(myPass.equals(chkPass)) { /* 입력한 password와 내 password가 일치하면 */
+			page = "views/myPage/user/checkDelete.jsp";
+			request.setAttribute("id", id);
+		} else { /* 일치하지 않으면 */
 			page = "views/common/errorPage.jsp";
-			request.setAttribute("msg", "FAQ 수정에 실패하였습니다.");
+			request.setAttribute("msg", "잘못된 비밀번호입니다.");
 		}
 		RequestDispatcher view = request.getRequestDispatcher(page);
 		view.forward(request, response);

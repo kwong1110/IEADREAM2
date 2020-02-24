@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import questionBoard.faq.model.service.FaqService;
-import questionBoard.faq.model.vo.Faq;
+import board.model.service.FaqService;
+import board.model.vo.Board;
 
 /**
  * Servlet implementation class faqInsertFormServlet
@@ -31,18 +31,18 @@ public class faqInsertFormServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");
+		//request.setCharacterEncoding("utf-8");
 		
-		String category = request.getParameter("category");
 		String title = request.getParameter("title");
+		String category = request.getParameter("category");
 		String content = request.getParameter("con");
 		
-		Faq faq = new Faq();
-		faq.setCategory(category);
-		faq.setTitle(title);
-		faq.setContent(content);
+		Board board = new Board();
+		board.setCategory(category);
+		board.setTitle(title);
+		board.setContent(content);
 		
-		int result = new FaqService().faqInsert(faq, category);
+		int result = new FaqService().faqInsert(board);
 		
 		if(result > 0) {
 			response.sendRedirect("adminList.faq");

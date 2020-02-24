@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import questionBoard.faq.model.service.FaqService;
-import questionBoard.faq.model.vo.Faq;
+import board.model.service.FaqService;
+import board.model.vo.Board;
 
 /**
  * Servlet implementation class FaqListServlet
@@ -34,7 +34,7 @@ public class FaqListServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		FaqService service = new FaqService();
 		
-		ArrayList<Faq> list = service.selectList(); 
+		ArrayList<Board> list = service.selectList(); 
 		/* 1페이지만으로 구성되어있기 때문에 매개변수를 넣을 필요 없이 값을 담아옴 */
 		
 		String page = null;

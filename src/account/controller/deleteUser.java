@@ -1,4 +1,4 @@
-package board.controller.faq;
+package account.controller;
 
 import java.io.IOException;
 
@@ -9,20 +9,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import board.model.service.FaqService;
-import board.model.vo.Board;
+import myPage.user.model.service.userService;
 
 /**
- * Servlet implementation class faqAdminUpdateServlet
+ * Servlet implementation class deleteUser
  */
-@WebServlet("/faqUpdate.faq")
-public class faqAdminUpdateServlet extends HttpServlet {
+@WebServlet("/delete.ac")
+public class deleteUser extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public faqAdminUpdateServlet() {
+    public deleteUser() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,26 +30,17 @@ public class faqAdminUpdateServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");
-		int postNo = Integer.parseInt(request.getParameter("postNo"));
-		String category = request.getParameter("category");
-		String title = request.getParameter("title");
-		String content = request.getParameter("con");
+		String id = request.getParameter("id");
 		
-		Board board = new Board();
-		board.setPostNo(postNo);
-		board.setCategory(category);
-		board.setTitle(title);
-		board.setContent(content);
-		
-		int result = new FaqService().updateFaq(board);
+		int result = new userService().deleteAccount(id);
 		
 		String page = null;
 		if(result > 0) {
-			page = "/adminList.faq";
+			page = "";
+			request.setAttribute("msg", "정상적으로 탈퇴되었습니다.");
 		} else {
 			page = "views/common/errorPage.jsp";
-			request.setAttribute("msg", "FAQ 수정에 실패하였습니다.");
+			request.setAttribute("msg", "탈퇴에 실패했습니다.");
 		}
 		RequestDispatcher view = request.getRequestDispatcher(page);
 		view.forward(request, response);

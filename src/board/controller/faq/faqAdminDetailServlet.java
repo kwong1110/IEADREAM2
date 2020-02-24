@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import questionBoard.faq.model.service.FaqService;
-import questionBoard.faq.model.vo.Faq;
+import board.model.service.FaqService;
+import board.model.vo.Board;
 
 /**
  * Servlet implementation class faqAdminDetailServlet
@@ -32,12 +32,12 @@ public class faqAdminDetailServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String num = request.getParameter("no"); // list에서 num에 게시글 번호를 받아옴
-		Faq faq = new FaqService().selectAdminDetail(num); // 글 번호를 매개변수로 불러올 faq 객체 저장
+		Board board  = new FaqService().selectAdminDetail(num); // 글 번호를 매개변수로 불러올 faq 객체 저장
 		
 		String page = null;
-		if(faq != null) {
+		if(board != null) {
 			page = "views/questionBoard/faq/faqAdminUpdateForm.jsp";
-			request.setAttribute("faq", faq);
+			request.setAttribute("board", board);
 		} else {
 			page = "views/common/errorPage.jsp";
 			request.setAttribute("msg", "게시글 상세보기에 실패하였습니다.");
