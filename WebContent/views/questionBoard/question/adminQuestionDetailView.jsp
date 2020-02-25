@@ -11,7 +11,20 @@
 <head>
 <meta charset="UTF-8">
 <title>문의게시판</title>
+
 <style>
+
+	.outer{
+		width: 800px; height: 500px; background: rgba(255, 255, 255, 0.4); border: 5px solid white;
+		margin-left: auto; margin-right: auto; margin-top: 50px;
+	}
+	#listArea{text-align: center;}
+	.tableArea{width:650px;	height:350px; margin-left:auto;	margin-right:auto;}
+	th{border-bottom: 1px solid grey;}
+	.pagingArea button{border-radius: 15px; background: #D5D5D5;}
+	.searchArea{margin-right: 50px;}
+	.searchArea button{background: #D1B2FF; border-radius: 5px; color: white; width: 80px; heigth: 25px; text-align: center;}
+	button:hover{cursor: pointer;}
 	th, td, thead{
 		    border: 1px solid gray;
    	 border-radius: 10px;
@@ -29,7 +42,7 @@
 	#manager{
 		background: rgb(123, 164, 213);
 	}
-	#updateBtn{
+	#updateBtn, #insertBtn{
 		border-radius: 10px;
 		background:  rgb(123, 164, 213);
 		padding: 10px;
@@ -45,6 +58,7 @@
 		color: white;
 		font-size: 15px;
 		text-align: center;
+		border:none;
 	}
 
 </style>
@@ -73,7 +87,7 @@
 										<%= b.getUserId() %>
 									</td>
 									<% } %>
-									<th width=20% id="category">카테고리</th>
+									<th width=20% id="category" >카테고리</th>
 									<td>
 										<%= b.getCategory() %>
 										<input type="hidden" value="<%= b.getCategory() %>" name="category">
@@ -92,14 +106,14 @@
 						<div id="replyArea">
 							<table id="replyTable">
 								<tr>
-									<th id="manager" rowspan ="1">관리자</th>
+									<th id="manager" rowspan ="1" colspan="2">관리자</th>
 										<% if(r.getAnswerContent() == null) { %>
 										<td id="Mcommand" rowspan = "3" colspan="4" align= center>
-											<textarea id="insertReply" placeholder="답변을 남겨주세요."></textarea>
+											<textarea id="insertReply"style="resize:none; width: 300px; height: 40%;" placeholder="답변을 남겨주세요."></textarea>
 										</td>
 										<% } else { %>
 										<td id="Mcommand" rowspan = "3" colspan="4" align= center>
-											<textarea id="reply" name ="answerContent" readonly><%= r.getAnswerContent() %></textarea>
+											<textarea id="reply" name ="answerContent"style="resize:none; width: 300px; height: 40%;" readonly><%= r.getAnswerContent() %></textarea>
 										<% } %>
 										
 										<%-- <% if(r.getAnswerContent() != null) { %>
@@ -113,7 +127,6 @@
 										<% } %> --%>
 										</td>
 									<td><input type="button" id="insertBtn" class="addReply" value="등록"></td>
-									<td><input type="button" id="updateBtn" class="addReply" value="수정" ></td>
 									<td><input type="button" onclick="deleteReply();" id="deleteBtn" value="삭제"></td>
 								</tr>
 							</table>

@@ -97,7 +97,22 @@ public class Board {
 		this.createDate = createDate;
 		this.hit = hit;
 	}
-	
+
+	// 커플 후기
+	public Board(int boardNo, int postNo, int userNo, String userId, String title, String content, Date createDate,
+			int hit, String deleted) {
+		super();
+		this.boardNo = boardNo;
+		this.postNo = postNo;
+		this.userNo = userNo;
+		this.userId = userId;
+		this.title = title;
+		this.content = content;
+		this.createDate = createDate;
+		this.hit = hit;
+		this.deleted = deleted;
+	}
+
 	// 베스트 커플1
 	public Board(int postNo, String userId, String title, Date createDate, int hit) {
 		super();
@@ -115,7 +130,6 @@ public class Board {
 		this.title = title;
 		this.content = content;
 	}
-
 
 	public int getPostNo() {
 		return postNo;

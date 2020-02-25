@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import board.model.vo.Board;
-import board.model.vo.Question;
 import board.model.vo.Reply;
 
 
@@ -113,7 +112,7 @@ public class QuestionDAO {
 		  
 		  try {
 			  pstmt = conn.prepareStatement(query);
-			  pstmt.setString(1, userNo);
+			  pstmt.setInt(1, startRow);
 			  pstmt.setInt(2, endRow);
 			  pstmt.setString(3, userNo);
 			  rset = pstmt.executeQuery();
@@ -208,7 +207,7 @@ public class QuestionDAO {
 			try {
 				pstmt = conn.prepareStatement(query);
 				pstmt.setInt(1, postNo);
-				pstmt.setString(1, userNo);
+				pstmt.setString(2, userNo);
 				result = pstmt.executeUpdate();
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -236,8 +235,11 @@ public class QuestionDAO {
 			pstmt.setString(3, board.getContent());
 			pstmt.setString(4, board.getCategory());
 			
+			
 			result1 = pstmt.executeUpdate();
-			System.out.println("result1 :  " + result1);
+			
+			
+			System.out.println("DAO result1 :  " + result1);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -251,13 +253,13 @@ public class QuestionDAO {
 		PreparedStatement pstmt = null;
 		int result2 = 0;
 		String query = prop.getProperty("insertQuestionQ");
+		
 		try {
 			pstmt = conn.prepareStatement(query);
-			//pstmt.setInt(1, num);
 			pstmt.setInt(1, board.getUserNo());
 			
 			result2 = pstmt.executeUpdate();
-			System.out.println("result2 :  " + result2);
+			System.out.println("DAO result2 :  " + result2);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -267,7 +269,7 @@ public class QuestionDAO {
 		return result2;
 	}
 
-	public int updateQuestion(Connection conn,  Board board, int category) {
+	public int updateQuestion(Connection conn,  Board board) {
 			PreparedStatement pstmt = null;
 			int result = 0;
 			
@@ -277,7 +279,7 @@ public class QuestionDAO {
 				pstmt = conn.prepareStatement(query);
 				pstmt.setString(1, board.getTitle());
 				pstmt.setString(2, board.getContent());
-				pstmt.setInt(3, category);
+				pstmt.setString(3, board.getCategory());
 				pstmt.setInt(4, board.getPostNo());
 				
 				result = pstmt.executeUpdate();
@@ -478,6 +480,7 @@ public class QuestionDAO {
 		}
 		return board;
 	}
+	/*
 	// 사용자 디테일 뷰
 		public Board userSelectQuestion(Connection conn, int post) {
 			PreparedStatement pstmt = null;
@@ -513,7 +516,7 @@ public class QuestionDAO {
 			}
 			return board;
 		}
-
+*/
 
 	public Reply selectRQuestion(Connection conn, int post) {
 		PreparedStatement pstmt = null;
@@ -580,6 +583,90 @@ public class QuestionDAO {
 		}
 		return result;
 	}
+	
+	//검색
+	
+	public int getListSearchCount(Connection conn, String search, String searchCategory) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = prop.getProperty("getListSearchCount");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, "%"+search+"%");
+			pstmt.setString(2, "%"+searchCategory+"%");
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		
+		return result;
+	}
+
+	public ArrayList<Board> selectSearchList(Connection conn, int currentPage, String search, String searchCategory) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ArrayList<Board> list = null;
+		
+		int posts = 10;
+		
+		int startRow = (currentPage -1) * posts + 1;
+		int endRow = startRow + posts -1;
+		String query = prop.getProperty("selectSearchList");
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			pstmt.setString(3, "%"+search+"%");
+			pstmt.setString(4, "%"+searchCategory+"%");
+			
+			rs = pstmt.executeQuery();
+		
+
+			while(rs.next()) {
+				 list.add(new Board(
+						 rs.getInt("BOARD_NO"),
+						 rs.getInt("POST_NO"), 
+						 rs.getInt("USER_NO"),
+						 rs.getString("ID"), 
+						 rs.getString("title"),
+						 rs.getString("CONTENT"),
+						 rs.getDate("hit"),
+						 rs.getString("DELETED"),
+						 rs.getString("category")));
+					System.out.println(list);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+	
+		return list;
+	}
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	//수정
 	/*public ArrayList<Reply> updateReplyList(Connection conn, int postNo) {
 		PreparedStatement pstmt = null;

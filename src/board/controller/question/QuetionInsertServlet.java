@@ -49,15 +49,17 @@ public class QuetionInsertServlet extends HttpServlet {
 		
 		System.out.println("insertservlet: " + board);
 		/* int result = new QuestionService().insertQuestion(question, category); */
+		
 		int resultb = new QuestionService().insertQuestion1(board);
 		System.out.println("servlet resultb : " + resultb);
-		int resultq = new QuestionService().insertQuestion2(board);
-		System.out.println("servlet resultq : " + resultq);
+		//int resultq = new QuestionService().insertQuestion2(board);
+		//System.out.println("servlet resultq : " + resultq);
 		
 		
-		int result = resultb * resultq; 
-		System.out.println("servlet result : " +result);
-		if (result > 0) {
+		//int result = resultb * resultq; 
+		//System.out.println("servlet result : " +result);
+		//if (resultb > 0 && resultq >0) {
+		if (resultb > 0 ) {
 			response.sendRedirect("list.qu?userNo="+userNo);
 		} else {
 			request.setAttribute("msg", "문의글 등록에 실패하였습니다.");
