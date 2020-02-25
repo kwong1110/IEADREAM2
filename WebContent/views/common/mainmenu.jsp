@@ -15,7 +15,7 @@
 <script type="text/javascript" src="<%= request.getContextPath() %>/js/jquery-3.4.1.min.js"></script>
 <style>
 	* {margin: 0; padding: 0; }
-	body{background:url('<%= request.getContextPath() %>/images/bg4.jpg') no-repeat center center fixed;
+	body{background:url('<%= request.getContextPath() %>/images/bgbgbg.jpg') no-repeat center center fixed;
 		background-size: cover;}
 	
 	.header {
@@ -192,6 +192,10 @@
 				alert(msg);
 			}
 		});
+		
+		function goIndex(){
+			location.href="<%= request.getContextPath()%>/views/common/mainmenu.jsp";
+		}
 				
 	</script>
 </body>
