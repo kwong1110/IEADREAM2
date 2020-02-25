@@ -4,58 +4,58 @@ import java.util.ArrayList;
 
 public class UserPrefer {
 
-	// PRI는 비중.
+	// Pri는 비중.
 	private int userNo;
 	private int height;		// 키
-	private int heightPRI;
+	private int heightPri;
 	private String shape;		// 체형
-	private int shapePRI;
+	private int shapePri;
 	private String style;		// 스타일
-	private int stylePRI;
+	private int stylePri;
 	private int age;			// 나이
-	private int agePRI;
+	private int agePri;
 	private int region;		// 거주지역
-	private int regionPRI;
+	private int regionPri;
 	private String religion;	// 종교
-	private int religionPRI;
+	private int religionPri;
 	private int scholar;		// 학력
-	private int scholarPRI;
+	private int scholarPri;
 	private String job;			// 직업
-	private int jobPRI;
+	private int jobPri;
 	private int drink;		// 음주
-	private int drinkPRI;
+	private int drinkPri;
 	private int smoke;		// 흡연
-	private int smokePRI;
-	private int interestPRI;	// 관심분야
+	private int smokePri;
+	private int interestPri;	// 관심분야
 	
 	public UserPrefer() {}
 
-	public UserPrefer(int userNo, int height, int heightPRI, String shape, int shapePRI, String style, int stylePRI,
-			int age, int agePRI, int region, int regionPRI, String religion, int religionPRI, int scholar,
-			int scholarPRI, String job, int jobPRI, int drink, int drinkPRI, int smoke, int smokePRI, int interestPRI) {
+	public UserPrefer(int userNo, int height, int heightPri, String shape, int shapePri, String style, int stylePri,
+			int age, int agePri, int region, int regionPri, String religion, int religionPri, int scholar,
+			int scholarPri, String job, int jobPri, int drink, int drinkPri, int smoke, int smokePri, int interestPri) {
 		super();
 		this.userNo = userNo;
 		this.height = height;
-		this.heightPRI = heightPRI;
+		this.heightPri = heightPri;
 		this.shape = shape;
-		this.shapePRI = shapePRI;
+		this.shapePri = shapePri;
 		this.style = style;
-		this.stylePRI = stylePRI;
+		this.stylePri = stylePri;
 		this.age = age;
-		this.agePRI = agePRI;
+		this.agePri = agePri;
 		this.region = region;
-		this.regionPRI = regionPRI;
+		this.regionPri = regionPri;
 		this.religion = religion;
-		this.religionPRI = religionPRI;
+		this.religionPri = religionPri;
 		this.scholar = scholar;
-		this.scholarPRI = scholarPRI;
+		this.scholarPri = scholarPri;
 		this.job = job;
-		this.jobPRI = jobPRI;
+		this.jobPri = jobPri;
 		this.drink = drink;
-		this.drinkPRI = drinkPRI;
+		this.drinkPri = drinkPri;
 		this.smoke = smoke;
-		this.smokePRI = smokePRI;
-		this.interestPRI = interestPRI;
+		this.smokePri = smokePri;
+		this.interestPri = interestPri;
 	}
 
 	public int getUserNo() {
@@ -74,12 +74,12 @@ public class UserPrefer {
 		this.height = height;
 	}
 
-	public int getHeightPRI() {
-		return heightPRI;
+	public int getHeightPri() {
+		return heightPri;
 	}
 
-	public void setHeightPRI(int heightPRI) {
-		this.heightPRI = heightPRI;
+	public void setHeightPri(int heightPri) {
+		this.heightPri = heightPri;
 	}
 
 	public String getShape() {
@@ -90,12 +90,12 @@ public class UserPrefer {
 		this.shape = shape;
 	}
 
-	public int getShapePRI() {
-		return shapePRI;
+	public int getShapePri() {
+		return shapePri;
 	}
 
-	public void setShapePRI(int shapePRI) {
-		this.shapePRI = shapePRI;
+	public void setShapePri(int shapePri) {
+		this.shapePri = shapePri;
 	}
 
 	public String getStyle() {
@@ -106,12 +106,12 @@ public class UserPrefer {
 		this.style = style;
 	}
 
-	public int getStylePRI() {
-		return stylePRI;
+	public int getStylePri() {
+		return stylePri;
 	}
 
-	public void setStylePRI(int stylePRI) {
-		this.stylePRI = stylePRI;
+	public void setStylePri(int stylePri) {
+		this.stylePri = stylePri;
 	}
 
 	public int getAge() {
@@ -122,12 +122,12 @@ public class UserPrefer {
 		this.age = age;
 	}
 
-	public int getAgePRI() {
-		return agePRI;
+	public int getAgePri() {
+		return agePri;
 	}
 
-	public void setAgePRI(int agePRI) {
-		this.agePRI = agePRI;
+	public void setAgePri(int agePri) {
+		this.agePri = agePri;
 	}
 
 	public int getRegion() {
@@ -138,12 +138,12 @@ public class UserPrefer {
 		this.region = region;
 	}
 
-	public int getRegionPRI() {
-		return regionPRI;
+	public int getRegionPri() {
+		return regionPri;
 	}
 
-	public void setRegionPRI(int regionPRI) {
-		this.regionPRI = regionPRI;
+	public void setRegionPri(int regionPri) {
+		this.regionPri = regionPri;
 	}
 
 	public String getReligion() {
@@ -154,12 +154,12 @@ public class UserPrefer {
 		this.religion = religion;
 	}
 
-	public int getReligionPRI() {
-		return religionPRI;
+	public int getReligionPri() {
+		return religionPri;
 	}
 
-	public void setReligionPRI(int religionPRI) {
-		this.religionPRI = religionPRI;
+	public void setReligionPri(int religionPri) {
+		this.religionPri = religionPri;
 	}
 
 	public int getScholar() {
@@ -170,12 +170,12 @@ public class UserPrefer {
 		this.scholar = scholar;
 	}
 
-	public int getScholarPRI() {
-		return scholarPRI;
+	public int getScholarPri() {
+		return scholarPri;
 	}
 
-	public void setScholarPRI(int scholarPRI) {
-		this.scholarPRI = scholarPRI;
+	public void setScholarPri(int scholarPri) {
+		this.scholarPri = scholarPri;
 	}
 
 	public String getJob() {
@@ -186,12 +186,12 @@ public class UserPrefer {
 		this.job = job;
 	}
 
-	public int getJobPRI() {
-		return jobPRI;
+	public int getJobPri() {
+		return jobPri;
 	}
 
-	public void setJobPRI(int jobPRI) {
-		this.jobPRI = jobPRI;
+	public void setJobPri(int jobPri) {
+		this.jobPri = jobPri;
 	}
 
 	public int getDrink() {
@@ -202,12 +202,12 @@ public class UserPrefer {
 		this.drink = drink;
 	}
 
-	public int getDrinkPRI() {
-		return drinkPRI;
+	public int getDrinkPri() {
+		return drinkPri;
 	}
 
-	public void setDrinkPRI(int drinkPRI) {
-		this.drinkPRI = drinkPRI;
+	public void setDrinkPri(int drinkPri) {
+		this.drinkPri = drinkPri;
 	}
 
 	public int getSmoke() {
@@ -218,20 +218,20 @@ public class UserPrefer {
 		this.smoke = smoke;
 	}
 
-	public int getSmokePRI() {
-		return smokePRI;
+	public int getSmokePri() {
+		return smokePri;
 	}
 
-	public void setSmokePRI(int smokePRI) {
-		this.smokePRI = smokePRI;
+	public void setSmokePri(int smokePri) {
+		this.smokePri = smokePri;
 	}
 
-	public int getInterestPRI() {
-		return interestPRI;
+	public int getInterestPri() {
+		return interestPri;
 	}
 
-	public void setInterestPRI(int interestPRI) {
-		this.interestPRI = interestPRI;
+	public void setInterestPri(int interestPri) {
+		this.interestPri = interestPri;
 	}
 
 	

@@ -17,8 +17,10 @@
 		width: 70%;
 		height: 600px;
 		border: 8px solid pink;
+		background: white;
 		margin-left: 23px;
 		margin-bottom: 20px;
+		font-family: "만화진흥원체";
 	}
 	
 	.subj{
@@ -72,63 +74,80 @@
 		margin-bottom: 1%;
 	}
 	
-	.submit{
-		width: 5%;
-		height: 30px;
+	button{
+		padding: 6px 9px 6px 9px;
 		background: pink;
 		color: white;
-		font-weight: bold;
 		border-radius: 10px;
-		margin-left: 35%;
+		font-weight: bold;
+		font-size: 15px;
+		font-family: "만화진흥원체";
+	    cursor: pointer;
 		margin-bottom: 30px;
+		text-align: center;
+	    display: inline-block;
+		text-shadow: 0 1px 1px rgba(0,0,0,.3);
+		box-shadow: 0 1px 2px rgba(0,0,0,.2);
 	}
+	
+	.btnBox{
+		margin-left: 33%;
+	}
+	
 </style>
 </head>
 <body>
+	<%@ include file="../../common/mainmenu.jsp" %>
 	<section>
-		<h1 class="title">이달의 베스트 커플</h1>
-		<form>
-			<div class="main">
-				<div class="subj">
-					<div id="subjtitle">제목</div>
-					<input type="text" id="subjbox">
-				</div>
-				
-				<div class="contn1">
-					<div class="contn1box">
-						<div class="label">
-							<label>남자 이름 : </label>
+		<div class="outer">
+			<div class="wrapper">
+				<h1 class="title">이달의 베스트 커플</h1>
+				<form action="<%= request.getContextPath() %>/insert.bc" method="post" encType="multipart/form-data">
+					<div class="main">
+						<div class="subj">
+							<div id="subjtitle">제목</div>
+							<input type="text" name="title" id="subjbox">
 						</div>
-						<input type="text" class="bx"><br>
 						
-						<div class="label">
-							<label>여자 이름 : </label>
+						<div class="contn1">
+							<div class="contn1box">
+								<div class="label">
+									<label>남자 이름 : </label>
+								</div>
+								<input type="text" name="mName" class="bx"><br>
+								
+								<div class="label">
+									<label>여자 이름 : </label>
+								</div>
+								<input type="text" name="fName" class="bx"><br>
+								
+								<div class="label">
+									<label>연애 기간 : </label>
+								</div>
+								<input type="number" name="dtPeriod" min="1" value="1" class="bx">&nbsp;일<br>
+								
+								<div class="label">
+									<label>즐겨하는 데이트 : </label>
+								</div>
+								<input type="text" name="fvDate" maxlength="12" placeholder="12자이내로 입력하세요.">
+							</div>
 						</div>
-						<input type="text" class="bx"><br>
 						
-						<div class="label">
-							<label>연애 기간 : </label>
-						</div>
-						<input type="number" min="1" value="1" class="bx">&nbsp;일<br>
+						<textarea class="contn2" name="content" placeholder="내용을 자유롭게 입력해주세요."></textarea>
 						
-						<div class="label">
-							<label>즐겨하는 데이트 : </label>
+						<div class="file">
+							<input type="file" name="photo1" multiple="multiple" id="file1"><br>
+							<input type="file" name="photo2" multiple="multiple">
 						</div>
-						<input type="text">
 					</div>
-				</div>
-				
-				<textarea class="contn2">내용을 자유롭게 입력해주세요.
-				</textarea>
-				
-				<div class="file">
-					<input type="file" id="file1"><br>
-					<input type="file">
-				</div>
+					
+					<div class="btnBox">
+						<button type="submit" class="submit">등록</button>
+						<button type="reset" onclick="location.href='<%= request.getContextPath() %>/list.bc'">취소</button>
+					</div>	
+				</form>
 			</div>
-		</form>	
-		
-		<button type="submit" class="submit">등록</button>
+		</div>
 	</section>
 </body>
 </html>

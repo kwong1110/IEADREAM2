@@ -213,23 +213,6 @@
             <section id="items">
               <table>
                 <tr class="itemBox">
-                  <td class="itemName" id="">나이(만)</td>
-                  <td>
-                    <label><input type="radio" name="height" value="-2">연하</label>
-                    <label><input type="radio" name="height" value="-1">1~3년 연하</label>
-                    <label><input type="radio" name="height" value="0">동갑</label>
-                    <label><input type="radio" name="height" value="1">1~3년 연상</label>
-                    <label><input type="radio" name="height" value="2">연상</label>
-                  </td>
-                  <td>
-                    <select class="itemPriority" name="중요도">
-                      <option value="중요">중요</option>
-                      <option value="보통" selected="selected">보통</option>
-                      <option value="무관">무관</option>
-                    </select>
-                  </td>
-                </tr>
-                <tr class="itemBox">
                   <td class="itemName" id="">키 (cm)</td>
                   <td>
                     <label><input type="radio" name="height" value="150">155이하</label>
@@ -242,27 +225,27 @@
                     <label><input type="radio" name="height" value="185">185 이상</label>
                   </td>
                   <td>
-                    <select class="itemPriority" name="중요도">
-                      <option value="중요">중요</option>
-                      <option value="보통" selected="selected">보통</option>
-                      <option value="무관">무관</option>
+                    <select class="itemPriority" name="heightPri">
+                      <option value="2">중요</option>
+                      <option value="1" selected="selected">보통</option>
+                      <option value="0">무관</option>
                     </select>
                   </td>
                 </tr>
                 <tr class="itemBox">
                   <td class="itemName" id="">체형</tdclass="itemName" id="">
                   <td>
-                    <label><input type="radio" name="body" value="slim">마름</label>
-                    <label><input type="radio" name="body" value="normal">보통</label>
-                    <label><input type="radio" name="body" value="muscular">근육질</label>
-                    <label><input type="radio" name="body" value="glamour">글래머</label>
-                    <label><input type="radio" name="body" value="chubby">통통</label>
+                    <label><input type="radio" name="shape" value="slim">마름</label>
+                    <label><input type="radio" name="shape" value="normal">보통</label>
+                    <label><input type="radio" name="shape" value="chubby">통통</label>
+                    <label><input type="radio" name="shape" value="muscular">근육질</label>
+                    <label><input type="radio" name="shape" value="glamour">글래머</label>
                   </td>
                   <td>
-                    <select class="itemPriority" name="중요도">
-                      <option value="중요">중요</option>
-                      <option value="보통" selected="selected">보통</option>
-                      <option value="무관">무관</option>
+                    <select class="itemPriority" name="shapePri">
+                      <option value="2">중요</option>
+                      <option value="1" selected="selected">보통</option>
+                      <option value="0">무관</option>
                     </select>
                   </td>
                 </tr>
@@ -277,10 +260,27 @@
                     <label><input type="radio" name="style" value="tough">터프한</label>
                   </td>
                   <td>
-                    <select class="itemPriority" name="중요도">
-                      <option value="중요">중요</option>
-                      <option value="보통" selected="selected">보통</option>
-                      <option value="무관">무관</option>
+                    <select class="itemPriority" name="stylePri">
+                      <option value="2">중요</option>
+                      <option value="1" selected="selected">보통</option>
+                      <option value="0">무관</option>
+                    </select>
+                  </td>
+                </tr>
+                <tr class="itemBox">
+                  <td class="itemName" id="">나이(만)</td>
+                  <td>
+                    <label><input type="radio" name="age" value="-2">연하</label>
+                    <label><input type="radio" name="age" value="-1">1~3년 연하</label>
+                    <label><input type="radio" name="age" value="0">동갑</label>
+                    <label><input type="radio" name="age" value="1">1~3년 연상</label>
+                    <label><input type="radio" name="age" value="2">연상</label>
+                  </td>
+                  <td>
+                    <select class="itemPriority" name="agePri">
+                      <option value="2">중요</option>
+                      <option value="1" selected="selected">보통</option>
+                      <option value="0">무관</option>
                     </select>
                   </td>
                 </tr>
@@ -294,10 +294,10 @@
                     <label><input type="radio" name="religion" value="etc">기타</label>
                   </td>
                   <td>
-                    <select class="itemPriority" name="중요도">
-                      <option value="중요">중요</option>
-                      <option value="보통" selected="selected">보통</option>
-                      <option value="무관">무관</option>
+                    <select class="itemPriority" name="religionPri">
+                      <option value="2">중요</option>
+                      <option value="1" selected="selected">보통</option>
+                      <option value="0">무관</option>
                     </select>
                   </td>
                 </tr>
@@ -310,10 +310,10 @@
                     <label><input type="radio" name="drink" value="0">안 마심</label>
                   </td>
                   <td>
-                    <select class="itemPriority" name="중요도">
-                      <option value="중요">중요</option>
-                      <option value="보통" selected="selected">보통</option>
-                      <option value="무관">무관</option>
+                    <select class="itemPriority" name="drinkPri">
+                      <option value="2">중요</option>
+                      <option value="1" selected="selected">보통</option>
+                      <option value="0">무관</option>
                     </select>
                   </td>
                 </tr>
@@ -324,10 +324,10 @@
                     <label><input type="radio" name="smoke" value="0">비흡연</label>
                   </td>
                   <td>
-                    <select class="itemPriority" name="중요도">
-                      <option value="중요">중요</option>
-                      <option value="보통" selected="selected">보통</option>
-                      <option value="무관">무관</option>
+                    <select class="itemPriority" name="smokePri">
+                      <option value="2">중요</option>
+                      <option value="1" selected="selected">보통</option>
+                      <option value="0">무관</option>
                     </select>
                   </td>
                 </tr>
@@ -344,10 +344,10 @@
                     <label><input type="radio" name="job" value="etc">기타</label>
                   </td>
                   <td>
-                    <select class="itemPriority" name="중요도">
-                      <option value="중요">중요</option>
-                      <option value="보통" selected="selected">보통</option>
-                      <option value="무관">무관</option>
+                    <select class="itemPriority" name="jobPri">
+                      <option value="2">중요</option>
+                      <option value="1" selected="selected">보통</option>
+                      <option value="0">무관</option>
                     </select>
                   </td>
                 </tr>
@@ -361,70 +361,70 @@
                     <label><input type="radio" name="scholar" value="8">박사</label>
                   </td>
                   <td>
-                    <select class="itemPriority" name="중요도">
-                      <option value="중요">중요</option>
-                      <option value="보통" selected="selected">보통</option>
-                      <option value="무관">무관</option>
+                    <select class="itemPriority" name="scholarPri">
+                      <option value="2">중요</option>
+                      <option value="1" selected="selected">보통</option>
+                      <option value="0">무관</option>
                     </select>
                   </td>
                 </tr>
                 <tr class="itemBox">
                   <td class="itemName" id="">거주 지역</td>
                   <td>
-                    <label><input type="radio" name="region" value="11">서울</label>
-                    <label><input type="radio" name="region" value="12">인천</label>
-                    <label><input type="radio" name="region" value="13">경기</label>
-                    <label><input type="radio" name="region" value="20">강원</label>
-                    <label><input type="radio" name="region" value="31">충북</label>
-                    <label><input type="radio" name="region" value="32">충남</label>
-                    <label><input type="radio" name="region" value="33">대전</label>
-                    <label><input type="radio" name="region" value="41">전북</label><br>
-                    <label><input type="radio" name="region" value="42">전남</label>
-                    <label><input type="radio" name="region" value="43">광주</label>
-                    <label><input type="radio" name="region" value="51">경북</label>
-                    <label><input type="radio" name="region" value="52">대구</label>
-                    <label><input type="radio" name="region" value="53">경남</label>
-                    <label><input type="radio" name="region" value="54">부산</label>
-                    <label><input type="radio" name="region" value="55">울산</label>
-                    <label><input type="radio" name="region" value="60">제주</label>
+                    <label><input type="radio" name="region" value="11" disabled="disabled">서울</label>
+                    <label><input type="radio" name="region" value="12" disabled="disabled">인천</label>
+                    <label><input type="radio" name="region" value="13" disabled="disabled">경기</label>
+                    <label><input type="radio" name="region" value="20" disabled="disabled">강원</label>
+                    <label><input type="radio" name="region" value="31" disabled="disabled">충북</label>
+                    <label><input type="radio" name="region" value="32" disabled="disabled">충남</label>
+                    <label><input type="radio" name="region" value="33" disabled="disabled">대전</label>
+                    <label><input type="radio" name="region" value="41" disabled="disabled">전북</label><br>
+                    <label><input type="radio" name="region" value="42" disabled="disabled">전남</label>
+                    <label><input type="radio" name="region" value="43" disabled="disabled">광주</label>
+                    <label><input type="radio" name="region" value="51" disabled="disabled">경북</label>
+                    <label><input type="radio" name="region" value="52" disabled="disabled">대구</label>
+                    <label><input type="radio" name="region" value="53" disabled="disabled">경남</label>
+                    <label><input type="radio" name="region" value="54" disabled="disabled">부산</label>
+                    <label><input type="radio" name="region" value="55" disabled="disabled">울산</label>
+                    <label><input type="radio" name="region" value="60" disabled="disabled">제주</label>
                   </td>
                   <td>
-                    <select class="itemPriority" name="중요도">
-                      <option value="중요">중요</option>
-                      <option value="보통" selected="selected">보통</option>
-                      <option value="무관">무관</option>
+                    <select class="itemPriority" name="regionPri">
+                      <option value="2">중요</option>
+                      <option value="1" selected="selected">보통</option>
+                      <option value="0">무관</option>
                     </select>
                   </td>
                 </tr>
                 <tr class="itemBox">
                   <td class="itemName" id="">관심 분야</td>
                   <td>
-                    <label><input type="checkbox" name="interest" value="movie" >영화&드라마</label>
-                    <label><input type="checkbox" name="interest" value="musical" >연극&뮤지컬</label>
-                    <label><input type="checkbox" name="interest" value="comic" >만화&서브컬처</label>
-                    <label><input type="checkbox" name="interest" value="picture" >사진&영상 촬영</label>
-                    <label><input type="checkbox" name="interest" value="books" >독서</label>
-                    <label><input type="checkbox" name="interest" value="music" >음악 감상</label><br>
-                    <label><input type="checkbox" name="interest" value="sing" >노래&춤</label>
-                    <label><input type="checkbox" name="interest" value="instrument" >악기 연주</label>
-                    <label><input type="checkbox" name="interest" value="cook" >요리&음식</label>
-                    <label><input type="checkbox" name="interest" value="camp" >여행&캠핑</label>
-                    <label><input type="checkbox" name="interest" value="exercise" >운동</label>
-                    <label><input type="checkbox" name="interest" value="sports" >스포츠 경기</label>
-                    <label><input type="checkbox" name="interest" value="vgame" >비디오 게임</label><br>
-                    <label><input type="checkbox" name="interest" value="bgame" >보드게임</label>
-                    <label><input type="checkbox" name="interest" value="sns" >SNS</label>
-                    <label><input type="checkbox" name="interest" value="drink" >술&모임</label>
-                    <label><input type="checkbox" name="interest" value="beauty" >뷰티&패션</label>
-                    <label><input type="checkbox" name="interest" value="pet" >반려동물</label>
-                    <label><input type="checkbox" name="interest" value="diy" >DIY</label>
-                    <label><input type="checkbox" name="interest" value="money" >재테크</label>
+                    <label><input type="checkbox" name="interest" value="movie" disabled="disabled">영화&드라마</label>
+                    <label><input type="checkbox" name="interest" value="musical" disabled="disabled">연극&뮤지컬</label>
+                    <label><input type="checkbox" name="interest" value="comic" disabled="disabled">만화&서브컬처</label>
+                    <label><input type="checkbox" name="interest" value="picture" disabled="disabled">사진&영상 촬영</label>
+                    <label><input type="checkbox" name="interest" value="books" disabled="disabled">독서</label>
+                    <label><input type="checkbox" name="interest" value="music" disabled="disabled">음악 감상</label><br>
+                    <label><input type="checkbox" name="interest" value="sing" disabled="disabled">노래&춤</label>
+                    <label><input type="checkbox" name="interest" value="instrument" disabled="disabled">악기 연주</label>
+                    <label><input type="checkbox" name="interest" value="cook" disabled="disabled">요리&음식</label>
+                    <label><input type="checkbox" name="interest" value="camp" disabled="disabled">여행&캠핑</label>
+                    <label><input type="checkbox" name="interest" value="exercise" disabled="disabled">운동</label>
+                    <label><input type="checkbox" name="interest" value="sports" disabled="disabled">스포츠 경기</label>
+                    <label><input type="checkbox" name="interest" value="vgame" disabled="disabled">비디오 게임</label><br>
+                    <label><input type="checkbox" name="interest" value="bgame" disabled="disabled">보드게임</label>
+                    <label><input type="checkbox" name="interest" value="sns" disabled="disabled">SNS</label>
+                    <label><input type="checkbox" name="interest" value="drink" disabled="disabled">술&모임</label>
+                    <label><input type="checkbox" name="interest" value="beauty" disabled="disabled">뷰티&패션</label>
+                    <label><input type="checkbox" name="interest" value="pet" disabled="disabled">반려동물</label>
+                    <label><input type="checkbox" name="interest" value="diy" disabled="disabled">DIY</label>
+                    <label><input type="checkbox" name="interest" value="money" disabled="disabled">재테크</label>
                   </td>
                   <td>
-                    <select class="itemPriority" name="중요도">
-                      <option value="중요">중요</option>
-                      <option value="보통" selected="selected">보통</option>
-                      <option value="무관">무관</option>
+                    <select class="itemPriority" name="interestPri">
+                      <option value="2">중요</option>
+                      <option value="1" selected="selected">보통</option>
+                      <option value="0">무관</option>
                     </select>
                   </td>
                 </tr>

@@ -10,9 +10,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import questionBoard.faq.model.service.FaqService;
-import questionBoard.faq.model.vo.Faq;
-import questionBoard.faq.model.vo.PageInfo;
+import board.model.service.FaqService;
+import board.model.vo.Board;
+import common.PageInfo;
 
 /**
  * Servlet implementation class faqAdminListViewServlet
@@ -36,8 +36,7 @@ public class faqAdminListViewServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		
 		FaqService service = new FaqService();
-		
-		
+
 		/* 페이징 */
 		int listCount = service.getListCount();
 		
@@ -60,20 +59,20 @@ public class faqAdminListViewServlet extends HttpServlet {
 		
 		PageInfo pi = new PageInfo(currentPage, listCount, limit, maxPage, startPage, endPage);
 		
-		/* 리스트 불러오기 */
-		ArrayList<Faq> list = service.selectAdminList(currentPage);
-		String page = null;
-		if(list != null) {
-			page = "views/questionBoard/faq/faqAdminListView.jsp";
-			request.setAttribute("list", list);
-			request.setAttribute("pi", pi);
-		} else {
-			page = "views/common/errorPage.jsp";
-			request.setAttribute("msg", "FAQ 목록 조회에 실패했습니다.");
+			/* 그냥 리스트 불러오기 */
+			ArrayList<Board> list = service.selectAdminList(currentPage);
+			String page = null;
+			if(list != null) {
+				page = "views/questionBoard/faq/faqAdminListView.jsp";
+				request.setAttribute("list", list);
+				request.setAttribute("pi", pi);
+			} else {
+				page = "views/common/errorPage.jsp";
+				request.setAttribute("msg", "FAQ 목록 조회에 실패했습니다.");
+			}
+			RequestDispatcher view = request.getRequestDispatcher(page);
+			view.forward(request, response);
 		}
-		RequestDispatcher view = request.getRequestDispatcher(page);
-		view.forward(request, response);
-	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

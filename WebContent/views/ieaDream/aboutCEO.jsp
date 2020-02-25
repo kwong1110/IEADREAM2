@@ -45,11 +45,12 @@
 		<%@ include file="../../views/common/mainmenu.jsp" %>
 	</div>
 	
-	<div class="container">
-
-		<section class="content">
-			<main>
-				<div> <h1 style="padding: 5px;">CEO 소개</h1> </div>
+	<div class="outer">
+		<div class="wrapper">
+			<div class="main">
+				<div class="pageTitle">
+					<h1>CEO 소개</h1>
+				</div>
 				<div class="article"><img id="CEO_pic" src="../img/IMG_5526.jpg"></div>
 				<div class="article" id="history"> 
 					<p style="padding: 5px;">
@@ -72,15 +73,8 @@
 					<h3> CEO의 인사말 </h3>
 					안녕하세요 여기에 인사말을 써주세요
 				</div>
-			</main>
-			<nav>
-				<div style="border-right: 1px solid rgb(136, 136, 136);">
-					<div style="margin-top: 10px; color: rgb(51, 51, 51); font-size: 20px; padding-left: 40px;">
-						<h2> 이어드림 </h2>
-					</div>
-				</div>
-			</nav>
-		</section>
+			</div>
+		</div>
 	</div>
 </body>
 </html>

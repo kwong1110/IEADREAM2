@@ -48,16 +48,30 @@ public class Board {
 		this.category = category;
 	}
 	// FAQ
-	public Board(int boardNo, int postNo, String title, String content, String deleted, String category) {
+	public Board(int boardNo, int postNo, String title, String content, String category) {
 		super();
 		this.boardNo = boardNo;
 		this.postNo = postNo;
 		this.title = title;
 		this.content = content;
-		this.deleted = deleted;
 		this.category = category;
 	}
 	
+	public Board(int postNo, String title, String content, String category) {
+		super();
+		this.postNo = postNo;
+		this.title = title;
+		this.content = content;
+		this.category = category;
+	}
+
+	public Board(int postNo, String title, String category) {
+		super();
+		this.postNo = postNo;
+		this.title = title;
+		this.category = category;
+	}
+
 	// 파티 리뷰 1
 	public Board(int boardNo, int postNo, int userNo, String userId, String title, String content, Date createDate,
 			int hit, String deleted, int partyNo) {
@@ -83,8 +97,7 @@ public class Board {
 		this.createDate = createDate;
 		this.hit = hit;
 	}
-	
-	
+
 	// 커플 후기
 	public Board(int boardNo, int postNo, int userNo, String userId, String title, String content, Date createDate,
 			int hit, String deleted) {
@@ -98,6 +111,24 @@ public class Board {
 		this.createDate = createDate;
 		this.hit = hit;
 		this.deleted = deleted;
+	}
+
+	// 베스트 커플1
+	public Board(int postNo, String userId, String title, Date createDate, int hit) {
+		super();
+		this.postNo = postNo;
+		this.userId = userId;
+		this.title = title;
+		this.createDate = createDate;
+		this.hit = hit;
+	}
+	
+	// 베스트 커플2
+	public Board(int postNo, String title, String content) {
+		super();
+		this.postNo = postNo;
+		this.title = title;
+		this.content = content;
 	}
 
 	public int getPostNo() {
@@ -186,6 +217,13 @@ public class Board {
 
 	public void setPartyNo(int partyNo) {
 		this.partyNo = partyNo;
+	}
+
+	@Override
+	public String toString() {
+		return "Board [boardNo=" + boardNo + ", postNo=" + postNo + ", userNo=" + userNo + ", userId=" + userId
+				+ ", title=" + title + ", content=" + content + ", createDate=" + createDate + ", hit=" + hit
+				+ ", deleted=" + deleted + ", category=" + category + ", partyNo=" + partyNo + "]";
 	}
 	
 	

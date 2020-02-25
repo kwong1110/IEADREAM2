@@ -9,22 +9,22 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import board.model.service.bestCoupleService;
+import board.model.vo.Board;
 import common.PageInfo;
-import coupleStory.bestCouple.model.service.bestCoupleService;
-import coupleStory.bestCouple.model.vo.BestCouple;
 import photo.model.vo.Photo;
 
 /**
  * Servlet implementation class bestCoupleListServlet
  */
-@WebServlet("/list.bc")
-public class bestCoupleListServlet extends HttpServlet {
+@WebServlet("/list.dd")
+public class bestCoupleListServlet2 extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public bestCoupleListServlet() {
+    public bestCoupleListServlet2() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -60,7 +60,7 @@ public class bestCoupleListServlet extends HttpServlet {
 		
 		PageInfo pi = new PageInfo(currentPage, listCount, limit, maxPage, startPage, endPage);
 		
-		ArrayList<BestCouple> bcList = bcService.selectbcList(currentPage);
+		ArrayList<Board> bcList = bcService.selectbcList(currentPage);
 		ArrayList<Photo> pList = bcService.selectpList();
 		
 		System.out.println(pList);

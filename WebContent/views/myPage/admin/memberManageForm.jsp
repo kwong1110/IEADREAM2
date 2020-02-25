@@ -52,11 +52,8 @@
 							<a href="<%=request.getContextPath()%>/manage.mem">회원 관리</a>
 						</li>
 						<li class="leftMenu admin boardManage">
-							<a href="<%=request.getContextPath()%>/views/myPage/admin/boardManageForm.jsp">게시물 관리</a>
+							<a href="<%=request.getContextPath()%>/manage.bo">게시물 관리</a>
 						</li>
-						<li class="leftMenu admin partyManage">
-							<a href="<%=request.getContextPath()%>/views/myPage/admin/partyManageForm.jsp">파티 관리</a>
-						</li>	
 					</ul>
 				</div>
 			</nav>
@@ -96,7 +93,6 @@
 							<thead>
 								<tr>
 									<th><input type="checkbox" id="all" onclick="checkAll();"></th>
-									<th>No</th>
 									<th>회원번호</th>
 									<th>아이디</th>
 									<th>이름</th>
@@ -108,7 +104,7 @@
 							<tbody>
 								<% if(list.isEmpty()){ %>
 								<tr>
-									<td colspan="8">조회된 목록이 없습니다.</td>
+									<td colspan="7">조회된 목록이 없습니다.</td>
 								</tr>
 								<% } else{ 
 										for(Account a : list){
@@ -116,7 +112,6 @@
 								<tr>
 									<td><input type="checkbox" name="checkselect" value="<%= a.getUserNo() %>,<%= a.getUserName() %>" onclick="checkDetail()"></td>
 									<td><%= a.getUserNo() %><input type="hidden" value='<%= a.getUserNo() %>' name='userNo'></td>
-									<td><%= a.getUserNo() %></td>
 									<td><%= a.getId() %><input type="hidden" value='<%= a.getId() %>' name='userId'></td>
 									<td><%= a.getUserName() %><input type="hidden" value='<%= a.getUserName() %>' name='userName'></td>
 									<td><%= a.getPhone() %></td>
@@ -273,14 +268,12 @@
 				var popLeft = Math.ceil(( window.screen.width - 400 )/2);
 				var popTop = Math.ceil(( window.screen.height - 500 )/2);
 				
-				$('#memManageForm').attr('action', '<%= request.getContextPath() %>/');
-				$('#memManageForm').submit();
-				window.open("views/myPage/admin/?????????.jsp?checkList="+checkList, "updateMember", "width=400, height=500, "+ ", left=" + popLeft + ", top="+ popTop); 	
+				window.open("views/myPage/admin/memberDeleteForm.jsp?checkList="+checkList, "deleteMember", "width=400, height=500, "+ ", left=" + popLeft + ", top="+ popTop); 	
 			};
 		}
 		
 		
-		
+		<%-- 새로운 HTML이 추가되는 것이 아니기 때문에 비동기 방식을 굳이 할 필요는 없음. --%>
 		<%-- var searchList;
 		
 		$('#SearchBtn').click(function(){

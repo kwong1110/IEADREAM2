@@ -1,10 +1,10 @@
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="coupleStory.bestCouple.model.vo.*, photo.model.vo.*, common.*" %>    
+<%@ page import="board.model.vo.*, common.*" %>    
     
 <%
-	ArrayList<BestCouple> bcList = (ArrayList<BestCouple>)request.getAttribute("bcList");
+	ArrayList<Board> bcList = (ArrayList<Board>)request.getAttribute("bcList");
 	ArrayList<Photo> pList = (ArrayList<Photo>)request.getAttribute("pList");
 	
 	PageInfo pi = (PageInfo)request.getAttribute("pi");
@@ -56,7 +56,7 @@
 		background: rgba(255, 255, 255, 0.4);
 		box-shadow: 3px 3px 3px 3px gray;
 		margin-left: 23px;
-		margin-bottom: 60px;
+		margin-bottom: 40px;
 	}
 	
 	.contn{
@@ -68,6 +68,11 @@
 		margin-bottom: 55px;
 	}
 	
+	.hit{
+		margin: 0 0 2% 80%;
+		font-size: 12px;
+	}
+	
 	.img{
 		width: 100%;
 		height: 200px;
@@ -75,16 +80,6 @@
 		position: relative;
 		margin-bottom: 20px;
 		cursor: pointer;
-	}
-	
-	#img1{
-		background-image: url("../../../images/common/flower1.PNG");
-	}
-	#img2{
-		background-image: url("../../../images/common/flower2.PNG");
-	}
-	#img3{
-		background-image: url("../../../images/common/flower3.PNG");
 	}
 		
 	.peoNum > p {
@@ -136,17 +131,16 @@
 		margin: 0 auto;
 	}
 	
-	/* 관리자용 업로드 버튼 */
-	/* .uploadbtn{
+	.uploadbtn{
 		width: 9%;
 		height: 28px;
-		margin-left: 89%;
+		margin-left: 32%;
 		background: #e75a82;
 		color: white;
 		font-weight: border;
-	} */
+	}
 	
-	.pagingArea button{border-radius: 15px; background: #D5D5D5;}
+	.sc-footer button{border-radius: 15px; background: #D5D5D5;}
 	.searchArea{margin-right: 50px;}
 	.searchArea button{background: #D1B2FF; border-radius: 5px; color: white; width: 80px; heigth: 25px; text-align: center;}
 	button:hover{cursor: pointer;}
@@ -197,23 +191,24 @@
 					<div class="contents">
 					<% 
 						for(int i = 0; i < bcList.size(); i++){
-							BestCouple bc = bcList.get(i);
+							Board bc = bcList.get(i);
 					%>
-						<div class="contn" id="contn1">
-							<div class="img" id="img1">
+						<div class="contn">
+							<p class="hit">HIT : <%= bc.getHit() %></p>
+							<div class="img">
+								<input type="hidden" value="<%= bc.getPostNo() %>">
 								<% 
 									for(int j = 0; j < pList.size(); j++){
 										Photo p = pList.get(j);		
 								%>
-									<% if(bc.getPostNo() == p.getPhotoNo()){ %>
+									<% if(bc.getPostNo() == p.getPostNo()){ %>
 										<img src="<%= request.getContextPath() %>/photo_uploadFiles/<%= p.getChangeName() %>" style="width:inherit; height:inherit;">
 									<% } %>
 								<% } %>
 							</div>
 							<div class="text">
-								<input type="hidden" value="<%= bc.getPostNo() %>">
 								<p id="text1"><%= bc.getTitle() %></p>
-								<p id="text2">박보검</p>
+								<p id="text2"><%= bc.getUserId() %></p>
 								<p id="text3"><%= bc.getCreateDate() %></p>
 							</div>
 						</div>
@@ -222,7 +217,7 @@
 						<div class="clear-both"></div>
 						
 						 <div class="sc-footer">
-						 	<% if(!bcList.isEmpty()) { %> <!-- && !pList.isEmpty() -->
+						 	<% if(!bcList.isEmpty()) { %>
 								<div class="button">
 									<button onclick="location.href='<%= request.getContextPath() %>/list.bc?currentPage=1'">&lt;&lt;</button>
 									
@@ -254,16 +249,26 @@
 								</div>
 							<% } %>
 						</div>
-						
-						<!-- 관리자용 업로드 버튼 -->
-					<!-- <div>
-							<a href="#"><button class="uploadbtn">UPLOAD</button></a>
-						</div> -->
+					</div>
 					
+					<div>
+						<button class="uploadbtn" onclick='location.href="views/coupleStory/bestCouple/bestCoupleInsertForm.jsp"'>UPLOAD</button>
 					</div>
 				</div>	
 			</div>
 		</div>
+		
+		<script>
+			$(function(){
+				$('.contn').click(function(){
+					var pNo = $(this).children().children().eq(0).val();
+					location.href="<%= request.getContextPath() %>/detail.bc?pNo=" + pNo;
+				});
+			});
+		</script>
+		
+		
+		
 	</section>
 </body>
 </html>

@@ -10,18 +10,19 @@ public class UserInfo {
 	private int height;			// 키
 	private String shape;		// 체형
 	private String style;		// 스타일
-	private int region;		// 거주지역
+	private int region;			// 거주지역
 	private String religion;	// 종교
 	private int scholar;		// 학력
 	private String job;			// 직업
 	private int drink;			// 음주
 	private int smoke;			// 흡연
-	private ArrayList<String> interest;
+
+	private String[] interest;
 	
 	public UserInfo() {}
 
 	public UserInfo(int userNo, String thumb, String hello, int height, String shape, String style, int region,
-			String religion, int scholar, String job, int drink, int smoke, ArrayList<String> interest) {
+			String religion, int scholar, String job, int drink, int smoke, String[] interest) {
 		super();
 		this.userNo = userNo;
 		this.thumb = thumb;
@@ -134,11 +135,11 @@ public class UserInfo {
 		this.smoke = smoke;
 	}
 
-	public ArrayList<String> getInterest() {
+	public String[] getInterest() {
 		return interest;
 	}
 
-	public void setInterest(ArrayList<String> interest) {
+	public void setInterest(String[] interest) {
 		this.interest = interest;
 	}
 

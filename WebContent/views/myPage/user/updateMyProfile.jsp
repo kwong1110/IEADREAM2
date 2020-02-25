@@ -1,16 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="account.model.vo.*, java.util.*" %>
 <%
 	request.setCharacterEncoding("UTF-8");
 
-	String id = request.getParameter("id");
-	String user_name = request.getParameter("user_name");
-	int grade = Integer.parseInt(request.getParameter("grade"));
-	String email = request.getParameter("email");
-	String phone = request.getParameter("phone");
-	String gender = request.getParameter("gender");
-	String birth = (String)request.getParameter("birth");
-	
+	Account account = (Account)request.getAttribute("account");
+
+	String id = account.getId();
+	String name = account.getUserName();
+	String password = account.getPassword();
+	int grade = account.getGrade();
+	String email = account.getEmail();
+	String phone = account.getPhone();
+	String gender = account.getGender();
+	Date birth = account.getBirth();
 %>
 
 <!DOCTYPE html>
@@ -34,14 +37,15 @@
 <body>
 	
 	<%@ include file="../../common/mainmenu.jsp" %>
-	
-	<div class="container">
-		
-		<section class="content">
-			<main>
-				<div> <h1 style="padding: 5px;">기본정보</h1> </div>
-				<div class="article" id="info" style="padding-left: 20%; padding-right: 20%;"> 
-					<form action="<%= request.getContextPath() %>/update.ac" method="post" id="updateForm" name="updateForm" 
+
+	<div class="outer">
+		<div class="wrapper">
+			<div class="main">
+				<div class="pageTitle">
+					<h1>기본 정보</h1>
+				</div>
+				<div>
+					<form action="<%= request.getContextPath() %>/update.mp" method="post" id="updateForm" name="updateForm" 
 						style="font-size: 20px; text-align: center;">
 						<table style="border-spacing: 20px;">
 								<tr>
@@ -51,67 +55,86 @@
 									</td>
 								</tr>
 								<tr>
+									<td>이름</td>
+									<td><input type="text" placeholder="이름을 입력해주세요" class="profile" name="user_name" value="<%= name %>"><%= name %></td>
+									<td><input type="text" name="nameResult"></td>
+								</tr>
+								<tr>
+									<td>회원등급</td>
+									<td><input type="text" class="profile" name="grade" readonly value="<%= grade %>"><%= grade %></td>
+								</tr>
+								<tr>
 									<td>비밀번호</td>
-									<td><input type="text" placeholder="비밀번호를 입력해주세요" class="profile" name="pass"></td>
+									<td><input type="text" placeholder="비밀번호를 입력해주세요" class="profile" name="pass" value="<%= password %>"></td>
+									<td><input type="text" name="passResult"></td>
 								</tr>
 								<tr>
 									<td>비밀번호 확인</td>
 									<td><input type="text" placeholder="비밀번호 확인" class="profile" name="passCheck"></td>
-									<td><input type="text" name="passResult">
-								</tr>
-								<tr>
-									<td>이름</td>
-									<td><input type="text" placeholder="이름을 입력해주세요" class="profile" name="user_name" value="<%= user_name %>"></td>
+									<td><input type="text" name="passResult2"></td>
 								</tr>
 								<tr>
 									<td>이메일</td>
-									<td><input type="text" placeholder="메일을 입력해주세요" class="profile" name="email" value="<%= email %>"></td>
+									<td><input type="text" placeholder="메일을 입력해주세요" class="profile" name="email" value="<%= email %>"><%= email %></td>
 								</tr>
 								<tr>
 									<td>휴대전화</td>
-									<td><input type="text" placeholder="휴대전화 번호를 입력해주세요" class="profile" name="phone" value="<%= phone %>"></td>
+									<td><input type="text" placeholder="휴대전화 번호를 입력해주세요" class="profile" name="phone" value="<%= phone %>"><%= phone %></td>
+								</tr>
+								<tr>
+									<td>성별</td>
+									<td><input type="text" class="profile" name="gender" readonly value="<%= gender %>"><%= gender %></td>
+								</tr>
+								<tr>
+									<td>생년월일</td>
+									<td><input type="text" class="profile" name="birth" readonly value="<%= birth %>"><%= birth %></td>
 								</tr>
 						</table>
+						<div style="text-align: center;">
+								<input id="updateBtn" type="submit" value="수정"> <!-- action으로 연결 -->
+								
+								<!-- 탈퇴 확인을 위한 페이지 -->
+								<input id="deleteAcBtn" onclick="location.href='views/deleteAcCheck.jsp'" value="탈퇴">
+						</div>
 					</form>
-					<div style="text-align: center;">
-						<input id="updateBtn" type="submit" value="확인"> <!-- action으로 연결 -->
-						<div id="cancelBtn" onclick="location.href='javascript:history.go(-1)'">취소</div>
-						<!-- 뒷페이지로 가기 -->
-					</div>
 				</div>
-			</main>
-		</section>
+			</div>
+		</div>
+	
 		<script>
-			/* 비밀번호 형식이 맞을 때 / 맞지않을 때 */
-			$('#pass').on('blur', function() {
-				if($('#pass').val().trim().length >= 8 && $('#pass').val().trim().length <= 15) { //글자수 세기
-					/* 규칙 : 영어로 시작, 숫자, 영어, 특문 !*& 필수 포함 */
-					var passRule = /^[^0-9]*[a-zA-Z][0-9]+[!*&]+/g;
-					if(!(passRule.test($('#pass').val()))) { /* 입력한 값이 false로 나오면 */
-						$('#passResult').text("영어, 숫자와 특수문자(!*&) 중 하나가 들어가야 합니다");
-						$('#passResult').css('color','red');
-						pass.focus();
-					} else { /* 입력한 값이 rule에 맞을 때 */
-						/* passcheck에서 password가 일치하지 않았을 때 */
-						$('#passCheck').on('keyup', function() {
-							if($('#pass').val() == $('#passCheck')) {
-								$('#passResult').text("비밀번호가 일치합니다");
-								$('#passResult').css('color','black');
-							} else {
-								$('#passResult').text("비밀번호가 일치하지 않습니다");
-								$('#passResult').css('color','red');
-								passCheck.focus();
-							}
-						});
-						/* password가 일치하지 않았을 때 끝 */
+				$('#pass').blur(function(){
+					var pwdExp = /[a-zA-Z](?=.*[a-zA-Z])(?=.*[!@#$%^&*])(?=.*[0-9]).{7,14}/;
+					if(!pwdExp.test($(this).val())){
+						$('#passResult').text("비밀번호 입력 오류").css('color', 'red');
+						$(this).focus().css('background','pink');
+					} else{
+						$('#passResult').text("정상 입력").css('color', 'green');
+						$(this).css("background","initial");
 					}
-				} else { //글자수 부족
-					$('#passResult').text("비밀번호는 8자 이상 15자 이하여야합니다.");
-					$('#passResult').css('color','red');
-					pass.focus();
-				}
-			})
-			/* 비밀번호 형식 확인 끝*/
+				});
+				
+				$('#passCheck').keyup(function(){
+					if($(this).val() != $('#pass').val()){
+						$('#passResult1').text("비밀번호 불일치").css('color', 'red');
+						$(this).focus().css('background', 'pink');
+					} else{
+						$('#passResult1').text("비밀번호 일치").css('color', 'green');
+						$(this).css("background","initial");
+					}
+				});
+				
+				
+				$("#user_name").change(function(){
+					var nameExp = /[가-힣]{2,}/;
+					
+					if(!nameExp.test($(this).val())){
+						$('#nameResult').text('잘못된 이름 입력').css('color', 'red');
+						$(this).focus().css("background", "pink").val('');
+					} else{
+						$('#nameResult').text('정상 입력').css('color', 'green');
+						$(this).css("background", "initial");
+					}
+				});
 		</script>
 
 	</div>

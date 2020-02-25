@@ -1,4 +1,4 @@
-package board.controller;
+package board.controller.faq;
 
 import java.io.IOException;
 
@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import questionBoard.faq.model.service.FaqService;
+import board.model.service.FaqService;
 
 /**
  * Servlet implementation class faqAdminDeleteServlet
