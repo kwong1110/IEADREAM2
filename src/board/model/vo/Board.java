@@ -65,7 +65,7 @@ public class Board {
 		this.category = category;
 	}
 
-	public Board(int postNo, String title, String category) {
+	public Board(String category, int postNo, String title) {
 		super();
 		this.postNo = postNo;
 		this.title = title;
