@@ -354,10 +354,10 @@
                 <tr class="itemBox">
                   <td class="itemName" id="">최종 학력</td class="itemName" id="">
                   <td>
-                    <label><input type="radio" name="scholar" value="0">고졸</label>
-                    <label><input type="radio" name="scholar" value="2">초대졸</label>
-                    <label><input type="radio" name="scholar" value="4">대졸</label>
-                    <label><input type="radio" name="scholar" value="6">석사</label>
+                    <label><input type="radio" name="scholar" value="0">고등학교</label>
+                    <label><input type="radio" name="scholar" value="2">전문대</label>
+                    <label><input type="radio" name="scholar" value="4">대학교</label>
+                    <label><input type="radio" name="scholar" value="6">대학원</label>
                     <label><input type="radio" name="scholar" value="8">박사</label>
                   </td>
                   <td>

@@ -263,10 +263,6 @@
                 <div class="itemValue" id="age">31</div>
             </div>
             <div class="itemBox">
-                <div class="itemName" id="">지역</div>
-                <div class="itemValue" id="region">서울</div>
-            </div>
-            <div class="itemBox">
                 <div class="itemName" id="">키</div>
                 <div class="itemValue" id="height">155~160</div>
             </div>
@@ -279,8 +275,8 @@
                 <div class="itemValue" id="style">우아함</div>
             </div>
             <div class="itemBox">
-                <div class="itemName" id="">직업</div>
-                <div class="itemValue" id="job">예술</div>
+                <div class="itemName" id="">지역</div>
+                <div class="itemValue" id="region">서울</div>
             </div>
             <div class="itemBox">
                 <div class="itemName" id="">종교</div>
@@ -291,12 +287,16 @@
                 <div class="itemValue" id="scholar">대졸</div>
             </div>
             <div class="itemBox">
-                <div class="itemName" id="">흡연</div>
-                <div class="itemValue" id="smoke">안 핌</div>
+                <div class="itemName" id="">직업</div>
+                <div class="itemValue" id="job">예술</div>
             </div>
             <div class="itemBox">
                 <div class="itemName" id="">음주</div>
                 <div class="itemValue" id="drink">월 1회 이상</div>
+            </div>
+            <div class="itemBox">
+                <div class="itemName" id="">흡연</div>
+                <div class="itemValue" id="smoke">안 핌</div>
             </div>
             <div class="itemBox">
                 <div class="itemName" id="">관심분야</div>

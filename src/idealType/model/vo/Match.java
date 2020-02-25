@@ -33,11 +33,11 @@ public class Match {
 		this.targetNo = targetNo;
 	}
 
-	public Date getmatchDate() {
+	public Date getMatchDate() {
 		return matchDate;
 	}
 
-	public void setmatchDate(Date matchDate) {
+	public void setMatchDate(Date matchDate) {
 		this.matchDate = matchDate;
 	}
 

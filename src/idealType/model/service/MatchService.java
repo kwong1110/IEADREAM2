@@ -4,11 +4,13 @@ import static common.JDBCTemplate.*;
 
 import java.sql.Connection;
 
+import account.model.dao.UserInfoDAO;
+import account.model.vo.UserInfo;
 import idealType.model.dao.IdealTypeDAO;
 import idealType.model.vo.Match;
 
 
-public class IdealTypeService {
+public class MatchService {
 	
 	/* public double getSync() { 일치율 계산 알고리즘 예씨
 		
@@ -44,6 +46,31 @@ public class IdealTypeService {
 		매칭 후에도 데이터는 유지됨
 		
 	 */
-	
+	public int insertMatch(Match m) {
+		Connection conn = getConnection();
+		MatchAO mDAO = new MatchDAO();
+		int result = mDAO.insertMatch(conn, m);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+	public int updateMatch(Match m) {
+		Connection conn = getConnection();
+		MatchDAO mDAO = new MatchDAO();
+		int result = mDAO.updateMatch(conn, m);
+
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
 
 }
