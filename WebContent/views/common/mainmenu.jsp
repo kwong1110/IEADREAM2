@@ -15,7 +15,8 @@
 <script type="text/javascript" src="<%= request.getContextPath() %>/js/jquery-3.4.1.min.js"></script>
 <style>
 	* {margin: 0; padding: 0; }
-	body{background-color:  rgb(250, 212, 216); width: 100%; margin: 0 auto;}
+	body{background:url('<%= request.getContextPath() %>/images/bg.jpg') no-repeat center center fixed;
+		background-size: cover;}
 	
 	.header {
 	height: 100%; background-color: white; 
