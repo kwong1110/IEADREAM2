@@ -15,12 +15,11 @@
 <script type="text/javascript" src="<%= request.getContextPath() %>/js/jquery-3.4.1.min.js"></script>
 <style>
 	* {margin: 0; padding: 0; }
-	body{background:url('<%= request.getContextPath() %>/images/bg.jpg') no-repeat center center fixed;
+	body{background:url('<%= request.getContextPath() %>/images/bg4.jpg') no-repeat center center fixed;
 		background-size: cover;}
 	
 	.header {
-	height: 100%; background-color: white; 
-	box-shadow: 1px 0.5px 1px 1px gray;
+	height: 100%;
 	}
             
 	li {list-style: none;}
