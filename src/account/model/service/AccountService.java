@@ -3,6 +3,9 @@ package account.model.service;
 import static common.JDBCTemplate.*;
 
 import java.sql.Connection;
+
+import javax.security.auth.login.AccountException;
+
 import account.model.dao.AccountDAO;
 import account.model.vo.Account;
 
@@ -71,6 +74,8 @@ public class AccountService {
 	// 아이디 찾기 Service
 	public Account searchid(Account account) {
 		Connection conn = getConnection();
+		System.out.println(account);
+
 		
 		AccountDAO aDAO = new AccountDAO();
 		Account findId = aDAO.searchid(account, conn);
@@ -79,6 +84,26 @@ public class AccountService {
 		System.out.println(findId);
 		
 		return findId;
+	}
+
+	// 비밀번호  찾기 Service
+	public int searchPwd(Account account) {
+		Connection conn = getConnection();
+		
+		AccountDAO aDAO = new AccountDAO();
+		String findPwd = aDAO.searchPwd(account, conn);
+		String 
+		close(conn);
+		
+		if(result == 0) {
+			throw new AccountException("비밀번호 찾기 실패!");
+		}
+		if(result > 0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		
+		return 
+		
 	}
 	
 }

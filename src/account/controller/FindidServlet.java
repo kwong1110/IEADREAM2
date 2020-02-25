@@ -15,7 +15,7 @@ import account.model.vo.Account;
 /**
  * Servlet implementation class FindidServlet
  */
-@WebServlet("/Findid.do")
+@WebServlet("/Findeid.do")
 public class FindidServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -35,25 +35,24 @@ public class FindidServlet extends HttpServlet {
 			
 			String userName = request.getParameter("userName");
 			String email = request.getParameter("email");
-			
-			Account findUser = new Account(userName, email);
-			
-			AccountService service = new AccountService();
-			String page ="";
-			page = "views/account/searchidForm.jsp";
-			Account account = service.searchid(findUser);
-			System.out.println("아이디 찾기 완료!!");
-			request.setAttribute("account", account);
-			
-			}catch(Exception e) {
-				page = "views/commm/errorpage.jsp";
-				request.setAttribute("error", "아이디 찾기에 실패하셨습니다.  ㅠㅠ");
-				request.setAttribute("exception", e);
-			}
-			request.getRequestDispatcher(page).forward(request, response);
-	
-			}
+			System.out.println("서블릿 유저이름, 이메일 : " + userName + email);
 		
+			Account findUser = new Account(userName, email);
+			System.out.println("서블릿 : " + findUser);
+			Account account = new AccountService().searchid(findUser);
+			
+			String page ="";
+			if (account != null){
+				page = "views/account/searchidForm.jsp";
+				System.out.println("아이디 찾기 완료!!");
+				request.setAttribute("account", account);
+			}else {
+				page = "views/common/errorPage.jsp";
+				request.setAttribute("msg", "아이디 찾기에 실패하셨습니다. ㅠㅠ");
+			}
+			
+			request.getRequestDispatcher(page).forward(request, response);
+		}
 		
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
