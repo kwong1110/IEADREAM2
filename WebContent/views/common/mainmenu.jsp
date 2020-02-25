@@ -11,6 +11,7 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/reset.css" />
+<link rel="stylesheet" href="<%= request.getContextPath() %>/css/common.css" />
 <title>Insert title here</title>
 <script type="text/javascript" src="<%= request.getContextPath() %>/js/jquery-3.4.1.min.js"></script>
 <style>
