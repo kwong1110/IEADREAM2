@@ -80,7 +80,7 @@ public class bestCoupleDAO {
 			
 			while(rset.next()) {
 				Board bc = new Board(rset.getInt("POST_NO"),
-									rset.getInt("USER_NO"),
+									rset.getString("ID"),
 									rset.getString("TITLE"),
 									rset.getDate("CREATE_DATE"),
 									rset.getInt("HIT"));
@@ -209,4 +209,237 @@ public class bestCoupleDAO {
 		
 		return result;
 	}
+
+	public int updateCount(Connection conn, int pNo) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("updateCount");
+		//UPDATE BOARD SET HIT=HIT+1 WHERE POST_NO=?
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, pNo);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public Board selectBoard(Connection conn, int pNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		Board b = null;
+		
+		String query = prop.getProperty("selectBoard");
+		//SELECT POST_NO, TITLE, CONTENT FROM BOARD WHERE POST_NO=?
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, pNo);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				b = new Board(rset.getInt("POST_NO"), rset.getString("TITLE"), rset.getString("CONTENT"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return b;
+	}
+	
+	public BestCouple selectBestCouple(Connection conn, int pNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		BestCouple bc = null;
+		
+		String query = prop.getProperty("selectBestCouple");
+		//SELECT * FROM BEST_COUPLE WHERE POST_NO=?
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, pNo);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				bc = new BestCouple(rset.getInt("POST_NO"),
+									rset.getString("M_NAME"),
+									rset.getString("F_NAME"),
+									rset.getInt("DATING_PERIOD"),
+									rset.getString("FAVORIT_DATE"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return bc;
+	}
+
+	public ArrayList<Photo> selectPhoto(Connection conn, int pNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Photo> pList = null;
+		
+		String query = prop.getProperty("selectPhoto");
+		//SELECT * FROM PHOTO WHERE POST_NO=? AND DELETED='N'
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, pNo);
+			
+			rset = pstmt.executeQuery();
+			
+			pList = new ArrayList<Photo>();
+			while(rset.next()) {
+				Photo p = new Photo();
+				p.setPhotoNo(rset.getInt("PHOTO_NO"));
+				p.setPostNo(rset.getInt("POST_NO"));
+				p.setOriginName(rset.getString("ORIGIN_NAME"));
+				p.setChangeName(rset.getString("CHANGE_NAME"));
+				p.setFilePath(rset.getString("FILE_PATH"));
+				p.setFileLevel(rset.getInt("FILE_LEVEL"));
+				p.setDeleted(rset.getString("DELETED"));
+				
+				pList.add(p);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return pList;
+	}
+
+	public int updatePtBoard(Connection conn, Board b) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("updatePtBoard");
+		//UPDATE BOARD SET TITLE=?, CONTENT=? WHERE POST_NO=?
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, b.getTitle());
+			pstmt.setString(2, b.getContent());
+			pstmt.setInt(3, b.getPostNo());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int updatePtBestCouple(Connection conn, BestCouple bc) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("updatePtBestCouple");
+		//UPDATE BEST_COUPLE SET M_NAME=?, F_NAME=?, DATING_PERIOD=?, FAVORIT_DATE=? WHERE POST_NO=?
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, bc.getmName());
+			pstmt.setString(2, bc.getfName());
+			pstmt.setInt(3, bc.getDtPeriod());
+			pstmt.setString(4, bc.getFvDate());
+			pstmt.setInt(5, bc.getPostNo());
+			
+			result = pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	
+	public int updatePhoto(Connection conn, ArrayList<Photo> changeFile) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("updatePhoto");
+		//UPDATE PHOTO SET ORIGIN_NAME=?, CHANGE_NAME=? WHERE PHOTO_NO=?
+		
+		for(int i = 0; i < changeFile.size(); i++) {
+			Photo p = changeFile.get(i);
+			
+			try {
+				pstmt = conn.prepareStatement(query);
+				pstmt.setString(1, p.getOriginName());
+				pstmt.setString(2, p.getChangeName());
+				pstmt.setInt(3, p.getPhotoNo());
+				
+				result += pstmt.executeUpdate();
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				close(pstmt);
+			}
+		}
+		
+		return result;
+	}
+
+	public int insertNewPhoto(Connection conn, ArrayList<Photo> newInsertFile) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("insertNewPhoto");
+		//INSERT INTO PHOTO VALUES(SEQ_PHOTONO.NEXTVAL, ?, ?, ?, ?, ?, DEFAULT)
+		
+		for(int i = 0; i < newInsertFile.size(); i++) {
+			Photo p = newInsertFile.get(i);
+			
+			try {
+				pstmt = conn.prepareStatement(query);
+				pstmt.setInt(1, p.getPostNo());
+				pstmt.setString(2, p.getOriginName());
+				pstmt.setString(3, p.getChangeName());
+				pstmt.setString(4, p.getFilePath());
+				pstmt.setInt(5, p.getFileLevel());
+				
+				result += pstmt.executeUpdate();
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(pstmt);
+			}
+			
+		}
+		
+		return result;
+	}
+
+
 }

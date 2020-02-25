@@ -15,11 +15,11 @@
 <script type="text/javascript" src="<%= request.getContextPath() %>/js/jquery-3.4.1.min.js"></script>
 <style>
 	* {margin: 0; padding: 0; }
-	body{background-color:  rgb(250, 212, 216); width: 100%; margin: 0 auto;}
+	body{background:url('<%= request.getContextPath() %>/images/bg4.jpg') no-repeat center center fixed;
+		background-size: cover;}
 	
 	.header {
-	height: 100%; background-color: white; 
-	box-shadow: 1px 0.5px 1px 1px gray;
+	height: 100%;
 	}
             
 	li {list-style: none;}
@@ -67,7 +67,7 @@
 						<li class="s-menu"><span onclick="goIeaDream();">이어드림</span>
 							<ul class="dept01">
 								<li id="nop"><a href="<%=request.getContextPath()%>/views/ieaDream/aboutCEO.jsp">CEO소개</a></li>
-								<li id="nop"><a href="">회사 소개</a></li>
+								<li id="nop"><a href="<%=request.getContextPath()%>/views/ieaDream/aboutUs.jsp">회사 소개</a></li>
 								<li id="nop"><a href="<%=request.getContextPath()%>/views/ieaDream/wayToCome.jsp">오시는 길</a></li>
 							</ul>
 						</li>
@@ -88,7 +88,7 @@
 						<li class="s-menu"><span onclick="goCoupleStory();">커플이야기</span>
 							<ul class="dept01">
 								<li id="nop"><a href="<%= request.getContextPath() %>/list.bc">베스트 커플</a></li>
-								<li id="nop"><a href="">우리 커플 됐어요</a></li>
+								<li id="nop"><a href="<%= request.getContextPath() %>/list.wac">우리 커플 됐어요</a></li>
 							</ul>
 						</li>
 						<li class="s-menu"><span onclick="goQuestionBoard();">문의게시판</span>
@@ -111,7 +111,7 @@
 						<li class="s-menu" id="myPage"><span onclick="">마이페이지</span>
 							<ul class="dept01">							
 								<li id="nop"><a href="<%=request.getContextPath()%>/views/myPage/user/memberGradeUpForm.jsp">정회원 등업</a></li>
-								<li id="nop"><a href="">기본정보</a></li>
+								<li id="nop"><a href="<%= request.getContextPath()%>/selectProfile.mp">기본정보</a></li>
 								<li id="nop"><a href="">나의 프로필</a></li>
 								<li id="nop"><a href="">이상형 정보</a></li>
 								<li id="nop">

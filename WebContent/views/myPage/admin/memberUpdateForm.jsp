@@ -31,7 +31,7 @@
 .main{
 	position:absolute;
   	top:15%;
-  	left:18%;
+  	left:20%;
 }
 
 .botBox{

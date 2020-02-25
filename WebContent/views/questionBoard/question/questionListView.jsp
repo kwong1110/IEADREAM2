@@ -82,17 +82,15 @@
 								<% if(reply.get(i).getAnswerChecked().equals("N")){%>
 									<td>미답변</td>
 								<% } else{  %>
-							<td>답변 완료</td>
-									
-						
-							<%}%>
+									<td>답변 완료</td>
+								<%}%>
 									
 					
 							<td><%= list.get(i).getCreateDate() %></td>
 						</tr>
 					
-				<%}%>
 							<%}%>
+						<%}%>
 									
 					
 					
