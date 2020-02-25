@@ -35,7 +35,7 @@ public class UserInfoDAO {
 			pstmt = conn.prepareStatement(query);
 			
 			pstmt.setInt(1, ui.getUserNo());
-			pstmt.setString(2, ui.getThumb());
+			pstmt.setint(2, ui.getThumbNo());
 			pstmt.setString(3, ui.getHello());
 			pstmt.setInt(4, ui.getHeight());
 			pstmt.setString(5, ui.getShape());
@@ -64,7 +64,7 @@ public class UserInfoDAO {
 		try {
 			pstmt = conn.prepareStatement(query);
 
-			pstmt.setString(1, ui.getThumb());
+			pstmt.setint(1, ui.getThumbNo());
 			pstmt.setString(2, ui.getHello());
 			pstmt.setInt(3, ui.getHeight());
 			pstmt.setString(4, ui.getShape());

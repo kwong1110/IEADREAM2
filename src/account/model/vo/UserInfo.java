@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class UserInfo {
 
 	private int userNo;
-	private String thumb;		// 프로필 사진
+	private int thumbNo;		// 프로필 사진
 	private String hello;		// 자기소개
 	private int height;			// 키
 	private String shape;		// 체형
@@ -21,11 +21,11 @@ public class UserInfo {
 	
 	public UserInfo() {}
 
-	public UserInfo(int userNo, String thumb, String hello, int height, String shape, String style, int region,
+	public UserInfo(int userNo, int thumbNo, String hello, int height, String shape, String style, int region,
 			String religion, int scholar, String job, int drink, int smoke, String[] interest) {
 		super();
 		this.userNo = userNo;
-		this.thumb = thumb;
+		this.thumbNo = thumbNo;
 		this.hello = hello;
 		this.height = height;
 		this.shape = shape;
@@ -47,12 +47,12 @@ public class UserInfo {
 		this.userNo = userNo;
 	}
 
-	public String getThumb() {
-		return thumb;
+	public int getThumbNo() {
+		return thumbNo;
 	}
 
-	public void setThumb(String thumb) {
-		this.thumb = thumb;
+	public void setThumbNo(int thumbNo) {
+		this.thumbNo = thumbNo;
 	}
 
 	public String getHello() {
