@@ -126,9 +126,10 @@ public class FaqDAO {
 			list = new ArrayList<Board>();
 			
 			while(rs.next()) {
-				Board board = new Board(rs.getInt("post_no"),
-								  rs.getString("title"),
-								  rs.getString("category"));
+				Board board = new Board(
+								rs.getString("category"),
+								rs.getInt("post_no"),
+								rs.getString("title"));
 				
 				list.add(board);
 			}
@@ -254,12 +255,12 @@ public class FaqDAO {
 			list = new ArrayList<Board>();
 			
 			while(rs.next()) {
-				Board board = new Board(rs.getInt("post_no"),
-								  rs.getString("title"),
-								  rs.getString("category"));
+				Board board = new Board(
+						rs.getString("category"),
+						rs.getInt("post_no"),
+						rs.getString("title"));
 				
 				list.add(board);
-				System.out.println(rs.getInt("post_no"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
