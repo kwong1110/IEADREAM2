@@ -49,7 +49,7 @@
 </head>
 <body>
 	<div class="main">
-		<form action="<%= request.getContextPath() %>/" method="get">
+		<form action="<%= request.getContextPath() %>/manageDelete.bo" method="get">
 			<table class="mainBoard">
 				<thead>
 					<tr>
