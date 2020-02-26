@@ -14,9 +14,9 @@
 	String gr = null;
 	switch(grade) {
 	case 0: gr = "관리자"; break;
-	/*case 1은 비회원이기 때문에 마이페이지에 접근하지 못함*/
-	case 2: gr = "준회원"; break;
-	case 3: gr = "정회원"; break;
+	case 1: gr = "준회원"; break;
+	case 2: gr = "정회원"; break;
+	case 3: gr = "준회원(결제대기중)"; break;
 	}
 	
 	String ge = null;
@@ -80,9 +80,9 @@
 								<input id="updateBtn" type="submit" value="수정"> <!-- action으로 연결 -->
 								
 								<!-- 탈퇴 확인을 위한 페이지 -->
-								<button id="deleteAcBtn" onclick="location.href='views/myPage/user/deleteAcCheck.jsp'" value="탈퇴">탈퇴</button>
 						</div>
 					</form>
+								<button id="deleteAcBtn" onclick="location.href='views/myPage/user/deleteAcCheck.jsp'" value="탈퇴">탈퇴</button>
 				</div>
 			</div>
 		</div>
