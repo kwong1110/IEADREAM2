@@ -148,17 +148,17 @@
 				<button onclick="location.href='<%= request.getContextPath() %>/list.wac?currentPage=<%= maxPage %>'">&gt;&gt;</button>			
 				
 				<% } %>
-				<!-- 로그인한 사람만 작성하기 할 수 있도록 -->
+				<!-- 로그인한 일반 회원만 작성하기 할 수 있도록 -->
 				<div class='searchArea' align='right'>
-					 <% if(loginUser != null){ %> 
+					 <% if(loginUser != null && loginUser.getGrade() != 0){ %> 
 					<button onclick='location.href="views/coupleStory/weAreCouple/weAreCoupleInsertForm.jsp"'>작성하기</button>
 					<% } %> 
 				</div>
 			</div>
 			
-			<div class="search">
+			<!-- <div class="search">
 			<button id="searchBtn" onclick="search();">검색</button><input name="searchCon" id="searchCon" type="text" width="30">
-			</div>
+			</div> -->
 		</div>
 		
 	</div>

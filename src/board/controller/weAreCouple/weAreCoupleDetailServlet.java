@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import board.model.service.WeAreCoupleService;
+import board.model.vo.BestCouple;
 import board.model.vo.Board;
 import board.model.vo.Photo;
 
@@ -37,11 +38,13 @@ public class weAreCoupleDetailServlet extends HttpServlet {
 		
 		Board board = service.selectBoard(postNo);
 		ArrayList<Photo> fileList = service.selectPhoto(postNo);
+		BestCouple bc = service.selectCouple(postNo);
 		
 		String page = null;
-		if(board != null &&fileList != null) {
+		if(board != null &&fileList != null  &&bc != null) {
 			request.setAttribute("board", board);
 			request.setAttribute("fileList", fileList);
+			request.setAttribute("bc",bc);
 			page= "views/coupleStory/weAreCouple/weAreCoupleDetailView.jsp";
 		} else {
 			request.setAttribute("msg", "사진 게시판 상세보기에 실패하였습니다.");

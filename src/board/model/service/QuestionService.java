@@ -133,7 +133,7 @@ public class QuestionService {
 	}
 
 
-	/*public ArrayList<Reply> updateReply(Reply r) {
+/*	public ArrayList<Reply> updateReply(Reply r) {
 		Connection conn = getConnection();
 		QuestionDAO dao = new QuestionDAO();// 두번 왔다갔다 할거기 때문에
 		
@@ -275,6 +275,7 @@ public class QuestionService {
 		close(conn);
 		return list;
 	}
+
 
 	
 

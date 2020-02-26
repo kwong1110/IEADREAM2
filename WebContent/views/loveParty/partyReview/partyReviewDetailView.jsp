@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="java.util.ArrayList, loveParty.partyReview.model.vo.*"%>
+    pageEncoding="UTF-8" import="java.util.ArrayList, board.model.vo.*"%>
 <%
-	PartyReviewList prl = (PartyReviewList)request.getAttribute("partyReview");
-	ArrayList<PartyReviewList> fileList = (ArrayList<PartyReviewList>)request.getAttribute("fileList");
+	Board board = (Board)request.getAttribute("partyReview");
+	ArrayList<Board> board1 = (ArrayList<Board>)request.getAttribute("board");
 	/* PartyReviewList image = fileList.get(0); */
 %>
 <!DOCTYPE html>
@@ -64,15 +64,15 @@
 					<div class="tableArea">
 						<table>
 							<tr>
-								<th><%= prl.getTitle() %></th>
+								<th><%= board.getTitle() %></th>
 								<th>작성일시</th>
-								<th><%= prl.getCreateDate() %></th>
+								<th><%= board.getCreateDate() %></th>
 							</tr>
 							<tr>
 								<th>제목</th>
-								<td><%= prl.getTitle() %></td>
+								<td><%= board.getTitle() %></td>
 								<th>작성자</th>
-								<td><%= prl.getUserName() %></td>
+								<td><%= board.getUserId() %></td>
 							</tr>
 							<tr>
 								<th>사진</th>
@@ -87,7 +87,7 @@
 								<td colspan=3>
 									<p id="contentArea">
 										<%
-											String memo = prl.getContent();
+											String memo = board.getContent();
 											if(memo == null){ %>
 												(메모 없음)
 											}

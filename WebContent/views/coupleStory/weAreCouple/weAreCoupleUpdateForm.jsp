@@ -1,9 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="java.util.ArrayList" %>
+    pageEncoding="UTF-8" import="java.util.ArrayList, board.model.vo.*" %>
 <%
 	String title = request.getParameter("title");
 	String titleImg = request.getParameter("titleImage");
 	
+	BestCouple bc = (BestCouple)request.getAttribute("bc");
+	
+	 String mName = request.getParameter("mName");
+	 String fName = request.getParameter("fName");
+	 
+	 String dtPeriod =request.getParameter("dtPeriod");
+	String fvDate = request.getParameter("fvDate"); 
+	String content = request.getParameter("content");
 	ArrayList<String> images = new ArrayList<String>();
 	for(int i = 1; i < 4; i++){
 		images.add(request.getParameter("detailImg" + i) == null ? "" : "src=" + request.getContextPath() + "/photo_uploadFiles/" + request.getParameter("detailImg" + i));
@@ -13,6 +21,9 @@
 	for(int i = 0; i < 4; i++){
 		photoNos.add(request.getParameter("detailImgId" + i) == null ? "" : request.getParameter("detailImgId" + i));
 	}
+	
+	String content1 =request.getParameter("content1");
+	String content2 = request.getParameter("content2");
 %>
 <!DOCTYPE html>
 <html>
@@ -36,6 +47,7 @@
 	#cancelBtn{background: #B2CCFF}
 	#updateBtn:hover, #cancelBtn:hover{cursor: pointer;}
 	#insertThumbTable{margin: auto;}
+	#titleImg,#contentImg1{width:500px; height:300px;}
 </style>
 </head>
 <body>
@@ -48,95 +60,105 @@
 			</div>
 			<form action="<%= request.getContextPath() %>/update.wac" method="post" encType="multipart/form-data"><!-- 파일올리는 거기 때문에 -->
 				<div class="insertArea">
-					<table id="insertThumbTable">
-						<tr>
-							<th width="100px">제목</th>
-							<td colspan="3">
-								<input type="hidden" name="postNo" value="<%= request.getParameter("postNo") %>">
+					<div class="review">
+						<div class="titleArea">
+							<label>제목</label><input type="hidden" name="postNo" value="<%= request.getParameter("postNo") %>">
 								<input type="text" size="45" name="title" value="<%=title %>">
+						</div>
+				
+					<table id="reviewTable" align=center>
+						<tr>
+							<td><span>*</span> 남자친구의 이름을 작성해주세요.</td>
+							<td><span>*</span> 여자친구의 이름을 작성해주세요.</td>
+						</tr>
+						<tr>
+							<td><input type="text" name="mName" class="wac"  value="<%= mName %>"></td>
+							<td><input type="text" name="fName" class="wac"  value="<%= fName %>"></td>
+						</tr>
+							
+						<tr>
+							<td><span>*</span> 연애 기간</td>
+							<td><span>*</span> 즐겨하는 데이트</td>
+						</tr>
+						
+						<tr>
+							<td><input type="number" name="dtPeriod" min="1"  class="wac" value="<%= request.getParameter("dtPeriod") %>">&nbsp;일</td>
+							<td><input type="text" name="fvDate" maxlength="12" class="wac" placeholder="12자이내로 입력하세요."  value="<%= request.getParameter("fvDate") %>"></td>
+						</tr>
+						
+						<tr>
+							<td><span>*</span> 이어드림의 서비스 중 가장 만족했던 서비스를  작성해주세요.</td>
+						</tr>
+						<tr>
+							<td colspan=2>
+								<textarea cols= 60 rows= 4 name="content1" placeholder="작성해주세요"> <%=content1 %></textarea>
 							</td>
 						</tr>
 						<tr>
-							<th>대표 이미지</th>
-							<td colspan="3">
-								<div id="titleImgArea">
-									<img id="titleImg" width="350" height="200" src="<%= request.getContextPath() %>/photo_uploadFiles/<%= titleImg %>">
+							<td>후기</td>
+						</tr>
+						<tr>
+							<td colspan=2 width=100%>
+								<textarea  cols= 60 rows= 8 name="content2"  placeholder="작성해주세요"  ><%=content2 %></textarea>
+								<input type="hidden" name="content" value="content1+content2">
+							</td>
+						</tr>
+						<tr>
+							<td>커플 사진</td>
+						</tr>
+						<tr>
+								<td colspan="4">
+								<img id="titleImg" src="<%= request.getContextPath() %>/photo_uploadFiles/<%= titleImg %>">
 									<input type="hidden" id="detailImgId0" name="detailImgId0" value="<%= photoNos.get(0) %>"> 
 									<input type="hidden" id="cTitle" name="cTitle">
-								</div>
 							</td>
-						</tr>
-						<tr>
-							<th>내용 사진</th>
-							<% for(int i = 1; i < 4; i++){ %>
 							<td>
-								<div id="contentImgArea<%=i%>">
-									<img id="contentImg<%=i%>" width="120" height="100" <%= images.get(i-1) %>> 
-									<input type="hidden" id="detailImgId<%=i%>" name="detailImgId<%=i%>" value="<%= photoNos.get(i) %>"> 
-									<input type="hidden" id="cContent<%= i %>" name="cContent<%= i %>">
-								</div>
-							</td>
-							<% } %>
+								<img id="contentImg1" <%= images.get(0) %>> 
+									<input type="hidden" id="detailImgId1" name="detailImgId1" value="<%= photoNos.get(1) %>"> 
+									<input type="hidden" id="cContent1" name="cContent1">
+						</td>
 						</tr>
-						<tr>
-							<th width="100px">사진 메모</th>
-							<td colspan="3"><textarea name="content" rows="5" cols="50" style="resize:none;"><%= request.getParameter("memo").equals("null") ? "" : request.getParameter("memo") %></textarea>
-						</tr>
-					</table>
-					
-					<!-- 파일 업로드 하는 부분 -->
-					<div id="fileArea">
-						<input type="file" id="thumbnailImg1" multiple="multiple" name="thumbnailImg1" onchange="LoadImg(this,1)">
-						<input type="file" id="thumbnailImg2" multiple="multiple" name="thumbnailImg2" onchange="LoadImg(this,2)">
-						<input type="file" id="thumbnailImg3" multiple="multiple" name="thumbnailImg3" onchange="LoadImg(this,3)">
-						<input type="file" id="thumbnailImg4" multiple="multiple" name="thumbnailImg4" onchange="LoadImg(this,4)">
-					</div>
-					<script>
-						// 내용 작성 부분의 공간을 클릭할 때 파일 첨부 창이 뜨도록 설정하는 함수
-						$(function(){
-							$("#fileArea").hide();
-							
-							$("#titleImgArea").click(function(){
-								$("#thumbnailImg1").click();
-							});
-							$("#contentImgArea1").click(function(){
-								$("#thumbnailImg2").click();
-							});
-							$("#contentImgArea2").click(function(){
-								$("#thumbnailImg3").click();
-							});
-							$("#contentImgArea3").click(function(){
-								$("#thumbnailImg4").click();
-							});
-						});
 						
-						// 각각의 영역에 파일을 첨부 했을 경우 미리 보기가 가능하도록 하는 함수
-						function LoadImg(value, num){
-							if(value.files && value.files[0]){
-								var reader = new FileReader();
-								
-								reader.onload = function(e){								
-									switch(num){
-									case 1: 
-										$("#titleImg").attr("src", e.target.result);
-										break;
-									case 2:
-										$("#contentImg1").attr("src", e.target.result);
-										break;
-									case 3: 
-										$("#contentImg2").attr("src", e.target.result);
-										break;
-									case 4:
-										$("#contentImg3").attr("src", e.target.result);
-										break;
-									}
-								}
-								
-								reader.readAsDataURL(value.files[0]);
-							}
-						}
-					</script>
+					</table>
+				</div>
+
+				<div id="fileArea">
+					<input type="file" id="thumbnailImg1" multiple="multiple" name="thumbnailImg1" onchange="LoadImg(this,1)">
+					<input type="file" id="thumbnailImg2" multiple="multiple" name="thumbnailImg2" onchange="LoadImg(this,2)">
+				</div>
+				<script>
+					// 내용 작성 부분의 공간을 클릭할 때 파일 첨부 창이 뜨도록 설정하는 함수
+					$(function(){
+						$("#fileArea").hide();
+						
+						$("#titleImg").click(function(){
+							$("#thumbnailImg1").click();
+						});
+						$("#contentImg1").click(function(){
+							$("#thumbnailImg2").click();
+						});
+					});
 					
+					// 각각의 영역에 파일을 첨부 했을 경우 미리 보기가 가능하도록 하는 함수
+					function LoadImg(value, num){
+						if(value.files && value.files[0]){
+							var reader = new FileReader();
+							
+							reader.onload = function(e){								
+								switch(num){
+								case 1: 
+									$("#titleImg").attr("src", e.target.result);
+									break;
+								case 2:
+									$("#contentImg1").attr("src", e.target.result);
+									break;
+								}
+							}
+							
+							reader.readAsDataURL(value.files[0]);
+						}
+					}
+				</script>
 				</div>
 				<br>
 				<div class="btnArea">
