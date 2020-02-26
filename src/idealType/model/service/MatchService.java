@@ -18,7 +18,7 @@ import idealType.model.dao.MatchDAO;
 import idealType.model.vo.Match;
 
 
-public class MatchService {		
+public class MatchService {
 
 	public int insertMatch(Match m) {
 		Connection conn = getConnection();
@@ -33,6 +33,7 @@ public class MatchService {
 		close(conn);
 		return result;
 	}
+	
 	public int updateMatch(Match m) {
 		Connection conn = getConnection();
 		MatchDAO mDAO = new MatchDAO();
@@ -48,37 +49,36 @@ public class MatchService {
 	}
 	
 	public Match[] findMatch(int userNo) {
+		double minSync = 0.5;
+		int maxMatch = 5;
+		
 		Connection conn = getConnection();
 		UserInfoDAO uiDAO = new UserInfoDAO();
-		UserPreferDAO upDAO = new UserPreferDAO();
 		
-		UserInfo ui = uiDAO.selectUserInfo(conn, userNo);
-		UserPrefer up = upDAO.selectUserPrefer(conn, userNo);
-		
-		int[] tlist = uiDAO.searchUserNoList(conn, getUserGender(userNo));
-		
+		String targetGender = "F";
+		if (getUserGender(userNo).equals("F")) {
+			targetGender = "M";
+		}
+	
+		int[] tlist = uiDAO.searchUserNoList(conn, targetGender); // 반대 성별 유저 리스트
 		Match[] mlist = new Match[tlist.length];
 		
 		for (int i=0; i < tlist.length ; i++) {
-			UserInfo ti = uiDAO.selectUserInfo(conn, tlist[i]);
-			UserPrefer tp = upDAO.selectUserPrefer(conn, tlist[i]);
-			mlist[i].setSync(getMatchSync(ui, up, ti, tp));
+			mlist[i].setSync(getMatchSync(userNo, tlist[i])); // 임시 매칭 리스트 생성, 싱크율 기준 정렬
 		}
-		
-		Arrays.sort(mlist);
-		
-		Match[] result = new Match[5];
+		Arrays.sort(mlist);										
+		Match[] result = new Match[maxMatch];
 		int j = 0;
-		for (int i=0 ; i<5 || j < mlist.length; i++) {
+		for (int i=0 ; i<5 || j < mlist.length; i++) { // 싱크율 옾은 순서대로 대입해서 중복 없고 상대도 나를 마음에 들어할 가능성이 있다면 리턴 배열에 추가
 			for (; result[i] != null ; j++) {
-				if (checkMatch(mlist[j])) {result[i] = mlist[j];}
+				if (checkMatch(mlist[j]) && (getMatchSync(mlist[j].getUserNo(), userNo) > minSync)) {
+					result[i] = mlist[j];}
 			}
 		}
-		
 		return result;
 	}
 	
-	public String getUserGender(int userNo) {
+	public String getUserGender(int userNo) { // 성별 확인
 		Connection conn = getConnection();
 		UserInfoDAO uiDAO = new UserInfoDAO();
 		Account ac = uiDAO.selectAccount(conn, userNo);
@@ -86,12 +86,11 @@ public class MatchService {
 		return gender;
 	}
 	
-	public boolean checkMatch(Match m) {
+	public boolean checkMatch(Match m) { //중복 확인
 		Connection conn = getConnection();
 		MatchDAO mDAO = new MatchDAO();
 		Match[] mlist = mDAO.selectMatchList(conn, m.getUserNo());
 		boolean result = true;
-		
 		for (int i=0; i < mlist.length ;i++) {
 			if (mlist[i].getTargetNo() == m.getTargetNo()){
 				result = false;
@@ -100,7 +99,17 @@ public class MatchService {
 		return result;
 	}
 	
-	public double getMatchSync(UserInfo ui, UserPrefer up, UserInfo ti, UserPrefer tp) {
+	public double getMatchSync(int userNo, int targetNo) { // 취향 적합도 계산
+		
+		Connection conn = getConnection();
+		UserInfoDAO uiDAO = new UserInfoDAO();
+		UserPreferDAO upDAO = new UserPreferDAO();
+
+		UserInfo ui = uiDAO.selectUserInfo(conn, userNo);
+		UserPrefer up = upDAO.selectUserPrefer(conn, userNo);
+		UserInfo ti = uiDAO.selectUserInfo(conn, targetNo);
+		UserPrefer tp = upDAO.selectUserPrefer(conn, targetNo);
+		
 		double syncPoint = 0;
 		int maxPoint = up.getHeightPri() + up.getShapePri() + up.getStylePri() + up.getAgePri() + up.getRegionPri() 
 						+ up.getReligionPri() + up.getScholarPri() + up.getJobPri() + up.getDrinkPri() + up.getSmokePri() + up.getInterestPri();
