@@ -26,7 +26,7 @@
 		height: 600px;
 		border: 8px solid pink;
 		margin-left: 23px;
-		margin-bottom: 60px;
+		margin-bottom: 20px;
 	}
 	
 	.parag1{
@@ -47,7 +47,7 @@
 		box-shadow: 1px 1px 25px #ccc;
 	}
 	
-	.img1:hover .parag1-img{ transition:0.2s ease-out; transform: rotate(360deg) translateX(0px) translateY(0px); }
+	.img1:hover .titlePhoto{ transition:0.2s ease-out; transform: rotate(360deg) translateX(0px) translateY(0px); }
 	.img1 > img{
 		width: 100%;
 		height: 280px;
@@ -79,13 +79,12 @@
 		outline: none;
 		font-size: 25px;
 		color: white;
-		width: 80px;
+		width: 140px;
 		font-weight: bold;
 	}
 	
 	#nameinput1{
 		text-align: right;
-		margin-right: 2%;
 	}
 	
 	#nameinput2{
@@ -95,7 +94,7 @@
 	.heart{
 		font-size: 25px;
 		display: inline-block;
-		margin-right: 1%;
+		margin: 0 1% 0 2%;
 	}
 	
 	.text2{
@@ -182,23 +181,45 @@
 		box-shadow: 1px 1px 25px #ccc;
 	}
 	
-	.img2:hover .parag2-img{ transition:0.2s ease-out; transform: rotate(360deg) translateX(0px) translateY(0px); }
+	.img2:hover .detailPhoto{ transition:0.2s ease-out; transform: rotate(360deg) translateX(0px) translateY(0px); }
 	.img2 > img{
 		width: 100%;
 		height: 280px;
 	}
+	
+		button{
+		padding: 6px 9px 6px 9px;
+		background: pink;
+		color: white;
+		border-radius: 10px;
+		font-weight: bold;
+		font-size: 15px;
+		font-family: "만화진흥원체";
+	    cursor: pointer;
+		margin-bottom: 30px;
+		text-align: center;
+	    display: inline-block;
+		text-shadow: 0 1px 1px rgba(0,0,0,.3);
+		box-shadow: 0 1px 2px rgba(0,0,0,.2);
+	}
+	
+	.btnBox{
+		margin-left: 33%;
+	}
+	
 </style>
 </head>
 <body>
 	<%@ include file="../../common/mainmenu.jsp" %>
 	<section>
 		<h1 class="title">이달의 베스트 커플</h1>
-		<form action="<%= request.getContextPath() %>/views/coupleStory/bestCouple/bestCoupleUpdateForm.jsp">
+		<form action="<%= request.getContextPath() %>/views/coupleStory/bestCouple/bestCoupleUpdateForm.jsp" id="detailForm" method="post">
 			<div class="main">
 				<div class="parag1">
+					<input type="hidden" name="pNo" value="<%= b.getPostNo() %>">
 					<input type="hidden" name="title" value="<%= b.getTitle() %>">
 					<div class="img1">
-						<img class="parag1-img" src="<%= request.getContextPath() %>/photo_uploadFiles/<%= titlePt.getChangeName() %>">
+						<img class="titlePt" id="titlePt" src="<%= request.getContextPath() %>/photo_uploadFiles/<%= titlePt.getChangeName() %>">
 					</div>
 					<div class="contn1">
 						<div class="text1">
@@ -217,7 +238,7 @@
 						</div>
 					</div>
 					<div class="img2">
-						<img class="parag2-img detailPhoto" id="detailPhoto" src="<%= request.getContextPath()%>/photo_uploadFiles/<%= pList.get(1).getChangeName() %>">
+						<img class="detailPt" id="detailPt" src="<%= request.getContextPath()%>/photo_uploadFiles/<%= pList.get(1).getChangeName() %>">
 					</div>
 				</div>
 			</div>
@@ -228,12 +249,19 @@
 					<button type="submit" id="deleteBtn" onclick="deletePt();">삭제</button>
 				<% } %>
 			</div>
-			
-			
-			
-			
-			
 		</form>
+		
+		<script>
+		function deletePt(){
+			var bool = confirm('게시글을 삭제하시겠습니까?');
+			if(bool){
+				$('#detailForm').attr('action', '<%= request.getContextPath() %>/delete.bc');
+				$('#detailForm').submit();
+			}else {
+				event.preventDefault();
+			} 
+		}
+		</script>
 	</section>
 </body>
 </html>

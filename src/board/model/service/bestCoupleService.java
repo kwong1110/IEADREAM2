@@ -165,5 +165,20 @@ public class bestCoupleService {
 		return result1;
 	}
 
+	public int deleteBoard(int pNo) {
+		Connection conn = getConnection();
+		bestCoupleDAO bcDAO = new bestCoupleDAO();
+		
+		int result = bcDAO.deleteBoard(conn, pNo);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		return result;
+	}
+
 
 }	
