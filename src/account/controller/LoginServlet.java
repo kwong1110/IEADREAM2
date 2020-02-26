@@ -44,17 +44,24 @@ public class LoginServlet extends HttpServlet {
 		
 		response.setContentType("text/html; charset=UTF-8");
 		
+		int failCount = 0;
+		
 		if(loginUser != null) { // 로그인 성공시에 대한 코드
-			
-			HttpSession session = request.getSession();
-			session.setMaxInactiveInterval(600); // 로그인에 대한  시간을 설정해주는 것이다 . -> 10분(60 * 10) 
-			session.setAttribute("loginUser", loginUser);
-			
-			response.sendRedirect("index.jsp");
-			
+			if(loginUser.getPassword().equals("비밀번호 불일치")) {
+				request.setAttribute("msg", "비밀번호가 일치하지 않습니다.");
+				request.setAttribute("failCount", failCount);
+				RequestDispatcher view = request.getRequestDispatcher("views/account/accountLoginForm.jsp");
+				view.forward(request, response);
+			}else {
+				HttpSession session = request.getSession();
+				session.setMaxInactiveInterval(600); // 로그인에 대한  시간을 설정해주는 것이다 . -> 10분(60 * 10) 
+				session.setAttribute("loginUser", loginUser);
+				
+				response.sendRedirect("index.jsp");
+			}
 		} else { // 로그인 실패 시 출력코드 
-			request.setAttribute("msg", "로그인 실패");
-			RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
+			request.setAttribute("msg", "아이디가 존재하지 않습니다.");
+			RequestDispatcher view = request.getRequestDispatcher("views/account/accountLoginForm.jsp");
 			view.forward(request, response);
 		}	
 	}
