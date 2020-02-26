@@ -20,7 +20,7 @@
 		font-family: 'LotteMartHappy'; font-style: normal;
 	}
 	* {margin: 0; padding: 0; }
-	body{background:url('<%= request.getContextPath() %>/images/bgbgbg.jpg') no-repeat center center fixed;
+	body{background:url('<%= request.getContextPath() %>/images/bgbg.jpg') no-repeat center center fixed;
 		background-size: cover;}
 	
 	.header {
@@ -116,9 +116,9 @@
 						<li class="s-menu" id="myPage"><span onclick="">마이페이지</span>
 							<ul class="dept01">							
 								<li id="nop"><a href="<%=request.getContextPath()%>/views/myPage/user/memberGradeUpForm.jsp">정회원 등업</a></li>
-								<li id="nop"><a href="<%= request.getContextPath()%>/selectProfile.mp">기본정보</a></li>
-								<li id="nop"><a href="">나의 프로필</a></li>
-								<li id="nop"><a href="">이상형 정보</a></li>
+								<li id="nop"><a href="<%= request.getContextPath()%>/selectProfileServlet">기본정보</a></li>
+								<li id="nop"><a href="<%= request.getContextPath() %>/updateUser.if">나의 프로필</a></li>
+								<li id="nop"><a href="<%= request.getContextPath() %>/updateUser.pf">이상형 정보</a></li>
 								<li id="nop">
 									<a href="<%=request.getContextPath()%>/views/myPage/user/myWritingListForm.jsp">작성글 조회</a>
 								</li>
