@@ -36,7 +36,7 @@ public class UpdateUserInfoServlet extends HttpServlet {
 
 		
 		int userNo = ((Account)request.getSession().getAttribute("loginUser")).getUserNo();
-		String thumb = request.getParameter("thumb");
+		int thumbNo = Integer.parseInt(request.getParameter("thumbNo"));
 		String hello = request.getParameter("hello");
 		int height = Integer.parseInt(request.getParameter("height"));
 		String shape = request.getParameter("shape");
@@ -52,7 +52,7 @@ public class UpdateUserInfoServlet extends HttpServlet {
 		UserInfo ui = new UserInfo();
 
 		ui.setUserNo(userNo);
-		ui.setThumb(thumb);
+		ui.setThumbNo(thumbNo);
 		ui.setHello(hello);
 		ui.setHeight(height);
 		ui.setShape(shape);

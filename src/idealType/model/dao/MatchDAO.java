@@ -10,6 +10,8 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Properties;
 
+import account.model.dao.String;
+import account.model.vo.UserInfo;
 import idealType.model.vo.Match;
 import questionBoard.question.model.vo.Question;
 
@@ -27,6 +29,47 @@ public class MatchDAO {
 			e.printStackTrace();
 		}
 	}
+	public int inserMatch(Connection conn, Match m) {
+		PreparedStatement pstmt = null;
+		String query = prop.getProperty("insertMatch");
+		int result= 0;
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			
+			pstmt.setInt(1, m.getUserNo());
+			pstmt.setInt(2, m.getTargetNo());
+
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+
+	}
+	public int updateMatch(Connection conn, Match m) {
+		PreparedStatement pstmt = null;
+		String query = prop.getProperty("updateMatch");
+		int result= 0;
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+
+			pstmt.setChar(1, m.getStatus());
+			pstmt.setInt(2, m.getUserNo());
+			pstmt.setInt(3, m.getTargetNo());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
 	
 	
 }

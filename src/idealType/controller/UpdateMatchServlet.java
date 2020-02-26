@@ -26,8 +26,29 @@ public class UpdateMatchServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		request.setCharacterEncoding("UTF-8");
+		
+		int userNo = ((Account)request.getSession().getAttribute("loginUser")).getUserNo();
+		
+		Match m = new Match();
+
+		m.setUserNo(userNo);
+		m.setTargetNo(targetNo);
+		m.setStatus(status);
+		m.setMatchDate(matchdate);
+		
+		int result = new MatchService().insertMatch(m);
+		
+		String page = null;
+		if(result > 0) {
+			page = "";
+		} else {
+			page = "views/common/errorPage.jsp";
+			request.setAttribute("msg", "정보 수정에 실패하였습니다.");
+		}
+		
+		RequestDispatcher view = request.getRequestDispatcher(page);
+		view.forward(request, response);
 	}
 
 	/**
