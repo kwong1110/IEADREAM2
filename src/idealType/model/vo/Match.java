@@ -7,9 +7,9 @@ public class Match {
 	private int userNo;			
 	private int targetNo;		
 	private Date matchDate;		
-	private char status;	
+	private String status;	
 
-	public Match(int userNo, int targetNo, Date matchDate, char status) {
+	public Match(int userNo, int targetNo, Date matchDate, String status) {
 		this.userNo = userNo;
 		this.targetNo = targetNo;
 		this.matchDate = matchDate;
@@ -41,11 +41,11 @@ public class Match {
 		this.matchDate = matchDate;
 	}
 
-	public void setStatus(char status) {
+	public void setStatus(String status) {
 		this.status = status;
 	}
 	
-	public char getStatus() {
+	public String getStatus() {
 		return status;
 	}
 

@@ -29,7 +29,7 @@ public class MatchDAO {
 			e.printStackTrace();
 		}
 	}
-	public int inserMatch(Connection conn, Match m) {
+	public int insertMatch(Connection conn, Match m) {
 		PreparedStatement pstmt = null;
 		String query = prop.getProperty("insertMatch");
 		int result= 0;
