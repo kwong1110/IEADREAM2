@@ -7,6 +7,9 @@
 <title>아이디 찾기후 값 출력</title>
 </head>
 <body>
+	<p class="txt"><Strong class="black">고객님의 아이디는 <%=account.getUserid() %></Strong>
+
+			
 
 </body>
 </html>

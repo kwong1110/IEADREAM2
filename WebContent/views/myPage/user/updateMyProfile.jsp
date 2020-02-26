@@ -2,18 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ page import="account.model.vo.*, java.util.*" %>
 <%
-	request.setCharacterEncoding("UTF-8");
 
-	Account account = (Account)request.getAttribute("account");
-
-	String id = account.getId();
-	String name = account.getUserName();
-	String password = account.getPassword();
-	int grade = account.getGrade();
-	String email = account.getEmail();
-	String phone = account.getPhone();
-	String gender = account.getGender();
-	Date birth = account.getBirth();
 %>
 
 <!DOCTYPE html>
@@ -51,21 +40,21 @@
 								<tr>
 									<td class="minW">아이디</td>
 									<td>
-										<input type="text" placeholder="userID" class="profile" name="id" readOnly value="<%= id %>" style="background: lightgray;">
+										<input type="text" placeholder="userID" class="profile" name="id" readOnly value="" style="background: lightgray;">
 									</td>
 								</tr>
 								<tr>
 									<td>이름</td>
-									<td><input type="text" placeholder="이름을 입력해주세요" class="profile" name="user_name" value="<%= name %>"><%= name %></td>
+									<td><input type="text" placeholder="이름을 입력해주세요" class="profile" name="user_name" value=""></td>
 									<td><input type="text" name="nameResult"></td>
 								</tr>
 								<tr>
 									<td>회원등급</td>
-									<td><input type="text" class="profile" name="grade" readonly value="<%= grade %>"><%= grade %></td>
+									<td><input type="text" class="profile" name="grade" readonly value=""></td>
 								</tr>
 								<tr>
 									<td>비밀번호</td>
-									<td><input type="text" placeholder="비밀번호를 입력해주세요" class="profile" name="pass" value="<%= password %>"></td>
+									<td><input type="text" placeholder="비밀번호를 입력해주세요" class="profile" name="pass" value=""></td>
 									<td><input type="text" name="passResult"></td>
 								</tr>
 								<tr>
@@ -75,19 +64,19 @@
 								</tr>
 								<tr>
 									<td>이메일</td>
-									<td><input type="text" placeholder="메일을 입력해주세요" class="profile" name="email" value="<%= email %>"><%= email %></td>
+									<td><input type="text" placeholder="메일을 입력해주세요" class="profile" name="email" value=""></td>
 								</tr>
 								<tr>
 									<td>휴대전화</td>
-									<td><input type="text" placeholder="휴대전화 번호를 입력해주세요" class="profile" name="phone" value="<%= phone %>"><%= phone %></td>
+									<td><input type="text" placeholder="휴대전화 번호를 입력해주세요" class="profile" name="phone" value=""></td>
 								</tr>
 								<tr>
 									<td>성별</td>
-									<td><input type="text" class="profile" name="gender" readonly value="<%= gender %>"><%= gender %></td>
+									<td><input type="text" class="profile" name="gender" readonly value=""></td>
 								</tr>
 								<tr>
 									<td>생년월일</td>
-									<td><input type="text" class="profile" name="birth" readonly value="<%= birth %>"><%= birth %></td>
+									<td><input type="text" class="profile" name="birth" readonly value=""></td>
 								</tr>
 						</table>
 						<div style="text-align: center;">

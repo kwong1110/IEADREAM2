@@ -37,6 +37,7 @@ public class FindpwdServlet extends HttpServlet {
 		
 	
 		Account findUser = new Account(userId, email);
+		String account = new AccountService().searchPwd(findUser);
 		
 		String page ="";
 		if (account != null){

@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>IEADREAM - CEO</title>
+<link rel="stylesheet" href="<%= request.getContextPath() %>/css/common.css">
 <style>
 	a:link { color: black; text-decoration: none}
     a:visited {color: black;}

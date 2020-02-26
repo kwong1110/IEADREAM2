@@ -183,6 +183,7 @@ public class AccountDAO {
 		
 		return result;
 	}
+<<<<<<< HEAD
 	public String searchPwd(Account account, Connection conn) {
 		// TODO Auto-generated method stub
 		return null;
@@ -267,5 +268,8 @@ public class AccountDAO {
 
 	
 	
+=======
+}
+>>>>>>> branch 'master' of https://github.com/kwong1110/IeaDream2.git
 	
 
