@@ -47,7 +47,7 @@ public class FindpwdServlet extends HttpServlet {
 			
 		}else {
 			page = "views/common/errorPage.jsp";
-			request.setAttribute("msg", "아이디 찾기에 실패하셨습니다,");
+			request.setAttribute("msg", "비밀번호 찾기에 실패하셨습니다,");
 		}
 		
 		request.getRequestDispatcher(page).forward(request, response);
