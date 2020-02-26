@@ -33,6 +33,34 @@ public class UserInfoDAO {
 			e.printStackTrace();
 		}
 	}
+	public Account selectAccount(Connection conn, int userNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		Account ac = new Account();
+		String query = prop.getProperty("selectAccount");
+		try	{
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, userNo);
+			rs = pstmt.executeQuery();
+				ac.setUserNo(userNo);
+				ac.setGrade(rs.getInt("GRADE"));
+				ac.setId(rs.getString("ID"));
+				ac.setGender(rs.getString("GENDER"));
+				ac.setUserName(rs.getString("USER_NAME"));
+				ac.setPhone(rs.getString("PHONE"));
+				ac.setEmail(rs.getString("EMAIL"));
+				ac.setBirth(rs.getDate("BIRTH"));
+		}catch(Exception e) { 
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return ac;
+	}
+	
+	
+	
 	public UserInfo selectUserInfo(Connection conn, int userNo) {
 		PreparedStatement pstmt = null; 
 		ResultSet rs = null;
