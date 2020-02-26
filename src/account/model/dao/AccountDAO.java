@@ -123,7 +123,7 @@ public class AccountDAO {
 	
 	// 아이디 찾기 DAO
 	public Account searchid(Account account, Connection conn) {
-		Account result = null;
+		Account a = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		String query = prop.getProperty("searchid");
@@ -137,11 +137,12 @@ public class AccountDAO {
 			rset = pstmt.executeQuery();
 					
 			if(rset.next()) {
-				result = new Account();
+				a = new Account();
 				
-				result.setId(rset.getString("id"));
+				a.setId(rset.getString("id"));
+				
 			}
-			System.out.println(result);
+			System.out.println(a);
 			
 		}catch(Exception e) { 
 			e.printStackTrace();
@@ -149,7 +150,7 @@ public class AccountDAO {
 			close(rset);
 			close(pstmt);
 		}
-		return result;
+		return a;
 	}
 	
 	//비밀번호 찾기 DAO
@@ -182,6 +183,93 @@ public class AccountDAO {
 		
 		return result;
 	}
+<<<<<<< HEAD
+	public String searchPwd(Account account, Connection conn) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Account selectMyProfile(Connection conn, String loginId) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		Account account = null;
+		
+		String query = prop.getProperty("selectMyProfile");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			
+			pstmt.setString(1, loginId);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				account = new Account(rs.getInt("user_no"),
+									  rs.getInt("grade"),
+									  rs.getString("id"),
+									  rs.getString("password"),
+									  rs.getString("gender"),
+									  rs.getString("user_name"),
+									  rs.getString("phone"),
+									  rs.getString("email"),
+									  rs.getDate("birth"),
+									  rs.getString("deleted"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return account;
+	}
+
+	public int updateAccount(Connection conn, Account account) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("updateAccount");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, account.getPassword());
+			pstmt.setString(2, account.getUserName());
+			pstmt.setString(3, account.getPhone());
+			pstmt.setString(4, account.getEmail());
+			pstmt.setString(5, account.getId());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public int deleteAccount(Connection conn, String id) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("deleteAccount");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			
+			pstmt.setString(1, id);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+	}
+
+	
+	
+=======
 }
+>>>>>>> branch 'master' of https://github.com/kwong1110/IeaDream2.git
 	
 
