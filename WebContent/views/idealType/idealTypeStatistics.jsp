@@ -6,64 +6,12 @@
   <title>이상형의 이상형</title>
   <meta charset="utf-8">
   <style>
-    a:link { color: black; text-decoration: none}
-    a:visited {color: black;}
-    a:hover{ color : silver;}
     .wrapper{
       text-align: left;
       width: 1200px;
       margin:0 auto;
       padding:0;
       display : block;
-    }
-    header {
-      background-color: white;
-      text-align:center;
-      height:120px;
-    }
-    #logo{
-      min-width : 175px;
-      float:left;
-    }
-    ul, ol, li {
-      list-style: none;
-      margin:0;
-      padding:0;
-    }
-    ul.mainMenu > li {
-      display : inline-block;
-      font-size :18pt;
-      font-weight : 500;
-      width: 130px;
-      height: 35px;
-      padding: 5px;
-      padding-top: 10px;
-      margin: 50px 0px -5px -6px;
-      background-color: white;
-      text-align: center;
-      position:relative;
-    }
-    ul.mainMenu > li ul.subMenu{
-      visibility: hidden;
-      position:absolute;
-      top:50px;
-      left:0;
-    }
-    ul.mainMenu > li ul.subMenu > li{
-      display : inline-block;
-      font-size :14pt;
-      font-weight : 400;
-      width: 130px;
-      margin: -3px 0px -5px 0px;
-      padding: 5px;
-      background-color: white;
-      text-align: center;
-    }
-    ul.mainMenu > li:hover ul.subMenu > li{
-      visibility :visible;
-    }
-    ul.mainMenu > li ul.subMenu > li:hover{
-      color:slategray
     }
     #profile {
       text-align: right;
@@ -107,12 +55,6 @@
     }
     section {
       padding: 15px;
-    }
-    footer {
-      clear : left;
-      background-color: gray;
-      height: 120px;
-      text-align: center;
     }
     .graph { 
       position: relative;
@@ -165,71 +107,15 @@
   </style>
 </head>
 <body style="height:100%; margin:0 auto;">
-  <header>
-    <div class="wrapper">
-      <div id="logo">
-        <img src="logo.png" width="150px" height="120px" style="float:left;">
-      </div>
-      <div id="profile">
-        <a href="">로그인</a>
-        <a href="">회원 가입</a>
-      </div>
-      <div>
-        <ul class="mainMenu">
-          <li><a href="">이어드림</a>
-            <ul class="subMenu">
-              <li><a href="">회사 소개</a></li>
-              <li><a href="">CEO 소개</a></li>
-              <li><a href="">오시는 길</a></li>
-            </ul>
-          </li>
-          <li><a href="">이상형 매칭</a>
-            <ul class="subMenu">
-              <li><a href="">이상형 추천</a></li>
-              <li><a href="">이상형의<br>이상형 찾기</a></li>
-            </ul>
-          </li>
-          <li><a href="">러브 파티</a>
-            <ul class="subMenu">
-              <li><a href="">러브 파티</a></li>
-              <li><a href="">파티 후기</a></li>
-            </ul>
-          </li>
-          <li><a href="">커플 이야기</a>
-            <ul class="subMenu">
-              <li><a href="">이달의 커플</a></li>
-              <li><a href="">커플 후기</a></li>
-            </ul>
-          </li>
-          <li><a href="">고객 문의</a>
-            <ul class="subMenu">
-              <li><a href="">1:1 문의</a></li>
-              <li><a href="">FAQ</a></li>
-            </ul>
-          </li>
-          <li><a href="">마이 페이지</a>
-            <ul class="subMenu">
-              <li><a href="">정회원 등업</a></li>
-              <li><a href="">계정 정보</a></li>
-              <li><a href="">나의 정보</a></li>
-              <li><a href="">이상형 정보</a></li>
-              <li><a href="">작성글 조회</a></li>
-              <li><a href="">하트<br>히스토리</a></li>
-            </ul>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </header>
 
   <div class ="outer">
     <div class="wrapper">
       <nav>
         <div  class="mainCategory">
-          <a href="">이상형</a>
+          <a href="views/account/idealType/idealTypeMatch.jsp">이상형</a>
         </div>
         <div class="subCategory">
-          <a href="">이상형 추천</a>
+          <a href="views/account/idealType/idealTypeMatch.jsp">이상형 추천</a>
         </div>
         <div class="subCategory">
           <a href="">이상형의 이상형</a>
@@ -706,20 +592,6 @@
       </div>
     </div>
   </div>
-  <footer>
-    <div class="wrapper" style="display:inline-block;">
-      <div style="float:left; margin:20px;">
-        <img src="logo.png" width="100px" height="80px">
-      </div>
-      <div style="margin:5px;">
-        <p> 
-          대표이사 박소현 | 사업자 111-11-111111 | TEL 02)0202-0202<br>
-          본사 | 서울 특별시 연애하구 사랑동 행복로 잘되길 12-3<br>
-          E-MAIL love_manager@naver.com<br>
-          Copyright c 1998-2019 Couple Matching Service 
-        </p>
-      </div>
-    </div>      
-  </footer>
+
 </body>
 </html>

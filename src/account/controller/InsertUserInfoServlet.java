@@ -9,7 +9,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.oreilly.servlet.MultipartRequest;
+
 import account.model.vo.UserInfo;
+import account.model.vo.UserPhoto;
+import common.MyFileRenamePolicy;
 import account.model.vo.Account;
 import account.model.service.UserService;
 
@@ -32,27 +36,34 @@ public class InsertUserInfoServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		request.setCharacterEncoding("UTF-8");
-		
+		int maxSize = 1024 * 1024 * 10;
+		String root = request.getSession().getServletContext().getRealPath("/");
+		String savePath = root + "photo_uploadFiles/";
+		MultipartRequest mrequest = new MultipartRequest(request, savePath, maxSize, "UTF-8", new MyFileRenamePolicy());
+		String originName = mrequest.getFilesystemName("profileImg");
+		String changeName = mrequest.getOriginalFileName("profileImg");
 		
 		int userNo = ((Account)request.getSession().getAttribute("loginUser")).getUserNo();
-		int thumbNo = Integer.parseInt(request.getParameter("thumbNo"));
-		String hello = request.getParameter("hello");
-		int height = Integer.parseInt(request.getParameter("height"));
-		String shape = request.getParameter("shape");
-		String style = request.getParameter("style");
-		int region = Integer.parseInt(request.getParameter("region"));
-		String religion = request.getParameter("religion");
-		int scholar = Integer.parseInt(request.getParameter("scholar"));
-		String job = request.getParameter("job");
-		int drink = Integer.parseInt(request.getParameter("drink"));
-		int smoke = Integer.parseInt(request.getParameter("smoke"));
-		String[] interest = request.getParameterValues("interest");
+		String hello = mrequest.getParameter("hello");
+		int height = Integer.parseInt(mrequest.getParameter("height"));
+		String shape = mrequest.getParameter("shape");
+		String style = mrequest.getParameter("style");
+		int region = Integer.parseInt(mrequest.getParameter("region"));
+		String religion = mrequest.getParameter("religion");
+		int scholar = Integer.parseInt(mrequest.getParameter("scholar"));
+		String job = mrequest.getParameter("job");
+		int drink = Integer.parseInt(mrequest.getParameter("drink"));
+		int smoke = Integer.parseInt(mrequest.getParameter("smoke"));
+		String[] interest = mrequest.getParameterValues("interest");
+
+		UserPhoto p = new UserPhoto();
+		p.setUserNo(userNo);
+		p.setFilePath(savePath);
+		p.setOriginName(originName);
+		p.setChangeName(changeName);
 		
 		UserInfo ui = new UserInfo();
-
 		ui.setUserNo(userNo);
-		ui.setThumbNo(thumbNo);
 		ui.setHello(hello);
 		ui.setHeight(height);
 		ui.setShape(shape);
@@ -65,10 +76,12 @@ public class InsertUserInfoServlet extends HttpServlet {
 		ui.setSmoke(smoke);
 		ui.setInterest(interest);
 
-		int result = new UserService().insertUserInfo(ui);
+		UserService UserService = new UserService();
+		int result1 = UserService.insertPhoto(p);
+		int result2 = UserService.insertUserInfo(ui);
 		
 		String page = null;
-		if(result > 0) {
+		if(result1 > 0 && result2 > 0) {
 			page = "views/account/joinUserPreferenceForm.jsp";
 		} else {
 			page = "views/common/errorPage.jsp";

@@ -57,7 +57,7 @@ public class MatchDAO {
 		try {
 			pstmt = conn.prepareStatement(query);
 
-			pstmt.setChar(1, m.getStatus());
+			pstmt.setString(1, m.getStatus());
 			pstmt.setInt(2, m.getUserNo());
 			pstmt.setInt(3, m.getTargetNo());
 			
