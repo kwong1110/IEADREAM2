@@ -1,8 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!doctype html>
+<!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" type="text/css" href="css/reset.css" />
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
   <title>내 정보 입력</title>
   <meta charset="utf-8">
   <style>
@@ -118,67 +120,9 @@
       text-align : right;
       margin : 5px  5px auto;
     }
-
   </style>
 </head>
 <body style="height:100%; margin:0 auto;">
-  <header>
-    <div class="wrapper">
-      <div id="logo">
-        <img src="logo.png" width="150px" height="120px" style="float:left;">
-      </div>
-      <div id="profile">
-        <a href="">로그인</a>
-        <a href="">회원 가입</a>
-      </div>
-      <div>
-        <ul class="mainMenu">
-          <li><a href="">이어드림</a>
-            <ul class="subMenu">
-              <li><a href="">회사 소개</a></li>
-              <li><a href="">CEO 소개</a></li>
-              <li><a href="">오시는 길</a></li>
-            </ul>
-          </li>
-          <li><a href="">이상형 매칭</a>
-            <ul class="subMenu">
-              <li><a href="">이상형 추천</a></li>
-              <li><a href="">이상형의<br>이상형 찾기</a></li>
-            </ul>
-          </li>
-          <li><a href="">러브 파티</a>
-            <ul class="subMenu">
-              <li><a href="">러브 파티</a></li>
-              <li><a href="">파티 후기</a></li>
-            </ul>
-          </li>
-          <li><a href="">커플 이야기</a>
-            <ul class="subMenu">
-              <li><a href="">이달의 커플</a></li>
-              <li><a href="">커플 후기</a></li>
-            </ul>
-          </li>
-          <li><a href="">고객 문의</a>
-            <ul class="subMenu">
-              <li><a href="">1:1 문의</a></li>
-              <li><a href="">FAQ</a></li>
-            </ul>
-          </li>
-          <li><a href="">마이 페이지</a>
-            <ul class="subMenu">
-              <li><a href="">정회원 등업</a></li>
-              <li><a href="">계정 정보</a></li>
-              <li><a href="">나의 정보</a></li>
-              <li><a href="">이상형 정보</a></li>
-              <li><a href="">작성글 조회</a></li>
-              <li><a href="">하트<br>히스토리</a></li>
-            </ul>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </header>
-
   <div class ="outer">
     <div class="wrapper">
       <div class ="main">
@@ -186,15 +130,15 @@
           <label>내 정보 입력</label>
         </section>
         <section>
-          <form action="/update.ui">
+          <form action="<%= request.getContextPath() %>/insert.ui" method="post" enctype="multipart/form-data">
             <section id="itemProfile" style="display:flex">
-              <article style="padding-right: 50px;">
-                <img src="" width="200" height="200"/>
-                <p><input type="file" value="첨부"></p>
+              <article style="width: 400px; height: 250px;" >
+				<img id='output' width="250" height="250"><br>
+              	<input type='file' accept='image/*' onchange='openFile(event)' id="imgInput" name="profileImg">
               </article>
               <article id="hello" style="text-align:center; margin-left:30px;">
                 <label>소갯말</label><br>
-                <textarea style="width: 500px; height:200px; margin-top :15px; resize:none;">
+                <textarea style="width: 400px; height:150px; margin-top :15px; resize:none;" name="hello">
                 </textarea>
               </article>
             </section>
@@ -339,20 +283,23 @@
       </div>
     </div>
   </div>
-  <footer>
-    <div class="wrapper" style="display:inline-block;">
-      <div style="float:left; margin:20px;">
-        <img src="logo.png" width="100px" height="80px">
-      </div>
-      <div style="margin:5px;">
-        <p> 
-          대표이사 박소현 | 사업자 111-11-111111 | TEL 02)0202-0202<br>
-          본사 | 서울 특별시 연애하구 사랑동 행복로 잘되길 12-3<br>
-          E-MAIL love_manager@naver.com<br>
-          Copyright c 1998-2019 Couple Matching Service 
-        </p>
-      </div>
-    </div>      
-  </footer>
+
+  
 </body>
+<script>
+
+	var openFile = function(event) {
+    	var input = event.target;
+   		var reader = new FileReader();
+    	reader.onload = function(){
+    		var dataURL = reader.result;
+    		var output = document.getElementById('output');
+    		output.src = dataURL;
+    		};
+	reader.readAsDataURL(input.files[0]);
+
+  	};
+
+</script>
+
 </html>

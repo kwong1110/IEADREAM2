@@ -1,8 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!doctype html>
+<!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" type="text/css" href="css/reset.css" />
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
   <title>이상형 정보 입력</title>
   <meta charset="utf-8">
   <style>
@@ -145,62 +147,6 @@
   </style>
 </head>
 <body style="height:100%; margin:0 auto;">
-  <header>
-    <div class="wrapper">
-      <div id="logo">
-        <img src="logo.png" width="150px" height="120px" style="float:left;">
-      </div>
-      <div id="profile">
-        <a href="">로그인</a>
-        <a href="">회원 가입</a>
-      </div>
-      <div>
-        <ul class="mainMenu">
-          <li><a href="">이어드림</a>
-            <ul class="subMenu">
-              <li><a href="">회사 소개</a></li>
-              <li><a href="">CEO 소개</a></li>
-              <li><a href="">오시는 길</a></li>
-            </ul>
-          </li>
-          <li><a href="">이상형 매칭</a>
-            <ul class="subMenu">
-              <li><a href="">이상형 추천</a></li>
-              <li><a href="">이상형의<br>이상형 찾기</a></li>
-            </ul>
-          </li>
-          <li><a href="">러브 파티</a>
-            <ul class="subMenu">
-              <li><a href="">러브 파티</a></li>
-              <li><a href="">파티 후기</a></li>
-            </ul>
-          </li>
-          <li><a href="">커플 이야기</a>
-            <ul class="subMenu">
-              <li><a href="">이달의 커플</a></li>
-              <li><a href="">커플 후기</a></li>
-            </ul>
-          </li>
-          <li><a href="">고객 문의</a>
-            <ul class="subMenu">
-              <li><a href="">1:1 문의</a></li>
-              <li><a href="">FAQ</a></li>
-            </ul>
-          </li>
-          <li><a href="">마이 페이지</a>
-            <ul class="subMenu">
-              <li><a href="">정회원 등업</a></li>
-              <li><a href="">계정 정보</a></li>
-              <li><a href="">나의 정보</a></li>
-              <li><a href="">이상형 정보</a></li>
-              <li><a href="">작성글 조회</a></li>
-              <li><a href="">하트<br>히스토리</a></li>
-            </ul>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </header>
 
   <div id ="outer">
     <div class="wrapper">
@@ -209,7 +155,7 @@
           <label>이상형 정보 입력</label>
         </section>
         <section>
-          <form action="">
+          <form action="<%= request.getContextPath() %>/insert.up" method="post">
             <section id="items">
               <table>
                 <tr class="itemBox">
@@ -250,7 +196,7 @@
                   </td>
                 </tr>
                 <tr class="itemBox">
-                  <td class="itemName" id="">스타일</td class="itemName" id="">
+                  <td class="itemName" id="">스타일</td>
                   <td>
                     <label><input type="radio" name="style" value="cute">귀여운</label>
                     <label><input type="radio" name="style" value="intellect">지적인</label>
@@ -285,7 +231,7 @@
                   </td>
                 </tr>
                 <tr class="itemBox">
-                  <td class="itemName" id="">종교</td class="itemName" id="">
+                  <td class="itemName" id="">종교</td>
                   <td>
                     <label><input type="radio" name="religion" value="christian">기독교</label>
                     <label><input type="radio" name="religion" value="catholic">천주교</label>
@@ -438,20 +384,5 @@
       </div>
     </div>
   </div>
-  <footer>
-    <div class="wrapper" style="display:inline-block;">
-      <div style="float:left; margin:20px;">
-        <img src="logo.png" width="100px" height="80px">
-      </div>
-      <div style="margin:5px;">
-        <p> 
-          대표이사 박소현 | 사업자 111-11-111111 | TEL 02)0202-0202<br>
-          본사 | 서울 특별시 연애하구 사랑동 행복로 잘되길 12-3<br>
-          E-MAIL love_manager@naver.com<br>
-          Copyright c 1998-2019 Couple Matching Service 
-        </p>
-      </div>
-    </div>      
-  </footer>
 </body>
 </html>

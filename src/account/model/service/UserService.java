@@ -1,3 +1,4 @@
+package account.model.service;
 
 import static common.JDBCTemplate.*;
 
@@ -7,6 +8,7 @@ import account.model.dao.UserPreferDAO;
 import account.model.dao.UserInfoDAO;
 import account.model.vo.UserPrefer;
 import account.model.vo.UserInfo;
+import account.model.vo.UserPhoto;
 
 
 public class UserService {
@@ -15,6 +17,7 @@ public class UserService {
 		Connection conn = getConnection();
 		UserInfoDAO uiDAO = new UserInfoDAO();
 		int result = uiDAO.insertUserInfo(conn, ui);
+		int result2 = uiDAO.insertInterest(conn, ui);
 		
 		if(result > 0) {
 			commit(conn);
@@ -39,14 +42,25 @@ public class UserService {
 		return result;
 	}
 	
-	public int insertUserInterest(UserInfo ui) {
+	public int insertPhoto(UserPhoto p) {
 		Connection conn = getConnection();
 		UserInfoDAO uiDAO = new UserInfoDAO();
-		int[] rs = uiDAO.insertInterest(conn, ui.getUserNo(), ui.getInterest());
-		int result = 1;
-		for (int i=0;i<rs.length;i++){
-			if(rs[i] <= 0){result = 0;} 
+		int r = uiDAO.deletePhoto(conn, p);
+		int result = uiDAO.insertPhoto(conn, p);
+		
+		if(r > 0 && result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
 		}
+		close(conn);
+		return result;
+	}
+	public int deletePhoto(UserPhoto p) {
+		Connection conn = getConnection();
+		UserInfoDAO uiDAO = new UserInfoDAO();
+		int result = uiDAO.deletePhoto(conn, p);
+		
 		if(result > 0) {
 			commit(conn);
 		} else {
@@ -55,10 +69,29 @@ public class UserService {
 		close(conn);
 		return result;
 	}
-	public int deleteUserInterest(UserInfo ui) [
+
+	
+	public int insertUserInterest(UserInfo ui) {
 		Connection conn = getConnection();
 		UserInfoDAO uiDAO = new UserInfoDAO();
-		int result = uiDAO.deleteInterest(conn, ui.getUserNo());
+		int r = uiDAO.deleteInterest(conn, ui);
+		int rs = uiDAO.insertInterest(conn, ui);
+		int result = 1;
+		
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+	
+	public int deleteUserInterest(UserInfo ui) {
+		Connection conn = getConnection();
+		UserInfoDAO uiDAO = new UserInfoDAO();
+		int result = uiDAO.deleteInterest(conn, ui);
 
 		if(result>0) {
 			commit(conn);
@@ -67,7 +100,7 @@ public class UserService {
 		}
 		close(conn);
 		return result;
-	]
+	}
 
 	public int insertUserPrefer(UserPrefer up) {
 		Connection conn = getConnection();
@@ -96,10 +129,5 @@ public class UserService {
 		close(conn);
 		return result;
 	}
-
-
-
-
-
 	
 }
