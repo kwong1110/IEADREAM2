@@ -7,8 +7,11 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Properties;
+
+import account.model.vo.UserInfo;
 import account.model.vo.UserPrefer;
 
 
@@ -28,6 +31,46 @@ public class UserPreferDAO {
 		}
 	
 	}
+	public UserPrefer selectUserPrefer(Connection conn, int userNo) {
+		PreparedStatement pstmt = null; 
+		ResultSet rs = null;
+		UserPrefer up = new UserPrefer();
+		String query = prop.getProperty("selectUserPrefer");
+		
+		try {
+			  pstmt = conn.prepareStatement(query);
+			  pstmt.setInt(1, userNo);
+			  rs = pstmt.executeQuery();
+				up.setHeight(rs.getInt("HEIGHT"));
+				up.setHeightPri(rs.getInt("HEIGHT_PRI"));
+				up.setShape(rs.getString("SHAPE"));
+				up.setShapePri(rs.getInt("SHAPE_PRI"));
+				up.setStyle(rs.getString("STYLE"));
+				up.setStylePri(rs.getInt("STYLE_PRI"));
+				up.setAge(rs.getInt("AGE"));
+				up.setAgePri(rs.getInt("AGE_PRI"));
+				up.setRegion(rs.getInt("REGION"));
+				up.setRegionPri(rs.getInt("REGION_PRI"));
+				up.setReligion(rs.getString("RELIGION"));
+				up.setReligionPri(rs.getInt("RELIGION_PRI"));
+				up.setScholar(rs.getInt("SCHOLAR"));
+				up.setScholarPri(rs.getInt("SCHOLAR_PRI"));
+				up.setJob(rs.getString("JOB"));
+				up.setJobPri(rs.getInt("JOB_PRI"));
+				up.setDrink(rs.getInt("DRINK"));
+				up.setDrinkPri(rs.getInt("DRINK_PRI"));
+				up.setSmoke(rs.getInt("SMOKE"));
+				up.setSmokePri(rs.getInt("SMOKE_PRI"));
+				up.setInterestPri(rs.getInt("INTERST_PRI"));
+		  } catch (SQLException e) { 
+			  e.printStackTrace(); 
+		  } finally {
+			close(rs);
+			close(pstmt);
+		  }
+		return up;
+	}
+	
 	public int insertUserPrefer(Connection conn, UserPrefer up) {
 		PreparedStatement pstmt = null;
 		String query = prop.getProperty("insertUserPrefer");

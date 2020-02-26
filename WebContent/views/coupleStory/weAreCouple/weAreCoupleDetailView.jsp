@@ -70,98 +70,94 @@
 				</div>
 				<div class="tableArea">
 					<div class="review">
-					<table id="reviewTable" align=center>
-						
-						<tr>
-							<th >작성자</th>
-							<td width="100px"><%= b.getUserId() %></td>
-							<th width="20px">조회수</th>
-							<td width="20px"><%= b.getHit() %></td>
-							<th width="40px">작성일</th>
-							<td width="150px"><%= b.getCreateDate() %></td> 
-						</tr>
-						<tr>
-							<th width="20px">제목<input type="hidden" name ="postNo" value = "<%= request.getParameter("postNo") %>"></th>
-							<td colspan="5">
-								<input type="hidden" value="<%= b.getTitle() %>" name="title"><input id="title" value='<%= b.getTitle() %>'>
-							</td>
-						</tr>
-						<tr>
-							<th>남자친구의 이름</th>
-							<th>여자친구의 이름</th>
-						</tr>
-						<tr>
-							<td><input type="hidden" name="mName" value="<%= bc.getmName() %>"><input  class="wac" value="<%= bc.getmName() %>"></td>
-							<td><input type="hidden" name="fName" value="<%= bc.getfName() %>"><input class="wac" value='<%= bc.getfName() %>'></td>
-						</tr>
+						<table id="reviewTable" align=center>
+							<tr>
+								<th >작성자</th>
+								<td width="100px"><%= b.getUserId() %></td>
+								<th width="20px">조회수</th>
+								<td width="20px"><%= b.getHit() %></td>
+								<th width="40px">작성일</th>
+								<td width="150px"><%= b.getCreateDate() %></td> 
+							</tr>
+							<tr>
+								<th width="20px">제목<input type="hidden" name ="postNo" value = "<%= request.getParameter("postNo") %>"></th>
+								<td colspan="5">
+									<input type="hidden" value="<%= b.getTitle() %>" name="title"><input id="title" value='<%= b.getTitle() %>'>
+								</td>
+							</tr>
+							<tr>
+								<th>남자친구의 이름</th>
+								<th>여자친구의 이름</th>
+							</tr>
+							<tr>
+								<td><input type="hidden" name="mName" value="<%= bc.getmName() %>"><input  class="wac" value="<%= bc.getmName() %>"></td>
+								<td><input type="hidden" name="fName" value="<%= bc.getfName() %>"><input class="wac" value='<%= bc.getfName() %>'></td>
+							</tr>
+								
+							<tr>
+								<td>연애 기간</td>
+								<td>즐겨하는 데이트</td>
+							</tr>
 							
-						<tr>
-							<td>연애 기간</td>
-							<td>즐겨하는 데이트</td>
-						</tr>
+							<tr>
+								<td><input type="hidden" name="dtPeriod" value="<%= bc.getDtPeriod()%>"><input class="wac" value="<%= bc.getDtPeriod() %>" class="wac">&nbsp;일</td>
+								<td><input type="hidden" name="fvDate" value="<%= bc.getFvDate() %>"><input  class="wac" value="<%= bc.getFvDate()%>"name="fvDate" ></td>
+							</tr>
+							<tr>
+								<td>이어드림의 서비스 중 가장 만족했던 서비스를  작성해주세요.</td>
+							</tr>
+							<tr>
+								<td colspan=2>
+									<input type="hidden" name = "content1" value="<%=content1 %>"><input class="Rwac" value="<%=content1 %>">
+								</td>
+							</tr>
+							<tr>
+								<td>후기</td>
+							</tr>
+							<tr>
+								<td colspan=2 width=100%>
+								<input type="hidden" name = "content2" value="<%=content2 %>"><input class="Rwac" value="<%=content2 %>">
+								</td>
+							</tr>
+							<tr>
+								<td colspan=2>
+								<input type="hidden" name="dtPeriod" value="<%= b.getContent() %>">
+								</td>
+							</tr>
+							
+							<tr>
+								<td>커플 사진</td>
+							</tr>
+							<tr>
+									<td colspan="4">
+									<img id="titleImg"  width="150" height="200" src="<%= request.getContextPath() %>/photo_uploadFiles/<%= titleImg.getChangeName() %>">
+										<input type="hidden" value="<%= titleImg.getChangeName() %>" name="titleImage">
+										<input type="hidden" value="<%= titleImg.getPhotoNo() %>" name="detailImgId0">
+								</td>
+								<td>
+									<img id="contentImg1" width="150" height="200" class="detailImg" src="<%= request.getContextPath() %>/photo_uploadFiles/<%= fileList.get(1).getChangeName() %>">
+								<input type="hidden" value="<%= fileList.get(1).getChangeName() %>" name="detailImg1">
+								<input type="hidden" value="<%= fileList.get(1).getPhotoNo() %>" name="detailImgId1">
+							</td>
+							</tr>
 						
-						<tr>
-							<td><input type="hidden" name="dtPeriod" value="<%= bc.getDtPeriod()%>"><input class="wac" value="<%= bc.getDtPeriod() %>" class="wac">&nbsp;일</td>
-							<td><input type="hidden" name="fvDate" value="<%= bc.getFvDate() %>"><input  class="wac" value="<%= bc.getFvDate()%>"name="fvDate" ></td>
-						</tr>
-						<tr>
-							<td>이어드림의 서비스 중 가장 만족했던 서비스를  작성해주세요.</td>
-						</tr>
-						<tr>
-							<td colspan=2>
-								<input type="hidden" name = "content1" value="<%=content1 %>"><input class="Rwac" value="<%=content1 %>">
-							</td>
-						</tr>
-						<tr>
-							<td>후기</td>
-						</tr>
-						<tr>
-							<td colspan=2 width=100%>
-							<input type="hidden" name = "content2" value="<%=content2 %>"><input class="Rwac" value="<%=content2 %>">
-							</td>
-						</tr>
-						<tr>
-							<td colspan=2>
-							<input type="hidden" name="dtPeriod" value="<%= b.getContent() %>">
-							</td>
-						</tr>
-						
-						<tr>
-							<td>커플 사진</td>
-						</tr>
-						<tr>
-								<td colspan="4">
-								<img id="titleImg"  width="150" height="200" src="<%= request.getContextPath() %>/photo_uploadFiles/<%= titleImg.getChangeName() %>">
-									<input type="hidden" value="<%= titleImg.getChangeName() %>" name="titleImage">
-									<input type="hidden" value="<%= titleImg.getPhotoNo() %>" name="detailImgId0">
-							</td>
-							<td>
-								<img id="contentImg1" width="150" height="200" class="detailImg" src="<%= request.getContextPath() %>/photo_uploadFiles/<%= fileList.get(1).getChangeName() %>">
-							<input type="hidden" value="<%= fileList.get(1).getChangeName() %>" name="detailImg1">
-							<input type="hidden" value="<%= fileList.get(1).getPhotoNo() %>" name="detailImgId1">
-						</td>
-						</tr>
-						
-					</table>
-					
-				</div>
+						</table>
+						<div class="btnBox" align="center">
+								<% if(loginUser != null && loginUser.getId().equals(b.getUserId())){ %>
+							<input type ="submit" id="updateBtn" value="수정">
+							<input type ="button" onclick="deleteThumb();" id="deleteBtn" value="삭제">
+							<% } %>
+							<div onclick="location.href='<%=request.getContextPath() %>/list.wac'" id="menuBtn">메뉴로</div>
+							<% if(loginUser != null && loginUser.getGrade()==0){ %>
+							<input type="button" onclick="location.href='<%=request.getContextPath() %>/views/coupleStory/weAreCouple/TestBC.jsp'" id="menuBtn" value="베스트 커플">
+							<input type ="button" onclick="deleteThumb();" id="deleteBtn" value="삭제">
+							<% } %>
+						</div>
+					</div>
 				</div>
 				</form>
-				</div>
-				<br>
-				<div class="btnBox" align="center">
-					<% if(loginUser != null && loginUser.getId().equals(b.getUserId())){ %>
-					<input type ="submit" id="updateBtn" value="수정">
-					<input type ="button" onclick="deleteThumb();" id="deleteBtn" value="삭제">
-					<% } %>
-					<div onclick="location.href='<%=request.getContextPath() %>/list.wac'" id="menuBtn">메뉴로</div>
-					<% if(loginUser != null && loginUser.getGrade()==0){ %>
-					<input type="button" onclick="location.href='<%=request.getContextPath() %>/views/coupleStory/weAreCouple/TestBC.jsp'" id="menuBtn" value="베스트 커플">
-					<input type ="button" onclick="deleteThumb();" id="deleteBtn" value="삭제">
-					<% } %>
-				
-			
 			</div>
+			<br>
 		</div>
 	</div>
 	<script>
