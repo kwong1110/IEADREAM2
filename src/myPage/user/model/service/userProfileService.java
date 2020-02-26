@@ -6,6 +6,7 @@ import static common.JDBCTemplate.*;
 
 import account.model.vo.Account;
 import account.model.vo.UserInfo;
+import account.model.vo.UserPrefer;
 import myPage.user.model.dao.userProfileDAO;
 
 public class userProfileService {
@@ -73,6 +74,12 @@ public class userProfileService {
 		}
 		close(conn);
 		return result;
+	}
+
+	public UserPrefer updateIdealInfo(int userNo) {
+		Connection conn = getConnection();
+		userProfileDAO dao = new userProfileDAO();
+		
 	}
 	
 }
