@@ -80,7 +80,30 @@ button {
 			}
 			
 			return true;
+		}
 		
+		var msg = "<%= msg %>";
+		var failCount = 0;
+		
+		$(function(){
+			if(msg != "null" && msg == "아이디가 존재하지 않습니다."){
+				alert(msg);
+			} else if(msg != "null" && msg == "비밀번호가 일치하지 않습니다."){
+				alert(msg + + "(" + failCount++ + "회)");
+				if(failCount == 3){
+					var bool = confirm("비밀번호가" + failCount + "회 틀리셨습니다.\n 비밀번호를 찾으시겠습니까?")
+					if(bool){
+						
+					} else {
+						
+					}
+				}
+			}
+		});
+		
+		function goIndex(){
+			location.href="<%= request.getContextPath()%>/views/common/mainmenu.jsp";
+		}
 	</script>
 </body>
 </html>
