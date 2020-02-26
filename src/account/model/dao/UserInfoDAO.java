@@ -9,11 +9,15 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Properties;
 
 import account.model.vo.Account;
 import account.model.vo.UserInfo;
 import account.model.vo.UserPhoto;
+import board.model.vo.Board;
+import board.model.vo.Photo;
 
 public class UserInfoDAO {
 
@@ -29,6 +33,35 @@ public class UserInfoDAO {
 			e.printStackTrace();
 		}
 	}
+	public UserInfo selectUserInfo(Connection conn, int userNo) {
+		PreparedStatement pstmt = null; 
+		ResultSet rs = null;
+		UserInfo ui = new UserInfo();
+		String query = prop.getProperty("selectUserInfo");
+		
+		try {
+			  pstmt = conn.prepareStatement(query);
+			  pstmt.setInt(1, userNo);
+			  rs = pstmt.executeQuery();
+			  	ui.setHello(rs.getString("HELLO"));
+				ui.setHeight(rs.getInt("HEIGHT"));
+				ui.setShape(rs.getString("SHAPE"));
+				ui.setStyle(rs.getString("STYLE"));
+				ui.setRegion(rs.getInt("REGION"));
+				ui.setReligion(rs.getString("RELIGION"));
+				ui.setScholar(rs.getInt("SCHOLAR"));
+				ui.setJob(rs.getString("JOB"));
+				ui.setDrink(rs.getInt("DRINK"));
+				ui.setSmoke(rs.getInt("Smoke"));
+		  } catch (SQLException e) { 
+			  e.printStackTrace(); 
+		  } finally {
+			close(rs);
+			close(pstmt);
+		  }
+		return ui;
+	}
+	
 	public int insertUserInfo(Connection conn, UserInfo ui) {
 		PreparedStatement pstmt = null;
 		String query = prop.getProperty("insertUserInfo");
@@ -87,6 +120,30 @@ public class UserInfoDAO {
 		return result;
 	}
 	
+	public String[] selectInterest(Connection conn, int userNo) {
+		PreparedStatement pstmt = null; 
+		ResultSet rs = null;
+		String query = prop.getProperty("selectInterest");
+		ArrayList<String> list = new ArrayList<String>();
+		try {
+			  pstmt = conn.prepareStatement(query);
+			  pstmt.setInt(1, userNo);
+			  rs = pstmt.executeQuery();
+			  while(rs.next()) {list.add(rs.getString("INTEREST"));}
+		  } catch (SQLException e) { 
+			  e.printStackTrace(); 
+		  } finally {
+			close(rs);
+			close(pstmt);
+		  }
+		String[] interest = new String[list.size()];
+		  int size=0;
+		  for(String temp : list){
+		    interest[size++] = temp;
+		  }
+		return interest;
+	}
+	
 	public int insertInterest(Connection conn, UserInfo ui) {
 		PreparedStatement pstmt = null;
 		String query = prop.getProperty("insertInterest");
@@ -127,6 +184,36 @@ public class UserInfoDAO {
 			close(pstmt);
 		}
 		return result;
+	}
+	
+	public ArrayList<Photo> selectpList(Connection conn) {
+		Statement stmt = null;
+		ResultSet rset = null;
+		
+		ArrayList<Photo> pList = null;
+		
+		String query = prop.getProperty("selectPhoto");
+		try {
+			stmt = conn.createStatement();
+			rset = stmt.executeQuery(query);
+			pList = new ArrayList<Photo>();
+			while(rset.next()) {
+				pList.add(new Photo(rset.getInt("PHOTO_NO"),
+									rset.getInt("USER_NO"),
+									rset.getString("ORIGIN_NAME"),
+									rset.getString("CHANGE_NAME"),
+									rset.getString("FILE_PATH"),
+									rset.getInt("FILE_LEVEL"),
+									rset.getString("DELETED")));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(stmt);
+		}
+		
+		return pList;
 	}
 	public int insertPhoto(Connection conn, UserPhoto p) {
 		PreparedStatement pstmt = null;
