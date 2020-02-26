@@ -135,16 +135,6 @@
 						<button onclick="location.href='<%= request.getContextPath() %>/Mlist.qu?currentPage=<%= maxPage %>'">&gt;&gt;</button>			
 						<% } %>
 				</div>
-				<div class="searchArea">	
-				<select name="searchCategory">			<!-- 옵션 자체의 값이 들어감 -->
-					<option value="번호">번호</option>
-					<option value="카테고리">카테고리</option>
-					<option value="제목">제목</option>
-					<option value="답변여부">답변여부</option>
-				</select>
-				<input type="text" id="text" name="title" placeholder= "내용을 입력해주세요."> 
-				<button onclick="search();"  id="searchCon" >검색</button>
-			</div>
 			</div>
 		</div>
 	</div>
