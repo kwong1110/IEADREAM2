@@ -85,17 +85,17 @@ public class UserInfoDAO {
 		return result;
 	}
 	
-	public int[] insertInterest(Connection conn, int userNo, String[] interest) {
+	public int insertInterest(Connection conn, UserInfo ui) {
 		PreparedStatement pstmt = null;
 		String query = prop.getProperty("insertInterest");
-		int[] result = null;
+		int result = 1;
 		
 		try {
 			pstmt = conn.prepareStatement(query);
 			
-			for(int i = 0; i < interest.length; i++) {
-				pstmt.setInt(1, userNo);
-				pstmt.setString(2, interest[i]);
+			for(int i = 0; i < ui.getInterest().length; i++) {
+				pstmt.setInt(1, ui.getUserNo());
+				pstmt.setString(2, ui.getInterest()[i]);
 				pstmt.addBatch();
 				pstmt.clearParameters();
 			}
@@ -109,14 +109,14 @@ public class UserInfoDAO {
 		return result;
 	}
 	
-	public int deleteInterest(Connection conn, int userNo) {
+	public int deleteInterest(Connection conn, UserInfo ui) {
 		PreparedStatement pstmt = null;
 		String query = prop.getProperty("deleteInterest");
 		int result= 0;
 		
 		try {
 			pstmt = conn.prepareStatement(query);
-			pstmt.setInt(1, userNo);
+			pstmt.setInt(1, ui.getUserNo());
 
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -148,14 +148,14 @@ public class UserInfoDAO {
 		}
 		return result;
 	}
-	public int deletePhoto(Connection conn, int userNo) {
+	public int deletePhoto(Connection conn, UserPhoto p) {
 		PreparedStatement pstmt = null;
 		String query = prop.getProperty("deletePhoto");
 		int result= 0;
 		
 		try {
 			pstmt = conn.prepareStatement(query);
-			pstmt.setInt(1, userNo);
+			pstmt.setInt(1, p.getUserNo());
 
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {

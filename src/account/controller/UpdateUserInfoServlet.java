@@ -77,9 +77,8 @@ public class UpdateUserInfoServlet extends HttpServlet {
 		ui.setInterest(interest);
 
 		UserService UserService = new UserService();
-		int result1 = UserService.deletePhoto(ui);
-		int result2 = UserService.insertPhoto(p);
-		int result3 = UserService.updateUserInfo(ui);
+		int result1 = UserService.insertPhoto(p);
+		int result2 = UserService.updateUserInfo(ui);
 		
 		String page = null;
 		if(result1 > 0 && result2 > 0) {

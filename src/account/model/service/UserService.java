@@ -17,6 +17,7 @@ public class UserService {
 		Connection conn = getConnection();
 		UserInfoDAO uiDAO = new UserInfoDAO();
 		int result = uiDAO.insertUserInfo(conn, ui);
+		int result2 = uiDAO.insertInterest(conn, ui);
 		
 		if(result > 0) {
 			commit(conn);
@@ -44,9 +45,10 @@ public class UserService {
 	public int insertPhoto(UserPhoto p) {
 		Connection conn = getConnection();
 		UserInfoDAO uiDAO = new UserInfoDAO();
+		int r = uiDAO.deletePhoto(conn, p);
 		int result = uiDAO.insertPhoto(conn, p);
 		
-		if(result > 0) {
+		if(r > 0 && result > 0) {
 			commit(conn);
 		} else {
 			rollback(conn);
@@ -54,10 +56,10 @@ public class UserService {
 		close(conn);
 		return result;
 	}
-	public int deletePhoto(UserInfo ui) {
+	public int deletePhoto(UserPhoto p) {
 		Connection conn = getConnection();
 		UserInfoDAO uiDAO = new UserInfoDAO();
-		int result = uiDAO.deletePhoto(conn, ui.getUserNo());
+		int result = uiDAO.deletePhoto(conn, p);
 		
 		if(result > 0) {
 			commit(conn);
@@ -72,13 +74,10 @@ public class UserService {
 	public int insertUserInterest(UserInfo ui) {
 		Connection conn = getConnection();
 		UserInfoDAO uiDAO = new UserInfoDAO();
-		
-		int[] rs = uiDAO.insertInterest(conn, ui.getUserNo(), ui.getInterest());
+		int r = uiDAO.deleteInterest(conn, ui);
+		int rs = uiDAO.insertInterest(conn, ui);
 		int result = 1;
 		
-		for (int i=0;i<rs.length;i++){
-			if(rs[i] <= 0){result = 0;} 
-		}
 		
 		if(result > 0) {
 			commit(conn);
@@ -92,7 +91,7 @@ public class UserService {
 	public int deleteUserInterest(UserInfo ui) {
 		Connection conn = getConnection();
 		UserInfoDAO uiDAO = new UserInfoDAO();
-		int result = uiDAO.deleteInterest(conn, ui.getUserNo());
+		int result = uiDAO.deleteInterest(conn, ui);
 
 		if(result>0) {
 			commit(conn);
