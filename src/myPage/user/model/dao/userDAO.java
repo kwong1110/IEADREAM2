@@ -2,6 +2,7 @@ package myPage.user.model.dao;
 
 import static common.JDBCTemplate.close;
 
+
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -13,7 +14,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Properties;
 
-import myPage.user.model.vo.Recommend;
+import myPage.user.model.vo.Match;
 
 
 public class userDAO {
@@ -56,10 +57,10 @@ private Properties prop = new Properties();
 		return result;
 	}
 
-	public ArrayList<Recommend> selectHhList(Connection conn, int currentPage) {
+	public ArrayList<Match> selectHhList(Connection conn, int currentPage) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		ArrayList<Recommend> list = null;
+		ArrayList<Match> list = null;
 		int posts = 10;
 		
 		int startRow = (currentPage - 1) * posts + 1;
@@ -73,10 +74,10 @@ private Properties prop = new Properties();
 			pstmt.setInt(2, endRow);
 			
 			rset = pstmt.executeQuery();
-			list = new ArrayList<Recommend>();
+			list = new ArrayList<Match>();
 			
 			while(rset.next()) {
-				Recommend r = new Recommend(rset.getInt("user_no"),
+				Match r = new Match(rset.getInt("user_no"),
 										   rset.getInt("target_no"),
 										   rset.getString("match_status"),
 										   rset.getDate("match_date"),

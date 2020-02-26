@@ -33,38 +33,22 @@ public class FindpwdServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String userId = request.getParameter("userId");
-		String eamil = request.getParameter("email");
+		String email = request.getParameter("email");
 		
-		Date writerDate = null;
-		
-		String [] dateArr = userId.split("-"); 
-		int [] intArr = new int[dateArr.length];
-		
-		for(int i=0; i<dateArr.length;i++) {
-			intArr[i] = Integer.parseInt(dateArr[i]);
-		}
-		
-		writerDate = new Date(new GregorianCalendar(intArr[0], intArr[1]-1, intArr[2]).getTimeInMillis());
-		
-		Account account = new Account(userId,writerDate);
 	
-		AccountService hms = new AccountService();
-		
+		Account findUser = new Account(userId, email);
 		
 		String page ="";
-		
-		
-		try{
-			page = "views/homep/searchPwdForm.jsp";
-			int result = hms.searchPwd(account);
-			System.out.println("비밀번호 찾기 완료");
+		if (account != null){
+			page = "views/account/searchpwdForm.jsp";
+			System.out.println("비밀번호 찾기 완료!!");
 			request.setAttribute("account", account);
-		
-		} catch(Exception e) {
+			
+		}else {
 			page = "views/common/errorPage.jsp";
-			request.setAttribute("error", "비밀번호 찾기중 오류 발생!!");
-			request.setAttribute("exception", account);
+			request.setAttribute("msg", "아이디 찾기에 실패하셨습니다,");
 		}
+		
 		request.getRequestDispatcher(page).forward(request, response);
 		
 	}

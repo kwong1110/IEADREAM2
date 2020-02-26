@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.ArrayList, common.PageInfo, myPage.user.model.vo.*" %>
 <%
-	ArrayList<Recommend> list = (ArrayList<Recommend>)request.getAttribute("list");
+	ArrayList<Match> list = (ArrayList<Match>)request.getAttribute("list");
 	PageInfo pi = (PageInfo)request.getAttribute("pi");
 	
 	int listCount = pi.getListCount();
@@ -46,9 +46,6 @@
 						<li class="leftMenu admin boardManage">
 							<a href="<%=request.getContextPath()%>/views/myPage/admin/boardManageForm.jsp">게시물 관리</a>
 						</li>
-						<li class="leftMenu admin partyManage">
-							<a href="<%=request.getContextPath()%>/views/myPage/admin/partyManageForm.jsp">파티 관리</a>
-						</li>
 						<% } %>
 					</ul>
 				</div>
@@ -78,7 +75,7 @@
 									<td colspan="6">조회된 리스트가 없습니다.</td>
 								</tr>
 								<% } else{ 
-										for(Recommend r : list){
+										for(Match r : list){
 										switch(r.getMatchStatus()){
 										case "D": MatchStatus = "상대방의 응답을 기다리고 있습니다."; break;
 										case "C": MatchStatus = "확인 완료"; break;

@@ -67,8 +67,6 @@ public class Account {
 		this.password = password;
 	}
 	
-	
-	
 	public Account(int userNo, int grade, String id, String password, String gender, String userName, String phone,
 			String email, Date birth, String deleted) {
 		this.userNo = userNo;

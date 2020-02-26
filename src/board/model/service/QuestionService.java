@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.util.ArrayList;
 
 import board.model.dao.QuestionDAO;
+import board.model.dao.WeAreCoupleDAO;
 import board.model.vo.Board;
 import board.model.vo.Reply;
 
@@ -75,36 +76,36 @@ public class QuestionService {
 	public int insertQuestion1(Board board) {
 		Connection conn = getConnection();
 		QuestionDAO dao = new QuestionDAO();
-		int result1 = dao.insertQuestionB(conn,  board);
-		
+		int resultb = dao.insertQuestionB(conn,  board);
+		int resultq = dao.insertQuestionQ(conn, board);
 
-		if(result1 > 0) {
+		if(resultb > 0 && resultq >0) {
 			commit(conn);
 		} else{
 			rollback(conn);
 		}
-		return result1;
+		return resultb;
 
 	}
 	
 	public int insertQuestion2(Board board) {
 		Connection conn = getConnection();
 		QuestionDAO dao = new QuestionDAO();
-		int result2 = dao.insertQuestionQ(conn, board);
+		int resultq = dao.insertQuestionQ(conn, board);
 
-		if(result2 > 0) {
+		if(resultq > 0) {
 			commit(conn);
 		} else{
 			rollback(conn);
 		}
-		return result2;
+		return resultq;
 
 	}
 	// 문의사항 수정
-	public int updateQuestion(Board board, int category) {
+	public int updateQuestion(Board board) {
 			Connection conn = getConnection();
 			QuestionDAO dao = new QuestionDAO();
-			int result = dao.updateQuestion(conn,  board, category);
+			int result = dao.updateQuestion(conn,  board);
 			if(result>0) {
 				commit(conn);
 			} else {
@@ -152,6 +153,7 @@ public class QuestionService {
 		QuestionDAO dao = new QuestionDAO();
 		
 		ArrayList<Board> list = new QuestionDAO().selectQBList(conn, currentPage,userNo); 
+		System.out.println("b : " + list);
 		close(conn);
 		return list;
 	}
@@ -230,7 +232,7 @@ public class QuestionService {
 	
 	
 	// --
- 
+ /*
 	  public ArrayList MselectList(int currentPage) {
 		  Connection conn = getConnection();
 		  ArrayList list = new QuestionDAO().MselectList(conn, currentPage); 
@@ -238,7 +240,7 @@ public class QuestionService {
 		  return list; 
 	  }
 
-
+*/
 
 
 	public int MdeleteQuestion(int postNo) {
@@ -257,6 +259,22 @@ public class QuestionService {
 	}
 
 
+	//검색
+
+	public int getListSearchCount(String search, String searchCategory) {
+		Connection conn = getConnection();
+		int result = new QuestionDAO().getListSearchCount(conn,search,searchCategory);
+		close(conn);
+		
+		return result;
+	}
+
+	public ArrayList<Board> selectSearchList(int currentPage, String search, String searchCategory) {
+		Connection conn = getConnection();
+		ArrayList<Board> list =  new QuestionDAO().selectSearchList(conn,currentPage,search,searchCategory);
+		close(conn);
+		return list;
+	}
 
 	
 

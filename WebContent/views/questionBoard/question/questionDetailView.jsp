@@ -9,21 +9,34 @@
 	String userId = (String)request.getAttribute("userId");
 	
 	String category = b.getCategory();
-	int categoryInt = 0;
+	/* int categoryInt = 0;
 	switch(category){
 	case "결제" : categoryInt = 1; break;
 	case "파티" : categoryInt = 2; break;
 	case "서비스" : categoryInt = 3; break;
 	case "회원/등급" : categoryInt = 4; break;
 	case "기타" : categoryInt = 5; break;
-	}
+	} */
 %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>문의게시판</title>
+
 <style>
+	.outer{
+		width: 800px; height: 500px; background: rgba(255, 255, 255, 0.4); border: 5px solid white;
+		margin-left: auto; margin-right: auto; margin-top: 50px;
+	}
+	#listArea{text-align: center;}
+	.tableArea{width:650px;	height:350px; margin-left:auto;	margin-right:auto;}
+	th{border-bottom: 1px solid grey;}
+	.pagingArea button{border-radius: 15px; background: #D5D5D5;}
+	.searchArea{margin-right: 50px;}
+	.searchArea button{background: #D1B2FF; border-radius: 5px; color: white; width: 80px; heigth: 25px; text-align: center;}
+	button:hover{cursor: pointer;}
+
 	th, td, thead{
 		    border: 1px solid gray;
    	 border-radius: 10px;
@@ -87,8 +100,8 @@
 									<% } %>
 									<th width=20% id="category">카테고리</th>
 									<td>
-										<%= category %>
-										<input type="hidden" value="<%= categoryInt %>" name="category">
+										<%= b.getCategory() %>
+										<input type="hidden" value="<%= b.getCategory() %>" name="category">
 									</td>
 								</tr>
 							</thead>
@@ -104,12 +117,12 @@
 						<div id="replyArea">
 							<table id="replyTable">
 								<tr>
-									<th id="manager" rowspan ="1">관리자</th>
-									<td id="Mcommand" rowspan = "3" colspan="4" align= center>
+									<th id="manager" rowspan ="1" colspan="2" style="vertical-align: middle;">관리자</th>
+									<td id="Mcommand" rowspan = "3" colspan="3"  align= center>
 										<% if(r.getAnswerContent() != null) { %>
-											<input type="text" name = "answerContent" value ="<%= r.getAnswerContent() %>">
+											<textarea name = "answerContent" style="resize:none; width: 300px; height: 40%;"><%= r.getAnswerContent() %></textarea>
 										<% } else { %>
-											관리자가 아직 답변을 달지 않았습니다.
+										<textarea name = "answerContent" readonly style="resize:none; width: 300px; height: 40%; text-align: center">관리자가 아직 답변을 달지 않았습니다. </textarea>
 										<% } %>
 									</td>
 								</tr>

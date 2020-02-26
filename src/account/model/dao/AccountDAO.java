@@ -11,8 +11,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Properties;
 
-import javax.security.auth.login.AccountException;
-
 import account.model.vo.Account;
 
 public class AccountDAO {
@@ -29,31 +27,6 @@ public class AccountDAO {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	}
-	public int updateAccount(Connection conn, Account account) {
-		/* 내용물을 새로 넣어야하기 때문에 pstmt로 넣기 */
-		PreparedStatement pstmt = null;
-		int result = 0;
-		
-		String query = prop.getProperty("updateAccount");
-		
-		try {
-			/* query문에 값 담아서 보내기 */
-			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, account.getPassword());
-			pstmt.setString(2, account.getUserName());
-			pstmt.setString(3, account.getPhone());
-			pstmt.setString(4, account.getEmail());
-			pstmt.setString(5, account.getId());
-			
-			/* DB수행 결과값 result에 담기 */
-			result = pstmt.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(pstmt);
-		}
-		return result;
 	}
 	
 	public int idCheck(Connection conn, String userId) {
@@ -215,7 +188,84 @@ public class AccountDAO {
 		return null;
 	}
 
+	public Account selectMyProfile(Connection conn, String loginId) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		Account account = null;
+		
+		String query = prop.getProperty("selectMyProfile");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			
+			pstmt.setString(1, loginId);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				account = new Account(rs.getInt("user_no"),
+									  rs.getInt("grade"),
+									  rs.getString("id"),
+									  rs.getString("password"),
+									  rs.getString("gender"),
+									  rs.getString("user_name"),
+									  rs.getString("phone"),
+									  rs.getString("email"),
+									  rs.getDate("birth"),
+									  rs.getString("deleted"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return account;
 	}
+
+	public int updateAccount(Connection conn, Account account) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("updateAccount");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, account.getPassword());
+			pstmt.setString(2, account.getUserName());
+			pstmt.setString(3, account.getPhone());
+			pstmt.setString(4, account.getEmail());
+			pstmt.setString(5, account.getId());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public int deleteAccount(Connection conn, String id) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("deleteAccount");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			
+			pstmt.setString(1, id);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+	}
+
+	
 	
 	
 

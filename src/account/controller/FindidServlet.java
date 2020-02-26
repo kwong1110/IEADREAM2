@@ -48,7 +48,7 @@ public class FindidServlet extends HttpServlet {
 				request.setAttribute("account", account);
 			}else {
 				page = "views/common/errorPage.jsp";
-				request.setAttribute("msg", "아이디 찾기에 실패하셨습니다. ㅠㅠ");
+				request.setAttribute("msg", "아이디 찾기에 실패하셨습니다.");
 			}
 			
 			request.getRequestDispatcher(page).forward(request, response);

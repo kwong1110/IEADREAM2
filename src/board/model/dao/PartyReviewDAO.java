@@ -90,8 +90,8 @@ public class PartyReviewDAO {
 			return list;
 		}
 
-	
-	public ArrayList<Board> selectImage(Connection conn, int postNo) {
+	// 디테일 뷰
+	/*public ArrayList<Board> selectImage(Connection conn, int postNo) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		ArrayList<Board> list = null;
@@ -127,6 +127,6 @@ public class PartyReviewDAO {
 		
 		return list;
 	}
-
+*/
 	
 }

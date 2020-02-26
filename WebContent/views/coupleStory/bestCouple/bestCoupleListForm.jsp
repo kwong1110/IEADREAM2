@@ -68,6 +68,11 @@
 		margin-bottom: 55px;
 	}
 	
+	.hit{
+		margin: 0 0 2% 80%;
+		font-size: 12px;
+	}
+	
 	.img{
 		width: 100%;
 		height: 200px;
@@ -188,21 +193,22 @@
 						for(int i = 0; i < bcList.size(); i++){
 							Board bc = bcList.get(i);
 					%>
-						<div class="contn" id="contn1">
-							<div class="img" id="img1">
+						<div class="contn">
+							<p class="hit">HIT : <%= bc.getHit() %></p>
+							<div class="img">
+								<input type="hidden" value="<%= bc.getPostNo() %>">
 								<% 
 									for(int j = 0; j < pList.size(); j++){
 										Photo p = pList.get(j);		
 								%>
 									<% if(bc.getPostNo() == p.getPostNo()){ %>
-										<img src="<%= request.getContextPath() %>/photo_uploadFiles/<%= p.getChangeName() %>" width="200px" height="150px">
+										<img src="<%= request.getContextPath() %>/photo_uploadFiles/<%= p.getChangeName() %>" style="width:inherit; height:inherit;">
 									<% } %>
 								<% } %>
 							</div>
 							<div class="text">
-								<input type="hidden" value="<%= bc.getPostNo() %>">
 								<p id="text1"><%= bc.getTitle() %></p>
-								<p id="text2">박보검</p>
+								<p id="text2"><%= bc.getUserId() %></p>
 								<p id="text3"><%= bc.getCreateDate() %></p>
 							</div>
 						</div>
@@ -251,6 +257,18 @@
 				</div>	
 			</div>
 		</div>
+		
+		<script>
+			$(function(){
+				$('.contn').click(function(){
+					var pNo = $(this).children().children().eq(0).val();
+					location.href="<%= request.getContextPath() %>/detail.bc?pNo=" + pNo;
+				});
+			});
+		</script>
+		
+		
+		
 	</section>
 </body>
 </html>
