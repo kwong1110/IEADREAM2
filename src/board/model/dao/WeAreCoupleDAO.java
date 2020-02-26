@@ -14,6 +14,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import board.model.vo.BestCouple;
 import board.model.vo.Board;
 import board.model.vo.Photo;
 
@@ -21,7 +22,7 @@ public class WeAreCoupleDAO {
 	private Properties prop = new Properties();
 	
 	public WeAreCoupleDAO() {
-		String fileName = PartyReviewDAO.class.getResource("/sql/coupleStory/weAreCouple-query.properties").getPath();
+		String fileName = WeAreCoupleDAO.class.getResource("/sql/coupleStory/weAreCouple-query.properties").getPath();
 		
 		try {
 			prop.load(new FileReader(fileName));
@@ -104,6 +105,45 @@ public class WeAreCoupleDAO {
 		}
 		return result;
 	}
+	
+	//best couple 항목 추가
+
+	public int insertBcPhoto(Connection conn, BestCouple bc) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("insertbcBestCouple");
+		//INSERT INTO BEST_COUPLE VALUES(SEQ_POSTNO.CURRVAL, ?, ?, ?, ?)
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, bc.getmName());
+			pstmt.setString(2, bc.getfName());
+			pstmt.setInt(3, bc.getDtPeriod());
+			pstmt.setString(4, bc.getFvDate());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 	public ArrayList<Board> selectList(Connection conn, int currentPage) {
 			PreparedStatement pstmt = null;
@@ -228,6 +268,37 @@ public class WeAreCoupleDAO {
 		
 		return list;
 	}
+	
+	public BestCouple selectCouple(Connection conn, String postNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		BestCouple bc = null;
+		
+		
+		String query = prop.getProperty("selectCouple");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, postNo);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				bc = new BestCouple(rs.getInt("POST_NO"),
+						rs.getString("M_NAME"),
+						rs.getString("F_NAME"),
+						rs.getInt("DATING_PERIOD"),
+						rs.getString("FAVORIT_DATE"));
+					
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return bc;
+	}
 
 	public int deletePhoto(Connection conn, String postNo) {
 		PreparedStatement pstmt = null;
@@ -283,6 +354,32 @@ public class WeAreCoupleDAO {
 			pstmt.setInt(3,post);
 			System.out.println("post : " +post);
 			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	public int updateBestCouple(Connection conn, BestCouple bc, int post) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("updateBestCouple");
+		//UPDATE BEST_COUPLE SET M_NAME=?, F_NAME=?, DATING_PERIOD=?, FAVORIT_DATE=? WHERE POST_NO=?
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, bc.getmName());
+			pstmt.setString(2, bc.getfName());
+			pstmt.setInt(3, bc.getDtPeriod());
+			pstmt.setString(4, bc.getFvDate());
+			pstmt.setInt(5, post);
+			
+			result = pstmt.executeUpdate();
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -410,6 +507,10 @@ public class WeAreCoupleDAO {
 	
 		return list;
 	}
+
+	
+
+
 
 
 	
