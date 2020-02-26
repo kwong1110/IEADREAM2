@@ -1,16 +1,22 @@
 package account.controller;
 
 import java.io.IOException;
+import java.sql.Date;
+import java.util.GregorianCalendar;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import account.model.service.AccountService;
+import account.model.vo.Account;
+
 /**
  * Servlet implementation class FindpwdServlet
  */
-@WebServlet("/Findpwd.do")
+@WebServlet("/Findpwd.me")
 public class FindpwdServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -26,38 +32,26 @@ public class FindpwdServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-			String userid = request.getParameter("id");
-			String 
+		String userId = request.getParameter("userId");
+		String email = request.getParameter("email");
+		
+	
+		Account findUser = new Account(userId, email);
+		String account = new AccountService().searchPwd(findUser);
+		
+		String page ="";
+		if (account != null){
+			page = "views/account/searchpwdForm.jsp";
+			System.out.println("비밀번호 찾기 완료!!");
+			request.setAttribute("account", account);
 			
-			Date writerDate = null;
-			
-			String [] dateArr = cbdate.split("-");
-			int [] intArr = new int[dateArr.length];
-			
-			for(int i=0; i<dateArr.length; i++) {
-				intArr[i] = Integer.parseInt(dateArr[i]);
-			}
-			
-			writerDate = new Date(new GregorianCalendar(intArr[0],intArr[1]-1, intArr[2]).getTimelnMillis());
-			
-			Account account = new Account(id, writerDate);
-			
-			AccountService account = new AccountService();
-			String = "";
-			
-			try {
-				page = "view/account/searchPwdForm.jsp";
-				account = account.searchPwd(account);
-				System.out.println("비밀번호 찾기 완료");
-				request.setAttribute("member", account);
-				
-			}catch(Exception e) {
-				page = "views/account/common/errorPage.jsp";
-				request.setAttribute("error","비밀번호 찾기중 오류 발생!!");
-				request.setAttribute("exception", e);
-			}
-				request.getRequestDispatcher(page).forward(request. response);
-				
+		}else {
+			page = "views/common/errorPage.jsp";
+			request.setAttribute("msg", "비밀번호 찾기에 실패하셨습니다,");
+		}
+		
+		request.getRequestDispatcher(page).forward(request, response);
+		
 	}
 			
 	/**

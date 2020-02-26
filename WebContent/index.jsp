@@ -8,7 +8,7 @@
 </head>
 <body>
 	<!-- 메인 메뉴로 연결  -->
-	<div>
+	<div> 
 		<%@ include file="views/common/mainmenu.jsp" %>
 	</div>
 	
