@@ -123,7 +123,7 @@ public class AccountDAO {
 	
 	// 아이디 찾기 DAO
 	public Account searchid(Account account, Connection conn) {
-		Account result = null;
+		Account a = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		String query = prop.getProperty("searchid");
@@ -137,11 +137,12 @@ public class AccountDAO {
 			rset = pstmt.executeQuery();
 					
 			if(rset.next()) {
-				result = new Account();
+				a = new Account();
 				
-				result.setId(rset.getString("id"));
+				a.setId(rset.getString("id"));
+				
 			}
-			System.out.println(result);
+			System.out.println(a);
 			
 		}catch(Exception e) { 
 			e.printStackTrace();
@@ -149,7 +150,7 @@ public class AccountDAO {
 			close(rset);
 			close(pstmt);
 		}
-		return result;
+		return a;
 	}
 	
 	//비밀번호 찾기 DAO
@@ -182,6 +183,12 @@ public class AccountDAO {
 		
 		return result;
 	}
+<<<<<<< HEAD
+	public String searchPwd(Account account, Connection conn) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	public Account selectMyProfile(Connection conn, String loginId) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -257,9 +264,12 @@ public class AccountDAO {
 		} finally {
 			close(pstmt);
 		}
-		return result;
 	}
+
 	
+	
+=======
 }
+>>>>>>> branch 'master' of https://github.com/kwong1110/IeaDream2.git
 	
 

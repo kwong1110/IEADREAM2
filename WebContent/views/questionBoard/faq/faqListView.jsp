@@ -45,7 +45,7 @@
 	.category{cursor: pointer; font-size:20px; text-align: center; padding: 10px;}
 	.faq{text-align: center; cursor: pointer; display: none; font-size: 15px; padding: 2px;}
 	.con{height: 200px; display: none; text-align: left;
-				border-radius: 5px; border-top: 1px solid black; border-bottom: 1px solid black;}
+		 border-top: 1px solid black; border-bottom: 1px solid black;}
 </style>
 </head>
 <body>

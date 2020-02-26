@@ -30,41 +30,4 @@ public class userService {
 		return list;
 	}
 
-	public Account selectMyProfile(String loginId) {
-		Connection conn = getConnection();
-		AccountDAO dao = new AccountDAO();
-		Account account = dao.selectMyProfile(conn, loginId);
-		
-		close(conn);
-		return account;
-	}
-
-	public int updateAccount(Account account) {
-		Connection conn = getConnection();
-		AccountDAO dao = new AccountDAO();
-		int result = dao.updateAccount(conn, account);
-		
-		if(result > 0) {
-			commit(conn);
-		} else {
-			rollback(conn);
-		}
-		close(conn);
-		return result;
-	}
-
-	public int deleteAccount(String id) {
-		Connection conn = getConnection();
-		AccountDAO dao = new AccountDAO();
-		int result = dao.deleteAccount(conn, id);
-		
-		if(result > 0) {
-			commit(conn);
-		} else {
-			rollback(conn);
-		}
-		close(conn);
-		return result;
-	}
-
 }
