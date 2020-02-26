@@ -8,22 +8,21 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import account.model.vo.Account;
 import myPage.user.model.service.userProfileService;
 
 /**
- * Servlet implementation class selectProfileServlet
+ * Servlet implementation class deleteProfileServlet
  */
-@WebServlet("/selectProfileServlet")
-public class selectProfileServlet extends HttpServlet {
+@WebServlet("/delete.mp")
+public class deleteProfileServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public selectProfileServlet() {
+    public deleteProfileServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,20 +31,22 @@ public class selectProfileServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession(); //로그인 정보 불러오기
+		request.setCharacterEncoding("utf-8");
 		
-		String loginUser = ((Account)session.getAttribute("loginUser")).getId();
+		String id = request.getParameter("id");
+		String password = request.getParameter("password");
 		
-		Account account = new userProfileService().selectProfile(loginUser);
-		//account 객체에 내 정보보기에 필요한 모든 정보 받아오기
+		Account account = new Account(id, password);
+		
+		int result = new userProfileService().deleteProfile(account);
 		
 		String page = null;
-		if(account != null) {
-			page = "views/myPage/user/selectMyProfileView.jsp";
-			request.setAttribute("account", account);
+		if(result > 0) {
+			page = "views/common/successPage.jsp";
+			request.setAttribute("msg", "탈퇴가 완료되었습니다.");
 		} else {
 			page = "views/common/errorPage.jsp";
-			request.setAttribute("msg", "내 정보 보기에 실패했습니다.");
+			request.setAttribute("msg", "잘못된 비밀번호입니다.");
 		}
 		RequestDispatcher view = request.getRequestDispatcher(page);
 		view.forward(request, response);

@@ -1,47 +1,48 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ page import="account.model.vo.*, java.util.*" %>
+    pageEncoding="UTF-8" import="account.model.vo.Account, java.util.Date"%>
 <%
-	request.setCharacterEncoding("utf-8");
-	String id = request.getParameter("id");
-	String name = request.getParameter("user_name");
-	String grade = request.getParameter("grade");
-	String email = request.getParameter("email");
-	String phone = request.getParameter("phone");
-	String gender = request.getParameter("gender");
-	String birth = request.getParameter("birth");
-%>
+	Account a = (Account)request.getAttribute("account");
 
+	String id = a.getId();
+	String name = a.getUserName();
+	int grade = a.getGrade();
+	String phone = a.getPhone();
+	String email = a.getEmail();
+	String gender = a.getGender();
+	Date birth = a.getBirth();
+	
+	String gr = null;
+	switch(grade) {
+	case 0: gr = "관리자"; break;
+	/*case 1은 비회원이기 때문에 마이페이지에 접근하지 못함*/
+	case 2: gr = "준회원"; break;
+	case 3: gr = "정회원"; break;
+	}
+	
+	String ge = null;
+	switch(gender) {
+	case "F": ge = "여자"; break;
+	case "M": ge = "남자"; break;
+	}
+	
+%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="<%= request.getContextPath() %>/css/common.css">
-<style>
-	*{box-sizing: border-box;}
-	.content{width: 100%; height: 100%;}    
-    
-    table{width: 90%;}
-    button{background-color: gray; color: white; border-radius: 10px; text-align: center; 
-    		font-size: 20px; cursor: pointer; padding: 10px 20px; margin: 10px;}
-    .minW{min-weight: 60px;}
-    
-    .profile{width: 300px; height: 30px; border: 1px solid gray; border-radius: 3px;}
-</style>
 </head>
 <body>
-	
 	<%@ include file="../../common/mainmenu.jsp" %>
 
 	<div class="outer">
 		<div class="wrapper">
 			<div class="main">
 				<div class="pageTitle">
-					<h1>기본 정보 수정</h1>
+					<h1>기본 정보</h1>
 				</div>
 				<div>
-					<form action="<%= request.getContextPath() %>/update.mp" method="post" id="updateForm" name="updateForm" 
+					<form action="views/myPage/user/updateMyProfile.jsp" method="post" id="updateForm" name="updateForm" 
 						style="font-size: 20px; text-align: center;">
 						<table style="border-spacing: 20px;">
 								<tr>
@@ -52,26 +53,15 @@
 								</tr>
 								<tr>
 									<td>이름</td>
-									<td><input type="text" placeholder="이름을 입력해주세요" class="profile" name="user_name" value="<%= name %>"></td>
-									<td><input type="text" name="nameResult"></td>
+									<td><input type="text" placeholder="이름을 입력해주세요" class="profile" name="user_name" readOnly value="<%= name %>"></td>
 								</tr>
 								<tr>
 									<td>회원등급</td>
-									<td><input type="text" class="profile" name="grade" readonly value="<%= grade %>"></td>
-								</tr>
-								<tr>
-									<td>비밀번호</td>
-									<td><input type="password" placeholder="비밀번호를 입력해주세요" class="profile" name="pass"></td>
-									<td><input type="text" name="passResult"></td>
-								</tr>
-								<tr>
-									<td>비밀번호 확인</td>
-									<td><input type="password" placeholder="비밀번호 확인" class="profile" name="passCheck"></td>
-									<td><input type="text" name="passResult2"></td>
+									<td><input type="text" class="profile" name="grade" readonly value="<%= gr %>"></td>
 								</tr>
 								<tr>
 									<td>이메일</td>
-									<td><input type="email" placeholder="메일을 입력해주세요" class="profile" name="email" value="<%= email %>"></td>
+									<td><input type="text" placeholder="메일을 입력해주세요" class="profile" name="email" value="<%= email %>"></td>
 								</tr>
 								<tr>
 									<td>휴대전화</td>
@@ -79,7 +69,7 @@
 								</tr>
 								<tr>
 									<td>성별</td>
-									<td><input type="text" class="profile" name="gender" readonly value="<%= gender %>"></td>
+									<td><input type="text" class="profile" name="gender" readonly value="<%= ge %>"></td>
 								</tr>
 								<tr>
 									<td>생년월일</td>
@@ -88,6 +78,9 @@
 						</table>
 						<div style="text-align: center;">
 								<input id="updateBtn" type="submit" value="수정"> <!-- action으로 연결 -->
+								
+								<!-- 탈퇴 확인을 위한 페이지 -->
+								<button id="deleteAcBtn" onclick="location.href='views/myPage/user/deleteAcCheck.jsp'" value="탈퇴">탈퇴</button>
 						</div>
 					</form>
 				</div>
@@ -97,9 +90,9 @@
 		<script>
 				$('#pass').blur(function(){
 					var pwdExp = /[a-zA-Z](?=.*[a-zA-Z])(?=.*[!@#$%^&*])(?=.*[0-9]).{7,14}/;
-					if(!pwdExp.test($('#pass').val())){
-						$('#passResult').val("비밀번호 입력 오류").css('color', 'red');
-						$('#pass').focus().css('background','pink');
+					if(!pwdExp.test($(this).val())){
+						$('#passResult').text("비밀번호 입력 오류").css('color', 'red');
+						$(this).focus().css('background','pink');
 					} else{
 						$('#passResult').text("정상 입력").css('color', 'green');
 						$(this).css("background","initial");

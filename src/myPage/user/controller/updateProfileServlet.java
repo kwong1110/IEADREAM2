@@ -1,6 +1,7 @@
 package myPage.user.controller;
 
 import java.io.IOException;
+import java.sql.Date;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -8,22 +9,21 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import account.model.vo.Account;
 import myPage.user.model.service.userProfileService;
 
 /**
- * Servlet implementation class selectProfileServlet
+ * Servlet implementation class updateProfileServlet
  */
-@WebServlet("/selectProfileServlet")
-public class selectProfileServlet extends HttpServlet {
+@WebServlet("/update.mp")
+public class updateProfileServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public selectProfileServlet() {
+    public updateProfileServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,20 +32,37 @@ public class selectProfileServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession(); //로그인 정보 불러오기
+		String id = request.getParameter("id");
+		String userName = request.getParameter("user_name");
+		String password = request.getParameter("pass");
+		String gr = request.getParameter("grade");
+			int grade = 0;
+			switch(gr) {
+			case "관리자": grade = 0; break;
+			case "준회원": grade = 2; break;
+			case "정회원": grade = 3; break;
+			}
+		String email = request.getParameter("email");
+		String phone = request.getParameter("phone");
+		String ge = request.getParameter("gender");
+			String gender = null;
+			switch(ge) {
+			case "여자": ge = "F"; break;
+			case "남자": ge = "M"; break;
+			}
+		String bi = request.getParameter("birth");
+		Date birth = Date.valueOf(bi);
 		
-		String loginUser = ((Account)session.getAttribute("loginUser")).getId();
+		Account account = new Account(grade, id, password, gender, userName, phone, email, birth);
 		
-		Account account = new userProfileService().selectProfile(loginUser);
-		//account 객체에 내 정보보기에 필요한 모든 정보 받아오기
+		int result = new userProfileService().updateProfile(account);
 		
 		String page = null;
-		if(account != null) {
-			page = "views/myPage/user/selectMyProfileView.jsp";
-			request.setAttribute("account", account);
+		if(result > 0) {
+			page = "/selectProfileServlet";
 		} else {
 			page = "views/common/errorPage.jsp";
-			request.setAttribute("msg", "내 정보 보기에 실패했습니다.");
+			request.setAttribute("msg", "회원 수정에 실패했습니다.");
 		}
 		RequestDispatcher view = request.getRequestDispatcher(page);
 		view.forward(request, response);
