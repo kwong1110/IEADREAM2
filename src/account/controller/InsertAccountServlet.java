@@ -62,7 +62,6 @@ public class InsertAccountServlet extends HttpServlet {
 		String page = "";
 		if(result > 0) {
 			page = "index.jsp";
-			// page = "/insert.ui";
 			request.setAttribute("msg", "기본정보 입력이 완료되었습니다.");
 		} else {
 			page = "views/common/errorPage.jsp";
