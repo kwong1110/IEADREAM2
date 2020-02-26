@@ -1,8 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!doctype html>
+<!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" type="text/css" href="css/reset.css" />
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
   <title>내 정보 입력</title>
   <meta charset="utf-8">
   <style>
@@ -130,9 +132,9 @@
         <section>
           <form action="<%= request.getContextPath() %>/insert.ui" method="post" enctype="multipart/form-data">
             <section id="itemProfile" style="display:flex">
-              <article style="width: 400px; height: 250px;">
-   				<img id="image_section" src="#" alt="프로필 사진 업로드" style="min-width: 200px; min-height: 200px;"/>
-            	<p><input type='file' id="imgInput" name="profileImg"/><p>
+              <article style="width: 400px; height: 250px;" >
+				<img id='output' width="250" height="250"><br>
+              	<input type='file' accept='image/*' onchange='openFile(event)' id="imgInput" name="profileImg">
               </article>
               <article id="hello" style="text-align:center; margin-left:30px;">
                 <label>소갯말</label><br>
@@ -281,23 +283,23 @@
       </div>
     </div>
   </div>
-  <script type="text/javascript" src="<%= request.getContextPath() %>/js/jquery-3.4.1.min.js">>
-  function readURL(input) {
-	  if (input.files && input.files[0]) {
-	   var reader = new FileReader();
-	   
-	   reader.onload = function (e) {
-	    $('#image_section').attr('src', e.target.result);  
-	   }
-	   
-	   reader.readAsDataURL(input.files[0]);
-	   }
-	 }
-	   
-	 $("#imgInput").change(function(){
-	    readURL(this);
-	 });
-  </script>
+
   
 </body>
+<script>
+
+	var openFile = function(event) {
+    	var input = event.target;
+   		var reader = new FileReader();
+    	reader.onload = function(){
+    		var dataURL = reader.result;
+    		var output = document.getElementById('output');
+    		output.src = dataURL;
+    		};
+	reader.readAsDataURL(input.files[0]);
+
+  	};
+
+</script>
+
 </html>

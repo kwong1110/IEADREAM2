@@ -1,8 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!doctype html>
+<!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" type="text/css" href="css/reset.css" />
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
   <title>이상형 정보 입력</title>
   <meta charset="utf-8">
   <style>
@@ -145,6 +147,7 @@
   </style>
 </head>
 <body style="height:100%; margin:0 auto;">
+
   <div id ="outer">
     <div class="wrapper">
       <div class ="main">
@@ -193,7 +196,7 @@
                   </td>
                 </tr>
                 <tr class="itemBox">
-                  <td class="itemName" id="">스타일</td class="itemName" id="">
+                  <td class="itemName" id="">스타일</td>
                   <td>
                     <label><input type="radio" name="style" value="cute">귀여운</label>
                     <label><input type="radio" name="style" value="intellect">지적인</label>
@@ -228,7 +231,7 @@
                   </td>
                 </tr>
                 <tr class="itemBox">
-                  <td class="itemName" id="">종교</td class="itemName" id="">
+                  <td class="itemName" id="">종교</td>
                   <td>
                     <label><input type="radio" name="religion" value="christian">기독교</label>
                     <label><input type="radio" name="religion" value="catholic">천주교</label>
