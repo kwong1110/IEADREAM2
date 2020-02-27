@@ -7,6 +7,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import idealType.model.service.MatchService;
+import idealType.model.vo.Match;
+
 /**
  * Servlet implementation class UpdateMatchServlet
  */
@@ -31,7 +34,6 @@ public class UpdateMatchServlet extends HttpServlet {
 		int userNo = ((Account)request.getSession().getAttribute("loginUser")).getUserNo();
 		
 		Match m = new Match();
-
 		m.setUserNo(userNo);
 		m.setTargetNo(targetNo);
 		m.setStatus(status);

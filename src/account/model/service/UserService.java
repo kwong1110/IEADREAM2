@@ -28,7 +28,7 @@ public class UserService {
 		int result = uiDAO.insertUserInfo(conn, ui);
 		int result2 = uiDAO.insertInterest(conn, ui);
 		
-		if(result > 0) {
+		if(result > 0 && result2 > 0) {
 			commit(conn);
 		} else {
 			rollback(conn);
@@ -96,10 +96,8 @@ public class UserService {
 	public int insertUserInterest(UserInfo ui) {
 		Connection conn = getConnection();
 		UserInfoDAO uiDAO = new UserInfoDAO();
-		int r = uiDAO.deleteInterest(conn, ui);
-		int rs = uiDAO.insertInterest(conn, ui);
-		int result = 1;
-		
+		uiDAO.deleteInterest(conn, ui);
+		int result = uiDAO.insertInterest(conn, ui);
 		
 		if(result > 0) {
 			commit(conn);
