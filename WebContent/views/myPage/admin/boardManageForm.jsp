@@ -68,10 +68,11 @@
 								<div class="searchMenu">카테고리</div>
 								<div>
 									<select class="search" name="bCategory">
-										<option value="1,2,3,4,5">전체</option>
+										<option value="1,2,3,4,5,6">전체</option>
 										<option value="1">베스트커플</option>
 										<option value="2">우리커플됐어요</option>
 										<option value="5">1:1문의</option>
+										<option value="6">FAQ</option>
 									</select>
 								</div>
 							</div>
@@ -119,6 +120,7 @@
 										case 2: viewBoard = "우리커플됐어요"; break;
 										case 4: viewBoard = "파티참여후기"; break;
 										case 5: viewBoard = "1:1문의"; break;
+										case 6: viewBoard = "FAQ"; break;
 										} %>
 										<%= viewBoard %>
 									</td>
@@ -133,7 +135,6 @@
 						</table>
 						<div class="btnBox btnC">
 							<button type="button" class="defaultBtn" id="insertBtn" onclick="insertBoard();">게시글 등록</button>
-							<button type="button" class="defaultBtn" id="updateBtn" onclick="updateBoard();">게시글 수정</button>
 							<button type="button" class="defaultBtn" id="deleteBtn" onclick="deleteBoard();">게시글 삭제</button>
 						</div>
 					</form>
@@ -243,7 +244,7 @@
 			window.open("views/myPage/admin/boardInsertForm.jsp", "insertBoard", "width=370, height=250, "+ ", left=" + popLeft + ", top="+ popTop); 	
 		};
 		
-		function updateBoard(){
+		/* function updateBoard(){
 			
 			var checkList = [];
 		
@@ -266,7 +267,7 @@
 					}
 				});
 			}; 	
-		};
+		}; */
 		
 		function deleteBoard(){
 			var checkList = [];

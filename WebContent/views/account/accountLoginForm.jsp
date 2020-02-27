@@ -37,7 +37,7 @@ button {
 	    		<div class="loginTitle">
 	     			<h2>로그인</h2>
 	     		</div>
-	            <form action="<%= request.getContextPath() %>/login.me" onsubmit="return validate();" method="post">
+	            <form id="loginForm" action="<%= request.getContextPath() %>/login.me" onsubmit="return validate();" method="post">
 		            <div class="loginBox">
 		            	<div>
 		                <label>&nbsp;&nbsp;&nbsp;아이디</label>
@@ -50,7 +50,7 @@ button {
 		            </div>
 		            <div class="btnBox">		            
 			            <div>
-			            <button type="submit" class="defaultBtn loginBtn" onclick="location.href='<%= request.getContextPath() %>/login.me'">로그인</button> 
+			            <button type="submit" class="defaultBtn loginBtn">로그인</button> 
 			            </div>
 			            
 			             <!-- 아이디 찾기 눌렀을때 searchidForm 으로 넘어 가기... -->
@@ -67,14 +67,14 @@ button {
 		function validate(){
 			if($('#userId2').val().trim().length == 0){
 				alert('아이디를 입력해주세요.');
-				$('#userId').focus();
+				$('#userId2').focus();
 				
 				return false;
 			}
 			
 			if($('#userPwd2').val().trim().length == 0){
 				alert('비밀번호를 입력해주세요.');
-				$('#userPwd').focus();
+				$('#userPwd2').focus();
 				
 				return false;
 			}
@@ -82,24 +82,19 @@ button {
 			return true;
 		}
 		
-		var msg = "<%= msg %>";
-		var failCount = 0;
 		
-		$(function(){
-			if(msg != "null" && msg == "아이디가 존재하지 않습니다."){
-				alert(msg);
-			} else if(msg != "null" && msg == "비밀번호가 일치하지 않습니다."){
-				alert(msg + + "(" + failCount++ + "회)");
-				if(failCount == 3){
-					var bool = confirm("비밀번호가" + failCount + "회 틀리셨습니다.\n 비밀번호를 찾으시겠습니까?")
-					if(bool){
-						
-					} else {
-						
-					}
-				}
+		<%-- $(function(){
+			if("<%= msg %>" != "null" && "<%= msg %>" === "아이디가 존재하지 않습니다."){
+				alert("<%= msg %>");
+			} else if("<%= msg %>" != "null" && "<%= msg %>" === "비밀번호가 일치하지 않습니다."){
+				
+				var bool = confirm("비밀번호가 일치하지 않습니다.\n 비밀번호를 찾으시겠습니까?" + failCount);
+				
+				if(bool){
+					location.href='<%= request.getContextPath() %>/views/account/searchPwdForm.jsp';
+				} 
 			}
-		});
+		}); --%>
 		
 		function goIndex(){
 			location.href="<%= request.getContextPath()%>/views/common/mainmenu.jsp";
