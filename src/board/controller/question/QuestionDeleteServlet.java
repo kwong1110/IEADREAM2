@@ -30,14 +30,16 @@ public class QuestionDeleteServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int postNo = Integer.parseInt(request.getParameter("postNo"));
+		String postNo = request.getParameter("postNo");
+		System.out.println("deleteServelt의 postNo : " + postNo );
+		//int postNo = Integer.parseInt(request.getParameter("postNo"));
+
 		String userNo = request.getParameter("userNo");
+		System.out.println("deleteServelt의 userNo : " + userNo );
 		int result = new QuestionService().deleteQuestion(postNo,userNo);
 		String page =null;
 		if(result > 0) {
-			page = "/list.qu";
-			request.setAttribute("userNo", userNo);
-			//response.sendRedirect("list.qu");
+			response.sendRedirect("list.qu?userNo="+userNo);
 		} else {
 			request.setAttribute("msg", "게시글 삭제에 실패하였습니다.");
 			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);

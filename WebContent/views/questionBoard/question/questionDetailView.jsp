@@ -17,6 +17,7 @@
 	case "회원/등급" : categoryInt = 4; break;
 	case "기타" : categoryInt = 5; break;
 	} */
+	
 %>
 <!DOCTYPE html>
 <html>
@@ -92,15 +93,10 @@
 										<input type ="hidden" value ="<%= b.getPostNo() %>" name = "postNo">
 										<input type="hidden" id="title" name = "title" value="<%= b.getTitle() %>"><%= b.getTitle() %>							
 									</td>
-									<% if(loginUser.getGrade() == 0) {%>
-									<th>작성자</th>
-									<td>
-										<%= b.getUserId() %>
-									</td>
-									<% } %>
+									
 									<th width=20% id="category">카테고리</th>
 									<td>
-										<%= b.getCategory() %>
+										<%= b.getCategory() %><input type="hidden" value="<%= loginUser.getUserNo()%>" name="userNo">
 										<input type="hidden" value="<%= b.getCategory() %>" name="category">
 									</td>
 								</tr>

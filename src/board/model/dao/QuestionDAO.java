@@ -197,6 +197,32 @@ public class QuestionDAO {
 			return reply;
 		}
 		
+		
+		// 사용자 - 문의글 삭제
+		public int deleteQuestion(Connection conn, String postNo, String userNo) {
+			PreparedStatement pstmt = null;
+			int result = 0;
+			int post = Integer.parseInt(postNo);
+			String query = prop.getProperty("deleteQuestion");
+			System.out.println("dao의 post값 : " + post);
+			
+			try {
+				pstmt = conn.prepareStatement(query);
+				pstmt.setInt(1, post);
+				pstmt.setString(2, userNo);
+				result = pstmt.executeUpdate();
+				System.out.println("dao의 result값 : " + result);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(pstmt);
+			}
+			return result;
+		}
+		
+		
+		
+/*		
 		// 사용자 - 문의글 삭제
 		public int deleteQuestion(Connection conn, int postNo, String userNo) {
 			PreparedStatement pstmt = null;
@@ -216,7 +242,7 @@ public class QuestionDAO {
 			}
 			return result;
 		}
-
+*/
 // 새로 고칠거 	
 
 	

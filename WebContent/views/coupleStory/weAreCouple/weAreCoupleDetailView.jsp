@@ -80,9 +80,9 @@
 								<td width="150px"><%= b.getCreateDate() %></td> 
 							</tr>
 							<tr>
-								<th width="20px">제목<input type="hidden" name ="postNo" value = "<%= request.getParameter("postNo") %>"></th>
+								<th width="20px">제목<input type="hidden" name ="postNo" value = "<%= request.getParameter("postNo") %>"> </th>
 								<td colspan="5">
-									<input type="hidden" value="<%= b.getTitle() %>" name="title"><input id="title" value='<%= b.getTitle() %>'>
+									<input type="hidden" value="<%= b.getTitle() %>" name="title"><input id="title" value='<%= b.getTitle() %>' readonly>
 								</td>
 							</tr>
 							<tr>
@@ -90,8 +90,8 @@
 								<th>여자친구의 이름</th>
 							</tr>
 							<tr>
-								<td><input type="hidden" name="mName" value="<%= bc.getmName() %>"><input  class="wac" value="<%= bc.getmName() %>"></td>
-								<td><input type="hidden" name="fName" value="<%= bc.getfName() %>"><input class="wac" value='<%= bc.getfName() %>'></td>
+								<td><input type="hidden" name="mName" value="<%= bc.getmName() %>"><input  class="wac" value="<%= bc.getmName() %>" readonly></td>
+								<td><input type="hidden" name="fName" value="<%= bc.getfName() %>"><input class="wac" value='<%= bc.getfName() %>' readonly></td>
 							</tr>
 								
 							<tr>
@@ -100,15 +100,15 @@
 							</tr>
 							
 							<tr>
-								<td><input type="hidden" name="dtPeriod" value="<%= bc.getDtPeriod()%>"><input class="wac" value="<%= bc.getDtPeriod() %>" class="wac">&nbsp;일</td>
-								<td><input type="hidden" name="fvDate" value="<%= bc.getFvDate() %>"><input  class="wac" value="<%= bc.getFvDate()%>"name="fvDate" ></td>
+								<td><input type="hidden" name="dtPeriod" value="<%= bc.getDtPeriod()%>"><input class="wac" value="<%= bc.getDtPeriod() %>" class="wac" readonly>&nbsp;일</td>
+								<td><input type="hidden" name="fvDate" value="<%= bc.getFvDate() %>"><input  class="wac" value="<%= bc.getFvDate()%>"name="fvDate" readonly></td>
 							</tr>
 							<tr>
 								<td>이어드림의 서비스 중 가장 만족했던 서비스를  작성해주세요.</td>
 							</tr>
 							<tr>
 								<td colspan=2>
-									<input type="hidden" name = "content1" value="<%=content1 %>"><input class="Rwac" value="<%=content1 %>">
+									<input type="hidden" name = "content1" value="<%=content1 %>"><input class="Rwac" value="<%=content1 %>" readonly>
 								</td>
 							</tr>
 							<tr>
@@ -116,18 +116,19 @@
 							</tr>
 							<tr>
 								<td colspan=2 width=100%>
-								<input type="hidden" name = "content2" value="<%=content2 %>"><input class="Rwac" value="<%=content2 %>">
+								<input type="hidden" name = "content2" value="<%=content2 %>"><input class="Rwac" value="<%=content2 %>" readonly>
 								</td>
 							</tr>
 							<tr>
 								<td colspan=2>
-								<input type="hidden" name="dtPeriod" value="<%= b.getContent() %>">
+								<input type="hidden" name = "con" value="<%=content1 %><%= content2 %>">
 								</td>
 							</tr>
 							
 							<tr>
 								<td>커플 사진</td>
 							</tr>
+							<%if(loginUser.getGrade() !=0){%>
 							<tr>
 									<td colspan="4">
 									<img id="titleImg"  width="150" height="200" src="<%= request.getContextPath() %>/photo_uploadFiles/<%= titleImg.getChangeName() %>">
@@ -140,7 +141,25 @@
 								<input type="hidden" value="<%= fileList.get(1).getPhotoNo() %>" name="detailImgId1">
 							</td>
 							</tr>
-						
+							<% } else { %>
+								<tr>
+									<td colspan="4">
+									<a href="<%= request.getContextPath() %>/photo_uploadFiles/<%=titleImg.getChangeName() %>" download="<%=titleImg.getOriginName() %>">
+									<img id="titleImg"  width="150" height="200" src="<%= request.getContextPath() %>/photo_uploadFiles/<%= titleImg.getChangeName() %>">
+										<input type="hidden" value="<%= titleImg.getChangeName() %>" name="titleImage">
+										<input type="hidden" value="<%= titleImg.getPhotoNo() %>" name="detailImgId0">
+									</a>
+								</td>
+								<td>
+								<a href="<%= request.getContextPath() %>/photo_uploadFiles/<%=titleImg.getChangeName() %>" download="<%=titleImg.getOriginName() %>">
+									<img id="contentImg1" width="150" height="200" class="detailImg" src="<%= request.getContextPath() %>/photo_uploadFiles/<%= fileList.get(1).getChangeName() %>">
+								<input type="hidden" value="<%= fileList.get(1).getChangeName() %>" name="detailImg1">
+								<input type="hidden" value="<%= fileList.get(1).getPhotoNo() %>" name="detailImgId1">
+								</a>
+							</td>
+							</tr>
+							
+							<% } %>
 						</table>
 						<div class="btnBox" align="center">
 								<% if(loginUser != null && loginUser.getId().equals(b.getUserId())){ %>
@@ -149,7 +168,7 @@
 							<% } %>
 							<div onclick="location.href='<%=request.getContextPath() %>/list.wac'" id="menuBtn">메뉴로</div>
 							<% if(loginUser != null && loginUser.getGrade()==0){ %>
-							<input type="button" onclick="location.href='<%=request.getContextPath() %>/views/coupleStory/weAreCouple/TestBC.jsp'" id="menuBtn" value="베스트 커플">
+							<input type="button" onclick="updateBC();" id="menuBtn" value="베스트 커플">
 							<input type ="button" onclick="deleteThumb();" id="deleteBtn" value="삭제">
 							<% } %>
 						</div>
@@ -167,6 +186,11 @@
 				$('#detailForm').attr('action', '<%= request.getContextPath() %>/delete.wac');
 				$('#detailForm').submit();
 			}
+		}
+		
+		function updateBC(){
+			$('#detailForm').attr('action','<%=request.getContextPath() %>/views/coupleStory/weAreCouple/TestBC.jsp'); /* 합칠 때 이름 바꾸기 */
+			$('#detailForm').submit();
 		}
 	</script>
 </body>
