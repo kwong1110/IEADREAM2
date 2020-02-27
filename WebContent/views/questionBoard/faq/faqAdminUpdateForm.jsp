@@ -6,39 +6,30 @@
 	
 	
 	String category = board.getCategory();
-	String[] selected = new String[5];
-	
+	String[] selected = new String[4];
+
 		if(category.equals("결제")) {
 			selected[0] = "selected";
 			selected[1] = "";
 			selected[2] = "";
 			selected[3] = "";
-			selected[4] = "";
-		} else if(category.equals("파티")) {
+		} else if(category.equals("서비스")) {
 			selected[0] = "";
 			selected[1] = "selected";
 			selected[2] = "";
 			selected[3] = "";
-			selected[4] = "";
-		} else if(category.equals("서비스")) {
+		} else if(category.equals("회원/등급")) {
 			selected[0] = "";
 			selected[1] = "";
 			selected[2] = "selected";
 			selected[3] = "";
-			selected[4] = "";
-		} else if(category.equals("회원/등급")) {
-			selected[0] = "";
-			selected[1] = "";
-			selected[2] = "";
-			selected[3] = "selected";
-			selected[4] = "";
 		} else {
 			selected[0] = "";
 			selected[1] = "";
 			selected[2] = "";
-			selected[3] = "";
-			selected[4] = "selected";
+			selected[3] = "selected";
 		 } 
+
 %>
 <!DOCTYPE html>
 <html>
@@ -73,10 +64,9 @@
 								<td>
 									<select class="select" name="category">
 										<option value="결제" <%= selected[0] %>>결제</option>
-										<option value="파티" <%= selected[1] %>>파티</option>
-										<option value="서비스" <%= selected[2] %>>서비스</option>
-										<option value="회원/등급" <%= selected[3] %>>회원/등급</option>
-										<option value="기타" <%= selected[4] %>>기타</option>
+										<option value="서비스" <%= selected[1] %>>서비스</option>
+										<option value="회원/등급" <%= selected[2] %>>회원/등급</option>
+										<option value="기타" <%= selected[3] %>>기타</option>
 									</select>
 								</td>
 							</tr>

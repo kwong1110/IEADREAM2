@@ -35,19 +35,18 @@
 				</div>
 				<div class="tableArea">
 					<table id="listArea">
-						<tr>
+						<%
+							if (list.isEmpty()) {
+						%>
+							존재하는 공지사항이 없습니다.
+						<%
+							} else {
+						%>
 							<th>글번호</th>
 							<th width="100px">카테고리</th>
 							<th width="300px">글제목</th>
 						</tr>
 						<%
-							if (list.isEmpty()) {
-						%>
-						<tr>
-							<td colspan="3">존재하는 공지사항이 없습니다.</td>
-						</tr>
-						<%
-							} else {
 								for (Board board : list) {
 						%>
 									<tr>
@@ -105,7 +104,7 @@
 	<script>
 		$(function() {
 			$('#listArea td').mouseenter(function() {
-				$(this).parent().css({'background':'darkgray', 'cursor':'pointer'});
+				$(this).parent().css({'background':'darkgray', 'cursor':'pointer'});				
 			}).mouseout(function() {
 				$(this).parent().css('background','none');
 			}).click(function() {

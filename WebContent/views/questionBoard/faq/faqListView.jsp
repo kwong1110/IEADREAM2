@@ -9,7 +9,6 @@
 		ArrayList<Board> cate2 = new ArrayList<Board>();
 		ArrayList<Board> cate3 = new ArrayList<Board>();
 		ArrayList<Board> cate4 = new ArrayList<Board>();
-		ArrayList<Board> cate5 = new ArrayList<Board>();
 	if(list.isEmpty()) {
 		System.out.println("비어있음");
 	} else {
@@ -18,17 +17,14 @@
 			case "결제":
 				cate1.add(board);
 				break;
-			case "파티":
+			case "서비스":
 				cate2.add(board);
 				break;
-			case "서비스":
+			case "회원/등급":
 				cate3.add(board);
 				break;
-			case "회원/등급":
-				cate4.add(board);
-				break;
 			case "기타":
-				cate5.add(board);
+				cate4.add(board);
 				break;
 			}
 		}
@@ -71,29 +67,22 @@
 							
 							<% } %>
 						</div>
-						<div class="category" id="cate2"><label>파티</label>
+						<div class="category" id="cate2"><label>서비스</label>
 							<% for(Board board : cate2) { %>
 							<div class="faq"><%= board.getTitle() %>
 								<div class="con"><%= board.getContent() %></div>
 							</div>
 							<% } %>
 						</div>
-						<div class="category" id="cate3"><label>서비스</label>
+						<div class="category" id="cate3"><label>회원/등급</label>
 							<% for(Board board : cate3) { %>
 							<div class="faq"><%= board.getTitle() %>
 								<div class="con"><%= board.getContent() %></div>
 							</div>
 							<% } %>
 						</div>
-						<div class="category" id="cate4"><label>회원/등급</label>
+						<div class="category" id="cate4"><label>기타</label>
 							<% for(Board board : cate4) { %>
-							<div class="faq"><%= board.getTitle() %>
-								<div class="con"><%= board.getContent() %></div>
-							</div>
-							<% } %>
-						</div>
-						<div class="category" id="cate5"><label>기타</label>
-							<% for(Board board : cate5) { %>
 							<div class="faq"><%= board.getTitle() %>
 								<div class="con"><%= board.getContent() %></div>
 							</div>
