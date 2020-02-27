@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import account.model.vo.Account;
 import myPage.user.model.service.userProfileService;
@@ -31,12 +32,17 @@ public class deleteProfileServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");
 		
-		String id = request.getParameter("id");
-		String password = request.getParameter("password");
+		HttpSession session = request.getSession(); //로그인 정보 불러오기
+		String id = ((Account)session.getAttribute("loginUser")).getId();
 		
-		Account account = new Account(id, password);
+		System.out.println(id);
+		
+		String deletePass = request.getParameter("deletePass");
+		
+		System.out.println(deletePass);
+		
+		Account account = new Account(id, deletePass);
 		
 		int result = new userProfileService().deleteProfile(account);
 		

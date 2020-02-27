@@ -52,8 +52,8 @@
 								</tr>
 								<tr>
 									<td>이름</td>
-									<td><input type="text" placeholder="이름을 입력해주세요" class="profile" name="user_name" value="<%= name %>"></td>
-									<td><input type="text" name="nameResult"></td>
+									<td><input type="text" placeholder="이름을 입력해주세요" class="profile" name="user_name" id="user_name" value="<%= name %>"></td>
+									<td><input type="text" name="nameResult" id="nameResult" readonly></td>
 								</tr>
 								<tr>
 									<td>회원등급</td>
@@ -61,13 +61,13 @@
 								</tr>
 								<tr>
 									<td>비밀번호</td>
-									<td><input type="password" placeholder="비밀번호를 입력해주세요" class="profile" name="pass"></td>
-									<td><input type="text" name="passResult"></td>
+									<td><input type="password" placeholder="비밀번호를 입력해주세요" class="profile" name="pass" id="pass"></td>
+									<td><input type="text" name="passResult" id="passResult"></td>
 								</tr>
 								<tr>
 									<td>비밀번호 확인</td>
-									<td><input type="password" placeholder="비밀번호 확인" class="profile" name="passCheck"></td>
-									<td><input type="text" name="passResult2"></td>
+									<td><input type="password" placeholder="비밀번호 확인" class="profile" name="passCheck" id="passCheck"></td>
+									<td><input type="text" name="passResult2" id="passResult2"></td>
 								</tr>
 								<tr>
 									<td>이메일</td>
@@ -95,39 +95,40 @@
 		</div>
 	
 		<script>
+				$("#user_name").blur(function(){
+					var nameExp = /^[가-힣]{2,}$/;
+					
+					if(!nameExp.test($(this).val())){
+						$('#nameResult').val('잘못된 이름 입력').css('color', 'red');
+						$(this).focus().css("background", "pink").val('');
+					} else{
+						$('#nameResult').val('정상 입력').css('color', 'green');
+						$(this).css("background", "initial");
+					}
+				});
+				
 				$('#pass').blur(function(){
 					var pwdExp = /[a-zA-Z](?=.*[a-zA-Z])(?=.*[!@#$%^&*])(?=.*[0-9]).{7,14}/;
 					if(!pwdExp.test($('#pass').val())){
 						$('#passResult').val("비밀번호 입력 오류").css('color', 'red');
 						$('#pass').focus().css('background','pink');
 					} else{
-						$('#passResult').text("정상 입력").css('color', 'green');
+						$('#passResult').val("정상 입력").css('color', 'green');
 						$(this).css("background","initial");
 					}
 				});
 				
 				$('#passCheck').keyup(function(){
 					if($(this).val() != $('#pass').val()){
-						$('#passResult1').text("비밀번호 불일치").css('color', 'red');
+						$('#passResult2').val("비밀번호 불일치").css('color', 'red');
 						$(this).focus().css('background', 'pink');
 					} else{
-						$('#passResult1').text("비밀번호 일치").css('color', 'green');
+						$('#passResult2').val("비밀번호 일치").css('color', 'green');
 						$(this).css("background","initial");
 					}
 				});
 				
 				
-				$("#user_name").change(function(){
-					var nameExp = /[가-힣]{2,}/;
-					
-					if(!nameExp.test($(this).val())){
-						$('#nameResult').text('잘못된 이름 입력').css('color', 'red');
-						$(this).focus().css("background", "pink").val('');
-					} else{
-						$('#nameResult').text('정상 입력').css('color', 'green');
-						$(this).css("background", "initial");
-					}
-				});
 		</script>
 
 	</div>

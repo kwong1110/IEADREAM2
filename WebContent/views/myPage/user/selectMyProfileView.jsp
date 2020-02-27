@@ -42,7 +42,7 @@
 					<h1>기본 정보</h1>
 				</div>
 				<div>
-					<form action="views/myPage/user/updateMyProfile.jsp" method="post" id="updateForm" name="updateForm" 
+					<form action="<%= request.getContextPath() %>/views/myPage/user/updateMyProfile.jsp" method="post" id="updateForm" name="updateForm" 
 						style="font-size: 20px; text-align: center;">
 						<table style="border-spacing: 20px;">
 								<tr>
@@ -65,7 +65,7 @@
 								</tr>
 								<tr>
 									<td>휴대전화</td>
-									<td><input type="text" placeholder="휴대전화 번호를 입력해주세요" class="profile" name="phone" value="<%= phone %>"></td>
+									<td><input type="tel" placeholder="휴대전화 번호를 입력해주세요" class="profile" name="phone" value="<%= phone %>"></td>
 								</tr>
 								<tr>
 									<td>성별</td>
@@ -78,11 +78,11 @@
 						</table>
 						<div style="text-align: center;">
 								<input id="updateBtn" type="submit" value="수정"> <!-- action으로 연결 -->
+								<div id="deleteAcBtn" onclick="goToDelete();">탈퇴</div>
 								
 								<!-- 탈퇴 확인을 위한 페이지 -->
 						</div>
 					</form>
-								<button id="deleteAcBtn" onclick="location.href='views/myPage/user/deleteAcCheck.jsp'" value="탈퇴">탈퇴</button>
 				</div>
 			</div>
 		</div>
@@ -121,6 +121,10 @@
 						$(this).css("background", "initial");
 					}
 				});
+				
+				function goToDelete() {
+					location.href='<%= request.getContextPath() %>/views/myPage/user/deleteAcCheck.jsp';
+				}
 		</script>
 
 	</div>
