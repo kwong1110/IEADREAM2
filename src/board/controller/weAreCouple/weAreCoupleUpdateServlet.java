@@ -17,6 +17,7 @@ import com.oreilly.servlet.MultipartRequest;
 
 import account.model.vo.Account;
 import board.model.service.WeAreCoupleService;
+import board.model.vo.BestCouple;
 import board.model.vo.Board;
 import board.model.vo.Photo;
 import common.MyFileRenamePolicy;
@@ -68,9 +69,23 @@ public class weAreCoupleUpdateServlet extends HttpServlet {
 			String postNo = multipartRequest.getParameter("postNo");
 			
 			System.out.println("update서블릿에 담겨져온 postNo : " + postNo);
+			
 			String title = multipartRequest.getParameter("title");
-			String content = multipartRequest.getParameter("content");
 			//String userId = ((Account)request.getSession().getAttribute("loginUser")).getId();
+			
+			
+			//String content = multipartRequest.getParameter("content");
+			String content1 = multipartRequest.getParameter("content1");
+			String content2 = multipartRequest.getParameter("content2");
+			
+			String content = content1 +"/////" + content2;
+			
+			
+			
+			String mName = multipartRequest.getParameter("mName");
+			String fName = multipartRequest.getParameter("fName");
+			int dtPeriod = Integer.parseInt(multipartRequest.getParameter("dtPeriod"));
+			String fvDate = multipartRequest.getParameter("fvDate");
 			
 			
 			Board b = new Board();
@@ -78,6 +93,14 @@ public class weAreCoupleUpdateServlet extends HttpServlet {
 			b.setTitle(title);
 			b.setContent(content);
 			//b.setUserId(userId);
+			
+
+			BestCouple bc = new BestCouple();
+			bc.setmName(mName);
+			bc.setfName(fName);
+			bc.setDtPeriod(dtPeriod);
+			bc.setFvDate(fvDate);
+			
 			
 			ArrayList<Photo> fileList = new ArrayList<Photo>();
 			for(int i = originFiles.size() -1; i >= 0; i--) {
@@ -114,7 +137,7 @@ public class weAreCoupleUpdateServlet extends HttpServlet {
 			ArrayList<Photo> newInsertFile = new ArrayList<Photo>();
 			
 			for(int h = 0; h < fileList.size();) {
-				for(int i = 0; i < 4; i++) {
+				for(int i = 0; i < 2; i++) {
 					if(!detailImgId.get(i).equals("") && changeImg.get(i).equals("data")) { // 바꾼 파일
 						fileList.get(h).setPhotoNo(Integer.parseInt(detailImgId.get(i)));
 						changeFile.add(fileList.get(h));
@@ -146,13 +169,13 @@ public class weAreCoupleUpdateServlet extends HttpServlet {
 			int result = 0;
 			
 			if(changeFile.isEmpty() && newInsertFile.isEmpty()) {
-				result = new WeAreCoupleService().updatePhoto(b, postNo);
+				result = new WeAreCoupleService().updatePhoto(b, bc, postNo);
 			} else if(!changeFile.isEmpty() && newInsertFile.isEmpty()) {
-				result = new WeAreCoupleService().updatePhoto(b, postNo,changeFile);
+				result = new WeAreCoupleService().updatePhoto(b,bc,  postNo,changeFile);
 			} else if(changeFile.isEmpty() && !newInsertFile.isEmpty()) {
-				result = new WeAreCoupleService().updatePhoto(b,postNo, newInsertFile);
+				result = new WeAreCoupleService().updatePhoto(b, bc, postNo, newInsertFile);
 			} else {
-				result = new WeAreCoupleService().updatePhoto(b, changeFile, newInsertFile,postNo);
+				result = new WeAreCoupleService().updatePhoto(b, bc,  changeFile, newInsertFile,postNo);
 			}
 			
 			String page = "";

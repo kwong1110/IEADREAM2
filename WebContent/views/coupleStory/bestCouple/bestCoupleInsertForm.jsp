@@ -106,7 +106,7 @@
 					<div class="main">
 						<div class="subj">
 							<div id="subjtitle">제목</div>
-							<input type="text" name="title" id="subjbox">
+							<input type="text" name="title" id="subjbox" required>
 						</div>
 						
 						<div class="contn1">
@@ -114,30 +114,30 @@
 								<div class="label">
 									<label>남자 이름 : </label>
 								</div>
-								<input type="text" name="mName" class="bx"><br>
+								<input type="text" name="mName" class="bx" required><br>
 								
 								<div class="label">
 									<label>여자 이름 : </label>
 								</div>
-								<input type="text" name="fName" class="bx"><br>
+								<input type="text" name="fName" class="bx" required><br>
 								
 								<div class="label">
 									<label>연애 기간 : </label>
 								</div>
-								<input type="number" name="dtPeriod" min="1" value="1" class="bx">&nbsp;일<br>
+								<input type="number" name="dtPeriod" min="1" value="1" class="bx" required>&nbsp;일<br>
 								
 								<div class="label">
 									<label>즐겨하는 데이트 : </label>
 								</div>
-								<input type="text" name="fvDate" maxlength="12" placeholder="12자이내로 입력하세요.">
+								<input type="text" name="fvDate" maxlength="12" placeholder="12자이내로 입력하세요." required>
 							</div>
 						</div>
 						
-						<textarea class="contn2" name="content" placeholder="내용을 자유롭게 입력해주세요."></textarea>
+						<textarea class="contn2" name="content" placeholder="내용을 자유롭게 입력해주세요." required></textarea>
 						
 						<div class="file">
-							<input type="file" name="photo1" multiple="multiple" id="file1"><br>
-							<input type="file" name="photo2" multiple="multiple">
+							<input type="file" name="photo1" multiple="multiple" id="file1" required><br>
+							<input type="file" name="photo2" multiple="multiple" required>
 						</div>
 					</div>
 					

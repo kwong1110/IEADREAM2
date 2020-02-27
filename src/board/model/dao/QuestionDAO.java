@@ -564,6 +564,28 @@ public class QuestionDAO {
 		}
 		return result;
 	}
+	//수정
+	public int updateReplyList(Connection conn, Reply r) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("insertReply");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, r.getAnswerContent());
+			pstmt.setInt(2, r.getPostNo());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	
 	// 댓글 삭제 - 관리자
 	public int MdeleteQuestion(Connection conn, int postNo) {
 		PreparedStatement pstmt = null;
@@ -583,6 +605,8 @@ public class QuestionDAO {
 		}
 		return result;
 	}
+	
+
 	
 	//검색
 	
@@ -667,27 +691,7 @@ public class QuestionDAO {
 	
 	
 	
-	//수정
-	/*public ArrayList<Reply> updateReplyList(Connection conn, int postNo) {
-		PreparedStatement pstmt = null;
-		int result = 0;
-		
-		String query = prop.getProperty("updateReply");
-		
-		try {
-			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, answerContent);
-			pstmt.setInt(1, postNo);
-			
-			result = pstmt.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(pstmt);
-		}
-		return result;
-	}
-	*/
+	
 	
 
  }

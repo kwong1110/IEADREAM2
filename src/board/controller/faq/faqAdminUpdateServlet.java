@@ -47,7 +47,8 @@ public class faqAdminUpdateServlet extends HttpServlet {
 		
 		String page = null;
 		if(result > 0) {
-			page = "/adminList.faq";
+			page = "views/common/successPage.jsp";
+			request.setAttribute("msg", "FAQ 수정이 완료되었습니다.");
 		} else {
 			page = "views/common/errorPage.jsp";
 			request.setAttribute("msg", "FAQ 수정에 실패하였습니다.");

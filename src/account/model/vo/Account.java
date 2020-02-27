@@ -81,6 +81,19 @@ public class Account {
 		this.deleted = deleted;
 	}
 
+	public Account(int grade, String id, String password, String gender, String userName, String phone, String email,
+			Date birth) {
+		super();
+		this.grade = grade;
+		this.id = id;
+		this.password = password;
+		this.gender = gender;
+		this.userName = userName;
+		this.phone = phone;
+		this.email = email;
+		this.birth = birth;
+	}
+
 	public int getUserNo() {
 		return userNo;
 	}

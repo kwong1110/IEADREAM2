@@ -20,7 +20,7 @@
 		font-family: 'LotteMartHappy'; font-style: normal;
 	}
 	* {margin: 0; padding: 0; }
-	body{background:url('<%= request.getContextPath() %>/images/bgbgbg.jpg') no-repeat center center fixed;
+	body{background:url('<%= request.getContextPath() %>/images/bgbg.jpg') no-repeat center center fixed;
 		background-size: cover;}
 	
 	.header {
@@ -114,17 +114,33 @@
 						</li>
 						
 						<li class="s-menu" id="myPage"><span onclick="">마이페이지</span>
-							<ul class="dept01">							
+							<ul class="dept01">	
+								<% if(loginUser != null) { // login상태일 경우 접근 가능 %>
 								<li id="nop"><a href="<%=request.getContextPath()%>/views/myPage/user/memberGradeUpForm.jsp">정회원 등업</a></li>
-								<li id="nop"><a href="<%= request.getContextPath()%>/selectProfile.mp">기본정보</a></li>
-								<li id="nop"><a href="">나의 프로필</a></li>
-								<li id="nop"><a href="">이상형 정보</a></li>
+								<li id="nop"><a href="<%= request.getContextPath()%>/selectProfileServlet">기본정보</a></li>
+								<li id="nop"><a href="<%= request.getContextPath() %>/updateUser.if">나의 프로필</a></li>
+								<li id="nop"><a href="<%= request.getContextPath() %>/updateUser.pf">이상형 정보</a></li>
 								<li id="nop">
 									<a href="<%=request.getContextPath()%>/views/myPage/user/myWritingListForm.jsp">작성글 조회</a>
 								</li>
+									<% if(loginUser.getGrade() == 2 || loginUser.getGrade() == 0) { // 로그인 + 등급이 관리자 혹은 정회원 %>
 								<li id="nop">
 									<a href="<%=request.getContextPath()%>/list.hh">하트 히스토리</a>
 								</li>
+									<% } %>
+								<% } else { // 위 조건들이 하나도 맞지 않을 경우 %>
+									<li id="nop"><a href='<%= request.getContextPath() %>/views/account/accountLoginForm.jsp' onclick="question();">정회원 등업</a></li>
+									<li id="nop"><a href='<%= request.getContextPath() %>/views/account/accountLoginForm.jsp' onclick="question();">기본정보</a></li>
+									<li id="nop"><a href='<%= request.getContextPath() %>/views/account/accountLoginForm.jsp' onclick="question();">나의 프로필</a></li>
+									<li id="nop"><a href='<%= request.getContextPath() %>/views/account/accountLoginForm.jsp' onclick="question();">이상형 정보</a></li>
+									<li id="nop">
+										<a href='<%= request.getContextPath() %>/views/account/accountLoginForm.jsp' onclick="question();">작성글 조회</a>
+									</li>
+									<li id="nop">
+									<a href='<%= request.getContextPath() %>/views/account/accountLoginForm.jsp' onclick="question();">하트 히스토리</a>
+									</li>
+								<% } %>
+								
 								<% if(loginUser != null && loginUser.getGrade() == 0){ %>
 									<br>
 									<li id="nop">

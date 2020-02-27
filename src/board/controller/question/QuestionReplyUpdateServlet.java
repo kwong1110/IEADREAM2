@@ -41,7 +41,7 @@ public class QuestionReplyUpdateServlet extends HttpServlet {
 		r.setAnswerContent(answerContent);
 		r.setPostNo(postNo);
 		
-		ArrayList<Reply> list = new QuestionService().updateReply(r);
+		ArrayList<Reply> list = new QuestionService().insertReply(r);
 		response.setContentType("application/json; charset=UTF-8");
 		//new Gson().toJson(list, response.getWriter());//list를 response.getWriter를 통해서 보내겠다.
 		

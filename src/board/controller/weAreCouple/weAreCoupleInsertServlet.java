@@ -17,6 +17,7 @@ import com.oreilly.servlet.MultipartRequest;
 
 import account.model.vo.Account;
 import board.model.service.WeAreCoupleService;
+import board.model.vo.BestCouple;
 import board.model.vo.Board;
 import board.model.vo.Photo;
 import common.MyFileRenamePolicy;
@@ -46,40 +47,34 @@ public class weAreCoupleInsertServlet extends HttpServlet {
 			// 어디에 저장할건지 지정하는것
 			String savePath = root + "photo_uploadFiles/";
 			
-			/*
-				DefaultFileRenamePolicy dfrp = null;
-				DefaultFileRenamePolicy는 cos.jar 안에 있는 클래스
-				같은 파일 명이 존재하는지 확인 후 존재한다면 파일 명 뒤에 숫자를 붙여 구분
-					ex. aaa.zip		aaa1.zip	aaa2.zip
-			
-			*/
 			MultipartRequest multipartRequest
 				= new MultipartRequest(request, savePath, maxSize, "UTF-8", new MyFileRenamePolicy());
-			//	request를 받아오고,  어디에 저장할건지 경로,  파일에대한 제한용량(최대크기)  형식이 어떤 형식인지, 같은 이름의 파일을 무슨 정책을 사용해서 이름을 정할건지(내가 만든 정책 클래스를 넣음) 
 			
 			ArrayList<String> saveFiles = new ArrayList<String>();   // 바뀐 파일에 대한 이름을 저장할 ArrayList
 			ArrayList<String> originFiles = new ArrayList<String>(); // 원본 파일의 이름을 저장할 ArrayList
 			
 			Enumeration<String> files = multipartRequest.getFileNames();
-			// 파일이름을 반환하는 메소드
-			// 폼에서 전송된 파일들의 이름 반환하는메소드
-			// 반환값 : Enumeration 
-			// iterator의 구버전 
 			
 			while(files.hasMoreElements()) {
 				String name = files.nextElement(); // 전송 순서의 역순으로 파일을 가져옴
 				
 				if(multipartRequest.getFilesystemName(name) != null) { // rename이 제대로 됐으면
-					// getFilesystemName(name) : MyFileRenamePoliicy의 rename메소드에서 작성한 대로 rename된 파일명
 					saveFiles.add(multipartRequest.getFilesystemName(name));
 					originFiles.add(multipartRequest.getOriginalFileName(name)); // 원래이름 그대로
 				}
 			}
 			
 			String title = multipartRequest.getParameter("title");
-			String content = multipartRequest.getParameter("content");
+			String content1 = multipartRequest.getParameter("content1");
+			String content2 = multipartRequest.getParameter("content2");
+			
+			String content = content1 +"/////" + content2;
 			String userId = ((Account)request.getSession().getAttribute("loginUser")).getId();
 			int userNo = ((Account)request.getSession().getAttribute("loginUser")).getUserNo();
+			String mName = multipartRequest.getParameter("mName");
+			String fName = multipartRequest.getParameter("fName");
+			int dtPeriod = Integer.parseInt(multipartRequest.getParameter("dtPeriod"));
+			String fvDate = multipartRequest.getParameter("fvDate");
 			
 			Board b = new Board();
 			b.setTitle(title);
@@ -87,25 +82,32 @@ public class weAreCoupleInsertServlet extends HttpServlet {
 			b.setUserId(userId);
 			b.setUserNo(userNo);
 			
+			BestCouple bc = new BestCouple();
+			bc.setmName(mName);
+			bc.setfName(fName);
+			bc.setDtPeriod(dtPeriod);
+			bc.setFvDate(fvDate);
+			
+			
 			ArrayList<Photo> fileList = new ArrayList<Photo>();
 			// 역순으로 들어가있음
 			for(int i = originFiles.size() -1; i>=0; i--) {
-				Photo at = new Photo();
-				at.setFilePath(savePath);
-				at.setOriginName(originFiles.get(i));
-				at.setChangeName(saveFiles.get(i));
+				Photo p = new Photo();
+				p.setFilePath(savePath);
+				p.setOriginName(originFiles.get(i));
+				p.setChangeName(saveFiles.get(i));
 				
 				System.out.println(originFiles);
 				//대표이미지 인지 아닌지를 구분해주는 if문
 				if( i == originFiles.size()-1) {
-					at.setFileLevel(0);
+					p.setFileLevel(0);
 				} else {
-					at.setFileLevel(1);
+					p.setFileLevel(1);
 				}
 				
-				fileList.add(at);
+				fileList.add(p);
 			}
-			int result = new WeAreCoupleService().insertThumbnail(b,fileList);
+			int result = new WeAreCoupleService().insertThumbnail(b,bc,fileList);
 			
 			if(result > 0) {
 				response.sendRedirect("list.wac");
@@ -115,7 +117,7 @@ public class weAreCoupleInsertServlet extends HttpServlet {
 					failedFile.delete();
 				}
 				
-				request.setAttribute("msg", "사진 게시판 등록에 실패하였습니다.");
+				request.setAttribute("msg", "우리 커플 됐어요 게시판 등록에 실패하였습니다.");
 				request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
 			}
 		}

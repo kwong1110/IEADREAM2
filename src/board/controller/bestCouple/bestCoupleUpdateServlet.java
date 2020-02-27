@@ -62,7 +62,7 @@ public class bestCoupleUpdateServlet extends HttpServlet {
 				}
 			}
 			
-			int pNo = Integer.parseInt(multipartRequest.getParameter("pNo"));
+			int pNo = Integer.parseInt(multipartRequest.getParameter("postNo"));
 			String title = multipartRequest.getParameter("title");
 			String mName = multipartRequest.getParameter("mName");
 			String fName = multipartRequest.getParameter("fName");
@@ -82,7 +82,7 @@ public class bestCoupleUpdateServlet extends HttpServlet {
 			bc.setDtPeriod(dtPeriod);
 			bc.setFvDate(fvDate);
 			
-			ArrayList<Photo> pList = new ArrayList<Photo>();
+			ArrayList<Photo> fileList = new ArrayList<Photo>();
 			for(int i = originFiles.size() - 1; i >= 0; i--) {
 				Photo pt = new Photo();
 				pt.setPostNo(pNo);
@@ -96,31 +96,28 @@ public class bestCoupleUpdateServlet extends HttpServlet {
 					pt.setFileLevel(1);
 				}
 				
-				pList.add(pt);
+				fileList.add(pt);
 			}
 			
 			ArrayList<String> detailPhotoId = new ArrayList<String>();
-			for(int i = 0; i < 2; i++) {
-				detailPhotoId.add(multipartRequest.getParameter("detailPhotoId" + i));
-			}
+			detailPhotoId.add(multipartRequest.getParameter("detailPhotoId0"));
+			detailPhotoId.add(multipartRequest.getParameter("detailPhotoId1"));
 			
 			ArrayList<String> changePhoto = new ArrayList<String>();
 			changePhoto.add(multipartRequest.getParameter("cTitle"));
-			for(int i = 0; i < 1; i++) {
-				changePhoto.add(multipartRequest.getParameter("cContent" + (i+1)));
-			}
+			changePhoto.add(multipartRequest.getParameter("cContent"));
 			
 			ArrayList<Photo> changeFile = new ArrayList<Photo>();
 			ArrayList<Photo> newInsertFile = new ArrayList<Photo>();
 			
-			for(int h = 0; h < pList.size();) {
+			for(int h = 0; h < fileList.size();) {
 				for(int i = 0; i < 2; i++) {
 					if(!detailPhotoId.get(i).equals("") && changePhoto.get(i).equals("data")) {
-						pList.get(h).setPhotoNo(Integer.parseInt(detailPhotoId.get(i)));
-						changeFile.add(pList.get(h));
+						fileList.get(h).setPhotoNo(Integer.parseInt(detailPhotoId.get(i)));
+						changeFile.add(fileList.get(h));
 						h++;
 					}else if(detailPhotoId.get(i).equals("") && changePhoto.get(i).equals("data")) {
-						newInsertFile.add(pList.get(h));
+						newInsertFile.add(fileList.get(h));
 						h++;
 					}
 				}

@@ -5,20 +5,19 @@
 	String title = request.getParameter("title");
 	String mName = request.getParameter("mName");
 	String fName = request.getParameter("fName");
-	int dtPeriod = Integer.parseInt(request.getParameter("dtPeriod"));
+	String dtPeriod = request.getParameter("dtPeriod");
 	String fvDate = request.getParameter("fvDate");
 	String content = request.getParameter("content");
 	
-	ArrayList<String> photos = new ArrayList<String>();
-	for(int i = 1; i < 2; i++){
-		photos.add(request.getParameter(""));
+	String titlePt = request.getParameter("titlePt");
+	String detailPt = request.getParameter("detailPt") == null ? "" : "src=" + request.getContextPath() + "/photo_uploadFiles/" + request.getParameter("detailPt");
+	//String originName0 = request.getParameter("originName0");
+	//String originName1 = request.getParameter("originName1");
+	
+	ArrayList<String> photoNos = new ArrayList<String>();
+	for(int i = 0; i < 2; i++){
+		photoNos.add(request.getParameter("detailPhotoId" + i) == null ? "" : request.getParameter("detailPhotoId" + i));
 	}
-	
-	
-	
-	
-	
-	
 %>    
     
 <!DOCTYPE html>
@@ -36,7 +35,7 @@
 	
 	.main{
 		width: 70%;
-		height: 600px;
+		height: 750px;
 		border: 8px solid pink;
 		background: white;
 		margin-left: 23px;
@@ -91,7 +90,7 @@
 		margin: 2%;
 	}
 	
-	#file1{
+	.file1{
 		margin-bottom: 1%;
 	}
 	
@@ -113,6 +112,40 @@
 	
 	.btnBox{
 		margin-left: 33%;
+	}
+	
+	#titlePtArea {
+		width:370px; 
+		height:200px;
+		border: 2px solid darkgray;
+		text-align:center; 
+		/* display:table-cell;
+		vertical-align:middle; */
+		display: inline-block;
+		margin: 0 1.5% 0 3%;
+	}
+	
+	#titlePt{
+		width: 370px;
+		height: 200px;
+	}
+	
+	#titlePtArea:hover, #contentPtArea:hover {cursor:pointer;}
+	
+	#contentPtArea {
+		width:370px; 
+		height:200px; 
+		border: 2px solid darkgray; 
+		text-align:center; 
+/* 		display:table-cell; 
+		vertical-align:middle; */
+		display: inline-block;
+		margin: 0 3% 0 1.5%;
+	}
+	
+	#contentPt{
+		width: 370px;
+		height: 200px;
 	}
 	
 </style>
@@ -158,18 +191,104 @@
 						<textarea class="contn2" name="content"><%= content %></textarea>
 						
 						<div class="file">
-							<input type="file" name="photo1" multiple="multiple" id="file1" value="<%= %>"><br>
-							<input type="file" name="photo2" multiple="multiple">
+							<div id="titlePtArea">
+								<img id="titlePt" src="<%= request.getContextPath() %>/photo_uploadFiles/<%= titlePt %>">
+								<input type="hidden" id="detailPhotoId0" name="detailPhotoId0" value="<%= photoNos.get(0) %>"> 
+								<input type="hidden" id="cTitle" name="cTitle">
+							</div>	
+							
+							<div id="contentPtArea">
+								<img id="contentPt" <%= detailPt %>> 
+								<input type="hidden" id="detailPhotoId1" name="detailPhotoId1" value="<%= photoNos.get(1) %>"> 
+								<input type="hidden" id="cContent" name="cContent">
+							</div>
 						</div>
+						
+						
+						<%-- <div class="fileUpload" id="fileUpload">
+								<input type="button" value="파일 선택">
+								<input type="text" id="text" value="<%= originName0 %>">
+						</div> --%>
+					
+						<div id="fileArea">
+							<input type="file" id="thumbnailImg1" multiple="multiple" name="thumbnailImg1" onchange="LoadImg(this,1)">
+							<input type="file" id="thumbnailImg2" multiple="multiple" name="thumbnailImg2" onchange="LoadImg(this,2)">
+							
+						</div>
+					
+						<script>
+						
+							/* $(function(){
+								$("#fileArea").hide();
+							
+								$("#fileUpload").click(function(){
+									$("#thumbnailImg1").click();
+								});
+							});
+							
+							function fileUpload(thumbnailImg1) {
+								var str = thumbnailImg1.value;
+								$('#text').attr("value", thumbnailImg1.value.substring(str.lastIndexOf("\\")+1));
+							} */
+						
+						
+							$(function(){
+								$("#fileArea").hide();
+							
+								$("#titlePtArea").click(function(){
+									$("#thumbnailImg1").click();
+								});
+								$("#contentPtArea").click(function(){
+									$("#thumbnailImg2").click();
+								});
+							});
+							
+							
+							function LoadImg(value, num){
+								if(value.files && value.files[0]){
+									var reader = new FileReader();
+									
+									reader.onload = function(e){								
+										switch(num){
+										case 1: 
+											$("#titlePt").attr("src", e.target.result);
+											break;
+										case 2:
+											$("#contentPt").attr("src", e.target.result);
+											break;
+										}
+									}
+								
+									reader.readAsDataURL(value.files[0]);
+								}
+							}
+							
+						</script>
 					</div>
 					
 					<div class="btnBox">
-						<button type="submit" class="submit">완료</button>
-						<button type="reset" onclick="location.href='<%= request.getContextPath() %>/detail.bc'">취소</button>
+						<button type="button" id="updateBtn">완료</button>
+						<button type="reset" onclick="location.href='<%= request.getContextPath() %>/list.bc'">취소</button>
 					</div>	
 				</form>
 			</div>
 		</div>
+		
+		<script>
+		$('#updateBtn').click(function(){
+			var t = $("#titlePt").attr('src');
+			var c = $("#contentPt").attr('src');
+			
+			if(typeof(t) != 'undefined'){
+				$("#cTitle").val($("#titlePt").attr('src').substring(0, 4));
+			}
+			if(typeof(c) != 'undefined'){
+				$("#cContent").val($("#contentPt").attr('src').substring(0, 4));
+			}
+			
+			$('.main').parent().submit();
+		});
+		</script>
 	</section>
 </body>
 </html>

@@ -49,6 +49,9 @@ public class AccountDAO {
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
 		}
 		
 		return result;
@@ -88,27 +91,29 @@ public class AccountDAO {
 		ResultSet rset = null;
 		Account loginUser = null;
 		
-		String query = prop.getProperty("loginUser");
-		// loginUser=SELECT * FROM ACCOUNT WHERE ID=? AND PASSWORD=? AND DELETED='N'
+		String query = prop.getProperty("loginUserPW");
 		
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, account.getId());
-			pstmt.setString(2, account.getPassword());
 			
 			rset = pstmt.executeQuery();
 			
 			if(rset.next()) {
-				loginUser = new Account(rset.getInt("user_no"), 
-									   rset.getInt("grade"), 
-									   rset.getString("id"),
-									   rset.getString("password"),
-									   rset.getString("gender"),
-									   rset.getString("user_name"),
-									   rset.getString("phone"),
-									   rset.getString("email"),
-									   rset.getDate("birth"),
-									   rset.getString("deleted"));
+				if(rset.getString("password").equals(account.getPassword())) {
+					loginUser = new Account(rset.getInt("user_no"), 
+										   rset.getInt("grade"), 
+										   rset.getString("id"),
+										   rset.getString("password"),
+										   rset.getString("gender"),
+										   rset.getString("user_name"),
+										   rset.getString("phone"),
+										   rset.getString("email"),
+										   rset.getDate("birth"),
+										   rset.getString("deleted"));
+				}else {
+					loginUser = new Account(account.getId(),"비밀번호 불일치");
+				}
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -116,7 +121,9 @@ public class AccountDAO {
 			close(rset);
 			close(pstmt);
 		}
-		System.out.println("DAO : " + loginUser);
+		
+		// System.out.println("DAO : " + loginUser);
+		
 		return loginUser;
 	}
 
@@ -183,7 +190,7 @@ public class AccountDAO {
 		
 		return result;
 	}
-<<<<<<< HEAD
+
 	public String searchPwd(Account account, Connection conn) {
 		// TODO Auto-generated method stub
 		return null;
@@ -264,12 +271,10 @@ public class AccountDAO {
 		} finally {
 			close(pstmt);
 		}
+		
+		return result;
 	}
-
 	
-	
-=======
 }
->>>>>>> branch 'master' of https://github.com/kwong1110/IeaDream2.git
 	
 

@@ -2,7 +2,14 @@
     pageEncoding="UTF-8"%>
 <%@ page import="account.model.vo.*, java.util.*" %>
 <%
-
+	request.setCharacterEncoding("utf-8");
+	String id = request.getParameter("id");
+	String name = request.getParameter("user_name");
+	String grade = request.getParameter("grade");
+	String email = request.getParameter("email");
+	String phone = request.getParameter("phone");
+	String gender = request.getParameter("gender");
+	String birth = request.getParameter("birth");
 %>
 
 <!DOCTYPE html>
@@ -31,7 +38,7 @@
 		<div class="wrapper">
 			<div class="main">
 				<div class="pageTitle">
-					<h1>기본 정보</h1>
+					<h1>기본 정보 수정</h1>
 				</div>
 				<div>
 					<form action="<%= request.getContextPath() %>/update.mp" method="post" id="updateForm" name="updateForm" 
@@ -40,50 +47,47 @@
 								<tr>
 									<td class="minW">아이디</td>
 									<td>
-										<input type="text" placeholder="userID" class="profile" name="id" readOnly value="" style="background: lightgray;">
+										<input type="text" placeholder="userID" class="profile" name="id" readOnly value="<%= id %>" style="background: lightgray;">
 									</td>
 								</tr>
 								<tr>
 									<td>이름</td>
-									<td><input type="text" placeholder="이름을 입력해주세요" class="profile" name="user_name" value=""></td>
+									<td><input type="text" placeholder="이름을 입력해주세요" class="profile" name="user_name" value="<%= name %>"></td>
 									<td><input type="text" name="nameResult"></td>
 								</tr>
 								<tr>
 									<td>회원등급</td>
-									<td><input type="text" class="profile" name="grade" readonly value=""></td>
+									<td><input type="text" class="profile" name="grade" readonly value="<%= grade %>"></td>
 								</tr>
 								<tr>
 									<td>비밀번호</td>
-									<td><input type="text" placeholder="비밀번호를 입력해주세요" class="profile" name="pass" value=""></td>
+									<td><input type="password" placeholder="비밀번호를 입력해주세요" class="profile" name="pass"></td>
 									<td><input type="text" name="passResult"></td>
 								</tr>
 								<tr>
 									<td>비밀번호 확인</td>
-									<td><input type="text" placeholder="비밀번호 확인" class="profile" name="passCheck"></td>
+									<td><input type="password" placeholder="비밀번호 확인" class="profile" name="passCheck"></td>
 									<td><input type="text" name="passResult2"></td>
 								</tr>
 								<tr>
 									<td>이메일</td>
-									<td><input type="text" placeholder="메일을 입력해주세요" class="profile" name="email" value=""></td>
+									<td><input type="email" placeholder="메일을 입력해주세요" class="profile" name="email" value="<%= email %>"></td>
 								</tr>
 								<tr>
 									<td>휴대전화</td>
-									<td><input type="text" placeholder="휴대전화 번호를 입력해주세요" class="profile" name="phone" value=""></td>
+									<td><input type="text" placeholder="휴대전화 번호를 입력해주세요" class="profile" name="phone" value="<%= phone %>"></td>
 								</tr>
 								<tr>
 									<td>성별</td>
-									<td><input type="text" class="profile" name="gender" readonly value=""></td>
+									<td><input type="text" class="profile" name="gender" readonly value="<%= gender %>"></td>
 								</tr>
 								<tr>
 									<td>생년월일</td>
-									<td><input type="text" class="profile" name="birth" readonly value=""></td>
+									<td><input type="text" class="profile" name="birth" readonly value="<%= birth %>"></td>
 								</tr>
 						</table>
 						<div style="text-align: center;">
 								<input id="updateBtn" type="submit" value="수정"> <!-- action으로 연결 -->
-								
-								<!-- 탈퇴 확인을 위한 페이지 -->
-								<input id="deleteAcBtn" onclick="location.href='views/deleteAcCheck.jsp'" value="탈퇴">
 						</div>
 					</form>
 				</div>
@@ -93,9 +97,9 @@
 		<script>
 				$('#pass').blur(function(){
 					var pwdExp = /[a-zA-Z](?=.*[a-zA-Z])(?=.*[!@#$%^&*])(?=.*[0-9]).{7,14}/;
-					if(!pwdExp.test($(this).val())){
-						$('#passResult').text("비밀번호 입력 오류").css('color', 'red');
-						$(this).focus().css('background','pink');
+					if(!pwdExp.test($('#pass').val())){
+						$('#passResult').val("비밀번호 입력 오류").css('color', 'red');
+						$('#pass').focus().css('background','pink');
 					} else{
 						$('#passResult').text("정상 입력").css('color', 'green');
 						$(this).css("background","initial");

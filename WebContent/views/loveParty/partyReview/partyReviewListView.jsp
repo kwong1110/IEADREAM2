@@ -17,7 +17,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>우리 커플 됐어요</title>
+<title>파티 참여 후기</title>
 <style>
 	
 		/* table*/
@@ -66,7 +66,7 @@
 		<div id="wrapper">
 			<div id="main">
 				<div class="pageTitle">
-					<h1>우리 커플 됐어요</h1>
+					<h1>파티 참여 후기</h1>
 				</div>
 				<div class="tableArea">
 					<table id="listArea">

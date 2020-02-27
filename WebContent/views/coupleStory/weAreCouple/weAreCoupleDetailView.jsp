@@ -2,16 +2,30 @@
     pageEncoding="UTF-8" import="board.model.vo.*, java.util.*"%>
 <%
 	Board b = (Board)request.getAttribute("board");
+	BestCouple bc = (BestCouple)request.getAttribute("bc");
 	ArrayList<Photo> fileList = (ArrayList<Photo>)request.getAttribute("fileList");
 	System.out.println("fileList의 크기 : " + fileList);
 	Photo titleImg = fileList.get(0);
+	String content = b.getContent();
 	
+	String[] conArr = content.split("/////");
+	
+	String content1 ="";
+	String content2 = "";
+	for(int i =0; i<conArr.length; i++){
+		if(i %2 == 0){
+			content1 += conArr[i];		
+		}else{
+			content2 += conArr[i];
+		}
+	}	
 %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
 <style>
 	.outer {
 		width:1000px; height:735px; background: rgba(255, 255, 255, 0.4); border: 5px solid white;
@@ -23,7 +37,7 @@
 	#titleImgArea{width:500px; height:300px; margin-left:auto; margin-right:auto;}
 	#contentArea{height:30px;}
 	.detailImgArea{width:250px; height:210px; margin-left:auto; margin-right:auto;}
-	#titleImg{width:500px; height:300px;}
+	#titleImg,#contentImg1{width:400px; height:300px}
 	.detailImg{width:250px; height:180px;}
 	.downBtn{width: 80px; height: 25px; color: white; border-radius: 5px; background: #D1B2FF;}
 	#thumbTable{margin: auto;}
@@ -31,6 +45,18 @@
    #menuBtn{background: #D1B2FF;}
    #deleteBtn{background: #D5D5D5;}
    #updateBtn:hover, #menuBtn:hover, #deleteBtn:hover{cursor: pointer;}
+   
+   
+   #title,.wac{
+   	border-radius: 10px;
+   	width:80%;
+   	padding: 5px;
+   }
+   .Rwac{
+   	border-radius: 10px;
+   	width:80%;
+   	padding: 10px;
+   }
 </style>
 </head>
 <body>
@@ -43,77 +69,95 @@
 					<h1>우리 커플 됐어요</h1>
 				</div>
 				<div class="tableArea">
-				<table class="detail" id="thumbTable">
-					<tr>
-						<th width="50px">제목<input type="hidden" name ="postNo" value = "<%= request.getParameter("postNo") %>"></th>
-						<td colspan="5">
-						<input type="hidden" value="<%= b.getTitle() %>" name="title">
-						<%= b.getTitle() %></td>
-					</tr>
-					<tr>
-						<th>작성자</th>
-						<td><%= b.getUserId() %></td>
-						<th>조회수</th>
-						<td><%= b.getHit() %></td>
-						<th>작성일</th>
-						<td><%= b.getCreateDate() %></td> 
-					</tr>
-					<tr>
-						<th>대표<br>사진</th>
-						<td colspan="4">
-							<div id="titldImgArea" align="center">
-								<img id="titleImg" src="<%= request.getContextPath() %>/photo_uploadFiles/<%= titleImg.getChangeName() %>">
-									<input type="hidden" value="<%= titleImg.getChangeName() %>" name="titleImage">
-									<input type="hidden" value="<%= titleImg.getPhotoNo() %>" name="detailImgId0">
-							</div>
-						</td>
-					</tr>
-					<tr>
-						<th>사진<br>메모</th>
-						<td colspan="6">
-							<p id="contentArea">
-								<%
-									String memo = b.getContent();
-									if(memo == null){ %>
-										(메모 없음)
-									}
-								<%
-									} else {%>
-									<%= memo %>
-								<%	
-									}
-								%>
-								<input type="hidden" value="<%= memo %>" name="memo">
-							</p>
-						</td>
-					</tr>
-				</table>
-				
-				<table class="detail">
-					<tr>
-					<% for(int i = 1; i<fileList.size(); i++){ %>
-						<td>
-							<div class="detailImageArea">
-								<img id="detailImg" class="detailImg" src="<%= request.getContextPath() %>/photo_uploadFiles/<%= fileList.get(i).getChangeName() %>">
-							<input type="hidden" value="<%= fileList.get(i).getChangeName() %>" name="detailImg<%= i %>">
-							<input type="hidden" value="<%= fileList.get(i).getPhotoNo() %>" name="detailImgId<%= i %>">
-							</div>
-						</td>
-					<% } %>
-					</tr>
-				</table>
+					<div class="review">
+						<table id="reviewTable" align=center>
+							<tr>
+								<th >작성자</th>
+								<td width="100px"><%= b.getUserId() %></td>
+								<th width="20px">조회수</th>
+								<td width="20px"><%= b.getHit() %></td>
+								<th width="40px">작성일</th>
+								<td width="150px"><%= b.getCreateDate() %></td> 
+							</tr>
+							<tr>
+								<th width="20px">제목<input type="hidden" name ="postNo" value = "<%= request.getParameter("postNo") %>"></th>
+								<td colspan="5">
+									<input type="hidden" value="<%= b.getTitle() %>" name="title"><input id="title" value='<%= b.getTitle() %>'>
+								</td>
+							</tr>
+							<tr>
+								<th>남자친구의 이름</th>
+								<th>여자친구의 이름</th>
+							</tr>
+							<tr>
+								<td><input type="hidden" name="mName" value="<%= bc.getmName() %>"><input  class="wac" value="<%= bc.getmName() %>"></td>
+								<td><input type="hidden" name="fName" value="<%= bc.getfName() %>"><input class="wac" value='<%= bc.getfName() %>'></td>
+							</tr>
+								
+							<tr>
+								<td>연애 기간</td>
+								<td>즐겨하는 데이트</td>
+							</tr>
+							
+							<tr>
+								<td><input type="hidden" name="dtPeriod" value="<%= bc.getDtPeriod()%>"><input class="wac" value="<%= bc.getDtPeriod() %>" class="wac">&nbsp;일</td>
+								<td><input type="hidden" name="fvDate" value="<%= bc.getFvDate() %>"><input  class="wac" value="<%= bc.getFvDate()%>"name="fvDate" ></td>
+							</tr>
+							<tr>
+								<td>이어드림의 서비스 중 가장 만족했던 서비스를  작성해주세요.</td>
+							</tr>
+							<tr>
+								<td colspan=2>
+									<input type="hidden" name = "content1" value="<%=content1 %>"><input class="Rwac" value="<%=content1 %>">
+								</td>
+							</tr>
+							<tr>
+								<td>후기</td>
+							</tr>
+							<tr>
+								<td colspan=2 width=100%>
+								<input type="hidden" name = "content2" value="<%=content2 %>"><input class="Rwac" value="<%=content2 %>">
+								</td>
+							</tr>
+							<tr>
+								<td colspan=2>
+								<input type="hidden" name="dtPeriod" value="<%= b.getContent() %>">
+								</td>
+							</tr>
+							
+							<tr>
+								<td>커플 사진</td>
+							</tr>
+							<tr>
+									<td colspan="4">
+									<img id="titleImg"  width="150" height="200" src="<%= request.getContextPath() %>/photo_uploadFiles/<%= titleImg.getChangeName() %>">
+										<input type="hidden" value="<%= titleImg.getChangeName() %>" name="titleImage">
+										<input type="hidden" value="<%= titleImg.getPhotoNo() %>" name="detailImgId0">
+								</td>
+								<td>
+									<img id="contentImg1" width="150" height="200" class="detailImg" src="<%= request.getContextPath() %>/photo_uploadFiles/<%= fileList.get(1).getChangeName() %>">
+								<input type="hidden" value="<%= fileList.get(1).getChangeName() %>" name="detailImg1">
+								<input type="hidden" value="<%= fileList.get(1).getPhotoNo() %>" name="detailImgId1">
+							</td>
+							</tr>
+						
+						</table>
+						<div class="btnBox" align="center">
+								<% if(loginUser != null && loginUser.getId().equals(b.getUserId())){ %>
+							<input type ="submit" id="updateBtn" value="수정">
+							<input type ="button" onclick="deleteThumb();" id="deleteBtn" value="삭제">
+							<% } %>
+							<div onclick="location.href='<%=request.getContextPath() %>/list.wac'" id="menuBtn">메뉴로</div>
+							<% if(loginUser != null && loginUser.getGrade()==0){ %>
+							<input type="button" onclick="location.href='<%=request.getContextPath() %>/views/coupleStory/weAreCouple/TestBC.jsp'" id="menuBtn" value="베스트 커플">
+							<input type ="button" onclick="deleteThumb();" id="deleteBtn" value="삭제">
+							<% } %>
+						</div>
+					</div>
 				</div>
-				<br>
-				
-				<div class="btnBox" align="center">
-					<% if(loginUser != null && loginUser.getId().equals(b.getUserId())){ %>
-					<input type ="submit" id="updateBtn" value="수정">
-					<input type ="button" onclick="deleteThumb();" id="deleteBtn" value="삭제">
-					<% } %>
-					<div onclick="location.href='<%=request.getContextPath() %>/list.wac'" id="menuBtn">메뉴로</div>
-				</div>
-			</form>
+				</form>
 			</div>
+			<br>
 		</div>
 	</div>
 	<script>

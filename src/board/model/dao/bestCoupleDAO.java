@@ -186,7 +186,7 @@ public class bestCoupleDAO {
 		int result = 0;
 		
 		String query = prop.getProperty("insertbcPhoto");
-		//INSERT INTO PHOTO VALUES(SEQ_PHOTONO.NEXTVAL, SEQ_POSTNO.CURRVAL, ?, ?, ?, ?, DEFAULT)
+		//INSERT INTO PHOTO VALUES(SEQ_PHOTONO.NEXTVAL, SEQ_POSTNO.CURRVAL, ?, ?, ?, ?, DEFAULT, NULL)
 		
 		try {
 			for(int i = 0; i < photoList.size(); i++) {
@@ -436,6 +436,27 @@ public class bestCoupleDAO {
 				close(pstmt);
 			}
 			
+		}
+		
+		return result;
+	}
+
+	public int deleteBoard(Connection conn, int pNo) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("deleteBoard");
+		//UPDATE BOARD SET DELETED='Y' WHERE POST_NO=?
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, pNo);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
 		}
 		
 		return result;
