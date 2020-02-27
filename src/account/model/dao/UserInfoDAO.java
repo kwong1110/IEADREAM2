@@ -33,6 +33,34 @@ public class UserInfoDAO {
 			e.printStackTrace();
 		}
 	}
+	public Account selectAccount(Connection conn, int userNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		Account ac = new Account();
+		String query = prop.getProperty("selectAccount");
+		try	{
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, userNo);
+			rs = pstmt.executeQuery();
+				ac.setUserNo(userNo);
+				ac.setGrade(rs.getInt("GRADE"));
+				ac.setId(rs.getString("ID"));
+				ac.setGender(rs.getString("GENDER"));
+				ac.setUserName(rs.getString("USER_NAME"));
+				ac.setPhone(rs.getString("PHONE"));
+				ac.setEmail(rs.getString("EMAIL"));
+				ac.setBirth(rs.getDate("BIRTH"));
+		}catch(Exception e) { 
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return ac;
+	}
+	
+	
+	
 	public UserInfo selectUserInfo(Connection conn, int userNo) {
 		PreparedStatement pstmt = null; 
 		ResultSet rs = null;
@@ -43,6 +71,7 @@ public class UserInfoDAO {
 			  pstmt = conn.prepareStatement(query);
 			  pstmt.setInt(1, userNo);
 			  rs = pstmt.executeQuery();
+			  	ui.setUserNo(userNo);
 			  	ui.setHello(rs.getString("HELLO"));
 				ui.setHeight(rs.getInt("HEIGHT"));
 				ui.setShape(rs.getString("SHAPE"));
@@ -52,7 +81,7 @@ public class UserInfoDAO {
 				ui.setScholar(rs.getInt("SCHOLAR"));
 				ui.setJob(rs.getString("JOB"));
 				ui.setDrink(rs.getInt("DRINK"));
-				ui.setSmoke(rs.getInt("Smoke"));
+				ui.setSmoke(rs.getInt("SMOKE"));
 		  } catch (SQLException e) { 
 			  e.printStackTrace(); 
 		  } finally {
@@ -186,16 +215,16 @@ public class UserInfoDAO {
 		return result;
 	}
 	
-	public ArrayList<Photo> selectpList(Connection conn) {
-		Statement stmt = null;
+	public ArrayList<Photo> selectPList(Connection conn, int userNo) {
+		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
 		ArrayList<Photo> pList = null;
 		
 		String query = prop.getProperty("selectPhoto");
 		try {
-			stmt = conn.createStatement();
-			rset = stmt.executeQuery(query);
+			pstmt = conn.prepareStatement(query);
+			rset = pstmt.executeQuery(query);
 			pList = new ArrayList<Photo>();
 			while(rset.next()) {
 				pList.add(new Photo(rset.getInt("PHOTO_NO"),
@@ -210,7 +239,7 @@ public class UserInfoDAO {
 			e.printStackTrace();
 		} finally {
 			close(rset);
-			close(stmt);
+			close(pstmt);
 		}
 		
 		return pList;
@@ -254,4 +283,33 @@ public class UserInfoDAO {
 		}
 		return result;
 	}
+	
+	public int[] searchUserNoList(Connection conn, String gender) {
+		PreparedStatement pstmt = null; 
+		ResultSet rs = null;
+		String query = prop.getProperty("selectInterest");
+		ArrayList<Integer> list = new ArrayList<Integer>();
+		
+		try {
+			  pstmt = conn.prepareStatement(query);
+			  pstmt.setString(1, gender);
+			  
+			  rs = pstmt.executeQuery();
+			  while(rs.next()) {
+				  list.add(rs.getInt("USER_NO"));
+			  }
+		  } catch (SQLException e) {
+			  e.printStackTrace(); 
+		  } finally {
+			close(rs);
+			close(pstmt);
+		  }
+		int[] rList = new int[list.size()];
+	    for (int i=0; i < rList.length; i++)
+	    {
+	    	rList[i] = list.get(i).intValue();
+	    }
+		return rList;
+	}
+	
 }
