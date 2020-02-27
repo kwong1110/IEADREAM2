@@ -99,7 +99,7 @@
 					<div class="review">
 						<div class="titleArea">
 							<label>제목</label>
-							<input type="text" size="45"  name="title" id="title" >
+							<input type="text" size="45"  name="title" id="title" required>
 						</div>
 				
 					<table id="reviewTable" align=center>
@@ -108,8 +108,8 @@
 							<td><span>*</span> 여자친구의 이름을 작성해주세요.</td>
 						</tr>
 						<tr>
-							<td><input type="text" name="mName" class="wac"></td>
-							<td><input type="text" name="fName" class="wac"></td>
+							<td><input type="text" name="mName" class="wac" id="mName" required></td>
+							<td><input type="text" name="fName" class="wac" id="fName"required></td>
 						</tr>
 							
 						<tr>
@@ -118,8 +118,8 @@
 						</tr>
 						
 						<tr>
-							<td><input type="number" name="dtPeriod" min="1" value="1" class="wac">&nbsp;일</td>
-							<td><input type="text" name="fvDate" maxlength="12" class="wac" placeholder="12자이내로 입력하세요."></td>
+							<td><input type="number" name="dtPeriod" id="dtPeriod" min="1" value="1" class="wac" required>&nbsp;일</td>
+							<td><input type="text" name="fvDate" id="fvDate" maxlength="12" class="wac" placeholder="12자이내로 입력하세요." required></td>
 						</tr>
 						
 						<tr>
@@ -127,7 +127,7 @@
 						</tr>
 						<tr>
 							<td colspan=2>
-								<textarea cols= 60 rows= 4 name="content1" placeholder="작성해주세요" ></textarea>
+								<textarea cols= 60 rows= 4 name="content1" placeholder="작성해주세요" required></textarea>
 							</td>
 						</tr>
 						<tr>
@@ -135,28 +135,23 @@
 						</tr>
 						<tr>
 							<td colspan=2 width=100%>
-								<textarea  cols= 60 rows= 8 name="content2"  placeholder="작성해주세요"></textarea>
+								<textarea  cols= 60 rows= 8 name="content2"  placeholder="작성해주세요" required></textarea>
 							</td>
 						</tr>
 						<tr>
 							<td>커플 사진</td>
 						</tr>
 						<tr>
-							<td><img id="titleImg" width="150" height="200"></td>
-							<td><img id="contentImg1" width="150" height="200"></td>
+							<td><img id="titleImg" width="150" height="200" ></td>
+							<td><img id="contentImg1" width="150" height="200" ></td>
 						</tr>
 						
 					</table>
-					<!-- <div class="coupleImg">
-						<label>커플 사진</label>
-								<img id="titleImg" width="300" height="200">
-								<img id="titleImg" width="300" height="200">
-					</div> -->
 				</div>
 
 				<div id="fileArea">
-					<input type="file" id="thumbnailImg1" multiple="multiple" name="thumbnailImg1" onchange="LoadImg(this,1)">
-					<input type="file" id="thumbnailImg2" multiple="multiple" name="thumbnailImg2" onchange="LoadImg(this,2)">
+					<input type="file" id="thumbnailImg1" multiple="multiple" name="thumbnailImg1" onchange="LoadImg(this,1)" required>
+					<input type="file" id="thumbnailImg2" multiple="multiple" name="thumbnailImg2" onchange="LoadImg(this,2)" required >
 				</div>
 				<script>
 					// 내용 작성 부분의 공간을 클릭할 때 파일 첨부 창이 뜨도록 설정하는 함수
@@ -170,6 +165,8 @@
 							$("#thumbnailImg2").click();
 						});
 					});
+					
+					
 					
 					// 각각의 영역에 파일을 첨부 했을 경우 미리 보기가 가능하도록 하는 함수
 					function LoadImg(value, num){
@@ -194,7 +191,7 @@
 
 			<br>
 			<div class="btnArea">
-				<button type="submit" onclick="insert();" id="insertBtn">작성완료</button>
+				<button type="submit"  id="insertBtn">작성완료</button>
 				<input type="button" id="cancelBtn" onclick="location.href='<%= request.getContextPath() %>/list.wac'" value="취소">
 			</div>
 			
@@ -202,6 +199,19 @@
 			</div>
 		</div>
 	</div>
+<script>
+$(function(){
+	$('#insertBtn').click(function(){
+		if($('#thumbnailImg1').val()== ''){
+			alert('첫번째 사진을 첨부 해주세요');
+		} else if($('#thumbnailImg2').val()== ''){
+			alert('두번째 사진을 첨부 해주세요');
+		} else{
+			
+		}
+	});
 	
+});
+</script>
 </body>
 </html>

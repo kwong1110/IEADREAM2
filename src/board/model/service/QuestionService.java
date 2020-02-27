@@ -56,13 +56,13 @@ public class QuestionService {
 			return r;
 		}
 		 // 사용자 - 문의글 삭제
-		public int deleteQuestion(int postNo, String userNo) {
+		public int deleteQuestion(String postNo, String userNo) {
 			Connection conn = getConnection();
 			QuestionDAO dao = new QuestionDAO();
 
 			int result = 0;
 
-			result = dao.deleteQuestion(conn, postNo,userNo);
+			result = dao.deleteQuestion(conn, postNo, userNo);
 			if(result > 0) {
 				commit(conn);
 			} else {

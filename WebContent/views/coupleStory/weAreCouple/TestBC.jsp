@@ -3,8 +3,10 @@
 <%
 	//String mName = (String)request.getAttribute("mName");
 	String mName = request.getParameter("mName");
-	String fName = (String)request.getAttribute("fName");
-	
+	String fName = request.getParameter("fName");
+	String content = request.getParameter("con");
+	String dtPeriod = request.getParameter("dtPeriod");
+	String fvDate = request.getParameter("fvDate");
 	BestCouple bc = (BestCouple)request.getAttribute("bc");
 %>
 <!DOCTYPE html>
@@ -131,16 +133,16 @@
 								<div class="label">
 									<label>연애 기간 : </label>
 								</div>
-								<input type="number" name="dtPeriod" min="1" value="1" class="bx">&nbsp;일<br>
+								<input type="number" name="dtPeriod" min="1" value="<%=dtPeriod %>" class="bx">&nbsp;일<br>
 								
 								<div class="label">
 									<label>즐겨하는 데이트 : </label>
 								</div>
-								<input type="text" name="fvDate" maxlength="12" placeholder="12자이내로 입력하세요.">
+								<input type="text" name="fvDate" maxlength="12" placeholder="12자이내로 입력하세요." value="<%=fvDate %>">
 							</div>
 						</div>
 						
-						<textarea class="contn2" name="content" placeholder="내용을 자유롭게 입력해주세요."></textarea>
+						<textarea class="contn2" name="content" placeholder="내용을 자유롭게 입력해주세요."><%= content %></textarea>
 						
 						<div class="file">
 							<input type="file" name="photo1" multiple="multiple" id="file1"><br>

@@ -99,11 +99,11 @@
 						<li class="s-menu"><span onclick="goQuestionBoard();">문의게시판</span>
 							<ul class="dept01">
 								<% if(loginUser != null && loginUser.getGrade() != 0){ %>
-									<li id="nop"><a href="<%=request.getContextPath() %>/list.qu?userNo=<%= loginUser.getUserNo() %>">1:1</a></li>
+									<li id="nop"><a href="<%=request.getContextPath() %>/list.qu?userNo=<%= loginUser.getUserNo() %>">1:1문의</a></li>
 								<% } else if(loginUser != null && loginUser.getGrade() == 0){%>
-									<li id="nop"><a href="<%=request.getContextPath() %>/Mlist.qu">1:1</a></li>
+									<li id="nop"><a href="<%=request.getContextPath() %>/Mlist.qu">1:1문의</a></li>
 								<% }else{%>
-								<li id="nop"><a href="<%=request.getContextPath() %>/list.qu">1:1</a></li>
+								<li id="nop"><a href="<%=request.getContextPath() %>/views/account/accountLoginForm.jsp" onclick="question();">1:1문의</a>
 								<% } %>
 								
 								<li id="nop"><a href="<%=request.getContextPath() %>/list.faq">FAQ</a></li>
@@ -200,6 +200,11 @@
 		
 		function goIndex(){
 			location.href="<%= request.getContextPath()%>/views/common/mainmenu.jsp";
+		}
+		
+		function question(){
+			alert("로그인 후 사용 가능합니다.");
+			<%-- location.href="<%= request.getContextPath()%>/views/account/accountLoginForm.jsp"; --%>
 		}
 				
 	</script>
