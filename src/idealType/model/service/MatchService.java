@@ -19,6 +19,13 @@ import idealType.model.vo.Match;
 
 
 public class MatchService {
+	
+	public Match[] getMatch(int userNo) {
+		Connection conn = getConnection();
+		MatchDAO mDAO = new MatchDAO();
+		Match[] result = mDAO.selectMatchList(conn, userNo);
+		return result;
+	}
 
 	public int insertMatch(Match m) {
 		Connection conn = getConnection();
@@ -54,6 +61,10 @@ public class MatchService {
 		
 		Connection conn = getConnection();
 		UserInfoDAO uiDAO = new UserInfoDAO();
+		UserPreferDAO upDAO = new UserPreferDAO();
+		
+		UserInfo ui = uiDAO.selectUserInfo(conn, userNo);
+		UserPrefer up = upDAO.selectUserPrefer(conn, userNo);
 		
 		String targetGender = "F";
 		if (getUserGender(userNo).equals("F")) {
@@ -64,14 +75,18 @@ public class MatchService {
 		Match[] mlist = new Match[tlist.length];
 		
 		for (int i=0; i < tlist.length ; i++) {
-			mlist[i].setSync(getMatchSync(userNo, tlist[i])); // 임시 매칭 리스트 생성, 싱크율 기준 정렬
+			UserInfo ti = uiDAO.selectUserInfo(conn, tlist[i]);
+			UserPrefer tp = upDAO.selectUserPrefer(conn, tlist[i]);
+			mlist[i].setSync(getMatchSync(ui, up, ti, tp)); // 임시 매칭 리스트 생성, 싱크율 기준 정렬
+			mlist[i].setRsync(getMatchSync(ti, tp, ui, up)); // 상대방이 나를 볼 때의 싱크
 		}
-		Arrays.sort(mlist);										
+		Arrays.sort(mlist);								//싱크로율순 정렬		
 		Match[] result = new Match[maxMatch];
+		
 		int j = 0;
-		for (int i=0 ; i<5 || j < mlist.length; i++) { // 싱크율 옾은 순서대로 대입해서 중복 없고 상대도 나를 마음에 들어할 가능성이 있다면 리턴 배열에 추가
+		for (int i=0 ; i<5 || j < mlist.length; i++) { 
 			for (; result[i] != null ; j++) {
-				if (checkMatch(mlist[j]) && (getMatchSync(mlist[j].getUserNo(), userNo) > minSync)) {
+				if (checkMatch(mlist[j]) && (mlist[i].getRsync() > minSync)) { // 중복 검사, 상대의 싱크율 검사 후 리턴
 					result[i] = mlist[j];}
 			}
 		}
@@ -99,16 +114,9 @@ public class MatchService {
 		return result;
 	}
 	
-	public double getMatchSync(int userNo, int targetNo) { // 취향 적합도 계산
+	public double getMatchSync(UserInfo ui, UserPrefer up, UserInfo ti, UserPrefer tp) { // 취향 적합도 계산
 		
 		Connection conn = getConnection();
-		UserInfoDAO uiDAO = new UserInfoDAO();
-		UserPreferDAO upDAO = new UserPreferDAO();
-
-		UserInfo ui = uiDAO.selectUserInfo(conn, userNo);
-		UserPrefer up = upDAO.selectUserPrefer(conn, userNo);
-		UserInfo ti = uiDAO.selectUserInfo(conn, targetNo);
-		UserPrefer tp = upDAO.selectUserPrefer(conn, targetNo);
 		
 		double syncPoint = 0;
 		int maxPoint = up.getHeightPri() + up.getShapePri() + up.getStylePri() + up.getAgePri() + up.getRegionPri() 
