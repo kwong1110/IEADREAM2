@@ -181,7 +181,7 @@
 				$.ajax({
 					url: "<%= request.getContextPath()%>/idCheck.ac",
 					type: "post",
-					data: {userId:userId.val()},
+					data: {joinUserId:userId.val()},
 					success: function(data){
 						if(data == 'success'){
 							alert('사용 가능한 아이디입니다.');

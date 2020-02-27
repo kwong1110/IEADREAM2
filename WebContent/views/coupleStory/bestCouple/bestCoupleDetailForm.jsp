@@ -220,6 +220,9 @@
 					<input type="hidden" name="title" value="<%= b.getTitle() %>">
 					<div class="img1">
 						<img class="titlePt" id="titlePt" src="<%= request.getContextPath() %>/photo_uploadFiles/<%= titlePt.getChangeName() %>">
+						<input type="hidden" value="<%= titlePt.getChangeName() %>" name="titlePt">
+						<input type="hidden" value="<%= titlePt.getPhotoNo() %>" name="detailPhotoId0">
+						<%-- <input type="hidden" value="<%= titlePt.getOriginName() %>" name="originName0"> --%>
 					</div>
 					<div class="contn1">
 						<div class="text1">
@@ -239,12 +242,15 @@
 					</div>
 					<div class="img2">
 						<img class="detailPt" id="detailPt" src="<%= request.getContextPath()%>/photo_uploadFiles/<%= pList.get(1).getChangeName() %>">
+						<input type="hidden" value="<%= pList.get(1).getChangeName() %>" name="detailPt">
+						<input type="hidden" value="<%= pList.get(1).getPhotoNo() %>" name="detailPhotoId1">
+						<%-- <input type="hidden" value="<%= pList.get(1).getOriginName() %>" name="originName1"> --%>
 					</div>
 				</div>
 			</div>
 			
 			<div class="btnBox">
-				<% if(loginUser != null && loginUser.getUserNo() == b.getUserNo()) { %>
+				<% if(loginUser != null && loginUser.getGrade() == 0) { %>
 					<button type="submit" id="updateBtn">수정</button>
 					<button type="submit" id="deleteBtn" onclick="deletePt();">삭제</button>
 				<% } %>
