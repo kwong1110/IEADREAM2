@@ -63,7 +63,7 @@
 						<td><%= nameArr[i] %></td>
 						<td><%= noArr[i] %></td>
 						
-						<td style="display:none;"><input type="hidden" name="userNo" value="<%= noArr[i] %>"></td>
+						<td style="display:none;"><input type="hidden" name="bNo" value="<%= nameArr[i] %>"></td>
 					</tr>
 				<% } %>
 				</tbody>

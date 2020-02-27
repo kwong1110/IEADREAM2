@@ -307,7 +307,7 @@ public class adminDAO {
 		case "ID": query = prop.getProperty("searchBIDListCount"); break;
 		}
 		
-		if(bCategory.equals("1,2,3,4,5")) {
+		if(bCategory.equals("1,2,3,4,5,6")) {
 			switch(sCategory) {
 			case "B_NAME": query = prop.getProperty("allSearchBNameListCount"); break;
 			case "B_DATE": query = prop.getProperty("allSearchBDateListCount"); break;
@@ -318,7 +318,7 @@ public class adminDAO {
 		try {
 			pstmt = conn.prepareStatement(query);
 			
-			if(bCategory.equals("1,2,3,4,5")) {
+			if(bCategory.equals("1,2,3,4,5,6")) {
 				pstmt.setString(1, "%" + sWord + "%");					
 			}else {
 				pstmt.setString(1, bCategory);
@@ -400,7 +400,7 @@ public class adminDAO {
 		case "ID": query = prop.getProperty("searchBIDList"); break;
 		}
 		
-		if(bCategory.equals("1,2,3,4,5")) {
+		if(bCategory.equals("1,2,3,4,5,6")) {
 			switch(sCategory) {
 			case "B_NAME": query = prop.getProperty("allSearchBNameList"); break;
 			case "B_DATE": query = prop.getProperty("allSearchBDateList"); break;
@@ -411,7 +411,7 @@ public class adminDAO {
 		try {
 			pstmt = conn.prepareStatement(query);
 			
-			if(!bCategory.equals("1,2,3,4,5")) {
+			if(!bCategory.equals("1,2,3,4,5,6")) {
 				pstmt.setString(1, bCategory);
 				pstmt.setString(2, "%" + sWord + "%");					
 				pstmt.setInt(3, startRow);
@@ -444,5 +444,34 @@ public class adminDAO {
 		}
 		
 		return search;
+	}
+
+	public int deleteBo(Connection conn, String[] bNo) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("deleteBo");
+		
+		try {
+			for(int i = 0; i < bNo.length; i++) {
+				pstmt = conn.prepareStatement(query);
+				pstmt.setString(1, bNo[i]);
+				
+				result = pstmt.executeUpdate();
+				
+				if(result > 0) {
+					commit(conn);
+				} else {
+					rollback(conn);
+					break;
+				}
+			}			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
 	}	
 }
