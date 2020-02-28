@@ -6,49 +6,29 @@
 <meta charset="UTF-8">
 <title>정회원 등업</title>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/common.css">
-<link rel="stylesheet" href="<%= request.getContextPath() %>/css/board.css">
-<script type="text/javascript" src="<%= request.getContextPath() %>/js/SelectAll.js"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
-</head>
 <style>
 .gradeBtn{
 	font-size: 16px;
 	padding: 10px 20px 10px 20px;
-	margin: 20px;
+	margin: 0;
 }
-
-#inputImage{
-	display: none;
+.gradeInfo{
+	float: left;
+	width: 500px;
+	height: 400px;
+	font-size: 12px;
+	background-size: contain; 
+	background-image: url('../../../images/common/memGradeUp.png');
+	background-repeat: no-repeat;
 }
-
 </style>
+</head>
 <body>
 	<%@ include file="../../common/mainmenu.jsp"%>
 	<div class="outer">
 		<div class="wrapper">
-			<nav>
-				<div class="nav">
-					<div class="leftMenuTitle">마이페이지</div>
-					<ul>
-						<li class="leftMenu memberGradeUp"><a href="<%= request.getContextPath() %>/views/myPage/user/memberGradeUpForm.jsp">정회원 등업</a></li>
-						<li class="leftMenu"><a href="">기본정보</a></li>
-						<li class="leftMenu"><a href="">나의 프로필</a></li>
-						<li class="leftMenu"><a href="">이상형 정보</a></li>
-						<li class="leftMenu "><a href="">작성글 조회</a></li>			
-						<li class="leftMenu heartHistory"><a href="<%= request.getContextPath() %>/list.hh">하트 히스토리</a></li>
-						<% if(loginUser != null && loginUser.getGrade() == 0){ %>
-							<br>
-							<li class="leftMenu admin memberManage">
-								<a href="<%=request.getContextPath()%>/manage.mem">회원 관리</a>
-							</li>
-							<li class="leftMenu admin boardManage">
-								<a href="<%=request.getContextPath()%>/manage.bo">게시물 관리</a>
-							</li>
-						<% } %>
-					</ul>
-				</div>
-			</nav>
 			<div class="main">
 				<div class="pageTitle">
 					<h2>정회원 등업</h2>
@@ -59,19 +39,14 @@
 				</div>
 				<div class="contents">
 					<input type="button" class="defaultBtn gradeBtn" id="payment" value="정회원 가입하기">	
-					<div id="imageView">
-						<img src="<%= request.getContextPath() %>/images/common/memGradeUp.png" width="80%" height="80%">
-					</div>			
 				</div>
-				<%-- <% if(loginUser != null && loginUser.getGrade() == 0){ %>
-					<div class="btnBox btnC" >
-					<input type="file" id="inputImage" accept="img/*" required multiple>
-					<input type="button" class="defaultBtn imageBtn" id="imageChange" value="표이미지 변경">
-					</div>
-				<% } %> --%>
+				<div class="gradeInfo">
+				</div>			
 			</div>
 		</div>
 	</div>
+</body>
+<%@ include file="../../common/footer.jsp"%>
 	<script>
 		/* $(function(){
 			$('#imageChange').click(function(){
@@ -122,5 +97,4 @@
 			});
 		});
 	</script>
-</body>
 </html>
