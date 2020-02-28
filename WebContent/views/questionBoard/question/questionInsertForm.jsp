@@ -39,7 +39,7 @@
 		<div class="wrapper">
 			<div class="main">
 				<div class="pageTitle">
-					<h1>1:1 문의글 수정</h1>
+					<h1>1:1 문의</h1>
 				</div>
 				<div class="tableArea">
 					<form action="<%= request.getContextPath() %>/insert.qu" method="post">

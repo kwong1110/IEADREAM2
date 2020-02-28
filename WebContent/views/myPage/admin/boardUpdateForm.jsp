@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%-- <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="account.model.vo.*, common.*, java.util.ArrayList" %>
 <%
@@ -39,11 +39,17 @@
 	padding: 10px;
 	border-radius: 10px;
 }
+.deleteCheck{
+	margin: 10px;
+	font-weight: bold;
+	font-size: 15px;
+	color: red;
+}
 </style>
 </head>
 <body>
 	<div class="main">
-		<form action="<%= request.getContextPath() %>/" method="get">
+		<form method="get">
 			<table class="mainBoard">
 				<thead>
 					<tr>
@@ -64,6 +70,9 @@
 					</tr>
 				</tbody>
 			</table>
+			<div class="deleteCheck">
+				<div>해당 카테고리 상세페이지로 이동합니다.</div>
+			</div>
 			<div class="btnBox">
 				<button class="defaultBtn" type="submit">확인</button>
 				<button class="defaultBtn" type="button" onclick="window.close();">취소</button>
@@ -71,4 +80,4 @@
 		</form>
 	</div>
 </body>
-</html>
+</html> --%>

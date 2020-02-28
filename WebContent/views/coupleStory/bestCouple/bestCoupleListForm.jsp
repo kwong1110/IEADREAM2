@@ -59,6 +59,11 @@
 		margin-bottom: 40px;
 	}
 	
+	.contns{
+		width: 100%;
+		height: 400px;
+	}
+	
 	.contn{
 		margin-top: 40px;
 		margin-left: 2%; 
@@ -122,11 +127,11 @@
 	}
 	
 	.sc-footer{
-		width: 100%; 
+		width: 100%;
 	}
 	
 	.button{
-		width: 50%;
+		width: 70%;
 		text-align:center;
 		margin: 0 auto;
 	}
@@ -138,6 +143,10 @@
 		background: #e75a82;
 		color: white;
 		font-weight: border;
+	}
+	
+	.clear-both{
+		height: 10px;
 	}
 	
 	.sc-footer button{border-radius: 15px; background: #D5D5D5;}
@@ -189,31 +198,33 @@
 					</div>
 					
 					<div class="contents">
-					<% 
-						for(int i = 0; i < bcList.size(); i++){
-							Board bc = bcList.get(i);
-					%>
-						<div class="contn">
-							<p class="hit">HIT : <%= bc.getHit() %></p>
-							<div class="img">
-								<input type="hidden" value="<%= bc.getPostNo() %>">
-								<% 
-									for(int j = 0; j < pList.size(); j++){
-										Photo p = pList.get(j);		
-								%>
-									<% if(bc.getPostNo() == p.getPostNo()){ %>
-										<img src="<%= request.getContextPath() %>/photo_uploadFiles/<%= p.getChangeName() %>" style="width:inherit; height:inherit;">
+					<div class="contns">
+						<% 
+							for(int i = 0; i < bcList.size(); i++){
+								Board bc = bcList.get(i);
+						%>
+							<div class="contn">
+								<p class="hit">HIT : <%= bc.getHit() %></p>
+								<div class="img">
+									<input type="hidden" value="<%= bc.getPostNo() %>">
+									<% 
+										for(int j = 0; j < pList.size(); j++){
+											Photo p = pList.get(j);		
+									%>
+										<% if(bc.getPostNo() == p.getPostNo()){ %>
+											<img src="<%= request.getContextPath() %>/photo_uploadFiles/<%= p.getChangeName() %>" style="width:inherit; height:inherit;">
+										<% } %>
 									<% } %>
-								<% } %>
+								</div>
+								<div class="text">
+									<p id="text1"><%= bc.getTitle() %></p>
+									<p id="text2"><%= bc.getUserId() %></p>
+									<p id="text3"><%= bc.getCreateDate() %></p>
+								</div>
 							</div>
-							<div class="text">
-								<p id="text1"><%= bc.getTitle() %></p>
-								<p id="text2"><%= bc.getUserId() %></p>
-								<p id="text3"><%= bc.getCreateDate() %></p>
-							</div>
+								
+							<% } %>
 						</div>
-							
-						<% } %>
 						<div class="clear-both"></div>
 						
 						 <div class="sc-footer">

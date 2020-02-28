@@ -1,57 +1,55 @@
-package board.controller.question;
+package myPage.admin.controller;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import board.model.service.QuestionService;
-
+import myPage.admin.model.service.adminService;
 
 /**
- * Servlet implementation class QuestionDeleteServlet
+ * Servlet implementation class boardManageDeleteServlet
  */
-@WebServlet("/delete.qu")
-public class QuestionDeleteServlet extends HttpServlet {
+@WebServlet("/manageDelete.bo")
+public class boardManageDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public QuestionDeleteServlet() {
+    public boardManageDeleteServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String postNo = request.getParameter("postNo");
-		System.out.println("deleteServelt의 postNo : " + postNo );
-		//int postNo = Integer.parseInt(request.getParameter("postNo"));
+		String[] bNo = request.getParameterValues("bNo");
+		
+		int result = new adminService().deleteBo(bNo);
 
-		String userNo = request.getParameter("userNo");
-		System.out.println("deleteServelt의 userNo : " + userNo );
-		int result = new QuestionService().deleteQuestion(postNo,userNo);
-		String page =null;
+		String page = null;
 		if(result > 0) {
-			response.sendRedirect("list.qu?userNo="+userNo);
+			page = "views/common/successPage.jsp";
+			request.setAttribute("msg", "총 "+ bNo.length + "개의 게시글을 삭제 하였습니다.");
 		} else {
+			page = "views/common/errorPage.jsp";
 			request.setAttribute("msg", "게시글 삭제에 실패하였습니다.");
-			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
 		}
-	
+		
+		RequestDispatcher view = request.getRequestDispatcher(page);
+		view.forward(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

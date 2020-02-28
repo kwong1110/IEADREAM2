@@ -117,75 +117,76 @@
 					</table>
 				</div>
 			</div>
-			<div class='pagingArea' align='center'>
-			<%if(!list.isEmpty()){ %>
-			<button onclick="location.href='<%= request.getContextPath() %>/list.wac?currentPage=1'">&lt;&lt;</button>
-			<button onclick="location.href='<%= request.getContextPath() %>/list.wac?currentPage=<%= currentPage-1 %>'" id="beforeBtn">&lt;</button>
-				<script>
-					if(<%= currentPage %> <= 1){
-						var before = $('#beforeBtn');
-						before.attr('disabled','true');
-					}
-				</script>
-				<% for(int p = startPage; p <= endPage; p++){ %>
-					<%if(p == currentPage){ %>
-						<button id="choosen" disabled><%= p %></button>
-					<% } else { %>
-						<button id="numBtn" onclick="location.href='<%= request.getContextPath() %>/list.wac?currentPage=<%= p  %>'"><%= p %></button>
-					<% } %>
-				<% } %>
+				<div class='pagingArea' align="center">
+					<!-- 검색결과 페이징 -->
+					<%if(!list.isEmpty()){ %>
+					<button onclick="location.href='<%= request.getContextPath() %>/list.wac?currentPage=1'">&lt;&lt;</button>
+					<button onclick="location.href='<%= request.getContextPath() %>/list.wac?currentPage=<%= currentPage-1 %>'" id="beforeBtn">&lt;</button>
+						<script>
+							if(<%= currentPage %> <= 1){
+								var before = $('#beforeBtn');
+								before.attr('disabled','true');
+							}
+						</script>
+						<% for(int p = startPage; p <= endPage; p++){ %>
+							<%if(p == currentPage){ %>
+								<button id="choosen" disabled><%= p %></button>
+							<% } else { %>
+								<button id="numBtn" onclick="location.href='<%= request.getContextPath() %>/list.wac?currentPage=<%= p  %>'"><%= p %></button>
+							<% } %>
+						<% } %>
+						
+						<!-- 다음 페이지로 가는 버튼 -->
+						<button onclick="location.href='<%= request.getContextPath() %>/list.wac?currentPage=<%= currentPage + 1 %>'" id="afterBtn">&gt;</button>
+						<script>
+							if(<%= currentPage %> >= <%= maxPage %>){
+								var after= $("#afterBtn");
+								after.attr('disabled','true');
+							}
+						</script>
+						
+						<!-- 맨 끝으로 가는 버튼 -->
+						<button onclick="location.href='<%= request.getContextPath() %>/list.wac?currentPage=<%= maxPage %>'">&gt;&gt;</button>			
+						
+						<% } %>
+						<!-- 로그인한 일반 회원만 작성하기 할 수 있도록 -->
+						<div class='searchArea' align='right'>
+							 <% if(loginUser != null && loginUser.getGrade() != 0){ %> 
+							<button onclick='location.href="views/coupleStory/weAreCouple/weAreCoupleInsertForm.jsp"'>작성하기</button>
+							<% } %> 
+						</div>
+					</div>
 				
-				<!-- 다음 페이지로 가는 버튼 -->
-				<button onclick="location.href='<%= request.getContextPath() %>/list.wac?currentPage=<%= currentPage + 1 %>'" id="afterBtn">&gt;</button>
-				<script>
-					if(<%= currentPage %> >= <%= maxPage %>){
-						var after= $("#afterBtn");
-						after.attr('disabled','true');
-					}
-				</script>
-				
-				<!-- 맨 끝으로 가는 버튼 -->
-				<button onclick="location.href='<%= request.getContextPath() %>/list.wac?currentPage=<%= maxPage %>'">&gt;&gt;</button>			
-				
-				<% } %>
-				<!-- 로그인한 일반 회원만 작성하기 할 수 있도록 -->
-				<div class='searchArea' align='right'>
-					 <% if(loginUser != null && loginUser.getGrade() != 0){ %> 
-					<button onclick='location.href="views/coupleStory/weAreCouple/weAreCoupleInsertForm.jsp"'>작성하기</button>
-					<% } %> 
-				</div>
+				<!-- <div class="search">
+				<button id="searchBtn" onclick="search();">검색</button><input name="searchCon" id="searchCon" type="text" width="30">
+				</div> -->
 			</div>
 			
-			<!-- <div class="search">
-			<button id="searchBtn" onclick="search();">검색</button><input name="searchCon" id="searchCon" type="text" width="30">
-			</div> -->
 		</div>
-		
-	</div>
-	<script>
-		$(function(){
-			$('#listArea td').mouseenter(function(){
-				$(this).parent().css({'background':'darkgray','cursor':'pointer'});
-			}).mouseout(function(){
-				$(this).parent().css('background','none');
-			}).click(function(){
-				var postNo = $(this).parent().children().children('input').val();
-				location.href='<%= request.getContextPath() %>/detail.wac?postNo=' + postNo;
-				// 로그인 한 사람만 상세보기 이용할 수 있게 하기
-				<%if(loginUser != null){ %>
+		<script>
+			$(function(){
+				$('#listArea td').mouseenter(function(){
+					$(this).parent().css({'background':'darkgray','cursor':'pointer'});
+				}).mouseout(function(){
+					$(this).parent().css('background','none');
+				}).click(function(){
+					var postNo = $(this).parent().children().children('input').val();
 					location.href='<%= request.getContextPath() %>/detail.wac?postNo=' + postNo;
-				 <% } else { %>
-					alert('회원만 이용할 수 있는 서비스 입니다.');
-					location.href='<%= request.getContextPath() %>/views/account/accountLoginForm.jsp';
-				<% } %> 
+					// 로그인 한 사람만 상세보기 이용할 수 있게 하기
+					<%if(loginUser != null){ %>
+						location.href='<%= request.getContextPath() %>/detail.wac?postNo=' + postNo;
+					 <% } else { %>
+						alert('회원만 이용할 수 있는 서비스 입니다.');
+						location.href='<%= request.getContextPath() %>/views/account/accountLoginForm.jsp';
+					<% } %> 
+				});
 			});
-		});
-		
-		function search() {
-			var searchWord = $('#searchCon').val()
 			
-			location.href='<%= request.getContextPath() %>/search.wac?searchWord='+searchWord;
-		}
-	</script>
+			function search() {
+				var searchWord = $('#searchCon').val()
+				
+				location.href='<%= request.getContextPath() %>/search.wac?searchWord='+searchWord;
+			}
+		</script>
 </body>
 </html>
