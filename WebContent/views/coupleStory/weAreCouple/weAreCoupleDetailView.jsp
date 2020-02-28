@@ -25,7 +25,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
+<link rel="stylesheet" href="<%= request.getContextPath() %>/css/common.css">
+<link rel="stylesheet" href="<%= request.getContextPath() %>/css/board.css">
 <style>
 	.outer {
 		width:1000px; height:735px; background: rgba(255, 255, 255, 0.4); border: 5px solid white;
