@@ -36,12 +36,21 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/common.css">
+<link rel="styleSheet" href="<%= request.getContextPath() %>/css/board.css">
 <style>
-	.tableArea{width:650px;	height:350px; margin-left:auto;	margin-right:auto;}
+	.tableArea{width:700px;	height:100%; margin:auto; box-sizing: border-box;}
 	.category{cursor: pointer; font-size:20px; text-align: center; padding: 10px;}
 	.faq{text-align: center; cursor: pointer; display: none; font-size: 15px; padding: 2px;}
-	.con{height: 200px; display: none; text-align: left;
-		 border-top: 1px solid black; border-bottom: 1px solid black;}
+	.con{height: 100px; display: none; text-align: center;
+		 border-top: 1px solid rgb(200, 200, 200); border-bottom: 1px solid rgb(200, 200, 200);}
+
+	.con{ /* 내용 css */
+		padding:12px 0;
+		border-top:1px solid rgb(136, 136, 136); /* 상단라인색 */
+		border-bottom:1px solid rgb(224, 224, 224); /* 하단라인색 */
+		background:#f9f9f9;  /* 제목배경색 */ 
+		color:rgb(51, 51, 51); font-size:1em;/* 제목글자크기 */ 
+		letter-spacing:0.1em}/* 제목띠어쓰기간격 */ 
 </style>
 </head>
 <body>
