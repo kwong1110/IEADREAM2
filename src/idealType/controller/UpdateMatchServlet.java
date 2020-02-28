@@ -42,8 +42,6 @@ public class UpdateMatchServlet extends HttpServlet {
 		
 		int result = new MatchService().updateMatch(m);
 		
-		RequestDispatcher view = request.getRequestDispatcher(page);
-		view.forward(request, response);
 	}
 
 	/**
