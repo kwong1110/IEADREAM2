@@ -15,7 +15,8 @@
 <body>
 
     <p class="txt"><Strong class="black">
-								회원님의 아이디는 <%=account.password() %> 입니다.</Strong></p>
+								<%=account.password() %> 이메일로 임시 비밀번호 발송하였습니다 변경된 임시비밀번호로 
+								로그인 해주세요!!</Strong></p>
 								<!-- userId가져오는것  -->
 					
 </body>
