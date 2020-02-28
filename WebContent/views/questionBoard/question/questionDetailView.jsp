@@ -9,14 +9,6 @@
 	String userId = (String)request.getAttribute("userId");
 	
 	String category = b.getCategory();
-	/* int categoryInt = 0;
-	switch(category){
-	case "결제" : categoryInt = 1; break;
-	case "파티" : categoryInt = 2; break;
-	case "서비스" : categoryInt = 3; break;
-	case "회원/등급" : categoryInt = 4; break;
-	case "기타" : categoryInt = 5; break;
-	} */
 	
 %>
 <!DOCTYPE html>
@@ -24,23 +16,18 @@
 <head>
 <meta charset="UTF-8">
 <title>문의게시판</title>
-
+<link rel="stylesheet" href="<%= request.getContextPath() %>/css/common.css">
 <style>
 	.outer{
-		width: 800px; height: 500px; background: rgba(255, 255, 255, 0.4); border: 5px solid white;
+		width: 1000px; height: 500px; background: rgba(255, 255, 255, 0.4); border: 5px solid white;
 		margin-left: auto; margin-right: auto; margin-top: 50px;
 	}
-	#listArea{text-align: center;}
-	.tableArea{width:650px;	height:350px; margin-left:auto;	margin-right:auto;}
-	th{border-bottom: 1px solid grey;}
-	.pagingArea button{border-radius: 15px; background: #D5D5D5;}
-	.searchArea{margin-right: 50px;}
-	.searchArea button{background: #D1B2FF; border-radius: 5px; color: white; width: 80px; heigth: 25px; text-align: center;}
+	.tableArea{width:670px;	height:350px;}
 	button:hover{cursor: pointer;}
 
 	th, td, thead{
 		    border: 1px solid gray;
-   	 border-radius: 10px;
+   	 		border-radius: 10px;
 	}
 	textarea, #title, #category, #Mcommand{
 		border-radius: 10px;
@@ -50,29 +37,27 @@
 	textarea{
 		margin: 0;
     padding: 0;
-    border: none;
 	}
 	#manager{
 		background: rgb(123, 164, 213);
 	}
-	#updateBtn{
-		border-radius: 10px;
-		background:  rgb(123, 164, 213);
-		padding: 10px;
-		color: white;
-		font-size: 15px;
-		text-align: center;
-		border:none;
+	#showTitle{
+		resize: none;
+		width: 356px;
+   		height: 24px;
+    	vertical-align: middle;
 	}
-	#deleteBtn ,#menuBtn{
-		border-radius: 10px;
-		background:rgb(230, 141, 150);
-		padding: 10px;
-		color: white;
-		font-size: 15px;
+	#showCategory{
+		resize : none;
+		height: 24px;
 		text-align: center;
+    	vertical-align: middle;
 	}
-
+	table>thead{
+		margin-bottom: 20px;
+	}
+	
+	
 </style>
 </head>
 <body>
@@ -91,12 +76,12 @@
 									<th width=10%>제목</th>
 									<td width=30%>
 										<input type ="hidden" value ="<%= b.getPostNo() %>" name = "postNo">
-										<input type="hidden" id="title" name = "title" value="<%= b.getTitle() %>"><%= b.getTitle() %>							
+										<input type="hidden" id="title" name = "title" value="<%= b.getTitle() %>"><textarea readonly id="showTitle"><%= b.getTitle() %></textarea>							
 									</td>
-									
 									<th width=20% id="category">카테고리</th>
 									<td>
-										<%= b.getCategory() %><input type="hidden" value="<%= loginUser.getUserNo()%>" name="userNo">
+										<textarea readonly id="showCategory"><%= b.getCategory() %></textarea>
+										<input type="hidden" value="<%= loginUser.getUserNo()%>" name="userNo">
 										<input type="hidden" value="<%= b.getCategory() %>" name="category">
 									</td>
 								</tr>
@@ -126,9 +111,9 @@
 						</div>
 						<% if(loginUser.getGrade() != 0){ %> 
 						<div class="btnBox">
-							<input type="submit" id="updateBtn" value="수정">
-							<input type="button" onclick="location.href='<%= request.getContextPath() %>/list.qu?userNo=<%= loginUser.getUserNo()%>'" id="menuBtn" value="메뉴로" >
-							<input type="button" onclick="deleteBoard();" id="deleteBtn" value="삭제">
+							<input type="submit" class="defaultBtn" id="updateBtn" value="수정">
+							<input type="button"  class="defaultBtn" onclick="location.href='<%= request.getContextPath() %>/list.qu?userNo=<%= loginUser.getUserNo()%>'" id="menuBtn" value="메뉴로" >
+							<input type="button" class="defaultBtn"  onclick="deleteBoard();" id="deleteBtn" value="삭제">
 						</div>
 						<% } %> 
 					</form>

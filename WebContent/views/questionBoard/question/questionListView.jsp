@@ -22,12 +22,11 @@
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/common.css">
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/board.css">
 <style>
-	/* .outer{
-		width: 800px; height: 500px; background: rgba(255, 255, 255, 0.4); border: 5px solid white;
+	 .outer{
+		width:1000px; background: white;
 		margin-left: auto; margin-right: auto; margin-top: 50px;
-	} */
+	} 
 	#listArea{text-align: center;}
-	.tableArea{width:650px;	height:350px; margin-left:auto;	margin-right:auto;}
 	th{border-bottom: 1px solid grey;}
 	.pagingArea button{border-radius: 15px; background: #D5D5D5;}
 	.searchArea{margin-right: 50px;}
@@ -137,7 +136,7 @@
 						<% } %>
 						<div class='searchArea' align='right'>
 						<% if(loginUser != null){ %>
-						<button onclick='location.href="views/questionBoard/question/questionInsertForm.jsp"'>작성하기</button>
+						<button class="defaultBtn" onclick='location.href="views/questionBoard/question/questionInsertForm.jsp"'>작성하기</button>
 						<% } %>
 					</div>
 				</div>
