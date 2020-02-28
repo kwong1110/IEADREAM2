@@ -6,7 +6,7 @@
 <head>
 <link rel="stylesheet" type="text/css" href="css/reset.css" />
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-  <title>내 정보 입력</title>
+  <title>내 정보 수정</title>
   <meta charset="utf-8">
   <style>
     a:link { color: black; text-decoration: none}
@@ -131,7 +131,7 @@
           <label>내 정보 입력</label>
         </section>
         <section>
-          <form action="<%= request.getContextPath() %>/insert.ui" method="post" enctype="multipart/form-data">
+          <form action="<%= request.getContextPath() %>/update.ui" method="post" enctype="multipart/form-data">
             <section id="itemProfile" style="display:flex">
               <article style="width: 400px; height: 250px;" >
 				<img id='output' width="250" height="250"><br>

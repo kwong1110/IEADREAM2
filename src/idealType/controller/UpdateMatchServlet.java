@@ -1,12 +1,15 @@
 package idealType.controller;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import account.model.vo.Account;
 import idealType.model.service.MatchService;
 import idealType.model.vo.Match;
 
@@ -33,21 +36,11 @@ public class UpdateMatchServlet extends HttpServlet {
 		
 		int userNo = ((Account)request.getSession().getAttribute("loginUser")).getUserNo();
 		
+		
+		
 		Match m = new Match();
-		m.setUserNo(userNo);
-		m.setTargetNo(targetNo);
-		m.setStatus(status);
-		m.setMatchDate(matchdate);
 		
-		int result = new MatchService().insertMatch(m);
-		
-		String page = null;
-		if(result > 0) {
-			page = "";
-		} else {
-			page = "views/common/errorPage.jsp";
-			request.setAttribute("msg", "정보 수정에 실패하였습니다.");
-		}
+		int result = new MatchService().updateMatch(m);
 		
 		RequestDispatcher view = request.getRequestDispatcher(page);
 		view.forward(request, response);

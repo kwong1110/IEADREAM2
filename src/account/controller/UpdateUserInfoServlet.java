@@ -82,7 +82,7 @@ public class UpdateUserInfoServlet extends HttpServlet {
 		
 		String page = null;
 		if(result1 > 0 && result2 > 0) {
-			page = "views/account/joinUserPreferenceForm.jsp";
+			page = "views/myPage/user/updateMyProfile.jsp";
 		} else {
 			page = "views/common/errorPage.jsp";
 			request.setAttribute("msg", "정보 수정에 실패하였습니다.");
