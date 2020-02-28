@@ -1,7 +1,8 @@
 package myPage.user.model.dao;
 
 import static common.JDBCTemplate.close;
-
+import static common.JDBCTemplate.commit;
+import static common.JDBCTemplate.rollback;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -92,5 +93,27 @@ private Properties prop = new Properties();
 		}
 		
 		return list;
+	}
+
+	public int paymentMemGrade(Connection conn, String userNo) {
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("paymentMemGrade");
+		// UPDATE ACCOUNT SET GRADE=2 WHERE USER_NO=?
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, userNo);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
 	}
 }
