@@ -37,11 +37,11 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/common.css">
 <style>
-	.tableArea{width:650px;	height:350px; margin-left:auto;	margin-right:auto;}
+	.tableArea{width:700px;	height:100%; margin:auto; box-sizing: border-box;}
 	.category{cursor: pointer; font-size:20px; text-align: center; padding: 10px;}
 	.faq{text-align: center; cursor: pointer; display: none; font-size: 15px; padding: 2px;}
 	.con{height: 200px; display: none; text-align: left;
-		 border-top: 1px solid black; border-bottom: 1px solid black;}
+		 border-top: 1px solid black; border-bottom: 1px solid black; margin: 0 0 10px;}
 </style>
 </head>
 <body>
