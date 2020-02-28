@@ -53,6 +53,13 @@
 	<h5 style="text-align: center;">가입할때 입력하신 아이디 이메일 주소를 통해 비밀번호를 확인하실수 있습니다.</h5>
 	<br><br>
 
+
+
+
+
+
+
+
 	</div>
 	
 	<div class = "textbox">

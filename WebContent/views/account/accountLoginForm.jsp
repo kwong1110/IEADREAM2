@@ -55,8 +55,9 @@ button {
 			            
 			             <!-- 아이디 찾기 눌렀을때 searchidForm 으로 넘어 가기... -->
 			            <button type ="button" class="defaultBtn" onclick="location.href='<%= request.getContextPath() %>/views/account/searchIdForm.jsp'">아이디 찾기</button>
-		
-			            <button type ="button" class="defaultBtn" onclick="searchPwdForm'<%= request.getContextPath() %>/Findpwd.me'">비밀번호 찾기</button>
+						
+						<!-- 비밀번호 찾기 눌렀을때 searchPwdForm 으로 넘어가기... -->	
+			            <button type ="button" class="defaultBtn" onclick="location.href='<%= request.getContextPath() %>/views/account/searchPwdForm.jsp'">비밀번호 찾기</button>
 			            <button type ="button" class="defaultBtn" onclick="joinAccount();">회원가입</button>
 		            </div>
 	            </form>
