@@ -167,7 +167,7 @@
 		case 0: scp3 = "checked"; break;
 		}
 		
-	int region = up.getRegion();
+	int region = ui.getRegion();
 		String re11 = null; String re42 = null;
 		String re12 = null; String re43 = null;
 		String re13 = null; String re51 = null;
@@ -402,22 +402,22 @@
                 <tr class="itemBox">
                   <td class="itemName" id="">거주 지역</td>
                   <td>
-                    <label><input type="radio" name="region"value="11" <%= re11 %>>서울</label> 
-					<label><input type="radio" name="region" value="12" <%= re12 %>>인천</label>
-					<label><input type="radio" name="region" value="13"<%= re13 %>>경기</label> 
-					<label><input type="radio" name="region" value="20" <%= re20 %>>강원</label> 
-					<label><input type="radio" name="region" value="31" <%= re31 %>>충북</label>
-					<label><input type="radio" name="region" value="32" <%= re32 %>>충남</label> 
-					<label><input type="radio" name="region" value="33" <%= re33 %>>대전</label> 
-					<label><input type="radio" name="region" value="41" <%= re41 %>>전북</label><br>
-					<label><input type="radio" name="region" value="42" <%= re42 %>>전남</label>
-					<label><input type="radio" name="region" value="43" <%= re43 %>>광주</label> 
-					<label><input type="radio" name="region" value="51" <%= re51 %>>경북</label>
-					<label><input type="radio" name="region" value="52" <%= re52 %>>대구</label> 
-					<label><input type="radio" name="region" value="53" <%= re53 %>>경남</label> 
-					<label><input type="radio" name="region" value="54" <%= re54 %>>부산</label>
-					<label><input type="radio" name="region" value="55" <%= re55 %>>울산</label> 
-					<label><input type="radio" name="region" value="60" <%= re60 %>>제주</label>
+                    <label><input type="radio" name="region"value="11"   disabled="disabled"<%= re11 %>>서울</label> 
+					<label><input type="radio" name="region" value="12"  disabled="disabled"<%= re12 %>>인천</label>
+					<label><input type="radio" name="region" value="13"  disabled="disabled"<%= re13 %>>경기</label> 
+					<label><input type="radio" name="region" value="20"  disabled="disabled"<%= re20 %>>강원</label> 
+					<label><input type="radio" name="region" value="31"  disabled="disabled"<%= re31 %>>충북</label>
+					<label><input type="radio" name="region" value="32"  disabled="disabled"<%= re32 %>>충남</label> 
+					<label><input type="radio" name="region" value="33"  disabled="disabled"<%= re33 %>>대전</label> 
+					<label><input type="radio" name="region" value="41"  disabled="disabled"<%= re41 %>>전북</label><br>
+					<label><input type="radio" name="region" value="42"  disabled="disabled"<%= re42 %>>전남</label>
+					<label><input type="radio" name="region" value="43"  disabled="disabled"<%= re43 %>>광주</label> 
+					<label><input type="radio" name="region" value="51"  disabled="disabled"<%= re51 %>>경북</label>
+					<label><input type="radio" name="region" value="52"  disabled="disabled"<%= re52 %>>대구</label> 
+					<label><input type="radio" name="region" value="53"  disabled="disabled"<%= re53 %>>경남</label> 
+					<label><input type="radio" name="region" value="54"  disabled="disabled"<%= re54 %>>부산</label>
+					<label><input type="radio" name="region" value="55"  disabled="disabled"<%= re55 %>>울산</label> 
+					<label><input type="radio" name="region" value="60"  disabled="disabled"<%= re60 %>>제주</label>
                   </td>
                   <td>
                     <select class="itemPriority" name="regionPri">
@@ -429,28 +429,28 @@
                 </tr>
                 <tr class="itemBox">
                   <td class="itemName" id="">관심 분야</td>
-                  <td>
-                    <label><input type="checkbox" name="interest" value="movie" <%= check[0] %>>영화&드라마</label>
-					<label><input type="checkbox" name="interest" value="musical" <%= check[1] %>>연극&뮤지컬</label>
-					<label><input type="checkbox" name="interest" value="comic" <%= check[2] %>>만화&서브컬처</label>
-					<label><input type="checkbox" name="interest" value="picture" <%= check[3] %>>사진&영상 촬영</label> 
-					<label><input type="checkbox" name="interest" value="books" <%= check[4] %>>독서</label>
-					<label><input type="checkbox" name="interest" value="music" <%= check[5] %>>음악 감상</label><br> 
-					<label><input type="checkbox" name="interest" value="sing" <%= check[6] %>>노래&춤</label>
-					<label><input type="checkbox" name="interest" value="instrument" <%= check[7] %>>악기 연주</label> 
-					<label><input type="checkbox" name="interest" value="cook" <%= check[8] %>>요리&음식</label>
-					<label><input type="checkbox" name="interest" value="camp" <%= check[9] %>>여행&캠핑</label> 
-					<label><input type="checkbox" name="interest" value="exercise" <%= check[10] %>>운동</label> 
-					<label><input type="checkbox" name="interest" value="sports" <%= check[11] %>>스포츠 경기</label> 
-					<label><input type="checkbox" name="interest" value="vgame" <%= check[12] %>>비디오 게임</label><br> 
-					<label><input type="checkbox" name="interest" value="bgame" <%= check[13] %>>보드게임</label> 
-					<label><input type="checkbox" name="interest" value="sns" <%= check[14] %>>SNS</label>
-					<label><input type="checkbox" name="interest" value="drink" <%= check[15] %>>술&모임</label> 
-					<label><input type="checkbox" name="interest" value="beauty" <%= check[16] %>>뷰티&패션</label> 
-					<label><input type="checkbox" name="interest" value="pet" <%= check[17] %>>반려동물</label>
-					<label><input type="checkbox" name="interest" value="diy" <%= check[18] %>>DIY</label> 
-					<label><input type="checkbox" name="interest" value="money" <%= check[19] %>>재테크</label>
-              </td>
+	                <td>
+	                    <label><input type="checkbox" name="interest" value="movie"  	disabled="disabled"<%= check[0] %>>영화&드라마</label>
+						<label><input type="checkbox" name="interest" value="musical"  	disabled="disabled"<%= check[1] %>>연극&뮤지컬</label>
+						<label><input type="checkbox" name="interest" value="comic"  	disabled="disabled"<%= check[2] %>>만화&서브컬처</label>
+						<label><input type="checkbox" name="interest" value="picture"  	disabled="disabled"<%= check[3] %>>사진&영상 촬영</label> 
+						<label><input type="checkbox" name="interest" value="books"  	disabled="disabled"<%= check[4] %>>독서</label>
+						<label><input type="checkbox" name="interest" value="music"  	disabled="disabled"<%= check[5] %>>음악 감상</label><br> 
+						<label><input type="checkbox" name="interest" value="sing"  	disabled="disabled"<%= check[6] %>>노래&춤</label>
+						<label><input type="checkbox" name="interest" value="instrument"disabled="disabled"<%= check[7] %>>악기 연주</label> 
+						<label><input type="checkbox" name="interest" value="cook"  	disabled="disabled"<%= check[8] %>>요리&음식</label>
+						<label><input type="checkbox" name="interest" value="camp"  	disabled="disabled"<%= check[9] %>>여행&캠핑</label> 
+						<label><input type="checkbox" name="interest" value="exercise"  disabled="disabled"<%= check[10] %>>운동</label> 
+						<label><input type="checkbox" name="interest" value="sports"  	disabled="disabled"<%= check[11] %>>스포츠 경기</label> 
+						<label><input type="checkbox" name="interest" value="vgame" 	disabled="disabled"<%= check[12] %>>비디오 게임</label><br> 
+						<label><input type="checkbox" name="interest" value="bgame"  	disabled="disabled"<%= check[13] %>>보드게임</label> 
+						<label><input type="checkbox" name="interest" value="sns"  		disabled="disabled"<%= check[14] %>>SNS</label>
+						<label><input type="checkbox" name="interest" value="drink"  	disabled="disabled"<%= check[15] %>>술&모임</label> 
+						<label><input type="checkbox" name="interest" value="beauty"  	disabled="disabled"<%= check[16] %>>뷰티&패션</label> 
+						<label><input type="checkbox" name="interest" value="pet"  		disabled="disabled"<%= check[17] %>>반려동물</label>
+						<label><input type="checkbox" name="interest" value="diy"  		disabled="disabled"<%= check[18] %>>DIY</label> 
+						<label><input type="checkbox" name="interest" value="money" 	disabled="disabled"<%= check[19] %>>재테크</label>
+              		</td>
                   <td>
                     <select class="itemPriority" name="interestPri">
                       <option value="2" <%= ip1%>>중요</option>
