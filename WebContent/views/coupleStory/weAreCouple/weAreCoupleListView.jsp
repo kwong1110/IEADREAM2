@@ -20,6 +20,7 @@
 <title>우리 커플 됐어요</title>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/common.css">
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/board.css">
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <style>
 	.outer{
 		width: 1000px; height: 500px; background:white;
@@ -195,6 +196,12 @@
 				
 				location.href='<%= request.getContextPath() %>/search.wac?searchWord='+searchWord;
 			}
+			
+			 $(document).ready(function(){
+			      $("#listArea").tablesorter();
+			   });
+
+
 		</script>
 </body>
 </html>

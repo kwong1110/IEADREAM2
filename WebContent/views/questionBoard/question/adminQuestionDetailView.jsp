@@ -12,11 +12,10 @@
 <meta charset="UTF-8">
 <title>문의게시판</title>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/common.css">
-<link rel="stylesheet" href="<%= request.getContextPath() %>/css/board.css">
 <style>
 
 	.outer{
-		width: 800px; height: 500px; background: rgba(255, 255, 255, 0.4); border: 5px solid white;
+		width: 1000px; height: 500px; background: rgba(255, 255, 255, 0.4); border: 5px solid white;
 		margin-left: auto; margin-right: auto; margin-top: 50px;
 	}
 	#listArea{text-align: center;}
@@ -39,7 +38,7 @@
 	#manager{
 		background: rgb(123, 164, 213);
 	}
-	#updateBtn, #insertBtn{
+	/* #updateBtn, #insertBtn{
 		border-radius: 10px;
 		background:  rgb(123, 164, 213);
 		padding: 10px;
@@ -58,7 +57,7 @@
 		font-size: 15px;
 		text-align: center;
 		border:none;
-	}
+	} */
 	
 </style>
 </head>
@@ -116,12 +115,12 @@
 										<% } %>
 										
 										</td>
-									<td><input type="button" id="insertBtn" class="addReply" value="등록"></td>
-									<td><input type="button" id="updateBtn" class="updateReply" value="수정"></td>
-									<td><input type="button" onclick="deleteReply();" id="deleteBtn" value="삭제"></td>
+									<td><input type="button" id="addReply" class="defaultBtn" value="등록"></td>
+									<td><input type="button" id="updateBtn" class="defaultBtn" value="수정"></td>
+									<td><input type="button" onclick="deleteReply();" id="deleteBtn" class="defaultBtn" value="삭제"></td>
 								</tr>
 							</table>
-							<input type="button" onclick="location.href='<%= request.getContextPath() %>/Mlist.qu?'" id="menuBtn" value="메뉴로" >
+							<input type="button" onclick="location.href='<%= request.getContextPath() %>/Mlist.qu?'" class="defaultBtn" id="menuBtn" value="메뉴로" >
 						</div>
 					</form>
 				 </div>
@@ -169,7 +168,7 @@
 			   });
 			
 			
-		   $('.addReply').click(function(){
+		   $('#addReply').click(function(){
 			var postNo = <%= b.getPostNo() %>;
 			var answerContent = $('#insertReply').val();
 			$.ajax({

@@ -27,22 +27,12 @@
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/board.css">
 <style>
 	.outer{
-		width: 1000px; height: 500px; background: white;
+		width: 1000px; background: white;
 		margin-left: auto; margin-right: auto; margin-top: 50px;
 	}
 	#listArea{text-align: center;}
-	.tableArea{width:650px;	 margin-left:auto;	margin-right:auto;}
 	th{border-bottom: 1px solid grey;}
 	button:hover{cursor: pointer;}
-	#insertBtn{
-		border-radius: 10px;
-		background:  rgb(123, 164, 213);
-		padding: 10px;
-		color: white;
-		font-size: 15px;
-		text-align: center;
-		border:none;
-	}
 	.clear-both{
 		height: 20px;
 	}
