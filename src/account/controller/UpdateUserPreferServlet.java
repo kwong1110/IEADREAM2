@@ -87,7 +87,8 @@ public class UpdateUserPreferServlet extends HttpServlet {
 		
 		String page = null;
 		if(result > 0) {
-			page = "";
+			page = "views/myPage/user/updateUsrPreferenceForm.jsp";
+			request.setAttribute("up", up);
 		} else {
 			page = "views/common/errorPage.jsp";
 			request.setAttribute("msg", "정보 수정에 실패하였습니다.");

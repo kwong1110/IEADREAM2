@@ -4,7 +4,7 @@
 	UserInfo ui = (UserInfo)request.getAttribute("ui");
 
 	int userNo = ui.getUserNo();
-	String thumb = ui.getThumb();
+	
 	String hello = ui.getHello();
 	int height = ui.getHeight();
 		String h1 = null; String h2 = null; String h3 = null;
@@ -124,7 +124,7 @@
 		 }
 		 
 	 String[] getInter = ui.getInterest(); // 가져온 배열
-	 String[] interest = {"movie", "musical", "comic", "picturer", "books", "music",
+	 String[] interest = {"movie", "musical", "comic", "picture", "books", "music",
 	                      "sing", "instrurment", "cook", "camp", "exercise", "sports",
 	                      "vgame", "bgame", "sns", "drink", "beauty", "pet", "diy", "money"}; // 취미20개가 다 저장된 배열
 	 String[] check = new String[20];         
@@ -156,19 +156,17 @@
 				</section>
 				<section>
 					<form action="/update.ui">
-						<section id="itemProfile" style="display: flex">
-							<article style="padding-right: 50px;">
-								<img src="" width="200" height="200" />
-								<p>
-									<input type="file" value="첨부">
-								</p>
-							</article>
-							<article id="hello"
-								style="text-align: center; margin-left: 30px;">
-								<label>소갯말</label><br>
-								<textarea style="width: 500px; height: 200px; margin-top: 15px; resize: none;"><%= hello %></textarea>
-							</article>
-						</section>
+						 <section id="itemProfile" style="display:flex">
+			             	<article style="width: 400px; height: 250px;" >
+								<img id='output' width="250" height="250"><br>
+			              		<input type='file' accept='image/*' onchange='openFile(event)' id="imgInput" name="profileImg">
+			              	</article>
+			              	<article id="hello" style="text-align:center; margin-left:30px;">
+			                	<label>소갯말</label><br>
+			                	<textarea style="width: 400px; height:150px; margin-top :15px; resize:none;" name="hello">
+			                	</textarea>
+			              </article>
+			            </section>
 						<section id="items">
 							<table>
 								<tr>
@@ -309,4 +307,19 @@
 		</div>
 	</div>
 </body>
+<script>
+
+	var openFile = function(event) {
+    	var input = event.target;
+   		var reader = new FileReader();
+    	reader.onload = function(){
+    		var dataURL = reader.result;
+    		var output = document.getElementById('output');
+    		output.src = dataURL;
+    		};
+	reader.readAsDataURL(input.files[0]);
+
+  	};
+
+</script>
 </html>

@@ -1,6 +1,52 @@
-<%@page import="java.sql.*" %>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+pageEncoding="UTF-8" import="account.model.vo.*"%>
+<%
+	UserInfo ui = (UserInfo)request.getAttribute("ui");
+
+	int userNo = ui.getUserNo();
+	int region = ui.getRegion();
+		String re11 = null; String re42 = null;
+		String re12 = null; String re43 = null;
+		String re13 = null; String re51 = null;
+		String re20 = null; String re52 = null;
+		String re31 = null; String re53 = null;
+		String re32 = null; String re54 = null;
+		String re33 = null; String re55 = null;
+		String re41 = null; String re60 = null;
+	 switch(region) {
+		 case 11: re11 = "checked"; break;
+		 case 12: re12 = "checked"; break;
+		 case 13: re13 = "checked"; break;
+		 case 20: re20 = "checked"; break;
+		 case 31: re31 = "checked"; break;
+		 case 32: re32 = "checked"; break;
+		 case 33: re33 = "checked"; break;
+		 case 41: re41 = "checked"; break;
+		 case 42: re42 = "checked"; break;
+		 case 43: re43 = "checked"; break;
+		 case 51: re51 = "checked"; break;
+		 case 52: re52 = "checked"; break;
+		 case 53: re53 = "checked"; break;
+		 case 54: re54 = "checked"; break;
+		 case 55: re55 = "checked"; break;
+		 case 60: re60 = "checked"; break;
+	 }
+	 String[] getInter = ui.getInterest(); // 가져온 배열
+	 String[] interest = {"movie", "musical", "comic", "picture", "books", "music",
+	                      "sing", "instrurment", "cook", "camp", "exercise", "sports",
+	                      "vgame", "bgame", "sns", "drink", "beauty", "pet", "diy", "money"}; // 취미20개가 다 저장된 배열
+	 String[] check = new String[20];         
+	                      
+	 for(int k = 0; k < interest.length; k++) {
+		 for(int j = 0; j < getInter.length; j++) {
+			 if(interest[k].equals(getInter[j])) { //해당 관심분야를 가져왔다면
+				 check[k] = "checked";
+			 } 
+		 }
+	 };
+
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -346,27 +392,27 @@
                 <tr class="itemBox">
                   <td class="itemName" id="">관심 분야</td>
                   <td>
-                    <label><input type="checkbox" name="interest" value="movie" disabled="disabled">영화&드라마</label>
-                    <label><input type="checkbox" name="interest" value="musical" disabled="disabled">연극&뮤지컬</label>
-                    <label><input type="checkbox" name="interest" value="comic" disabled="disabled">만화&서브컬처</label>
-                    <label><input type="checkbox" name="interest" value="picture" disabled="disabled">사진&영상 촬영</label>
-                    <label><input type="checkbox" name="interest" value="books" disabled="disabled">독서</label>
-                    <label><input type="checkbox" name="interest" value="music" disabled="disabled">음악 감상</label><br>
-                    <label><input type="checkbox" name="interest" value="sing" disabled="disabled">노래&춤</label>
-                    <label><input type="checkbox" name="interest" value="instrument" disabled="disabled">악기 연주</label>
-                    <label><input type="checkbox" name="interest" value="cook" disabled="disabled">요리&음식</label>
-                    <label><input type="checkbox" name="interest" value="camp" disabled="disabled">여행&캠핑</label>
-                    <label><input type="checkbox" name="interest" value="exercise" disabled="disabled">운동</label>
-                    <label><input type="checkbox" name="interest" value="sports" disabled="disabled">스포츠 경기</label>
-                    <label><input type="checkbox" name="interest" value="vgame" disabled="disabled">비디오 게임</label><br>
-                    <label><input type="checkbox" name="interest" value="bgame" disabled="disabled">보드게임</label>
-                    <label><input type="checkbox" name="interest" value="sns" disabled="disabled">SNS</label>
-                    <label><input type="checkbox" name="interest" value="drink" disabled="disabled">술&모임</label>
-                    <label><input type="checkbox" name="interest" value="beauty" disabled="disabled">뷰티&패션</label>
-                    <label><input type="checkbox" name="interest" value="pet" disabled="disabled">반려동물</label>
-                    <label><input type="checkbox" name="interest" value="diy" disabled="disabled">DIY</label>
-                    <label><input type="checkbox" name="interest" value="money" disabled="disabled">재테크</label>
-                  </td>
+	                    <label><input type="checkbox" name="interest" value="movie"  	disabled="disabled"<%= check[0] %>>영화&드라마</label>
+						<label><input type="checkbox" name="interest" value="musical"  	disabled="disabled"<%= check[1] %>>연극&뮤지컬</label>
+						<label><input type="checkbox" name="interest" value="comic"  	disabled="disabled"<%= check[2] %>>만화&서브컬처</label>
+						<label><input type="checkbox" name="interest" value="picture"  	disabled="disabled"<%= check[3] %>>사진&영상 촬영</label> 
+						<label><input type="checkbox" name="interest" value="books"  	disabled="disabled"<%= check[4] %>>독서</label>
+						<label><input type="checkbox" name="interest" value="music"  	disabled="disabled"<%= check[5] %>>음악 감상</label><br> 
+						<label><input type="checkbox" name="interest" value="sing"  	disabled="disabled"<%= check[6] %>>노래&춤</label>
+						<label><input type="checkbox" name="interest" value="instrument"disabled="disabled"<%= check[7] %>>악기 연주</label> 
+						<label><input type="checkbox" name="interest" value="cook"  	disabled="disabled"<%= check[8] %>>요리&음식</label>
+						<label><input type="checkbox" name="interest" value="camp"  	disabled="disabled"<%= check[9] %>>여행&캠핑</label> 
+						<label><input type="checkbox" name="interest" value="exercise"  disabled="disabled"<%= check[10] %>>운동</label> 
+						<label><input type="checkbox" name="interest" value="sports"  	disabled="disabled"<%= check[11] %>>스포츠 경기</label> 
+						<label><input type="checkbox" name="interest" value="vgame" 	disabled="disabled"<%= check[12] %>>비디오 게임</label><br> 
+						<label><input type="checkbox" name="interest" value="bgame"  	disabled="disabled"<%= check[13] %>>보드게임</label> 
+						<label><input type="checkbox" name="interest" value="sns"  		disabled="disabled"<%= check[14] %>>SNS</label>
+						<label><input type="checkbox" name="interest" value="drink"  	disabled="disabled"<%= check[15] %>>술&모임</label> 
+						<label><input type="checkbox" name="interest" value="beauty"  	disabled="disabled"<%= check[16] %>>뷰티&패션</label> 
+						<label><input type="checkbox" name="interest" value="pet"  		disabled="disabled"<%= check[17] %>>반려동물</label>
+						<label><input type="checkbox" name="interest" value="diy"  		disabled="disabled"<%= check[18] %>>DIY</label> 
+						<label><input type="checkbox" name="interest" value="money" 	disabled="disabled"<%= check[19] %>>재테크</label>
+              		</td>
                   <td>
                     <select class="itemPriority" name="interestPri">
                       <option value="2">중요</option>

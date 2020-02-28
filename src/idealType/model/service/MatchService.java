@@ -20,7 +20,7 @@ import idealType.model.vo.Match;
 
 public class MatchService {
 	
-	public Match[] getMatch(int userNo) {
+	public Match[] getMatchList(int userNo) {
 		Connection conn = getConnection();
 		MatchDAO mDAO = new MatchDAO();
 		Match[] result = mDAO.selectMatchList(conn, userNo);
@@ -115,9 +115,6 @@ public class MatchService {
 	}
 	
 	public double getMatchSync(UserInfo ui, UserPrefer up, UserInfo ti, UserPrefer tp) { // 취향 적합도 계산
-		
-		Connection conn = getConnection();
-		
 		double syncPoint = 0;
 		int maxPoint = up.getHeightPri() + up.getShapePri() + up.getStylePri() + up.getAgePri() + up.getRegionPri() 
 						+ up.getReligionPri() + up.getScholarPri() + up.getJobPri() + up.getDrinkPri() + up.getSmokePri() + up.getInterestPri();
@@ -154,5 +151,8 @@ public class MatchService {
 		
 		return syncPoint/maxPoint;
 	}
+	
+	public int get
+	
 
 }
