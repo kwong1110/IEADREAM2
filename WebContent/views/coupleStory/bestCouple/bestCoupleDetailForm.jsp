@@ -16,6 +16,12 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <title>이어드림_베스트커플_상세조회</title>
 <style>
+
+	.outer{
+      width: 1000px; height: 680px; background: /* rgba(255, 255, 255, 0.4) */ white; border: 5px solid white;
+      margin-left: auto; margin-right: auto; margin-top: 50px; margin-bottom: 50px;
+   }
+   
 	.title{
 		padding: 10px 0 10px 30px;
 		margin: 60px 0 40px 0;
@@ -207,55 +213,71 @@
 		margin-left: 33%;
 	}
 	
+	.footer{
+		left:0;
+		bottom:0;
+		width: 104%;
+		height: 90px;
+		padding: 15px 0;
+		text-align: center;
+		color: white;
+		background: gray;
+		line-height: 22px;
+	}
+	
 </style>
 </head>
 <body>
 	<%@ include file="../../common/mainmenu.jsp" %>
 	<section>
-		<h1 class="title">이달의 베스트 커플</h1>
-		<form action="<%= request.getContextPath() %>/views/coupleStory/bestCouple/bestCoupleUpdateForm.jsp" id="detailForm" method="post">
-			<div class="main">
-				<div class="parag1">
-					<input type="hidden" name="pNo" value="<%= b.getPostNo() %>">
-					<input type="hidden" name="title" value="<%= b.getTitle() %>">
-					<div class="img1">
-						<img class="titlePt" id="titlePt" src="<%= request.getContextPath() %>/photo_uploadFiles/<%= titlePt.getChangeName() %>">
-						<input type="hidden" value="<%= titlePt.getChangeName() %>" name="titlePt">
-						<input type="hidden" value="<%= titlePt.getPhotoNo() %>" name="detailPhotoId0">
-						<%-- <input type="hidden" value="<%= titlePt.getOriginName() %>" name="originName0"> --%>
-					</div>
-					<div class="contn1">
-						<div class="text1">
-							<input class="nameinput" id="nameinput1" name="mName" value="<%= bc.getmName() %>"><div class="heart">&#9829;</div>
-							<input class="nameinput" id="nameinput2" name="fName" value="<%= bc.getfName() %>">
+		<div class="outer">
+			<div class="wrapper">
+				<h1 class="title">이달의 베스트 커플</h1>
+				<form action="<%= request.getContextPath() %>/views/coupleStory/bestCouple/bestCoupleUpdateForm.jsp" id="detailForm" method="post">
+					<div class="main">
+						<div class="parag1">
+							<input type="hidden" name="pNo" value="<%= b.getPostNo() %>">
+							<input type="hidden" name="title" value="<%= b.getTitle() %>">
+							<div class="img1">
+								<img class="titlePt" id="titlePt" src="<%= request.getContextPath() %>/photo_uploadFiles/<%= titlePt.getChangeName() %>">
+								<input type="hidden" value="<%= titlePt.getChangeName() %>" name="titlePt">
+								<input type="hidden" value="<%= titlePt.getPhotoNo() %>" name="detailPhotoId0">
+								<%-- <input type="hidden" value="<%= titlePt.getOriginName() %>" name="originName0"> --%>
+							</div>
+							<div class="contn1">
+								<div class="text1">
+									<input class="nameinput" id="nameinput1" name="mName" value="<%= bc.getmName() %>"><div class="heart">&#9829;</div>
+									<input class="nameinput" id="nameinput2" name="fName" value="<%= bc.getfName() %>">
+								</div>
+								<div class="text2">연애기간 :<input class="perinput" name="dtPeriod" value="<%= bc.getDtPeriod() %>">일</div>
+								<div class="text3">즐겨하는 데이트 :<input class="dateinput" name="fvDate" value="<%= bc.getFvDate() %>"></div>
+							</div>
 						</div>
-						<div class="text2">연애기간 :<input class="perinput" name="dtPeriod" value="<%= bc.getDtPeriod() %>">일</div>
-						<div class="text3">즐겨하는 데이트 :<input class="dateinput" name="fvDate" value="<%= bc.getFvDate() %>"></div>
-					</div>
-				</div>
-				
-				<div class="parag2">
-					<div class="contn2">
-						<div class="text4box">
-							<textarea class="text4" name="content" readonly><%= b.getContent() %></textarea>
+						
+						<div class="parag2">
+							<div class="contn2">
+								<div class="text4box">
+									<textarea class="text4" name="content" readonly><%= b.getContent() %></textarea>
+								</div>
+							</div>
+							<div class="img2">
+								<img class="detailPt" id="detailPt" src="<%= request.getContextPath()%>/photo_uploadFiles/<%= pList.get(1).getChangeName() %>">
+								<input type="hidden" value="<%= pList.get(1).getChangeName() %>" name="detailPt">
+								<input type="hidden" value="<%= pList.get(1).getPhotoNo() %>" name="detailPhotoId1">
+								<%-- <input type="hidden" value="<%= pList.get(1).getOriginName() %>" name="originName1"> --%>
+							</div>
 						</div>
 					</div>
-					<div class="img2">
-						<img class="detailPt" id="detailPt" src="<%= request.getContextPath()%>/photo_uploadFiles/<%= pList.get(1).getChangeName() %>">
-						<input type="hidden" value="<%= pList.get(1).getChangeName() %>" name="detailPt">
-						<input type="hidden" value="<%= pList.get(1).getPhotoNo() %>" name="detailPhotoId1">
-						<%-- <input type="hidden" value="<%= pList.get(1).getOriginName() %>" name="originName1"> --%>
+					
+					<div class="btnBox">
+						<% if(loginUser != null && loginUser.getGrade() == 0) { %>
+							<button type="submit" id="updateBtn">수정</button>
+							<button type="submit" id="deleteBtn" onclick="deletePt();">삭제</button>
+						<% } %>
 					</div>
-				</div>
+				</form>
 			</div>
-			
-			<div class="btnBox">
-				<% if(loginUser != null && loginUser.getGrade() == 0) { %>
-					<button type="submit" id="updateBtn">수정</button>
-					<button type="submit" id="deleteBtn" onclick="deletePt();">삭제</button>
-				<% } %>
-			</div>
-		</form>
+		</div>
 		
 		<script>
 		function deletePt(){
@@ -269,5 +291,13 @@
 		}
 		</script>
 	</section>
+<!-- 	<footer>
+		<div class="footer">
+		대표이사  박소현 |  사업자 111-11-111111  | TEL 02)0202-0202 <br> 
+		본사 ) 서울특별시 연애하구 사랑동 행복로 잘되길 12-3<br>
+		E-MAIL love_manager@ieadream.com <br>
+		Copyright © 1998-2019 Couple Matching Service All Right Reserved
+		</div>
+	</footer> -->
 </body>
 </html>
