@@ -22,10 +22,10 @@
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/common.css">
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/board.css">
 <style>
-	.outer{
+	/* .outer{
 		width: 800px; height: 500px; background: rgba(255, 255, 255, 0.4); border: 5px solid white;
 		margin-left: auto; margin-right: auto; margin-top: 50px;
-	}
+	} */
 	#listArea{text-align: center;}
 	.tableArea{width:650px;	height:350px; margin-left:auto;	margin-right:auto;}
 	th{border-bottom: 1px solid grey;}
@@ -42,61 +42,66 @@
 		text-align: center;
 		border:none;
 	}
+	.clear-both{
+		height: 10px;
+	}
 </style>
 </head>
 <body>
 	<%@ include file="../../common/mainmenu.jsp" %>
 	<div class="outer">
 		<div class="wrapper">
-			<%-- <nav>
-				<%@ include file="../../common/questionPageLeftmenu.jsp" %>
-			</nav> --%>
+			
 			<div class="main">
 				<div class="pageTitle">
 					<h2>1:1 문의게시판</h2>
 				</div>
-				<div class="tableArea">
-				
-					<table id="listArea">
-						<tr>
-							<th width="70px">번호</th>
-							<th width="100px">카테고리</th>
-							<th width="270px">제목</th>
-							<th width="140px">답변 여부</th>
-							<th width="170px">문의 날짜</th>
-						</tr>
-						<% if(list.isEmpty()){ %>
-						<tr>
-							<td colspan="5">조회된 문의사항이 없습니다.</td>
-						</tr>
-						<% } else{%>
-							<%for(int i=0; i<list.size(); i++){%>
-							<%	if(loginUser.getGrade()==0 || loginUser.getUserNo()== list.get(i).getUserNo()){%>
+				<div class="contents">
+					<div class="tableArea">
+						<table class="mainBoard" id="listArea">
+							<thead>
+								<tr>
+									<th width="70px">번호</th>
+									<th width="100px">카테고리</th>
+									<th width="270px">제목</th>
+									<th width="140px">답변 여부</th>
+									<th width="170px">문의 날짜</th>
+								</tr>
+							</thead>
+							<tbody>
+								<% if(list.isEmpty()){ %>
+									<tr>
+										<td colspan="5">조회된 문의사항이 없습니다.</td>
+									</tr>
+								<% } else{%>
+									<%for(int i=0; i<list.size(); i++){%>
+									<%	if(loginUser.getGrade()==0 || loginUser.getUserNo()== list.get(i).getUserNo()){%>
+									
+									<tr>
+										<td><%= list.get(i).getPostNo() %><input type = "hidden" value='<%= list.get(i).getPostNo() %>'></td>
+										<td><%= list.get(i).getCategory() %></td>
+										<td><%= list.get(i).getTitle() %></td>
+									<%}%>
+									  
+										<% if(reply.get(i).getAnswerChecked().equals("N")){%>
+											<td>미답변</td>
+										<% } else{  %>
+											<td>답변 완료</td>
+										<%}%>
+											
 							
-							<tr>
-								<td><%= list.get(i).getPostNo() %><input type = "hidden" value='<%= list.get(i).getPostNo() %>'></td>
-								<td><%= list.get(i).getCategory() %></td>
-								<td><%= list.get(i).getTitle() %></td>
-							<%}%>
-							  
-								<% if(reply.get(i).getAnswerChecked().equals("N")){%>
-									<td>미답변</td>
-								<% } else{  %>
-									<td>답변 완료</td>
+										<td><%= list.get(i).getCreateDate() %></td>
+									</tr>
+							
+									<%}%>
 								<%}%>
-									
-					
-							<td><%= list.get(i).getCreateDate() %></td>
-						</tr>
-					
-							<%}%>
-						<%}%>
-									
+							</tbody>
 					
 					
 					</table>
 				</div>
-				
+			</div>	
+				<div class="clear-both"></div>
 				<!-- 페이징 -->
 				<div class='pagingArea' align='center'>
 						<% if(!list.isEmpty()){ %>

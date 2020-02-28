@@ -11,7 +11,8 @@
 <head>
 <meta charset="UTF-8">
 <title>문의게시판</title>
-
+<link rel="stylesheet" href="<%= request.getContextPath() %>/css/common.css">
+<link rel="stylesheet" href="<%= request.getContextPath() %>/css/board.css">
 <style>
 
 	.outer{
@@ -20,11 +21,6 @@
 	}
 	#listArea{text-align: center;}
 	.tableArea{width:650px;	height:350px; margin-left:auto;	margin-right:auto;}
-	th{border-bottom: 1px solid grey;}
-	.pagingArea button{border-radius: 15px; background: #D5D5D5;}
-	.searchArea{margin-right: 50px;}
-	.searchArea button{background: #D1B2FF; border-radius: 5px; color: white; width: 80px; heigth: 25px; text-align: center;}
-	button:hover{cursor: pointer;}
 	th, td, thead{
 		    border: 1px solid gray;
    	 border-radius: 10px;
@@ -37,8 +33,8 @@
 	}
 	textarea{
 		margin: 0;
-    padding: 0;
-    border: none;
+    	padding: 0;
+   		border: none;
 	}
 	#manager{
 		background: rgb(123, 164, 213);
@@ -51,6 +47,8 @@
 		font-size: 15px;
 		text-align: center;
 		border:none;
+		width:100%;
+		height: 100%;
 	}
 	#deleteBtn ,#menuBtn{
 		border-radius: 10px;
@@ -61,7 +59,7 @@
 		text-align: center;
 		border:none;
 	}
-
+	
 </style>
 </head>
 <body>
@@ -107,7 +105,7 @@
 						<div id="replyArea">
 							<table id="replyTable">
 								<tr>
-									<th id="manager" rowspan ="1" colspan="2">관리자</th>
+									<th id="manager" colspan="2">관리자</th>
 										<% if(r.getAnswerContent() == null) { %>
 										<td id="Mcommand" rowspan = "3" colspan="4" align= center>
 											<textarea id="insertReply"style="resize:none; width: 300px; height: 40%;" placeholder="답변을 남겨주세요."></textarea>
