@@ -10,12 +10,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>회원아이디 정보 출력!!</title>
+<title>회원비밀번호 정보 출력!!</title>
 </head>
 <body>
 
     <p class="txt"><Strong class="black">
-								회원님의 아이디는 <%=account.getId() %> 입니다.</Strong></p>
+								회원님의 아이디는 <%=account.password() %> 입니다.</Strong></p>
 								<!-- userId가져오는것  -->
 					
 </body>

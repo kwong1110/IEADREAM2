@@ -20,23 +20,22 @@
 .loginBtn{
 	width: 300px;
 }
-.loginTitle{
+
+.logintitle{
+
 	text-align: center;
-	margin: 20px;
+
 }
-button {
-	margin: 4px;
-}
+
+
+
 </style>
 </head>
 <body>
 	<%@ include file="../common/mainmenu.jsp"%>
-	<div class ="outer">
-		<div class="wrapper">
-	    	<div class="main">
-	    		<div class="loginTitle">
-	     			<h2>로그인</h2>
-	     		</div>
+		<div class="logintitle" >
+	    <h2 style= "margin-top:120px">로그인</h2>
+	    </div>	
 	            <form id="loginForm" action="<%= request.getContextPath() %>/login.me" onsubmit="return validate();" method="post">
 		            <div class="loginBox">
 		            	<div>
@@ -47,11 +46,17 @@ button {
 		                <label>비밀번호</label>
 		                <input type="password" class="inputBox" name="userPwd" id="userPwd2" placeholder="Password" >
 		                </div>
+		                
+		                <br>
+		                
 		            </div>
-		            <div class="btnBox">		            
+		            <div class="btnBox">
+		           		            
 			            <div>
 			            <button type="submit" class="defaultBtn loginBtn">로그인</button> 
 			            </div>
+			            
+			            <br>
 			            
 			             <!-- 아이디 찾기 눌렀을때 searchidForm 으로 넘어 가기... -->
 			            <button type ="button" class="defaultBtn" onclick="location.href='<%= request.getContextPath() %>/views/account/searchIdForm.jsp'">아이디 찾기</button>

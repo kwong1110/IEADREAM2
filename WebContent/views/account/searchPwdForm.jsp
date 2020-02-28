@@ -61,7 +61,6 @@
 
 
 	</div>
-	
 	<div class = "textbox">
 		<br><br>
   		<h3>▶아이디</h3><input style="text-align: center;"  type="text" class="inputBox" name="findid" id="findid" placeholder="아이디를 입력해주세요" >	
@@ -71,7 +70,7 @@
 		<br><br>
 			
 			<div class="button">
-			<button type="submit" class="defaultBtn findid" id="btnfindid" onclick="location.href='<%= request.getContextPath() %>/Findeid.do'">임시비밀번호 발급</button>
+			<button type="submit" class="defaultBtn findid" id="btnfindid" onclick="location.href='<%= request.getContextPath() %>/Findpwd.me'">임시비밀번호 발급</button>
 			</div>
 	<script>
 	$(window).load(function(){
