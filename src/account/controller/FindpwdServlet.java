@@ -53,7 +53,9 @@ public class FindpwdServlet extends HttpServlet {
 		request.getRequestDispatcher(page).forward(request, response);
 		
 	}
-			
+		
+
+	
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
