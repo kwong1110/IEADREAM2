@@ -18,9 +18,42 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/common.css">
+<link rel="styleSheet" href="<%= request.getContextPath() %>/css/board.css">
 <style>
-		.pagingArea button{border-radius: 15px; background: #D5D5D5;}
+	.outer{
+      width: 1000px; height: 100%; background: white;
+      margin-left: auto; margin-right: auto; margin-top: 50px; margin-bottom: 50px;
+   }
+	.main{width: 80%; height: 100%;}
+	.pageTitle{margin: 1em auto;}
+	/* .tableArea{margin: auto; padding: auto;} */
+	.listAtrea{width: 800px;}
+	.tableArea tr { width: -webkit-fill-available;}
+	.tableArea th {/* 게시판제목라인 */
+		padding:12px 0;
+		border-top:1px solid rgb(136, 136, 136); /* 상단라인색 */
+		border-bottom:1px solid rgb(224, 224, 224); /* 하단라인색 */
+		background:#f9f9f9;  /* 제목배경색 */ 
+		color:rgb(230, 141, 150); font-size:1em;/* 제목글자크기 */ 
+		letter-spacing:0.1em}/* 제목띠어쓰기간격 */ 
+	.tableArea td {line-height: 10px;}
+		
+	.post_title {width:100px;text-align:center}
+	.td_cate {width:20%;text-align:center;}
+	.post_no {width:10%;text-align:center}
 	
+	.btnBox {width: 100%; text-align: center; border-top:1px solid rgb(224, 224, 224);}
+	#searchCon {width: 300px; font-size: 15px; padding: 10px; margin: 10px; border: none;
+				border-bottom: 1px solid rgb(224, 224, 224);}
+	#writeFaqBtn {align: right;}
+	
+	*:focus { outline:none; }
+	input:focus {outline:none;} /* 검색창 누를 때 나오는 초록색 테두리 없애기 */
+	
+	.pagingArea{text-decoratino: none; padding: 30px 0;}
+	.pagingArea button{background: none; border: 3px solid white; font-weight: bold; margin: 1em auto;
+					  position: relative; cursor: pointer;
+  text-transform: uppercase;}
 </style>
 </head>
 <body>
@@ -34,7 +67,7 @@
 					<h1>FAQ 관리</h1>
 				</div>
 				<div class="tableArea">
-					<table id="listArea">
+					<table id="listArea" style=" width: -webkit-fill-available;">
 						<%
 							if (list.isEmpty()) {
 						%>
@@ -42,17 +75,18 @@
 						<%
 							} else {
 						%>
-							<th>글번호</th>
-							<th width="100px">카테고리</th>
-							<th width="300px">글제목</th>
+						<tr>
+							<th class="post_no">글번호</th>
+							<th class="td_cate">카테고리</th>
+							<th class="post_title">글제목</th>
 						</tr>
 						<%
 								for (Board board : list) {
 						%>
 									<tr>
-										<td><%= board.getPostNo() %></td>
-										<td><%= board.getCategory() %></td>
-										<td><%= board.getTitle() %></td>
+										<td class="post_no"><%= board.getPostNo() %></td>
+										<td class="td_cate"><%= board.getCategory() %></td>
+										<td class="post_title"><%= board.getTitle() %></td>
 									</tr>
 						<%
 								}
@@ -61,15 +95,17 @@
 					</table>
 					
 					<div class="btnBox">
-						<button id="searchBtn" onclick="search();">검색</button><input name="searchCon" id="searchCon" type="text" width="30">
-						<button onclick="location.href='views/questionBoard/faq/faqInsertForm.jsp'" id="writeFaqBtn">글쓰기</button>
+						<button  class="defaultBtn" id="searchBtn" onclick="search();">검색</button><input name="searchCon" id="searchCon" type="text" width="30">
+						<button  class="defaultBtn" onclick="location.href='views/questionBoard/faq/faqInsertForm.jsp'" id="writeFaqBtn">글쓰기</button>
 					</div>
 					
 					<!-- 일반 페이징 -->
 				 		<div class="pagingArea" align="center">
 							<%if(!list.isEmpty()) { %>
+								<!-- 맨 처음으로 가는 버튼 -->
+								<button onclick="location.href='<%= request.getContextPath() %>/adminList.faq?currentPage=1'">&lt;&lt;</button>
 								<!-- 이전 페이지 -->
-								<button onclick="location.href='<%= request.getContextPath() %>/adminList.faq?currentPage=<%= currentPage-1 %>'" id="beforeBtn">&lt;</button>
+								<button onclick="location.href='<%= request.getContextPath() %>/adminList.faq?currentPage=<%= currentPage-1 %>'" id="beforeBtn">prev</button>
 								<script>
 									if(<%= currentPage %> <= 1) {
 										var before = $('#beforeBtn');
@@ -78,8 +114,8 @@
 								</script>
 								
 								<!-- 10개 페이지 목록 -->
-								<% for(int p = startPage; p <= endPage; p++) { 
-										if(p == currentPage) { %>
+								<% for(int p = startPage; p <= endPage; p++) {  %>
+									<%	if(p == currentPage) { %>
 											<button id="choosen" disabled><%= p %></button>
 								<%		} else { %>
 											<button id="numBtn" onclick="location.href='<%= request.getContextPath() %>/adminList.faq?currentPage=<%= p %>'"><%= p %></button>
@@ -87,14 +123,18 @@
 								<% } %>
 							
 								<!-- 다음 페이지 -->
-								<button onclick="location.href='<%= request.getContextPath() %>/adminList.faq?currentPage=<%= currentPage+1 %>'" id="nextBtn">&gt;</button>
+								<button onclick="location.href='<%= request.getContextPath() %>/adminList.faq?currentPage=<%= currentPage+1 %>'" id="nextBtn">next</button>
 								<script>
 									if(<%= currentPage %> >= <%= maxPage %>) {
 										var next = $('#nextBtn');
 										next.attr('disabled', 'true');
 									}
 								</script>
-							<% } %>
+								<!-- 맨 끝으로 가는 버튼 -->
+								<button onclick="location.href='<%= request.getContextPath() %>/adminList.faq?currentPage=<%= maxPage %>'">&gt;&gt;</button>					
+								<% } %>
+					
+							
 						</div>
 				</div>
 			</div>
