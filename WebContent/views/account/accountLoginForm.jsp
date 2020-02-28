@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/common.css">
 <style>
 .inputBox{
-	width: 200px;
+	width: 300px;
 	height: 25px;
 	border-radius: 10px;
 	margin: 4px;
