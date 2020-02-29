@@ -18,6 +18,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/common.css">
+<link rel="stylesheet" href="<%= request.getContextPath() %>/css/board.css">
 <style>
 	*{box-sizing: border-box;}
 	.content{width: 100%; height: 100%;}    
@@ -133,4 +134,5 @@
 
 	</div>
 </body>
+<%@ include file="../../common/footer.jsp" %>
 </html>

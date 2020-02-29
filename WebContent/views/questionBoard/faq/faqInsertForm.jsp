@@ -26,11 +26,28 @@
 		letter-spacing:0.1em}/* 제목띠어쓰기간격 */ 
 	.tableArea td {line-height: 10px;}
 		
-	#th_title {width:10px; text-align:center; }
-	#th_title_input {width:100px;text-align:center;}
-	#th_cate {width:30px;text-align:center}
-	#th_cate_select{width: 30px; text-align: center;}
+	#th_title {width:10%; text-align:rigth;}
+	#th_title_input {width:50%;text-align:left;}
+	#th_cate {width:20%;text-align: center;}
+	#th_cate_select{width: 20%;}
 	
+	.select {
+			width: 80px;
+			padding: .8em .5em;
+			border: 1px solid rgb(136, 136, 136);
+			border-radius: 0;
+			background: url('<%= request.getContextPath() %>/images/arrow.jpg') no-repeat 95% 50%;
+			background-color: white;
+			-webkit-appearance: none;
+			}
+	#title {
+		padding: .8em .5em;
+		border: 1px solid rgb(136, 136, 136);
+	}
+	#con {
+		font-size: 15px;
+		width: 100%
+	}
 	
 	
 	*:focus { outline:none; }
@@ -53,21 +70,23 @@
 							<tr>
 								<th id="th_title">제목</th>
 								<th id="th_title_input">
-									<input type="text" size="80%" name="title" placeholder="제목을 넣어주세요">
+									<input type="text" size="80%" name="title" id="title" placeholder="제목을 넣어주세요">
 								</th>
 								<th id="th_cate">카테고리</th>
 								<th id="th_cate_select">
+									<div class="cateCss" style="width: 20px;">
 										<select class="select" name="category">
 											<option value="결제">결제</option>
 											<option value="서비스">서비스</option>
 											<option value="회원/등급">회원/등급</option>
 											<option value="기타">기타</option>
 										</select>
+									</div>
 								</th>
 							</tr>
 							<tr>
 								<td colspan="4">
-									<textarea name="con" cols="150" rows="15"style="resize:none;" placeholder="내용을 입력해주세요"></textarea>
+									<textarea id="con" name="con" rows="20" cols="100%" style="resize:none;" placeholder="내용을 입력해주세요"></textarea>
 								</td>
 							</tr>
 						</table>
@@ -84,4 +103,5 @@
 
 
 </body>
+<%@ include file="../../common/footer.jsp" %>
 </html>
