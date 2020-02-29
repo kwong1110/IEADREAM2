@@ -8,29 +8,34 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <title>이어드림_회원가입_Step1</title>
 <style>
+	
+	.outer{
+      width: 1000px; height: 850px; background: white;
+      margin-left: auto; margin-right: auto; margin-top: 50px; margin-bottom: 50px;
+   }
+	
 	.pageTitle{
-		padding: 10px 0 10px 30px;
-		margin: 60px 0 40px 0;
+		padding: 60px 0 10px 40px;
+		margin: 10px 0 50px 0;
 	}
 	
 	.joinForm{
-		width: 60%;
-		height: 550px;
-		border: 8px solid white;
+		width: 80%;
+		height: 600px;
+		margin: 0 auto; 
+		margin-bottom: 30px;
+		border: 8px solid pink;
 		box-shadow: 3px 3px 3px 3px gray;
-		background: rgba(255, 255, 255, 0.4);
-		margin-left: 23px;
-		margin-bottom: 60px;
 	}
 	
 	.table{
-		margin-top: 5%;
+		margin-top: 8%;
 		margin-left: 25%;
 		font-family: "만화진흥원체";
 	}
 	
 	.table td {
-		padding-bottom: 4%;
+		padding-bottom: 5%;
 	}
 	
 	.btnBox{
@@ -39,24 +44,22 @@
 	}
 	
 	.defaultBtn{
-	    /* width: 60px;
-	    height: 26px; */
 	    padding: 6px 9px 6px 9px;
-	    background-color: rgb(123, 164, 213);
+	    background: /* rgb(123, 164, 213) */ pink;
 	    color: white;
-	    border: none;
+	    border-radius: 10px;
+	    font-weight: bold;
+	    font-size: 15px;
+	    font-family: "만화진흥원체";
+	    cursor: pointer;
 	    text-align: center;
 	    display: inline-block;
-	    font-size: 15px;
-	    cursor: pointer;
-	    border-radius: 10px;
-	    font-family: "만화진흥원체";
 	    text-shadow: 0 1px 1px rgba(0,0,0,.3);
 		box-shadow: 0 1px 2px rgba(0,0,0,.2);
 	}
 	
 	.defaultBtn:hover{
-		background: rgb(140, 190, 250);
+		background: lightpink;
 		color: white;
 	}
 	

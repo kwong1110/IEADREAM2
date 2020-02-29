@@ -18,21 +18,23 @@
 <style>
 
 	.outer{
-      width: 1000px; height: 680px; background: /* rgba(255, 255, 255, 0.4) */ white; border: 5px solid white;
+      width: 1000px; height: 850px; background: white;
       margin-left: auto; margin-right: auto; margin-top: 50px; margin-bottom: 50px;
    }
    
-	.title{
-		padding: 10px 0 10px 30px;
-		margin: 60px 0 40px 0;
+	.pageTitle{
+		padding: 60px 0 10px 40px;
+		margin: 10px 0 50px 0;
 	}
 	
-	.main{
-		width: 70%;
+	.contents{
+		width: 90%;
 		height: 600px;
-		border: 8px solid pink;
-		margin-left: 23px;
-		margin-bottom: 20px;
+		margin: 0 auto; 
+		margin-bottom: 30px;
+		background: pink;
+		border: 8px solid white;
+		box-shadow: 3px 3px 3px 3px gray;
 	}
 	
 	.parag1{
@@ -53,7 +55,7 @@
 		box-shadow: 1px 1px 25px #ccc;
 	}
 	
-	.img1:hover .titlePhoto{ transition:0.2s ease-out; transform: rotate(360deg) translateX(0px) translateY(0px); }
+	.img1:hover .titlePt{ transition:0.2s ease-out; transform: rotate(360deg) translateX(0px) translateY(0px); }
 	.img1 > img{
 		width: 100%;
 		height: 280px;
@@ -187,13 +189,13 @@
 		box-shadow: 1px 1px 25px #ccc;
 	}
 	
-	.img2:hover .detailPhoto{ transition:0.2s ease-out; transform: rotate(360deg) translateX(0px) translateY(0px); }
+	.img2:hover .detailPt{ transition:0.2s ease-out; transform: rotate(360deg) translateX(0px) translateY(0px); }
 	.img2 > img{
 		width: 100%;
 		height: 280px;
 	}
 	
-		button{
+	button{
 		padding: 6px 9px 6px 9px;
 		background: pink;
 		color: white;
@@ -202,7 +204,6 @@
 		font-size: 15px;
 		font-family: "만화진흥원체";
 	    cursor: pointer;
-		margin-bottom: 30px;
 		text-align: center;
 	    display: inline-block;
 		text-shadow: 0 1px 1px rgba(0,0,0,.3);
@@ -210,7 +211,8 @@
 	}
 	
 	.btnBox{
-		margin-left: 33%;
+		margin-left: 45%;
+		display: inline-block;
 	}
 	
 	.footer{
@@ -232,50 +234,52 @@
 	<section>
 		<div class="outer">
 			<div class="wrapper">
-				<h1 class="title">이달의 베스트 커플</h1>
-				<form action="<%= request.getContextPath() %>/views/coupleStory/bestCouple/bestCoupleUpdateForm.jsp" id="detailForm" method="post">
-					<div class="main">
-						<div class="parag1">
-							<input type="hidden" name="pNo" value="<%= b.getPostNo() %>">
-							<input type="hidden" name="title" value="<%= b.getTitle() %>">
-							<div class="img1">
-								<img class="titlePt" id="titlePt" src="<%= request.getContextPath() %>/photo_uploadFiles/<%= titlePt.getChangeName() %>">
-								<input type="hidden" value="<%= titlePt.getChangeName() %>" name="titlePt">
-								<input type="hidden" value="<%= titlePt.getPhotoNo() %>" name="detailPhotoId0">
-								<%-- <input type="hidden" value="<%= titlePt.getOriginName() %>" name="originName0"> --%>
-							</div>
-							<div class="contn1">
-								<div class="text1">
-									<input class="nameinput" id="nameinput1" name="mName" value="<%= bc.getmName() %>"><div class="heart">&#9829;</div>
-									<input class="nameinput" id="nameinput2" name="fName" value="<%= bc.getfName() %>">
+				<div class="main">
+					<h1 class="pageTitle">이달의 베스트 커플</h1>
+					<form action="<%= request.getContextPath() %>/views/coupleStory/bestCouple/bestCoupleUpdateForm.jsp" id="detailForm" method="post">
+						<div class="contents">
+							<div class="parag1">
+								<input type="hidden" name="pNo" value="<%= b.getPostNo() %>">
+								<input type="hidden" name="title" value="<%= b.getTitle() %>">
+								<div class="img1">
+									<img class="titlePt" id="titlePt" src="<%= request.getContextPath() %>/photo_uploadFiles/<%= titlePt.getChangeName() %>">
+									<input type="hidden" value="<%= titlePt.getChangeName() %>" name="titlePt">
+									<input type="hidden" value="<%= titlePt.getPhotoNo() %>" name="detailPhotoId0">
+									<%-- <input type="hidden" value="<%= titlePt.getOriginName() %>" name="originName0"> --%>
 								</div>
-								<div class="text2">연애기간 :<input class="perinput" name="dtPeriod" value="<%= bc.getDtPeriod() %>">일</div>
-								<div class="text3">즐겨하는 데이트 :<input class="dateinput" name="fvDate" value="<%= bc.getFvDate() %>"></div>
+								<div class="contn1">
+									<div class="text1">
+										<input class="nameinput" id="nameinput1" name="mName" value="<%= bc.getmName() %>"><div class="heart">&#9829;</div>
+										<input class="nameinput" id="nameinput2" name="fName" value="<%= bc.getfName() %>">
+									</div>
+									<div class="text2">연애기간 :<input class="perinput" name="dtPeriod" value="<%= bc.getDtPeriod() %>">일</div>
+									<div class="text3">즐겨하는 데이트 :<input class="dateinput" name="fvDate" value="<%= bc.getFvDate() %>"></div>
+								</div>
+							</div>
+							
+							<div class="parag2">
+								<div class="contn2">
+									<div class="text4box">
+										<textarea class="text4" name="content" readonly><%= b.getContent() %></textarea>
+									</div>
+								</div>
+								<div class="img2">
+									<img class="detailPt" id="detailPt" src="<%= request.getContextPath()%>/photo_uploadFiles/<%= pList.get(1).getChangeName() %>">
+									<input type="hidden" value="<%= pList.get(1).getChangeName() %>" name="detailPt">
+									<input type="hidden" value="<%= pList.get(1).getPhotoNo() %>" name="detailPhotoId1">
+									<%-- <input type="hidden" value="<%= pList.get(1).getOriginName() %>" name="originName1"> --%>
+								</div>
 							</div>
 						</div>
 						
-						<div class="parag2">
-							<div class="contn2">
-								<div class="text4box">
-									<textarea class="text4" name="content" readonly><%= b.getContent() %></textarea>
-								</div>
-							</div>
-							<div class="img2">
-								<img class="detailPt" id="detailPt" src="<%= request.getContextPath()%>/photo_uploadFiles/<%= pList.get(1).getChangeName() %>">
-								<input type="hidden" value="<%= pList.get(1).getChangeName() %>" name="detailPt">
-								<input type="hidden" value="<%= pList.get(1).getPhotoNo() %>" name="detailPhotoId1">
-								<%-- <input type="hidden" value="<%= pList.get(1).getOriginName() %>" name="originName1"> --%>
-							</div>
+						<div class="btnBox">
+							<% if(loginUser != null && loginUser.getGrade() == 0) { %>
+								<button type="submit" id="updateBtn">수정</button>
+								<button type="submit" id="deleteBtn" onclick="deletePt();">삭제</button>
+							<% } %>
 						</div>
-					</div>
-					
-					<div class="btnBox">
-						<% if(loginUser != null && loginUser.getGrade() == 0) { %>
-							<button type="submit" id="updateBtn">수정</button>
-							<button type="submit" id="deleteBtn" onclick="deletePt();">삭제</button>
-						<% } %>
-					</div>
-				</form>
+					</form>
+				</div>
 			</div>
 		</div>
 		

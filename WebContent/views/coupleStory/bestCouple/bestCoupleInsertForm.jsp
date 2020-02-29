@@ -8,18 +8,25 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <title>이어드림_베스트커플_글작성</title>
 <style>
-	.title{
-		padding: 10px 0 10px 30px;
-		margin: 60px 0 40px 0;
+
+	.outer{
+      width: 1000px; height: 850px; background: white;
+      margin-left: auto; margin-right: auto; margin-top: 50px; margin-bottom: 50px;
+   }
+   
+	.pageTitle{
+		padding: 60px 0 10px 40px;
+		margin: 10px 0 50px 0;
 	}
 	
-	.main{
-		width: 70%;
+	.contents{
+		width: 90%;
 		height: 600px;
 		border: 8px solid pink;
+		box-shadow: 3px 3px 3px 3px gray;
 		background: white;
-		margin-left: 23px;
-		margin-bottom: 20px;
+		margin: 0 auto; 
+		margin-bottom: 30px;
 		font-family: "만화진흥원체";
 	}
 	
@@ -91,7 +98,8 @@
 	}
 	
 	.btnBox{
-		margin-left: 33%;
+		margin-left: 45%;
+		display: inline-block;
 	}
 	
 </style>
@@ -101,51 +109,53 @@
 	<section>
 		<div class="outer">
 			<div class="wrapper">
-				<h1 class="title">이달의 베스트 커플</h1>
-				<form action="<%= request.getContextPath() %>/insert.bc" method="post" encType="multipart/form-data">
-					<div class="main">
-						<div class="subj">
-							<div id="subjtitle">제목</div>
-							<input type="text" name="title" id="subjbox" required>
-						</div>
-						
-						<div class="contn1">
-							<div class="contn1box">
-								<div class="label">
-									<label>남자 이름 : </label>
+				<div class="main">
+					<h1 class="pageTitle">이달의 베스트 커플</h1>
+					<form action="<%= request.getContextPath() %>/insert.bc" method="post" encType="multipart/form-data">
+						<div class="contents">
+							<div class="subj">
+								<div id="subjtitle">제목</div>
+								<input type="text" name="title" id="subjbox" required>
+							</div>
+							
+							<div class="contn1">
+								<div class="contn1box">
+									<div class="label">
+										<label>남자 이름 : </label>
+									</div>
+									<input type="text" name="mName" class="bx" required><br>
+									
+									<div class="label">
+										<label>여자 이름 : </label>
+									</div>
+									<input type="text" name="fName" class="bx" required><br>
+									
+									<div class="label">
+										<label>연애 기간 : </label>
+									</div>
+									<input type="number" name="dtPeriod" min="1" value="1" class="bx" required>&nbsp;일<br>
+									
+									<div class="label">
+										<label>즐겨하는 데이트 : </label>
+									</div>
+									<input type="text" name="fvDate" maxlength="12" placeholder="12자이내로 입력하세요." required>
 								</div>
-								<input type="text" name="mName" class="bx" required><br>
-								
-								<div class="label">
-									<label>여자 이름 : </label>
-								</div>
-								<input type="text" name="fName" class="bx" required><br>
-								
-								<div class="label">
-									<label>연애 기간 : </label>
-								</div>
-								<input type="number" name="dtPeriod" min="1" value="1" class="bx" required>&nbsp;일<br>
-								
-								<div class="label">
-									<label>즐겨하는 데이트 : </label>
-								</div>
-								<input type="text" name="fvDate" maxlength="12" placeholder="12자이내로 입력하세요." required>
+							</div>
+							
+							<textarea class="contn2" name="content" placeholder="내용을 자유롭게 입력해주세요." required></textarea>
+							
+							<div class="file">
+								<input type="file" name="photo1" multiple="multiple" id="file1" required><br>
+								<input type="file" name="photo2" multiple="multiple" required>
 							</div>
 						</div>
 						
-						<textarea class="contn2" name="content" placeholder="내용을 자유롭게 입력해주세요." required></textarea>
-						
-						<div class="file">
-							<input type="file" name="photo1" multiple="multiple" id="file1" required><br>
-							<input type="file" name="photo2" multiple="multiple" required>
-						</div>
-					</div>
-					
-					<div class="btnBox">
-						<button type="submit" class="submit">등록</button>
-						<button type="reset" onclick="location.href='<%= request.getContextPath() %>/list.bc'">취소</button>
-					</div>	
-				</form>
+						<div class="btnBox">
+							<button type="submit" class="submit">등록</button>
+							<button type="reset" onclick="location.href='<%= request.getContextPath() %>/list.bc'">취소</button>
+						</div>	
+					</form>
+				</div>
 			</div>
 		</div>
 	</section>
