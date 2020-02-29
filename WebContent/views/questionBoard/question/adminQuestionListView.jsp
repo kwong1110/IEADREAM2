@@ -36,6 +36,9 @@
 	.clear-both{
 		height: 20px;
 	}
+	.mainBoard>thead>tr>th {
+		background-color: rgb(177,232,237)
+	}
 
 </style>
 </head>
