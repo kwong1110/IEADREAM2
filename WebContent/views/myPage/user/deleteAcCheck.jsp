@@ -6,6 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="<%= request.getContextPath() %>/css/common.css">
+<link rel="stylesheet" href="<%= request.getContextPath() %>/css/board.css">
 </head>
 <body>
 	<%@ include file="../../common/mainmenu.jsp" %>
@@ -47,4 +49,5 @@
 		} --%>
 	</script>
 </body>
+<%@ include file="../../common/footer.jsp" %>
 </html>

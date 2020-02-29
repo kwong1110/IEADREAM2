@@ -31,6 +31,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="<%= request.getContextPath() %>/css/common.css">
+<link rel="stylesheet" href="<%= request.getContextPath() %>/css/board.css">
 </head>
 <body>
 	<%@ include file="../../common/mainmenu.jsp" %>
@@ -76,9 +78,9 @@
 									<td><input type="text" class="profile" name="birth" readonly value="<%= birth %>"></td>
 								</tr>
 						</table>
-						<div style="text-align: center;">
-								<input id="updateBtn" type="submit" value="수정"> <!-- action으로 연결 -->
-								<div id="deleteAcBtn" onclick="goToDelete();">탈퇴</div>
+						<div class="btnBox">
+								<button class="defaultBtn" type="submit" id="updateBtn">수정</button> <!-- action으로 연결 -->
+								<button class="defaultBtn" type="button" id="deleteAcBtn" onclick="goToDelete();">탈퇴</button>
 								
 								<!-- 탈퇴 확인을 위한 페이지 -->
 						</div>
