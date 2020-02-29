@@ -14,7 +14,9 @@ import java.util.Properties;
 
 import account.model.dao.UserInfoDAO;
 import account.model.vo.UserInfo;
+import board.model.vo.Board;
 import idealType.model.vo.Match;
+import idealType.model.vo.Stat;
 
 public class MatchDAO {
 	
@@ -103,5 +105,107 @@ public class MatchDAO {
 		return result;
 	}
 
-
+	public Stat[] getUiProp(Connection conn, String item, String gender) {
+		PreparedStatement pstmt = null; 
+		ResultSet rs = null;
+		String query = prop.getProperty("getUiCount");
+		//SELECT ?, COUNT AS PROP FROM USER_INFO JOIN ACCOUNT USING (USER_NO) GROUP BY ? ORDER BY PROP DESC WHERE GENDER = ?;
+		
+		ArrayList<Stat> list = new ArrayList<Stat>();
+		try {
+			  pstmt = conn.prepareStatement(query);
+			  pstmt.setString(1, item);
+			  pstmt.setString(2, item);
+			  pstmt.setString(3, gender);
+			  rs = pstmt.executeQuery();
+			  int total = rs.getInt("TOTAL");
+			  
+			  while(rs.next()) {
+				  Stat stat = new Stat();
+				  stat.setItem(rs.getString(item));
+				  stat.setProp(rs.getInt("PROP")/total);
+				  list.add(stat);
+			  }
+			  
+		  } catch (SQLException e) { 
+			  e.printStackTrace(); 
+		  } finally {
+			close(rs);
+			close(pstmt);
+		  }
+		Stat[] result = new Stat[list.size()];
+		int size=0;
+		for(Stat temp : list){
+				result[size++] = temp;
+	  	}
+		return result;	
+	}
+	public Stat[] getUpProp(Connection conn, String item, String gender) {
+		PreparedStatement pstmt = null; 
+		ResultSet rs = null;
+		String query = prop.getProperty("getUpCount");
+		
+		ArrayList<Stat> list = new ArrayList<Stat>();
+		try {
+			  pstmt = conn.prepareStatement(query);
+			  pstmt.setString(1, item);
+			  pstmt.setString(2, item);
+			  pstmt.setString(3, gender);
+			  rs = pstmt.executeQuery();
+			  int total = rs.getInt("TOTAL");
+			  
+			  while(rs.next()) {
+				  Stat stat = new Stat();
+				  stat.setItem(rs.getString(item));
+				  stat.setProp(rs.getInt("PROP")/total);
+				  list.add(stat);
+			  }
+			  
+		  } catch (SQLException e) { 
+			  e.printStackTrace(); 
+		  } finally {
+			close(rs);
+			close(pstmt);
+		  }
+		Stat[] result = new Stat[list.size()];
+		int size=0;
+		for(Stat temp : list){
+				result[size++] = temp;
+	  	}
+		return result;	
+	}
+	public Stat[] getInterestProp(Connection conn, String gender) {
+		PreparedStatement pstmt = null; 
+		ResultSet rs = null;
+		String query = prop.getProperty("getInterestCount");
+		
+		ArrayList<Stat> list = new ArrayList<Stat>();
+		try {
+			  pstmt = conn.prepareStatement(query);
+			  pstmt.setString(1, gender);
+			  rs = pstmt.executeQuery();
+			  int total = rs.getInt("TOTAL");
+			  
+			  while(rs.next()) {
+				  Stat stat = new Stat();
+				  stat.setItem(rs.getString("INTEREST"));
+				  stat.setProp(rs.getInt("PROP")/total);
+				  list.add(stat);
+			  }
+			  
+		  } catch (SQLException e) { 
+			  e.printStackTrace(); 
+		  } finally {
+			close(rs);
+			close(pstmt);
+		  }
+		Stat[] result = new Stat[list.size()];
+		int size=0;
+		for(Stat temp : list){
+				result[size++] = temp;
+	  	}
+		return result;	
+	}
+	
+	
 }

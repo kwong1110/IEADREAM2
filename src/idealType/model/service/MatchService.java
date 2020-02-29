@@ -16,6 +16,7 @@ import account.model.vo.UserInfo;
 import account.model.vo.UserPrefer;
 import idealType.model.dao.MatchDAO;
 import idealType.model.vo.Match;
+import idealType.model.vo.Stat;
 
 
 public class MatchService {
@@ -152,7 +153,4 @@ public class MatchService {
 		return syncPoint/maxPoint;
 	}
 	
-	public int get
-	
-
 }
