@@ -48,7 +48,8 @@ public class deleteProfileServlet extends HttpServlet {
 		
 		String page = null;
 		if(result > 0) {
-			page = "views/common/successPage.jsp";
+			session.invalidate(); /* 로그아웃 */
+			page = "views/myPage/user/completeAcDelete.jsp";
 			request.setAttribute("msg", "탈퇴가 완료되었습니다.");
 		} else {
 			page = "views/common/errorPage.jsp";
