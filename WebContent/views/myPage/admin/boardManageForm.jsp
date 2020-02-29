@@ -25,7 +25,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>게시글 관리</title>
+<title>이어드림 - 게시글 관리</title>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/common.css">
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/board.css">
 <script type="text/javascript" src="<%= request.getContextPath() %>/js/SelectAll.js"></script>
@@ -201,6 +201,7 @@
 		</div>
 	</div>
 </body>
+<%@ include file="../../common/footer.jsp"%>
 	<script>
 		$(function(){
 			$('.boardManage').addClass('on')

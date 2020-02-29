@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>하트 히스토리 - 데이트 추천</title>
+<title>이어드림 - 하트 히스토리(데이트 추천)</title>
 <link rel="stylesheet" href="../../../css/board.css">
 </head>
 <body>

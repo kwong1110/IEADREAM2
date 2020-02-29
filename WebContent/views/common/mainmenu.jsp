@@ -20,8 +20,7 @@
 		font-family: 'LotteMartHappy'; font-style: normal;
 	}
 	* {margin: 0; padding: 0; }
-	body{background:url('<%= request.getContextPath() %>/images/bgbg.jpg') no-repeat center center fixed;
-		background-size: cover;}
+	body{background:white;}
 	
 	.header {
 	height: 100%;
@@ -43,11 +42,12 @@
 	}
 	.topMenu:after {content: ""; display: block; clear: both; }
 	.menu01>li {float: left; width: 12%; vertical-align: middle;}
-	.menu01 span {font-size: 20px; font-weight: bold; vertical-align: middle; padding: 10px}
+	.menu01 span {font-size: 20px; font-weight: bold; vertical-align: middle; padding: 20px}
 	
 	.dept01 {display: none; padding: 20px 0;}
 	            
-	#nop {float: none;}
+	#nop {float: none; margin-top: 15px;}
+	#nop>a{color:black;}
 	            
 	.none:after {content: ""; display: block; clear: both; }
 
@@ -57,7 +57,12 @@
 	#redDot{width:15px; height:15px; border-radius:100%;}
 	.imageBox child{margin:0;}
 	
-	.s-menu{margin-top:1%;}
+	.s-menu{
+		margin-top:1%;
+		border-bottom: 2px solid pink;
+		color: black;
+		padding: 10px 0px 10px 0px; ;
+	}
 </style>
 </head>
 <body>
@@ -161,7 +166,7 @@
 							<span id="MemberJoinBtn" onclick="memberJoin();" style="font-size: 10px; padding: 10px;">sign up</span>
 						</li>
 						<% } else { %>
-						<li style="width: 10%; height: 10%">
+						<li style="width: 10%; height: 10%" class="s-menu">
 							<ul>
 								<li style="margin: 5px;">
 									<span class="imageBox">
