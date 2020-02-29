@@ -66,7 +66,7 @@
 		width: 900px;
 		height: 470px;
 		border: 8px solid white;
-		background: rgba(255, 255, 255, 0.4);
+		background: pink;
 		box-shadow: 3px 3px 3px 3px gray;
 		margin: 0 4% 0 4%;
 		margin-bottom: 15px;
@@ -153,7 +153,7 @@
 	.uploadbtn{
 		width: 9%;
 		height: 28px;
-		margin: 0 50% 0 50%;
+		margin-left: 47%;
 		background: #e75a82;
 		color: white;
 		font-weight: border;
@@ -163,8 +163,8 @@
 		height: 10px;
 	}
 	
-	.sc-footer{text-decoration: none; padding: 30px 0;}
-	.sc-footer button{background: none; border: 3px solid white; font-weight: bold; margin: 1em auto;
+	.sc-footer{text-decoration: none; padding: 10px 0;}
+	.sc-footer button{background: none; border: /* 3px solid white */ none; font-weight: bold; margin: 1em auto;
 					  position: relative; cursor: pointer; text-transform: uppercase;}
 	button:hover{cursor: pointer;}
 	/* #numBtn{background: #B2CCFF;}
