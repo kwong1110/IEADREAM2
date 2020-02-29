@@ -20,32 +20,28 @@
 		selected[3] = "selected";
 		break;
 	} 
-	/*
-	int category = Integer.parseInt(request.getParameter("category"));
-	String[] selected = new String[5];
-	for(int i =0; i<selected.length; i++){
-		if(category == (i+1)){
-			selected[i] = "selected";
-		}else{
-			selected[i] = "";
-		}
-	}
-	*/
+
 %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>문의게시판 수정</title>
-<link rel="stylesheet" type="text/css" href="../css/board.css" />
+<link rel="stylesheet" href="<%= request.getContextPath() %>/css/common.css">
+<link rel="stylesheet" href="<%= request.getContextPath() %>/css/board.css">
 <style>
+
+	.outer{
+		width: 1000px; height: 500px; background: white;
+		margin-left: auto; margin-right: auto; margin-top: 50px;
+	}
 	textarea, #title, #category{
 		border-radius: 10px;
 		font-size:15px;
 		font-family:"ON I고딕";
 	}
 	textarea{margin-top:10px;}
-	#insertBtn{
+	/* #insertBtn{
 		border-radius: 10px;
 		background:  rgb(123, 164, 213);
 		padding: 10px;
@@ -61,7 +57,7 @@
 		color: white;
 		font-size: 15px;
 		text-align: center;
-	}
+	} */
 </style>
 </head>
 <body>
@@ -99,8 +95,8 @@
 					</table>
 					<br>
 					<div align="center">
-						<button type="submit" id="insertBtn">등록하기</button>
-						<input type="button" id="cancelBtn" onclick="location.href='<%= request.getContextPath() %>/list.qu'" value="취소">
+						<button type="submit" class="defaultBtn">등록하기</button>
+						<input type="button"  class="defaultBtn" id="cancelBtn" onclick="location.href='<%= request.getContextPath() %>/list.qu?userNo='+<%= loginUser.getUserNo() %>" value="취소">
 					</div>
 					</form>
 				</div>

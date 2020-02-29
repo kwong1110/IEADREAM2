@@ -1,6 +1,7 @@
 @charset "UTF-8";
 /*
-	공통 CSS
+		공통 CSS 
+	-색상 참고.
 	듀오핑크 rgb(230, 141, 150);
 	듀오블루 rgb(123, 164, 213);
 	
@@ -8,70 +9,51 @@
 	회색 rgb(136, 136, 136);
 	진회색 rgb(51, 51, 51);
 */
-@font-face { font-family: 'LotteMartHappy'; font-style: normal; font-weight: 400; src: url('//cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartHappy/LotteMartHappyMedium.woff2') format('woff2'), url('//cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartHappy/LotteMartHappyMedium.woff') format('woff'); } @font-face { font-family: 'LotteMartHappy'; font-style: normal; font-weight: 700; src: url('//cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartHappy/LotteMartHappyBold.woff2') format('woff2'), url('//cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartHappy/LotteMartHappyBold.woff') format('woff'); } .lottemarthappy * { font-family: 'LotteMartHappy', sans-serif; }
 
+/* 메인 폰트 : 롯데마트 행복드림체 */
+@font-face {
+	font-family: 'LotteMartHappy'; 
+	font-style: normal; 
+	font-weight: 700; 
+	src: url('//cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartHappy/LotteMartHappyBold.woff2') format('woff2'), url('//cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartHappy/LotteMartHappyBold.woff') format('woff'); 
+} 
+.lottemarthappy * { 
+	font-family: 'LotteMartHappy', sans-serif
+}
 html{
-	font-family: 'LotteMartHappy'; font-style: normal;
+	font-family: 'LotteMartHappy'; 
+	font-style: normal
 }
 
-/* 내용 부분 */
+	/* 내용(body상단) 부분 */
 .outer{
-	margin-top : 1.6px;
+	width: 1000px; 
+	height: 680px;
+    margin: 50px auto 50px auto;
+    		/* 위       우      아래       좌     */
+	background: white
 }
-
-.nav{
-  	justify-content: center;
-  	align-items: center;
-	background: rgb(252, 240, 241);
-	float: left;
-	margin: 25px;
-}
-
-.nav ul{
-	list-style-type: none;
-}
-
-.on{
-	background: orange;
-}
-
-.leftMenuTitle{
-	font-size: 18px;
-	font-weight: bold;
-	margin: 45px;
-}
-
-.leftMenu{
-	font-size: 16px;
-	margin: 30px;
-}
-
 .wrapper{
 	display: flex;
-  	justify-content: center;
   	align-items: center;
-  	background: white;
+  	justify-content: center;
+  	background: white
 }	
-
 .pageTitle{
-	padding: 20px 0px 10px 0px; 
-		  /* 위       우      아래       좌     */
+	padding: 20px 0 10px 0 
 }
-
 .information{
-	padding: 10px 0px 10px 0px;
+	padding: 10px 0 10px 0;
 	font-size: 14px;
-	text-align: left;
+	text-align: left
 }
-
-.contents, .btnBox, .pagination{
-  	padding: 10px 0px 10px 0px;
+.contents,.btnBox{
+  	padding: 10px 0 10px 0;
 	font-size: 14px;	
-	text-align: center;
+	text-align: center
 }
-
 ul {
-	list-style-type: none;
+	list-style-type: none
 }
 
 	/* 버튼 관리 */
@@ -83,47 +65,88 @@ ul {
 		btnS : sub 버튼 (내용 안쪽에 들어가는 버튼)
 		
 	*/
+	
 	/* 게시판 내용 안에 들어가는 버튼*/
 .defaultBtn{
-	font-size: 15px;
-	color: white;
-	background: #fdb5be;
+	padding: 6px 9px 6px 9px;
 	border: 0;
 	border-radius: 10px;
-	padding: 6px 9px 6px 9px;
+	background: rgb(253, 181, 190);
+	color: white;
+	font-size: 15px
 }
 
 .defaultBtn:hover{
-	background: #f2aab2;
+	background: rgb(242, 170, 178)
 }
 
 .searchBtn{
-	padding: 4px;
+	padding: 4px
 }
+
 	/* 최하단 버튼 위치 관리 */
 	/* '버튼 박스'에 넣어 줄것. */
 .btnL{
-	text-align: left;
+	text-align: left
 }
 .btnR{
-	text-align: right;
+	text-align: right
 }
 .btnC{
-	text-align: center;
-}
-.btnS{
-	
+	text-align: center
 }
 
 	/* 페이지네이션 */
-.pagination > li{
-	display: inline-block;
-	padding: 4px;
-	font-size: 14px;
-	vertical-align: middle;
+	/* 페이지네이션 박스 클래스명 .pagingArea 로 바꾸기 */
+.pagingArea{
+	padding: 30px 0;
+	text-decoration: none
+}
+.pagingArea button{
+	position: relative; 
+	margin: 1em auto;
+	border: 3px solid white; 
+	background: none; 
+	font-weight: bold; 
+	text-transform: uppercase;
+	cursor: pointer
+}
+.footer{
+	display: flex;
+	align-items: center;
+  	justify-content: center;
+	clear: both;
+	position: relative;
+	border: none;
+	width: 104%; 
+	height: 80px;
+	padding: 10px 0; 
+	margin-top: 150px;
+	background-color: gray;
+	color: white;
+	font-size: small;
+	line-height: 22px;
+	text-align: left;
+	left:0;
+	bottom: 0;
+ }
+.footer .logo{
+	display: block;
+	float: left;
+	width: 100px;
+	height: 50px;
+	font-size: 12px;
+	background-size: contain; 
+	background-image: url('../images/common/logo.png');
+	background-repeat: no-repeat;
+}
+.footerBox{
+	margin: 0;
+	padding: 0;
 }
 
-.pagination > a:hover {
-	background-color: #e6e6e6;
-    border-radius: 4px;
+ 	/* 기타 */
+ 	/* focus시 테두리 없애기*/
+*:focus{ 
+	outline:none; 
 }

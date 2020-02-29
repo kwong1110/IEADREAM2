@@ -11,20 +11,15 @@
 <head>
 <meta charset="UTF-8">
 <title>문의게시판</title>
-
+<link rel="stylesheet" href="<%= request.getContextPath() %>/css/common.css">
 <style>
 
 	.outer{
-		width: 800px; height: 500px; background: rgba(255, 255, 255, 0.4); border: 5px solid white;
+		width: 1000px; height: 500px; background: rgba(255, 255, 255, 0.4); border: 5px solid white;
 		margin-left: auto; margin-right: auto; margin-top: 50px;
 	}
 	#listArea{text-align: center;}
 	.tableArea{width:650px;	height:350px; margin-left:auto;	margin-right:auto;}
-	th{border-bottom: 1px solid grey;}
-	.pagingArea button{border-radius: 15px; background: #D5D5D5;}
-	.searchArea{margin-right: 50px;}
-	.searchArea button{background: #D1B2FF; border-radius: 5px; color: white; width: 80px; heigth: 25px; text-align: center;}
-	button:hover{cursor: pointer;}
 	th, td, thead{
 		    border: 1px solid gray;
    	 border-radius: 10px;
@@ -37,13 +32,13 @@
 	}
 	textarea{
 		margin: 0;
-    padding: 0;
-    border: none;
+    	padding: 0;
+   		border: none;
 	}
 	#manager{
 		background: rgb(123, 164, 213);
 	}
-	#updateBtn, #insertBtn{
+	/* #updateBtn, #insertBtn{
 		border-radius: 10px;
 		background:  rgb(123, 164, 213);
 		padding: 10px;
@@ -51,6 +46,8 @@
 		font-size: 15px;
 		text-align: center;
 		border:none;
+		width:100%;
+		height: 100%;
 	}
 	#deleteBtn ,#menuBtn{
 		border-radius: 10px;
@@ -60,8 +57,8 @@
 		font-size: 15px;
 		text-align: center;
 		border:none;
-	}
-
+	} */
+	
 </style>
 </head>
 <body>
@@ -107,7 +104,7 @@
 						<div id="replyArea">
 							<table id="replyTable">
 								<tr>
-									<th id="manager" rowspan ="1" colspan="2">관리자</th>
+									<th id="manager" colspan="2">관리자</th>
 										<% if(r.getAnswerContent() == null) { %>
 										<td id="Mcommand" rowspan = "3" colspan="4" align= center>
 											<textarea id="insertReply"style="resize:none; width: 300px; height: 40%;" placeholder="답변을 남겨주세요."></textarea>
@@ -118,12 +115,12 @@
 										<% } %>
 										
 										</td>
-									<td><input type="button" id="insertBtn" class="addReply" value="등록"></td>
-									<td><input type="button" id="updateBtn" class="updateReply" value="수정"></td>
-									<td><input type="button" onclick="deleteReply();" id="deleteBtn" value="삭제"></td>
+									<td><input type="button" id="addReply" class="defaultBtn" value="등록"></td>
+									<td><input type="button" id="updateBtn" class="defaultBtn" value="수정"></td>
+									<td><input type="button" onclick="deleteReply();" id="deleteBtn" class="defaultBtn" value="삭제"></td>
 								</tr>
 							</table>
-							<input type="button" onclick="location.href='<%= request.getContextPath() %>/Mlist.qu?'" id="menuBtn" value="메뉴로" >
+							<input type="button" onclick="location.href='<%= request.getContextPath() %>/Mlist.qu?'" class="defaultBtn" id="menuBtn" value="메뉴로" >
 						</div>
 					</form>
 				 </div>
@@ -171,7 +168,7 @@
 			   });
 			
 			
-		   $('.addReply').click(function(){
+		   $('#addReply').click(function(){
 			var postNo = <%= b.getPostNo() %>;
 			var answerContent = $('#insertReply').val();
 			$.ajax({

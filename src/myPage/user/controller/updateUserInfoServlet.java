@@ -10,8 +10,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.oreilly.servlet.MultipartRequest;
+
+import account.model.service.UserService;
 import account.model.vo.Account;
 import account.model.vo.UserInfo;
+import account.model.vo.UserPhoto;
+import common.MyFileRenamePolicy;
 import myPage.user.model.service.userProfileService;
 
 /**
@@ -36,18 +41,58 @@ public class updateUserInfoServlet extends HttpServlet {
 		// 디테일이 아니고 바로 정보를 불러와 수정해야하기 때문에 servlet에서 view 페이지로 넘어감
 		HttpSession session = request.getSession();
 		
-		int userNo = ((Account)session.getAttribute("loginUser")).getUserNo();
+		int maxSize = 1024 * 1024 * 10;
+		String root = request.getSession().getServletContext().getRealPath("/");
+		String savePath = root + "photo_uploadFiles/";
+		MultipartRequest mrequest = new MultipartRequest(request, savePath, maxSize, "UTF-8", new MyFileRenamePolicy());
+		String originName = mrequest.getFilesystemName("profileImg");
+		String changeName = mrequest.getOriginalFileName("profileImg");
 		
-		UserInfo ui = new userProfileService().updateUserInfo(userNo);
+		int userNo = ((Account)request.getSession().getAttribute("loginUser")).getUserNo();
+		String hello = mrequest.getParameter("hello");
+		int height = Integer.parseInt(mrequest.getParameter("height"));
+		String shape = mrequest.getParameter("shape");
+		String style = mrequest.getParameter("style");
+		int region = Integer.parseInt(mrequest.getParameter("region"));
+		String religion = mrequest.getParameter("religion");
+		int scholar = Integer.parseInt(mrequest.getParameter("scholar"));
+		String job = mrequest.getParameter("job");
+		int drink = Integer.parseInt(mrequest.getParameter("drink"));
+		int smoke = Integer.parseInt(mrequest.getParameter("smoke"));
+		String[] interest = mrequest.getParameterValues("interest");
+
+		UserPhoto p = new UserPhoto();
+		p.setUserNo(userNo);
+		p.setFilePath(savePath);
+		p.setOriginName(originName);
+		p.setChangeName(changeName);
+		
+		UserInfo ui = new UserInfo();
+		ui.setUserNo(userNo);
+		ui.setHello(hello);
+		ui.setHeight(height);
+		ui.setShape(shape);
+		ui.setStyle(style);
+		ui.setRegion(region);
+		ui.setReligion(religion);
+		ui.setScholar(scholar);
+		ui.setJob(job);
+		ui.setDrink(drink);
+		ui.setSmoke(smoke);
+		ui.setInterest(interest);
+
+		UserService UserService = new UserService();
+		int result1 = UserService.insertPhoto(p);
+		int result2 = UserService.updateUserInfo(ui);
 		
 		String page = null;
-		if(ui != null) {
+		if(result1 > 0 && result2 > 0) {
 			page = "views/myPage/user/updateMyProfile.jsp";
-			request.setAttribute("ui", ui);
 		} else {
 			page = "views/common/errorPage.jsp";
-			request.setAttribute("msg", "내 프로필 조회에 실패했습니다.");
+			request.setAttribute("msg", "정보 수정에 실패하였습니다.");
 		}
+		
 		RequestDispatcher view = request.getRequestDispatcher(page);
 		view.forward(request, response);
 	}

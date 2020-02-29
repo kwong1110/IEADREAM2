@@ -1,5 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="account.model.vo.Account"%>
+    
+ <%
+	Account account = (Account)request.getAttribute("account");
+%>
+ 
+ 
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,9 +14,10 @@
 <title>아이디 찾기후 값 출력</title>
 </head>
 <body>
-	<p class="txt"><Strong class="black">고객님의 아이디는 <%=account.getUserid() %></Strong>
-
-			
+	
+    <p class="txt"><Strong class="black">
+								회원님의 아이디는 <%=account.getId() %> 입니다.</Strong></p>
+								<!-- userId가져오는것  -->
 
 </body>
 </html>

@@ -4,7 +4,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>1:1문의글 작성</title>
+<link rel="stylesheet" href="<%= request.getContextPath() %>/css/common.css">
 <style>
 
 	textarea, #title, #category{
@@ -13,24 +14,10 @@
 		font-family:"ON I고딕";
 	}
 	textarea{margin-top:10px;}
-	#insertBtn{
-		border-radius: 10px;
-		background:  rgb(123, 164, 213);
-		padding: 10px;
-		color: white;
-		font-size: 15px;
-		text-align: center;
-		border:none;
+	.outer{
+		width:1000px; height: 500px; background: rgba(255, 255, 255, 0.4); border: 5px solid white;
+		margin-left: auto; margin-right: auto; margin-top: 50px;
 	}
-	#cancelBtn{
-		border-radius: 10px;
-		background:rgb(230, 141, 150);
-		padding: 10px;
-		color: white;
-		font-size: 15px;
-		text-align: center;
-	}
-	
 </style>
 </head>
 <body>
@@ -59,14 +46,14 @@
 						</tr>
 						<tr>
 							<td colspan="4">
-								<textarea rows="15" cols="60" name="content" style="resize:none; width: 100%;" ></textarea>
+								<textarea rows="15" cols="60" name="content" style="resize:none; width: 100%;" placeholder="문의글을 작성해주세요." ></textarea>
 							</td>
 						</tr>
 					</table>
 					<br>
 					<div align="center">
-						<button type="submit" id="insertBtn">등록하기</button>
-						<input type="button" id="cancelBtn" onclick="location.href='<%= request.getContextPath() %>/list.qu?userNo=<%= loginUser.getUserNo() %>'" value="취소">
+						<button type="submit" class="defaultBtn" id="insertBtn">등록하기</button>
+						<input type="button"  class="defaultBtn" id="cancelBtn" onclick="location.href='<%= request.getContextPath() %>/list.qu?userNo=<%= loginUser.getUserNo() %>'" value="취소">
 					</div>
 					</form>
 				</div>	
