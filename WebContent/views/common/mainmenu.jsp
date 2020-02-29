@@ -147,7 +147,7 @@
 										<a href="<%=request.getContextPath()%>/manage.mem">회원 관리</a>
 									</li>
 									<li id="nop">
-										<a href="<%=request.getContextPath()%>/views/myPage/admin/boardManageForm.jsp">게시물 관리</a>
+										<a href="<%=request.getContextPath()%>/manage.bo">게시물 관리</a>
 									</li>
 									<li id="nop">
 										<a href="<%=request.getContextPath()%>/views/myPage/admin/partyManageForm.jsp">파티 관리</a>
@@ -215,7 +215,7 @@
 		});
 		
 		function goIndex(){
-			location.href="<%= request.getContextPath()%>/views/common/mainmenu.jsp";
+			location.href="<%= request.getContextPath()%>/index.jsp";
 		}
 		
 		function question(){
