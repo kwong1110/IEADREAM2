@@ -26,7 +26,8 @@
    }
 	.main{width: 80%; height: 100%;}
 	.pageTitle{margin: 1em auto;}
-	/* .tableArea{margin: auto; padding: auto;} */
+
+/* .tableArea{margin: auto; padding: auto;} */
 	.listAtrea{width: 800px;}
 	.tableArea tr { width: -webkit-fill-available;}
 	.tableArea th {/* 게시판제목라인 */
@@ -40,12 +41,13 @@
 		
 	.post_title {width:100px;text-align:center}
 	.td_cate {width:20%;text-align:center;}
-	.post_no {width:10%;text-align:center}
+	.post_no {width: 20%; text-align: center;}
 	
-	.btnBox {width: 100%; text-align: center; border-top:1px solid rgb(224, 224, 224);}
 	#searchCon {width: 300px; font-size: 15px; padding: 10px; margin: 10px; border: none;
 				border-bottom: 1px solid rgb(224, 224, 224);}
 	#writeFaqBtn {align: right;}
+	
+	.btnBox{border-top: 1px solid rgb(224, 224, 224);}
 	
 	*:focus { outline:none; }
 	input:focus {outline:none;} /* 검색창 누를 때 나오는 초록색 테두리 없애기 */
@@ -161,4 +163,5 @@
 		}
 	</script>
 </body>
+<%@ include file="../../common/footer.jsp" %>
 </html>
