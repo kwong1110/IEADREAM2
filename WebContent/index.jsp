@@ -6,6 +6,7 @@
 <meta charset="UTF-8">
 <title>이어드림</title>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/reset.css" />
+<link rel="stylesheet" href="<%= request.getContextPath() %>/css/common.css">
 <style>
 	.bigBox{
 		text-align: center;
@@ -94,5 +95,6 @@
 			</div>
 		</div>
 	</div>
+<%@ include file="views/common/footer.jsp"%>
 </body>
 </html>
