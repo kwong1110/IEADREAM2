@@ -30,23 +30,14 @@
 <style>
 
 	.outer{
-      width: 1000px; height: 1000px; background: white;
-      margin-left: auto; margin-right: auto; margin-top: 50px; margin-bottom: 50px;
-   }
-	
-	.pageTitle{
-		padding: 60px 0 10px 40px;
-		margin: 10px 0 50px 0;
+		height: 830px;
 	}
 	
 	.contents{
-		width: 90%;
-		height: 750px;
+		text-align: left;
+		width: 900px;
 		border: 8px solid pink;
 		box-shadow: 3px 3px 3px 3px gray;
-		background: white;
-		margin: 0 auto; 
-		margin-bottom: 30px;
 	}
 	
 	.subj{
@@ -100,26 +91,6 @@
 		margin-bottom: 1%;
 	}
 	
-	button{
-		padding: 6px 9px 6px 9px;
-		background: pink;
-		color: white;
-		border-radius: 10px;
-		font-weight: bold;
-		font-size: 15px;
-	    cursor: pointer;
-		margin-bottom: 30px;
-		text-align: center;
-	    display: inline-block;
-		text-shadow: 0 1px 1px rgba(0,0,0,.3);
-		box-shadow: 0 1px 2px rgba(0,0,0,.2);
-	}
-	
-	.btnBox{
-		margin-left: 45%;
-		display: inline-block;
-	}
-	
 	#titlePtArea {
 		width:370px; 
 		height:200px;
@@ -154,6 +125,9 @@
 		height: 200px;
 	}
 	
+	/* .footer{
+		margin-top: 130px;
+	} */
 </style>
 </head>
 <body>
@@ -274,8 +248,8 @@
 						</div>
 						
 						<div class="btnBox">
-							<button type="button" id="updateBtn">완료</button>
-							<button type="reset" onclick="location.href='<%= request.getContextPath() %>/list.bc'">취소</button>
+							<button type="button" class="defaultBtn" id="updateBtn">완료</button>
+							<button type="reset" class="defaultBtn" onclick="location.href='<%= request.getContextPath() %>/list.bc'">취소</button>
 						</div>	
 					</form>
 				</div>	

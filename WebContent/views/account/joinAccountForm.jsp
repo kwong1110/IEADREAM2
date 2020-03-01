@@ -9,21 +9,9 @@
 <title>이어드림 - 회원가입</title>
 <style>
 	
-	.outer{
-      width: 1000px; height: 850px; background: white;
-      margin-left: auto; margin-right: auto; margin-top: 50px; margin-bottom: 50px;
-   }
-	
-	.pageTitle{
-		padding: 60px 0 10px 40px;
-		margin: 10px 0 50px 0;
-	}
-	
-	.joinForm{
-		width: 80%;
-		height: 600px;
-		margin: 0 auto; 
-		margin-bottom: 30px;
+	.contents{
+		text-align: left;
+		width: 800px;
 		border: 8px solid pink;
 		box-shadow: 3px 3px 3px 3px gray;
 	}
@@ -35,30 +23,6 @@
 	
 	.table td {
 		padding-bottom: 5%;
-	}
-	
-	.btnBox{
-		margin-left: 42%;
-		padding: 4% 0;
-	}
-	
-	.defaultBtn{
-	    padding: 6px 9px 6px 9px;
-	    background: /* rgb(123, 164, 213) */ pink;
-	    color: white;
-	    border-radius: 10px;
-	    font-weight: bold;
-	    font-size: 15px;
-	    cursor: pointer;
-	    text-align: center;
-	    display: inline-block;
-	    text-shadow: 0 1px 1px rgba(0,0,0,.3);
-		box-shadow: 0 1px 2px rgba(0,0,0,.2);
-	}
-	
-	.defaultBtn:hover{
-		background: lightpink;
-		color: white;
 	}
 	
 	#dubtn{
@@ -81,6 +45,15 @@
 		margin-left: 20%;
 	}
 	
+	.btnBox{
+		margin-left: 630px;
+		padding: 5% 0 1% 0;
+	}
+	
+	.cancel{
+		background: lightgray;
+	}
+	
 </style>
 </head>
 <body>
@@ -90,7 +63,7 @@
 			<div class="wrapper">
 				<div class="main">
 					<div class="pageTitle"><h1>회원가입</h1></div>
-					<form action="<%= request.getContextPath() %>/insert.ac" method="post" class="joinForm" name="joinForm" onsubmit="return validate();">
+					<form action="<%= request.getContextPath() %>/insert.ac" method="post" class="contents" name="joinForm" onsubmit="return validate();">
 						<div class="table">
 							<table>
 								<tr>
@@ -136,8 +109,8 @@
 						</div>
 						
 						<div class="btnBox">
-							<button type="submit" id="joinBtn" class="defaultBtn btnC" value="1단계완료">다음단계</button>
-							<button type="reset" id="goMain" class="defaultBtn btnC" onclick="goMain();">취소</button>
+							<button type="submit" id="joinBtn" class="defaultBtn" value="1단계완료">다음단계</button>
+							<button type="reset" id="goMain" class="defaultBtn cancel" onclick="goMain();">취소</button>
 						</div>
 					</form>
 				</div>	
