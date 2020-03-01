@@ -56,7 +56,7 @@ public class MatchService {
 		return result;
 	}
 	
-	public Match[] findMatch(int userNo) {
+	public Match[] searchMatchList(int userNo) {
 		double minSync = 0.5;
 		int maxMatch = 5;
 		
@@ -85,7 +85,7 @@ public class MatchService {
 		Match[] result = new Match[maxMatch];
 		
 		int j = 0;
-		for (int i=0 ; i<5 || j < mlist.length; i++) { 
+		for (int i=0 ; i< maxMatch || j < mlist.length; i++) { 
 			for (; result[i] != null ; j++) {
 				if (checkMatch(mlist[j]) && (mlist[i].getRsync() > minSync)) { // 중복 검사, 상대의 싱크율 검사 후 리턴
 					result[i] = mlist[j];}
