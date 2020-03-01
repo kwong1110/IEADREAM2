@@ -18,10 +18,6 @@
 <style>
 
 	.contents{
-		/* width: 90%;
-		height: 600px;
-		margin: 0 auto; 
-		margin-bottom: 30px; */
 		border: 8px solid pink;
 		box-shadow: 3px 3px 3px 3px gray;
 	}
@@ -89,9 +85,13 @@
 	}
 	
 	.heart{
-		font-size: 25px;
 		display: inline-block;
-		margin: 0 1% 0 2%;
+		margin: 5px 3px 0 3px ;
+	}
+	
+	.heartImg{
+		width: 22px;
+		height: 22px;
 	}
 	
 	.text2{
@@ -191,7 +191,7 @@
 		<div class="outer">
 			<div class="wrapper">
 				<div class="main">
-					<h1 class="pageTitle">이달의 베스트 커플</h1>
+					<h1 class="pageTitle" >이달의 베스트 커플</h1>
 					<form action="<%= request.getContextPath() %>/views/coupleStory/bestCouple/bestCoupleUpdateForm.jsp" id="detailForm" method="post">
 						<div class="contents">
 							<div class="parag1">
@@ -205,7 +205,8 @@
 								</div>
 								<div class="contn1">
 									<div class="text1">
-										<input class="nameinput" id="nameinput1" name="mName" value="<%= bc.getmName() %>"><div class="heart">&#9829;</div>
+										<input class="nameinput" id="nameinput1" name="mName" value="<%= bc.getmName() %>">
+										<div class="heart"><img src="<%=request.getContextPath()%>/images/heart.png" class="heartImg"></div>
 										<input class="nameinput" id="nameinput2" name="fName" value="<%= bc.getfName() %>">
 									</div>
 									<div class="text2">연애기간 :<input class="perinput" name="dtPeriod" value="<%= bc.getDtPeriod() %>">일</div>
