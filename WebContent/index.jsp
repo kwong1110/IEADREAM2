@@ -11,23 +11,31 @@
 		text-align: center;
 		margin: 20px 150px 20px 150px;
 	}
-	
 	.indexBox:nth-of-type(1){
 		background: salmon;
 	}
-	
 	.indexBox:nth-of-type(2){
 		background: lightyellow;
 	}
-	
 	.indexBox:nth-of-type(3){
 		background: skyblue;
 	}
+	.indexBox:nth-of-type(4){
+		background: powderblue;
+	}
+	.indexBox:nth-of-type(5){
+		background: powderblue;
+	}
+	.indexBox:nth-of-type(6){
+		background: powderblue;
+	}
+	
+	/* 초기 height: 250px */
 	.indexBox{
 		display: inline-block;
-		width: 300px;
-		height: 250px;
-		margin: 0px;
+		width: 350px;
+		height: 500px;
+		margin: 10px;
 	}
 	
 	.firstBox{
@@ -40,13 +48,13 @@
 	}
 	
 	.imageBar{
-		position: absolute;
-		top: 200px;
+		position: fixed;
+		top: 120px;
 		display:inline-block;
 		width: 100%;
 		height: 400px;
 		background: lightyellow;
-		opacity: 0.3;
+		opacity: 0.6;
 		z-index: -1;
 	}
 </style>
@@ -74,6 +82,15 @@
 			</div>
 			<div class="indexBox">
 				4번박스
+			</div>
+			<div class="indexBox">
+				5번박스 (띠가 고정되나 보려고 만든 박스들)
+			</div>
+			<div class="indexBox">
+				6번박스 (띠가 고정되나 보려고 만든 박스들)
+			</div>
+			<div class="indexBox">
+				7번박스 (띠가 고정되나 보려고 만든 박스들)
 			</div>
 		</div>
 	</div>
