@@ -22,7 +22,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>이어드림 - 1:1문의</title>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/common.css">
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/board.css">
 <style>
@@ -36,9 +36,17 @@
 	.clear-both{
 		height: 20px;
 	}
-	.mainBoard>thead>tr>th {
-		background-color: rgb(177,232,237)
-	}
+	
+	.main{width: 80%; height: 100%;}
+	.pageTitle{margin: 1em auto;}
+	.tableArea th {/* 게시판제목라인 */
+		padding:12px 0;
+		border-top:1px solid rgb(136, 136, 136); /* 상단라인색 */
+		border-bottom:1px solid rgb(224, 224, 224); /* 하단라인색 */
+		background:#f9f9f9;  /* 제목배경색 */ 
+		color:rgb(230, 141, 150); font-size:1em;/* 제목글자크기 */ 
+		letter-spacing:0.1em}/* 제목띠어쓰기간격 */ 
+	.tableArea td {line-height: 10px;}
 
 </style>
 </head>
@@ -55,8 +63,7 @@
 				</div>
 				<div class="tableArea">
 				<form>
-					<table class="mainBoard" id="listArea">
-						<thead>
+					<table  id="listArea" style=" width: -webkit-fill-available;">
 							<tr>
 								<th width="70px">번호</th>
 								<th width="100px">카테고리</th>
@@ -64,8 +71,6 @@
 								<th width="140px">답변 여부</th>
 								<th width="170px">문의 날짜</th>
 							</tr>
-						</thead>
-						<tbody>
 						<% if(list.isEmpty()){ %>
 						<tr>
 							<td colspan="5">조회된 문의사항이 없습니다.</td>
@@ -94,7 +99,6 @@
 					
 						<%}%>
 					<%}%>
-							</tbody>		
 					</table>
 					</form>
 				</div>

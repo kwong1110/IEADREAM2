@@ -15,28 +15,28 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>문의게시판</title>
+<title>이어드림 - 1:1문의</title>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/common.css">
 <style>
 	.outer{
-		width: 1000px; height: 500px; background: rgba(255, 255, 255, 0.4); border: 5px solid white;
+		width: 1000px; height: 600px; background: white;
 		margin-left: auto; margin-right: auto; margin-top: 50px;
 	}
 	.tableArea{width:670px;	height:350px;}
 	button:hover{cursor: pointer;}
 
 	th, td, thead{
-		    border: 1px solid gray;
-   	 		border-radius: 10px;
+   	 	border-radius: 5px;
 	}
 	textarea, #title, #category, #Mcommand{
-		border-radius: 10px;
+		border-radius: 5px;
 		font-size:15px;
 		font-family:"ON I고딕";
 	}
 	textarea{
 		margin: 0;
-    padding: 0;
+   		padding: 0;
+   		border: none;
 	}
 	#manager{
 		background: rgb(123, 164, 213);
@@ -55,9 +55,25 @@
 	}
 	table>thead{
 		margin-bottom: 20px;
+		background: #f9f9f9;
 	}
-	
-	
+	.qDetailTableArea{
+	border-top:1px solid rgb(136, 136, 136); 
+		background: #f9f9f9;
+	}
+	#content{
+		resize: none;
+    	width: 94%;
+   	 	height: 30%;
+   	 	margin: 20px;
+	}
+	.qDetailTableArea th {/* 게시판제목라인 */
+		padding:12px 0;
+		border-top:1px solid rgb(136, 136, 136); /* 상단라인색 */
+		border-bottom:1px solid rgb(224, 224, 224); /* 하단라인색 */
+		background:#f9f9f9;  /* 제목배경색 */ 
+		color:rgb(51, 51, 51); font-size:1em;/* 제목글자크기 */ 
+		letter-spacing:0.1em}/
 </style>
 </head>
 <body>
@@ -66,11 +82,12 @@
 		<div class="wrapper">
 			<div class="main">
 				<div class="pageTitle">
-					<h1>1:1 문의</h1>
+					<h2>1:1 문의</h2>
 				</div>
 				<div class="tableArea">
 					<form action="<%= request.getContextPath() %>/views/questionBoard/question/questionUpdateForm.jsp"  id="detailForm"  method="post">
-						<table>
+						<div class="allTableArea" style="background:#f9f9f9">
+						<table class="qDetailTableArea">
 							<thead>
 								<tr>
 									<th width=10%>제목</th>
@@ -89,25 +106,26 @@
 							<tbody>
 								<tr>
 									<td colspan="4">
-										<textarea rows="15" cols="60" name="content" style="resize:none; width: 100%; height: 30%;"  readonly ><%= b.getContent() %></textarea>
+										<textarea rows="15" cols="60" id="content" name="content"  readonly ><%= b.getContent() %></textarea>
 									</td>
 								</tr>
 							</tbody>
 						</table>
 					
-						<div id="replyArea">
+						<div id="replyArea" style="background: #f9f9f9;margin-left: 20px; margin-bottom: 10px;">
 							<table id="replyTable">
 								<tr>
-									<th id="manager" rowspan ="1" colspan="2" style="vertical-align: middle;">관리자</th>
+									<th id="manager" style="vertical-align: middle; margin-left:10px">관리자</th>
 									<td id="Mcommand" rowspan = "3" colspan="3"  align= center>
 										<% if(r.getAnswerContent() != null) { %>
-											<textarea name = "answerContent" style="resize:none; width: 300px; height: 40%;"><%= r.getAnswerContent() %></textarea>
+											<textarea name = "answerContent" style="resize:none; width: 500px; height: 40%;margin-left: 20px;"><%= r.getAnswerContent() %></textarea>
 										<% } else { %>
-										<textarea name = "answerContent" readonly style="resize:none; width: 300px; height: 40%; text-align: center">관리자가 아직 답변을 달지 않았습니다. </textarea>
+										<textarea name = "answerContent" readonly style="resize:none; width: 500px; height: 40%; text-align: center;margin-left: 20px;">관리자가 아직 답변을 달지 않았습니다. </textarea>
 										<% } %>
 									</td>
 								</tr>
 							</table>
+						</div>
 						</div>
 						<% if(loginUser.getGrade() != 0){ %> 
 						<div class="btnBox">
@@ -132,4 +150,5 @@
 		
 	</script>
 </body>
+<%@ include file="../../common/footer.jsp" %>
 </html>

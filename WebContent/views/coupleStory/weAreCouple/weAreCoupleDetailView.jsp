@@ -24,7 +24,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>이어드림 - 우리커플됐어요</title>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/common.css">
 <style>
 	.outer {
@@ -47,20 +47,29 @@
    	    margin: 30px;
     padding: 15px;
    }
+  
+   table>thead>tr>th {
+	  background:#f9f9f9;  
+    }
+     table>tbody>tr>th {
+     	background:#f9f9f9;  
+     }
    table>tbody>tr>td {
     padding: 5px;
-    vertical-align: baseline}
+    vertical-align: baseline;
+    }
    #title,.wac{
-   	border-radius: 10px;
+   	border-radius: 5px;
    	width:80%;
    	padding: 5px;
    	    border: 1px solid lightgray
    }
    .Rwac{
-   	border-radius: 10px;
+   	border-radius: 5px;
    	width:80%;
-   	height: 70px;
-	    border: 1px solid lightgray
+   	height: 100px;
+	    border: 1px solid lightgray;
+	    resize: none;
    }
 </style>
 </head>
@@ -71,7 +80,7 @@
 			<div class="main">
 				<form action="<%= request.getContextPath() %>/views/coupleStory/weAreCouple/weAreCoupleUpdateForm.jsp" id="detailForm" method="post">
 				<div class="pageTitle">
-					<h1>우리 커플 됐어요</h1>
+					<h2>우리 커플 됐어요</h2>
 				</div>
 				<div class="tableArea">
 					<div class="review">
@@ -80,10 +89,10 @@
 							<tr>
 								<th width="20px">작성자</th>
 								<td width="50px"><%= b.getUserId() %></td>
-								<th width="20px">조회수</th>
-								<td width="20px"><%= b.getHit() %></td>
-								<td width="20px">작성일</td>
-								<th ><%= b.getCreateDate() %></th> 
+								<th width="40px">조회수</th>
+								<td width="40px"><%= b.getHit() %></td>
+								<th width="60px">작성일</th>
+								<td ><%= b.getCreateDate() %></td> 
 							</tr>
 							</thead>
 							<tbody>
@@ -114,23 +123,19 @@
 								<td><input type="hidden" name="fvDate" value="<%= bc.getFvDate() %>"><input  class="wac" value="<%= bc.getFvDate()%>"name="fvDate" readonly></td>
 							</tr>
 							<tr>
-								<td colspan=4>이어드림의 서비스 중 가장 만족했던 서비스</td>
+								<td colspan=6>이어드림의 서비스 중 가장 만족했던 서비스</td>
 							</tr>
 							<tr>
 								<td colspan=6>
-									<input type="hidden" name = "content1" value="<%=content1 %>"><input class="Rwac" value="<%=content1 %>" readonly>
+									<input type="hidden" name = "content1" value="<%=content1 %>"><textarea class="Rwac" readonly><%=content1 %></textarea>
 								</td>
 							</tr>
 							<tr>
 								<td>후기</td>
 							</tr>
 							<tr>
-								<td colspan=6 width=100%>
-								<input type="hidden" name = "content2" value="<%=content2 %>"><input class="Rwac" value="<%=content2 %>" readonly>
-								</td>
-							</tr>
-							<tr>
-								<td >
+								<td colspan=6>
+								<input type="hidden" name = "content2" value="<%=content2 %>"><textarea class="Rwac"readonly><%=content2 %></textarea>
 								<input type="hidden" name = "con" value="<%=content1 %><%= content2 %>">
 								</td>
 							</tr>
@@ -140,12 +145,12 @@
 							</tr>
 							<%if(loginUser.getGrade() !=0){%>
 							<tr>
-									<td colspan="4">
+									<td colspan="3">
 									<img id="titleImg"  width="150" height="200" src="<%= request.getContextPath() %>/photo_uploadFiles/<%= titleImg.getChangeName() %>">
 										<input type="hidden" value="<%= titleImg.getChangeName() %>" name="titleImage">
 										<input type="hidden" value="<%= titleImg.getPhotoNo() %>" name="detailImgId0">
 								</td>
-								<td>
+								<td colspan="3">
 									<img id="contentImg1" width="150" height="200" class="detailImg" src="<%= request.getContextPath() %>/photo_uploadFiles/<%= fileList.get(1).getChangeName() %>">
 								<input type="hidden" value="<%= fileList.get(1).getChangeName() %>" name="detailImg1">
 								<input type="hidden" value="<%= fileList.get(1).getPhotoNo() %>" name="detailImgId1">
@@ -153,20 +158,20 @@
 							</tr>
 							<% } else { %>
 								<tr>
-									<td colspan="4">
+									<td colspan="3">
+										<a href="<%= request.getContextPath() %>/photo_uploadFiles/<%=titleImg.getChangeName() %>" download="<%=titleImg.getOriginName() %>">
+										<img id="titleImg"  width="150" height="200" src="<%= request.getContextPath() %>/photo_uploadFiles/<%= titleImg.getChangeName() %>">
+											<input type="hidden" value="<%= titleImg.getChangeName() %>" name="titleImage">
+											<input type="hidden" value="<%= titleImg.getPhotoNo() %>" name="detailImgId0">
+										</a>
+									</td>
+								<td colspan="3">
 									<a href="<%= request.getContextPath() %>/photo_uploadFiles/<%=titleImg.getChangeName() %>" download="<%=titleImg.getOriginName() %>">
-									<img id="titleImg"  width="150" height="200" src="<%= request.getContextPath() %>/photo_uploadFiles/<%= titleImg.getChangeName() %>">
-										<input type="hidden" value="<%= titleImg.getChangeName() %>" name="titleImage">
-										<input type="hidden" value="<%= titleImg.getPhotoNo() %>" name="detailImgId0">
+										<img id="contentImg1" width="150" height="200" class="detailImg" src="<%= request.getContextPath() %>/photo_uploadFiles/<%= fileList.get(1).getChangeName() %>">
+									<input type="hidden" value="<%= fileList.get(1).getChangeName() %>" name="detailImg1">
+									<input type="hidden" value="<%= fileList.get(1).getPhotoNo() %>" name="detailImgId1">
 									</a>
 								</td>
-								<td>
-								<a href="<%= request.getContextPath() %>/photo_uploadFiles/<%=titleImg.getChangeName() %>" download="<%=titleImg.getOriginName() %>">
-									<img id="contentImg1" width="150" height="200" class="detailImg" src="<%= request.getContextPath() %>/photo_uploadFiles/<%= fileList.get(1).getChangeName() %>">
-								<input type="hidden" value="<%= fileList.get(1).getChangeName() %>" name="detailImg1">
-								<input type="hidden" value="<%= fileList.get(1).getPhotoNo() %>" name="detailImgId1">
-								</a>
-							</td>
 							</tr>
 							
 							<% } %>
@@ -174,13 +179,13 @@
 						</table>
 						<div class="btnBox" align="center">
 								<% if(loginUser != null && loginUser.getId().equals(b.getUserId())){ %>
-							<input type ="submit" id="updateBtn" value="수정">
-							<input type ="button" onclick="deleteThumb();" id="deleteBtn" value="삭제">
+							<input type ="submit" id="updateBtn"  class="defaultBtn"  value="수정">
+							<input type ="button" onclick="deleteThumb();" id="deleteBtn"  class="defaultBtn"  value="삭제">
 							<% } %>
-							<div onclick="location.href='<%=request.getContextPath() %>/list.wac'" id="menuBtn">메뉴로</div>
+							<div onclick="location.href='<%=request.getContextPath() %>/list.wac'" class="defaultBtn"  id="menuBtn">메뉴로</div>
 							<% if(loginUser != null && loginUser.getGrade()==0){ %>
-							<input type="button" onclick="updateBC();" id="menuBtn" value="베스트 커플">
-							<input type ="button" onclick="deleteThumb();" id="deleteBtn" value="삭제">
+							<input type="button" onclick="updateBC();" class="defaultBtn" id="menuBtn" value="베스트 커플">
+							<input type ="button" onclick="deleteThumb();"class="defaultBtn"  id="deleteBtn" value="삭제">
 							<% } %>
 						</div>
 					</div>
@@ -205,6 +210,7 @@
 		}
 	</script>
 </body>
+<%@ include file="../../common/footer.jsp"%> 
 </html>
 
 

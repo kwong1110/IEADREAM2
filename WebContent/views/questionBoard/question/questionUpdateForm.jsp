@@ -26,9 +26,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>문의게시판 수정</title>
+<title>이어드림 - 1:1문의</title>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/common.css">
-<link rel="stylesheet" href="<%= request.getContextPath() %>/css/board.css">
 <style>
 
 	.outer{
@@ -36,28 +35,12 @@
 		margin-left: auto; margin-right: auto; margin-top: 50px;
 	}
 	textarea, #title, #category{
-		border-radius: 10px;
+		border-radius: 5px;
 		font-size:15px;
 		font-family:"ON I고딕";
 	}
 	textarea{margin-top:10px;}
-	/* #insertBtn{
-		border-radius: 10px;
-		background:  rgb(123, 164, 213);
-		padding: 10px;
-		color: white;
-		font-size: 15px;
-		text-align: center;
-		border:none;
-	}
-	#cancelBtn{
-		border-radius: 10px;
-		background:rgb(230, 141, 150);
-		padding: 10px;
-		color: white;
-		font-size: 15px;
-		text-align: center;
-	} */
+	
 </style>
 </head>
 <body>
@@ -105,4 +88,5 @@
 	</div>
 
 </body>
+<%@ include file="../../common/footer.jsp" %>
 </html>
