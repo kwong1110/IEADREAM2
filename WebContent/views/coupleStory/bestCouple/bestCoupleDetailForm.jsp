@@ -12,28 +12,17 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" type="text/css" href="css/reset.css" />
+<link rel="stylesheet" href="<%= request.getContextPath() %>/css/common.css">
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<title>이어드림_베스트커플_상세조회</title>
+<title>이어드림 - 이 달의 베스트커플</title>
 <style>
 
-	.outer{
-      width: 1000px; height: 850px; background: white;
-      margin-left: auto; margin-right: auto; margin-top: 50px; margin-bottom: 50px;
-   }
-   
-	.pageTitle{
-		padding: 60px 0 10px 40px;
-		margin: 10px 0 50px 0;
-	}
-	
 	.contents{
-		width: 90%;
+		/* width: 90%;
 		height: 600px;
 		margin: 0 auto; 
-		margin-bottom: 30px;
-		background: pink;
-		border: 8px solid white;
+		margin-bottom: 30px; */
+		border: 8px solid pink;
 		box-shadow: 3px 3px 3px 3px gray;
 	}
 	
@@ -117,7 +106,7 @@
 		border: none;
 		outline: none;
 		font-size: 21px;
-		color: white;
+		color: pink;
 		width: 50px;
 		text-align: right;
 		margin: 0 1% 0 4%;
@@ -126,7 +115,7 @@
 	.text3{
 		height: 30px;
 		font-size: 17px;
-		color: white;
+		color: pink;
 		line-height: 170%;
 		margin: 0px 1px 0 45px;
 		text-align: center;
@@ -171,7 +160,6 @@
 		resize: none;
 		background: transparent;
 		border: none;
-		font-family: 만화진흥원체;
 		font-size: 15px;
 		outline: none;
 	}
@@ -193,38 +181,6 @@
 	.img2 > img{
 		width: 100%;
 		height: 280px;
-	}
-	
-	button{
-		padding: 6px 9px 6px 9px;
-		background: pink;
-		color: white;
-		border-radius: 10px;
-		font-weight: bold;
-		font-size: 15px;
-		font-family: "만화진흥원체";
-	    cursor: pointer;
-		text-align: center;
-	    display: inline-block;
-		text-shadow: 0 1px 1px rgba(0,0,0,.3);
-		box-shadow: 0 1px 2px rgba(0,0,0,.2);
-	}
-	
-	.btnBox{
-		margin-left: 45%;
-		display: inline-block;
-	}
-	
-	.footer{
-		left:0;
-		bottom:0;
-		width: 104%;
-		height: 90px;
-		padding: 15px 0;
-		text-align: center;
-		color: white;
-		background: gray;
-		line-height: 22px;
 	}
 	
 </style>
@@ -274,8 +230,8 @@
 						
 						<div class="btnBox">
 							<% if(loginUser != null && loginUser.getGrade() == 0) { %>
-								<button type="submit" id="updateBtn">수정</button>
-								<button type="submit" id="deleteBtn" onclick="deletePt();">삭제</button>
+								<button type="submit" class="defaultBtn" id="updateBtn">수정</button>
+								<button type="submit" class="defaultBtn" id="deleteBtn" onclick="deletePt();">삭제</button>
 							<% } %>
 						</div>
 					</form>
@@ -295,13 +251,6 @@
 		}
 		</script>
 	</section>
-<!-- 	<footer>
-		<div class="footer">
-		대표이사  박소현 |  사업자 111-11-111111  | TEL 02)0202-0202 <br> 
-		본사 ) 서울특별시 연애하구 사랑동 행복로 잘되길 12-3<br>
-		E-MAIL love_manager@ieadream.com <br>
-		Copyright © 1998-2019 Couple Matching Service All Right Reserved
-		</div>
-	</footer> -->
 </body>
+<%@ include file="../../common/footer.jsp" %>
 </html>
