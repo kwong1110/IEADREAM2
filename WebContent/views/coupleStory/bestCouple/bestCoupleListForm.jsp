@@ -19,20 +19,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" type="text/css" href="css/reset.css" />
+<link rel="stylesheet" href="<%= request.getContextPath() %>/css/common.css">
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<title>이어드림_베스트커플_목록</title>
+<title>이어드림 - 이 달의 베스트커플</title>
 <style>
-
-	.outer{
-      width: 1000px; height: 680px; background: white;
-      margin-left: auto; margin-right: auto; margin-top: 50px; margin-bottom: 50px;
-   }
-	
-	.pageTitle{
-		padding: 10px 0 10px 40px;
-		margin: 60px 0 20px 0;
-	}
 	
 	.option{
 		padding: 3px 7px 6px 7px;
@@ -63,13 +53,12 @@
 	}
 	
 	.contents{
-		width: 900px;
-		height: 470px;
-		border: 8px solid white;
-		background: pink;
+		/* width: 900px;
+		height: 470px; */
+		border: 8px solid pink;
 		box-shadow: 3px 3px 3px 3px gray;
-		margin: 0 4% 0 4%;
-		margin-bottom: 15px;
+		/* margin: 0 4% 0 4%; */
+		margin-bottom: 15px; 
 	}
 	
 	.contns{
@@ -99,6 +88,7 @@
 		position: relative;
 		margin-bottom: 20px;
 		cursor: pointer;
+		border: 1px solid darkgray;
 	}
 		
 	.peoNum > p {
@@ -140,48 +130,11 @@
 		text-align: center;
 	}
 	
-	.sc-footer{
-		width: 100%;
-	}
-	
-	.button{
-		width: 70%;
-		text-align:center;
-		margin: 0 auto;
-	}
-	
-	.uploadbtn{
-		width: 9%;
-		height: 28px;
-		margin-left: 47%;
-		background: #e75a82;
-		color: white;
-		font-weight: border;
-	}
-	
 	.clear-both{
 		height: 10px;
 	}
 	
-	.sc-footer{text-decoration: none; padding: 10px 0;}
-	.sc-footer button{background: none; border: /* 3px solid white */ none; font-weight: bold; margin: 1em auto;
-					  position: relative; cursor: pointer; text-transform: uppercase;}
 	button:hover{cursor: pointer;}
-	/* #numBtn{background: #B2CCFF;}
-	#choosen{background: #FFD8D8;} */
-	#listArea{margin: auto;}
-	
-	.footer{
-		left:0;
-		bottom:0;
-		width: 100%;
-		height: 90px;
-		padding: 15px 0;
-		text-align: center;
-		color: white;
-		background: gray;
-		line-height: 22px;
-	}
 	
 </style>
 </head>
@@ -254,7 +207,7 @@
 							
 						 <div class="clear-both"></div>
 						
-						 <div class="sc-footer">
+						 <div class="pagingArea">
 						 	<% if(!bcList.isEmpty()) { %>
 								<div class="button">
 									<button onclick="location.href='<%= request.getContextPath() %>/list.bc?currentPage=1'">&lt;&lt;</button>
@@ -289,8 +242,8 @@
 						</div>
 					</div>
 					
-					<div class="uploadbtndv">
-						<button class="uploadbtn" onclick='location.href="views/coupleStory/bestCouple/bestCoupleInsertForm.jsp"'>UPLOAD</button>
+					<div class="btnBox">
+						<button class="defaultBtn" onclick='location.href="views/coupleStory/bestCouple/bestCoupleInsertForm.jsp"'>UPLOAD</button>
 					</div>
 				</div>	
 			</div>
@@ -307,12 +260,5 @@
 		
 	</section>
 </body>
-<footer>
-		<div class="footer">
-		대표이사  박소현 |  사업자 111-11-111111  | TEL 02)0202-0202 <br> 
-		본사 ) 서울특별시 연애하구 사랑동 행복로 잘되길 12-3<br>
-		E-MAIL love_manager@ieadream.com <br>
-		Copyright © 1998-2019 Couple Matching Service All Right Reserved
-		</div>
-</footer>
+<%@ include file="../../common/footer.jsp" %>
 </html>

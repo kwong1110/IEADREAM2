@@ -4,9 +4,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" type="text/css" href="css/reset.css" />
+<link rel="stylesheet" href="<%= request.getContextPath() %>/css/common.css">
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<title>이어드림_회원가입_Step1</title>
+<title>이어드림 - 회원가입</title>
 <style>
 	
 	.outer{
@@ -31,7 +31,6 @@
 	.table{
 		margin-top: 8%;
 		margin-left: 25%;
-		font-family: "만화진흥원체";
 	}
 	
 	.table td {
@@ -50,7 +49,6 @@
 	    border-radius: 10px;
 	    font-weight: bold;
 	    font-size: 15px;
-	    font-family: "만화진흥원체";
 	    cursor: pointer;
 	    text-align: center;
 	    display: inline-block;
@@ -257,4 +255,5 @@
 	</script>
 	
 </body>
+<%@ include file="../common/footer.jsp" %>
 </html>

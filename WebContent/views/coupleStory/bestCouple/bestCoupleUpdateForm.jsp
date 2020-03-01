@@ -24,9 +24,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" type="text/css" href="css/reset.css" />
+<link rel="stylesheet" href="<%= request.getContextPath() %>/css/common.css">
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<title>이어드림_베스트커플_글수정</title>
+<title>이어드림 - 이 달의 베스트커플</title>
 <style>
 
 	.outer{
@@ -47,7 +47,6 @@
 		background: white;
 		margin: 0 auto; 
 		margin-bottom: 30px;
-		font-family: "만화진흥원체";
 	}
 	
 	.subj{
@@ -108,7 +107,6 @@
 		border-radius: 10px;
 		font-weight: bold;
 		font-size: 15px;
-		font-family: "만화진흥원체";
 	    cursor: pointer;
 		margin-bottom: 30px;
 		text-align: center;
@@ -301,4 +299,5 @@
 		</script>
 	</section>
 </body>
+<%@ include file="../../common/footer.jsp" %>
 </html>
