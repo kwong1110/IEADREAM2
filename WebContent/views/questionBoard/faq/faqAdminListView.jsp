@@ -16,7 +16,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>이어드림 - FAQ 관리</title>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/common.css">
 <link rel="styleSheet" href="<%= request.getContextPath() %>/css/board.css">
 <style>
@@ -50,7 +50,6 @@
 	.btnBox{border-top: 1px solid rgb(224, 224, 224);}
 	
 	*:focus { outline:none; }
-	input:focus {outline:none;} /* 검색창 누를 때 나오는 초록색 테두리 없애기 */
 	
 	.pagingArea{text-decoratino: none; padding: 30px 0;}
 	.pagingArea button{background: none; border: 3px solid white; font-weight: bold; margin: 1em auto;

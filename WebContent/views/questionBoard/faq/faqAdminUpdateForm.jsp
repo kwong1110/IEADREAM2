@@ -35,7 +35,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>이어드림 - FAQ 수정</title>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/common.css">
 <link rel="styleSheet" href="<%= request.getContextPath() %>/css/board.css">
 <style>

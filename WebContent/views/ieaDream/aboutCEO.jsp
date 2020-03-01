@@ -4,41 +4,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>CEO 소개</title>
+<title>이어드림 - CEO 소개</title>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/common.css">
 <script type="text/javascript" src="<%= request.getContextPath() %>/js/jquery-3.4.1.min.js"></script>
 <style>
-	a:link { color: black; text-decoration: none}
-    a:visited {color: black;}
-    a:hover{ color : silver;}
-    
-	*{box-sizing: border-box;}
-	.container{min-width: 1000px;}
-	.container .content{padding-left: 200px; padding-right: 200px; overflow: hidden;}
-	.container .content>*{float: left; padding-bottom: 200px; margin-bottom: -200px;}
-	.container .content main{width: 100%;}
-	.container .content nav{width: 200px; margin-left: -100%; left:-200px; position: relative;}
-	.container footer{clear: both;}
-	
-	.menu{background: white;}
-	.menu> li{list-style: none; font-size: 30px; left: 150px; 
-			  display: inline-block; padding: 10px; position: relative;}
-	.menu a{line-height: 75px; color:rgb(51,51,51); display: block;}
-	.menu .link{text-decoration: none;}
-	
-	.subCategory{color: rgb(51, 51, 51); text-decoration: none;}
-	.quickmenu> li{list-style: none; font-size: 20px; left: 30px; padding: 5px; position: relative;}
-	
-    
-	.container .content main .article{position: relative; float: left;}
     #CEO_pic{margin: 10px; width: 400px; border-radius: 20px;}
-    
-    #loginProfile{float: right;}
-	#loginPicture{width:80px; height: 80px; border-radius: 100%;}
-	#alert{position: relative; top:-60px; left: -20px;}
-	#redDot{width:20px; height:20px; border-radius:100%;}
-	#loginInfo{display:inline-block; position: relative; top:-20px;
-				font-size: 20px; word-spacing: 5px;}
 </style>
 </head>
 <body>
@@ -78,4 +48,5 @@
 		</div>
 	</div>
 </body>
+<%@ include file="../common/footer.jsp" %>
 </html>
