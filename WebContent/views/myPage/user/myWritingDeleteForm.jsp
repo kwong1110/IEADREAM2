@@ -28,17 +28,12 @@
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/common.css">
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/board.css">
 <style>
-.main{
+.popMain{
 	display: flex;
   	align-items: center;
   	justify-content: center;
 }
 
-.botBox{
-	background: #c7eef2;
-	padding: 10px;
-	border-radius: 10px;
-}
 .deleteCheck{
 	margin: 10px;
 	font-weight: bold;
@@ -48,9 +43,9 @@
 </style>
 </head>
 <body onload='resizeWindow(this)'>
-	<div class="main" id="mainBox">
+	<div class="popMain" id="mainBox">
 		<form action="<%= request.getContextPath() %>/delete.mwl" method="get">
-			<table class="mainBoard">
+			<table class="popTable">
 				<thead>
 					<tr>
 						<th>게시글 번호</th>
@@ -80,7 +75,7 @@
 </body>
 <script>
 function resizeWindow(win)    {
-	var wid = win.document.body.offsetWidth + 100;
+	var wid = win.document.body.offsetWidth + 80;
 	var hei = win.document.body.offsetHeight + 100;    //30 과 40은 넉넉하게 하려는 임의의 값임
 	
 	win.resizeTo(wid,hei);
