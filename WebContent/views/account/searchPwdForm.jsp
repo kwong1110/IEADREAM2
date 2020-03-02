@@ -45,6 +45,7 @@
 </style>
 </head>
 <body>
+	<form action="<% request.getContextPath() %> /findPwd.do" method="post"></form>
 	<%@ include file="../common/mainmenu.jsp"%>
 	<div class ="outer">
 	<h1 style="text-align: center; margin-top:100px;">비밀번호 찾기</h1>
