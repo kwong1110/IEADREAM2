@@ -95,11 +95,6 @@ public class Account {
 	}
 	
 	
-	public Account(String id) {
-		super();
-		this.id = id;
-	}
-
 	public int getUserNo() {
 		return userNo;
 	}

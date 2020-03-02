@@ -40,12 +40,12 @@ public class FindidServlet extends HttpServlet {
 			findUser.setUserName(userName);
 			findUser.setEmail(email);
 			
-			Account a = new AccountService().searchId(findUser);
+			String id = new AccountService().searchId(findUser);
 			
 			String page = null;
-			if(a != null) {
+			if(id != null) {
 				page = "views/account/searchidFind.jsp";
-				request.setAttribute("account", a);
+				request.setAttribute("id", id);
 			} else {
 				page = "views/common/errorPage.jsp";
 				request.setAttribute("msg", "아이디 찾기에 실패하였습니다.");
