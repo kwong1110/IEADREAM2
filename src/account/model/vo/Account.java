@@ -93,6 +93,12 @@ public class Account {
 		this.email = email;
 		this.birth = birth;
 	}
+	
+	
+	public Account(String id) {
+		super();
+		this.id = id;
+	}
 
 	public int getUserNo() {
 		return userNo;

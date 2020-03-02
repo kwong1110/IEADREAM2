@@ -129,36 +129,37 @@ public class AccountDAO {
 
 	
 	// 아이디 찾기 DAO
-	public Account searchid(Account account, Connection conn) {
-		Account a = null;
+	
+	public Account searchId(Connection conn, Account findUser) {
+		
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String query = prop.getProperty("searchid");
+		Account a = null;
 		
+		String query = prop.getProperty("searchId");
+		//SELECT ID FROM ACCOUNT WHERE USER_NAME=? AND EMAIL=? AND DELETED='N'
 		
-		try	{
+		try {
 			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, account.getId());
-			pstmt.setString(2, account.getEmail());
+			pstmt.setString(1, findUser.getUserName());
+			pstmt.setString(2, findUser.getEmail());
 			
 			rset = pstmt.executeQuery();
-					
-			if(rset.next()) {
-				a = new Account();
-				
-				a.setId(rset.getString("id"));
-				
-			}
-			System.out.println(a);
 			
-		}catch(Exception e) { 
+			if(rset.next()) {
+				a = new Account(rset.getString("ID"));
+			}
+			
+		} catch (SQLException e) {
 			e.printStackTrace();
-		}finally {
+		} finally {
 			close(rset);
 			close(pstmt);
 		}
+		
 		return a;
 	}
+	
 	
 	//비밀번호 찾기 DAO
 	public Account searchPwd(Connection conn, Account account){
@@ -274,6 +275,7 @@ public class AccountDAO {
 		
 		return result;
 	}
+
 	
 }
 	
