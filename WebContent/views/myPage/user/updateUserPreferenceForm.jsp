@@ -265,11 +265,11 @@
 				</tr>
 				<tr>
 					<td class="itemName" id="">체형</td>
-					<td><label><input type="radio" name="shape" value="slim" <%= sh1 %>>마름</label>
-						<label><input type="radio" name="shape" value="normal" <%= sh2 %>>보통</label>
-						<label><input type="radio" name="shape" value="chubby" <%= sh3 %>>통통</label>
-						<label><input type="radio" name="shape" value="muscular" <%= sh4 %>>근육질</label>
-						<label><input type="radio" name="shape" value="glamour" <%= sh5 %>>글래머</label>
+					<td><label><input type="radio" name="shape" value="마름" <%= sh1 %>>마름</label>
+						<label><input type="radio" name="shape" value="보통" <%= sh2 %>>보통</label>
+						<label><input type="radio" name="shape" value="통통" <%= sh3 %>>통통</label>
+						<label><input type="radio" name="shape" value="근육질" <%= sh4 %>>근육질</label>
+						<label><input type="radio" name="shape" value="글래머" <%= sh5 %>>글래머</label>
 					</td>
 	                <td>
                     <select class="itemPriority" name="smokePri">
@@ -281,12 +281,12 @@
 				</tr>
 				<tr>
 					<td class="itemName" id="">스타일</td>
-					<td><label><input type="radio" name="style" value="cute" <%= st1 %>>귀여운</label> 
-						<label><input type="radio" name="style" value="intellect" <%= st2 %>>지적인</label>
-						<label><input type="radio" name="style" value="sexy" <%= st3 %>>섹시한</label> 
-						<label><input type="radio" name="style" value="warm" <%= st4 %>>따뜻한</label> 
-						<label><input type="radio" name="style" value="elegant" <%= st5 %>>우아한</label>
-						<label><input type="radio" name="style" value="tough" <%= st6 %>>터프한</label>
+					<td><label><input type="radio" name="style" value="귀여운" <%= st1 %>>귀여운</label> 
+						<label><input type="radio" name="style" value="지적인" <%= st2 %>>지적인</label>
+						<label><input type="radio" name="style" value="섹시한" <%= st3 %>>섹시한</label> 
+						<label><input type="radio" name="style" value="따뜻한" <%= st4 %>>따뜻한</label> 
+						<label><input type="radio" name="style" value="우아한" <%= st5 %>>우아한</label>
+						<label><input type="radio" name="style" value="터프한" <%= st6 %>>터프한</label>
 					</td>
 	                <td>
                     <select class="itemPriority" name="smokePri">
@@ -316,11 +316,11 @@
                 <tr class="itemBox">
                   <td class="itemName" id="">종교</td>
                   	<td>
-						<label><input type="radio" name="religion" value="christian" <%=rel1%>>기독교</label> 
-						<label><input type="radio" name="religion" value="catholic" <%=rel2%>>천주교</label>
-						<label><input type="radio" name="religion" value="buddhism" <%=rel3%>>불교</label>
-						<label><input type="radio" name="religion" value="none" <%=rel4%>>무교</label>
-						<label><input type="radio" name="religion" value="etc" <%=rel5%>>기타</label>
+						<label><input type="radio" name="religion" value="기독교" <%=rel1%>>기독교</label> 
+						<label><input type="radio" name="religion" value="천주교" <%=rel2%>>천주교</label>
+						<label><input type="radio" name="religion" value="불교" <%=rel3%>>불교</label>
+						<label><input type="radio" name="religion" value="무교" <%=rel4%>>무교</label>
+						<label><input type="radio" name="religion" value="기타" <%=rel5%>>기타</label>
 					</td>
 				`	<td>
 	                    <select class="itemPriority" name="smokePri">
@@ -335,7 +335,7 @@
 					<td class="itemName" id="">음주 습관</td>
 					<td>
 						<label><input type="radio" name="drink" value="3" <%= d3 %>>주 3회</label> 
-						<label><input type="radio" name="drink" value="2" <%= d2 %>>주 1회</label> 
+						<label><input type="radio" name="drink" value="2" <%= d2 %>>주 1~2회</label> 
 						<label><input type="radio" name="drink" value="1" <%= d1 %>>월 1회</label> 
 						<label><input type="radio" name="drink" value="0" <%= d0 %>>안 마심</label>
 					</td>
@@ -365,14 +365,14 @@
                 <tr class="itemBox">
                 	<td class="itemName" id="">직업</td>
                  	<td>
-						<label><input type="radio" name="job" value="student" <%= j1 %>>학생</label> 
-						<label><input type="radio" name="job" value="office" <%= j2 %>>사무직</label>
-						<label><input type="radio" name="job" value="research" <%= j3 %>>연구직</label>
-						<label><input type="radio" name="job" value="education" <%= j4 %>>교육직</label> 
-						<label><input type="radio" name="job" value="art" <%= j5 %>>예술</label> 
-						<label><input type="radio" name="job" value="service" <%= j6 %>>서비스</label>
-						<label><input type="radio" name="job" value="profession" <%= j7 %>>전문직</label> 
-						<label><input type="radio" name="job" value="etc" <%= j8 %>>기타</label>
+						<label><input type="radio" name="job" value="학생" <%= j1 %>>학생</label> 
+						<label><input type="radio" name="job" value="사무직" <%= j2 %>>사무직</label>
+						<label><input type="radio" name="job" value="연구직" <%= j3 %>>연구직</label>
+						<label><input type="radio" name="job" value="교육직" <%= j4 %>>교육직</label> 
+						<label><input type="radio" name="job" value="예술" <%= j5 %>>예술</label> 
+						<label><input type="radio" name="job" value="서비스" <%= j6 %>>서비스</label>
+						<label><input type="radio" name="job" value="전문직" <%= j7 %>>전문직</label> 
+						<label><input type="radio" name="job" value="기타" <%= j8 %>>기타</label>
 					</td>
                   	<td>
                     <select class="itemPriority" name="jobPri">
