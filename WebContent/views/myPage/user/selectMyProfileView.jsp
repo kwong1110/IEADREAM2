@@ -65,11 +65,11 @@
 					<form action="<%= request.getContextPath() %>/views/myPage/user/updateMyProfile.jsp" method="post" id="updateForm" name="updateForm" 
 						style="font-size: 20px; text-align: center;">
 						<table class="listArea" style="border-spacing: 20px;">
-							<div><input type="hidden" name="pwd" <%= password %>></div>
 								<tr>
 									<td class="minW">아이디</td>
 									<td>
 										<input style="border: none;" type="text" placeholder="userID" class="profile" name="id" readOnly value="<%= id %>" style="background: lightgray;">
+										<input type="hidden" name="pwd" value="<%= password %>">
 									</td>
 								</tr>
 								<tr>

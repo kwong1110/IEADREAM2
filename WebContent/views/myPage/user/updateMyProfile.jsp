@@ -22,7 +22,7 @@
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/board.css">
 <style>
 	.listArea{width: 800px;}
-	.tableArea tr { width: -webkit-fill-available;}
+	.tableArea tr {width: -webkit-fill-available;}
 	.tableArea td {/* 게시판제목라인 */
 		padding:20px 0;
 		border-top:1px solid rgb(136, 136, 136); /* 상단라인색 */
@@ -48,19 +48,23 @@
 					<h1>기본 정보 수정</h1>
 				</div>
 				<div class="tableArea">
-					<form action="<%= request.getContextPath() %>/update.mp" method="post" id="updateForm" name="updateForm" style="font-size: 20px; text-align: center;">
+					<form action="<%= request.getContextPath() %>/update.mp" method="post" 
+					id="updateForm" name="updateForm" style="font-size: 20px; text-align: center;">
 						<table class="listArea" style="border-spacing: 20px;">
 								<tr>
 									<td class="minW">아이디</td>
 									<td>
-										<input style="border: none;" type="text" placeholder="userID" class="profile" name="id" readOnly value="<%= id %>" style="background: lightgray;">
+										<input style="border: none;" type="text" placeholder="userID" 
+										class="profile" name="id" readonly value="<%= id %>" style="background: lightgray;">
 									</td>
 									<td></td>
 								</tr>
 								<tr>
 									<td>이름</td>
-									<td><input type="text" placeholder="이름을 입력해주세요" class="profile" name="user_name" id="user_name" value="<%= name %>"></td>
-									<td><input style="border: none;" readonly type="text" name="nameResult" id="nameResult" readonly></td>
+									<td><input type="text" placeholder="이름을 입력해주세요" 
+										class="profile" name="user_name" id="user_name" required value="<%= name %>">
+									</td>
+									<td><input style="border: none;" type="text" name="nameResult" id="nameResult" readonly></td>
 								</tr>
 								<tr>
 									<td>회원등급</td>
@@ -69,22 +73,22 @@
 								</tr>
 								<tr>
 									<td>비밀번호</td>
-									<td><input type="password" placeholder="비밀번호를 입력해주세요" class="profile" name="pass" id="pass" value="<%= pwd %>"></td>
+									<td><input type="password" placeholder="비밀번호를 입력해주세요" class="profile" name="pass" id="pass" required></td>
 									<td><input style="border: none;" readonly type="text" name="passResult" id="passResult"></td>
 								</tr>
 								<tr>
 									<td>비밀번호 확인</td>
-									<td><input type="password" placeholder="비밀번호 확인" class="profile" name="passCheck" id="passCheck" value="<%= pwd %>"></td>
+									<td><input type="password" placeholder="비밀번호 확인" class="profile" name="passCheck" id="passCheck" required></td>
 									<td><input style="border: none;" readonly type="text" name="passResult2" id="passResult2"></td>
 								</tr>
 								<tr>
 									<td>이메일</td>
-									<td><input type="email" placeholder="메일을 입력해주세요" class="profile" name="email" value="<%= email %>"></td>
+									<td><input type="email" placeholder="메일을 입력해주세요" class="profile" name="email" required value="<%= email %>"></td>
 									<td></td>
 								</tr>
 								<tr>
 									<td>휴대전화</td>
-									<td><input type="tel" placeholder="휴대전화 번호를 입력해주세요" class="profile" name="phone" value="<%= phone %>"></td>
+									<td><input type="tel" placeholder="휴대전화 번호를 입력해주세요" class="profile" name="phone" required value="<%= phone %>"></td>
 									<td></td>
 								</tr>
 								<tr>
@@ -99,14 +103,23 @@
 								</tr>
 						</table>
 						<div class="btnBox">
-								<button class="defaultBtn" id="updateBtn" type="submit">수정</button> <!-- action으로 연결 -->
+								<input class="defaultBtn" id="updateBtn" type="submit" name="submit" value="수정"> <!-- action으로 연결 -->
 						</div>
 					</form>
 				</div>
 			</div>
 		</div>
+	</div>
 	
 		<script>
+				$(function() {
+					$('#submit').click(function() {
+						if($('#pass').val()=='') {
+							alert('시발');
+						}
+					});
+				});
+				
 				$("#user_name").blur(function(){
 					var nameExp = /^[가-힣]{2,}$/;
 					
@@ -140,10 +153,8 @@
 					}
 				});
 				
-				
 		</script>
 
-	</div>
 </body>
 <%@ include file="../../common/footer.jsp" %>
 </html>
