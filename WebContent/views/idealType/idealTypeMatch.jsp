@@ -2,145 +2,133 @@
 pageEncoding="UTF-8" 
 
 import="account.model.vo.*"
-import="match.model.vo.*"
+import="account.model.service.*"
+import="idealType.model.vo.*"
+import="idealType.model.service.*"
 
 %>
 <%
-UserInfo ui = (UserInfo)request.getAttribute("ui");
-
-int userNo = ui.getUserNo();
-
-String hello = ui.getHello();
-int height = ui.getHeight();
-	String h1 = null; String h2 = null; String h3 = null;
-	String h4 = null; String h5 = null; String h6 = null;
-	String h7 = null; String h8 = null;
-	switch(height) {
-	case 150: h1 = "155 이하"; break;
-	case 155: h2 = "155~160"; break;
-	case 160: h3 = "160~165"; break;
-	case 165: h4 = "165~170"; break;
-	case 170: h5 = "170~175"; break;
-	case 175: h6 = "175~180"; break;
-	case 180: h7 = "180~185"; break;
-	case 185: h8 = "185 이상"; break;
-	}
 	
-String shape = ui.getShape();
-	String sh1 = null; String sh2 = null; String sh3 = null;
-	String sh4 = null; String sh5 = null;
-	switch(shape) {
-	case "마름": sh1 = "마름"; break;
-	case "보통": sh2 = "보통"; break;
-	case "통통": sh3 = "통통"; break;
-	case "근육질": sh4 = "checked"; break;
-	case "글래머": sh5 = "checked"; break;
-	}
+	MatchService ms = new MatchService();
+	UserService us = new UserService();
 	
-String style = ui.getStyle();
-	String st1 = null; String st2 = null; String st3 = null;
-	String st4 = null; String st5 = null; String st6 = null;
-	switch(style) {
-	case "귀여운": st1 = "checked"; break;
-	case "지적인": st2 = "checked"; break;
-	case "섹시한": st3 = "checked"; break;
-	case "따뜻한": st4 = "checked"; break;
-	case "우아한": st5 = "checked"; break;
-	case "터프한": st6 = "checked"; break;
-	}
+	int targetNo = ms.getMatchList(userNo)[matchNo].getTargetNo();
 	
-String religion = ui.getReligion();
-	String rel1 = null; String rel2 = null;	String rel3 = null;
-	String rel4 = null; String rel5 = null;
-	switch(religion) {
-	case "기독교": rel1 = "checked"; break;
-	case "천주교": rel2 = "checked"; break;
-	case "불교": rel3 = "checked"; break;
-	case "무교": rel4 = "checked"; break;
-	case "기타": rel5 = "checked"; break; 
-	}
+	Account ac = us.selectAccount(targetNo);
+	UserInfo ui = us.selectUserInfo(targetNo); 
 	
-int drink = ui.getDrink();
-	String d3 = null; String d2 = null; String d1 = null; String d0 = null;
-	switch(drink) {
-	case 3: d3 = "checked"; break;
-	case 2: d2 = "checked"; break;
-	case 1: d1 = "checked"; break;
-	case 0: d0 = "checked"; break;
-	}
+	String name = ac.getUserName();
+		String nameVal = null;
+		
+	String hello = ui.getHello();
+		int height = ui.getHeight();
+		String hVal = null;
+		switch(height) {
+		case 150: hVal = "155 이하"; break;
+		case 155: hVal = "155~160"; break;
+		case 160: hVal = "160~165"; break;
+		case 165: hVal = "165~170"; break;
+		case 170: hVal = "170~175"; break;
+		case 175: hVal = "175~180"; break;
+		case 180: hVal = "180~185"; break;
+		case 185: hVal = "185 이상"; break;
+		}
+		
+	String shape = ui.getShape();
+		String shVal = null; 
+		switch(shape) {
+		case "마름": shVal = "마름"; break;
+		case "보통": shVal = "보통"; break;
+		case "통통": shVal = "통통"; break;
+		case "근육질": shVal = "근육질"; break;
+		case "글래머": shVal = "글래머"; break;
+		}
+		
+	String style = ui.getStyle();
+		String stVal = null;
+		switch(style) {
+		case "귀여운": stVal = "귀여운"; break;
+		case "지적인": stVal = "지적인"; break;
+		case "섹시한": stVal = "섹시한"; break;
+		case "따뜻한": stVal = "따뜻한"; break;
+		case "우아한": stVal = "우아한"; break;
+		case "터프한": stVal = "터프한"; break;
+		}
 	
-int smoke = ui.getSmoke();
-	String s1 = null; String s0 = null;
-	switch(smoke) {
-	case 1: s1 = "checked"; break;
-	case 2: s0 = "checked"; break;
-	}
-	
-String job = ui.getJob();
-	String j1 = null; String j2 = null; String j3 = null; String j4 = null;
-	String j5 = null; String j6 = null; String j7 = null; String j8 = null;
-	switch(job) {
-	case "학생": j1 = "checked"; break;
-	case "사무직": j2 = "checked"; break;
-	case "연구직": j3 = "checked"; break;
-	case "교육직": j4 = "checked"; break;
-	case "예술": j5 = "checked"; break;
-	case "서비스": j6 = "checked"; break;
-	case "전문직": j7 = "checked"; break;
-	case "기타": j8 = "checked"; break;
-	}
-	
-int scholar = ui.getScholar();
-	String sc1 = null; String sc2 = null; String sc3 = null; String sc4 = null; String sc5 = null;
-	switch(scholar) {
-	case 0: sc1 = "checked"; break;
-	case 2: sc2 = "checked"; break;
-	case 4: sc3 = "checked"; break;
-	case 6: sc4 = "checked"; break;
-	case 8: sc5 = "checked"; break;
-	}
-	
-int region = ui.getRegion();
-	String re11 = null; String re42 = null;
-	String re12 = null; String re43 = null;
-	String re13 = null; String re51 = null;
-	String re20 = null; String re52 = null;
-	String re31 = null; String re53 = null;
-	String re32 = null; String re54 = null;
-	String re33 = null; String re55 = null;
-	String re41 = null; String re60 = null;
-	 switch(region) {
-	 case 11: re11 = "checked"; break;
-	 case 12: re12 = "checked"; break;
-	 case 13: re13 = "checked"; break;
-	 case 20: re20 = "checked"; break;
-	 case 31: re31 = "checked"; break;
-	 case 32: re32 = "checked"; break;
-	 case 33: re33 = "checked"; break;
-	 case 41: re41 = "checked"; break;
-	 case 42: re42 = "checked"; break;
-	 case 43: re43 = "checked"; break;
-	 case 51: re51 = "checked"; break;
-	 case 52: re52 = "checked"; break;
-	 case 53: re53 = "checked"; break;
-	 case 54: re54 = "checked"; break;
-	 case 55: re55 = "checked"; break;
-	 case 60: re60 = "checked"; break;
-	 }
-	 
- String[] getInter = ui.getInterest(); // 가져온 배열
- String[] interest = {"movie", "musical", "comic", "picture", "books", "music",
-                      "sing", "instrurment", "cook", "camp", "exercise", "sports",
-                      "vgame", "bgame", "sns", "drink", "beauty", "pet", "diy", "money"}; // 취미20개가 다 저장된 배열
- String[] check = new String[20];         
-                      
- for(int k = 0; k < interest.length; k++) {
-	 for(int j = 0; j < getInter.length; j++) {
-		 if(interest[k].equals(getInter[j])) { //해당 관심분야를 가져왔다면
-			 check[k] = "checked";
-		 } 
-	 }
- };
+	int age = ui.getAge();
+		String ageVal = "만 " + ui.getAge() + "세";
+		
+	String religion = ui.getReligion();
+		String relVal = null;
+		switch(religion) {
+		case "기독교": relVal = "기독교"; break;
+		case "천주교": relVal = "천주교"; break;
+		case "불교": relVal = "불교"; break;
+		case "무교": relVal = "무교"; break;
+		case "기타": relVal = "기타"; break; 
+		}
+		
+	int drink = ui.getDrink();
+		String dVal = null;
+		switch(drink) {
+		case 3: dVal = "주 3회 이상"; break;
+		case 2: dVal = "주 1~2회"; break;
+		case 1: dVal = "월 1회"; break;
+		case 0: dVal = "안 마심"; break;
+		}
+		
+	int smoke = ui.getSmoke();
+		String sVal = null;
+		switch(smoke) {
+		case 1: sVal = "피움"; break;
+		case 2: sVal = "안 피움"; break;
+		}
+		
+	String job = ui.getJob();
+		String jVal = null;
+		switch(job) {
+		case "학생": jVal = "학생"; break;
+		case "사무직": jVal = "사무직"; break;
+		case "연구직": jVal = "연구직"; break;
+		case "교육직": jVal = "교육직"; break;
+		case "예술": jVal = "예술"; break;
+		case "서비스": jVal = "서비스"; break;
+		case "전문직": jVal = "전문직"; break;
+		case "기타": jVal = "기타"; break;
+		}
+		
+	int scholar = ui.getScholar();
+		String scVal = null;
+		switch(scholar) {
+		case 0: scVal = "고졸"; break;
+		case 2: scVal = "초대졸"; break;
+		case 4: scVal = "대졸"; break;
+		case 6: scVal = "석사"; break;
+		case 8: scVal = "박사"; break;
+		}
+		
+	int region = ui.getRegion();
+		String reVal = null;
+		 switch(region) {
+		 case 11: reVal = "서울"; break;
+		 case 12: reVal = "인천"; break;
+		 case 13: reVal = "경기"; break;
+		 case 20: reVal = "강원"; break;
+		 case 31: reVal = "충북"; break;
+		 case 32: reVal = "충남"; break;
+		 case 33: reVal = "대전"; break;
+		 case 41: reVal = "전북"; break;
+		 case 42: reVal = "전남"; break;
+		 case 43: reVal = "광주"; break;
+		 case 51: reVal = "경북"; break;
+		 case 52: reVal = "대구"; break;
+		 case 53: reVal = "경남"; break;
+		 case 54: reVal = "부산"; break;
+		 case 55: reVal = "울산"; break;
+		 case 60: reVal = "제주"; break;
+		 }
+		 
+	 String[] interestVal = ui.getInterest(); // 가져온 배열
 
 %>    
     
@@ -401,64 +389,71 @@ int region = ui.getRegion();
           <article>
             <div class="itemBox">
               <div class="itemName" id="">이름</div>
-              <div class="itemValue" id="name">고윤하</div>
+              <div class="itemValue" id="name"><%= nameVal %></div>
             </div>
             <div class="itemBox">
                 <div class="itemName" id="">나이</div>
-                <div class="itemValue" id="age">31</div>
+                <div class="itemValue" id="age"><%= ageVal %></div>
             </div>
             <div class="itemBox">
                 <div class="itemName" id="">키</div>
-                <div class="itemValue" id="height">155~160</div>
+                <div class="itemValue" id="height"><%= hVal %></div>
             </div>
             <div class="itemBox">
                 <div class="itemName" id="">체형</div>
-                <div class="itemValue" id="shape">보통</div>
+                <div class="itemValue" id="shape"><%= shVal %></div>
             </div>
             <div class="itemBox">
                 <div class="itemName" id="">스타일</div>
-                <div class="itemValue" id="style">우아함</div>
+                <div class="itemValue" id="style"><%= stVal %></div>
             </div>
             <div class="itemBox">
                 <div class="itemName" id="">지역</div>
-                <div class="itemValue" id="region">서울</div>
+                <div class="itemValue" id="region"><%= reVal %></div>
             </div>
             <div class="itemBox">
                 <div class="itemName" id="">종교</div>
-                <div class="itemValue" id="religion">천주교</div>
+                <div class="itemValue" id="religion"><%= relVal %></div>
             </div>
             <div class="itemBox">
                 <div class="itemName" id="">학력</div>
-                <div class="itemValue" id="scholar">대졸</div>
+                <div class="itemValue" id="scholar"><%= scVal %></div>
             </div>
             <div class="itemBox">
                 <div class="itemName" id="">직업</div>
-                <div class="itemValue" id="job">예술</div>
+                <div class="itemValue" id="job"><%= jVal %></div>
             </div>
             <div class="itemBox">
                 <div class="itemName" id="">음주</div>
-                <div class="itemValue" id="drink">월 1회 이상</div>
+                <div class="itemValue" id="drink"><%= dVal %></div>
             </div>
             <div class="itemBox">
                 <div class="itemName" id="">흡연</div>
-                <div class="itemValue" id="smoke">안 핌</div>
+                <div class="itemValue" id="smoke"><%= sVal %></div>
+            </div>
+            
+            <div class="itemBox">
+                <div class="itemName" id="">관심분야</div>
+                <div class="itemValue" id="interest1"><%=interestVal[0] %></div>
             </div>
             <div class="itemBox">
                 <div class="itemName" id="">관심분야</div>
-                <div class="itemValue" id="interest1">영화</div>
+                <div class="itemValue" id="interest2"><%=interestVal[1] %></div>
             </div>
             <div class="itemBox">
                 <div class="itemName" id="">관심분야</div>
-                <div class="itemValue" id="interest2">음악</div>
+                <div class="itemValue" id="interest3"><%=interestVal[2] %></div>
             </div>
             <div class="itemBox">
                 <div class="itemName" id="">관심분야</div>
-                <div class="itemValue" id="interest3">악기</div>
+                <div class="itemValue" id="interest1"><%=interestVal[3] %></div>
             </div>
             <div class="itemBox">
                 <div class="itemName" id="">관심분야</div>
-                <div class="itemValue" id="interest4">외국어</div>
+                <div class="itemValue" id="interest1"><%=interestVal[4] %></div>
             </div>
+			
+
         </article>
         </section>
         <section id="move" style="display:flex;">
