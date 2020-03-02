@@ -2,7 +2,7 @@
     pageEncoding="UTF-8" import="account.model.vo.Account"%>
     
  <%
-	Account account = (Account)request.getAttribute("account");
+	Account a = (Account)request.getAttribute("account");
 %>
  
  
@@ -16,7 +16,7 @@
 <body>
 	
     <p class="txt"><Strong class="black">
-								회원님의 아이디는 <%=account.getId() %> 입니다.</Strong></p>
+								회원님의 아이디는 <%= a.getId() %> 입니다.</Strong></p>
 								<!-- userId가져오는것  -->
 
 </body>
