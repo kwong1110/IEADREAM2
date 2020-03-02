@@ -118,7 +118,7 @@
 									<th id="manager" style="vertical-align: middle; margin-left:10px">관리자</th>
 									<td id="Mcommand" rowspan = "3" colspan="3"  align= center>
 										<% if(r.getAnswerContent() != null) { %>
-											<textarea name = "answerContent" style="resize:none; width: 500px; height: 40%;margin-left: 20px;"><%= r.getAnswerContent() %></textarea>
+											<textarea name = "answerContent"  readonly  style="resize:none; width: 500px; height: 40%;margin-left: 20px;"><%= r.getAnswerContent() %></textarea>
 										<% } else { %>
 										<textarea name = "answerContent" readonly style="resize:none; width: 500px; height: 40%; text-align: center;margin-left: 20px;">관리자가 아직 답변을 달지 않았습니다. </textarea>
 										<% } %>
