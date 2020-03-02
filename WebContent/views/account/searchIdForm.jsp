@@ -27,7 +27,7 @@
 </head>
 <body>
 	<%@ include file="../common/mainmenu.jsp"%>
-	<div class ="outer">
+	<div class ="Logintext">
 	<h1 style="text-align: center;  margin-top:100px;">아이디 찾기</h1>
 	<br><br>
 	<h5 style="text-align: center;">아이디가 기억나지 않으세요?</h5>
@@ -44,7 +44,7 @@
 </div>
 
 		<div class="button">
-		<button type="submit" class="defaultBtn findid" id="btnfindid" onclick="<%= request.getContextPath() %>/Findeid.do">아이디 찾기</button>
+		<button type="submit" class="defaultBtn findid" id="btnfindid" onclick='location.href="<%=request.getContextPath()%>/Findeid.do"'>아이디 찾기</button>
 	</div>
 	
 													 							

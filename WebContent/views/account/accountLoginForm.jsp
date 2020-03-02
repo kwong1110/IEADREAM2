@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/common.css">
 <style>
 .inputBox{
-	width: 300px;
+	width: 180px;
 	height: 25px;
 	border-radius: 10px;
 	margin: 4px;
@@ -27,8 +27,6 @@
 
 }
 
-
-
 </style>
 </head>
 <body>
@@ -39,12 +37,12 @@
 	            <form id="loginForm" action="<%= request.getContextPath() %>/login.me" onsubmit="return validate();" method="post">
 		            <div class="loginBox">
 		            	<div>
-		                <label>&nbsp;&nbsp;&nbsp;아이디</label>
-		                <input type="text" class="inputBox" name="userId" id="userId2" placeholder="ID">
+		
+		                <input type="text" class="inputBox" name="userId" id="userId2" placeholder="아이디">
 		                </div>
 		                <div>
-		                <label>비밀번호</label>
-		                <input type="password" class="inputBox" name="userPwd" id="userPwd2" placeholder="Password" >
+		              
+		                <input type="password" class="inputBox" name="userPwd" id="userPwd2" placeholder="비밀번호" >
 		                </div>
 		                
 		                <br>
@@ -59,16 +57,14 @@
 			            <br>
 			            
 			             <!-- 아이디 찾기 눌렀을때 searchidForm 으로 넘어 가기... -->
-			            <button type ="button" class="defaultBtn" onclick="location.href='<%= request.getContextPath() %>/views/account/searchIdForm.jsp'">아이디 찾기</button>
+			            <button type ="button"class="defaultBtn" onclick="location.href='<%= request.getContextPath() %>/views/account/searchIdForm.jsp'">아이디 찾기</button>
 						
 						<!-- 비밀번호 찾기 눌렀을때 searchPwdForm 으로 넘어가기... -->	
 			            <button type ="button" class="defaultBtn" onclick="location.href='<%= request.getContextPath() %>/views/account/searchPwdForm.jsp'">비밀번호 찾기</button>
 			            <button type ="button" class="defaultBtn" onclick="joinAccount();">회원가입</button>
 		            </div>
 	            </form>
-             </div>
-		</div>
-	</div>
+            
 	<script>
 		function validate(){
 			if($('#userId2').val().trim().length == 0){
