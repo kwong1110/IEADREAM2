@@ -136,7 +136,7 @@
 		<div class="outer">
 			<div class="wrapper">
 				<div class="main">
-					<h1 class="pageTitle">이달의 베스트 커플</h1>
+					<div class="pageTitle"><h1>이달의 베스트 커플</h1></div>
 					<form action="<%= request.getContextPath() %>/update.bc" method="post" encType="multipart/form-data">
 						<div class="contents">
 							<div class="subj">
