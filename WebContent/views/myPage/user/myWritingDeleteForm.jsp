@@ -27,20 +27,6 @@
 <title></title>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/common.css">
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/board.css">
-<style>
-.popMain{
-	display: flex;
-  	align-items: center;
-  	justify-content: center;
-}
-
-.deleteCheck{
-	margin: 10px;
-	font-weight: bold;
-	font-size: 15px;
-	color: red;
-}
-</style>
 </head>
 <body onload='resizeWindow(this)'>
 	<div class="popMain" id="mainBox">
