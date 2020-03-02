@@ -1,6 +1,138 @@
-<%@page import="java.sql.*" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+pageEncoding="UTF-8" 
+
+import="account.model.vo.*"
+import="account.model.service.*"
+import="idealType.model.vo.*"
+import="idealType.model.service.*"
+
+%>
+<%
+	
+	MatchService ms = new MatchService();
+	UserService us = new UserService();
+	
+	int targetNo = ms.getMatchList(userNo)[matchNo].getTargetNo();
+	
+	Account ac = us.selectAccount(targetNo);
+	UserInfo ui = us.selectUserInfo(targetNo); 
+	
+	String name = ac.getUserName();
+		String nameVal = null;
+		
+	String hello = ui.getHello();
+		int height = ui.getHeight();
+		String hVal = null;
+		switch(height) {
+		case 150: hVal = "155 이하"; break;
+		case 155: hVal = "155~160"; break;
+		case 160: hVal = "160~165"; break;
+		case 165: hVal = "165~170"; break;
+		case 170: hVal = "170~175"; break;
+		case 175: hVal = "175~180"; break;
+		case 180: hVal = "180~185"; break;
+		case 185: hVal = "185 이상"; break;
+		}
+		
+	String shape = ui.getShape();
+		String shVal = null; 
+		switch(shape) {
+		case "마름": shVal = "마름"; break;
+		case "보통": shVal = "보통"; break;
+		case "통통": shVal = "통통"; break;
+		case "근육질": shVal = "근육질"; break;
+		case "글래머": shVal = "글래머"; break;
+		}
+		
+	String style = ui.getStyle();
+		String stVal = null;
+		switch(style) {
+		case "귀여운": stVal = "귀여운"; break;
+		case "지적인": stVal = "지적인"; break;
+		case "섹시한": stVal = "섹시한"; break;
+		case "따뜻한": stVal = "따뜻한"; break;
+		case "우아한": stVal = "우아한"; break;
+		case "터프한": stVal = "터프한"; break;
+		}
+	
+	int age = ui.getAge();
+		String ageVal = "만 " + ui.getAge() + "세";
+		
+	String religion = ui.getReligion();
+		String relVal = null;
+		switch(religion) {
+		case "기독교": relVal = "기독교"; break;
+		case "천주교": relVal = "천주교"; break;
+		case "불교": relVal = "불교"; break;
+		case "무교": relVal = "무교"; break;
+		case "기타": relVal = "기타"; break; 
+		}
+		
+	int drink = ui.getDrink();
+		String dVal = null;
+		switch(drink) {
+		case 3: dVal = "주 3회 이상"; break;
+		case 2: dVal = "주 1~2회"; break;
+		case 1: dVal = "월 1회"; break;
+		case 0: dVal = "안 마심"; break;
+		}
+		
+	int smoke = ui.getSmoke();
+		String sVal = null;
+		switch(smoke) {
+		case 1: sVal = "피움"; break;
+		case 2: sVal = "안 피움"; break;
+		}
+		
+	String job = ui.getJob();
+		String jVal = null;
+		switch(job) {
+		case "학생": jVal = "학생"; break;
+		case "사무직": jVal = "사무직"; break;
+		case "연구직": jVal = "연구직"; break;
+		case "교육직": jVal = "교육직"; break;
+		case "예술": jVal = "예술"; break;
+		case "서비스": jVal = "서비스"; break;
+		case "전문직": jVal = "전문직"; break;
+		case "기타": jVal = "기타"; break;
+		}
+		
+	int scholar = ui.getScholar();
+		String scVal = null;
+		switch(scholar) {
+		case 0: scVal = "고졸"; break;
+		case 2: scVal = "초대졸"; break;
+		case 4: scVal = "대졸"; break;
+		case 6: scVal = "석사"; break;
+		case 8: scVal = "박사"; break;
+		}
+		
+	int region = ui.getRegion();
+		String reVal = null;
+		 switch(region) {
+		 case 11: reVal = "서울"; break;
+		 case 12: reVal = "인천"; break;
+		 case 13: reVal = "경기"; break;
+		 case 20: reVal = "강원"; break;
+		 case 31: reVal = "충북"; break;
+		 case 32: reVal = "충남"; break;
+		 case 33: reVal = "대전"; break;
+		 case 41: reVal = "전북"; break;
+		 case 42: reVal = "전남"; break;
+		 case 43: reVal = "광주"; break;
+		 case 51: reVal = "경북"; break;
+		 case 52: reVal = "대구"; break;
+		 case 53: reVal = "경남"; break;
+		 case 54: reVal = "부산"; break;
+		 case 55: reVal = "울산"; break;
+		 case 60: reVal = "제주"; break;
+		 }
+		 
+	 String[] interestVal = ui.getInterest(); // 가져온 배열
+
+%>    
+    
+    
 <!doctype html>
 <html>
 <head>
@@ -244,7 +376,7 @@
         </section>
         <section id="itemProfile" style="display: flex;">
           <article id="thumb" style="margin-left:50px;">
-            <image width="250px" height="250px"></image>
+            <img width="250px" height="250px"></img>
           </article>
           <article id="hello" style="text-align:center; margin-left:30px;">
             <label>소갯말</label><br>
@@ -257,64 +389,71 @@
           <article>
             <div class="itemBox">
               <div class="itemName" id="">이름</div>
-              <div class="itemValue" id="name">고윤하</div>
+              <div class="itemValue" id="name"><%= nameVal %></div>
             </div>
             <div class="itemBox">
                 <div class="itemName" id="">나이</div>
-                <div class="itemValue" id="age">31</div>
+                <div class="itemValue" id="age"><%= ageVal %></div>
             </div>
             <div class="itemBox">
                 <div class="itemName" id="">키</div>
-                <div class="itemValue" id="height">155~160</div>
+                <div class="itemValue" id="height"><%= hVal %></div>
             </div>
             <div class="itemBox">
                 <div class="itemName" id="">체형</div>
-                <div class="itemValue" id="shape">보통</div>
+                <div class="itemValue" id="shape"><%= shVal %></div>
             </div>
             <div class="itemBox">
                 <div class="itemName" id="">스타일</div>
-                <div class="itemValue" id="style">우아함</div>
+                <div class="itemValue" id="style"><%= stVal %></div>
             </div>
             <div class="itemBox">
                 <div class="itemName" id="">지역</div>
-                <div class="itemValue" id="region">서울</div>
+                <div class="itemValue" id="region"><%= reVal %></div>
             </div>
             <div class="itemBox">
                 <div class="itemName" id="">종교</div>
-                <div class="itemValue" id="religion">천주교</div>
+                <div class="itemValue" id="religion"><%= relVal %></div>
             </div>
             <div class="itemBox">
                 <div class="itemName" id="">학력</div>
-                <div class="itemValue" id="scholar">대졸</div>
+                <div class="itemValue" id="scholar"><%= scVal %></div>
             </div>
             <div class="itemBox">
                 <div class="itemName" id="">직업</div>
-                <div class="itemValue" id="job">예술</div>
+                <div class="itemValue" id="job"><%= jVal %></div>
             </div>
             <div class="itemBox">
                 <div class="itemName" id="">음주</div>
-                <div class="itemValue" id="drink">월 1회 이상</div>
+                <div class="itemValue" id="drink"><%= dVal %></div>
             </div>
             <div class="itemBox">
                 <div class="itemName" id="">흡연</div>
-                <div class="itemValue" id="smoke">안 핌</div>
+                <div class="itemValue" id="smoke"><%= sVal %></div>
+            </div>
+            
+            <div class="itemBox">
+                <div class="itemName" id="">관심분야</div>
+                <div class="itemValue" id="interest1"><%=interestVal[0] %></div>
             </div>
             <div class="itemBox">
                 <div class="itemName" id="">관심분야</div>
-                <div class="itemValue" id="interest1">영화</div>
+                <div class="itemValue" id="interest2"><%=interestVal[1] %></div>
             </div>
             <div class="itemBox">
                 <div class="itemName" id="">관심분야</div>
-                <div class="itemValue" id="interest2">음악</div>
+                <div class="itemValue" id="interest3"><%=interestVal[2] %></div>
             </div>
             <div class="itemBox">
                 <div class="itemName" id="">관심분야</div>
-                <div class="itemValue" id="interest3">악기</div>
+                <div class="itemValue" id="interest1"><%=interestVal[3] %></div>
             </div>
             <div class="itemBox">
                 <div class="itemName" id="">관심분야</div>
-                <div class="itemValue" id="interest4">외국어</div>
+                <div class="itemValue" id="interest1"><%=interestVal[4] %></div>
             </div>
+			
+
         </article>
         </section>
         <section id="move" style="display:flex;">

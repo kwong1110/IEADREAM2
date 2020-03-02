@@ -17,7 +17,7 @@
     <p class="txt"><Strong class="black">
 								<%=account.getPassword() %> 이메일로 임시 비밀번호 발송하였습니다 변경된 임시비밀번호로 
 								로그인 해주세요!!</Strong></p>
-								<!-- userId가져오는것  -->
+								<!-- p가져오는것  -->
 					
 </body>
 </html>

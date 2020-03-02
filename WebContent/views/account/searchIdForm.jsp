@@ -1,7 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="account.model.vo.Account"%>
+    
+   
+ <%
+	Account account = (Account)request.getAttribute("account");
+%>
+     
+    
 <!DOCTYPE html>
 <html>
+
 <head>
 <meta charset="UTF-8">
 <title>아이디 찾기</title>
@@ -27,14 +35,14 @@
 </head>
 <body>
 	<%@ include file="../common/mainmenu.jsp"%>
-	<div class ="outer">
+	<div class ="Logintext">
 	<h1 style="text-align: center;  margin-top:100px;">아이디 찾기</h1>
 	<br><br>
 	<h5 style="text-align: center;">아이디가 기억나지 않으세요?</h5>
 	<br><br>
 	<h5 style="text-align: center;">가입할때 입력하신 이메일 주소를 통해 아이디를 확인하실수 있습니다</h5>
 	<br><br>
-	<form action="<%= request.getContextPath() %>/Findeid.do" method="post"></form>
+	
 	</div>
 	
 	<div class ="textbox">
@@ -44,7 +52,7 @@
 </div>
 
 		<div class="button">
-		<button type="submit" class="defaultBtn findid" id="btnfindid" onclick="<%= request.getContextPath() %>/Findeid.do">아이디 찾기</button>
+		<button type="submit" class="defaultBtn findid" id="btnfindid" onclick='location.href="<%=request.getContextPath()%>/Findeid.do"'>아이디 찾기</button>
 	</div>
 	
 													 							

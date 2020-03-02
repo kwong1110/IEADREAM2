@@ -29,17 +29,21 @@ public class AccountDAO {
 		}
 	}
 	
-	public int idCheck(Connection conn, String userId) {
+	
+	public int idCheck(Connection conn, String userId, String email) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		int result = 0;
 		
 		String query = prop.getProperty("idCheck");
 		//SELECT COUNT(*) FROM ACCOUNT WHERE ID=?
+		//sql에 있는 쿼리 db값을 불러 온다.
 		
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, userId);
+			pstmt.setString(2, email);
+			
 			
 			rset = pstmt.executeQuery();
 			
@@ -130,11 +134,10 @@ public class AccountDAO {
 	
 	// 아이디 찾기 DAO
 	public Account searchid(Account account, Connection conn) {
-		Account a = null;
+		account = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		String query = prop.getProperty("searchid");
-		
 		
 		try	{
 			pstmt = conn.prepareStatement(query);
@@ -144,12 +147,12 @@ public class AccountDAO {
 			rset = pstmt.executeQuery();
 					
 			if(rset.next()) {
-				a = new Account();
-				
-				a.setId(rset.getString("id"));
+				account = new Account();
+				account.setId(rset.getString("id"));
+				account.setEmail(rset.getString("email"));
 				
 			}
-			System.out.println(a);
+			System.out.println(account);
 			
 		}catch(Exception e) { 
 			e.printStackTrace();
@@ -157,7 +160,7 @@ public class AccountDAO {
 			close(rset);
 			close(pstmt);
 		}
-		return a;
+		return account;
 	}
 	
 	//비밀번호 찾기 DAO

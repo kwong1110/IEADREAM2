@@ -8,6 +8,21 @@
 <title>이어드림 - 탈퇴</title>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/common.css">
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/board.css">
+
+<style>
+	.listArea{width: 800px;}
+	.tableArea tr { width: -webkit-fill-available;}
+	.tableArea td {/* 게시판제목라인 */
+		padding:20px 0;
+		color:rgb(230, 141, 150); font-size:1em;/* 제목글자크기 */ 
+		letter-spacing:0.1em;}/* 제목띠어쓰기간격 */ 
+	
+	input{font-size: 20px; padding: 2px; width: 30%;}
+
+	.btnBox{border-top: 1px solid rgb(224, 224, 224);}
+	
+	*:focus { outline:none; }
+</style>
 </head>
 <body>
 	<%@ include file="../../common/mainmenu.jsp" %>
@@ -18,9 +33,9 @@
 				<div class="pageTitle">
 					<h1>비밀번호 확인</h1>
 				</div>
-				<div>
+				<div class="tableArea">
 					<form action="<%= request.getContextPath() %>/delete.mp" method="post">
-						<table>
+						<table class="listArea">
 							<tr>
 								<td>비밀번호를 입력해주세요</td>
 							</tr>
@@ -29,7 +44,7 @@
 							</tr>
 						</table>
 						<div class="btnBox">
-							<input id="ok" onclick="check();" type="submit" value="확인">
+							<button class="defaultBtn" id="ok" onclick="check();" type="submit">탈퇴</button>
 						</div>
 					</form>
 				</div>

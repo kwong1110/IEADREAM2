@@ -4,6 +4,7 @@
 	Account a = (Account)request.getAttribute("account");
 
 	String id = a.getId();
+	String password = a.getPassword();
 	String name = a.getUserName();
 	int grade = a.getGrade();
 	String phone = a.getPhone();
@@ -16,7 +17,6 @@
 	case 0: gr = "관리자"; break;
 	case 1: gr = "준회원"; break;
 	case 2: gr = "정회원"; break;
-	case 3: gr = "준회원(결제대기중)"; break;
 	}
 	
 	String ge = null;
@@ -33,6 +33,24 @@
 <title>이어드림 - 기본 정보</title>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/common.css">
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/board.css">
+<style>
+	.listArea{width: 800px;}
+	.tableArea tr { width: -webkit-fill-available;}
+	.tableArea td {/* 게시판제목라인 */
+		padding:20px 0;
+		border-top:1px solid rgb(136, 136, 136); /* 상단라인색 */
+		border-bottom:1px solid rgb(224, 224, 224); /* 하단라인색 */
+		color:rgb(230, 141, 150); font-size:1em;/* 제목글자크기 */ 
+		letter-spacing:0.1em;
+		text-align: right;}/* 제목띠어쓰기간격 */ 
+	
+	input{font-size: 20px; padding: 2px; width: 70%;}
+
+	.btnBox{border-top: 1px solid rgb(224, 224, 224);}
+	
+	*:focus { outline:none; }
+	
+</style>
 </head>
 <body>
 	<%@ include file="../../common/mainmenu.jsp" %>
@@ -43,39 +61,40 @@
 				<div class="pageTitle">
 					<h1>기본 정보</h1>
 				</div>
-				<div>
+				<div class="tableArea">
 					<form action="<%= request.getContextPath() %>/views/myPage/user/updateMyProfile.jsp" method="post" id="updateForm" name="updateForm" 
 						style="font-size: 20px; text-align: center;">
-						<table style="border-spacing: 20px;">
+						<table class="listArea" style="border-spacing: 20px;">
+							<div><input type="hidden" name="pwd" <%= password %>></div>
 								<tr>
 									<td class="minW">아이디</td>
 									<td>
-										<input type="text" placeholder="userID" class="profile" name="id" readOnly value="<%= id %>" style="background: lightgray;">
+										<input style="border: none;" type="text" placeholder="userID" class="profile" name="id" readOnly value="<%= id %>" style="background: lightgray;">
 									</td>
 								</tr>
 								<tr>
 									<td>이름</td>
-									<td><input type="text" placeholder="이름을 입력해주세요" class="profile" name="user_name" readOnly value="<%= name %>"></td>
+									<td><input style="border: none;" type="text" placeholder="이름을 입력해주세요" class="profile" name="user_name" readOnly value="<%= name %>"></td>
 								</tr>
 								<tr>
 									<td>회원등급</td>
-									<td><input type="text" class="profile" name="grade" readonly value="<%= gr %>"></td>
+									<td><input style="border: none;" type="text" class="profile" name="grade" readonly value="<%= gr %>"></td>
 								</tr>
 								<tr>
 									<td>이메일</td>
-									<td><input type="text" placeholder="메일을 입력해주세요" class="profile" name="email" value="<%= email %>"></td>
+									<td><input style="border: none;" type="text" placeholder="메일을 입력해주세요" class="profile" name="email" readonly  value="<%= email %>"></td>
 								</tr>
 								<tr>
 									<td>휴대전화</td>
-									<td><input type="tel" placeholder="휴대전화 번호를 입력해주세요" class="profile" name="phone" value="<%= phone %>"></td>
+									<td><input style="border: none;" type="tel" placeholder="휴대전화 번호를 입력해주세요" class="profile" name="phone" readonly value="<%= phone %>"></td>
 								</tr>
 								<tr>
 									<td>성별</td>
-									<td><input type="text" class="profile" name="gender" readonly value="<%= ge %>"></td>
+									<td><input style="border: none;" type="text" class="profile" name="gender" readonly value="<%= ge %>"></td>
 								</tr>
 								<tr>
 									<td>생년월일</td>
-									<td><input type="text" class="profile" name="birth" readonly value="<%= birth %>"></td>
+									<td><input style="border: none;" type="text" class="profile" name="birth" readonly value="<%= birth %>"></td>
 								</tr>
 						</table>
 						<div class="btnBox">
