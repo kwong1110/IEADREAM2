@@ -31,16 +31,6 @@
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/board.css">
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script type="text/javascript" src="<%= request.getContextPath() %>/js/SelectAll.js"></script>
-<style>
-	.tableArea th {/* 게시판제목라인 */
-		padding:12px 0;
-		border-top:1px solid rgb(136, 136, 136); /* 상단라인색 */
-		border-bottom:1px solid rgb(224, 224, 224); /* 하단라인색 */
-		background:#f9f9f9;  /* 제목배경색 */ 
-		color:rgb(230, 141, 150); font-size:1em;/* 제목글자크기 */ 
-		letter-spacing:0.1em}/* 제목띠어쓰기간격 */ 
-	.tableArea td {line-height: 10px;}
-</style>
 </head>
 <body>
 	<%@ include file="../../common/mainmenu.jsp"%>
@@ -135,7 +125,7 @@
 							<button onclick="location.href='<%= request.getContextPath() %>/list.mwl?currentPage=1&bCategory=<%= bCategory %>&sCategory=<%= sCategory %>&sWord=<%= sWord %>&search=<%= search %>&userNo=<%= userNo %>'">&lt;&lt;</button>
 					
 							<!-- 이전 페이지로 -->
-							<button onclick="location.href='<%= request.getContextPath() %>/list.mwl?currentPage=<%= currentPage-1 %>&bCategory=<%= bCategory %>&sCategory=<%= sCategory %>&sWord=<%= sWord %>&search=<%= search %>&userNo=<%= userNo %>'" id="beforeBtn">&lt;</button>
+							<button onclick="location.href='<%= request.getContextPath() %>/list.mwl?currentPage=<%= currentPage-1 %>&bCategory=<%= bCategory %>&sCategory=<%= sCategory %>&sWord=<%= sWord %>&search=<%= search %>&userNo=<%= userNo %>'" id="beforeBtn">PREV</button>
 							<script>
 								if(<%= currentPage %> <= 1){
 									var before = $('#beforeBtn');
@@ -154,7 +144,7 @@
 							<% } %>
 							
 							<!-- 다음 페이지로 -->
-							<button onclick="location.href='<%= request.getContextPath() %>/list.mwl?currentPage=<%= currentPage + 1 %>&bCategory=<%= bCategory %>&sCategory=<%= sCategory %>&sWord=<%= sWord %>&search=<%= search %>&userNo=<%= userNo %>'" id="afterBtn">&gt;</button>
+							<button onclick="location.href='<%= request.getContextPath() %>/list.mwl?currentPage=<%= currentPage + 1 %>&bCategory=<%= bCategory %>&sCategory=<%= sCategory %>&sWord=<%= sWord %>&search=<%= search %>&userNo=<%= userNo %>'" id="afterBtn">NEXT</button>
 							<script>
 								if(<%= currentPage %> >= <%= maxPage %>){
 									var after = $("#afterBtn");
@@ -172,7 +162,7 @@
 							<button onclick="location.href='<%= request.getContextPath() %>/list.mwl?currentPage=1&userNo=<%= userNo %>'">&lt;&lt;</button>
 					
 							<!-- 이전 페이지로 -->
-							<button onclick="location.href='<%= request.getContextPath() %>/list.mwl?currentPage=<%= currentPage-1 %>&userNo=<%= userNo %>'" id="beforeBtn">&lt;</button>
+							<button onclick="location.href='<%= request.getContextPath() %>/list.mwl?currentPage=<%= currentPage-1 %>&userNo=<%= userNo %>'" id="beforeBtn">PREV</button>
 							<script>
 								if(<%= currentPage %> <= 1){
 									var before = $('#beforeBtn');
@@ -191,7 +181,7 @@
 							<% } %>
 							
 							<!-- 다음 페이지로 -->
-							<button onclick="location.href='<%= request.getContextPath() %>/list.mwl?currentPage=<%= currentPage + 1 %>&userNo=<%= userNo %>'" id="afterBtn">&gt;</button>
+							<button onclick="location.href='<%= request.getContextPath() %>/list.mwl?currentPage=<%= currentPage + 1 %>&userNo=<%= userNo %>'" id="afterBtn">NEXT</button>
 							<script>
 								if(<%= currentPage %> >= <%= maxPage %>){
 									var after = $("#afterBtn");
@@ -239,5 +229,27 @@
 				window.open("views/myPage/user/myWritingDeleteForm.jsp?checkList="+checkList, "deleteBoard", "width=400, height=500, "+ ", left=" + popLeft + ", top="+ popTop);	
 			};
 		}
+		
+		$(function(){
+			$('#boManageForm td').mouseenter(function(){
+				$(this).parent().css({'background':'darkgray','cursor':'pointer'});
+			}).mouseout(function(){
+				$(this).parent().css('background','none');
+			}).click(function(){
+				var checkboxYn = $(this).find("input[type='checkbox']").length;
+				var postNo = $(this).parent().children().children('input').val();
+				
+				 if (checkboxYn == 0) {
+					<%if(loginUser != null && loginUser.getGrade()!=0){ %>
+						location.href='<%= request.getContextPath() %>/detail.qu?postNo=' + postNo;
+					<% } else if(loginUser != null && loginUser.getGrade()==0){ %>
+						location.href='<%= request.getContextPath() %>/Mdetail.qu?postNo=' + postNo;
+					<% } else{%> 
+						alert('회원만 이용할 수 있는 서비스 입니다.');
+						location.href='<%= request.getContextPath() %>/views/account/accountLoginForm.jsp';
+					<% } %> 
+				 }
+			});
+		});
 	</script>
 </html>

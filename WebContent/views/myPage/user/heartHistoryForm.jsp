@@ -22,7 +22,6 @@
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/common.css">
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/board.css">
 <script type="text/javascript" src="<%= request.getContextPath() %>/js/SelectAll.js"></script>
-
 </head>
 <body>
 	<%@ include file="../../common/mainmenu.jsp"%>
@@ -39,53 +38,59 @@
 				</div>
 				<div class="contents">
 					<form method="get">
-						<table class="mainBoard">
-								<tr>
-									<th><input type="checkbox" id="all" onclick="checkAll();"></th>
-									<th>분류</th>
-									<th>회원 이미지</th>
-									<th>상태</th>
-									<th>데이트 장소 추천</th>
-									<th>남은 기간</th>
-								</tr>
-								<% if(list.isEmpty()){ %>
-								<tr>
-									<td colspan="6">조회된 리스트가 없습니다.</td>
-								</tr>
-								<% } else{ 
-										for(Match r : list){
-										switch(r.getMatchStatus()){
-										case "D": MatchStatus = "상대방의 응답을 기다리고 있습니다."; break;
-										case "C": MatchStatus = "확인 완료"; break;
-										case "S": MatchStatus = "하트 보냄"; break;
-										case "A": MatchStatus = "하트 수락"; break;
+						<div class="tableArea">
+							<table class="mainBoard" id="boManageForm">
+								<thead>
+									<tr>
+										<th><input type="checkbox" id="all" onclick="checkAll();"></th>
+										<th>분류</th>
+										<th>회원 이미지</th>
+										<th>상태</th>
+										<th>데이트 장소 추천</th>
+										<th>남은 기간</th>
+									</tr>
+								</thead>
+								<tbody>
+									<% if(list.isEmpty()){ %>
+									<tr>
+										<td colspan="6">조회된 리스트가 없습니다.</td>
+									</tr>
+									<% } else{ 
+											for(Match r : list){
+											switch(r.getMatchStatus()){
+											case "D": MatchStatus = "상대방의 응답을 기다리고 있습니다."; break;
+											case "C": MatchStatus = "확인 완료"; break;
+											case "S": MatchStatus = "하트 보냄"; break;
+											case "A": MatchStatus = "하트 수락"; break;
+											}
+											/* if(r.getUserNo() == loginUser.getUserNo){
+												inOut = "발신";
+											} else {
+												inOut = "수신";
+											} */
+									%>		
+									<tr>
+										<td><input type="checkbox" id="all" name="checkselect" onclick="checkDetail();"></td>
+										<td>수신/발신</td>
+										<td>이미지 들어가야함</td>
+										<td>
+											<ul class="heartState">
+												<li><%= r.getTargetNo() %></li>
+												<li><%= MatchStatus %></li>
+												<li><%= r.getMatchDate() %></li>
+											</ul>
+										</td>
+										<td>
+											<input type="button" class="defaultBtn subBtn" value="데이트 장소 추천" onclick="">
+										</td>
+										<td>남은 기간 표시</td>
+									</tr>			
+									<% 		}
 										}
-										/* if(r.getUserNo() == loginUser.getUserNo){
-											inOut = "발신";
-										} else {
-											inOut = "수신";
-										} */
-								%>		
-								<tr>
-									<td><input type="checkbox" id="all" name="checkselect" onclick="checkDetail();"></td>
-									<td>수신/발신</td>
-									<td>이미지 들어가야함</td>
-									<td>
-										<ul class="heartState">
-											<li><%= r.getTargetNo() %></li>
-											<li><%= MatchStatus %></li>
-											<li><%= r.getMatchDate() %></li>
-										</ul>
-									</td>
-									<td>
-										<input type="button" class="defaultBtn subBtn" value="데이트 장소 추천" onclick="">
-									</td>
-									<td>남은 기간 표시</td>
-								</tr>			
-								<% 		}
-									}
-								%>
-						</table>
+									%>
+								</tbody>
+							</table>
+						</div>
 					</form>
 				</div>
 				<div class="btnBox btnC" >
@@ -98,7 +103,7 @@
 					<button onclick="location.href='<%= request.getContextPath() %>/list.hh?currentPage=1'">&lt;&lt;</button>
 			
 					<!-- 이전 페이지로 -->
-					<button onclick="location.href='<%= request.getContextPath() %>/list.hh?currentPage=<%= currentPage-1 %>'" id="beforeBtn">&lt;</button>
+					<button onclick="location.href='<%= request.getContextPath() %>/list.hh?currentPage=<%= currentPage-1 %>'" id="beforeBtn">PREV</button>
 					<script>
 						if(<%= currentPage %> <= 1){
 							var before = $('#beforeBtn');
@@ -117,7 +122,7 @@
 					<% } %>
 					
 					<!-- 다음 페이지로 -->
-					<button onclick="location.href='<%= request.getContextPath() %>/list.hh?currentPage=<%= currentPage + 1 %>'" id="afterBtn">&gt;</button>
+					<button onclick="location.href='<%= request.getContextPath() %>/list.hh?currentPage=<%= currentPage + 1 %>'" id="afterBtn">NEXT</button>
 					<script>
 						if(<%= currentPage %> >= <%= maxPage %>){
 							var after = $("#afterBtn");
@@ -143,9 +148,5 @@
 			<% } %>
 		});
 	}); --%>
-	
-	$(function(){
-		$('.heartHistory').addClass('on')
-	});
 </script>
 </html>
