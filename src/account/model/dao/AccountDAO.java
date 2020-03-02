@@ -130,10 +130,10 @@ public class AccountDAO {
 
 	
 	// 아이디 찾기 DAO	
-	public Account searchId(Connection conn, Account findUser) {
+	public String searchId(Connection conn, Account findUser) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		Account a = null;
+		String id = null;
 		
 		String query = prop.getProperty("searchId");
 		//SELECT ID FROM ACCOUNT WHERE USER_NAME=? AND EMAIL=? AND DELETED='N'
@@ -146,7 +146,7 @@ public class AccountDAO {
 			rset = pstmt.executeQuery();
 			
 			if(rset.next()) {
-				a = new Account(rset.getString("ID"));
+				id = rset.getString("ID");
 			}
 			
 		} catch (SQLException e) {
@@ -156,7 +156,7 @@ public class AccountDAO {
 			close(pstmt);
 		}
 		
-		return a;
+		return id;
 	}
 	
 	
