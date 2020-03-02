@@ -14,10 +14,9 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <style>
 .main{
-	position:absolute;
-  	top:15%;
-  	left:12%;
-  	right:10%;
+	display: flex;
+  	align-items: center;
+  	justify-content: center;
 }
 
 .botBox{

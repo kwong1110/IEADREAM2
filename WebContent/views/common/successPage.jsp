@@ -12,20 +12,18 @@
 </head>
 <style>
 .main{
-	position:absolute;
-  	top: 30%;
-  	left:7%;
-}
-
-.botBox{
-	background: #c7eef2;
-	padding: 10px;
-	border-radius: 10px;
+	display: flex;
+  	align-items: center;
+  	justify-content: center;
+  	flex-wrap: wrap;
+  	flex-direction: column;
 }
 </style>
 <body>
 	<div class="main">
-		<h3><%= msg %></h3>
+		<div>
+			<h3><%= msg %></h3>
+		</div>
 		<div class="btnBox">
 			<button class="defaultBtn" onclick="ok();">확인</button>
 		</div>
