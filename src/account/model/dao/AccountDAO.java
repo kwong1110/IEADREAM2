@@ -161,26 +161,24 @@ public class AccountDAO {
 	
 	
 	//비밀번호 찾기 DAO
-	public Account searchPwd(Connection conn, Account account){
-		Account result = null;
+	public String searchPwd(Connection conn, Account account){
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
+		String password = null;
+		
 		
 		String query = prop.getProperty("searchpwd");
 		
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, account.getId());
-			pstmt.setString(2, account.getPassword());
+			pstmt.setString(2, account.getEmail());
 			
 			rset = pstmt.executeQuery();
 			
 			if(rset.next()) {
-				result = new Account();
-				result.setPassword(rset.getString("password"));
-				
+				password = rset.getString("password");	
 			}
-			
 		}catch(Exception e) { 
 			e.printStackTrace();
 		}finally {
@@ -188,7 +186,7 @@ public class AccountDAO {
 			close(pstmt);
 		}
 		
-		return result;
+		return password;
 	}
 
 	public String searchPwd(Account account, Connection conn) {
