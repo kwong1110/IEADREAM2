@@ -4,43 +4,28 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>IEADREAM - CEO</title>
+<title>이어드림 - 오시는 길</title>
+<link rel="stylesheet" href="<%= request.getContextPath() %>/css/common.css">
 <style>
-	a:link { color: black; text-decoration: none}
-    a:visited {color: black;}
-    a:hover{ color : silver;}
-    
-    
-	*{box-sizing: border-box;}
-	.container{min-width: 1000px;}
-	.container .content{padding-left: 200px; padding-right: 200px; overflow: hidden;}
-	.container .content>*{float: left; padding-bottom: 200px; margin-bottom: -200px;}
-	.container .content main{width: 100%;}
-	.container .content nav{width: 200px; margin-left: -100%; left:-200px; position: relative;}
-	.container footer{clear: both;}
-	
-	.menu{background: white;}
-	.menu> li{list-style: none; font-size: 30px; left: 150px; 
-			  display: inline-block; padding: 10px; position: relative;}
-	.menu a{line-height: 75px; color:rgb(51,51,51); display: block;}
-	.menu .link{text-decoration: none;}
-	
-	.subCategory{color: rgb(51, 51, 51); text-decoration: none;}
-	.quickmenu> li{list-style: none; font-size: 20px; left: 30px; padding: 5px; position: relative;}
-	
-    
+	.outer{
+		width: 1000px; height: 600px; background: white;
+		margin-left: auto; margin-right: auto; margin-top: 50px;
+	}
+
 	.container .content main .article{position: relative; float: right;
     margin-right: 400px;}
     
     #loadTable{
-    	border-top : 2px solid black;
-    	width : 500px;
-    	height: 300px;
-    	margin-top: 30px;
+    	    border-top: 2px solid black;
+		    width: 500px;
+		    height: 150px;
+		    margin-top: 30px;
+		    text-align: center;
+		    margin-left: 25%;
     }
-    
-    td{
-    	border-bottom : 1px solid gray;
+    table>tbody>tr>td{
+    	vertical-align: middle;
+    	border-bottom: 1px solid lightgray;
     }
 
 </style>
@@ -51,7 +36,7 @@
 		<div class="wrapper">
 			<div class="main">
 				<div class="pageTitle">
-					<h1>오시는 길</h1>
+					<h2>오시는 길</h2>
 				</div>
 				<div class='mapArea' id="ieaMap">
 					<div id="map" style="width:500px;height:300px;"></div>
