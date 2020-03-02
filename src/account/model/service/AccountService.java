@@ -15,7 +15,7 @@ public class AccountService {
 		Connection conn = getConnection();
 		
 		AccountDAO aDAO = new AccountDAO();
-		int result = aDAO.idCheck(conn, userId, userId);
+		int result = aDAO.idCheck(conn, userId);
 		
 		close(conn);
 		
@@ -77,6 +77,17 @@ public class AccountService {
 		
 		return findPwd;
 		
+	}
+
+	public int emailCheck(String email) {
+		Connection conn = getConnection();
+		
+		AccountDAO aDAO = new AccountDAO();
+		int result = aDAO.emailCheck(conn, email);
+		
+		close(conn);
+		
+		return result;
 	}
 
 }
