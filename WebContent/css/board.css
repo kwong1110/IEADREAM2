@@ -7,9 +7,9 @@
 .topBox{
   	padding: 20px;
 	margin-bottom: 20px;
-	border: 2px solid rgb(177, 232, 237);
+	border: 2px solid;
 	border-radius: 10px;
-	background: rgb(199, 238, 242);
+	background: #f9f9f9;
 	color: rgb(89, 92, 92);
 	font-weight: bold
 }
@@ -24,7 +24,7 @@
 	padding: 3px 7px 4px 7px;
 	border: 0;
 	border-radius: 7px;
-	color: rgb(89, 92, 92);
+	color: rgb(230, 141, 150);
 	font-size: 12px
 }
 .search.search2{

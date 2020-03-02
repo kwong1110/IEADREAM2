@@ -47,14 +47,14 @@
 }
 </style>
 </head>
-<body>
-	<div class="main">
-		<form action="<%= request.getContextPath() %>/manageDelete.mem" method="get">
+<body onload='resizeWindow(this)'>
+	<div class="main" id="mainBox">
+		<form action="<%= request.getContextPath() %>/delete.mwl" method="get">
 			<table class="mainBoard">
 				<thead>
 					<tr>
-						<th>이름</th>
-						<th>회원번호</th>
+						<th>게시글 번호</th>
+						<th>제목</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -63,14 +63,13 @@
 						<td><%= nameArr[i] %></td>
 						<td><%= noArr[i] %></td>
 						
-						<td style="display:none;"><input type="hidden" name="userNo" value="<%= noArr[i] %>"></td>
+						<td style="display:none;"><input type="hidden" name="bNo" value="<%= nameArr[i] %>"></td>
 					</tr>
 				<% } %>
 				</tbody>
 			</table>
 			<div class="deleteCheck">
-				<div>총 <%=nameArr.length %>명 의 회원 탈퇴를 </div>
-				<div>정말로 진행 하시겠습니까?</div>
+				<div>총 <%=nameArr.length %>개 의 게시글삭제를 정말로 진행 하시겠습니까?</div>
 			</div>
 			<div class="btnBox">
 				<button class="defaultBtn" type="submit">확인</button>
@@ -79,4 +78,12 @@
 		</form>
 	</div>
 </body>
+<script>
+function resizeWindow(win)    {
+	var wid = win.document.body.offsetWidth + 100;
+	var hei = win.document.body.offsetHeight + 100;    //30 과 40은 넉넉하게 하려는 임의의 값임
+	
+	win.resizeTo(wid,hei);
+}
+</script>
 </html>

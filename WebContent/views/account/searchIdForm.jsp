@@ -34,8 +34,9 @@
 </style>
 </head>
 <body>
+	<form action="<%= request.getContextPath() %>/Findeid.do" method="post" ></form>
 	<%@ include file="../common/mainmenu.jsp"%>
-	<div class ="outer">
+	<div class ="pageTitle">
 		<h1 style="text-align: center;  margin-top:100px;">아이디 찾기</h1>
 		<br><br>
 		
@@ -47,13 +48,12 @@
 		
 		<form action="<%= request.getContextPath() %>/Findeid.do" method="post">
 			
-			<div class ="textbox">
-		  		<h3 style="text-align: center;">▶이름</h3><input type="text"  class="inputBox" name="userName" placeholder="이름을 입력해주세요" >
-		 
-		 		<h3 style="text-align: center;">▶이메일</h3><input type="text" class="inputBox" name="email" placeholder="이메일을 입력해주세요" >
-			</div>
+		<div class ="textbox">
+		 <h3 style="text-align: center;">▶이름</h3><input type="text"  class="inputBox" name="userName" placeholder="이름을 입력해주세요" >
+		 <h3 style="text-align: center;">▶이메일</h3><input type="text" class="inputBox" name="email" placeholder="이메일을 입력해주세요" >
+		</div>
 		
-			<div class="button">
+			<div class="btnBox">
 				<button type="submit" class="defaultBtn findid" id="btnfindid">아이디 찾기</button>
 			</div>
 		</form>
