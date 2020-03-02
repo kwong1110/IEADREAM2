@@ -63,7 +63,7 @@
 			<div class="wrapper">
 				<div class="main">
 					<div class="pageTitle"><h1>회원가입</h1></div>
-					<form action="<%= request.getContextPath() %>/insert.ac" method="post" class="contents" name="joinForm" onsubmit="return validate();">
+					<form action="<%= request.getContextPath() %>/insert.ac" method="post" class="contents" id="contents" name="joinForm" onsubmit="return validate();">
 						<div class="table">
 							<table>
 								<tr>
@@ -92,7 +92,8 @@
 								</tr>
 								<tr>
 									<td>이메일</td>
-										<td><input type="email" name="email" class="box" required></td>
+										<td><input type="email" name="email" class="box" id="email" required></td>
+										<td><button type="button" id="dubtn" class="defaultBtn" onclick="checkEmail();">중복체크</button></td>
 								</tr>
 								<tr>
 									<td>성별</td>
@@ -139,9 +140,18 @@
 		});
 	});
 	
+	$(function checkEmail(){
+		var isEmUsable = false;
+		var isEmailChecked = false;
+		
+		$('#email').on('change paste keyup', function(){
+			isEmailChecked = false;			
+		});
+	});
+	
 	
 	$(function(){
-		var isId, isPwd1, isPwd2, isName = false;
+		var isId, isEmail, isPwd1, isPwd2, isName = false;
 		
 		$("#joinUserId").change(function(){
 			var idExp = /^[a-zA-Z](?=.*[a-zA-Z])(?=.*[0-9]).{5,11}$/;
@@ -162,25 +172,62 @@
 							$('#joinUserId').css("background","white");
 							isUsable = true;
 							isIdChecked = true;
+							isId = true;
 						} else{
 							alert('이미 사용 중인 아이디입니다.');
 							$('#joinUserId').focus().css("background","pink").val('');
 							isUsable = false;
 							isIdChecked = false;
+							isId = false;
 						}
 					}
 				});
 			}
 		});
 		
+		
+		$("#email").change(function(){
+			var emExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+			var email = $('#email');
+			
+			if(!emExp.test($(this).val())){
+				alert('이메일을 올바르게 입력해주세요.')
+				$(this).focus().css("background","pink").val('');
+				isEmail = false;
+			} else{
+				$.ajax({
+					url: "<%= request.getContextPath()%>/emailCheck.ac",
+					type: "post",
+					data: {email:email.val()},
+					success: function(data){
+						if(data == 'success'){
+							alert('사용 가능한 이메일입니다.');
+							$('#email').css("background","white");
+							isEmUsable = true;
+							isEmailChecked = true;
+							isEmail = true;
+						} else{
+							alert('이미 사용 중인 이메일입니다.');
+							$('#email').focus().css("background","pink").val('');
+							isEmUsable = false;
+							isEmailChecked = false;
+							isEmail = false;
+						}
+					}
+				});
+			}	
+		});
+		
+		
 		function validate(){
-			if(isUsable && isIdChecked){
+			if(isUsable && isIdChecked && isEmUsable && isEmailChecked){
 				return true;
 			} else{
-				alert('아이디 중복확인을 해주세요.');
+				alert('아이디와 이메일 중복확인을 해주세요.');
 				return false;
 			}
 		}
+		
 		
 		$('#joinUserPwd').blur(function(){
 			var pwdExp = /[a-zA-Z](?=.*[a-zA-Z])(?=.*[!@#$%^&*])(?=.*[0-9]).{7,14}/;
@@ -190,7 +237,7 @@
 				$(this).focus().css('background','pink');
 				isPwd1 = false;
 			} else{
-				$('#pwdResult1').text("정상 입력").css('color', 'green');
+				$('#pwdResult1').text("정상 입력").css('color', 'rgb(136, 136, 136)');
 				$(this).css("background","initial");
 				isPwd1 = true;
 			}
@@ -202,7 +249,7 @@
 				$(this).focus().css('background', 'pink');
 				isPwd2 = false;
 			} else{
-				$('#pwdResult2').text("비밀번호 일치").css('color', 'green');
+				$('#pwdResult2').text("비밀번호 일치").css('color', 'rgb(136, 136, 136)');
 				$(this).css("background","initial");
 				isPwd2 = true;
 			}
@@ -217,9 +264,25 @@
 				$(this).focus().css("background", "pink").val('');
 				isName = false;
 			} else{
-				$('#nameResult').text('정상 입력').css('color', 'green');
+				$('#nameResult').text('정상 입력').css('color', 'rgb(136, 136, 136)');
 				$(this).css("background", "initial");
 				isName = true;
+			}
+		});
+		
+		
+		$('#contents').submit(function(){
+			if(isId && isEmail && isPwd1 && isPwd2 && isName){
+				return true;
+			} else{
+				alert('회원가입 폼에 맞춰주세요.');
+				if(!isId) $('#joinUserId').focus();
+				else if(!isEmail) $('#email').focus();
+				else if(!isPwd1) $('#joinUserPwd').focus();
+				else if(!isPwd2) $('#joinUserPwd2').focus();
+				else if(!isName) $('#userName').focus();
+
+				return false;
 			}
 		});
 		

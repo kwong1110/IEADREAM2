@@ -15,7 +15,7 @@ public class AccountService {
 		Connection conn = getConnection();
 		
 		AccountDAO aDAO = new AccountDAO();
-		int result = aDAO.idCheck(conn, userId, userId);
+		int result = aDAO.idCheck(conn, userId);
 		
 		close(conn);
 		
@@ -53,20 +53,17 @@ public class AccountService {
 
 
 	// 아이디 찾기 Service
-	public Account searchid(Account account) {
+	public Account searchId(Account findUser) {
 		Connection conn = getConnection();
-		System.out.println(account);
-
-		
 		AccountDAO aDAO = new AccountDAO();
-		Account findId = aDAO.searchid(account, conn);
+		
+		Account a = aDAO.searchId(conn, findUser);
 		close(conn);
 		
-		System.out.println(findId);
-		
-		return findId;
+		return a;
 	}
 
+	
 	// 비밀번호  찾기 Service
 	public String searchPwd(Account account) {
 		Connection conn = getConnection();
@@ -81,7 +78,18 @@ public class AccountService {
 		return findPwd;
 		
 	}
-	
+
+	public int emailCheck(String email) {
+		Connection conn = getConnection();
+		
+		AccountDAO aDAO = new AccountDAO();
+		int result = aDAO.emailCheck(conn, email);
+		
+		close(conn);
+		
+		return result;
+	}
+
 }
 
 	

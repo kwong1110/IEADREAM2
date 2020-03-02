@@ -30,20 +30,17 @@ public class AccountDAO {
 	}
 	
 	
-	public int idCheck(Connection conn, String userId, String email) {
+	public int idCheck(Connection conn, String userId) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		int result = 0;
 		
 		String query = prop.getProperty("idCheck");
 		//SELECT COUNT(*) FROM ACCOUNT WHERE ID=?
-		//sql에 있는 쿼리 db값을 불러 온다.
 		
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, userId);
-			pstmt.setString(2, email);
-			
 			
 			rset = pstmt.executeQuery();
 			
@@ -132,36 +129,36 @@ public class AccountDAO {
 	}
 
 	
-	// 아이디 찾기 DAO
-	public Account searchid(Account account, Connection conn) {
-		account = null;
+	// 아이디 찾기 DAO	
+	public Account searchId(Connection conn, Account findUser) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String query = prop.getProperty("searchid");
+		Account a = null;
 		
-		try	{
+		String query = prop.getProperty("searchId");
+		//SELECT ID FROM ACCOUNT WHERE USER_NAME=? AND EMAIL=? AND DELETED='N'
+		
+		try {
 			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, account.getId());
-			pstmt.setString(2, account.getEmail());
+			pstmt.setString(1, findUser.getUserName());
+			pstmt.setString(2, findUser.getEmail());
 			
 			rset = pstmt.executeQuery();
-					
-			if(rset.next()) {
-				account = new Account();
-				account.setId(rset.getString("id"));
-				account.setEmail(rset.getString("email"));
-				
-			}
-			System.out.println(account);
 			
-		}catch(Exception e) { 
+			if(rset.next()) {
+				a = new Account(rset.getString("ID"));
+			}
+			
+		} catch (SQLException e) {
 			e.printStackTrace();
-		}finally {
+		} finally {
 			close(rset);
 			close(pstmt);
 		}
-		return account;
+		
+		return a;
 	}
+	
 	
 	//비밀번호 찾기 DAO
 	public Account searchPwd(Connection conn, Account account){
@@ -277,6 +274,37 @@ public class AccountDAO {
 		
 		return result;
 	}
+
+
+	public int emailCheck(Connection conn, String email) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int result = 0;
+		
+		String query = prop.getProperty("emailCheck");
+		//SELECT COUNT(*) FROM ACCOUNT WHERE EMAIL=?
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, email);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				result = rset.getInt(1);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		
+		return result;
+	}
+
 	
 }
 	

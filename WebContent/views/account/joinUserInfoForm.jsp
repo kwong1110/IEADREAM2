@@ -160,39 +160,39 @@
                 <tr>
                   <td class="itemName" id="">체형</td>
                   <td>
-                    <label><input type="radio" name="shape" value="slim">마름</label>
-                    <label><input type="radio" name="shape" value="normal">보통</label>
-                    <label><input type="radio" name="shape" value="chubby">통통</label>
-                    <label><input type="radio" name="shape" value="muscular">근육질</label>
-                    <label><input type="radio" name="shape" value="glamour">글래머</label>
+                    <label><input type="radio" name="shape" value="마름">마름</label>
+                    <label><input type="radio" name="shape" value="보통">보통</label>
+                    <label><input type="radio" name="shape" value="통통">통통</label>
+                    <label><input type="radio" name="shape" value="근육질">근육질</label>
+                    <label><input type="radio" name="shape" value="글래머">글래머</label>
                   </td>
                 </tr>
                 <tr>
                   <td class="itemName" id="">스타일</td>
                   <td>
-                    <label><input type="radio" name="style" value="cute">귀여운</label>
-                    <label><input type="radio" name="style" value="intellect">지적인</label>
-                    <label><input type="radio" name="style" value="sexy">섹시한</label>
-                    <label><input type="radio" name="style" value="warm">따뜻한</label>
-                    <label><input type="radio" name="style" value="elegant">우아한</label>
-                    <label><input type="radio" name="style" value="tough">터프한</label>
+                    <label><input type="radio" name="style" value="귀여운">귀여운</label>
+                    <label><input type="radio" name="style" value="지적인">지적인</label>
+                    <label><input type="radio" name="style" value="섹시한">섹시한</label>
+                    <label><input type="radio" name="style" value="따뜻한">따뜻한</label>
+                    <label><input type="radio" name="style" value="우아한">우아한</label>
+                    <label><input type="radio" name="style" value="터프한">터프한</label>
                   </td>
                 </tr>
                 <tr>
                   <td class="itemName" id="">종교</td>
                   <td>
-                    <label><input type="radio" name="religion" value="christian">기독교</label>
-                    <label><input type="radio" name="religion" value="catholic">천주교</label>
-                    <label><input type="radio" name="religion" value="buddhism">불교</label>
-                    <label><input type="radio" name="religion" value="none">무교</label>
-                    <label><input type="radio" name="religion" value="etc">기타</label>
+                    <label><input type="radio" name="religion" value="기독교">기독교</label>
+                    <label><input type="radio" name="religion" value="천주교">천주교</label>
+                    <label><input type="radio" name="religion" value="불교">불교</label>
+                    <label><input type="radio" name="religion" value="무교">무교</label>
+                    <label><input type="radio" name="religion" value="기타">기타</label>
                   </td>
                 </tr>
                 <tr>
                   <td class="itemName" id="">음주 습관</td>
                   <td>
                     <label><input type="radio" name="drink" value="3">주 3회</label>
-                    <label><input type="radio" name="drink" value="2">주 1회</label>
+                    <label><input type="radio" name="drink" value="2">주 1~2회</label>
                     <label><input type="radio" name="drink" value="1">월 1회</label>
                     <label><input type="radio" name="drink" value="0">안 마심</label>
                   </td>
@@ -207,14 +207,14 @@
                 <tr>
                   <td class="itemName" id="">직업</td>
                   <td>
-                    <label><input type="radio" name="job" value="student">학생</label>
-                    <label><input type="radio" name="job" value="office">사무직</label>
-                    <label><input type="radio" name="job" value="research">연구직</label>
-                    <label><input type="radio" name="job" value="education">교육직</label>
-                    <label><input type="radio" name="job" value="art">예술</label>
-                    <label><input type="radio" name="job" value="service">서비스</label>
-                    <label><input type="radio" name="job" value="profession">전문직</label>
-                    <label><input type="radio" name="job" value="etc">기타</label>
+                    <label><input type="radio" name="job" value="학생">학생</label>
+                    <label><input type="radio" name="job" value="사무직">사무직</label>
+                    <label><input type="radio" name="job" value="연구직">연구직</label>
+                    <label><input type="radio" name="job" value="교육직">교육직</label>
+                    <label><input type="radio" name="job" value="예술">예술</label>
+                    <label><input type="radio" name="job" value="서비스">서비스</label>
+                    <label><input type="radio" name="job" value="전문직">전문직</label>
+                    <label><input type="radio" name="job" value="기타">기타</label>
                   </td>
                 </tr>
                 <tr>

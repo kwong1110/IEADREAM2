@@ -8,20 +8,24 @@ import="idealType.model.service.*"
 
 %>
 <%
-	
+
+	Account a = (Account)session.getAttribute("loginUser");
 	MatchService ms = new MatchService();
 	UserService us = new UserService();
-	
+	 
+	int userNo = a.getUserNo();
+	int matchNo = Integer.parseInt(request.getParameter("matchNo"));
 	int targetNo = ms.getMatchList(userNo)[matchNo].getTargetNo();
+	int sync = (int)Math.round(100*ms.getMatchList(userNo)[matchNo].getSync());
 	
 	Account ac = us.selectAccount(targetNo);
-	UserInfo ui = us.selectUserInfo(targetNo); 
+	UserInfo ui = us.selectUserInfo(targetNo);
 	
 	String name = ac.getUserName();
-		String nameVal = null;
 		
 	String hello = ui.getHello();
-		int height = ui.getHeight();
+	
+	int height = ui.getHeight();
 		String hVal = null;
 		switch(height) {
 		case 150: hVal = "155 이하"; break;
@@ -128,7 +132,7 @@ import="idealType.model.service.*"
 		 case 60: reVal = "제주"; break;
 		 }
 		 
-	 String[] interestVal = ui.getInterest(); // 가져온 배열
+	 String[] interestVal = ui.getInterest();
 
 %>    
     
@@ -365,13 +369,13 @@ import="idealType.model.service.*"
         <section id="summary" style="display: flex">
           <article id="sync" style="text-align: center; margin-left: 40%;">
             <label style="margin:10px;">일치율</label>
-            <label>65%</label>
+            <label><%= sync %>%</label>
             <div class="graph">
-                <strong class="bar" style="width: 65%;"></strong>
+                <strong class="bar" style="width: <%= sync %>%;"></strong>
             </div>
           </article>
           <article id="listNo" style="margin-left: 30%;">
-            <h3>1 / 5</h3>
+            <h3><%= matchNo %> / 5</h3>
           </article>
         </section>
         <section id="itemProfile" style="display: flex;">
@@ -381,7 +385,7 @@ import="idealType.model.service.*"
           <article id="hello" style="text-align:center; margin-left:30px;">
             <label>소갯말</label><br>
             <textarea style="width: 500px; height:200px; margin-top :15px; resize:none;;" readonly>
-            
+            	<%= hello %>
             </textarea>
           </article>
         </section>
@@ -389,7 +393,7 @@ import="idealType.model.service.*"
           <article>
             <div class="itemBox">
               <div class="itemName" id="">이름</div>
-              <div class="itemValue" id="name"><%= nameVal %></div>
+              <div class="itemValue" id="name"><%= name %></div>
             </div>
             <div class="itemBox">
                 <div class="itemName" id="">나이</div>
@@ -431,29 +435,15 @@ import="idealType.model.service.*"
                 <div class="itemName" id="">흡연</div>
                 <div class="itemValue" id="smoke"><%= sVal %></div>
             </div>
-            
+			<%
+			for(int i = 0; i < interestVal.length; i++){
+			%>
             <div class="itemBox">
                 <div class="itemName" id="">관심분야</div>
-                <div class="itemValue" id="interest1"><%=interestVal[0] %></div>
+                <div class="itemValue" id="interest[i]"><%= interestVal[i] %></div>
             </div>
-            <div class="itemBox">
-                <div class="itemName" id="">관심분야</div>
-                <div class="itemValue" id="interest2"><%=interestVal[1] %></div>
-            </div>
-            <div class="itemBox">
-                <div class="itemName" id="">관심분야</div>
-                <div class="itemValue" id="interest3"><%=interestVal[2] %></div>
-            </div>
-            <div class="itemBox">
-                <div class="itemName" id="">관심분야</div>
-                <div class="itemValue" id="interest1"><%=interestVal[3] %></div>
-            </div>
-            <div class="itemBox">
-                <div class="itemName" id="">관심분야</div>
-                <div class="itemValue" id="interest1"><%=interestVal[4] %></div>
-            </div>
+			<% } %>
 			
-
         </article>
         </section>
         <section id="move" style="display:flex;">

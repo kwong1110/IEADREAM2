@@ -52,7 +52,6 @@ public class fillMatchListServlet extends HttpServlet {
 				stack++;
 			}
 		}
-
 		Match[] newMlist = ms.searchMatchList(userNo); // 빈 공간 채워넣기
 		for (int i = 0; stack+i < 5 ; i++) {
 			ms.insertMatch(newMlist[i]);
