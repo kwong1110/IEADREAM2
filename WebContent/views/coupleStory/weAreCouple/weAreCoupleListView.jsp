@@ -28,6 +28,7 @@
 	.main{width: 80%; height: 100%;}
 	.pageTitle{margin: 1em auto;}
 	#listArea{text-align: center;width: 800px;}
+	.contents{height: 400px;border-bottom: 1px solid rgb(224,224,224);}
 	.tableArea tr { width: -webkit-fill-available;}
 	.tableArea th {/* 게시판제목라인 */
 		padding:12px 0;
@@ -83,7 +84,7 @@
 					<!-- 검색결과 페이징 -->
 					<%if(!list.isEmpty()){ %>
 					<button onclick="location.href='<%= request.getContextPath() %>/list.wac?currentPage=1'">&lt;&lt;</button>
-					<button onclick="location.href='<%= request.getContextPath() %>/list.wac?currentPage=<%= currentPage-1 %>'" id="beforeBtn">PREV<button>
+					<button onclick="location.href='<%= request.getContextPath() %>/list.wac?currentPage=<%= currentPage-1 %>'" id="beforeBtn">PREV</button>
 						<script>
 							if(<%= currentPage %> <= 1){
 								var before = $('#beforeBtn');
