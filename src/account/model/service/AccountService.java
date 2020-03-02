@@ -53,14 +53,14 @@ public class AccountService {
 
 
 	// 아이디 찾기 Service
-	public Account searchId(Account findUser) {
+	public String searchId(Account findUser) {
 		Connection conn = getConnection();
 		AccountDAO aDAO = new AccountDAO();
 		
-		Account a = aDAO.searchId(conn, findUser);
+		String id = aDAO.searchId(conn, findUser);
 		close(conn);
 		
-		return a;
+		return id;
 	}
 
 	
