@@ -132,58 +132,56 @@ public class AccountDAO {
 	}
 
 	
-	// 아이디 찾기 DAO
-	public Account searchid(Account account, Connection conn) {
-		account = null;
+	// 아이디 찾기 DAO	
+	public Account searchId(Connection conn, Account findUser) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String query = prop.getProperty("searchid");
+		Account a = null;
 		
-		try	{
+		String query = prop.getProperty("searchId");
+		//SELECT ID FROM ACCOUNT WHERE USER_NAME=? AND EMAIL=? AND DELETED='N'
+		
+		try {
 			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, account.getId());
-			pstmt.setString(2, account.getEmail());
+			pstmt.setString(1, findUser.getUserName());
+			pstmt.setString(2, findUser.getEmail());
 			
 			rset = pstmt.executeQuery();
-					
-			if(rset.next()) {
-				account = new Account();
-				account.setId(rset.getString("id"));
-				account.setEmail(rset.getString("email"));
-				
-			}
-			System.out.println(account);
 			
-		}catch(Exception e) { 
+			if(rset.next()) {
+				a = new Account(rset.getString("ID"));
+			}
+			
+		} catch (SQLException e) {
 			e.printStackTrace();
-		}finally {
+		} finally {
 			close(rset);
 			close(pstmt);
 		}
-		return account;
+		
+		return a;
 	}
 	
+	
 	//비밀번호 찾기 DAO
-	public Account searchPwd(Connection conn, Account account){
-		Account result = null;
+	public String searchPwd(Connection conn, Account account){
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
+		String password = null;
+		
 		
 		String query = prop.getProperty("searchpwd");
 		
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, account.getId());
-			pstmt.setString(2, account.getPassword());
+			pstmt.setString(2, account.getEmail());
 			
 			rset = pstmt.executeQuery();
 			
 			if(rset.next()) {
-				result = new Account();
-				result.setPassword(rset.getString("password"));
-				
+				password = rset.getString("password");	
 			}
-			
 		}catch(Exception e) { 
 			e.printStackTrace();
 		}finally {
@@ -191,7 +189,7 @@ public class AccountDAO {
 			close(pstmt);
 		}
 		
-		return result;
+		return password;
 	}
 
 	public String searchPwd(Account account, Connection conn) {
@@ -277,6 +275,7 @@ public class AccountDAO {
 		
 		return result;
 	}
+
 	
 }
 	

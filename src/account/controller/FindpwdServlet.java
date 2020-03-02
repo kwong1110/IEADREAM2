@@ -37,13 +37,13 @@ public class FindpwdServlet extends HttpServlet {
 		
 	
 		Account findUser = new Account(userId, email);
-		String account = new AccountService().searchPwd(findUser);
+		String password = new AccountService().searchPwd(findUser);
 		
 		String page ="";
-		if (account != null){
+		if (password != null){
 			page = "views/account/searchpwdForm.jsp";
 			System.out.println("비밀번호 찾기 완료!!");
-			request.setAttribute("account", account);
+			request.setAttribute("passoword", password);
 			
 		}else {
 			page = "views/common/errorPage.jsp";
