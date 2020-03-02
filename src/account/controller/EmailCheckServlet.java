@@ -1,8 +1,8 @@
 package account.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
-import javax.security.auth.login.AccountException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,19 +10,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import account.model.service.AccountService;
-import account.model.vo.Account;
 
 /**
- * Servlet implementation class FindidServlet
+ * Servlet implementation class EmailCheckServlet
  */
-@WebServlet("/Findeid.do")
-public class FindidServlet extends HttpServlet {
+@WebServlet("/emailCheck.ac")
+public class EmailCheckServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FindidServlet() {
+    public EmailCheckServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,30 +30,23 @@ public class FindidServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-			request.setCharacterEncoding("UTF-8");
-			
-			String userName = request.getParameter("userName");
-			String email = request.getParameter("email");
-			
-			Account findUser = new Account();
-			findUser.setUserName(userName);
-			findUser.setEmail(email);
-			
-			String id = new AccountService().searchId(findUser);
-			
-			String page = null;
-			if(id != null) {
-				page = "views/account/searchidFind.jsp";
-				request.setAttribute("id", id);
-			} else {
-				page = "views/common/errorPage.jsp";
-				request.setAttribute("msg", "아이디 찾기에 실패하였습니다.");
-			}
-			
-			request.getRequestDispatcher(page).forward(request, response);
-
-	}
+		String email = request.getParameter("email");
 		
+		int result = new AccountService().emailCheck(email);
+		
+		PrintWriter out = response.getWriter();
+		
+		if(result > 0) {
+			out.append("fail");
+		} else {
+			out.append("success");
+		}
+		
+		out.flush();
+		out.close();
+	
+	}
+
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */

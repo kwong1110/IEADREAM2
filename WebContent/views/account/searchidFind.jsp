@@ -2,7 +2,7 @@
     pageEncoding="UTF-8" import="account.model.vo.Account"%>
     
  <%
-	Account a = (Account)request.getAttribute("account");
+	String id = (String)request.getAttribute("id");
 %>
  
  
