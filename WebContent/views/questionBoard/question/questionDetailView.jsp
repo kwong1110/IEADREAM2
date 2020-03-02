@@ -24,7 +24,7 @@
 	}
 	.tableArea{width:670px;	height:350px;}
 	button:hover{cursor: pointer;}
-
+	button, input[type=button]{cursor: pointer;}
 	th, td, thead{
    	 	border-radius: 5px;
 	}
@@ -112,7 +112,7 @@
 							</tbody>
 						</table>
 					
-						<div id="replyArea" style="background: #f9f9f9;margin-left: 20px; margin-bottom: 10px;">
+						<div id="replyArea" style="background: #f9f9f9; height:60px;margin-left: 20px; margin-bottom: 10px;" >
 							<table id="replyTable">
 								<tr>
 									<th id="manager" style="vertical-align: middle; margin-left:10px">관리자</th>
@@ -129,7 +129,7 @@
 						</div>
 						<% if(loginUser.getGrade() != 0){ %> 
 						<div class="btnBox">
-							<input type="submit" class="defaultBtn" id="updateBtn" value="수정">
+							<button type="submit" class="defaultBtn" id="updateBtn" >수정</button>
 							<input type="button"  class="defaultBtn" onclick="location.href='<%= request.getContextPath() %>/list.qu?userNo=<%= loginUser.getUserNo()%>'" id="menuBtn" value="메뉴로" >
 							<input type="button" class="defaultBtn"  onclick="deleteBoard();" id="deleteBtn" value="삭제">
 						</div>
