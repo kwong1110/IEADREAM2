@@ -1,7 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="account.model.vo.Account"%>
+    
+   
+ <%
+	Account account = (Account)request.getAttribute("account");
+%>
+     
+    
 <!DOCTYPE html>
 <html>
+
 <head>
 <meta charset="UTF-8">
 <title>아이디 찾기</title>
@@ -34,7 +42,7 @@
 	<br><br>
 	<h5 style="text-align: center;">가입할때 입력하신 이메일 주소를 통해 아이디를 확인하실수 있습니다</h5>
 	<br><br>
-	<form action="<%= request.getContextPath() %>/Findeid.do" method="post"></form>
+	
 	</div>
 	
 	<div class ="textbox">
