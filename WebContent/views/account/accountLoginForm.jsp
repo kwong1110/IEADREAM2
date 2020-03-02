@@ -37,12 +37,12 @@
 	            <form id="loginForm" action="<%= request.getContextPath() %>/login.me" onsubmit="return validate();" method="post">
 		            <div class="loginBox">
 		            	<div>
-		
-		                <input type="text" class="inputBox" name="userId" id="userId2" placeholder="아이디">
+						
+		                <label>아이디</label>&nbsp;&nbsp;&nbsp;<input type="text" class="inputBox" name="userId" id="userId2" placeholder="ID">
 		                </div>
 		                <div>
 		              
-		                <input type="password" class="inputBox" name="userPwd" id="userPwd2" placeholder="비밀번호" >
+		                <label>비밀번호</label><input type="password" class="inputBox" name="userPwd" id="userPwd2" placeholder="PASSWORD" >
 		                </div>
 		                
 		                <br>
