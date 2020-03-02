@@ -29,17 +29,21 @@ public class AccountDAO {
 		}
 	}
 	
-	public int idCheck(Connection conn, String userId) {
+	
+	public int idCheck(Connection conn, String userId, String email) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		int result = 0;
 		
 		String query = prop.getProperty("idCheck");
 		//SELECT COUNT(*) FROM ACCOUNT WHERE ID=?
+		//sql에 있는 쿼리 db값을 불러 온다.
 		
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, userId);
+			pstmt.setString(2, email);
+			
 			
 			rset = pstmt.executeQuery();
 			
@@ -128,10 +132,8 @@ public class AccountDAO {
 	}
 
 	
-	// 아이디 찾기 DAO
-	
+	// 아이디 찾기 DAO	
 	public Account searchId(Connection conn, Account findUser) {
-		
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		Account a = null;

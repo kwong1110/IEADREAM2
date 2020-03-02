@@ -29,7 +29,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>이어드림 - 우리커플됐어요</title>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/common.css">
 <style>
 	.outer {
@@ -44,12 +44,15 @@
 		width:150px; height:100px; border:2px dashed darkgray;
 		text-align:center; display:table-cell; vertical-align:middle;
 	}
-	#updateBtn, #cancelBtn{background: #D1B2FF; width: 80px; height: 25px; color: white; border-radius: 15px; text-align: center; display: inline-block;}
-	#cancelBtn{background: #B2CCFF}
 	#updateBtn:hover, #cancelBtn:hover{cursor: pointer;}
 	#insertThumbTable{margin: auto;}
 	#titleImg,#contentImg1{width:400px; height:300px;}
-	
+	 table>thead>tr>th {
+	  background:#f9f9f9;  
+    }
+     table>tbody>tr>th {
+     	background:#f9f9f9;  
+     }
 	
 	textarea{
 		resize: none;
@@ -58,7 +61,7 @@
 		color:red;
 	}
 	#updateTitle, .updateWac{
-   	border-radius: 10px;
+   	border-radius: 5px;
    	width:80%;
    	padding: 5px;
    	border:1px solid lightgray;
@@ -68,9 +71,9 @@
    }
    .updateRwac{
    margin: 10px;
-   	border-radius: 10px;
+   	border-radius: 5px;
    	width:80%;
-   	height: 70px;
+   height: 100px;
 	    border: 1px solid lightgray
    }
      .tableArea{
@@ -92,13 +95,13 @@
 		<div class="wrapper">
 			<div class="main">
 			<div class="pageTitle">
-				<h1>우리 커플 됐어요</h1>
+				<h2>우리 커플 됐어요</h2>
 			</div>
 			<form action="<%= request.getContextPath() %>/update.wac" method="post" encType="multipart/form-data"><!-- 파일올리는 거기 때문에 -->
 				<div class="tableArea">
 					<div class="review">
 						<div class="titleArea">
-							<label>제목</label><input type="hidden" name="postNo" value="<%= request.getParameter("postNo") %>">
+							<label style="background:#f9f9f9; ">제목</label><input type="hidden" name="postNo" value="<%= request.getParameter("postNo") %>">
 								<input type="text" size="45" name="title" id="updateTitle" value="<%=title %>">
 						</div>
 				 
@@ -200,8 +203,8 @@
 				</div>
 				<br>
 				<div class="btnArea">
-					<button type="button" id="updateBtn">수정완료</button>
-					<div id="cancelBtn" onclick="location.href='<%= request.getContextPath() %>/list.wac'">취소하기</div>
+					<button class="defaultBtn" id="updateBtn">수정완료</button>
+					<input type="button" id="cancelBtn" class="defaultBtn" onclick="location.href='<%= request.getContextPath() %>/list.wac'" value="취소">
 				</div>
 			</form>
 			</div>
@@ -231,6 +234,7 @@
 		});
 	</script>
 </body>
+<%@ include file="../../common/footer.jsp"%> 
 </html>
 
 

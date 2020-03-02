@@ -17,71 +17,27 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>우리 커플 됐어요</title>
+<title>이어드림 - 우리 커플 됐어요</title>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/common.css">
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/board.css">
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <style>
 	.outer{
 		width: 1000px; height: 500px; background:white;
 		margin-left: auto; margin-right: auto; margin-top: 50px;
 	} 
-	#listArea{text-align: center;}
-	.tableArea{width:650px;	margin-left:auto;	margin-right:auto;}
-	th{border-bottom: 1px solid grey;}
-.pagingArea button{border-radius: 15px; background: #D5D5D5;}
-	button:hover{cursor: pointer;}
-	#insertBtn{
-		border-radius: 10px;
-		background:  rgb(123, 164, 213);
-		padding: 10px;
-		color: white;
-		font-size: 15px;
-		text-align: center;
-		border:none;
-	}
+	.main{width: 80%; height: 100%;}
+	.pageTitle{margin: 1em auto;}
+	#listArea{text-align: center;width: 800px;}
+	.tableArea tr { width: -webkit-fill-available;}
+	.tableArea th {/* 게시판제목라인 */
+		padding:12px 0;
+		border-top:1px solid rgb(136, 136, 136); /* 상단라인색 */
+		border-bottom:1px solid rgb(224, 224, 224); /* 하단라인색 */
+		background:#f9f9f9;  /* 제목배경색 */ 
+		color:rgb(230, 141, 150); font-size:1em;/* 제목글자크기 */ 
+		letter-spacing:0.1em}/* 제목띠어쓰기간격 */ 
+	.tableArea td {line-height: 10px;}
 	
-		/* table*/
-		th {
-	    width: 150px;
-	    padding: 10px;
-	    font-weight: bold;
-	    vertical-align: top;
-	    border-bottom: 1px solid #ccc;
-	    border-top: 1px solid #ccc;
-	}
-	td {
-    	width: 350px;
-    	padding: 10px;
-    	vertical-align: top;
-    	border-bottom: 1px solid #ccc;
-    	text-align: center;
-	}
-	#writeButton{
-		width: 70px;
-		height: 30px;
-		margin-right: 150px;
-		float:right;
-		
-	}
-	#category{
-		height: 40px;
-		text-align: center;
-		border-radius: 10px
-	}
-	#text{
-		height: 40px;
-		width: 300px;
-		border-radius: 10px;
-	}
-	table thead tr{
-		border-bottom: 1px solid rgb(123, 164, 213);
-		height:25px;
-	}
-	.pagingArea button{border-radius: 15px; background: #D5D5D5;}
-	.clear-both{
-		height: 10px;
-	}
 </style>
 </head>
 <body>
@@ -89,16 +45,13 @@
 	
 	<div class ="outer">
 		<div class="wrapper">
-			
 			<div class="main">
-			<%-- <%@ include file="../../common/sidemenu.jsp" %> --%>
 				<div class="pageTitle">
-					<h1>우리 커플 됐어요</h1>
+					<h2>우리 커플 됐어요</h2>
 				</div>
 				<div class="contents">
 					<div class="tableArea">
-						<table class="mainBoard" id="listArea">
-							<thead>
+						<table  id="listArea">
 								<tr>
 									<th width="70px">글번호</th>
 									<th  width="300px">제목</th>
@@ -106,8 +59,6 @@
 									<th  width="70px">조회수</th>
 									<th  width="170px">작성일시</th>
 								</tr>
-							</thead>
-							<tbody>
 							<% if(list.isEmpty()){ %>
 								<tr>
 									<td colspan="5">조회된 커플 리뷰가 없습니다.</td>
@@ -123,7 +74,6 @@
 								</tr>
 							<% 		} 
 								}%>
-							</tbody>
 						</table>
 					</div>
 				</div>
@@ -161,13 +111,14 @@
 						<button onclick="location.href='<%= request.getContextPath() %>/list.wac?currentPage=<%= maxPage %>'">&gt;&gt;</button>			
 						
 						<% } %>
-						<!-- 로그인한 일반 회원만 작성하기 할 수 있도록 -->
+						
+					</div>
+					<!-- 로그인한 일반 회원만 작성하기 할 수 있도록 -->
 						<div class='btnBox btnR' align='right'>
 							 <% if(loginUser != null && loginUser.getGrade() != 0){ %> 
-							<button onclick='location.href="views/coupleStory/weAreCouple/weAreCoupleInsertForm.jsp"'>작성하기</button>
+							<button class="defaultBtn" onclick='location.href="views/coupleStory/weAreCouple/weAreCoupleInsertForm.jsp"'>작성하기</button>
 							<% } %> 
 						</div>
-					</div>
 				</div>
 			</div>
 		</div>
@@ -204,6 +155,7 @@
 
 		</script>
 </body>
+<%@ include file="../../common/footer.jsp" %>
 </html>
 
 

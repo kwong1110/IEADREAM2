@@ -4,21 +4,51 @@ import static common.JDBCTemplate.*;
 
 import java.sql.Connection;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 import account.model.dao.UserPreferDAO;
 import account.model.dao.UserInfoDAO;
 import account.model.vo.UserPrefer;
 import board.model.vo.Photo;
+import account.model.vo.Account;
 import account.model.vo.UserInfo;
 import account.model.vo.UserPhoto;
 
 
 public class UserService {
 	
+	public Account selectAccount(int userNo) {
+		Connection conn = getConnection();
+		UserInfoDAO uiDAO = new UserInfoDAO();
+		Account result = uiDAO.selectAccount(conn, userNo);
+		
+		return result;
+	}
+	
 	public UserInfo selectUserInfo(int userNo) {
 		Connection conn = getConnection();
 		UserInfoDAO uiDAO = new UserInfoDAO();
 		UserInfo result = uiDAO.selectUserInfo(conn, userNo);
+		
+		Date b = uiDAO.selectAccount(conn, userNo).getBirth();
+		Calendar birth = Calendar.getInstance();
+	    birth.setTime(b);
+		
+		Calendar current = Calendar.getInstance();
+		int currentYear  = current.get(Calendar.YEAR);
+		int currentMonth = current.get(Calendar.MONTH) + 1;
+		int currentDay   = current.get(Calendar.DAY_OF_MONTH);
+		
+		int birthYear  = birth.get(Calendar.YEAR);
+		int birthMonth = birth.get(Calendar.MONTH) + 1;
+		int birthDay   = birth.get(Calendar.DAY_OF_MONTH);
+		
+		int age = currentYear - birthYear;
+		if (birthMonth * 100 + birthDay > currentMonth * 100 + currentDay) { age--;}
+
+		result.setAge(age);
+		
 		return result;
 	}
 	

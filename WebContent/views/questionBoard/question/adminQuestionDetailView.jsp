@@ -10,22 +10,22 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>문의게시판</title>
+<title>이어드림 - 1:1문의</title>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/common.css">
 <style>
 
 	.outer{
-		width: 1000px; height: 500px; background: rgba(255, 255, 255, 0.4); border: 5px solid white;
-		margin-left: auto; margin-right: auto; margin-top: 50px;
+		width: 1000px; height: 600px; background: white;
+		margin-left: auto; margin-right: auto; margin-top: 50px; margin-bottom: 50px;
 	}
+		.main{width: 80%; height: 100%;}
 	#listArea{text-align: center;}
-	.tableArea{width:650px;	height:350px; margin-left:auto;	margin-right:auto;}
+	.listArea{width:650px;	height:350px; margin-left:auto;	margin-right:auto;}
 	th, td, thead{
 		    border: 1px solid gray;
-   	 border-radius: 10px;
+   	 border-radius: 5px;
 	}
 	textarea, #title, #category, #Mcommand{
-		border-radius: 10px;
 		font-size:15px;
 		font-family:"ON I고딕";
 		outline: none;
@@ -36,29 +36,54 @@
    		border: none;
 	}
 	#manager{
-		background: rgb(123, 164, 213);
+		    background: #f5eded;
+    width: 70px;
+    height: 100%;
+    text-align: center;
+    vertical-align: middle
 	}
-	/* #updateBtn, #insertBtn{
-		border-radius: 10px;
-		background:  rgb(123, 164, 213);
-		padding: 10px;
-		color: white;
-		font-size: 15px;
-		text-align: center;
-		border:none;
-		width:100%;
-		height: 100%;
+	#Mcommand{
+		background:#f9f9f9;
 	}
-	#deleteBtn ,#menuBtn{
-		border-radius: 10px;
-		background:rgb(230, 141, 150);
-		padding: 10px;
-		color: white;
-		font-size: 15px;
-		text-align: center;
-		border:none;
-	} */
-	
+	.tableArea {table-layout:fixed;}
+	.tableArea tr { width: -webkit-fill-available;}
+	.tableArea th {/* 게시판제목라인 */
+		padding:12px 0;
+		border-top:1px solid rgb(136, 136, 136); /* 상단라인색 */
+		border-bottom:1px solid rgb(224, 224, 224); /* 하단라인색 */
+		background:#f9f9f9;  /* 제목배경색 */ 
+		color:rgb(51, 51, 51); font-size:1em;/* 제목글자크기 */ 
+		letter-spacing:0.1em}/* 제목띠어쓰기간격 */ 
+	.tableArea td {line-height: 10px;}
+	#th_title {width:10%; text-align:rigth;border-top:1px solid rgb(136, 136, 136);}
+	#td_title{width: 30%; border-top:1px solid rgb(136, 136, 136);}
+	#th_writer {width:10%;text-align:left; border-top:1px solid rgb(136, 136, 136);}
+	#td_writer {width:20%;text-align:left; border-top:1px solid rgb(136, 136, 136);}
+	#th_category {width:15%;text-align: center; border-top:1px solid rgb(136, 136, 136);}
+	#category{border-top:1px solid rgb(136, 136, 136);}
+	#th_cate_select{width: 20%;}
+	#con{
+		resize: none;
+    width: 95%;
+    height: 30%;
+    padding: 10px;
+    border: 10px solid #f9f9f9;
+	}
+	.replyArea{
+		background:#f9f9f9;
+		width:657px;
+	}
+	#addReply, #updateBtn, #deleteBtn{
+		margin-bottom: 20px;
+		margin-left: 5px;
+	}
+	#insertReply{
+		resize:none;
+		 width: 400px;
+		  height: 40%;
+		   margin: 10px;
+		    margin-bottom:0;
+	}
 </style>
 </head>
 <body>
@@ -69,57 +94,55 @@
 				<div class="pageTitle">
 					<h1>1:1 문의</h1>
 				</div>
-				<div class="tableArea">
+				<div class="listArea">
 					<form action="<%= request.getContextPath() %>/views/questionBoard/question/questionUpdateForm.jsp"  id="detailForm"  method="post">
-						<table>
-							<thead>
+						<table class="tableArea">
 								<tr>
-									<th width=10%>제목</th>
-									<td width=30%>
+									<th  id="th_title" width=10%>제목</th>
+									<td id="td_title" width=30%>
 										<input type ="hidden" value ="<%= b.getPostNo() %>" name = "postNo">
 										<input type="hidden" id="title" name = "title" value="<%= b.getTitle() %>"><%= b.getTitle() %>							
 									</td>
 									<% if(loginUser.getGrade() == 0) {%>
-									<th>작성자</th>
-									<td>
+									<th id="th_writer">작성자</th>
+									<td id="td_writer">
 										<%= b.getUserId() %>
 									</td>
 									<% } %>
-									<th width=20% id="category" >카테고리</th>
-									<td>
+									<th width=20% id="th_category" >카테고리</th>
+									<td id="category">
 										<%= b.getCategory() %>
 										<input type="hidden" value="<%= b.getCategory() %>" name="category">
 									</td>
 								</tr>
-							</thead>
-							<tbody>
 								<tr>
-									<td colspan="4">
-										<textarea rows="15" cols="60" name="content" style="resize:none; width: 100%; height: 30%;"  readonly ><%= b.getContent() %></textarea>
+									<td colspan="6">
+										<textarea rows="15" cols="60" id="con" name="content" style="resize:none; width: 95%;  height: 30%;"  readonly ><%= b.getContent() %></textarea>
 									</td>
 								</tr>
-							</tbody>
 						</table>
 					
-						<div id="replyArea">
-							<table id="replyTable">
+						<div class="replyArea">
+							<table class="replyTable">
 								<tr>
 									<th id="manager" colspan="2">관리자</th>
 										<% if(r.getAnswerContent() == null) { %>
-										<td id="Mcommand" rowspan = "3" colspan="4" align= center>
-											<textarea id="insertReply"style="resize:none; width: 300px; height: 40%;" placeholder="답변을 남겨주세요."></textarea>
+										<td id="Mcommand" rowspan = "3" colspan="2" align= center>
+											<textarea id="insertReply" placeholder="답변을 남겨주세요."></textarea>
 										</td>
 										<% } else { %>
-										<td id="Mcommand" rowspan = "3" colspan="4" align= center>
-											<textarea id="insertReply" name ="answerContent"style="resize:none; width: 300px; height: 40%;  background: lightgray;" readonly><%= r.getAnswerContent() %></textarea>
+										<td id="Mcommand" rowspan = "3" colspan="2" align= center>
+											<textarea id="insertReply" name ="answerContent"style="resize:none; width: 400px; height: 40%; margin-top: 10px;  background: #f9f9f9; border:1px solid #cababa " readonly><%= r.getAnswerContent() %></textarea>
 										<% } %>
 										
 										</td>
-									<td><input type="button" id="addReply" class="defaultBtn" value="등록"></td>
-									<td><input type="button" id="updateBtn" class="defaultBtn" value="수정"></td>
-									<td><input type="button" onclick="deleteReply();" id="deleteBtn" class="defaultBtn" value="삭제"></td>
+									<th><input type="button" id="addReply" class="defaultBtn" value="등록"></th>
+									<th><input type="button" id="updateBtn" class="defaultBtn" value="수정"></th>
+									<th><input type="button" onclick="deleteReply();" id="deleteBtn" class="defaultBtn" value="삭제"></th>
 								</tr>
 							</table>
+						</div>
+						<div class="btnBox">
 							<input type="button" onclick="location.href='<%= request.getContextPath() %>/Mlist.qu?'" class="defaultBtn" id="menuBtn" value="메뉴로" >
 						</div>
 					</form>
@@ -179,6 +202,7 @@
 					$replyTable = $('#replyTable');
 					alert('등록되었습니다.');
 					$('#insertReply').css('background','lightgray');
+					$('#insertReply').attr('readonly',true);
 					for(var key in data){
 					var $tr= $('<tr>');
 					var $writerTd = $('<td>').text('관리자');
@@ -219,4 +243,5 @@
 			   
 	</script>
 </body>
+<%@ include file="../../common/footer.jsp" %>
 </html>

@@ -15,7 +15,7 @@ public class AccountService {
 		Connection conn = getConnection();
 		
 		AccountDAO aDAO = new AccountDAO();
-		int result = aDAO.idCheck(conn, userId);
+		int result = aDAO.idCheck(conn, userId, userId);
 		
 		close(conn);
 		

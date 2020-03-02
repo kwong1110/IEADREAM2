@@ -18,31 +18,30 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>이어드림 - 1:1문의</title>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/common.css">
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/board.css">
 <style>
+
 	 .outer{
 		width:1000px; background: white;
 		margin-left: auto; margin-right: auto; margin-top: 50px;
 	} 
-	#listArea{text-align: center;}
+	.main{width: 80%; height: 100%;}
+	.pageTitle{margin: 1em auto;}
+	.listAtrea{width: 800px;text-align: center;}
+	.tableArea tr { width: -webkit-fill-available;}
+	.tableArea th {/* 게시판제목라인 */
+		padding:12px 0;
+		border-top:1px solid rgb(136, 136, 136); /* 상단라인색 */
+		border-bottom:1px solid rgb(224, 224, 224); /* 하단라인색 */
+		background:#f9f9f9;  /* 제목배경색 */ 
+		color:rgb(230, 141, 150); font-size:1em;/* 제목글자크기 */ 
+		letter-spacing:0.1em}/* 제목띠어쓰기간격 */ 
+	.tableArea td {line-height: 10px;}
 	th{border-bottom: 1px solid grey;}
-	.pagingArea button{border-radius: 15px; background: #D5D5D5;}
-	.searchArea{margin-right: 50px;}
-	.searchArea button{background: #D1B2FF; border-radius: 5px; color: white; width: 80px; heigth: 25px; text-align: center;}
-	button:hover{cursor: pointer;}
-	#insertBtn{
-		border-radius: 10px;
-		background:  rgb(123, 164, 213);
-		padding: 10px;
-		color: white;
-		font-size: 15px;
-		text-align: center;
-		border:none;
-	}
-	.clear-both{
-		height: 10px;
+	.contents{
+		height: 400px;
 	}
 </style>
 </head>
@@ -57,7 +56,7 @@
 				</div>
 				<div class="contents">
 					<div class="tableArea">
-						<table class="mainBoard" id="listArea">
+						<table id="listArea" style=" width: -webkit-fill-available;">
 							<thead>
 								<tr>
 									<th width="70px">번호</th>
@@ -100,14 +99,13 @@
 					</table>
 				</div>
 			</div>	
-				<div class="clear-both"></div>
 				<!-- 페이징 -->
 				<div class='pagingArea' align='center'>
 						<% if(!list.isEmpty()){ %>
 						<!-- 맨 처음으로 가는 버튼 -->
 						<button onclick="location.href='<%= request.getContextPath() %>/list.qu?userNo=<%= loginUser.getUserNo()%>&currentPage=1'">&lt;&lt;</button>
 						<!-- 이전 페이지로  가는 버튼 -->
-						<button onclick="location.href='<%= request.getContextPath() %>/list.qu?userNo=<%= loginUser.getUserNo()%>&currentPage=<%= currentPage-1 %>'" id="beforeBtn">&lt;</button>
+						<button onclick="location.href='<%= request.getContextPath() %>/list.qu?userNo=<%= loginUser.getUserNo()%>&currentPage=<%= currentPage-1 %>'" id="beforeBtn">PREV</button>
 						<script>
 							if(<%= currentPage %> <= 1){
 								var before = $('#beforeBtn');
@@ -124,7 +122,7 @@
 						<% } %>
 						
 						<!-- 다음 페이지로 가는 버튼 -->
-						<button onclick="location.href='<%= request.getContextPath() %>/list.qu?userNo=<%= loginUser.getUserNo()%>&currentPage=<%= currentPage + 1 %>'" id="afterBtn">&gt;</button>
+						<button onclick="location.href='<%= request.getContextPath() %>/list.qu?userNo=<%= loginUser.getUserNo()%>&currentPage=<%= currentPage + 1 %>'" id="afterBtn">NEXT</button>
 						<script>
 							if(<%= currentPage %> >= <%= maxPage %>){
 								var after= $("#afterBtn");
@@ -134,11 +132,11 @@
 						<!-- 맨 끝으로 가는 버튼 -->
 						<button onclick="location.href='<%= request.getContextPath() %>/list.qu?userNo=<%= loginUser.getUserNo()%>&currentPage=<%= maxPage %>'">&gt;&gt;</button>					
 						<% } %>
-						<div class='searchArea' align='right'>
+					</div>
+					<div class='searchArea' align='right'>
 						<% if(loginUser != null){ %>
 						<button class="defaultBtn" onclick='location.href="views/questionBoard/question/questionInsertForm.jsp"'>작성하기</button>
 						<% } %>
-					</div>
 				</div>
 			</div>
 		</div>
