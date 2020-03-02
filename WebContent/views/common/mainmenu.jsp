@@ -20,8 +20,7 @@
 		font-family: 'LotteMartHappy'; font-style: normal;
 	}
 	* {margin: 0; padding: 0; }
-	body{background:url('<%= request.getContextPath() %>/images/bgbg.jpg') no-repeat center center fixed;
-		background-size: cover;}
+	body{background:white;}
 	
 	.header {
 	height: 100%;
@@ -43,11 +42,12 @@
 	}
 	.topMenu:after {content: ""; display: block; clear: both; }
 	.menu01>li {float: left; width: 12%; vertical-align: middle;}
-	.menu01 span {font-size: 20px; font-weight: bold; vertical-align: middle; padding: 10px}
+	.menu01 span {font-size: 20px; font-weight: bold; vertical-align: middle; padding: 20px 20px 10px 20px; border-bottom: 3px solid pink;}
 	
 	.dept01 {display: none; padding: 20px 0;}
 	            
-	#nop {float: none;}
+	#nop {float: none; margin-top: 15px;}
+	#nop>a{color:black;}
 	            
 	.none:after {content: ""; display: block; clear: both; }
 
@@ -57,7 +57,11 @@
 	#redDot{width:15px; height:15px; border-radius:100%;}
 	.imageBox child{margin:0;}
 	
-	.s-menu{margin-top:1%;}
+	.s-menu{
+		margin-top:1%;
+		color: black;
+		padding: 10px 0px 10px 0px;
+	}
 </style>
 </head>
 <body>
@@ -147,7 +151,7 @@
 										<a href="<%=request.getContextPath()%>/manage.mem">회원 관리</a>
 									</li>
 									<li id="nop">
-										<a href="<%=request.getContextPath()%>/views/myPage/admin/boardManageForm.jsp">게시물 관리</a>
+										<a href="<%=request.getContextPath()%>/manage.bo">게시물 관리</a>
 									</li>
 									<li id="nop">
 										<a href="<%=request.getContextPath()%>/views/myPage/admin/partyManageForm.jsp">파티 관리</a>
@@ -164,16 +168,16 @@
 						<li style="width: 10%; height: 10%">
 							<ul>
 								<li style="margin: 5px;">
-									<span class="imageBox">
+									<span class="imageBox" style="border-bottom: none;">
 										<img id="loginPicture" src='<%=request.getContextPath()%>/images/common/user.png' onclick="goUpdateProfile();"> 
 									</span> 
 									<%-- <span id="alert"> <img id="redDot" src='<%=request.getContextPath()%>/images/common/redDot.png'></span> --%>
 							 	</li>
 							 	<li>
-									<span><%= loginUser.getUserName() %>님</span>
+									<span style="padding: 3px;"><%= loginUser.getUserName() %>님</span>
 								</li>
 								<li style="margin: 5px;">
-									<span id="logoutBtn" onclick="logout();" style="font-size: 10px; padding: 10px;">로그아웃</span>
+									<span id="logoutBtn" onclick="logout();" style="font-size: 10px; padding: 10px; border-bottom: none;">로그아웃</span>
 								</li>
 							</ul>
 						</li>
@@ -215,7 +219,7 @@
 		});
 		
 		function goIndex(){
-			location.href="<%= request.getContextPath()%>/views/common/mainmenu.jsp";
+			location.href="<%= request.getContextPath()%>/index.jsp";
 		}
 		
 		function question(){

@@ -18,7 +18,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>하트 히스토리</title>
+<title>이어드림 - 하트 히스토리</title>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/common.css">
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/board.css">
 <script type="text/javascript" src="<%= request.getContextPath() %>/js/SelectAll.js"></script>

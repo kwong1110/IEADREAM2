@@ -30,7 +30,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>이어드림 - 기본 정보</title>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/common.css">
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/board.css">
 </head>

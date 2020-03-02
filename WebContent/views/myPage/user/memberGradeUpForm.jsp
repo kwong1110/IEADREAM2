@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>정회원 등업</title>
+<title>이어드림 - 정회원 등업</title>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/common.css">
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>

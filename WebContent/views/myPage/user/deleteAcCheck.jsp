@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>이어드림 - 탈퇴</title>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/common.css">
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/board.css">
 </head>
@@ -29,7 +29,7 @@
 							</tr>
 						</table>
 						<div class="btnBox">
-							<input type="submit" value="확인">
+							<input id="ok" onclick="check();" type="submit" value="확인">
 						</div>
 					</form>
 				</div>
@@ -38,15 +38,13 @@
 	</div>
 	
 	<script>
-		<%-- function check() {
+		function check() {
 			if(confirm("정말로 탈퇴하시겠어요? 지금 탈퇴하시면 더이상 이어드림의 서비스를 이용하실 수 없습니다.")) {
-				// 탈퇴 선택 - 탈퇴 서블릿에 값 전달
-				location.href='<%= request.getContextPath() %>/delete.mp';
 			} else {
 				// 탈퇴 취소 -> 내 정보 보기 페이지로 넘어감
 				location.href='<%= request.getContextPath() %>/selectProfileServlet';
 			}
-		} --%>
+		}
 	</script>
 </body>
 <%@ include file="../../common/footer.jsp" %>
