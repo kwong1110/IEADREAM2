@@ -29,9 +29,9 @@
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/board.css">
 <style>
 .main{
-	position:absolute;
-  	top:15%;
-  	left:20%;
+	display: flex;
+  	align-items: center;
+  	justify-content: center;
 }
 
 .botBox{

@@ -125,7 +125,7 @@
 								<li id="nop"><a href="<%= request.getContextPath() %>/updateUser.if">나의 프로필</a></li>
 								<li id="nop"><a href="<%= request.getContextPath() %>/updateUser.pf">이상형 정보</a></li>
 								<li id="nop">
-									<a href="<%=request.getContextPath()%>/views/myPage/user/myWritingListForm.jsp">작성글 조회</a>
+									<a href="<%=request.getContextPath()%>/list.mwl?userNo=<%= loginUser.getUserNo() %>">작성글 조회</a>
 								</li>
 									<% if(loginUser.getGrade() == 2 || loginUser.getGrade() == 0) { // 로그인 + 등급이 관리자 혹은 정회원 %>
 								<li id="nop">
