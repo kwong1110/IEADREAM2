@@ -60,11 +60,11 @@
 	</div>
 </body>
 <script>
-function resizeWindow(win)    {
-	var wid = win.document.body.offsetWidth + 80;
-	var hei = win.document.body.offsetHeight + 100;    //30 과 40은 넉넉하게 하려는 임의의 값임
-	
-	win.resizeTo(wid,hei);
-}
+	function resizeWindow(win)    {
+		var wid = win.document.body.offsetWidth + 80;
+		var hei = win.document.body.offsetHeight + 100;    //80 과 100은 넉넉하게 하려는 임의의 값임
+		
+		win.resizeTo(wid,hei);
+	};
 </script>
 </html>
