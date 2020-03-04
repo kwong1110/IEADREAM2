@@ -217,25 +217,26 @@ public class UserInfoDAO {
 		return result;
 	}
 	
-	public ArrayList<Photo> selectPList(Connection conn, int userNo) {
+	public ArrayList<UserPhoto> selectUserPhoto(Connection conn, int userNo) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
-		ArrayList<Photo> pList = null;
+		ArrayList<UserPhoto> pList = null;
 		
 		String query = prop.getProperty("selectPhoto");
 		try {
 			pstmt = conn.prepareStatement(query);
 			rset = pstmt.executeQuery(query);
-			pList = new ArrayList<Photo>();
+			pList = new ArrayList<UserPhoto>();
 			while(rset.next()) {
-				pList.add(new Photo(rset.getInt("PHOTO_NO"),
-									rset.getInt("USER_NO"),
-									rset.getString("ORIGIN_NAME"),
-									rset.getString("CHANGE_NAME"),
-									rset.getString("FILE_PATH"),
-									rset.getInt("FILE_LEVEL"),
-									rset.getString("DELETED")));
+				pList.add(new UserPhoto(
+						rset.getInt("USER_NO"),
+						rset.getInt("PHOTO_NO"),
+						rset.getString("ORIGIN_NAME"),
+						rset.getString("CHANGE_NAME"),
+						rset.getString("FILE_PATH"),
+						rset.getInt("FILE_LEVEL"),
+						rset.getString("DELETED")));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

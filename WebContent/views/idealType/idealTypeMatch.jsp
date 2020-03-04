@@ -9,20 +9,19 @@ import="idealType.model.service.*"
 %>
 <%
 
-	Account a = (Account)session.getAttribute("loginUser");
 	MatchService ms = new MatchService();
 	UserService us = new UserService();
-	 
-	int userNo = a.getUserNo();
-	int matchNo = Integer.parseInt(request.getParameter("matchNo"));
-	int targetNo = ms.getMatchList(userNo)[matchNo].getTargetNo();
-	int sync = (int)Math.round(100*ms.getMatchList(userNo)[matchNo].getSync());
-	
-	Account ac = us.selectAccount(targetNo);
-	UserInfo ui = us.selectUserInfo(targetNo);
+
+	Account ac = (Account)request.getAttribute("ac");
+	UserInfo ui = (UserInfo)request.getAttribute("ui");	
+	int sync = (int)request.getAttribute("sync");
+	String photoPath = (String)request.getAttribute("pPath");
+	int matchNo = (int)request.getAttribute("matchNO");
+	String min = null; String max = null;
+	if (matchNo == 0){min="hidden";}
+	if (matchNo == 5){max="hidden";}
 	
 	String name = ac.getUserName();
-		
 	String hello = ui.getHello();
 	
 	int height = ui.getHeight();
@@ -132,7 +131,7 @@ import="idealType.model.service.*"
 		 case 60: reVal = "제주"; break;
 		 }
 		 
-	 String[] interestVal = ui.getInterest();
+	 String[] interestList = ui.getInterest();
 
 %>    
     
@@ -153,59 +152,6 @@ import="idealType.model.service.*"
       padding:0;
       display : block;
     }
-    header {
-      background-color: white;
-      text-align:center;
-      height:120px;
-    }
-    #logo{
-      min-width : 175px;
-      float:left;
-    }
-    ul, ol, li {
-      list-style: none;
-      margin:0;
-      padding:0;
-    }
-    ul.mainMenu > li {
-      display : inline-block;
-      font-size :18pt;
-      font-weight : 500;
-      width: 130px;
-      height: 35px;
-      padding: 5px;
-      padding-top: 10px;
-      margin: 50px 0px -5px -6px;
-      background-color: white;
-      text-align: center;
-      position:relative;
-    }
-    ul.mainMenu > li ul.subMenu{
-      visibility: hidden;
-      position:absolute;
-      top:50px;
-      left:0;
-    }
-    ul.mainMenu > li ul.subMenu > li{
-      display : inline-block;
-      font-size :14pt;
-      font-weight : 400;
-      width: 130px;
-      margin: -3px 0px -5px 0px;
-      padding: 5px;
-      background-color: white;
-      text-align: center;
-    }
-    ul.mainMenu > li:hover ul.subMenu > li{
-      visibility :visible;
-    }
-    ul.mainMenu > li ul.subMenu > li:hover{
-      color:slategray
-    }
-    #profile {
-      text-align: right;
-    }
-
     .outer{
       background-color: white;
       text-align: center;
@@ -219,18 +165,6 @@ import="idealType.model.service.*"
       margin: 0 auto;
       padding:0;
       float : left;
-    }
-    .mainCategory{
-      font-size : 15pt;
-      font-weight : 500;
-      padding-top: 20px;
-      padding-bottom: 20px;
-      border-bottom: 1px solid darkgray;
-    }
-    .subCategory{
-      font-size : 13pt;
-      font-weight : 400;
-      padding-top: 20px;
     }
     .main{
       background-color: whites;
@@ -292,76 +226,8 @@ import="idealType.model.service.*"
   </style>
 </head>
 <body style="height:100%; margin:0 auto;">
-  <header>
-    <div class="wrapper">
-      <div id="logo">
-        <img src="logo.png" width="150px" height="120px" style="float:left;">
-      </div>
-      <div id="profile">
-        <a href="">로그인</a>
-        <a href="">회원 가입</a>
-      </div>
-      <div>
-        <ul class="mainMenu">
-          <li><a href="">이어드림</a>
-            <ul class="subMenu">
-              <li><a href="">회사 소개</a></li>
-              <li><a href="">CEO 소개</a></li>
-              <li><a href="">오시는 길</a></li>
-            </ul>
-          </li>
-          <li><a href="">이상형 매칭</a>
-            <ul class="subMenu">
-              <li><a href="">이상형 추천</a></li>
-              <li><a href="">이상형의<br>이상형 찾기</a></li>
-            </ul>
-          </li>
-          <li><a href="">러브 파티</a>
-            <ul class="subMenu">
-              <li><a href="">러브 파티</a></li>
-              <li><a href="">파티 후기</a></li>
-            </ul>
-          </li>
-          <li><a href="">커플 이야기</a>
-            <ul class="subMenu">
-              <li><a href="">이달의 커플</a></li>
-              <li><a href="">커플 후기</a></li>
-            </ul>
-          </li>
-          <li><a href="">고객 문의</a>
-            <ul class="subMenu">
-              <li><a href="">1:1 문의</a></li>
-              <li><a href="">FAQ</a></li>
-            </ul>
-          </li>
-          <li><a href="">마이 페이지</a>
-            <ul class="subMenu">
-              <li><a href="">정회원 등업</a></li>
-              <li><a href="">계정 정보</a></li>
-              <li><a href="">나의 정보</a></li>
-              <li><a href="">이상형 정보</a></li>
-              <li><a href="">작성글 조회</a></li>
-              <li><a href="">하트<br>히스토리</a></li>
-            </ul>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </header>
-
   <div class ="outer">
     <div class="wrapper">
-      <nav>
-        <div  class="mainCategory">
-          <a href="">이상형</a>
-        </div>
-        <div class="subCategory">
-          <a href="">이상형 추천</a>
-        </div>
-        <div class="subCategory">
-          <a href="">이상형의 이상형</a>
-        </div>
-      </nav>
       <div class="main">
         <section class="pageTitle">
           <label>이상형 추천</label>
@@ -380,7 +246,7 @@ import="idealType.model.service.*"
         </section>
         <section id="itemProfile" style="display: flex;">
           <article id="thumb" style="margin-left:50px;">
-            <img width="250px" height="250px"></img>
+            <img src="<%= photoPath %>" width="250px" height="250px"></img>
           </article>
           <article id="hello" style="text-align:center; margin-left:30px;">
             <label>소갯말</label><br>
@@ -436,11 +302,36 @@ import="idealType.model.service.*"
                 <div class="itemValue" id="smoke"><%= sVal %></div>
             </div>
 			<%
-			for(int i = 0; i < interestVal.length; i++){
+			String[] interestVal = new String[interestList.length];
+			for(int i = 0; i < interestList.length; i++){
+				switch(interestList[i]){
+				case "movie": interestVal[i] = "영화&드라마"; break;
+				case "musical": interestVal[i] = "연극&뮤지컬"; break;
+				case "comic": interestVal[i] = "만화&서브컬처"; break;
+				case "picture": interestVal[i] = "사진&영상 촬영"; break;
+				case "books": interestVal[i] = "독서"; break;
+				case "music": interestVal[i] = "음악 감상"; break;
+				case "sing": interestVal[i] = "노래&춤"; break;
+				case "instrument": interestVal[i] = "악기 연주"; break;
+				case "cook": interestVal[i] = "요리&음식"; break;
+				case "camp": interestVal[i] = "여행&캠핑"; break;
+				case "exercise": interestVal[i] = "운동"; break;
+				case "sports": interestVal[i] = "스포츠 경기"; break;
+				case "vgame": interestVal[i] = "비디오 게임"; break;
+				case "bgame": interestVal[i] = "보드게임"; break;
+				case "sns": interestVal[i] = "SNS"; break;
+				case "drink": interestVal[i] = "술&모임"; break;
+				case "beauty": interestVal[i] = "뷰티&패션"; break;
+				case "pet": interestVal[i] = "반려동물"; break;
+				case "diy": interestVal[i] = "DIY"; break;
+				case "money": interestVal[i] = "재테크"; break;
+				
+				}
+				
 			%>
             <div class="itemBox">
                 <div class="itemName" id="">관심분야</div>
-                <div class="itemValue" id="interest[i]"><%= interestVal[i] %></div>
+                <div class="itemValue" id="interest[<%= i %>]"><%= interestVal[i] %></div>
             </div>
 			<% } %>
 			
@@ -448,13 +339,13 @@ import="idealType.model.service.*"
         </section>
         <section id="move" style="display:flex;">
           <div style="text-align:left">
-            <image width="50px" height="100px"></image>
+            <img width="50px" height="100px" hidden="<%= min%>" onclick="<%= request.getContextPath()%>/get.mc?matchNo=<%= matchNo -1 %>" ></img>
           </div>
           <div style="margin: 0 auto;">
-            <image width="100px" height="100px"></image>
+            <img width="100px" height="100px" onclick="<%= request.getContextPath()%>/sendHeart.mc?matchNo=<%= matchNo %>"></img>
           </div>
           <div  style="text-align:right">
-            <image width="50px" height="100px"></image>
+            <img width="50px" height="100px" hidden="<%= max%>" onclick="<%= request.getContextPath()%>/get.mc?matchNo=<%= matchNo +1 %>"></img>
           </div>
         </section>
       </div>

@@ -81,13 +81,23 @@ public class UserService {
 		return result;
 	}
 	
-	public ArrayList<Photo> selectpList(int userNo) {
+	public ArrayList<UserPhoto> selectUserPhotoList(int userNo) {
 		Connection conn = getConnection();
 		UserInfoDAO uiDAO = new UserInfoDAO();
-		ArrayList<Photo> result = uiDAO.selectPList(conn, userNo);
+		ArrayList<UserPhoto> result = uiDAO.selectUserPhoto(conn, userNo);
 		return result;
 	}
 	
+	public UserPhoto selectUserPhoto(int userNo) {
+		Connection conn = getConnection();
+		UserInfoDAO uiDAO = new UserInfoDAO();
+		ArrayList<UserPhoto> plist = uiDAO.selectUserPhoto(conn, userNo);
+		for (int i =0; i < plist.size(); i++) {
+			if (plist.get(i).getFileLevel() == 0) {return plist.get(i);}
+		}
+		
+		return null;
+	}
 	public int insertPhoto(UserPhoto p) {
 		Connection conn = getConnection();
 		UserInfoDAO uiDAO = new UserInfoDAO();
