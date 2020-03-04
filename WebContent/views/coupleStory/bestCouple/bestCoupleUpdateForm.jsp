@@ -249,7 +249,7 @@
 						
 						<div class="btnBox">
 							<button type="button" class="defaultBtn" id="updateBtn">완료</button>
-							<button type="reset" class="defaultBtn" onclick="location.href='<%= request.getContextPath() %>/list.bc'">취소</button>
+							<button type="reset" class="defaultBtn deleteBtn" onclick="location.href='<%= request.getContextPath() %>/list.bc'">취소</button>
 						</div>	
 					</form>
 				</div>	

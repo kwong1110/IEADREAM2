@@ -181,8 +181,9 @@
 	
 	#subjbox{
 		width: 60%;
-		height: 20px;
+		height: 22px;
 		background: #f9f2f5;
+		border-radius: 5px;
 	}
 	
 	.contn1{
@@ -211,6 +212,14 @@
 	
 	.bx{
 		width: 65px;
+		height: 20px;
+		border-radius: 5px;
+	}
+	
+	.datebx{
+		width: 180px;
+		height: 22px;
+		border-radius: 5px;
 	}
 	
 	.file{
@@ -219,6 +228,10 @@
 	
 	#file1{
 		margin-bottom: 1%;
+	}
+	
+	#cancelBtn{
+		background: #D5D5D5;
 	}
 	
 </style>
@@ -257,7 +270,7 @@
 									<div class="label">
 										<label>즐겨하는 데이트 : </label>
 									</div>
-									<input type="text" name="fvDate" maxlength="12" placeholder="12자이내로 입력하세요." required>
+									<input type="text" name="fvDate" class="datebx" maxlength="12" placeholder="12자이내로 입력하세요." required>
 								</div>
 							</div>
 							
@@ -271,7 +284,7 @@
 						
 						<div class="btnBox">
 							<button type="submit" class="defaultBtn">등록</button>
-							<button type="reset" class="defaultBtn" onclick="location.href='<%= request.getContextPath() %>/list.bc'">취소</button>
+							<button type="reset" class="defaultBtn cancelBtn" onclick="location.href='<%= request.getContextPath() %>/list.bc'">취소</button>
 						</div>	
 					</form>
 				</div>

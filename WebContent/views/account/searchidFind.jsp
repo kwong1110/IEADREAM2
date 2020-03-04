@@ -2,9 +2,7 @@
     pageEncoding="UTF-8" import="account.model.vo.Account"%>
     
  <%
-	String id = (String)request.getAttribute("id");
-    String userName = (String)request.getAttribute("userName");
-    String email = (String)request.getAttribute("email");
+	Account a = (Account)request.getAttribute("a");
 %>   
 <!DOCTYPE html>
 <html>
@@ -43,13 +41,13 @@
 	</div>
 	
 	<div class="boxingBox" >
-	이름 : <%= userName %>
+	이름 : <%= a.getUserName() %>
 	<br><br>
 	
-	이메일 : <%= email %>
+	이메일 : <%= a.getEmail() %>
 	<br><br>
 	
-	아이디: <%= id %>
+	아이디: <%= a.getId() %>
 	<!-- userId가져오는것  -->
 	</div>
 
