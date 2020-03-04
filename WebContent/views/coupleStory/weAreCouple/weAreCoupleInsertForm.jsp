@@ -190,7 +190,7 @@
 						</script>
 						<div class="btnArea">
 							<button type="submit" class="defaultBtn" id="insertBtn">작성완료</button>
-							<button type="button" class="cancelBtn" id="cancelBtn" onclick="location.href='<%= request.getContextPath() %>/list.wac'">취소</button>
+							<button type="button" class="defaultBtn cancelBtn" id="cancelBtn" onclick="location.href='<%= request.getContextPath() %>/list.wac'">취소</button>
 							<%-- <input type="button" class="defaultBtn" id="cancelBtn" onclick="location.href='<%= request.getContextPath() %>/list.wac'" value="취소"> --%>
 						</div>
 					</div>

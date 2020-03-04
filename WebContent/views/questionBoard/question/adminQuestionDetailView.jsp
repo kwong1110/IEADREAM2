@@ -140,7 +140,7 @@
 										</td>
 									<th><input type="button" id="addReply" class="defaultBtn" value="등록"></th>
 									<th><input type="button" id="updateBtn" class="defaultBtn" value="수정"></th>
-									<th><input type="button" onclick="deleteReply();" id="deleteBtn" class="defaultBtn" value="삭제"></th>
+									<th><input type="button" onclick="deleteReply();" id="deleteBtn" class="defaultBtn cancelBtn" value="삭제"></th>
 								</tr>
 							</table>
 						</div>
