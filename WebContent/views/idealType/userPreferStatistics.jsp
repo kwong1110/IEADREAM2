@@ -10,13 +10,11 @@ import="idealType.model.service.*"
 
 <%
 	Stat[][] st = (Stat[][])request.getAttribute("st");
-%>    
-    
-    
+%>
 <!doctype html>
 <html>
 <head>
-  <title>이상형의 이상형</title>
+  <title>선호도 통계</title>
   <meta charset="utf-8">
   <style>
     .wrapper{

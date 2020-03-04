@@ -25,7 +25,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>이어드림 - 게시글 관리</title>
+<title>이어드림 - 게시물 관리</title>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/common.css">
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/board.css">
 <script type="text/javascript" src="<%= request.getContextPath() %>/js/SelectAll.js"></script>
@@ -39,7 +39,7 @@
 		<div class="wrapper">
 			<div class="main">
 				<div class="pageTitle">
-					<h2>게시글 관리</h2>
+					<h2>게시물 관리</h2>
 				</div>
 				<div class="contents">
 					<form method="get" action="<%= request.getContextPath() %>/manage.bo" id="searchBox">
@@ -93,7 +93,7 @@
 								%>		
 								<tr>
 									<td><input type="checkbox" name="checkselect" value="<%= b.getUserId() %>,<%= b.getPostNo() %>" onclick="checkDetail()"></td>
-									<td><%= b.getPostNo() %></td>
+									<td><%= b.getPostNo() %><input type="hidden" value="<%= b.getPostNo() %>"></td>
 									<td>
 										<% switch(b.getBoardNo()) {
 										case 1: viewBoard = "베스트커플"; break;
@@ -103,6 +103,7 @@
 										case 6: viewBoard = "FAQ"; break;
 										} %>
 										<%= viewBoard %>
+										<input type="hidden" value="<%= b.getBoardNo() %>">
 									</td>
 									<td><%= b.getUserId() %></td>
 									<td><%= b.getTitle() %></td>
@@ -127,7 +128,7 @@
 							<button onclick="location.href='<%= request.getContextPath() %>/manage.bo?currentPage=1&bCategory=<%= bCategory %>&sCategory=<%= sCategory %>&sWord=<%= sWord %>&search=<%= search %>'">&lt;&lt;</button>
 					
 							<!-- 이전 페이지로 -->
-							<button onclick="location.href='<%= request.getContextPath() %>/manage.bo?currentPage=<%= currentPage-1 %>&bCategory=<%= bCategory %>&sCategory=<%= sCategory %>&sWord=<%= sWord %>&search=<%= search %>'" id="beforeBtn">&lt;</button>
+							<button onclick="location.href='<%= request.getContextPath() %>/manage.bo?currentPage=<%= currentPage-1 %>&bCategory=<%= bCategory %>&sCategory=<%= sCategory %>&sWord=<%= sWord %>&search=<%= search %>'" id="beforeBtn">PREV</button>
 							<script>
 								if(<%= currentPage %> <= 1){
 									var before = $('#beforeBtn');
@@ -146,7 +147,7 @@
 							<% } %>
 							
 							<!-- 다음 페이지로 -->
-							<button onclick="location.href='<%= request.getContextPath() %>/manage.bo?currentPage=<%= currentPage + 1 %>&bCategory=<%= bCategory %>&sCategory=<%= sCategory %>&sWord=<%= sWord %>&search=<%= search %>'" id="afterBtn">&gt;</button>
+							<button onclick="location.href='<%= request.getContextPath() %>/manage.bo?currentPage=<%= currentPage + 1 %>&bCategory=<%= bCategory %>&sCategory=<%= sCategory %>&sWord=<%= sWord %>&search=<%= search %>'" id="afterBtn">NEXT</button>
 							<script>
 								if(<%= currentPage %> >= <%= maxPage %>){
 									var after = $("#afterBtn");
@@ -164,7 +165,7 @@
 							<button onclick="location.href='<%= request.getContextPath() %>/manage.bo?currentPage=1'">&lt;&lt;</button>
 					
 							<!-- 이전 페이지로 -->
-							<button onclick="location.href='<%= request.getContextPath() %>/manage.bo?currentPage=<%= currentPage-1 %>'" id="beforeBtn">&lt;</button>
+							<button onclick="location.href='<%= request.getContextPath() %>/manage.bo?currentPage=<%= currentPage-1 %>'" id="beforeBtn">PREV</button>
 							<script>
 								if(<%= currentPage %> <= 1){
 									var before = $('#beforeBtn');
@@ -183,7 +184,7 @@
 							<% } %>
 							
 							<!-- 다음 페이지로 -->
-							<button onclick="location.href='<%= request.getContextPath() %>/manage.bo?currentPage=<%= currentPage + 1 %>'" id="afterBtn">&gt;</button>
+							<button onclick="location.href='<%= request.getContextPath() %>/manage.bo?currentPage=<%= currentPage + 1 %>'" id="afterBtn">NEXT</button>
 							<script>
 								if(<%= currentPage %> >= <%= maxPage %>){
 									var after = $("#afterBtn");
@@ -202,71 +203,102 @@
 	</div>
 </body>
 <%@ include file="../../common/footer.jsp"%>
-	<script>
-		$(function(){
-			$('.boardManage').addClass('on')
-		});		
+<script>
+	$('#SearchBtn').click(function(){
+		if($('#sCategoryBox option:selected').val() == 'B_DATE'){
+			if(!$('#sWordId').val().includes("/")){
+				event.preventDefault();
+				alert("아래와 같은 날짜 형식으로 검색해주세요! \n ex) 20/02/08 ");
+			}
+		}
+	});
+	
+	function insertBoard(){
 		
-		$('#SearchBtn').click(function(){
-			if($('#sCategoryBox option:selected').val() == 'B_DATE'){
-				if(!$('#sWordId').val().includes("/")){
+		// 새로열리는 창 크기 및 위치 설정
+		var popLeft = Math.ceil(( window.screen.width - 370 )/2);
+		var popTop = Math.ceil(( window.screen.height - 250 )/2);
+		
+		window.open("views/myPage/admin/boardInsertForm.jsp", "insertBoard", "width=370, height=250, "+ ", left=" + popLeft + ", top="+ popTop); 	
+	};
+	
+	/* function updateBoard(){
+		
+		var checkList = [];
+	
+		if($("input:checkbox[name='checkselect']:checked").val() == null){
+			alert("수정할 게시글을 1개 선택해주세요!");
+		} else {
+			$("input:checkbox[name='checkselect']:checked").each(function() {
+				
+				checkList.push($(this).val());
+				
+				if(checkList.length > 1){
+					alert("수정할 게시글을 '1개'만 선택해주세요!");
 					event.preventDefault();
-					alert("아래와 같은 날짜 형식으로 검색해주세요! \n ex) 20/02/08 ");
+					window.open("views/myPage/admin/boardUpdateForm.jsp?checkList="+checkList, "deleteBoard", "width=400, height=500, "+ ", left=" + popLeft + ", top="+ popTop, ", location=no").close();
+				} else {
+					var popLeft = Math.ceil(( window.screen.width - 400 )/2);
+					var popTop = Math.ceil(( window.screen.height - 500 )/2);
+					
+					window.open("views/myPage/admin/boardUpdateForm.jsp?checkList="+checkList, "deleteBoard", "width=400, height=500, "+ ", left=" + popLeft + ", top="+ popTop, ", location=no"); 	
 				}
+			});
+		}; 	
+	}; */
+	
+	function deleteBoard(){
+		var checkList = [];
+		
+		if($("input:checkbox[name='checkselect']:checked").val() == null){
+			alert("삭제할 게시글을 선택해주세요!");
+		}else {
+			$("input:checkbox[name='checkselect']:checked").each(function() {
+				checkList.push($(this).val());			
+			});
+				// 체크박스 체크된 값의 value를 checkList에 저장한다.
+				
+			// 새로열리는 창 크기 및 위치 설정
+			var popLeft = Math.ceil(( window.screen.width - 400 )/2);
+			var popTop = Math.ceil(( window.screen.height - 500 )/2);
+			
+			window.open("views/myPage/admin/boardDeleteForm.jsp?checkList="+checkList, "deleteBoard", "width=400, height=500, "+ ", left=" + popLeft + ", top="+ popTop); 	
+		};
+	}
+	
+	$(function(){
+		$('#boManageForm td').mouseenter(function(){
+			$(this).parent().css({'background':'darkgray','cursor':'pointer'});
+		}).mouseout(function(){
+			$(this).parent().css('background','none');
+		}).click(function(){
+			var checkboxYn = $(this).find("input[type='checkbox']").length;
+			var postNo = $(this).parent().children().eq(1).children('input').val();
+			var categoryNo = $(this).parent().children().eq(2).children('input').val();
+			
+			// console.log("게시글번호 : " + postNo + "/ 카테고리 번호 : " + categoryNo);
+			
+			var eachLocation = "";
+			
+			if (checkboxYn == 0) {
+				if(categoryNo == 5){
+					<%if(loginUser.getGrade()!=0){ %>
+						eachLocation='<%= request.getContextPath() %>/detail.qu?postNo=' + postNo;
+					<% } else if(loginUser.getGrade()==0){ %>
+						eachLocation='<%= request.getContextPath() %>/Mdetail.qu?postNo=' + postNo;
+					<% } %> 
+				} else if(categoryNo == 2) {
+					eachLocation='<%= request.getContextPath() %>/detail.wac?postNo=' + postNo;
+				} else if(categoryNo == 1) {
+					eachLocation='<%= request.getContextPath() %>/detail.bc?pNo=' + postNo;
+				} else if(categoryNo == 6) {
+					eachLocation='<%=request.getContextPath()%>/faqDetail.faq?no=' + postNo;
+				}
+				var popLeft = Math.ceil(( window.screen.width - 1200 )/2);
+				var popTop = Math.ceil(( window.screen.height - 600 )/2);
+				window.open(eachLocation, "eachBoardDetail", "width=1200, height=600, "+ ", left=" + popLeft + ", top="+ popTop);
 			}
 		});
-		
-		function insertBoard(){
-			
-			// 새로열리는 창 크기 및 위치 설정
-			var popLeft = Math.ceil(( window.screen.width - 370 )/2);
-			var popTop = Math.ceil(( window.screen.height - 250 )/2);
-			
-			window.open("views/myPage/admin/boardInsertForm.jsp", "insertBoard", "width=370, height=250, "+ ", left=" + popLeft + ", top="+ popTop); 	
-		};
-		
-		/* function updateBoard(){
-			
-			var checkList = [];
-		
-			if($("input:checkbox[name='checkselect']:checked").val() == null){
-				alert("수정할 게시글을 1개 선택해주세요!");
-			} else {
-				$("input:checkbox[name='checkselect']:checked").each(function() {
-					
-					checkList.push($(this).val());
-					
-					if(checkList.length > 1){
-						alert("수정할 게시글을 '1개'만 선택해주세요!");
-						event.preventDefault();
-						window.open("views/myPage/admin/boardUpdateForm.jsp?checkList="+checkList, "deleteBoard", "width=400, height=500, "+ ", left=" + popLeft + ", top="+ popTop, ", location=no").close();
-					} else {
-						var popLeft = Math.ceil(( window.screen.width - 400 )/2);
-						var popTop = Math.ceil(( window.screen.height - 500 )/2);
-						
-						window.open("views/myPage/admin/boardUpdateForm.jsp?checkList="+checkList, "deleteBoard", "width=400, height=500, "+ ", left=" + popLeft + ", top="+ popTop, ", location=no"); 	
-					}
-				});
-			}; 	
-		}; */
-		
-		function deleteBoard(){
-			var checkList = [];
-			
-			if($("input:checkbox[name='checkselect']:checked").val() == null){
-				alert("삭제할 게시글을 선택해주세요!");
-			}else {
-				$("input:checkbox[name='checkselect']:checked").each(function() {
-					checkList.push($(this).val());			
-				});
-					// 체크박스 체크된 값의 value를 checkList에 저장한다.
-					
-				// 새로열리는 창 크기 및 위치 설정
-				var popLeft = Math.ceil(( window.screen.width - 400 )/2);
-				var popTop = Math.ceil(( window.screen.height - 500 )/2);
-				
-				window.open("views/myPage/admin/boardDeleteForm.jsp?checkList="+checkList, "deleteBoard", "width=400, height=500, "+ ", left=" + popLeft + ", top="+ popTop); 	
-			};
-		}
-	</script>
+	});
+</script>
 </html>

@@ -34,7 +34,7 @@
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/common.css">
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/board.css">
 <style>
-	.listArea{width: 800px;}
+	.listArea{width: 500px;}
 	.tableArea tr { width: -webkit-fill-available;}
 	.tableArea td {/* 게시판제목라인 */
 		padding:20px 0;
@@ -44,7 +44,7 @@
 		letter-spacing:0.1em;
 		text-align: right;}/* 제목띠어쓰기간격 */ 
 	
-	input{font-size: 20px; padding: 2px; width: 70%;}
+	input{font-size: 15px; padding: 2px; width: 80%;}
 
 	.btnBox{border-top: 1px solid rgb(224, 224, 224);}
 	
@@ -65,11 +65,11 @@
 					<form action="<%= request.getContextPath() %>/views/myPage/user/updateMyProfile.jsp" method="post" id="updateForm" name="updateForm" 
 						style="font-size: 20px; text-align: center;">
 						<table class="listArea" style="border-spacing: 20px;">
-							<div><input type="hidden" name="pwd" <%= password %>></div>
 								<tr>
 									<td class="minW">아이디</td>
 									<td>
 										<input style="border: none;" type="text" placeholder="userID" class="profile" name="id" readOnly value="<%= id %>" style="background: lightgray;">
+										<input type="hidden" name="pwd" value="<%= password %>">
 									</td>
 								</tr>
 								<tr>

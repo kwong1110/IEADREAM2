@@ -65,59 +65,6 @@ pageEncoding="UTF-8" import="account.model.vo.*"%>
       padding:0;
       display : block;
     }
-    header {
-      background-color: white;
-      text-align:center;
-      height:120px;
-    }
-    #logo{
-      min-width : 175px;
-      float:left;
-    }
-    ul, ol, li {
-      list-style: none;
-      margin:0;
-      padding:0;
-    }
-    ul.mainMenu > li {
-      display : inline-block;
-      font-size :18pt;
-      font-weight : 500;
-      width: 130px;
-      height: 35px;
-      padding: 5px;
-      padding-top: 10px;
-      margin: 50px 0px -5px -6px;
-      background-color: white;
-      text-align: center;
-      position:relative;
-    }
-    ul.mainMenu > li ul.subMenu{
-      visibility: hidden;
-      position:absolute;
-      top:50px;
-      left:0;
-    }
-    ul.mainMenu > li ul.subMenu > li{
-      display : inline-block;
-      font-size :14pt;
-      font-weight : 400;
-      width: 130px;
-      margin: -3px 0px -5px 0px;
-      padding: 5px;
-      background-color: white;
-      text-align: center;
-    }
-    ul.mainMenu > li:hover ul.subMenu > li{
-      visibility :visible;
-    }
-    ul.mainMenu > li ul.subMenu > li:hover{
-      color:slategray
-    }
-    #profile {
-      text-align: right;
-    }
-
     .outer{
       background-color: white;
       text-align: center;
@@ -228,11 +175,11 @@ pageEncoding="UTF-8" import="account.model.vo.*"%>
                 <tr class="itemBox">
                   <td class="itemName" id="">체형</tdclass="itemName" id="">
                   <td>
-                    <label><input type="radio" name="shape" value="slim">마름</label>
-                    <label><input type="radio" name="shape" value="normal">보통</label>
-                    <label><input type="radio" name="shape" value="chubby">통통</label>
-                    <label><input type="radio" name="shape" value="muscular">근육질</label>
-                    <label><input type="radio" name="shape" value="glamour">글래머</label>
+                    <label><input type="radio" name="shape" value="마름">마름</label>
+                    <label><input type="radio" name="shape" value="보통">보통</label>
+                    <label><input type="radio" name="shape" value="통통">통통</label>
+                    <label><input type="radio" name="shape" value="근육질">근육질</label>
+                    <label><input type="radio" name="shape" value="글래머">글래머</label>
                   </td>
                   <td>
                     <select class="itemPriority" name="shapePri">
@@ -245,12 +192,12 @@ pageEncoding="UTF-8" import="account.model.vo.*"%>
                 <tr class="itemBox">
                   <td class="itemName" id="">스타일</td>
                   <td>
-                    <label><input type="radio" name="style" value="cute">귀여운</label>
-                    <label><input type="radio" name="style" value="intellect">지적인</label>
-                    <label><input type="radio" name="style" value="sexy">섹시한</label>
-                    <label><input type="radio" name="style" value="warm">따뜻한</label>
-                    <label><input type="radio" name="style" value="elegant">우아한</label>
-                    <label><input type="radio" name="style" value="tough">터프한</label>
+                    <label><input type="radio" name="style" value="귀여운">귀여운</label>
+                    <label><input type="radio" name="style" value="지적인">지적인</label>
+                    <label><input type="radio" name="style" value="섹시한">섹시한</label>
+                    <label><input type="radio" name="style" value="따뜻한">따뜻한</label>
+                    <label><input type="radio" name="style" value="우아한">우아한</label>
+                    <label><input type="radio" name="style" value="터프한">터프한</label>
                   </td>
                   <td>
                     <select class="itemPriority" name="stylePri">
@@ -280,11 +227,11 @@ pageEncoding="UTF-8" import="account.model.vo.*"%>
                 <tr class="itemBox">
                   <td class="itemName" id="">종교</td>
                   <td>
-                    <label><input type="radio" name="religion" value="christian">기독교</label>
-                    <label><input type="radio" name="religion" value="catholic">천주교</label>
-                    <label><input type="radio" name="religion" value="buddhism">불교</label>
-                    <label><input type="radio" name="religion" value="none">무교</label>
-                    <label><input type="radio" name="religion" value="etc">기타</label>
+                    <label><input type="radio" name="religion" value="기독교">기독교</label>
+                    <label><input type="radio" name="religion" value="천주교">천주교</label>
+                    <label><input type="radio" name="religion" value="불교">불교</label>
+                    <label><input type="radio" name="religion" value="무교">무교</label>
+                    <label><input type="radio" name="religion" value="기타">기타</label>
                   </td>
                   <td>
                     <select class="itemPriority" name="religionPri">
@@ -295,10 +242,10 @@ pageEncoding="UTF-8" import="account.model.vo.*"%>
                   </td>
                 </tr>
                 <tr class="itemBox">
-                  <td class="itemName" id="">음주 습관</td class="itemName" id="">
+                  <td class="itemName" id="">음주 습관</td>
                   <td>
                     <label><input type="radio" name="drink" value="3">주 3회</label>
-                    <label><input type="radio" name="drink" value="2">주 1회</label>
+                    <label><input type="radio" name="drink" value="2">주 1~2회</label>
                     <label><input type="radio" name="drink" value="1">월 1회</label>
                     <label><input type="radio" name="drink" value="0">안 마심</label>
                   </td>
@@ -311,7 +258,7 @@ pageEncoding="UTF-8" import="account.model.vo.*"%>
                   </td>
                 </tr>
                 <tr class="itemBox">
-                  <td class="itemName" id="">흡연 여부</td class="itemName" id="">
+                  <td class="itemName" id="">흡연 여부</td>
                   <td>
                     <label><input type="radio" name="smoke" value="1">흡연</label>
                     <label><input type="radio" name="smoke" value="0">비흡연</label>
@@ -325,16 +272,16 @@ pageEncoding="UTF-8" import="account.model.vo.*"%>
                   </td>
                 </tr>
                 <tr class="itemBox">
-                  <td class="itemName" id="">직업</td class="itemName" id="">
+                  <td class="itemName" id="">직업</td>
                   <td>
-                    <label><input type="radio" name="job" value="student">학생</label>
-                    <label><input type="radio" name="job" value="office">사무직</label>
-                    <label><input type="radio" name="job" value="research">연구직</label>
-                    <label><input type="radio" name="job" value="education">교육직</label>
-                    <label><input type="radio" name="job" value="art">예술</label>
-                    <label><input type="radio" name="job" value="service">서비스</label>
-                    <label><input type="radio" name="job" value="profession">전문직</label>
-                    <label><input type="radio" name="job" value="etc">기타</label>
+                    <label><input type="radio" name="job" value="학생">학생</label>
+                    <label><input type="radio" name="job" value="사무직">사무직</label>
+                    <label><input type="radio" name="job" value="연구직">연구직</label>
+                    <label><input type="radio" name="job" value="교육직">교육직</label>
+                    <label><input type="radio" name="job" value="예술">예술</label>
+                    <label><input type="radio" name="job" value="서비스">서비스</label>
+                    <label><input type="radio" name="job" value="전문직">전문직</label>
+                    <label><input type="radio" name="job" value="기타">기타</label>
                   </td>
                   <td>
                     <select class="itemPriority" name="jobPri">
@@ -345,7 +292,7 @@ pageEncoding="UTF-8" import="account.model.vo.*"%>
                   </td>
                 </tr>
                 <tr class="itemBox">
-                  <td class="itemName" id="">최종 학력</td class="itemName" id="">
+                  <td class="itemName" id="">최종 학력</td>
                   <td>
                     <label><input type="radio" name="scholar" value="0">고등학교</label>
                     <label><input type="radio" name="scholar" value="2">전문대</label>

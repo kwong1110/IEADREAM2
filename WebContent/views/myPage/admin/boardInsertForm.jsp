@@ -12,31 +12,11 @@
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/common.css">
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/board.css">
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<style>
-.main{
-	position:absolute;
-  	top:15%;
-  	left:12%;
-  	right:10%;
-}
-
-.botBox{
-	background: #c7eef2;
-	padding: 10px;
-	border-radius: 10px;
-}
-.deleteCheck{
-	margin: 10px;
-	font-weight: bold;
-	font-size: 15px;
-	color: red;
-}
-</style>
 </head>
-<body>
-	<div class="main">
+<body onload='resizeWindow(this)'>
+	<div class="popMain" id="mainBox">
 		<form method="get">
-			<table class="mainBoard">
+			<table class="popTable">
 				<tr>
 					<td colspan="2"> 
 						<div class="botBox">
@@ -58,9 +38,9 @@
 			</div>
 		</form>
 	</div>
-	<script>
+</body>
+<script>
 	function goInsert(){
-		
 		if($('#sCategoryBox option:selected').val() == 'BC'){
 			opener.document.location.href='<%= request.getContextPath()%>/views/coupleStory/bestCouple/bestCoupleInsertForm.jsp';
 			self.close();
@@ -68,8 +48,13 @@
 			opener.document.location.href='<%= request.getContextPath()%>/views/questionBoard/faq/faqInsertForm.jsp';
 			self.close();
 		}
-	}
+	};
+	
+	function resizeWindow(win)    {
+		var wid = win.document.body.offsetWidth + 80;
+		var hei = win.document.body.offsetHeight + 100;    //80 과 100은 넉넉하게 하려는 임의의 값임
 		
-	</script>
-</body>
+		win.resizeTo(wid,hei);
+	};	
+</script>
 </html>

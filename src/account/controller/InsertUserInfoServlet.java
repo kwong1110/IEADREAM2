@@ -83,9 +83,10 @@ public class InsertUserInfoServlet extends HttpServlet {
 		String page = null;
 		if(result1 > 0 && result2 > 0) {
 			page = "views/account/joinUserPreferenceForm.jsp";
+			request.setAttribute("ui", ui);
 		} else {
 			page = "views/common/errorPage.jsp";
-			request.setAttribute("msg", "정보 수정에 실패하였습니다.");
+			request.setAttribute("msg", "정보 입력에 실패하였습니다.");
 		}
 		
 		RequestDispatcher view = request.getRequestDispatcher(page);

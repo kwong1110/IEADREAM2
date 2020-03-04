@@ -36,7 +36,7 @@
 	.clear-both{
 		height: 20px;
 	}
-	
+	.contents{height: 400px;border-bottom: 1px solid rgb(224,224,224);}
 	.main{width: 80%; height: 100%;}
 	.pageTitle{margin: 1em auto;}
 	.tableArea th {/* 게시판제목라인 */
@@ -61,48 +61,49 @@
 				<div class="pageTitle">
 					<h2>1:1 문의게시판</h2>
 				</div>
-				<div class="tableArea">
-				<form>
-					<table  id="listArea" style=" width: -webkit-fill-available;">
+				<div class="contents">
+					<div class="tableArea">
+					<form>
+						<table  id="listArea" style=" width: -webkit-fill-available;">
+								<tr>
+									<th width="70px">번호</th>
+									<th width="100px">카테고리</th>
+									<th width="270px">제목</th>
+									<th width="140px">답변 여부</th>
+									<th width="170px">문의 날짜</th>
+								</tr>
+							<% if(list.isEmpty()){ %>
 							<tr>
-								<th width="70px">번호</th>
-								<th width="100px">카테고리</th>
-								<th width="270px">제목</th>
-								<th width="140px">답변 여부</th>
-								<th width="170px">문의 날짜</th>
+								<td colspan="5">조회된 문의사항이 없습니다.</td>
 							</tr>
-						<% if(list.isEmpty()){ %>
-						<tr>
-							<td colspan="5">조회된 문의사항이 없습니다.</td>
-						</tr>
-						<% } else{%>
-							<%for(int i=0; i<list.size(); i++){%>
-							<%	if(loginUser.getGrade()==0 || loginUser.getUserNo()== list.get(i).getUserNo()){%>
+							<% } else{%>
+								<%for(int i=0; i<list.size(); i++){%>
+								<%	if(loginUser.getGrade()==0 || loginUser.getUserNo()== list.get(i).getUserNo()){%>
+								
+								<tr>
+									<td><%= list.get(i).getPostNo() %><input type = "hidden" value='<%= list.get(i).getPostNo() %>'></td>
+									<td><%= list.get(i).getCategory() %></td>
+									<td><%= list.get(i).getTitle() %></td>
+								<%}%>
+								  
+									<% if(reply.get(i).getAnswerChecked().equals("N")){%>
+										<td>미답변</td>
+									<% } else{  %>
+								<td>답변 완료</td>
+										
 							
-							<tr>
-								<td><%= list.get(i).getPostNo() %><input type = "hidden" value='<%= list.get(i).getPostNo() %>'></td>
-								<td><%= list.get(i).getCategory() %></td>
-								<td><%= list.get(i).getTitle() %></td>
-							<%}%>
-							  
-								<% if(reply.get(i).getAnswerChecked().equals("N")){%>
-									<td>미답변</td>
-								<% } else{  %>
-							<td>답변 완료</td>
-									
+								<%}%>
+										
+						
+								<td><%= list.get(i).getCreateDate() %></td>
+							</tr>
 						
 							<%}%>
-									
-					
-							<td><%= list.get(i).getCreateDate() %></td>
-						</tr>
-					
 						<%}%>
-					<%}%>
-					</table>
-					</form>
+						</table>
+						</form>
+					</div>
 				</div>
-				
 				<!-- 페이징 -->
 					<div class="clear-both"></div>
 				<div class='pagingArea' align='center'>

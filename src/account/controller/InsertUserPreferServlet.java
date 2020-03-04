@@ -43,7 +43,6 @@ public class InsertUserPreferServlet extends HttpServlet {
 		int stylePri = Integer.parseInt(request.getParameter("stylePri"));
 		int age = Integer.parseInt(request.getParameter("age"));
 		int agePri = Integer.parseInt(request.getParameter("agePri"));
-		int region = Integer.parseInt(request.getParameter("region"));
 		int regionPri = Integer.parseInt(request.getParameter("regionPri"));
 		String religion = request.getParameter("religion");
 		int religionPri = Integer.parseInt(request.getParameter("religionPri"));
@@ -68,7 +67,6 @@ public class InsertUserPreferServlet extends HttpServlet {
 		up.setStylePri(stylePri);
 		up.setAge(age);
 		up.setAgePri(agePri);
-		up.setRegion(region);
 		up.setRegionPri(regionPri);
 		up.setReligion(religion);
 		up.setReligionPri(religionPri);
@@ -89,7 +87,7 @@ public class InsertUserPreferServlet extends HttpServlet {
 			page = "";
 		} else {
 			page = "views/common/errorPage.jsp";
-			request.setAttribute("msg", "정보 수정에 실패하였습니다.");
+			request.setAttribute("msg", "정보 입력에 실패하였습니다.");
 		}
 		
 		RequestDispatcher view = request.getRequestDispatcher(page);

@@ -22,8 +22,7 @@
 <style>
 	.outer{
       width: 1000px; height: 100%; background: white;
-      margin-left: auto; margin-right: auto; margin-top: 50px; margin-bottom: 50px;
-   }
+      margin-left: auto; margin-right: auto; margin-top: 50px; margin-bottom: 50px;}
 	.main{width: 80%; height: 100%;}
 	.pageTitle{margin: 1em auto;}
 
@@ -55,6 +54,8 @@
 	.pagingArea button{background: none; border: 3px solid white; font-weight: bold; margin: 1em auto;
 					  position: relative; cursor: pointer;
   text-transform: uppercase;}
+  
+  	.contents{border-bottom: 1px solid black; height: 500px;}
 </style>
 </head>
 <body>

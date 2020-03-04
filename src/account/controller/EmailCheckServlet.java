@@ -1,7 +1,7 @@
-package idealType.controller;
+package account.controller;
 
 import java.io.IOException;
-import java.util.Date;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,21 +9,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import account.model.vo.Account;
-import idealType.model.service.MatchService;
-import idealType.model.vo.Match;
+import account.model.service.AccountService;
 
 /**
- * Servlet implementation class sendHeartServlet
+ * Servlet implementation class EmailCheckServlet
  */
-@WebServlet("/sendHeart.mc")
-public class sendHeartServlet extends HttpServlet {
+@WebServlet("/emailCheck.ac")
+public class EmailCheckServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public sendHeartServlet() {
+    public EmailCheckServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,18 +30,21 @@ public class sendHeartServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		int userNo = ((Account)request.getSession().getAttribute("loginUser")).getUserNo();
-		int matchNo = (int)request.getAttribute("matchNo");
-		Date date = new Date();
-
-		MatchService ms = new MatchService();
-		Match m = ms.getMatchList(userNo)[matchNo];
-		m.setStatus("S");
-		m.setMatchDate(date); //상태 변경된 날짜 전달
+		String email = request.getParameter("email");
 		
-		ms.updateMatch(m);
-			
+		int result = new AccountService().emailCheck(email);
+		
+		PrintWriter out = response.getWriter();
+		
+		if(result > 0) {
+			out.append("fail");
+		} else {
+			out.append("success");
+		}
+		
+		out.flush();
+		out.close();
+	
 	}
 
 	/**

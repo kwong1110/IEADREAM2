@@ -1,9 +1,6 @@
 package idealType.controller;
 
 import java.io.IOException;
-import java.util.Date;
-import java.text.SimpleDateFormat;
-import java.util.GregorianCalendar;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,22 +9,22 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import account.model.service.AccountService;
 import account.model.vo.Account;
 import idealType.model.service.MatchService;
-import idealType.model.vo.Match;
+import idealType.model.vo.Stat;
 
 /**
- * Servlet implementation class MatchInsertServlet
+ * Servlet implementation class getIdealStatisticsServlet
  */
-@WebServlet("/fill.mc")
-public class fillMatchListServlet extends HttpServlet {
+@WebServlet("/get.ist")
+public class getIdealStatisticsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+       
     /**
-     * Default constructor. 
+     * @see HttpServlet#HttpServlet()
      */
-    public fillMatchListServlet() {
+    public getIdealStatisticsServlet() {
+        super();
         // TODO Auto-generated constructor stub
     }
 
@@ -35,29 +32,25 @@ public class fillMatchListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
-		MatchService ms = new MatchService();
-		
 		int userNo = ((Account)request.getSession().getAttribute("loginUser")).getUserNo();
+		MatchService mc = new MatchService();
+		int[] list = mc.searchIdealList(userNo);
+		Stat[][] st = mc.getIdealUpStat(list);
 		
-		Match[] oldMlist = ms.getMatchList(userNo);
-		int stack = 0;
-		SimpleDateFormat date = new SimpleDateFormat("yyyy/MM/dd");
-		Date today = new Date();
-		for (int i = 0; i < oldMlist.length ; i++) {
-			if (oldMlist[i].getStatus().equals("D")) { // 대기중인 매칭 수 구하기
-				stack++;
-			}
-			if (oldMlist[i].getStatus().equals("C") && date.format(oldMlist[i].getMatchDate()).equals(date.format(today))) { // 확인한 매칭 중 오늘 생성된 매칭 수 구하기
-				stack++;
-			}
-		}
-		Match[] newMlist = ms.searchMatchList(userNo); // 빈 공간 채워넣기
-		for (int i = 0; stack+i < 5 ; i++) {
-			ms.insertMatch(newMlist[i]);
-		}
 		
+		String page = null;
+		if(st != null) {
+			page = "views/idealType/idealTypeStatistics.jsp";
+			request.setAttribute("st", st);
+		}else {
+			page = "views/common/errorPage.jsp";
+			request.setAttribute("msg", "통계 조회에 실패하였습니다.");
+		}
+		RequestDispatcher view = request.getRequestDispatcher(page);
+		view.forward(request, response);
+
 	}
+
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
