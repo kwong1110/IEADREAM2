@@ -1,10 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="account.model.vo.Account"%>
     
-   
- <%
-	Account account = (Account)request.getAttribute("account");
-%>
 <!DOCTYPE html>
 <html>
 
