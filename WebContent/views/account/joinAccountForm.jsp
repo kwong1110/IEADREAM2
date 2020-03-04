@@ -28,6 +28,7 @@
 	#dubtn{
 		margin-left: 23%;
 		font-size: 12px;
+		background: #B2CCFF;
 	}
 	
 	.msg{
@@ -51,7 +52,7 @@
 	}
 	
 	.cancel{
-		background: lightgray;
+		background: #D5D5D5;
 	}
 	
 </style>

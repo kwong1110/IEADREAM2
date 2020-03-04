@@ -183,6 +183,7 @@
 		height: 280px;
 	}
 	
+	
 </style>
 </head>
 <body>
@@ -232,7 +233,7 @@
 						<div class="btnBox">
 							<% if(loginUser != null && loginUser.getGrade() == 0) { %>
 								<button type="submit" class="defaultBtn" id="updateBtn">수정</button>
-								<button type="submit" class="defaultBtn" id="deleteBtn" onclick="deletePt();">삭제</button>
+								<button type="submit" class="defaultBtn cancelBtn" onclick="deletePt();">삭제</button>
 							<% } %>
 						</div>
 					</form>
