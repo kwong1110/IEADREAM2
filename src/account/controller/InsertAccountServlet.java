@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import account.model.service.AccountService;
+import account.model.service.UserService;
 import account.model.vo.Account;
 
 /**
@@ -56,14 +57,14 @@ public class InsertAccountServlet extends HttpServlet {
 		
 		Account a = new Account(userId, userPwd, gender, userName, phone, email, bir);
 		int result = new AccountService().insertAccount(a);
-		
+		int userNo = new UserService().getUserNo(userId);
 		
 		
 		String page = "";
 		if(result > 0) {
 			page = "views/account/joinUserInfoForm.jsp";
 			request.setAttribute("msg", "기본정보 입력이 완료되었습니다.");
-			request.setAttribute("userNo", a.getUserNo());
+			request.setAttribute("userNo", userNo);
 		} else {
 			page = "views/common/errorPage.jsp";
 			request.setAttribute("msg", "회원가입에 실패하였습니다.");

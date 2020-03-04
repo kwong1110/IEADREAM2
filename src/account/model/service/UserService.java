@@ -25,6 +25,13 @@ public class UserService {
 		
 		return result;
 	}
+	public int getUserNo(String userId) {
+		Connection conn = getConnection();
+		UserInfoDAO uiDAO = new UserInfoDAO();
+		int result = uiDAO.getUserNo(conn, userId);
+		
+		return result;
+	}
 	
 	public UserInfo selectUserInfo(int userNo) {
 		Connection conn = getConnection();
