@@ -18,14 +18,14 @@ import myPage.user.model.service.userProfileService;
 /**
  * Servlet implementation class updateUserPreferenceServlet
  */
-@WebServlet("/updateUser.pf")
-public class updateUserPreferenceServlet extends HttpServlet {
+@WebServlet("/update.up")
+public class updateUserPreferServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public updateUserPreferenceServlet() {
+    public updateUserPreferServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -87,7 +87,7 @@ public class updateUserPreferenceServlet extends HttpServlet {
 		
 		String page = null;
 		if(result > 0) {
-			page = "views/myPage/user/updateUserPreferenceForm.jsp";
+			page = "views/myPage/user/updateUserPreferForm.jsp";
 			request.setAttribute("up", up);
 		} else {
 			page = "views/common/errorPage.jsp";
