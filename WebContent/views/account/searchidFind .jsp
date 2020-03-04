@@ -24,7 +24,7 @@
 </head>
 <body>  
 	<div class="pageTitle">
-		회원님의 아이디는 <%= a.getId() %> 입니다. 
+		회원님의 아이디는 <%= a.getId() %> 입니다. 커밋올리기 테스트
 		<!-- userId가져오는것  -->						
 	</div>							
 	 
