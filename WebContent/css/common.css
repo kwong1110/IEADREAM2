@@ -63,7 +63,8 @@ ul {
 		btnR : 하단 오른쪽 위치
 		btnC : 하단 센터
 		btnS : sub 버튼 (내용 안쪽에 들어가는 버튼)
-		
+		cancleBtn : #D5D5D5	(회색) 
+		menuBtn : #B2CCFF (하늘색)
 	*/
 	
 	/* 게시판 내용 안에 들어가는 버튼*/
@@ -86,6 +87,14 @@ ul {
 
 .searchBtn{
 	padding: 4px
+}
+
+.cancelBtn{
+	background: #D5D5D5	
+}
+
+.menuBtn{
+	background: #B2CCFF
 }
 
 	/* 최하단 버튼 위치 관리 */

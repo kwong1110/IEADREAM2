@@ -122,7 +122,7 @@
 							</table>
 						</div>
 						<div class="btnBox btnC">
-							<button type="button" class="defaultBtn" id="deleteBtn" onclick="deleteBoard();">게시글 삭제</button>
+							<button type="button" class="defaultBtn cancelBtn" id="deleteBtn" onclick="deleteBoard();">게시글 삭제</button>
 						</div>
 					</form>
 					
