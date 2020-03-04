@@ -5,8 +5,6 @@
  <%
 	Account account = (Account)request.getAttribute("account");
 %>
-     
-    
 <!DOCTYPE html>
 <html>
 

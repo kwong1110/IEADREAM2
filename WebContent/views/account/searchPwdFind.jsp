@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"import="account.model.vo.Account"%>
 
 <%
-	Account account = (Account)request.getAttribute("account");
+	String password = (String)request.getAttribute("password");
 %>
     
     
@@ -14,10 +14,19 @@
 </head>
 <body>
 
-    <p class="txt"><Strong class="black">
-								<%=account.getPassword() %> 이메일로 임시 비밀번호 발송하였습니다 변경된 임시비밀번호로 
-								로그인 해주세요!!</Strong></p>
-								<!-- 아이디 출력 가져오는것  -->
+ 	<div class="pageTitle">
+ 		아이디 찾기
+ 	</div>
+
+  	<div class="pageTitletext">
+		회원님의 비밀번호는  <%= password %> 입니다.
+		<!-- userPassword  -->						
+	</div>				
+	
+	<div class="btnBox">
+		<!-- 버튼 클릭하였을때 로그인 페이지 창으로 이동 -->
+		<button type="submit" class="defaultBtn findid" id="btnfindid" onclick="location.href='<%= request.getContextPath() %>/views/account/accountLoginForm.jsp'">로그인하러 가기</button>
+	</div>			
 					
 </body>
 </html>
