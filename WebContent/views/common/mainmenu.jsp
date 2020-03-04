@@ -119,8 +119,8 @@
 								<% if(loginUser != null) { // login상태일 경우 접근 가능 %>
 								<li id="nop"><a href="<%=request.getContextPath()%>/views/myPage/user/memberGradeUpForm.jsp">정회원 등업</a></li>
 								<li id="nop"><a href="<%= request.getContextPath()%>/selectProfileServlet">기본정보</a></li>
-								<li id="nop"><a href="<%= request.getContextPath() %>/updateUser.if">나의 프로필</a></li>
-								<li id="nop"><a href="<%= request.getContextPath() %>/updateUser.pf">이상형 정보</a></li>
+								<li id="nop"><a href="<%= request.getContextPath() %>/views/myPage/user/updateUserInfoForm.jsp">나의 프로필</a></li>
+								<li id="nop"><a href="<%= request.getContextPath() %>/views/myPage/user/updateUserPreferForm.jsp">이상형 정보</a></li>
 								<li id="nop">
 									<a href="<%=request.getContextPath()%>/views/myPage/user/myWritingListForm.jsp">작성글 조회</a>
 								</li>

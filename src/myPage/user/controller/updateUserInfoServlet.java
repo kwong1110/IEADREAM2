@@ -22,7 +22,7 @@ import myPage.user.model.service.userProfileService;
 /**
  * Servlet implementation class updateUserInfoServlet
  */
-@WebServlet("/updateUser.if")
+@WebServlet("/update.ui")
 public class updateUserInfoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
