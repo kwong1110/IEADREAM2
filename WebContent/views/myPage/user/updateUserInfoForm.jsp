@@ -159,7 +159,7 @@
 					<form action="<%= request.getContextPath() %>/update.ui" method="post" enctype="multipart/form-data">
 						 <section id="itemProfile" style="display:flex">
 			             	<article style="width: 400px; height: 250px;" >
-								<img id='output' width="250" height="250"><br>
+								<img src="" id='output' width="250" height="250"><br>
 			              		<input type='file' accept='image/*' onchange='openFile(event)' id="imgInput" name="profileImg">
 			              	</article>
 			              	<article id="hello" style="text-align:center; margin-left:30px;">

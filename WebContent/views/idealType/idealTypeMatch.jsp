@@ -339,13 +339,13 @@ import="idealType.model.service.*"
         </section>
         <section id="move" style="display:flex;">
           <div style="text-align:left">
-            <img width="50px" height="100px" hidden="<%= min%>" onclick="<%= request.getContextPath()%>/get.mc?matchNo=<%= matchNo -1 %>" ></img>
+            <img src="<%= request.getContextPath() %>/images/common/back.png" width="50px" height="100px" hidden="<%= min%>" onclick="<%= request.getContextPath()%>/get.mc?matchNo=<%= matchNo -1 %>" ></img>
           </div>
           <div style="margin: 0 auto;">
-            <img width="100px" height="100px" onclick="<%= request.getContextPath()%>/sendHeart.mc?matchNo=<%= matchNo %>"></img>
+            <img src="<%= request.getContextPath() %>/images/common/heart.png" width="100px" height="100px" onclick="<%= request.getContextPath()%>/sendHeart.mc?matchNo=<%= matchNo %>"></img>
           </div>
           <div  style="text-align:right">
-            <img width="50px" height="100px" hidden="<%= max%>" onclick="<%= request.getContextPath()%>/get.mc?matchNo=<%= matchNo +1 %>"></img>
+            <img src="<%= request.getContextPath() %>/images/common/next.png" width="50px" height="100px" hidden="<%= max%>" onclick="<%= request.getContextPath()%>/get.mc?matchNo=<%= matchNo +1 %>"></img>
           </div>
         </section>
       </div>

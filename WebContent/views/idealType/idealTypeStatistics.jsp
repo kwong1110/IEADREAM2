@@ -9,9 +9,7 @@ import="idealType.model.service.*"
 %>
 
 <%
-
 	Stat[][] st = (Stat[][])request.getAttribute("st");
-	
 %>    
     
     
