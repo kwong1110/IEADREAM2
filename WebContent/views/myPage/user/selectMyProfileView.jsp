@@ -34,7 +34,7 @@
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/common.css">
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/board.css">
 <style>
-	.listArea{width: 500px;}
+	.listArea{width: 600px; margin:0 0 100px 100px;}
 	.tableArea tr { width: -webkit-fill-available;}
 	.tableArea td {/* 게시판제목라인 */
 		padding:20px 0;
@@ -42,7 +42,8 @@
 		border-bottom:1px solid rgb(224, 224, 224); /* 하단라인색 */
 		color:rgb(230, 141, 150); font-size:1em;/* 제목글자크기 */ 
 		letter-spacing:0.1em;
-		text-align: right;}/* 제목띠어쓰기간격 */ 
+		text-align: right;}/* 제목띠어쓰기간격 */
+	.tableArea {width: 100%; align: center;}
 	
 	input{font-size: 15px; padding: 2px; width: 80%;}
 
@@ -61,7 +62,7 @@
 				<div class="pageTitle">
 					<h1>기본 정보</h1>
 				</div>
-				<div class="tableArea">
+				<div class="tableArea" style="padding: 30px;">
 					<form action="<%= request.getContextPath() %>/views/myPage/user/updateMyProfile.jsp" method="post" id="updateForm" name="updateForm" 
 						style="font-size: 20px; text-align: center;">
 						<table class="listArea" style="border-spacing: 20px;">

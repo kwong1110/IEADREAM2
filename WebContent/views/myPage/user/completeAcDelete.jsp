@@ -21,6 +21,7 @@
 	.btnBox{border-top: 1px solid rgb(224, 224, 224);}
 	
 	*:focus { outline:none; }
+	.main{margin-top: 200px;}
 </style>
 </head>
 <body>
@@ -30,7 +31,7 @@
 				<div class="main">
 					<h3>탈퇴가 완료되었습니다.</h3>
 					<div class="btnBox">
-						<button onclick="ok();">확인</button>
+						<button class="defaultBtn" onclick="ok();">확인</button>
 					</div>
 				</div>
 			</div>
