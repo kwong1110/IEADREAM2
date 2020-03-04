@@ -22,12 +22,12 @@
 </style>
 
 </head>
-<body>
+<body>  
 	<div class="pageTitle">
-		회원님의 아이디는 <%= a.getId() %> 입니다.
+		회원님의 아이디는 <%= a.getId() %> 입니다
 		<!-- userId가져오는것  -->						
 	</div>							
-	
+	 
 	<div class="btnBox">
 		<!-- 버튼 클릭하였을때 로그인 페이지 창으로 이동 -->
 		<button type="submit" class="defaultBtn findid" id="btnfindid" onclick="location.href='<%= request.getContextPath() %>/views/account/accountLoginForm.jsp'">로그인하러 가기</button>
