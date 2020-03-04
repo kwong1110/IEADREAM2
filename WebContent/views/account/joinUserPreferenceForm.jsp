@@ -65,59 +65,6 @@ pageEncoding="UTF-8" import="account.model.vo.*"%>
       padding:0;
       display : block;
     }
-    header {
-      background-color: white;
-      text-align:center;
-      height:120px;
-    }
-    #logo{
-      min-width : 175px;
-      float:left;
-    }
-    ul, ol, li {
-      list-style: none;
-      margin:0;
-      padding:0;
-    }
-    ul.mainMenu > li {
-      display : inline-block;
-      font-size :18pt;
-      font-weight : 500;
-      width: 130px;
-      height: 35px;
-      padding: 5px;
-      padding-top: 10px;
-      margin: 50px 0px -5px -6px;
-      background-color: white;
-      text-align: center;
-      position:relative;
-    }
-    ul.mainMenu > li ul.subMenu{
-      visibility: hidden;
-      position:absolute;
-      top:50px;
-      left:0;
-    }
-    ul.mainMenu > li ul.subMenu > li{
-      display : inline-block;
-      font-size :14pt;
-      font-weight : 400;
-      width: 130px;
-      margin: -3px 0px -5px 0px;
-      padding: 5px;
-      background-color: white;
-      text-align: center;
-    }
-    ul.mainMenu > li:hover ul.subMenu > li{
-      visibility :visible;
-    }
-    ul.mainMenu > li ul.subMenu > li:hover{
-      color:slategray
-    }
-    #profile {
-      text-align: right;
-    }
-
     .outer{
       background-color: white;
       text-align: center;

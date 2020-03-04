@@ -46,7 +46,6 @@ public class updateUserPreferenceServlet extends HttpServlet {
 		int stylePri = Integer.parseInt(request.getParameter("stylePri"));
 		int age = Integer.parseInt(request.getParameter("age"));
 		int agePri = Integer.parseInt(request.getParameter("agePri"));
-		int region = Integer.parseInt(request.getParameter("region"));
 		int regionPri = Integer.parseInt(request.getParameter("regionPri"));
 		String religion = request.getParameter("religion");
 		int religionPri = Integer.parseInt(request.getParameter("religionPri"));
@@ -71,7 +70,6 @@ public class updateUserPreferenceServlet extends HttpServlet {
 		up.setStylePri(stylePri);
 		up.setAge(age);
 		up.setAgePri(agePri);
-		up.setRegion(region);
 		up.setRegionPri(regionPri);
 		up.setReligion(religion);
 		up.setReligionPri(religionPri);
@@ -89,7 +87,7 @@ public class updateUserPreferenceServlet extends HttpServlet {
 		
 		String page = null;
 		if(result > 0) {
-			page = "views/myPage/user/updateUsrPreferenceForm.jsp";
+			page = "views/myPage/user/updateUserPreferenceForm.jsp";
 			request.setAttribute("up", up);
 		} else {
 			page = "views/common/errorPage.jsp";

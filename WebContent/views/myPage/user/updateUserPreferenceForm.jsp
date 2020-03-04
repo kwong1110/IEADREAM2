@@ -240,7 +240,7 @@
           <label>이상형 정보 입력</label>
         </section>
         <section>
-          <form action="">
+          <form action="<%= request.getContextPath() %>/update.up" method="post">
             <section id="items">
               <table>
                 <tr>

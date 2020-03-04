@@ -1,6 +1,6 @@
 package idealType.model.vo;
 
-public class Stat {
+public class Stat implements Comparable<Stat>{
 
 	private String item;
 	private double prop;
@@ -29,9 +29,27 @@ public class Stat {
 
 	public void setProp(double prop) {
 		this.prop = prop;
+	}	
+	
+	public void addProp() {
+		this.prop++;
 	}
 	
+	public void divProp(int num) {
+		this.prop = prop/num;
+	}
 	
+	@Override
+	public int compareTo(Stat s) {
+		double p1 = this.getProp();
+		double p2 = s.getProp();
+		if (p1 == p2)
+			return 0;
+		else if (p1 > p2)
+			return 1;
+		else
+			return -1;
+	}
 	
 	
 }

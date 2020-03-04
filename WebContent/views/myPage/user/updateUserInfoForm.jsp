@@ -6,6 +6,7 @@
 	int userNo = ui.getUserNo();
 	
 	String hello = ui.getHello();
+	
 	int height = ui.getHeight();
 		String h1 = null; String h2 = null; String h3 = null;
 		String h4 = null; String h5 = null; String h6 = null;
@@ -79,10 +80,10 @@
 		case "사무직": j2 = "checked"; break;
 		case "연구직": j3 = "checked"; break;
 		case "교육직": j4 = "checked"; break;
-		case "예술": j5 = "checked"; break;
+		case "예술" : j5 = "checked"; break;
 		case "서비스": j6 = "checked"; break;
 		case "전문직": j7 = "checked"; break;
-		case "기타": j8 = "checked"; break;
+		case "기타" : j8 = "checked"; break;
 		}
 		
 	int scholar = ui.getScholar();
@@ -155,7 +156,7 @@
 					<label>내 정보 입력</label>
 				</section>
 				<section>
-					<form action="/update.ui">
+					<form action="<%= request.getContextPath() %>/update.ui" method="post" enctype="multipart/form-data">
 						 <section id="itemProfile" style="display:flex">
 			             	<article style="width: 400px; height: 250px;" >
 								<img id='output' width="250" height="250"><br>
@@ -298,8 +299,7 @@
 							</table>
 						</section>
 						<section id="submit" style="text-align: center;">
-							<input type="submit" value="제출"
-								style="font-size: 18px; padding: 5px 40px;">
+							<input type="submit" value="제출"style="font-size: 18px; padding: 5px 40px;">
 						</section>
 					</form>
 				</section>

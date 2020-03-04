@@ -30,73 +30,49 @@ public class Match implements Comparable<Match>{
 		return userNo;
 	}
 
-
-
 	public void setUserNo(int userNo) {
 		this.userNo = userNo;
 	}
-
-
 
 	public int getTargetNo() {
 		return targetNo;
 	}
 
-
-
 	public void setTargetNo(int targetNo) {
 		this.targetNo = targetNo;
 	}
-
-
 
 	public Date getMatchDate() {
 		return matchDate;
 	}
 
-
-
 	public void setMatchDate(Date matchDate) {
 		this.matchDate = matchDate;
 	}
-
-
 
 	public String getStatus() {
 		return status;
 	}
 
-
-
 	public void setStatus(String status) {
 		this.status = status;
 	}
-
-
 
 	public double getSync() {
 		return sync;
 	}
 
-
-
 	public void setSync(double sync) {
 		this.sync = sync;
 	}
-
-
 
 	public double getRsync() {
 		return rsync;
 	}
 
-
-
 	public void setRsync(double rsync) {
 		this.rsync = rsync;
 	}
-
-
 
 	@Override
 	public int compareTo(Match m) {
@@ -109,15 +85,6 @@ public class Match implements Comparable<Match>{
 		else
 			return -1;
 	}
-
-	
-	
-
-
-	
-	
-	
-
 
 }
 
