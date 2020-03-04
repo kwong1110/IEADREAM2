@@ -84,6 +84,8 @@
 		   margin: 10px;
 		    margin-bottom:0;
 	}
+	 #deleteBtn{background: #D5D5D5;}
+	  #menuBtn{background: #B2CCFF;}
 </style>
 </head>
 <body>

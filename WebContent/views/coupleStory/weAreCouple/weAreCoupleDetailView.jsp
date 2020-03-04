@@ -28,7 +28,7 @@
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/common.css">
 <style>
 	.outer {
-		width:1000px; height:735px; background:  white;
+		width:1000px; height: 900px;background:  white;
 		margin-left:auto; margin-right:auto; margin-top:50px;
 	}
 	#titleImgArea{width:500px; height:300px; margin-left:auto; margin-right:auto;}
@@ -36,8 +36,9 @@
 	#titleImg,#contentImg1{width:400px; height:300px}
 	.detailImg{width:250px; height:180px;}
 	.downBtn{width: 80px; height: 25px; color: white; border-radius: 5px; background: #D1B2FF;}
-   #updateBtn, #menuBtn, #deleteBtn{background: #B2CCFF; color: white; border-radius: 15px; width: 80px; heigth: 25px; text-align:center; display: inline-block;}
-   #menuBtn{background: #D1B2FF;}
+   #updateBtn, #menuBtn,#BestBtn, #deleteBtn{color: white;border-radius: 15px; width: 80px; heigth: 25px; text-align:center; display: inline-block;}
+   #menuBtn{background: #B2CCFF;}
+   #updateBtn,#BestBtn{background: rgb(253, 181, 190);}/* 분홍색버튼 */
    #deleteBtn{background: #D5D5D5;}
    #updateBtn:hover, #menuBtn:hover, #deleteBtn:hover{cursor: pointer;}
    
@@ -50,7 +51,12 @@
   
    table>thead>tr>th {
 	  background:#f9f9f9;  
+	      height: 30PX;
+    vertical-align: middle;
     }
+     table>thead>tr>td {
+     	vertical-align: middle;
+     }
      table>tbody>tr>th {
      	background:#f9f9f9;  
      }
@@ -182,9 +188,9 @@
 							<input type ="submit" id="updateBtn"  class="defaultBtn"  value="수정">
 							<input type ="button" onclick="deleteThumb();" id="deleteBtn"  class="defaultBtn"  value="삭제">
 							<% } %>
-							<div onclick="location.href='<%=request.getContextPath() %>/list.wac'" class="defaultBtn"  id="menuBtn">메뉴로</div>
+							<input type="button" onclick="location.href='<%=request.getContextPath() %>/list.wac'" class="defaultBtn"  id="menuBtn" value='메뉴로'>
 							<% if(loginUser != null && loginUser.getGrade()==0){ %>
-							<input type="button" onclick="updateBC();" class="defaultBtn" id="menuBtn" value="베스트 커플">
+							<input type="button" onclick="updateBC();" class="defaultBtn" id="BestBtn" style="width:140px" value="베스트커플">
 							<input type ="button" onclick="deleteThumb();"class="defaultBtn"  id="deleteBtn" value="삭제">
 							<% } %>
 						</div>
@@ -205,7 +211,7 @@
 		}
 		
 		function updateBC(){
-			$('#detailForm').attr('action','<%=request.getContextPath() %>/views/coupleStory/weAreCouple/TestBC.jsp'); /* 합칠 때 이름 바꾸기 */
+			$('#detailForm').attr('action','<%=request.getContextPath() %>/views/coupleStory/bestCouple/bestCoupleInsertForm.jsp'); /* 합칠 때 이름 바꾸기 */
 			$('#detailForm').submit();
 		}
 	</script>

@@ -22,7 +22,7 @@
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/board.css">
 <style>
 	.outer{
-		width: 1000px; height: 500px; background:white;
+		width: 1000px; background:white;
 		margin-left: auto; margin-right: auto; margin-top: 50px;
 	} 
 	.main{width: 80%; height: 100%;}
@@ -156,7 +156,7 @@
 
 		</script>
 </body>
-<%@ include file="../../common/footer.jsp" %>
+ <%@ include file="../../common/footer.jsp" %>
 </html>
 
 
