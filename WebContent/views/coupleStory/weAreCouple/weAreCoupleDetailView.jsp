@@ -58,7 +58,8 @@
      	vertical-align: middle;
      }
      table>tbody>tr>th {
-     	background:#f9f9f9;  
+     	background:#f9f9f9; 
+     	font-size: 15px; 
      }
    table>tbody>tr>td {
     padding: 5px;

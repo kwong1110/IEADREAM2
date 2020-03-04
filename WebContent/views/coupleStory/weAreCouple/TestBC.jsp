@@ -8,6 +8,7 @@
 	String dtPeriod = request.getParameter("dtPeriod");
 	String fvDate = request.getParameter("fvDate");
 	BestCouple bc = (BestCouple)request.getAttribute("bc");
+	String titleImage = request.getParameter("titleImage");
 %>
 <!DOCTYPE html>
 <html>
@@ -145,7 +146,7 @@
 						<textarea class="contn2" name="content" placeholder="내용을 자유롭게 입력해주세요."><%= content %></textarea>
 						
 						<div class="file">
-							<input type="file" name="photo1" multiple="multiple" id="file1"><br>
+							<input type="file" name="photo1" multiple="multiple" id="file1" value="<%= titleImage %>"><br>
 							<input type="file" name="photo2" multiple="multiple">
 						</div>
 					</div>

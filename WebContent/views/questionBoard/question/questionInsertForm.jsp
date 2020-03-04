@@ -81,7 +81,8 @@
 					<br>
 					<div align="center">
 						<button type="submit" class="defaultBtn" id="insertBtn">등록하기</button>
-						<input type="button"  class="defaultBtn" id="cancelBtn" onclick="location.href='<%= request.getContextPath() %>/list.qu?userNo=<%= loginUser.getUserNo() %>'" value="취소">
+						<button type="button" class="defaultBtn cancelBtn" id="cancelBtn" onclick="location.href='<%= request.getContextPath() %>/list.qu?userNo=<%= loginUser.getUserNo() %>'">취소</button>
+						<%-- <input type="button"  class="defaultBtn" id="cancelBtn" onclick="location.href='<%= request.getContextPath() %>/list.qu?userNo=<%= loginUser.getUserNo() %>'" value="취소"> --%>
 					</div>
 					</form>
 				</div>	
