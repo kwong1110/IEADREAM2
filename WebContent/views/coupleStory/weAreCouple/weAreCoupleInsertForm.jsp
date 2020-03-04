@@ -124,11 +124,11 @@
 								</tr>
 								
 								<tr>
-									<td colspan=2><span>*</span> 이어드림의 서비스 중 가장 만족했던 서비스를  작성해주세요.</td>
+									<td colspan=2 style="height: 30px;vertical-align: bottom;"><span>*</span> 이어드림의 서비스 중 가장 만족했던 서비스를  작성해주세요.</td>
 								</tr>
 								<tr>
 									<td colspan=2>
-										<textarea cols= 60 rows= 4 name="content1"  class="Insertwac" placeholder="작성해주세요" required></textarea>
+										<textarea cols= 60 rows= 4 name="content1"  class="Insertwac" placeholder="만족하신 서비스를 작성해주세요" required></textarea>
 									</td>
 								</tr>
 								<tr>
@@ -136,7 +136,7 @@
 								</tr>
 								<tr>
 									<td colspan=2 width=100%>
-										<textarea  cols= 60 rows= 8 name="content2" class="Insertwac" placeholder="작성해주세요" required></textarea>
+										<textarea  cols= 60 rows= 8 name="content2" class="Insertwac" placeholder="후기를 작성해주세요" required></textarea>
 									</td>
 								</tr>
 								<tr>
@@ -190,7 +190,8 @@
 						</script>
 						<div class="btnArea">
 							<button type="submit" class="defaultBtn" id="insertBtn">작성완료</button>
-							<input type="button" class="defaultBtn" id="cancelBtn" onclick="location.href='<%= request.getContextPath() %>/list.wac'" value="취소">
+							<button type="button" class="cancelBtn" id="cancelBtn" onclick="location.href='<%= request.getContextPath() %>/list.wac'">취소</button>
+							<%-- <input type="button" class="defaultBtn" id="cancelBtn" onclick="location.href='<%= request.getContextPath() %>/list.wac'" value="취소"> --%>
 						</div>
 					</div>
 				</form>

@@ -112,15 +112,15 @@
 							</tbody>
 						</table>
 					
-						<div id="replyArea" style="background: #f9f9f9; height:60px;margin-left: 20px; margin-bottom: 10px;" >
+						<div id="replyArea" style="background: #f9f9f9; height:100px;margin-left: 20px; margin-bottom: 10px;" >
 							<table id="replyTable">
 								<tr>
 									<th id="manager" style="vertical-align: middle; margin-left:10px">관리자</th>
 									<td id="Mcommand" rowspan = "3" colspan="3"  align= center>
 										<% if(r.getAnswerContent() != null) { %>
-											<textarea name = "answerContent"  readonly  style="resize:none; width: 500px; height: 40%;margin-left: 20px;"><%= r.getAnswerContent() %></textarea>
+											<textarea name = "answerContent" rows="4" cols="10" readonly  style="resize:none; width: 500px; height: 40%;margin-left: 20px;"><%= r.getAnswerContent() %></textarea>
 										<% } else { %>
-										<textarea name = "answerContent" readonly style="resize:none; width: 500px; height: 40%; text-align: center;margin-left: 20px;">관리자가 아직 답변을 달지 않았습니다. </textarea>
+										<textarea name = "answerContent" rows="4" cols="10" readonly style="resize:none; width: 500px; height: 40%; text-align: center;margin-left: 20px;">관리자가 아직 답변을 달지 않았습니다. </textarea>
 										<% } %>
 									</td>
 								</tr>
@@ -130,8 +130,10 @@
 						<% if(loginUser.getGrade() != 0){ %> 
 						<div class="btnBox">
 							<button type="submit" class="defaultBtn" id="updateBtn" >수정</button>
-							<input type="button"  class="defaultBtn" onclick="location.href='<%= request.getContextPath() %>/list.qu?userNo=<%= loginUser.getUserNo()%>'" id="menuBtn" value="메뉴로" >
-							<input type="button" class="defaultBtn"  onclick="deleteBoard();" id="deleteBtn" value="삭제">
+							<button type="button" class="menuBtn" onclick="location.href='<%= request.getContextPath() %>/list.qu?userNo=<%= loginUser.getUserNo()%>'" id="menuBtn">메뉴로</button>
+							<button  type="button" class="cancelBtn"  onclick="deleteBoard();" id="deleteBtn">삭제</button>
+							<%-- <input type="button"  class="defaultBtn" onclick="location.href='<%= request.getContextPath() %>/list.qu?userNo=<%= loginUser.getUserNo()%>'" id="menuBtn" value="메뉴로" >
+							<input type="button" class="defaultBtn"  onclick="deleteBoard();" id="deleteBtn" value="삭제"> --%>
 						</div>
 						<% } %> 
 					</form>
