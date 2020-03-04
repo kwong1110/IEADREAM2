@@ -7,6 +7,7 @@
 <title>이어드림 - 1:1문의</title>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/common.css">
 <style>
+	
 	#title, #category{
 		height: 30px;
 	}
@@ -14,19 +15,36 @@
 		border-radius: 5px;
 		font-size:15px;
 		font-family:"ON I고딕";
+		border:none;
 	}
 	textarea{margin-top:10px;}
 	.outer{
 		width:1000px; height: 500px; background: white;
 		margin-left: auto; margin-right: auto; margin-top: 50px;
 	}
-	.tableArea{background: #f9f9f9;width: 550px;}
+	.tableArea{background: #f9f9f9;width: 670px; 	height:410px;}
 		button, input[type='button']{cursor: pointer;}
-		#qinsertTable{
+		.qinsertTable{
 			vertical-align: middle;
 		    margin: 0;
-		    margin-left: 5%;
+		    margin-left: 10%;
 		}
+		
+		.qinsertTable td {/* 게시판제목라인 */
+		border-top:1px solid rgb(136, 136, 136); /* 상단라인색 */
+		border-bottom:1px solid rgb(224, 224, 224);
+		}
+		.qinsertTable th {/* 게시판제목라인 */
+		padding:12px 0;
+		border-top:1px solid rgb(136, 136, 136); /* 상단라인색 */
+		border-bottom:1px solid rgb(224, 224, 224); /* 하단라인색 */
+		background:#f9f9f9;  /* 제목배경색 */ 
+		color:rgb(51, 51, 51); font-size:1em;/* 제목글자크기 */ 
+		letter-spacing:0.1em}/
+		
+		.qinsertTable{
+	border-top:1px solid rgb(136, 136, 136); 
+		background: #f9f9f9;
 </style>
 </head>
 <body>
@@ -39,9 +57,9 @@
 				</div>
 				<div class="tableArea">
 					<form action="<%= request.getContextPath() %>/insert.qu" method="post">
-					<table id="qinsertTable">
+					<table class="qinsertTable">
 						<tr>
-							<th>제목</th>
+							<th width=10%>제목</th>
 							<td><input type="text" id="title"  name="title" size="40" placeholder="제목을 입력해주세요"></td>
 							<th>카테고리</th>
 							<td>
