@@ -150,6 +150,7 @@ pageEncoding="UTF-8" import="account.model.vo.*"%>
         </section>
         <section>
           <form action="<%= request.getContextPath() %>/insert.up" method="post">
+          <input type="number" name="userNo" hidden="hidden"><%= userNo %>
             <section id="items">
               <table>
                 <tr class="itemBox">
