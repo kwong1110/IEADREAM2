@@ -10,7 +10,7 @@
 
 <script type="text/javascript" src="<%= request.getContextPath() %>/js/jquery-3.4.1.min.js"></script>
 <style>
-    #CEO_pic{margin: 10px; width: 400px; border-radius: 20px;}
+    #CEO_pic{margin: 10px; width: 500px; border-radius: 20px;}
     .outer{
       width: 1000px; height: 100%; background: white;
       margin-left: auto; margin-right: auto; margin-top: 50px; margin-bottom: 50px;}
@@ -39,8 +39,8 @@
 							<td>
 							<div class="article"><img id="CEO_pic" src="../img/IMG_5526.jpg"></div>
 							</td>
-							<th style="width: 50px;">경력</th>
-							<td style="width: 300px; vertical-align: top;">
+							<th style="width: 100px;">경력</th>
+							<td style="width: 400px; vertical-align: top;">
 									1993.04 어쩌구<br>
 									1993.11 어쩌구저쩌구<br>
 									1994.02 냠냠<br>
@@ -54,8 +54,12 @@
 									1994.02 냠냠<br>
 									1995.33 냠냠 쩝쩝<br>
 							</td>
-							<th style="width: 80px;">인사말</th>
-							<td style="width: 300px; vertical-align: top;">
+						</tr>
+					</table>
+					<table class="tableArea">
+						<tr>
+							<th style="width: 130px;">인사말</th>
+							<td style="width: 800px; vertical-align: top;">
 								(안랩 배낌)
 								안녕하세요 CEO 박소현입니다. 약 30여년 간 국내외 결혼 전문 기업에서 영업과 마케팅 분야를 지휘해왔습니다.
 								2011년 이어드림에 입사한 이후 사업을 총괄해 왔으며, 이어드림 입사 전에는 듀오 부사장, 가연 대표이사 등을 지냈습니다.
