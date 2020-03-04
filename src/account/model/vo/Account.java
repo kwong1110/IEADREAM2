@@ -94,14 +94,19 @@ public class Account {
 		this.birth = birth;
 	}
 	
-	public Account(String userName, String email, String deleted) {
+//	public Account(String userName, String email) {
+//		super();
+//		this.userName = userName;
+//		this.email = email;
+//	}
+	
+	public Account(String id, String userName, String email) {
 		super();
+		this.id = id;
 		this.userName = userName;
 		this.email = email;
-		this.deleted = deleted;
 	}
-	
-	
+
 	public int getUserNo() {
 		return userNo;
 	}
