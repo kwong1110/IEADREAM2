@@ -92,7 +92,7 @@
 								</tr>
 								<tr>
 									<td>이메일</td>
-										<td><input type="email" name="email" class="box" id="email" required></td>
+										<td><input type="text" name="email" class="box" id="email" required></td>
 										<td><button type="button" id="dubtn" class="defaultBtn" onclick="checkEmail();">중복체크</button></td>
 								</tr>
 								<tr>
@@ -187,7 +187,7 @@
 		
 		
 		$("#email").change(function(){
-			var emExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+			var emExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
 			var email = $('#email');
 			
 			if(!emExp.test($(this).val())){
