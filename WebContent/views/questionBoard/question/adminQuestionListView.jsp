@@ -22,7 +22,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>이어드림 - 1:1문의</title>
+<title>이어드림 - 1:1문의</title>vfg
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/common.css">
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/board.css">
 <style>
@@ -36,7 +36,7 @@
 	.clear-both{
 		height: 20px;
 	}
-	.contents{height: 400px;border-bottom: 1px solid rgb(224,224,224);}
+	.contents{height: 440px;border-bottom: 1px solid rgb(224,224,224);}
 	.main{width: 80%; height: 100%;}
 	.pageTitle{margin: 1em auto;}
 	.tableArea th {/* 게시판제목라인 */
