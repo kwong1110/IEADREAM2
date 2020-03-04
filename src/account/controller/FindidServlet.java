@@ -36,6 +36,7 @@ public class FindidServlet extends HttpServlet {
 			String userName = request.getParameter("userName");
 			String email = request.getParameter("email");
 			
+			
 			Account findUser = new Account();
 			findUser.setUserName(userName);
 			findUser.setEmail(email);
