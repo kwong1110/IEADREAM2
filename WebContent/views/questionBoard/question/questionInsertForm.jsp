@@ -60,11 +60,11 @@
 					<table class="qinsertTable">
 						<tr>
 							<th width=10%>제목</th>
-							<td><input type="text" id="title"  name="title" size="40" placeholder="제목을 입력해주세요"></td>
+							<td><input type="text" id="title"  name="title" size="40" placeholder="제목을 입력해주세요" required></td>
 							<th>카테고리</th>
 							<td>
-								<select name="category" id="category">
-									<option>--------</option>
+								<select name="category" id="category" required>
+									<option></option>
 									<option value="결제">결제</option>
 									<option value="서비스">서비스</option>
 									<option value="회원/등급">회원/등급</option>
@@ -74,7 +74,7 @@
 						</tr>
 						<tr>
 							<td colspan="4">
-								<textarea rows="15" cols="60" name="content" style="resize:none; width: 100%;" placeholder="문의글을 작성해주세요." ></textarea>
+								<textarea rows="15" cols="60" name="content" style="resize:none; width: 100%;" placeholder="문의글을 작성해주세요." required></textarea>
 							</td>
 						</tr>
 					</table>
@@ -88,6 +88,16 @@
 			</div>	
 		</div>	
 	</div>
-
+<script>
+$(function(){
+	$('#insertBtn').click(function(){
+		if($('#category').val()== ''){
+			alert('카테고리를 선택해주세요.');
+			$('#category').focus();
+		}
+	});
+	
+});
+</script>
 </body>
 </html>

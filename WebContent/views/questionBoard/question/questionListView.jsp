@@ -22,7 +22,7 @@
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/common.css">
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/board.css">
 <style>
-		.contents{height: 350px;border-bottom: 1px solid rgb(224,224,224);}
+		.contents{height: 440px;border-bottom: 1px solid rgb(224,224,224);}
 	 .outer{
 		width:1000px; background: white;
 		margin-left: auto; margin-right: auto; margin-top: 50px;
@@ -40,9 +40,6 @@
 		letter-spacing:0.1em}/* 제목띠어쓰기간격 */ 
 	.tableArea td {line-height: 10px;}
 	th{border-bottom: 1px solid grey;}
-	.contents{
-		height: 400px;
-	}
 </style>
 </head>
 <body>

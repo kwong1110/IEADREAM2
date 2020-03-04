@@ -28,7 +28,7 @@
 	.main{width: 80%; height: 100%;}
 	.pageTitle{margin: 1em auto;}
 	#listArea{text-align: center;width: 800px;}
-	.contents{height: 400px;border-bottom: 1px solid rgb(224,224,224);}
+	.contents{height: 440px;border-bottom: 1px solid rgb(224,224,224);}
 	.tableArea tr { width: -webkit-fill-available;}
 	.tableArea th {/* 게시판제목라인 */
 		padding:12px 0;
