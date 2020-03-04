@@ -55,7 +55,7 @@
 		</div>
 		
 			<div class="btnBox">
-				<button type="submit" class="defaultBtn findid" id="btnfindid">아이디 찾기</button>
+				<button type="submit" class="defaultBtn findid" id="btnfindid">아이디 찾기</button> 
 			</div>
 		</form>
 	</div>													 							
