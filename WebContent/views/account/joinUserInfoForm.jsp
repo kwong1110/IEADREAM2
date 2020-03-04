@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>    
+    pageEncoding="UTF-8"%>
+<%
+	int userNo = (int)request.getAttribute("userNo");
+
+%>    
+    
     
 <!DOCTYPE html>
 <html>
@@ -91,6 +96,7 @@
               </article>
             </section>
             <section id="items">
+            <input type="number" name="userNo" hidden="hidden"><%= userNo %>
               <table>
                 <tr>
                   <td class="itemName" id="">키 (cm)</td>
