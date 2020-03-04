@@ -33,7 +33,7 @@
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/common.css">
 <style>
 	.outer {
-		width:1000px; height:800px; background:white;
+		width:1000px; height: 900px;background:white;
 		margin-left:auto; margin-right:auto; margin-top:50px;
 	}
 
@@ -202,8 +202,8 @@
 				</script>
 				</div>
 				<br>
-				<div class="btnArea">
-					<button class="defaultBtn" id="updateBtn">수정완료</button>
+				<div class="btnArea" align="center">
+					<input type ="button" class="defaultBtn" id="updateBtn" value="완료">
 					<input type="button" id="cancelBtn" class="defaultBtn" onclick="location.href='<%= request.getContextPath() %>/list.wac'" value="취소">
 				</div>
 			</form>
