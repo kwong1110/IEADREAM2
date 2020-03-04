@@ -82,8 +82,9 @@
 						</li>
 						<li class="s-menu"><span onclick="goIdealType();">이상형</span>
 							<ul class="dept01">
-								<li id="nop"><a href="">이상형 매칭</a></li>
-								<li id="nop"><a href="">이상형의 이상형 찾기</a></li>
+								<li id="nop"><a href="<%=request.getContextPath()%>/get.mc">이상형 매칭</a></li>
+								<li id="nop"><a href="<%=request.getContextPath()%>/get.ist">이상형의 이상형 찾기</a></li>
+								<li id="nop"><a href="<%=request.getContextPath()%>/get.ups">이용자 취향 통계</a></li>
 							</ul>
 						</li>
 						<li class="s-menu"><span onclick="goLoveParty();">러브파티</span>
@@ -122,8 +123,8 @@
 								<% if(loginUser != null) { // login상태일 경우 접근 가능 %>
 								<li id="nop"><a href="<%=request.getContextPath()%>/views/myPage/user/memberGradeUpForm.jsp">정회원 등업</a></li>
 								<li id="nop"><a href="<%= request.getContextPath()%>/selectProfileServlet">기본정보</a></li>
-								<li id="nop"><a href="<%= request.getContextPath() %>/updateUser.if">나의 프로필</a></li>
-								<li id="nop"><a href="<%= request.getContextPath() %>/updateUser.pf">이상형 정보</a></li>
+								<li id="nop"><a href="<%= request.getContextPath() %>/views/myPage/user/updateUserInfoForm.jsp">나의 프로필</a></li>
+								<li id="nop"><a href="<%= request.getContextPath() %>/views/myPage/user/updateUserPreferForm.jsp">이상형 정보</a></li>
 								<li id="nop">
 									<a href="<%=request.getContextPath()%>/list.mwl?userNo=<%= loginUser.getUserNo() %>">작성글 조회</a>
 								</li>
