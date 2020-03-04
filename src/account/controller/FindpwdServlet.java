@@ -35,8 +35,13 @@ public class FindpwdServlet extends HttpServlet {
 		String userId = request.getParameter("userId");
 		String email = request.getParameter("email");
 		
-	
+		
+		
+
+		// VO에 있는 db에 보내기 위해서 만든객체이며 현재 지금은 바로 db에 보내지않고 userName 이랑 email을 담아두고 있다.
 		Account findUser = new Account(userId, email);
+		
+		// userId랑 email을 보내준뒤 우리는 password를 찾으니 비밀번호 값을 가져오는것
 		String password = new AccountService().searchPwd(findUser);
 		
 		String page ="";

@@ -17,6 +17,7 @@
 
 .pageTitle{
 	text-align: center;
+	margin-top: 300px;
 }	
 </style>
 

@@ -46,6 +46,7 @@
 		<h5 style="text-align: center;">가입할때 입력하신 이메일 주소를 통해 아이디를 확인하실수 있습니다</h5>
 		<br><br>
 		
+		<!-- view 단에서 서블릿을 연결해주는 코드 -->
 		<form action="<%= request.getContextPath() %>/Findeid.do" method="post">
 			
 		<div class ="textbox">
