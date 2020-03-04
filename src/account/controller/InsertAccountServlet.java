@@ -63,6 +63,7 @@ public class InsertAccountServlet extends HttpServlet {
 		if(result > 0) {
 			page = "views/account/joinUserInfoForm.jsp";
 			request.setAttribute("msg", "기본정보 입력이 완료되었습니다.");
+			request.setAttribute("userNo", a.getUserNo());
 		} else {
 			page = "views/common/errorPage.jsp";
 			request.setAttribute("msg", "회원가입에 실패하였습니다.");
