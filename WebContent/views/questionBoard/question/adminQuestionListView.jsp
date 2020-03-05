@@ -22,7 +22,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>이어드림 - 1:1문의</title>vfg
+<title>이어드림 - 1:1문의</title>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/common.css">
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/board.css">
 <style>
@@ -54,9 +54,6 @@
 	<%@ include file="../../common/mainmenu.jsp" %>
 	<div class="outer">
 		<div class="wrapper">
-			<%-- <nav>
-				<%@ include file="../../common/questionPageLeftmenu.jsp" %>
-			</nav> --%>
 			<div class="main">
 				<div class="pageTitle">
 					<h2>1:1 문의게시판</h2>
@@ -146,6 +143,7 @@
 		
 	<script>
 		$(function(){
+			<% if(!list.isEmpty()){ %>
 			$('#listArea td').mouseenter(function(){
 				$(this).parent().css({'background':'darkgray','cursor':'pointer'});
 			}).mouseout(function(){
@@ -161,6 +159,7 @@
 				<% } %> 
 
 			});
+			<%}%>
 		});
 		function search() {
 			var searchWord = $('#searchCon').val()

@@ -445,16 +445,26 @@ public class WeAreCoupleDAO {
 		return result;
 	}
 
-	public int getListSearchCount(Connection conn, String search) {
+	public int getListSearchCount(Connection conn, String menu, String content) {
 		PreparedStatement pstmt = null;
 		int result = 0;
-		String query = prop.getProperty("getListSearchCount");
+		ResultSet rset = null;
+		
+		String query = "";
+		switch(menu) {
+			case "TITLE": query = prop.getProperty("getTitleCount");break;
+			case "NICK" : query = prop.getProperty("getNickCount"); break;
+		}
 		
 		try {
 			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, "%"+search+"%");
+			pstmt.setString(1, "%"+content+"%"); //CONTENT는 검색한 안의 내용
 			
-			result = pstmt.executeUpdate();
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				result=rset.getInt(1); // 검색한 게시글이 몇개인지 세는것
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -465,37 +475,44 @@ public class WeAreCoupleDAO {
 		return result;
 	}
 
-	public ArrayList<Board> selectSearchList(Connection conn, int currentPage, String search) {
+	public ArrayList<Board> selectSearchList(Connection conn, int currentPage, String menu, String content) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		ArrayList<Board> list = null;
+		ArrayList<Board> list = new ArrayList<Board>();
 		
 		int posts = 10;
 		
 		int startRow = (currentPage -1) * posts + 1;
 		int endRow = startRow + posts -1;
-		String query = prop.getProperty("selectSearchList");
+		
+		
+		String query = "";
+		switch(menu) {
+		case "TITLE": query = prop.getProperty("searchTitle");break;
+		case "NICK" : query = prop.getProperty("searchNick"); break;
+	}
+		
 		try {
 			pstmt = conn.prepareStatement(query);
-			pstmt.setInt(1, startRow);
-			pstmt.setInt(2, endRow);
-			pstmt.setString(3, "%"+search+"%");
+			pstmt.setString(1, "%"+content+"%");
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
 			
 			rs = pstmt.executeQuery();
 		
 
 			while(rs.next()) {
-				 list.add(new Board(
-						 rs.getInt("BOARD_NO"),
-						 rs.getInt("POST_NO"), 
-						 rs.getInt("USER_NO"),
-						 rs.getString("ID"), 
-						 rs.getString("title"),
-						 rs.getString("CONTENT"),
-						 rs.getDate("hit"),
-						 rs.getString("DELETED"),
-						 rs.getString("category")));
-					System.out.println(list);
+				 list.add(new Board(rs.getInt("board_no"),
+							rs.getInt("post_no"),
+							 rs.getInt("user_no"), 
+							  rs.getString("ID"), 
+							  rs.getString("title"), 
+							  rs.getString("CONTENT"),
+							  rs.getDate("create_Date"), 
+							  rs.getInt("HIT"), 
+							  rs.getString("deleted")));
+				 	System.out.println(list);
+					
 			}
 			
 		} catch (SQLException e) {

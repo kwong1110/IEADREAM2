@@ -203,7 +203,7 @@
 				<br>
 				<div class="btnArea" align="center">
 					<input type ="button" class="defaultBtn" id="updateBtn" value="완료">
-					<input type="button" id="cancelBtn" class="cancelBtn" onclick="location.href='<%= request.getContextPath() %>/list.wac'" value="취소">
+					<input type="button" id="cancelBtn" class="defaultBtn cancelBtn" onclick="location.href='<%= request.getContextPath() %>/list.wac'" value="취소">
 				</div>
 			</form>
 			</div>

@@ -34,11 +34,15 @@ public class WeAreCoupleSearchServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
-		String search = request.getParameter("searchCon");
+		String menu = request.getParameter("menu");
+		String content = request.getParameter("content");
+		
 		
 		WeAreCoupleService service = new WeAreCoupleService();
 		
-		int listCount = service.getListSearchCount(search);
+		String search = "on";
+		
+		int listCount = service.getListSearchCount(menu, content);
 		
 		int currentPage;
 		int limit;
@@ -60,12 +64,18 @@ public class WeAreCoupleSearchServlet extends HttpServlet {
 		PageInfo pi = new PageInfo(currentPage, listCount, limit, maxPage, startPage, endPage);
 		
 		/* 검색 리스트 불러오기 */
-		ArrayList<Board> list = service.selectSearchList(currentPage, search);
+		ArrayList<Board> list = service.selectSearchList(currentPage, menu, content);
+		
+		System.out.println(menu + content);
+		
 		String page = null;
 		if(list != null) {
 			page = "views/coupleStory/weAreCouple/weAreCoupleListView.jsp";
 			request.setAttribute("list", list);
 			request.setAttribute("pi", pi);
+			request.setAttribute("search", search);
+			request.setAttribute("menu", menu);
+			request.setAttribute("content", content);
 		} else {
 			page = "views/common/errorPage.jsp";
 			request.setAttribute("msg", "우리 커플됐어요 검색에 실패했습니다.");
