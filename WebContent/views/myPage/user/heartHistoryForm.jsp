@@ -94,7 +94,7 @@
 					</form>
 				</div>
 				<div class="btnBox btnC" >
-				<input type="button" class="defaultBtn" value="삭제">
+				<input type="button" class="defaultBtn cancelBtn" value="삭제">
 				</div>
 					<!-- 페이징 -->
 				<div class='pagination' align="center">

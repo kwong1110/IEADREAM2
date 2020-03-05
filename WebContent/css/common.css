@@ -63,8 +63,8 @@ ul {
 		btnR : 하단 오른쪽 위치
 		btnC : 하단 센터
 		btnS : sub 버튼 (내용 안쪽에 들어가는 버튼)
-		cancleBtn : #D5D5D5	(회색) 
-		menuBtn : #B2CCFF (하늘색)
+		cancleBtn : rgb(213, 213, 213) (회색) 
+		menuBtn : rgb(178, 204, 255) (하늘색)
 	*/
 	
 	/* 게시판 내용 안에 들어가는 버튼*/
@@ -80,23 +80,24 @@ ul {
 	box-shadow: 0 1px 2px rgba(0,0,0,.2);
 	cursor: pointer
 }
-
 .defaultBtn:hover{
-	background: rgb(242, 170, 178)
+	background: rgb(243, 171, 180)
 }
-
 .searchBtn{
 	padding: 4px
 }
-
 .cancelBtn{
-	background: #D5D5D5	
+	background: rgb(213, 213, 213)
 }
-
 .menuBtn{
-	background: #B2CCFF
+	background: rgb(178, 204, 255)
 }
-
+.cancelBtn:hover{
+	background: rgb(203, 203, 203)
+}
+.menuBtn:hover{
+	background: rgb(168, 194, 245)
+}
 	/* 최하단 버튼 위치 관리 */
 	/* '버튼 박스'에 넣어 줄것. */
 .btnL{
