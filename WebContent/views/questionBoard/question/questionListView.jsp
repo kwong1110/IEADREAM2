@@ -22,11 +22,7 @@
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/common.css">
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/board.css">
 <style>
-		.contents{height: 440px;border-bottom: 1px solid rgb(224,224,224);}
-	 .outer{
-		width:1000px; background: white;
-		margin-left: auto; margin-right: auto; margin-top: 50px;
-	} 
+	.contents{height: 440px;border-bottom: 1px solid rgb(224,224,224);}
 	.main{width: 80%; height: 100%;}
 	.pageTitle{margin: 1em auto;}
 	.listAtrea{width: 800px;text-align: center;}
@@ -51,6 +47,12 @@
 				<div class="pageTitle">
 					<h2>1:1 문의게시판</h2>
 				</div>
+				<!-- <div class="selectArea" align="right">
+					<select id="sort" name="sort">
+						<option value="ANSWER">답변여부순</option>
+						<option value="DATE">날짜순</option>
+					</select>
+				</div> -->
 				<div class="contents">
 					<div class="tableArea">
 						<table id="listArea" style=" width: -webkit-fill-available;">
@@ -140,6 +142,7 @@
 	</div>
 	<script>
 		$(function(){
+			<% if(!list.isEmpty()){ %>
 			$('#listArea td').mouseenter(function(){
 				$(this).parent().css({'background':'darkgray','cursor':'pointer'});
 			}).mouseout(function(){
@@ -156,7 +159,9 @@
 				<% } %> 
 
 			});
+			<% } %>
 		});
+		
 		
 	</script>
 </body>
