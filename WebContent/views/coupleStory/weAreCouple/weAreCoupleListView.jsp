@@ -11,6 +11,10 @@
 	int startPage = pi.getStartPage();
 	int endPage = pi.getEndPage();
 
+	String search = (String)request.getAttribute("search");
+	String menu = (String)request.getAttribute("menu");
+	String content = (String)request.getAttribute("content");
+	
 %>
 
 <!DOCTYPE html>
@@ -36,7 +40,7 @@
 		border-bottom:1px solid rgb(224, 224, 224); /* 하단라인색 */
 		background:#f9f9f9;  /* 제목배경색 */ 
 		color:rgb(230, 141, 150); font-size:1em;/* 제목글자크기 */ 
-		letter-spacing:0.1em}/* 제목띠어쓰기간격 */ 
+		letter-spacing:0.1em}/* 제목띄어쓰기간격 */ 
 	.tableArea td {line-height: 10px;}
 	
 </style>
@@ -50,6 +54,25 @@
 				<div class="pageTitle">
 					<h2>우리 커플 됐어요</h2>
 				</div>
+				<form action="<%= request.getContextPath() %>/search.wac" method="post" id ="searchForm">
+			      <hr>
+			         <div class='topBox' align='center'>
+			            <table>
+			               <tr>
+			                  <td>
+			                     <select class="search" name ="menu" id="menu">
+			                        <option value ="TITLE">제목</option>
+			                        <option value ="NICK">작성자</option>
+			                     </select>
+			                     <input type="text" class="search" placeholder="검색할 내용을 입력해주세요." name = "content" id="content" size="30">
+			                     <input type="submit" class="defaultBtn searchBtn" id="search" value= "검색">
+			                  
+			                  </td>
+			                  
+			               </tr>
+			            </table>
+			         </div>
+			     </form>
 				<div class="contents">
 					<div class="tableArea">
 						<table  id="listArea">
@@ -81,10 +104,11 @@
 			
 			<div class="clear-both"></div>
 				<div class='pagingArea' align="center">
+					<% if(search != null){ %><!-- 검색을 한 상태의 페이징 -->
 					<!-- 검색결과 페이징 -->
-					<%if(!list.isEmpty()){ %>
-					<button onclick="location.href='<%= request.getContextPath() %>/list.wac?currentPage=1'">&lt;&lt;</button>
-					<button onclick="location.href='<%= request.getContextPath() %>/list.wac?currentPage=<%= currentPage-1 %>'" id="beforeBtn">PREV</button>
+					<%if(!list.isEmpty() && maxPage != 1){ %> <!-- 전체 페이지가 1개면 페이징 기능 없애기 -->
+					<button onclick="location.href='<%= request.getContextPath() %>/search.wac?currentPage=1&menu=<%= menu %>&content=<%= content %>'">&lt;&lt;</button>
+					<button onclick="location.href='<%= request.getContextPath() %>/search.wac?currentPage=<%= currentPage-1 %>&menu=<%= menu %>&content=<%= content %>'" id="beforeBtn">PREV</button>
 						<script>
 							if(<%= currentPage %> <= 1){
 								var before = $('#beforeBtn');
@@ -95,12 +119,12 @@
 							<%if(p == currentPage){ %>
 								<button id="choosen" disabled><%= p %></button>
 							<% } else { %>
-								<button id="numBtn" onclick="location.href='<%= request.getContextPath() %>/list.wac?currentPage=<%= p  %>'"><%= p %></button>
+								<button id="numBtn" onclick="location.href='<%= request.getContextPath() %>/search.wac?currentPage=<%= p  %>&menu=<%= menu %>&content=<%= content %>'"><%= p %></button>
 							<% } %>
 						<% } %>
 						
 						<!-- 다음 페이지로 가는 버튼 -->
-						<button onclick="location.href='<%= request.getContextPath() %>/list.wac?currentPage=<%= currentPage + 1 %>'" id="afterBtn">NEXT</button>
+						<button onclick="location.href='<%= request.getContextPath() %>/search.wac?currentPage=<%= currentPage + 1 %>&menu=<%= menu %>&content=<%= content %>'" id="afterBtn">NEXT</button>
 						<script>
 							if(<%= currentPage %> >= <%= maxPage %>){
 								var after= $("#afterBtn");
@@ -109,9 +133,43 @@
 						</script>
 						
 						<!-- 맨 끝으로 가는 버튼 -->
-						<button onclick="location.href='<%= request.getContextPath() %>/list.wac?currentPage=<%= maxPage %>'">&gt;&gt;</button>			
+						<button onclick="location.href='<%= request.getContextPath() %>/search.wac?currentPage=<%= maxPage %>&menu=<%= menu %>&content=<%= content %>'">&gt;&gt;</button>			
 						
 						<% } %>
+						
+						<% } else { %>
+							<%if(!list.isEmpty() && maxPage != 1){ %> <!-- 전체 페이지가 1개면 페이징 기능 없애기 -->
+							<button onclick="location.href='<%= request.getContextPath() %>/list.wac?currentPage=1'">&lt;&lt;</button>
+							<button onclick="location.href='<%= request.getContextPath() %>/list.wac?currentPage=<%= currentPage-1 %>'" id="beforeBtn">PREV</button>
+								<script>
+									if(<%= currentPage %> <= 1){
+										var before = $('#beforeBtn');
+										before.attr('disabled','true');
+									}
+								</script>
+								<% for(int p = startPage; p <= endPage; p++){ %>
+									<%if(p == currentPage){ %>
+										<button id="choosen" disabled><%= p %></button>
+									<% } else { %>
+										<button id="numBtn" onclick="location.href='<%= request.getContextPath() %>/list.wac?currentPage=<%= p  %>'"><%= p %></button>
+									<% } %>
+								<% } %>
+								
+								<!-- 다음 페이지로 가는 버튼 -->
+								<button onclick="location.href='<%= request.getContextPath() %>/list.wac?currentPage=<%= currentPage + 1 %>'" id="afterBtn">NEXT</button>
+								<script>
+									if(<%= currentPage %> >= <%= maxPage %>){
+										var after= $("#afterBtn");
+										after.attr('disabled','true');
+									}
+								</script>
+								
+								<!-- 맨 끝으로 가는 버튼 -->
+								<button onclick="location.href='<%= request.getContextPath() %>/list.wac?currentPage=<%= maxPage %>'">&gt;&gt;</button>			
+								
+								<% } %>
+								
+								<% } %>
 						
 					</div>
 					<!-- 로그인한 일반 회원만 작성하기 할 수 있도록 -->
@@ -126,6 +184,7 @@
 		
 		<script>
 			$(function(){
+				<% if(!list.isEmpty()){ %>
 				$('#listArea td').mouseenter(function(){
 					$(this).parent().css({'background':'darkgray','cursor':'pointer'});
 				}).mouseout(function(){
@@ -141,6 +200,7 @@
 						location.href='<%= request.getContextPath() %>/views/account/accountLoginForm.jsp';
 					<% } %> 
 				});
+				<% } %>
 			});
 			
 			function search() {
