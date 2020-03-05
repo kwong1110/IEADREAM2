@@ -111,7 +111,7 @@
 						</table>
 						<div class="btnBox btnC">
 							<button type="button" class="defaultBtn" id="updateBtn" onclick="updateMember();">등급 변경</button>
-							<button type="button" class="defaultBtn" id="deleteBtn" onclick="deleteMember();">탈퇴 처리</button>
+							<button type="button" class="defaultBtn cancelBtn" id="deleteBtn" onclick="deleteMember();">탈퇴 처리</button>
 						</div>
 					</form>
 					
