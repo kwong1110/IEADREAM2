@@ -33,7 +33,7 @@
 	.topMenu {
 		width: 100%; 
 		text-align: center; 
-		padding: 25px;
+		padding: 25px 0 25px 0;
 	}
 	
 	.topMenu a{
