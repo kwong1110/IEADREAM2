@@ -19,14 +19,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" type="text/css" href="css/reset.css" />
+<link rel="stylesheet" href="<%= request.getContextPath() %>/css/common.css">
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<title>이어드림_베스트커플_목록</title>
+<title>이어드림 - 이 달의 베스트커플</title>
 <style>
-	.pageTitle{
-		padding: 10px 0 10px 30px;
-		margin: 60px 0 20px 0;
-	}
 	
 	.option{
 		padding: 3px 7px 6px 7px;
@@ -45,18 +41,24 @@
 	}
 	
 	.optionbox{
-		margin-left: 61.3%;
-		margin-bottom: .4%;
+		margin-left: 800px;
+		margin-bottom: .6%;
+	}
+	
+	.main{
+		display: inline-block;
+		float:left;
+		width: 960px;
+		height: 670px;
 	}
 	
 	.contents{
-		width: 70%;
-		height: 470px;
-		border: 8px solid white;
-		background: rgba(255, 255, 255, 0.4);
+		/* width: 900px;
+		height: 470px; */
+		border: 8px solid pink;
 		box-shadow: 3px 3px 3px 3px gray;
-		margin-left: 23px;
-		margin-bottom: 40px;
+		/* margin: 0 4% 0 4%; */
+		margin-bottom: 15px; 
 	}
 	
 	.contns{
@@ -76,6 +78,7 @@
 	.hit{
 		margin: 0 0 2% 80%;
 		font-size: 12px;
+		cursor: default;
 	}
 	
 	.img{
@@ -85,6 +88,7 @@
 		position: relative;
 		margin-bottom: 20px;
 		cursor: pointer;
+		border: 1px solid darkgray;
 	}
 		
 	.peoNum > p {
@@ -126,36 +130,11 @@
 		text-align: center;
 	}
 	
-	.sc-footer{
-		width: 100%;
-	}
-	
-	.button{
-		width: 70%;
-		text-align:center;
-		margin: 0 auto;
-	}
-	
-	.uploadbtn{
-		width: 9%;
-		height: 28px;
-		margin-left: 32%;
-		background: #e75a82;
-		color: white;
-		font-weight: border;
-	}
-	
 	.clear-both{
 		height: 10px;
 	}
 	
-	.sc-footer button{border-radius: 15px; background: #D5D5D5;}
-	.searchArea{margin-right: 50px;}
-	.searchArea button{background: #D1B2FF; border-radius: 5px; color: white; width: 80px; heigth: 25px; text-align: center;}
 	button:hover{cursor: pointer;}
-	#numBtn{background: #B2CCFF;}
-	#choosen{background: #FFD8D8;}
-	#listArea{margin: auto;}
 	
 </style>
 </head>
@@ -169,70 +148,71 @@
 					
 					<div class="optionbox">
 						<div class="optiondiv">
-							<select  class="option">
+							<select  class="option" id="year">
 								<option>-----</option>
-								<option>2019년</option>
-								<option>2020년</option>
-								<option>2021년</option>
-								<option>2022년</option>
+								<option value="2019">2019년</option>
+								<option value="2020">2020년</option>
+								<option value="2021">2021년</option>
+								<option value="2022">2022년</option>
 							</select>					
 						</div>
 						
 						<div class="optiondiv">
-							<select class="option">
+							<select class="option" id="month">
 								<option>-----</option>
-								<option>1월</option>
-								<option>2월</option>
-								<option>3월</option>
-								<option>4월</option>
-								<option>5월</option>
-								<option>6월</option>
-								<option>7월</option>
-								<option>8월</option>
-								<option>9월</option>
-								<option>10월</option>
-								<option>11월</option>
-								<option>12월</option>
+								<option value="1">1월</option>
+								<option value="2">2월</option>
+								<option value="3">3월</option>
+								<option value="4">4월</option>
+								<option value="5">5월</option>
+								<option value="6">6월</option>
+								<option value="7">7월</option>
+								<option value="8">8월</option>
+								<option value="9">9월</option>
+								<option value="10">10월</option>
+								<option value="11">11월</option>
+								<option value="12">12월</option>
 							</select>
 						</div>
 					</div>
 					
 					<div class="contents">
-					<div class="contns">
-						<% 
-							for(int i = 0; i < bcList.size(); i++){
-								Board bc = bcList.get(i);
-						%>
-							<div class="contn">
-								<p class="hit">HIT : <%= bc.getHit() %></p>
-								<div class="img">
-									<input type="hidden" value="<%= bc.getPostNo() %>">
-									<% 
-										for(int j = 0; j < pList.size(); j++){
-											Photo p = pList.get(j);		
-									%>
-										<% if(bc.getPostNo() == p.getPostNo()){ %>
-											<img src="<%= request.getContextPath() %>/photo_uploadFiles/<%= p.getChangeName() %>" style="width:inherit; height:inherit;">
+						<div class="contns">
+							<% 
+								for(int i = 0; i < bcList.size(); i++){
+									Board bc = bcList.get(i);
+							%>
+								<div class="contn">
+									<p class="hit">HIT : <%= bc.getHit() %></p>
+									<div class="img">
+										<input type="hidden" value="<%= bc.getPostNo() %>">
+										<% 
+											for(int j = 0; j < pList.size(); j++){
+												Photo p = pList.get(j);		
+										%>
+											<% if(bc.getPostNo() == p.getPostNo()){ %>
+												<img src="<%= request.getContextPath() %>/photo_uploadFiles/<%= p.getChangeName() %>" style="width:inherit; height:inherit;">
+											<% } %>
 										<% } %>
-									<% } %>
+									</div>
+									<div class="text">
+										<p id="text1"><%= bc.getTitle() %></p>
+										<p id="text2"><%= bc.getUserId() %></p>
+										<p id="text3"><%= bc.getCreateDate() %></p>
+									</div>
 								</div>
-								<div class="text">
-									<p id="text1"><%= bc.getTitle() %></p>
-									<p id="text2"><%= bc.getUserId() %></p>
-									<p id="text3"><%= bc.getCreateDate() %></p>
-								</div>
+									
+								<% } %>
 							</div>
-								
-							<% } %>
-						</div>
-						<div class="clear-both"></div>
+							
+						 <div class="clear-both"></div>
 						
-						 <div class="sc-footer">
+						 <div class="pagingArea">
 						 	<% if(!bcList.isEmpty()) { %>
 								<div class="button">
 									<button onclick="location.href='<%= request.getContextPath() %>/list.bc?currentPage=1'">&lt;&lt;</button>
 									
-									<button onclick="location.href='<%= request.getContextPath() %>/list.bc?currentPage=<%= currentPage-1 %>'" id="beforeBtn">&lt;</button>
+									<button onclick="location.href='<%= request.getContextPath() %>/list.bc?currentPage=<%= currentPage-1 %>'" id="beforeBtn">PREV</button>
 									<script>
 										if(<%= currentPage %> <= 1){
 											var before = $('#beforeBtn');
@@ -248,7 +228,7 @@
 										<% } %>	
 									<% } %>
 									
-									<button onclick="location.href='<%= request.getContextPath() %>/list.bc?currentPage=<%= currentPage + 1%>'" id="afterBtn">&gt;</button>
+									<button onclick="location.href='<%= request.getContextPath() %>/list.bc?currentPage=<%= currentPage + 1%>'" id="afterBtn">NEXT</button>
 									<script>
 										if(<%= currentPage %> >= <%= maxPage %>){
 											var after = $("#afterBtn");
@@ -262,8 +242,10 @@
 						</div>
 					</div>
 					
-					<div>
-						<button class="uploadbtn" onclick='location.href="views/coupleStory/bestCouple/bestCoupleInsertForm.jsp"'>UPLOAD</button>
+					<div class="btnBox">
+						<% if(loginUser != null && loginUser.getGrade() == 0) { %>
+							<button class="defaultBtn" onclick='location.href="views/coupleStory/bestCouple/bestCoupleInsertForm.jsp"'>작성하기</button>
+						<% } %>
 					</div>
 				</div>	
 			</div>
@@ -278,8 +260,7 @@
 			});
 		</script>
 		
-		
-		
 	</section>
 </body>
+<%@ include file="../../common/footer.jsp" %>
 </html>

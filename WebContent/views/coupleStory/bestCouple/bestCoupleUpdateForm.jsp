@@ -24,23 +24,20 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" type="text/css" href="css/reset.css" />
+<link rel="stylesheet" href="<%= request.getContextPath() %>/css/common.css">
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<title>이어드림_베스트커플_글수정</title>
+<title>이어드림 - 이 달의 베스트커플</title>
 <style>
-	.title{
-		padding: 10px 0 10px 30px;
-		margin: 60px 0 40px 0;
+
+	.outer{
+		height: 830px;
 	}
 	
-	.main{
-		width: 70%;
-		height: 750px;
+	.contents{
+		text-align: left;
+		width: 900px;
 		border: 8px solid pink;
-		background: white;
-		margin-left: 23px;
-		margin-bottom: 20px;
-		font-family: "만화진흥원체";
+		box-shadow: 3px 3px 3px 3px gray;
 	}
 	
 	.subj{
@@ -94,26 +91,6 @@
 		margin-bottom: 1%;
 	}
 	
-	button{
-		padding: 6px 9px 6px 9px;
-		background: pink;
-		color: white;
-		border-radius: 10px;
-		font-weight: bold;
-		font-size: 15px;
-		font-family: "만화진흥원체";
-	    cursor: pointer;
-		margin-bottom: 30px;
-		text-align: center;
-	    display: inline-block;
-		text-shadow: 0 1px 1px rgba(0,0,0,.3);
-		box-shadow: 0 1px 2px rgba(0,0,0,.2);
-	}
-	
-	.btnBox{
-		margin-left: 33%;
-	}
-	
 	#titlePtArea {
 		width:370px; 
 		height:200px;
@@ -148,6 +125,9 @@
 		height: 200px;
 	}
 	
+	/* .footer{
+		margin-top: 130px;
+	} */
 </style>
 </head>
 <body>
@@ -155,122 +135,124 @@
 	<section>
 		<div class="outer">
 			<div class="wrapper">
-				<h1 class="title">이달의 베스트 커플</h1>
-				<form action="<%= request.getContextPath() %>/update.bc" method="post" encType="multipart/form-data">
-					<div class="main">
-						<div class="subj">
-							<div id="subjtitle">제목</div>
-							<input type="hidden" name="postNo" value="<%= request.getParameter("pNo") %>">
-							<input type="text" name="title" id="subjbox" value="<%= title %>">
-						</div>
-						
-						<div class="contn1">
-							<div class="contn1box">
-								<div class="label">
-									<label>남자 이름 : </label>
-								</div>
-								<input type="text" name="mName" class="bx" value="<%= mName %>"><br>
-								
-								<div class="label">
-									<label>여자 이름 : </label>
-								</div>
-								<input type="text" name="fName" class="bx" value="<%= fName %>"><br>
-								
-								<div class="label">
-									<label>연애 기간 : </label>
-								</div>
-								<input type="number" name="dtPeriod" min="1" value="<%= dtPeriod %>" class="bx">&nbsp;일<br>
-								
-								<div class="label">
-									<label>즐겨하는 데이트 : </label>
-								</div>
-								<input type="text" name="fvDate" maxlength="12" value="<%= fvDate %>">
+				<div class="main">
+					<div class="pageTitle"><h1>이달의 베스트 커플</h1></div>
+					<form action="<%= request.getContextPath() %>/update.bc" method="post" encType="multipart/form-data">
+						<div class="contents">
+							<div class="subj">
+								<div id="subjtitle">제목</div>
+								<input type="hidden" name="postNo" value="<%= request.getParameter("pNo") %>">
+								<input type="text" name="title" id="subjbox" value="<%= title %>">
 							</div>
-						</div>
-						
-						<textarea class="contn2" name="content"><%= content %></textarea>
-						
-						<div class="file">
-							<div id="titlePtArea">
-								<img id="titlePt" src="<%= request.getContextPath() %>/photo_uploadFiles/<%= titlePt %>">
-								<input type="hidden" id="detailPhotoId0" name="detailPhotoId0" value="<%= photoNos.get(0) %>"> 
-								<input type="hidden" id="cTitle" name="cTitle">
-							</div>	
 							
-							<div id="contentPtArea">
-								<img id="contentPt" <%= detailPt %>> 
-								<input type="hidden" id="detailPhotoId1" name="detailPhotoId1" value="<%= photoNos.get(1) %>"> 
-								<input type="hidden" id="cContent" name="cContent">
-							</div>
-						</div>
-						
-						
-						<%-- <div class="fileUpload" id="fileUpload">
-								<input type="button" value="파일 선택">
-								<input type="text" id="text" value="<%= originName0 %>">
-						</div> --%>
-					
-						<div id="fileArea">
-							<input type="file" id="thumbnailImg1" multiple="multiple" name="thumbnailImg1" onchange="LoadImg(this,1)">
-							<input type="file" id="thumbnailImg2" multiple="multiple" name="thumbnailImg2" onchange="LoadImg(this,2)">
-							
-						</div>
-					
-						<script>
-						
-							/* $(function(){
-								$("#fileArea").hide();
-							
-								$("#fileUpload").click(function(){
-									$("#thumbnailImg1").click();
-								});
-							});
-							
-							function fileUpload(thumbnailImg1) {
-								var str = thumbnailImg1.value;
-								$('#text').attr("value", thumbnailImg1.value.substring(str.lastIndexOf("\\")+1));
-							} */
-						
-						
-							$(function(){
-								$("#fileArea").hide();
-							
-								$("#titlePtArea").click(function(){
-									$("#thumbnailImg1").click();
-								});
-								$("#contentPtArea").click(function(){
-									$("#thumbnailImg2").click();
-								});
-							});
-							
-							
-							function LoadImg(value, num){
-								if(value.files && value.files[0]){
-									var reader = new FileReader();
+							<div class="contn1">
+								<div class="contn1box">
+									<div class="label">
+										<label>남자 이름 : </label>
+									</div>
+									<input type="text" name="mName" class="bx" value="<%= mName %>"><br>
 									
-									reader.onload = function(e){								
-										switch(num){
-										case 1: 
-											$("#titlePt").attr("src", e.target.result);
-											break;
-										case 2:
-											$("#contentPt").attr("src", e.target.result);
-											break;
-										}
-									}
-								
-									reader.readAsDataURL(value.files[0]);
-								}
-							}
+									<div class="label">
+										<label>여자 이름 : </label>
+									</div>
+									<input type="text" name="fName" class="bx" value="<%= fName %>"><br>
+									
+									<div class="label">
+										<label>연애 기간 : </label>
+									</div>
+									<input type="number" name="dtPeriod" min="1" value="<%= dtPeriod %>" class="bx">&nbsp;일<br>
+									
+									<div class="label">
+										<label>즐겨하는 데이트 : </label>
+									</div>
+									<input type="text" name="fvDate" maxlength="12" value="<%= fvDate %>">
+								</div>
+							</div>
 							
-						</script>
-					</div>
-					
-					<div class="btnBox">
-						<button type="button" id="updateBtn">완료</button>
-						<button type="reset" onclick="location.href='<%= request.getContextPath() %>/list.bc'">취소</button>
-					</div>	
-				</form>
+							<textarea class="contn2" name="content"><%= content %></textarea>
+							
+							<div class="file">
+								<div id="titlePtArea">
+									<img id="titlePt" src="<%= request.getContextPath() %>/photo_uploadFiles/<%= titlePt %>">
+									<input type="hidden" id="detailPhotoId0" name="detailPhotoId0" value="<%= photoNos.get(0) %>"> 
+									<input type="hidden" id="cTitle" name="cTitle">
+								</div>	
+								
+								<div id="contentPtArea">
+									<img id="contentPt" <%= detailPt %>> 
+									<input type="hidden" id="detailPhotoId1" name="detailPhotoId1" value="<%= photoNos.get(1) %>"> 
+									<input type="hidden" id="cContent" name="cContent">
+								</div>
+							</div>
+							
+							
+							<%-- <div class="fileUpload" id="fileUpload">
+									<input type="button" value="파일 선택">
+									<input type="text" id="text" value="<%= originName0 %>">
+							</div> --%>
+						
+							<div id="fileArea">
+								<input type="file" id="thumbnailImg1" multiple="multiple" name="thumbnailImg1" onchange="LoadImg(this,1)">
+								<input type="file" id="thumbnailImg2" multiple="multiple" name="thumbnailImg2" onchange="LoadImg(this,2)">
+								
+							</div>
+						
+							<script>
+							
+								/* $(function(){
+									$("#fileArea").hide();
+								
+									$("#fileUpload").click(function(){
+										$("#thumbnailImg1").click();
+									});
+								});
+								
+								function fileUpload(thumbnailImg1) {
+									var str = thumbnailImg1.value;
+									$('#text').attr("value", thumbnailImg1.value.substring(str.lastIndexOf("\\")+1));
+								} */
+							
+							
+								$(function(){
+									$("#fileArea").hide();
+								
+									$("#titlePtArea").click(function(){
+										$("#thumbnailImg1").click();
+									});
+									$("#contentPtArea").click(function(){
+										$("#thumbnailImg2").click();
+									});
+								});
+								
+								
+								function LoadImg(value, num){
+									if(value.files && value.files[0]){
+										var reader = new FileReader();
+										
+										reader.onload = function(e){								
+											switch(num){
+											case 1: 
+												$("#titlePt").attr("src", e.target.result);
+												break;
+											case 2:
+												$("#contentPt").attr("src", e.target.result);
+												break;
+											}
+										}
+									
+										reader.readAsDataURL(value.files[0]);
+									}
+								}
+								
+							</script>
+						</div>
+						
+						<div class="btnBox">
+							<button type="button" class="defaultBtn" id="updateBtn">완료</button>
+							<button type="reset" class="defaultBtn deleteBtn" onclick="location.href='<%= request.getContextPath() %>/list.bc'">취소</button>
+						</div>	
+					</form>
+				</div>	
 			</div>
 		</div>
 		
@@ -286,9 +268,10 @@
 				$("#cContent").val($("#contentPt").attr('src').substring(0, 4));
 			}
 			
-			$('.main').parent().submit();
+			$('.contents').parent().submit();
 		});
 		</script>
 	</section>
 </body>
+<%@ include file="../../common/footer.jsp" %>
 </html>

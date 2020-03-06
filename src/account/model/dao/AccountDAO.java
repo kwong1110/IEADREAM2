@@ -29,6 +29,7 @@ public class AccountDAO {
 		}
 	}
 	
+	
 	public int idCheck(Connection conn, String userId) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -128,72 +129,64 @@ public class AccountDAO {
 	}
 
 	
-	// 아이디 찾기 DAO
-	public Account searchid(Account account, Connection conn) {
-		Account a = null;
+	// 아이디 찾기 DAO	
+	public Account searchId(Connection conn, String userName, String email) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String query = prop.getProperty("searchid");
+		Account a = null;
 		
+		String query = prop.getProperty("searchId");
+		//SELECT ID, USER_NAME, EMAIL FROM ACCOUNT WHERE USER_NAME=? AND EMAIL=? AND DELETED='N'
 		
-		try	{
+		try {
 			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, account.getId());
-			pstmt.setString(2, account.getEmail());
+			pstmt.setString(1, userName);
+			pstmt.setString(2, email);
 			
 			rset = pstmt.executeQuery();
-					
-			if(rset.next()) {
-				a = new Account();
-				
-				a.setId(rset.getString("id"));
-				
-			}
-			System.out.println(a);
 			
-		}catch(Exception e) { 
+			if(rset.next()) {
+				a = new Account(rset.getString("ID"),
+								rset.getString("USER_NAME"),
+								rset.getString("EMAIL"));
+			}
+			
+		} catch (SQLException e) {
 			e.printStackTrace();
-		}finally {
+		} finally {
 			close(rset);
 			close(pstmt);
 		}
+		
 		return a;
 	}
 	
+	
 	//비밀번호 찾기 DAO
-	public Account searchPwd(Connection conn, Account account){
-		Account result = null;
+	public String searchPwd(Connection conn, Account account){
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		
+		String password = null;
+	
 		String query = prop.getProperty("searchpwd");
 		
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, account.getId());
-			pstmt.setString(2, account.getPassword());
+			pstmt.setString(2, account.getEmail());
 			
 			rset = pstmt.executeQuery();
 			
 			if(rset.next()) {
-				result = new Account();
-				result.setPassword(rset.getString("password"));
-				
+				password = rset.getString("password");	
 			}
-			
 		}catch(Exception e) { 
 			e.printStackTrace();
 		}finally {
 			close(rset);
 			close(pstmt);
 		}
-		
-		return result;
-	}
-
-	public String searchPwd(Account account, Connection conn) {
-		// TODO Auto-generated method stub
-		return null;
+		return password;
 	}
 
 	public Account selectMyProfile(Connection conn, String loginId) {
@@ -274,6 +267,37 @@ public class AccountDAO {
 		
 		return result;
 	}
+
+
+	public int emailCheck(Connection conn, String email) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int result = 0;
+		
+		String query = prop.getProperty("emailCheck");
+		//SELECT COUNT(*) FROM ACCOUNT WHERE EMAIL=?
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, email);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				result = rset.getInt(1);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		
+		return result;
+	}
+
 	
 }
 	

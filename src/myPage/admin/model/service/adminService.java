@@ -106,6 +106,18 @@ public class adminService {
 		return search;
 	}
 
-	
+	public int deleteBo(String[] bNo) {
+		Connection conn = getConnection();
+		adminDAO aDAO = new adminDAO();
+		int result = aDAO.deleteBo(conn, bNo);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		return result;
+	}
 
 }

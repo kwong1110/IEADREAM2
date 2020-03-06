@@ -158,17 +158,17 @@ public class WeAreCoupleService {
 		return result1;
 	}
 
-	public int getListSearchCount(String search) {
+	public int getListSearchCount(String menu,String content) {
 		Connection conn = getConnection();
-		int result = new WeAreCoupleDAO().getListSearchCount(conn,search);
+		int result = new WeAreCoupleDAO().getListSearchCount(conn,menu,content);
 		close(conn);
 		
 		return result;
 	}
 
-	public ArrayList<Board> selectSearchList(int currentPage, String search) {
+	public ArrayList<Board> selectSearchList(int currentPage, String menu, String content) {
 		Connection conn = getConnection();
-		ArrayList<Board> list =  new WeAreCoupleDAO().selectSearchList(conn,currentPage,search);
+		ArrayList<Board> list =  new WeAreCoupleDAO().selectSearchList(conn,currentPage,menu, content);
 		close(conn);
 		return list;
 	}

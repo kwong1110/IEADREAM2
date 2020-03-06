@@ -1,88 +1,136 @@
 @charset "UTF-8";
 /*
-	게시판의 CSS
-	(미완성)
+		게시판의 CSS
 */
 
 	/* 게시판 부분 박스 (박스가 2개 존재하는 게시판)*/
-.topBox{
-	margin-bottom: 20px;
-	background: #c7eef2;
-	border: 2px solid #b1e8ed;
-	border-radius: 10px;
-	color: #595c5c;
-	font-weight: bold;
-  	padding: 20px;
+.main{
+	width: 80%;
+	height: 100%;
 }
-	
+
+.outer{
+	width:1000px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 50px;
+	background: white;
+}
+
+.contents{
+	height: 350px;
+}
+
+.topBox{
+  	padding: 20px;
+	margin-bottom: 20px;
+	border: 1px solid;
+	border-radius: 10px;
+	background: #f9f9f9;
+	color: rgb(89, 92, 92);
+	font-weight: bold
+}
 .midBox{
 	display: block;
-  	padding: 5px;
+  	padding: 5px
 }
-
-.midBox > div{
-	display: inline-block;
+.midBox>div{
+	display: inline-block
 }
-
-.search {
-	font-size: 12px;
+.search{
+	padding: 3px 7px 4px 7px;
 	border: 0;
 	border-radius: 7px;
-	color: #595c5c;
-	padding: 3px 7px 4px 7px;
+	color: rgb(89, 92, 92);
+	font-size: 12px
 }
-
-.search.search2 {
-	height: 17px;
+.search.search2{
 	width: 115px;
+	height: 17px
+}
+.searchMenu{
+	padding-right: 25px
 }
 
-.searchMenu {
-	padding-right: 25px;
+.searchBtn{
+	font-size: 12px;
 }
-
 
 	/* 게시판 부분 한판 게시판 */
-ul {
-	list-style-type: none;
+ul{
+	list-style-type: none
 }
-
-th {
+th{
+	text-align: center
+}
+table>tbody>tr>td{
+	padding: 15px;
 	text-align: center;
-}
-
-table>tbody>tr>td {
 	vertical-align: middle;
-	text-align: center;
-	padding: 15px;
+	line-height: 10px
 }
-
 .mainBoard>thead>tr>th{
-	border-bottom: 1px solid #b1e8ed;
-	padding: 15px;
-	
+	padding:12px 0;
+	border-top:1px solid rgb(136, 136, 136); 	/* 상단라인색 */
+	border-bottom:1px solid rgb(224, 224, 224); /* 하단라인색 */
+	background:#f9f9f9;  					/* 제목배경색 */ 
+	color:rgb(230, 141, 150); font-size:1em;/* 제목글자크기 */ 
+	letter-spacing:0.1em;					/* 제목띠어쓰기간격 */
 }
 
-.mainBoard {
-	background: white;
-	border: 2px solid #b1e8ed;
-	border-radius: 10px;
+.mainBoard>thead>tr{
+	width: -webkit-fill-available;
+}
+.mainBoard{
 	padding: 20px;
+	width: 800px;
+	text-align: center;
+	background: white;
+	border-bottom: 1px solid rgb(224,224,224)
 }
 
 	/* 게시판 요소 */
 .item{
 	display: flex;
-	margin: 10px;
+	margin: 10px
 }
-
 
 	/* 비공통 부분 */
 	/* 하트 히스토리 게시판 */
-.heartState {
+.heartState{
 	margin: 0;
 	text-align: justify;
 	vertical-align: middle;
 }
 
 	/* 관리자 전용 부분 */
+	
+	/* 팝업 창 테이블 */
+.popTable{
+	padding: 20px;
+	text-align: center;
+	background: white;
+	border-bottom: 1px solid rgb(224,224,224);
+	font-size:0.9em;
+}
+.popTable>thead>tr>th{
+	padding:12px 0;
+	border-top:1px solid rgb(136, 136, 136); 	/* 상단라인색 */
+	border-bottom:1px solid rgb(224, 224, 224); /* 하단라인색 */
+	background:#f9f9f9;  					/* 제목배경색 */ 
+	color:rgb(230, 141, 150); font-size:1em;/* 제목글자크기 */ 
+	letter-spacing:0.1em;					/* 제목띠어쓰기간격 */
+}
+
+.popMain{
+	display: flex;
+  	align-items: center;
+  	justify-content: center;
+}
+
+.deleteCheck{
+	margin: 10px;
+	font-weight: bold;
+	font-size: 15px;
+	color: red;
+}

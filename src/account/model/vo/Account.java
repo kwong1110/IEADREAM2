@@ -93,6 +93,19 @@ public class Account {
 		this.email = email;
 		this.birth = birth;
 	}
+	
+//	public Account(String userName, String email) {
+//		super();
+//		this.userName = userName;
+//		this.email = email;
+//	}
+	
+	public Account(String id, String userName, String email) {
+		super();
+		this.id = id;
+		this.userName = userName;
+		this.email = email;
+	}
 
 	public int getUserNo() {
 		return userNo;
@@ -181,4 +194,13 @@ public class Account {
 	public void setInterest(String interest) {
 		this.interest = interest;
 	}
+
+	@Override
+	public String toString() {
+		return "Account [userNo=" + userNo + ", grade=" + grade + ", id=" + id + ", password=" + password + ", gender="
+				+ gender + ", userName=" + userName + ", phone=" + phone + ", email=" + email + ", birth=" + birth
+				+ ", deleted=" + deleted + ", interest=" + interest + "]";
+	}
+	
+	
 }

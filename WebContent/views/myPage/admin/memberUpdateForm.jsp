@@ -28,23 +28,17 @@
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/common.css">
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/board.css">
 <style>
-.main{
-	position:absolute;
-  	top:15%;
-  	left:20%;
-}
-
-.botBox{
-	background: #c7eef2;
-	padding: 10px;
-	border-radius: 10px;
-}
+	.botBox{
+		background:#f9f9f9;
+		color:rgb(230, 141, 150);
+		font-size:1em
+	}
 </style>
 </head>
-<body>
-	<div class="main">
+<body onload='resizeWindow(this)'>
+	<div class="popMain" id="mainBox">
 		<form action="<%= request.getContextPath() %>/manageUpdate.mem" method="get">
-			<table class="mainBoard">
+			<table class="popTable">
 				<thead>
 					<tr>
 						<th>이름</th>
@@ -80,4 +74,12 @@
 		</form>
 	</div>
 </body>
+<script>
+	function resizeWindow(win)    {
+		var wid = win.document.body.offsetWidth + 80;
+		var hei = win.document.body.offsetHeight + 100;    //80 과 100은 넉넉하게 하려는 임의의 값임
+		
+		win.resizeTo(wid,hei);
+	};
+</script>
 </html>

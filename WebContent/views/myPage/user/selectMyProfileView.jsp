@@ -4,6 +4,7 @@
 	Account a = (Account)request.getAttribute("account");
 
 	String id = a.getId();
+	String password = a.getPassword();
 	String name = a.getUserName();
 	int grade = a.getGrade();
 	String phone = a.getPhone();
@@ -16,7 +17,6 @@
 	case 0: gr = "관리자"; break;
 	case 1: gr = "준회원"; break;
 	case 2: gr = "정회원"; break;
-	case 3: gr = "준회원(결제대기중)"; break;
 	}
 	
 	String ge = null;
@@ -30,7 +30,28 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>이어드림 - 기본 정보</title>
+<link rel="stylesheet" href="<%= request.getContextPath() %>/css/common.css">
+<link rel="stylesheet" href="<%= request.getContextPath() %>/css/board.css">
+<style>
+	.listArea{width: 600px; margin:0 0 100px 100px;}
+	.tableArea tr { width: -webkit-fill-available;}
+	.tableArea td {/* 게시판제목라인 */
+		padding:20px 0;
+		border-top:1px solid rgb(136, 136, 136); /* 상단라인색 */
+		border-bottom:1px solid rgb(224, 224, 224); /* 하단라인색 */
+		color:rgb(230, 141, 150); font-size:1em;/* 제목글자크기 */ 
+		letter-spacing:0.1em;
+		text-align: right;}/* 제목띠어쓰기간격 */
+	.tableArea {width: 100%; align: center;}
+	
+	input{font-size: 15px; padding: 2px; width: 80%;}
+
+	.btnBox{border-top: 1px solid rgb(224, 224, 224);}
+	
+	*:focus { outline:none; }
+	
+</style>
 </head>
 <body>
 	<%@ include file="../../common/mainmenu.jsp" %>
@@ -41,48 +62,49 @@
 				<div class="pageTitle">
 					<h1>기본 정보</h1>
 				</div>
-				<div>
-					<form action="views/myPage/user/updateMyProfile.jsp" method="post" id="updateForm" name="updateForm" 
+				<div class="tableArea" style="padding: 30px;">
+					<form action="<%= request.getContextPath() %>/views/myPage/user/updateMyProfile.jsp" method="post" id="updateForm" name="updateForm" 
 						style="font-size: 20px; text-align: center;">
-						<table style="border-spacing: 20px;">
+						<table class="listArea" style="border-spacing: 20px;">
 								<tr>
 									<td class="minW">아이디</td>
 									<td>
-										<input type="text" placeholder="userID" class="profile" name="id" readOnly value="<%= id %>" style="background: lightgray;">
+										<input style="border: none;" type="text" placeholder="userID" class="profile" name="id" readOnly value="<%= id %>" style="background: lightgray;">
+										<input type="hidden" name="pwd" value="<%= password %>">
 									</td>
 								</tr>
 								<tr>
 									<td>이름</td>
-									<td><input type="text" placeholder="이름을 입력해주세요" class="profile" name="user_name" readOnly value="<%= name %>"></td>
+									<td><input style="border: none;" type="text" placeholder="이름을 입력해주세요" class="profile" name="user_name" readOnly value="<%= name %>"></td>
 								</tr>
 								<tr>
 									<td>회원등급</td>
-									<td><input type="text" class="profile" name="grade" readonly value="<%= gr %>"></td>
+									<td><input style="border: none;" type="text" class="profile" name="grade" readonly value="<%= gr %>"></td>
 								</tr>
 								<tr>
 									<td>이메일</td>
-									<td><input type="text" placeholder="메일을 입력해주세요" class="profile" name="email" value="<%= email %>"></td>
+									<td><input style="border: none;" type="text" placeholder="메일을 입력해주세요" class="profile" name="email" readonly  value="<%= email %>"></td>
 								</tr>
 								<tr>
 									<td>휴대전화</td>
-									<td><input type="text" placeholder="휴대전화 번호를 입력해주세요" class="profile" name="phone" value="<%= phone %>"></td>
+									<td><input style="border: none;" type="tel" placeholder="휴대전화 번호를 입력해주세요" class="profile" name="phone" readonly value="<%= phone %>"></td>
 								</tr>
 								<tr>
 									<td>성별</td>
-									<td><input type="text" class="profile" name="gender" readonly value="<%= ge %>"></td>
+									<td><input style="border: none;" type="text" class="profile" name="gender" readonly value="<%= ge %>"></td>
 								</tr>
 								<tr>
 									<td>생년월일</td>
-									<td><input type="text" class="profile" name="birth" readonly value="<%= birth %>"></td>
+									<td><input style="border: none;" type="text" class="profile" name="birth" readonly value="<%= birth %>"></td>
 								</tr>
 						</table>
-						<div style="text-align: center;">
-								<input id="updateBtn" type="submit" value="수정"> <!-- action으로 연결 -->
+						<div class="btnBox">
+								<button class="defaultBtn" type="submit" id="updateBtn">수정</button> <!-- action으로 연결 -->
+								<button class="defaultBtn" type="button" id="deleteAcBtn" onclick="goToDelete();">탈퇴</button>
 								
 								<!-- 탈퇴 확인을 위한 페이지 -->
 						</div>
 					</form>
-								<button id="deleteAcBtn" onclick="location.href='views/myPage/user/deleteAcCheck.jsp'" value="탈퇴">탈퇴</button>
 				</div>
 			</div>
 		</div>
@@ -121,8 +143,13 @@
 						$(this).css("background", "initial");
 					}
 				});
+				
+				function goToDelete() {
+					location.href='<%= request.getContextPath() %>/views/myPage/user/deleteAcCheck.jsp';
+				}
 		</script>
 
 	</div>
 </body>
+<%@ include file="../../common/footer.jsp" %>
 </html>

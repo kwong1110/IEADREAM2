@@ -35,24 +35,21 @@ public class FindidServlet extends HttpServlet {
 			
 			String userName = request.getParameter("userName");
 			String email = request.getParameter("email");
-			System.out.println("서블릿 유저이름, 이메일 : " + userName + email);
-		
-			Account findUser = new Account(userName, email);
-			System.out.println("서블릿 : " + findUser);
-			Account account = new AccountService().searchid(findUser);
 			
-			String page ="";
-			if (account != null){
-				page = "views/account/searchidForm.jsp";
-				System.out.println("아이디 찾기 완료!!");
-				request.setAttribute("account", account);
-			}else {
+			Account a = new AccountService().searchId(userName, email);
+			
+			String page = null;
+			if(a != null) {
+				page = "views/account/searchidFind.jsp";
+				request.setAttribute("a", a);
+			} else {
 				page = "views/common/errorPage.jsp";
-				request.setAttribute("msg", "아이디 찾기에 실패하셨습니다.");
+				request.setAttribute("msg", "아이디 찾기에 실패하였습니다.");
 			}
 			
 			request.getRequestDispatcher(page).forward(request, response);
-		}
+
+	}
 		
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

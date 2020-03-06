@@ -1,0 +1,97 @@
+@charset "UTF-8";
+
+	/* index(첫화면) CSS */
+	
+	/* 뒷배경 띠 */
+.imageBar{
+	position: fixed;
+	top: 330px;
+	display:inline-block;
+	width: 100%;
+	height: 250px;
+	background: rgb(250, 225, 225);
+	opacity: 0.6;
+	z-index: -1
+}
+
+	/* 첫번째 박스(슬라이드박스) */
+.firstBox{
+	display: inline-block;
+	position: relative;
+	width: 100%;
+	height: 620px;
+	margin-bottom: 20px
+}
+.slideBox{
+	width: 100%;
+	height: 550px
+}
+.slideBox{
+	background: url('../images/common/mainimage1.jpg') no-repeat center center;
+	background-size: auto 550px;
+}
+.slideBox:nth-of-type(3){
+	background: lightyellow;
+}
+.slideBox:nth-of-type(4){
+	background: lightgreen;
+}
+	/* 슬라이드 하단 점 표시 위치 수정  */
+.slick-dots{
+	bottom: 3%;
+}
+
+	/* 슬라이드 화살표 */
+.slick-prev:before,.slick-next:before{
+	display: none;
+}
+.slick-next{
+	right: 0;
+}
+
+/* .slick-next:before{
+	height: 50px;
+	width: 50px;
+	border: solid 1px red;
+	right: 2%;
+	background: url('<%= request.getContextPath() %>/images/common/next.png') no-repeat center center;
+	background-size: contain
+}
+.slick-prev:before{
+	height: 50px;
+	width: 50px;
+	border: solid 1px red;
+	left: 2%;
+	z-index: 1;
+	background: url('<%= request.getContextPath() %>/images/common/prev.png') no-repeat center center;
+	background-size: contain
+} */
+	/* 중단~하단 각 메뉴 연결 박스 */
+.bigBox{
+	text-align: center;
+	margin: 20px 150px 20px 150px
+}
+.indexBox{
+	display: inline-block;
+	width: 350px;
+	height: 500px;
+	margin: 10px
+}
+.indexBox:nth-of-type(1){
+	background: salmon
+}
+.indexBox:nth-of-type(2){
+	background: lightyellow
+}
+.indexBox:nth-of-type(3){
+	background: skyblue
+}
+.indexBox:nth-of-type(4){
+	background: powderblue
+}
+.indexBox:nth-of-type(5){
+	background: powderblue
+}
+.indexBox:nth-of-type(6){
+	background: powderblue
+}

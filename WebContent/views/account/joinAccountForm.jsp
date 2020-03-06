@@ -4,65 +4,31 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" type="text/css" href="css/reset.css" />
+<link rel="stylesheet" href="<%= request.getContextPath() %>/css/common.css">
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<title>이어드림_회원가입_Step1</title>
+<title>이어드림 - 회원가입</title>
 <style>
-	.pageTitle{
-		padding: 10px 0 10px 30px;
-		margin: 60px 0 40px 0;
-	}
 	
-	.joinForm{
-		width: 60%;
-		height: 550px;
-		border: 8px solid white;
+	.contents{
+		text-align: left;
+		width: 800px;
+		border: 8px solid pink;
 		box-shadow: 3px 3px 3px 3px gray;
-		background: rgba(255, 255, 255, 0.4);
-		margin-left: 23px;
-		margin-bottom: 60px;
 	}
 	
 	.table{
-		margin-top: 5%;
+		margin-top: 8%;
 		margin-left: 25%;
-		font-family: "만화진흥원체";
 	}
 	
 	.table td {
-		padding-bottom: 4%;
-	}
-	
-	.btnBox{
-		margin-left: 42%;
-		padding: 4% 0;
-	}
-	
-	.defaultBtn{
-	    /* width: 60px;
-	    height: 26px; */
-	    padding: 6px 9px 6px 9px;
-	    background-color: rgb(123, 164, 213);
-	    color: white;
-	    border: none;
-	    text-align: center;
-	    display: inline-block;
-	    font-size: 15px;
-	    cursor: pointer;
-	    border-radius: 10px;
-	    font-family: "만화진흥원체";
-	    text-shadow: 0 1px 1px rgba(0,0,0,.3);
-		box-shadow: 0 1px 2px rgba(0,0,0,.2);
-	}
-	
-	.defaultBtn:hover{
-		background: rgb(140, 190, 250);
-		color: white;
+		padding-bottom: 5%;
 	}
 	
 	#dubtn{
 		margin-left: 23%;
 		font-size: 12px;
+		background: #B2CCFF;
 	}
 	
 	.msg{
@@ -80,6 +46,12 @@
 		margin-left: 20%;
 	}
 	
+	.btnBox{
+		margin-left: 630px;
+		padding: 5% 0 1% 0;
+	}
+	
+	
 </style>
 </head>
 <body>
@@ -89,7 +61,7 @@
 			<div class="wrapper">
 				<div class="main">
 					<div class="pageTitle"><h1>회원가입</h1></div>
-					<form action="<%= request.getContextPath() %>/insert.ac" method="post" class="joinForm" name="joinForm" onsubmit="return validate();">
+					<form action="<%= request.getContextPath() %>/insert.ac" method="post" class="contents" id="contents" name="joinForm" onsubmit="return validate();">
 						<div class="table">
 							<table>
 								<tr>
@@ -118,7 +90,8 @@
 								</tr>
 								<tr>
 									<td>이메일</td>
-										<td><input type="email" name="email" class="box" required></td>
+										<td><input type="text" name="email" class="box" id="email" required></td>
+										<td><button type="button" id="dubtn" class="defaultBtn" onclick="checkEmail();">중복체크</button></td>
 								</tr>
 								<tr>
 									<td>성별</td>
@@ -135,8 +108,8 @@
 						</div>
 						
 						<div class="btnBox">
-							<button type="submit" id="joinBtn" class="defaultBtn btnC" value="1단계완료">다음단계</button>
-							<button type="reset" id="goMain" class="defaultBtn btnC" onclick="goMain();">취소</button>
+							<button type="submit" id="joinBtn" class="defaultBtn" value="1단계완료">다음단계</button>
+							<button type="reset" id="goMain" class="defaultBtn cancelBtn" onclick='location.href="<%= request.getContextPath() %>/views/common/mainmenu.jsp"'>취소</button>
 						</div>
 					</form>
 				</div>	
@@ -165,9 +138,18 @@
 		});
 	});
 	
+	$(function checkEmail(){
+		var isEmUsable = false;
+		var isEmailChecked = false;
+		
+		$('#email').on('change paste keyup', function(){
+			isEmailChecked = false;			
+		});
+	});
+	
 	
 	$(function(){
-		var isId, isPwd1, isPwd2, isName = false;
+		var isId, isEmail, isPwd1, isPwd2, isName = false;
 		
 		$("#joinUserId").change(function(){
 			var idExp = /^[a-zA-Z](?=.*[a-zA-Z])(?=.*[0-9]).{5,11}$/;
@@ -188,25 +170,62 @@
 							$('#joinUserId').css("background","white");
 							isUsable = true;
 							isIdChecked = true;
+							isId = true;
 						} else{
 							alert('이미 사용 중인 아이디입니다.');
 							$('#joinUserId').focus().css("background","pink").val('');
 							isUsable = false;
 							isIdChecked = false;
+							isId = false;
 						}
 					}
 				});
 			}
 		});
 		
+		
+		$("#email").change(function(){
+			var emExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+			var email = $('#email');
+			
+			if(!emExp.test($(this).val())){
+				alert('이메일을 올바르게 입력해주세요.')
+				$(this).focus().css("background","pink").val('');
+				isEmail = false;
+			} else{
+				$.ajax({
+					url: "<%= request.getContextPath()%>/emailCheck.ac",
+					type: "post",
+					data: {email:email.val()},
+					success: function(data){
+						if(data == 'success'){
+							alert('사용 가능한 이메일입니다.');
+							$('#email').css("background","white");
+							isEmUsable = true;
+							isEmailChecked = true;
+							isEmail = true;
+						} else{
+							alert('이미 사용 중인 이메일입니다.');
+							$('#email').focus().css("background","pink").val('');
+							isEmUsable = false;
+							isEmailChecked = false;
+							isEmail = false;
+						}
+					}
+				});
+			}	
+		});
+		
+		
 		function validate(){
-			if(isUsable && isIdChecked){
+			if(isUsable && isIdChecked && isEmUsable && isEmailChecked){
 				return true;
 			} else{
-				alert('아이디 중복확인을 해주세요.');
+				alert('아이디와 이메일 중복확인을 해주세요.');
 				return false;
 			}
 		}
+		
 		
 		$('#joinUserPwd').blur(function(){
 			var pwdExp = /[a-zA-Z](?=.*[a-zA-Z])(?=.*[!@#$%^&*])(?=.*[0-9]).{7,14}/;
@@ -216,7 +235,7 @@
 				$(this).focus().css('background','pink');
 				isPwd1 = false;
 			} else{
-				$('#pwdResult1').text("정상 입력").css('color', 'green');
+				$('#pwdResult1').text("정상 입력").css('color', 'rgb(136, 136, 136)');
 				$(this).css("background","initial");
 				isPwd1 = true;
 			}
@@ -228,7 +247,7 @@
 				$(this).focus().css('background', 'pink');
 				isPwd2 = false;
 			} else{
-				$('#pwdResult2').text("비밀번호 일치").css('color', 'green');
+				$('#pwdResult2').text("비밀번호 일치").css('color', 'rgb(136, 136, 136)');
 				$(this).css("background","initial");
 				isPwd2 = true;
 			}
@@ -243,9 +262,25 @@
 				$(this).focus().css("background", "pink").val('');
 				isName = false;
 			} else{
-				$('#nameResult').text('정상 입력').css('color', 'green');
+				$('#nameResult').text('정상 입력').css('color', 'rgb(136, 136, 136)');
 				$(this).css("background", "initial");
 				isName = true;
+			}
+		});
+		
+		
+		$('#contents').submit(function(){
+			if(isId && isEmail && isPwd1 && isPwd2 && isName){
+				return true;
+			} else{
+				alert('회원가입 폼에 맞춰주세요.');
+				if(!isId) $('#joinUserId').focus();
+				else if(!isEmail) $('#email').focus();
+				else if(!isPwd1) $('#joinUserPwd').focus();
+				else if(!isPwd2) $('#joinUserPwd2').focus();
+				else if(!isName) $('#userName').focus();
+
+				return false;
 			}
 		});
 		
@@ -254,4 +289,5 @@
 	</script>
 	
 </body>
+<%@ include file="../common/footer.jsp" %>
 </html>

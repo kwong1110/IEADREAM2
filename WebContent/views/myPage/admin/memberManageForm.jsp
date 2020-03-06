@@ -25,38 +25,16 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>회원 관리</title>
+<title>이어드림 - 회원 관리</title>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/common.css">
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/board.css">
 <script type="text/javascript" src="<%= request.getContextPath() %>/js/SelectAll.js"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<style>
-</style>
 </head>
 <body>
 	<%@ include file="../../common/mainmenu.jsp"%>
 	<div class="outer">
 		<div class="wrapper">
-			<nav>
-				<div class="nav">
-					<div class="leftMenuTitle">마이페이지</div>
-					<ul>
-						<li class="leftMenu memberGradeUp"><a href="<%= request.getContextPath() %>/views/myPage/user/memberGradeUpForm.jsp">정회원 등업</a></li>
-						<li class="leftMenu"><a href="">기본정보</a></li>
-						<li class="leftMenu"><a href="">나의 프로필</a></li>
-						<li class="leftMenu"><a href="">이상형 정보</a></li>
-						<li class="leftMenu "><a href="">작성글 조회</a></li>			
-						<li class="leftMenu heartHistory"><a href="<%= request.getContextPath() %>/list.hh">하트 히스토리</a></li>
-						<br>
-						<li class="leftMenu admin memberManage">
-							<a href="<%=request.getContextPath()%>/manage.mem">회원 관리</a>
-						</li>
-						<li class="leftMenu admin boardManage">
-							<a href="<%=request.getContextPath()%>/manage.bo">게시물 관리</a>
-						</li>
-					</ul>
-				</div>
-			</nav>
 			<div class="main">
 				<div class="pageTitle">
 					<h2>회원 관리</h2>
@@ -133,7 +111,7 @@
 						</table>
 						<div class="btnBox btnC">
 							<button type="button" class="defaultBtn" id="updateBtn" onclick="updateMember();">등급 변경</button>
-							<button type="button" class="defaultBtn" id="deleteBtn" onclick="deleteMember();">탈퇴 처리</button>
+							<button type="button" class="defaultBtn cancelBtn" id="deleteBtn" onclick="deleteMember();">탈퇴 처리</button>
 						</div>
 					</form>
 					
@@ -145,7 +123,7 @@
 							<button onclick="location.href='<%= request.getContextPath() %>/manage.mem?currentPage=1&memGrade=<%= memGrade %>&sCategory=<%= sCategory %>&sWord=<%= sWord %>&search=<%= search %>'">&lt;&lt;</button>
 					
 							<!-- 이전 페이지로 -->
-							<button onclick="location.href='<%= request.getContextPath() %>/manage.mem?currentPage=<%= currentPage-1 %>&memGrade=<%= memGrade %>&sCategory=<%= sCategory %>&sWord=<%= sWord %>&search=<%= search %>'" id="beforeBtn">&lt;</button>
+							<button onclick="location.href='<%= request.getContextPath() %>/manage.mem?currentPage=<%= currentPage-1 %>&memGrade=<%= memGrade %>&sCategory=<%= sCategory %>&sWord=<%= sWord %>&search=<%= search %>'" id="beforeBtn">PREV</button>
 							<script>
 								if(<%= currentPage %> <= 1){
 									var before = $('#beforeBtn');
@@ -164,7 +142,7 @@
 							<% } %>
 							
 							<!-- 다음 페이지로 -->
-							<button onclick="location.href='<%= request.getContextPath() %>/manage.mem?currentPage=<%= currentPage + 1 %>&memGrade=<%= memGrade %>&sCategory=<%= sCategory %>&sWord=<%= sWord %>&search=<%= search %>'" id="afterBtn">&gt;</button>
+							<button onclick="location.href='<%= request.getContextPath() %>/manage.mem?currentPage=<%= currentPage + 1 %>&memGrade=<%= memGrade %>&sCategory=<%= sCategory %>&sWord=<%= sWord %>&search=<%= search %>'" id="afterBtn">NEXT</button>
 							<script>
 								if(<%= currentPage %> >= <%= maxPage %>){
 									var after = $("#afterBtn");
@@ -182,7 +160,7 @@
 							<button onclick="location.href='<%= request.getContextPath() %>/manage.mem?currentPage=1'">&lt;&lt;</button>
 					
 							<!-- 이전 페이지로 -->
-							<button onclick="location.href='<%= request.getContextPath() %>/manage.mem?currentPage=<%= currentPage-1 %>'" id="beforeBtn">&lt;</button>
+							<button onclick="location.href='<%= request.getContextPath() %>/manage.mem?currentPage=<%= currentPage-1 %>'" id="beforeBtn">PREV</button>
 							<script>
 								if(<%= currentPage %> <= 1){
 									var before = $('#beforeBtn');
@@ -201,7 +179,7 @@
 							<% } %>
 							
 							<!-- 다음 페이지로 -->
-							<button onclick="location.href='<%= request.getContextPath() %>/manage.mem?currentPage=<%= currentPage + 1 %>'" id="afterBtn">&gt;</button>
+							<button onclick="location.href='<%= request.getContextPath() %>/manage.mem?currentPage=<%= currentPage + 1 %>'" id="afterBtn">NEXT</button>
 							<script>
 								if(<%= currentPage %> >= <%= maxPage %>){
 									var after = $("#afterBtn");
@@ -219,85 +197,101 @@
 		</div>
 	</div>
 </body>
-	<script>
-		$(function(){
-			$('.memberManage').addClass('on')
-		});		
+<%@ include file="../../common/footer.jsp"%>
+<script>
+	$('#SearchBtn').click(function(){
+		if($('input[name="memGrade"]:checked').val() == null){
+			event.preventDefault();
+			alert("회원등급을 선택해주세요!");
+		};
+	});
+	
+	function updateMember(){
+		var checkList = [];
 		
-		$('#SearchBtn').click(function(){
-			if($('input[name="memGrade"]:checked').val() == null){
-				event.preventDefault();
-				alert("회원등급을 선택해주세요!");
-			};
-		});
-		
-		function updateMember(){
-			
-			var checkList = [];
-			
-			if($("input:checkbox[name='checkselect']:checked").val() == null){
-				alert("등급을 변경할 회원을 선택해주세요!");
-			}else {
-				$("input:checkbox[name='checkselect']:checked").each(function() {
-					checkList.push($(this).val());			
-				});
-					// 체크박스 체크된 값의 value를 checkList에 저장한다.
-				
-					
-				// 새로열리는 창 크기 및 위치 설정
-				var popLeft = Math.ceil(( window.screen.width - 400 )/2);
-				var popTop = Math.ceil(( window.screen.height - 500 )/2);
-				
-				window.open("views/myPage/admin/memberUpdateForm.jsp?checkList="+checkList, "updateMember", "width=400, height=500, "+ ", left=" + popLeft + ", top="+ popTop); 	
-			};
-		}
-		
-		function deleteMember(){
-			var checkList = [];
-			
-			if($("input:checkbox[name='checkselect']:checked").val() == null){
-				alert("탈퇴할 회원을 선택해주세요!");
-			}else {
-				$("input:checkbox[name='checkselect']:checked").each(function() {
-					checkList.push($(this).val());			
-				});
-					// 체크박스 체크된 값의 value를 checkList에 저장한다.
-				
-					
-				// 새로열리는 창 크기 및 위치 설정
-				var popLeft = Math.ceil(( window.screen.width - 400 )/2);
-				var popTop = Math.ceil(( window.screen.height - 500 )/2);
-				
-				window.open("views/myPage/admin/memberDeleteForm.jsp?checkList="+checkList, "deleteMember", "width=400, height=500, "+ ", left=" + popLeft + ", top="+ popTop); 	
-			};
-		}
-		
-		
-		<%-- 새로운 HTML이 추가되는 것이 아니기 때문에 비동기 방식을 굳이 할 필요는 없음. --%>
-		<%-- var searchList;
-		
-		$('#SearchBtn').click(function(){
-				// 검색버튼을 클릭했다는걸 알려주는 변수 (서블릿 전달 용도)
-			/* var sBtn = 1;
-					// 0일때, 처음 페이지 불러오기!
-					// 1일때, 검색 작동! */
-		
-				// 1.검색범위(회원등급)와 2.검색종류와 3.검색어 받기
-			//$('tbody').hide(); - aJax 작동 테스트
-			var memGrade = $('input[name="memGrade"]:checked').val();;
-			var sCategory = $("#sCategory option:selected").val();
-			var sWord = $("#sWord").val();
-				
-			console.log(memGrade, sCategory, sWord);
-			$.ajax({
-				url: '<%= request.getContextPath() %>/search.mem',
-				type: 'post',
-				data: {memGrade: memGrade, sCategory: sCategory, sWord: sWord},
-				success: function(data){
-					alert('조회 성공했습니다!');
-					
-				} 
+		if($("input:checkbox[name='checkselect']:checked").val() == null){
+			alert("등급을 변경할 회원을 선택해주세요!");
+		}else {
+			$("input:checkbox[name='checkselect']:checked").each(function() {
+				checkList.push($(this).val());			
 			});
-		}); --%>
-	</script>
+				// 체크박스 체크된 값의 value를 checkList에 저장한다.
+			
+				
+			// 새로열리는 창 크기 및 위치 설정
+			var popLeft = Math.ceil(( window.screen.width - 400 )/2);
+			var popTop = Math.ceil(( window.screen.height - 500 )/2);
+			
+			window.open("views/myPage/admin/memberUpdateForm.jsp?checkList="+checkList, "updateMember", "width=400, height=500, "+ ", left=" + popLeft + ", top="+ popTop); 	
+		};
+	}
+	
+	function deleteMember(){
+		var checkList = [];
+		
+		if($("input:checkbox[name='checkselect']:checked").val() == null){
+			alert("탈퇴할 회원을 선택해주세요!");
+		}else {
+			$("input:checkbox[name='checkselect']:checked").each(function() {
+				checkList.push($(this).val());			
+			});
+				// 체크박스 체크된 값의 value를 checkList에 저장한다.
+			
+				
+			// 새로열리는 창 크기 및 위치 설정
+			var popLeft = Math.ceil(( window.screen.width - 400 )/2);
+			var popTop = Math.ceil(( window.screen.height - 500 )/2);
+			
+			window.open("views/myPage/admin/memberDeleteForm.jsp?checkList="+checkList, "deleteMember", "width=400, height=500, "+ ", left=" + popLeft + ", top="+ popTop); 	
+		};
+	}
+	<%-- 새로운 HTML이 추가되는 것이 아니기 때문에 비동기 방식을 굳이 할 필요는 없음. --%>
+	<%-- var searchList;
+	
+	$('#SearchBtn').click(function(){
+			// 검색버튼을 클릭했다는걸 알려주는 변수 (서블릿 전달 용도)
+		/* var sBtn = 1;
+				// 0일때, 처음 페이지 불러오기!
+				// 1일때, 검색 작동! */
+	
+			// 1.검색범위(회원등급)와 2.검색종류와 3.검색어 받기
+		//$('tbody').hide(); - aJax 작동 테스트
+		var memGrade = $('input[name="memGrade"]:checked').val();;
+		var sCategory = $("#sCategory option:selected").val();
+		var sWord = $("#sWord").val();
+			
+		console.log(memGrade, sCategory, sWord);
+		$.ajax({
+			url: '<%= request.getContextPath() %>/search.mem',
+			type: 'post',
+			data: {memGrade: memGrade, sCategory: sCategory, sWord: sWord},
+			success: function(data){
+				alert('조회 성공했습니다!');
+				
+			} 
+		});
+	}); --%>
+	
+	$(function(){
+		$('#memManageForm td').mouseenter(function(){
+			$(this).parent().css({'background':'darkgray','cursor':'pointer'});
+		}).mouseout(function(){
+			$(this).parent().css('background','none');
+		}).click(function(){
+			var checkboxYn = $(this).find("input[type='checkbox']").length;
+			var postNo = $(this).parent().children().children('input').val();
+			
+			 if (checkboxYn == 0) {
+				<%if(loginUser != null && loginUser.getGrade()!=0){ %>
+					location.href='<%= request.getContextPath() %>/detail.qu?postNo=' + postNo;
+				<% } else if(loginUser != null && loginUser.getGrade()==0){ %>
+					location.href='<%= request.getContextPath() %>/Mdetail.qu?postNo=' + postNo;
+				<% } else{%> 
+					alert('회원만 이용할 수 있는 서비스 입니다.');
+					location.href='<%= request.getContextPath() %>/views/account/accountLoginForm.jsp';
+				<% } %> 
+			 }
+		});
+	});
+</script>
 </html>
