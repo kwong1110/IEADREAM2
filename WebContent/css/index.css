@@ -26,7 +26,7 @@
 	width: 100%;
 	height: 550px
 }
-.slideBox:nth-of-type(2){
+.slideBox{
 	background: url('../images/common/mainimage1.jpg') no-repeat center center;
 	background-size: auto 550px;
 }
@@ -66,7 +66,6 @@
 	background: url('<%= request.getContextPath() %>/images/common/prev.png') no-repeat center center;
 	background-size: contain
 } */
-
 	/* 중단~하단 각 메뉴 연결 박스 */
 .bigBox{
 	text-align: center;
