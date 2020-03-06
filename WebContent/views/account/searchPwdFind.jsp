@@ -1,24 +1,46 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"import="account.model.vo.Account"%>
-
+    pageEncoding="UTF-8"%>
 <%
 	String password = (String)request.getAttribute("password");
 %>
-    
-    
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>회원비밀번호 정보 출력!!</title>
+<title>비밀번호 찾기</title>
+<link rel="stylesheet" href="<%= request.getContextPath() %>/css/common.css">
+<style>
+.boxingBox{
+	width: 300px;
+	height:	150px;
+	text-align: center;
+    background-color: #ddd; 
+   	transform: translate( 175%, -10% );
+   	box-shadow: 5px 5px 5px;
+
+}
+
+.btmbox{
+	text-align: center;
+}
+
+.pageTitle{
+	text-align: center;
+	margin-top: 200px;
+
+}
+</style>
 </head>
+
 <body>
  	<div class="pageTitle">
- 		아이디 찾기
- 	</div>
-  	<div class="pageTitletext">
-		회원님의 비밀번호는  <%= password %> 입니다.
-		<!-- userPassword  -->						
+		<h2 style="text-align: center;">비밀번호 찾기</h2>
+	</div>
+  	
+  	<div class="boxingBox" >
+  		<br><br><br>
+		회원님의 비밀번호는 <%= password %>입니다.
+		<!-- userPassword 결과값 출력!! ㅠㅠ  -->						
 	</div>				
 	
 	<div class="btnBox">

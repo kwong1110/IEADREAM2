@@ -167,8 +167,7 @@ public class AccountDAO {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		String password = null;
-		
-		
+	
 		String query = prop.getProperty("searchpwd");
 		
 		try {
@@ -187,13 +186,7 @@ public class AccountDAO {
 			close(rset);
 			close(pstmt);
 		}
-		
 		return password;
-	}
-
-	public String searchPwd(Account account, Connection conn) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	public Account selectMyProfile(Connection conn, String loginId) {

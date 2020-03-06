@@ -37,7 +37,6 @@
 }
 
 .textbox{
-
 	text-align: center;
 }
 </style>
@@ -57,16 +56,14 @@
 		<div class = "textbox">
 			<br><br>
 	  		<h3>▶아이디</h3><input style="text-align: center;"  type="text" class="inputBox" name="userId" id="findid" placeholder="아이디를 입력해주세요" >	
-	 		<h3>▶이메일</h3><input style="text-align: center;"  type="text" class="inputBoxemail" name="email" id="Inputemail" placeholder="이메일를 입력해주세요" >
+	 		<h3>▶이메일</h3><input style="text-align: center;"  type="text" class="inputBox" name="email" id="Inputemail" placeholder="이메일를 입력해주세요" >
 		</div>
-		
 		<br><br>
 		
 		<div class="btnBox">
-			<button type="submit" class="defaultBtn" id="btnfindid" onclick="location.href='<%= request.getContextPath() %>/Findpwd.me'">비밀번호 찾기</button>
+			<button type="submit" class="defaultBtn" id="btnfindid">비밀번호 찾기</button>
 		</div>
 	</form>
-	
 	<script>
 	$(window).load(function(){
 		$("#btnfindpwd").click(btnfindpwd);	

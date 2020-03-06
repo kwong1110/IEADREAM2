@@ -67,14 +67,11 @@ public class AccountService {
 	// 비밀번호  찾기 Service
 	public String searchPwd(Account account) {
 		Connection conn = getConnection();
-		System.out.println(account);
-		
-		
+	
 		AccountDAO aDAO = new AccountDAO();
-		String findPwd = aDAO.searchPwd(account, conn); 
+		String findPwd = aDAO.searchPwd(conn, account); 
 		close(conn);
-		
-		
+
 		return findPwd;
 		
 	}
