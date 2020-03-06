@@ -3,7 +3,6 @@
     
 <!DOCTYPE html>
 <html>
-
 <head>
 <meta charset="UTF-8">
 <title>아이디 찾기</title>
@@ -23,6 +22,9 @@
 .textbox{
 	text-align: center;
 	}
+
+
+	
 
 
 </style>

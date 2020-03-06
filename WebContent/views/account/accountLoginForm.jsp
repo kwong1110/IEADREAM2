@@ -38,11 +38,11 @@
 		            <div class="loginBox">
 		            	<div>
 						
-		                <label>아이디</label>&nbsp;&nbsp;&nbsp;<input type="text" class="inputBox" name="userId" id="userId2" placeholder="ID">
+		                <label>&nbsp;&nbsp;아이디</label>&nbsp;&nbsp;&nbsp;<input type="text" class="inputBox" name="userId" id="userId2" placeholder="ID">
 		                </div>
 		                <div>
 		              
-		                <label>비밀번호</label><input type="password" class="inputBox" name="userPwd" id="userPwd2" placeholder="PASSWORD" >
+		                <label>비밀번호</label>&nbsp;&nbsp;<input type="password" class="inputBox" name="userPwd" id="userPwd2" placeholder="PASSWORD" >
 		                </div>
 		                
 		                <br>

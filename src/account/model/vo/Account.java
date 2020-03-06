@@ -194,4 +194,13 @@ public class Account {
 	public void setInterest(String interest) {
 		this.interest = interest;
 	}
+
+	@Override
+	public String toString() {
+		return "Account [userNo=" + userNo + ", grade=" + grade + ", id=" + id + ", password=" + password + ", gender="
+				+ gender + ", userName=" + userName + ", phone=" + phone + ", email=" + email + ", birth=" + birth
+				+ ", deleted=" + deleted + ", interest=" + interest + "]";
+	}
+	
+	
 }

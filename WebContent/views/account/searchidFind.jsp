@@ -26,8 +26,11 @@
 
 .boxingBox{
 	width: 300px;
-    background-color: #ddd;
-    text-align: center;
+	height:	150px;
+	text-align: center;
+    background-color: #ddd; 
+   	transform: translate( 175%, -10% );
+   	box-shadow: 5px 5px 5px;
 	
 
 }
@@ -41,11 +44,15 @@
 	</div>
 	
 	<div class="boxingBox" >
+	<br><br>
 	이름 : <%= a.getUserName() %>
+	<!-- User이름 가져오는것 -->
 	<br><br>
 	
 	이메일 : <%= a.getEmail() %>
+	<!-- email값  가져오는것 -->
 	<br><br>
+	<br>
 	
 	아이디: <%= a.getId() %>
 	<!-- userId가져오는것  -->
