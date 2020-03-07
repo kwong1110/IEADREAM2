@@ -4,6 +4,7 @@
 <%
 	ArrayList<Match> list = (ArrayList<Match>)request.getAttribute("list");
 	PageInfo pi = (PageInfo)request.getAttribute("pi");
+	String userNo = request.getParameter("userNo");
 	
 	int listCount = pi.getListCount();
 	int currentPage = pi.getCurrentPage();
@@ -56,34 +57,34 @@
 										<td colspan="6">조회된 리스트가 없습니다.</td>
 									</tr>
 									<% } else{ 
-											for(Match r : list){
-											switch(r.getMatchStatus()){
+											for(Match m : list){
+											switch(m.getMatchStatus()){
 											case "D": MatchStatus = "상대방의 응답을 기다리고 있습니다."; break;
 											case "C": MatchStatus = "확인 완료"; break;
 											case "S": MatchStatus = "하트 보냄"; break;
 											case "A": MatchStatus = "하트 수락"; break;
 											}
-											/* if(r.getUserNo() == loginUser.getUserNo){
+											if(m.getUserNo() == loginUser.getUserNo()){
 												inOut = "발신";
 											} else {
 												inOut = "수신";
-											} */
+											} 
 									%>		
 									<tr>
 										<td><input type="checkbox" id="all" name="checkselect" onclick="checkDetail();"></td>
-										<td>수신/발신</td>
+										<td><%=inOut %></td>
 										<td>이미지 들어가야함</td>
 										<td>
 											<ul class="heartState">
-												<li><%= r.getTargetNo() %></li>
+												<li><%= m.getTargetNo() %></li>
 												<li><%= MatchStatus %></li>
-												<li><%= r.getMatchDate() %></li>
+												<li><%= m.getMatchDate() %></li>
 											</ul>
 										</td>
 										<td>
 											<input type="button" class="defaultBtn subBtn" value="데이트 장소 추천" onclick="">
 										</td>
-										<td>남은 기간 표시</td>
+										<td><%= m.getMatchDate() %></td>
 									</tr>			
 									<% 		}
 										}
@@ -92,61 +93,51 @@
 							</table>
 						</div>
 					</form>
-				</div>
-				<div class="btnBox btnC" >
-				<input type="button" class="defaultBtn cancelBtn" value="삭제">
-				</div>
-					<!-- 페이징 -->
-				<div class='pagination' align="center">
-					<% if(!list.isEmpty() && maxPage != 1){ %>
-					<!-- 맨 처음으로 -->
-					<button onclick="location.href='<%= request.getContextPath() %>/list.hh?currentPage=1'">&lt;&lt;</button>
-			
-					<!-- 이전 페이지로 -->
-					<button onclick="location.href='<%= request.getContextPath() %>/list.hh?currentPage=<%= currentPage-1 %>'" id="beforeBtn">PREV</button>
-					<script>
-						if(<%= currentPage %> <= 1){
-							var before = $('#beforeBtn');
-							before.attr('disabled', 'true');
-						}
-					</script>
-					
-					
-					<!-- 10개의 페이지 목록 -->
-					<% for(int p = startPage; p <= endPage; p++){ %>
-						<% if(p == currentPage){%>
-							<button id="choosen" disabled><%= p %></button>
-						<% } else{ %>
-							<button id="numBtn" onclick="location.href='<%= request.getContextPath() %>/list.hh?currentPage=<%= p %>'"><%= p %></button>
+					<div class="btnBox btnC" >
+					<input type="button" class="defaultBtn cancelBtn" value="삭제">
+					</div>
+						<!-- 페이징 -->
+					<div class='pagingArea' align="center">
+						<% if(!list.isEmpty() && maxPage != 1){ %>
+						<!-- 맨 처음으로 -->
+						<button onclick="location.href='<%= request.getContextPath() %>/list.hh?currentPage=1&userNo=<%= userNo %>'">&lt;&lt;</button>
+				
+						<!-- 이전 페이지로 -->
+						<button onclick="location.href='<%= request.getContextPath() %>/list.hh?currentPage=<%= currentPage-1 %>&userNo=<%= userNo %>'" id="beforeBtn">PREV</button>
+						<script>
+							if(<%= currentPage %> <= 1){
+								var before = $('#beforeBtn');
+								before.attr('disabled', 'true');
+							}
+						</script>
+						
+						
+						<!-- 10개의 페이지 목록 -->
+						<% for(int p = startPage; p <= endPage; p++){ %>
+							<% if(p == currentPage){%>
+								<button id="choosen" disabled><%= p %></button>
+							<% } else{ %>
+								<button id="numBtn" onclick="location.href='<%= request.getContextPath() %>/list.hh?currentPage=<%= p %>&userNo=<%= userNo %>'"><%= p %></button>
+							<% } %>
 						<% } %>
-					<% } %>
-					
-					<!-- 다음 페이지로 -->
-					<button onclick="location.href='<%= request.getContextPath() %>/list.hh?currentPage=<%= currentPage + 1 %>'" id="afterBtn">NEXT</button>
-					<script>
-						if(<%= currentPage %> >= <%= maxPage %>){
-							var after = $("#afterBtn");
-							after.attr('disabled', 'true');
-						}
-					</script>			
-					
-					<!-- 맨 끝으로 -->
-					<button onclick="location.href='<%= request.getContextPath() %>/list.hh?currentPage=<%= maxPage %>'">&gt;&gt;</button>
-					<% } %>
+						
+						<!-- 다음 페이지로 -->
+						<button onclick="location.href='<%= request.getContextPath() %>/list.hh?currentPage=<%= currentPage + 1 %>&userNo=<%= userNo %>'" id="afterBtn">NEXT</button>
+						<script>
+							if(<%= currentPage %> >= <%= maxPage %>){
+								var after = $("#afterBtn");
+								after.attr('disabled', 'true');
+							}
+						</script>			
+						
+						<!-- 맨 끝으로 -->
+						<button onclick="location.href='<%= request.getContextPath() %>/list.hh?currentPage=<%= maxPage %>&userNo=<%= userNo %>'">&gt;&gt;</button>
+						<% } %>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 </body>
 <%@ include file="../../common/footer.jsp"%>
-<script>
-	<%-- $(function(){
-			<% if(loginUser != null){ %>
-				location.href='<%= request.getContextPath() %>/detail.bo?bid=' + bid;
-			<% } else{ %>
-				alert('회원만 이용할 수 있는 서비스입니다.');
-			<% } %>
-		});
-	}); --%>
-</script>
 </html>

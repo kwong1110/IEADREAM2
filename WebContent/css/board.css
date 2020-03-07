@@ -102,7 +102,9 @@ table>tbody>tr>td{
 	text-align: justify;
 	vertical-align: middle;
 }
-
+.heartState li{
+	padding: 4px;
+}
 	/* 관리자 전용 부분 */
 	
 	/* 팝업 창 테이블 */
