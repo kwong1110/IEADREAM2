@@ -15,17 +15,17 @@ import myPage.user.model.vo.Match;
 
 public class userService {
 
-	public int hhListCount() {
+	public int hhListCount(String userNo) {
 		Connection conn = getConnection();
 		
-		int result = new userDAO().getHhListCount(conn);
+		int result = new userDAO().getHhListCount(conn, userNo);
 		close(conn);
 		return result;
 	}
 
-	public ArrayList<Match> selectHhList(int currentPage) {
+	public ArrayList<Match> selectHhList(int currentPage, String userNo) {
 		Connection conn = getConnection();
-		ArrayList<Match> list = new userDAO().selectHhList(conn, currentPage);
+		ArrayList<Match> list = new userDAO().selectHhList(conn, currentPage, userNo);
 		close(conn);
 		
 		return list;

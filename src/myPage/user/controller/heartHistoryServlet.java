@@ -32,8 +32,12 @@ public class heartHistoryServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String userNo = request.getParameter("userNo");
+		
+		System.out.println("userNo: " + userNo);
+		
 		userService service = new userService();
-		int listCount = service.hhListCount();	// 게시판 리스트 개수
+		int listCount = service.hhListCount(userNo);	// 게시판 리스트 개수
 		
 		int currentPage;	// 현재 페이지 표시
 		int limit;			// 한 페이지에 표시될 페이징 수
@@ -46,7 +50,7 @@ public class heartHistoryServlet extends HttpServlet {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		}
 		
-		limit = 10;
+		limit = 5;
 		
 		maxPage = (int)((double)listCount/limit + 0.9);
 		startPage = (((int)((double)currentPage/limit + 0.9)) - 1) * limit + 1;
@@ -57,7 +61,7 @@ public class heartHistoryServlet extends HttpServlet {
 		
 		PageInfo pi = new PageInfo(currentPage, listCount, limit, maxPage, startPage, endPage);
 		
-		ArrayList<Match> list = service.selectHhList(currentPage);
+		ArrayList<Match> list = service.selectHhList(currentPage, userNo);
 		
 		/*for(Recommend r : list){
 			System.out.println(r.getUserNo() + r.getTargetNo() + r.getMatchStatus() + r.getMatchDate() + r.getMatchDelete());
@@ -68,6 +72,7 @@ public class heartHistoryServlet extends HttpServlet {
 			page = "views/myPage/user/heartHistoryForm.jsp";
 			request.setAttribute("list", list);
 			request.setAttribute("pi", pi);
+			request.setAttribute("userNo", userNo);
 		} else {
 			page = "views/common/errorPage.jsp";
 			request.setAttribute("msg", "게시판 조회에 실패하였습니다.");

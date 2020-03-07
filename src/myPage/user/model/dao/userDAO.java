@@ -34,8 +34,8 @@ private Properties prop = new Properties();
 		}
 	}
 
-	public int getHhListCount(Connection conn) {
-		Statement stmt = null;
+	public int getHhListCount(Connection conn, String userNo) {
+		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
 		int result = 0;
@@ -43,9 +43,11 @@ private Properties prop = new Properties();
 		String query = prop.getProperty("getHhListCount");
 		
 		try {
-			stmt = conn.createStatement();
-			rset = stmt.executeQuery(query);
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, userNo);
+			pstmt.setString(2, userNo);
 			
+			rset = pstmt.executeQuery();
 			if(rset.next()) {
 				result = rset.getInt(1);
 			}
@@ -53,17 +55,17 @@ private Properties prop = new Properties();
 			e.printStackTrace();
 		} finally {
 			close(rset);
-			close(stmt);
+			close(pstmt);
 		}
 		
 		return result;
 	}
 
-	public ArrayList<Match> selectHhList(Connection conn, int currentPage) {
+	public ArrayList<Match> selectHhList(Connection conn, int currentPage, String userNo) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		ArrayList<Match> list = null;
-		int posts = 10;
+		int posts = 5;
 		
 		int startRow = (currentPage - 1) * posts + 1;
 		int endRow = startRow + posts - 1;
@@ -72,18 +74,20 @@ private Properties prop = new Properties();
 		
 		try {
 			pstmt = conn.prepareStatement(query);
-			pstmt.setInt(1, startRow);
-			pstmt.setInt(2, endRow);
+			pstmt.setString(1, userNo);
+			pstmt.setString(2, userNo);
+			pstmt.setInt(3, startRow);
+			pstmt.setInt(4, endRow);
 			
 			rset = pstmt.executeQuery();
 			list = new ArrayList<Match>();
 			
 			while(rset.next()) {
 				Match r = new Match(rset.getInt("user_no"),
-										   rset.getInt("target_no"),
-										   rset.getString("match_status"),
-										   rset.getDate("match_date"),
-										   rset.getString("match_delete").charAt(0));
+								    rset.getInt("target_no"),
+									rset.getString("status"),
+									rset.getDate("match_date"),
+									rset.getString("deleted").charAt(0));
 				list.add(r);
 			}
 		} catch (SQLException e) {
