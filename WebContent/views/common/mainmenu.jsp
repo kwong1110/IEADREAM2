@@ -130,7 +130,7 @@
 								</li>
 									<% if(loginUser.getGrade() == 2 || loginUser.getGrade() == 0) { // 로그인 + 등급이 관리자 혹은 정회원 %>
 								<li id="nop">
-									<a href="<%=request.getContextPath()%>/list.hh">하트 히스토리</a>
+									<a href="<%=request.getContextPath()%>/list.hh?userNo=<%= loginUser.getUserNo() %>">하트 히스토리</a>
 								</li>
 									<% } %>
 								<% } else { // 위 조건들이 하나도 맞지 않을 경우 %>
@@ -139,10 +139,10 @@
 									<li id="nop"><a href='<%= request.getContextPath() %>/views/account/accountLoginForm.jsp' onclick="question();">나의 프로필</a></li>
 									<li id="nop"><a href='<%= request.getContextPath() %>/views/account/accountLoginForm.jsp' onclick="question();">이상형 정보</a></li>
 									<li id="nop">
-										<a href='<%= request.getContextPath() %>/views/account/accountLoginForm.jsp' onclick="question();">작성글 조회</a>
+										<a href='<%= request.getContextPath() %>/views/account/accountLoginForm.jsp'' onclick="question();">작성글 조회</a>
 									</li>
 									<li id="nop">
-									<a href='<%= request.getContextPath() %>/views/account/accountLoginForm.jsp' onclick="question();">하트 히스토리</a>
+										<a href='<%= request.getContextPath() %>/views/account/accountLoginForm.jsp'' onclick="question();">하트 히스토리</a>
 									</li>
 								<% } %>
 								
