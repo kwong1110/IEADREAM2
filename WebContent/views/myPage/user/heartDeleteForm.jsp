@@ -30,12 +30,12 @@
 </head>
 <body onload='resizeWindow(this)'>
 	<div class="popMain" id="mainBox">
-		<form action="<%= request.getContextPath() %>/manageDelete.bo" method="get">
+		<form action="<%= request.getContextPath() %>/????????" method="get">
 			<table class="popTable">
 				<thead>
 					<tr>
-						<th>게시글 번호</th>
-						<th>아이디</th>
+						<th>분류</th>
+						<th>회원번호</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -44,13 +44,14 @@
 						<td><%= nameArr[i] %></td>
 						<td><%= noArr[i] %></td>
 						
-						<td style="display:none;"><input type="hidden" name="bNo" value="<%= nameArr[i] %>"></td>
+						<td style="display:none;"><input type="hidden" name="inOut" value="<%= nameArr[i] %>"></td>
+						<td style="display:none;"><input type="hidden" name="userNo" value="<%= noArr[i] %>"></td>
 					</tr>
 				<% } %>
 				</tbody>
 			</table>
 			<div class="deleteCheck">
-				<div>총 <%=nameArr.length %>개 의 게시글삭제를 진행 하시겠습니까?</div>
+				<div>총 <%=nameArr.length %>개 의 하트삭제를 진행 하시겠습니까?</div>
 			</div>
 			<div class="btnBox">
 				<button class="defaultBtn" type="submit">확인</button>
