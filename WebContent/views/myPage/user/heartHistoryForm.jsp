@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="java.util.ArrayList, common.PageInfo, myPage.user.model.vo.*" %>
+<%@ page import="java.util.ArrayList, common.PageInfo, myPage.user.model.vo.*, java.util.*, java.text.*, java.sql.Date" %>
 <%
 	ArrayList<Match> list = (ArrayList<Match>)request.getAttribute("list");
 	PageInfo pi = (PageInfo)request.getAttribute("pi");
@@ -12,8 +12,13 @@
 	int startPage = pi.getStartPage();
 	int endPage = pi.getEndPage();
 	
-	String MatchStatus = "";
+	String matchStatus = "";
 	String inOut = "";
+	
+	SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+	java.util.Date utilDate = new java.util.Date();
+	java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+	/* String currentDate = format1.format(currentTime); */
 %>
 <!DOCTYPE html>
 <html>
@@ -23,6 +28,35 @@
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/common.css">
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/board.css">
 <script type="text/javascript" src="<%= request.getContextPath() %>/js/SelectAll.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<style>
+	.reception{
+		background: url('<%= request.getContextPath() %>/images/myPage/reception.png') no-repeat center center;
+		background-size: cover;
+	}
+	.sent{
+		background: url('<%= request.getContextPath() %>/images/myPage/sent.png') no-repeat center center;
+		background-size: cover;
+	}
+	.blinking{
+		color: pink;
+		-webkit-animation:blink .5s ease-in-out infinite alternate;
+		-moz-animation:blink .5s ease-in-out infinite alternate;
+		animation:blink .5s ease-in-out infinite alternate;
+    }
+    @-webkit-keyframes blink{
+        0% {opacity:0.4;}
+        100% {opacity:1;}
+    }
+    @-moz-keyframes blink{
+        0% {opacity:0.4;}
+        100% {opacity:1;}
+    }
+    @keyframes blink{
+        0% {opacity:0.4;}
+        100% {opacity:1;}
+    }
+</style>
 </head>
 <body>
 	<%@ include file="../../common/mainmenu.jsp"%>
@@ -59,32 +93,48 @@
 									<% } else{ 
 											for(Match m : list){
 											switch(m.getMatchStatus()){
-											case "D": MatchStatus = "상대방의 응답을 기다리고 있습니다."; break;
-											case "C": MatchStatus = "확인 완료"; break;
-											case "S": MatchStatus = "하트 보냄"; break;
-											case "A": MatchStatus = "하트 수락"; break;
+											case "D": matchStatus = "상대방의 응답을 기다리고 있습니다."; break;
+											case "C": matchStatus = "확인 완료"; break;
+											case "S": matchStatus = "하트 보냄"; break;
+											case "A": matchStatus = "하트 수락"; break;
 											}
 											if(m.getUserNo() == loginUser.getUserNo()){
 												inOut = "발신";
 											} else {
 												inOut = "수신";
+												matchStatus = "하트가 날아왔습니다! 확인해주세요!";
 											} 
-									%>		
+									%>
 									<tr>
-										<td><input type="checkbox" id="all" name="checkselect" onclick="checkDetail();"></td>
-										<td><%=inOut %></td>
+										<td><input type="checkbox" id="all" name="checkselect" value="<%= m.getTargetNo() %>,<%= inOut %>" onclick="checkDetail();"></td>
+										<% if(inOut.equals("수신")){ %>
+										<td class="reception"></td>
+										<% } else { %>
+										<td class="sent"></td>
+										<% } %>
 										<td>이미지 들어가야함</td>
 										<td>
 											<ul class="heartState">
-												<li><%= m.getTargetNo() %></li>
-												<li><%= MatchStatus %></li>
+												<li>회원번호 <%= m.getTargetNo() %></li>
+												<% if(inOut.equals("수신")){ %>
+												<li class="blinking"><%= matchStatus %></li>
+												<% } else { %>
+												<li><%= matchStatus %></li>
+												<% } %>
 												<li><%= m.getMatchDate() %></li>
 											</ul>
 										</td>
 										<td>
-											<input type="button" class="defaultBtn subBtn" value="데이트 장소 추천" onclick="">
+											<% if(matchStatus.equals("하트 수락")){ %>
+												<input type="button" class="defaultBtn subBtn" value="데이트 장소 추천" onclick="">
+											<% } %>
 										</td>
-										<td><%= m.getMatchDate() %></td>
+										<% long leftDays = 7 - (sqlDate.getTime() - m.getMatchDate().getTime()) / (24*60*60*1000); %>
+										<% if(matchStatus.equals("하트 수락")){ %>
+										<td>없음</td>
+										<% } else { %>
+										<td><%= leftDays %>일</td>
+										<% } %>
 									</tr>			
 									<% 		}
 										}
@@ -94,7 +144,7 @@
 						</div>
 					</form>
 					<div class="btnBox btnC" >
-					<input type="button" class="defaultBtn cancelBtn" value="삭제">
+					<input type="button" class="defaultBtn cancelBtn" value="삭제" onclick="deleteHeart();">
 					</div>
 						<!-- 페이징 -->
 					<div class='pagingArea' align="center">
@@ -140,4 +190,24 @@
 	</div>
 </body>
 <%@ include file="../../common/footer.jsp"%>
+<script>
+function deleteHeart(){
+	var checkList = [];
+	
+	if($("input:checkbox[name='checkselect']:checked").val() == null){
+		alert("삭제할 하트를 선택해주세요!");
+	}else {
+		$("input:checkbox[name='checkselect']:checked").each(function() {
+			checkList.push($(this).val());			
+		});
+			// 체크박스 체크된 값의 value를 checkList에 저장한다.
+			
+		// 새로열리는 창 크기 및 위치 설정
+		var popLeft = Math.ceil(( window.screen.width - 400 )/2);
+		var popTop = Math.ceil(( window.screen.height - 500 )/2);
+		
+		window.open("views/myPage/user/heartDeleteForm.jsp?checkList="+checkList, "deleteBoard", "width=400, height=500, "+ ", left=" + popLeft + ", top="+ popTop);	
+	};
+}
+</script>
 </html>
