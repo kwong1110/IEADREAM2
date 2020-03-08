@@ -1,9 +1,6 @@
 package idealType.controller;
 
 import java.io.IOException;
-import java.lang.reflect.Array;
-import java.util.Arrays;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 import account.model.service.UserService;
 import account.model.vo.Account;
 import account.model.vo.UserInfo;
-import idealType.model.dao.MatchDAO;
 import idealType.model.service.MatchService;
 import idealType.model.vo.Match;
 

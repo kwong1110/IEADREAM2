@@ -1,18 +1,13 @@
 package idealType.controller;
 
 import java.io.IOException;
-import java.util.Date;
-import java.text.SimpleDateFormat;
-import java.util.GregorianCalendar;
-
-import javax.servlet.RequestDispatcher;
+import java.sql.Date;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import account.model.service.AccountService;
 import account.model.vo.Account;
 import idealType.model.service.MatchService;
 import idealType.model.vo.Match;
@@ -42,13 +37,12 @@ public class fillMatchListServlet extends HttpServlet {
 		
 		Match[] oldMlist = ms.getMatchList(userNo);
 		int stack = 0;
-		SimpleDateFormat date = new SimpleDateFormat("yyyy/MM/dd");
-		Date today = new Date();
+		Date today = new Date(System.currentTimeMillis());
 		for (int i = 0; i < oldMlist.length ; i++) {
 			if (oldMlist[i].getStatus().equals("D")) { // 대기중인 매칭 수 구하기
 				stack++;
 			}
-			else if(date.format(oldMlist[i].getMatchDate()).equals(date.format(today))) { // 확인한 매칭 중 오늘 생성된 매칭 수 구하기
+			else if(oldMlist[i].getMatchDate() == today) { // 확인한 매칭 중 오늘 생성된 매칭 수 구하기
 				stack++;
 			}
 			
