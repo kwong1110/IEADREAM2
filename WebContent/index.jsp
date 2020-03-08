@@ -26,22 +26,16 @@
 	<div class="bigBox">
 		<div class="conBox">
 			<div class="indexBox">
-				1번박스
+				<img src="<%= request.getContextPath() %>/images/myIdeal.png">
 			</div>
 			<div class="indexBox">
-				2번박스
+				<img src="<%= request.getContextPath() %>/images/bestCouple.png">
 			</div>
 			<div class="indexBox">
-				3번박스
+				<img src="<%= request.getContextPath() %>/images/history.png">
 			</div>
 			<div class="indexBox">
-				4번박스
-			</div>
-			<div class="indexBox">
-				5번박스
-			</div>
-			<div class="indexBox">
-				6번박스
+				<img src="<%= request.getContextPath() %>/images/upGrade.png">
 			</div>
 		</div>
 	</div>
