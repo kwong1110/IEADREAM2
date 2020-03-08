@@ -141,7 +141,8 @@ public class MatchService {
 		
 		if (ti.getHeight() == up.getHeight()) 	{syncPoint += up.getHeightPri();}
 		else {double v = Math.abs((ti.getHeight() - up.getHeight())/5); syncPoint += (1-v)*up.getHeightPri();}
-		if (ti.getShape().equals(up.getShape())) 	{syncPoint += up.getShapePri();}
+		System.out.println(ti.getHeight() + " " + ti.getShape() + " " + up.getShape() + " " + up.getShapePri());
+
 		if (ti.getStyle().equals(up.getStyle())) 	{syncPoint += up.getStylePri();}
 		
 		int d = ti.getAge() - ui.getAge();
