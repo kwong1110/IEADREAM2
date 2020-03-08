@@ -30,14 +30,16 @@
 	
 	.option{
 		padding: 3px 7px 6px 7px;
-		background: #e75a82;
 		border: none;
-		color: white;
 		font-weight: border;
 		border-radius: 5px;
 		cursor: pointer;
 		text-shadow: 0 1px 1px rgba(0,0,0,.3);
 		box-shadow: 0 1px 2px rgba(0,0,0,.2);
+	}
+	
+	.go{
+		display: inline-block;
 	}
 	
 	.optiondiv{
@@ -46,22 +48,7 @@
 	
 	.optionbox{
 		margin-left: 770px;
-		margin-bottom: .6%;
-	}
-	
-	.go{
-		display: inline-block;
-	}
-	
-	#search{
-		cursor: pointer;
-		padding: 6px 7px 6px 7px;
-		border: none;
-		background: white;
-		font-weight: border;
-		border-radius: 5px;
-		text-shadow: 0 1px 1px rgba(0,0,0,.3);
-		box-shadow: 0 1px 2px rgba(0,0,0,.2);
+		margin-bottom: .8%;
 	}
 	
 	.main{
@@ -194,7 +181,7 @@
 							</div>
 							<div class="go">
 								<input type="hidden" name="search" value="on">
-								<input type="submit" id="search" value="Go">
+								<input type="submit" class="defaultBtn searchBtn" id="search" value="Go">
 							</div>
 						</div>
 					</form>

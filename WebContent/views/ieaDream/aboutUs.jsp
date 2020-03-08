@@ -18,7 +18,7 @@
 		letter-spacing:0.1em;}/* 제목띠어쓰기간격 */ 
 	.tableArea td {line-height: 30px; text-align: left;}
 	
-    #CEO_pic{margin: 10px; width: 400px; border-radius: 20px;}
+    #CEO_pic{margin: 10px; width: 300px; border-radius: 15px;}
     
 </style>
 </head>
@@ -37,12 +37,12 @@
 					<table class="tableArea">
 							<tr>
 								<td>
-								<div class="article"><img id="CEO_pic" src="../img/IMG_5526.jpg"></div>
+								<div class="article"><img id="CEO_pic" src="<%= request.getContextPath() %>/images/common/logo.png"></div>
 								</td>
 								<th style="width: 80px;">인사말</th>
-								<td style="width: 300px; vertical-align: top;">
-									저희 희사는 연애를 어쩌구 쌍방 따봉 어쩌구 념념 강아지 귀엽죠 9살이라는게 안믿겨지죠 내용은 넘어가는게 아니고
-									자동으로 본문 크기에 따라 달라진답니다 멋지죠
+								<td style="width: 310px; vertical-align: top;">
+									이어드림은 동종업계 부동의 1위,<br> 현재까지 98,000여건의 커플을 성사시킨<br> 우리나라 최고의 연애전문회사입니다.<br><br>
+									타업체에서는 찾아볼 수 없는 트렌디함과<br> 이어드림만의 체계적이고 과학적인 시스템으로<br> 지금 당장 회원님의 짝을 만나보세요.
 								</td>
 							</tr>
 						</table>
