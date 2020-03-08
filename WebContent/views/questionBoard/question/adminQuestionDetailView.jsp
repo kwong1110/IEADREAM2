@@ -45,7 +45,7 @@
 	#Mcommand{
 		background:#f9f9f9;
 	}
-	.tableArea {table-layout:fixed;}
+	.tableArea {table-layout:fixed;width: 670px}
 	.tableArea tr { width: -webkit-fill-available;}
 	.tableArea th {/* 게시판제목라인 */
 		padding:12px 0;
@@ -56,8 +56,8 @@
 		letter-spacing:0.1em}/* 제목띠어쓰기간격 */ 
 	.tableArea td {line-height: 10px;}
 	#th_title {width:10%; text-align:rigth;border-top:1px solid rgb(136, 136, 136);}
-	#td_title{width: 30%; border-top:1px solid rgb(136, 136, 136);}
-	#th_writer {width:10%;text-align:left; border-top:1px solid rgb(136, 136, 136);}
+	#td_title{width: 35%; border-top:1px solid rgb(136, 136, 136);}
+	#th_writer {width:10%;text-align:center; border-top:1px solid rgb(136, 136, 136);}
 	#td_writer {width:20%;text-align:left; border-top:1px solid rgb(136, 136, 136);}
 	#th_category {width:15%;text-align: center; border-top:1px solid rgb(136, 136, 136);}
 	#category{border-top:1px solid rgb(136, 136, 136);}
@@ -71,7 +71,7 @@
 	}
 	.replyArea{
 		background:#f9f9f9;
-		width:657px;
+		width:676px;
 	}
 	#addReply, #updateBtn, #deleteBtn{
 		margin-bottom: 20px;
@@ -84,6 +84,8 @@
 		   margin: 10px;
 		    margin-bottom:0;
 	}
+	 #deleteBtn{background: #D5D5D5;}
+	  #menuBtn{background: #B2CCFF;}
 </style>
 </head>
 <body>
@@ -128,17 +130,17 @@
 									<th id="manager" colspan="2">관리자</th>
 										<% if(r.getAnswerContent() == null) { %>
 										<td id="Mcommand" rowspan = "3" colspan="2" align= center>
-											<textarea id="insertReply" placeholder="답변을 남겨주세요."></textarea>
+											<textarea rows="4" cols="10" id="insertReply" placeholder="답변을 남겨주세요."></textarea>
 										</td>
 										<% } else { %>
 										<td id="Mcommand" rowspan = "3" colspan="2" align= center>
-											<textarea id="insertReply" name ="answerContent"style="resize:none; width: 400px; height: 40%; margin-top: 10px;  background: #f9f9f9; border:1px solid #cababa " readonly><%= r.getAnswerContent() %></textarea>
+											<textarea rows="4" cols="10" id="insertReply" name ="answerContent"style="resize:none; width: 400px; height: 40%; margin-top: 10px;  background: #f9f9f9; border:1px solid #cababa " readonly><%= r.getAnswerContent() %></textarea>
 										<% } %>
 										
 										</td>
 									<th><input type="button" id="addReply" class="defaultBtn" value="등록"></th>
 									<th><input type="button" id="updateBtn" class="defaultBtn" value="수정"></th>
-									<th><input type="button" onclick="deleteReply();" id="deleteBtn" class="defaultBtn" value="삭제"></th>
+									<th><input type="button" onclick="deleteReply();" id="deleteBtn" class="defaultBtn cancelBtn" value="삭제"></th>
 								</tr>
 							</table>
 						</div>

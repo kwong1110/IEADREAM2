@@ -50,11 +50,11 @@
 				</tbody>
 			</table>
 			<div class="deleteCheck">
-				<div>총 <%=nameArr.length %>개 의 게시글삭제를 정말로 진행 하시겠습니까?</div>
+				<div>총 <%=nameArr.length %>개 의 게시글삭제를 진행 하시겠습니까?</div>
 			</div>
 			<div class="btnBox">
 				<button class="defaultBtn" type="submit">확인</button>
-				<button class="defaultBtn" type="button" onclick="window.close();">취소</button>
+				<button class="defaultBtn cancelBtn" type="button" onclick="window.close();">취소</button>
 			</div>
 		</form>
 	</div>

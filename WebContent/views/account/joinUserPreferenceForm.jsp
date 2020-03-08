@@ -140,7 +140,8 @@ pageEncoding="UTF-8" import="account.model.vo.*"%>
 
   </style>
 </head>
-<body style="height:100%; margin:0 auto;">
+<body>
+	<%@ include file="../common/mainmenu.jsp" %>
 
   <div id ="outer">
     <div class="wrapper">
@@ -379,5 +380,7 @@ pageEncoding="UTF-8" import="account.model.vo.*"%>
       </div>
     </div>
   </div>
+  
+<%@ include file="../common/footer.jsp" %>
 </body>
 </html>

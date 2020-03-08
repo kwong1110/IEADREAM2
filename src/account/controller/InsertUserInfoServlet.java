@@ -39,6 +39,7 @@ public class InsertUserInfoServlet extends HttpServlet {
 		int maxSize = 1024 * 1024 * 10;
 		String root = request.getSession().getServletContext().getRealPath("/");
 		String savePath = root + "photo_uploadFiles/";
+
 		MultipartRequest mrequest = new MultipartRequest(request, savePath, maxSize, "UTF-8", new MyFileRenamePolicy());
 		String originName = mrequest.getFilesystemName("profileImg");
 		String changeName = mrequest.getOriginalFileName("profileImg");
@@ -79,7 +80,7 @@ public class InsertUserInfoServlet extends HttpServlet {
 		UserService UserService = new UserService();
 		int result1 = UserService.insertPhoto(p);
 		int result2 = UserService.insertUserInfo(ui);
-		
+
 		String page = null;
 		if(result1 > 0 && result2 > 0) {
 			page = "views/account/joinUserPreferenceForm.jsp";

@@ -33,11 +33,10 @@
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/common.css">
 <style>
 	.outer {
-		width:1000px; height:800px; background:white;
+		width:1000px; height: 900px;background:white;
 		margin-left:auto; margin-right:auto; margin-top:50px;
 	}
 
-	.btnArea {width:180px; margin-left:auto; margin-right:auto;}
 	#titleImgArea {width:350px; height:200px; border:2px dashed darkgray; text-align:center; display:table-cell; vertical-align:middle;}
 	#titleImgArea:hover, #contentImgArea1:hover, #contentImgArea2:hover, #contentImgArea3:hover {cursor:pointer;}
 	#contentImgArea1, #contentImgArea2, #contentImgArea3 {
@@ -202,9 +201,9 @@
 				</script>
 				</div>
 				<br>
-				<div class="btnArea">
-					<button class="defaultBtn" id="updateBtn">수정완료</button>
-					<input type="button" id="cancelBtn" class="defaultBtn" onclick="location.href='<%= request.getContextPath() %>/list.wac'" value="취소">
+				<div class="btnArea" align="center">
+					<input type ="button" class="defaultBtn" id="updateBtn" value="완료">
+					<input type="button" id="cancelBtn" class="defaultBtn cancelBtn" onclick="location.href='<%= request.getContextPath() %>/list.wac'" value="취소">
 				</div>
 			</form>
 			</div>

@@ -100,7 +100,7 @@
 						</table>
 						<div class="btnBox">
 								<button class="defaultBtn" type="submit" id="updateBtn">수정</button> <!-- action으로 연결 -->
-								<button class="defaultBtn" type="button" id="deleteAcBtn" onclick="goToDelete();">탈퇴</button>
+								<button class="defaultBtn cancelBtn" type="button" id="deleteAcBtn" onclick="goToDelete();">탈퇴</button>
 								
 								<!-- 탈퇴 확인을 위한 페이지 -->
 						</div>

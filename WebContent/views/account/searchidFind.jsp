@@ -2,11 +2,8 @@
     pageEncoding="UTF-8" import="account.model.vo.Account"%>
     
  <%
-	String id = (String)request.getAttribute("id");
-%>
- 
- 
-    
+	Account a = (Account)request.getAttribute("a");
+%>   
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,19 +14,54 @@
 
 .pageTitle{
 	text-align: center;
-}	
-</style>
+	margin-top: 200px;
 
+}
+
+.pageTitletwo{
+	text-align: center;
+	margin-top: 200px;
+
+}
+
+.boxingBox{
+	width: 300px;
+	height:	150px;
+	text-align: center;
+    background-color: #ddd; 
+   	transform: translate( 175%, -10% );
+   	box-shadow: 5px 5px 5px;
+	
+
+}
+</style>
 </head>
 <body>
+
 	<div class="pageTitle">
-		회원님의 아이디는 <%= id %> 입니다.
-		<!-- userId가져오는것  -->						
-	</div>							
+	<h2 style="text-align: center;">아이디 찾기</h2>
+	<h5 style="text-align: center;">입력하신 정보로 가입된 아이디가 있습니다</h5>
+	</div>
 	
+	<div class="boxingBox" >
+	<br><br>
+	이름 : <%= a.getUserName() %>
+	<!-- User이름 가져오는것 -->
+	<br><br>
+	
+	이메일 : <%= a.getEmail() %>
+	<!-- email값  가져오는것 -->
+	<br><br>
+	<br>
+	
+	아이디: <%= a.getId() %>
+	<!-- userId가져오는것  -->
+	</div>
+
 	<div class="btnBox">
 		<!-- 버튼 클릭하였을때 로그인 페이지 창으로 이동 -->
-		<button type="submit" class="defaultBtn findid" id="btnfindid" onclick="location.href='<%= request.getContextPath() %>/views/account/accountLoginForm.jsp'">로그인하러 가기</button>
+		<button type="submit" class="defaultBtn findid" id="btnfindid" onclick="location.href='<%= request.getContextPath() %>/views/account/accountLoginForm.jsp'">로그인</button>
+		<button type="submit" class="defaultBtn findid" id="btnfindid" onclick="location.href='<%= request.getContextPath() %>/views/account/searchPwdForm.jsp'">비밀번호 찾기</button>
 	</div>
 </body>
 </html>

@@ -102,8 +102,9 @@ public class UserService {
 		for (int i =0; i < plist.size(); i++) {
 			if (plist.get(i).getFileLevel() == 0) {return plist.get(i);}
 		}
+		UserPhoto photo = plist.get(0);
 		
-		return null;
+		return photo;
 	}
 	public int insertPhoto(UserPhoto p) {
 		Connection conn = getConnection();

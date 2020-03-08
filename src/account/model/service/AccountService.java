@@ -53,28 +53,25 @@ public class AccountService {
 
 
 	// 아이디 찾기 Service
-	public String searchId(Account findUser) {
+	public Account searchId(String userName, String email) {
 		Connection conn = getConnection();
 		AccountDAO aDAO = new AccountDAO();
 		
-		String id = aDAO.searchId(conn, findUser);
+		Account a = aDAO.searchId(conn, userName, email);
 		close(conn);
 		
-		return id;
+		return a;
 	}
 
 	
 	// 비밀번호  찾기 Service
 	public String searchPwd(Account account) {
 		Connection conn = getConnection();
-		System.out.println(account);
-		
-		
+	
 		AccountDAO aDAO = new AccountDAO();
-		String findPwd = aDAO.searchPwd(account, conn); 
+		String findPwd = aDAO.searchPwd(conn, account); 
 		close(conn);
-		
-		
+
 		return findPwd;
 		
 	}
@@ -91,5 +88,6 @@ public class AccountService {
 	}
 
 }
+
 
 	

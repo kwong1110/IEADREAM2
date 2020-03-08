@@ -130,23 +130,25 @@ public class AccountDAO {
 
 	
 	// 아이디 찾기 DAO	
-	public String searchId(Connection conn, Account findUser) {
+	public Account searchId(Connection conn, String userName, String email) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String id = null;
+		Account a = null;
 		
 		String query = prop.getProperty("searchId");
-		//SELECT ID FROM ACCOUNT WHERE USER_NAME=? AND EMAIL=? AND DELETED='N'
+		//SELECT ID, USER_NAME, EMAIL FROM ACCOUNT WHERE USER_NAME=? AND EMAIL=? AND DELETED='N'
 		
 		try {
 			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, findUser.getUserName());
-			pstmt.setString(2, findUser.getEmail());
+			pstmt.setString(1, userName);
+			pstmt.setString(2, email);
 			
 			rset = pstmt.executeQuery();
 			
 			if(rset.next()) {
-				id = rset.getString("ID");
+				a = new Account(rset.getString("ID"),
+								rset.getString("USER_NAME"),
+								rset.getString("EMAIL"));
 			}
 			
 		} catch (SQLException e) {
@@ -156,7 +158,7 @@ public class AccountDAO {
 			close(pstmt);
 		}
 		
-		return id;
+		return a;
 	}
 	
 	
@@ -165,8 +167,7 @@ public class AccountDAO {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		String password = null;
-		
-		
+	
 		String query = prop.getProperty("searchpwd");
 		
 		try {
@@ -185,13 +186,7 @@ public class AccountDAO {
 			close(rset);
 			close(pstmt);
 		}
-		
 		return password;
-	}
-
-	public String searchPwd(Account account, Connection conn) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	public Account selectMyProfile(Connection conn, String loginId) {

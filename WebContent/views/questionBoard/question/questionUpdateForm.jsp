@@ -76,7 +76,7 @@
 								<th  width=20% >카테고리</th>
 								<td>
 								<select name="category" id="category">
-										<option>--------</option>
+										<option></option>
 										<option value="결제" <%= selected[0] %>>결제</option>
 										<option value="서비스" <%= selected[1] %>>서비스</option>
 										<option value="회원/등급" <%= selected[2] %>>회원/등급</option>
@@ -93,7 +93,8 @@
 						<br>
 						<div align="center">
 							<button type="submit" class="defaultBtn">등록하기</button>
-							<input type="button"  class="defaultBtn" id="cancelBtn" onclick="location.href='<%= request.getContextPath() %>/list.qu?userNo='+<%= loginUser.getUserNo() %>" value="취소">
+							<button type="button" class="defaultBtn cancelBtn" id="cancelBtn" onclick="location.href='<%= request.getContextPath() %>/list.qu?userNo='+<%= loginUser.getUserNo() %>">취소</button> 
+							<%-- <input type="button"  class="defaultBtn" id="cancelBtn" onclick="location.href='<%= request.getContextPath() %>/list.qu?userNo='+<%= loginUser.getUserNo() %>" value="취소"> --%>
 						</div>
 						</form>
 					</div>

@@ -36,7 +36,7 @@
 	.clear-both{
 		height: 20px;
 	}
-	.contents{height: 400px;border-bottom: 1px solid rgb(224,224,224);}
+	.contents{height: 440px;border-bottom: 1px solid rgb(224,224,224);}
 	.main{width: 80%; height: 100%;}
 	.pageTitle{margin: 1em auto;}
 	.tableArea th {/* 게시판제목라인 */
@@ -54,9 +54,6 @@
 	<%@ include file="../../common/mainmenu.jsp" %>
 	<div class="outer">
 		<div class="wrapper">
-			<%-- <nav>
-				<%@ include file="../../common/questionPageLeftmenu.jsp" %>
-			</nav> --%>
 			<div class="main">
 				<div class="pageTitle">
 					<h2>1:1 문의게시판</h2>
@@ -146,6 +143,7 @@
 		
 	<script>
 		$(function(){
+			<% if(!list.isEmpty()){ %>
 			$('#listArea td').mouseenter(function(){
 				$(this).parent().css({'background':'darkgray','cursor':'pointer'});
 			}).mouseout(function(){
@@ -161,6 +159,7 @@
 				<% } %> 
 
 			});
+			<%}%>
 		});
 		function search() {
 			var searchWord = $('#searchCon').val()

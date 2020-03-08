@@ -28,6 +28,7 @@
 	#dubtn{
 		margin-left: 23%;
 		font-size: 12px;
+		background: #B2CCFF;
 	}
 	
 	.msg{
@@ -50,9 +51,6 @@
 		padding: 5% 0 1% 0;
 	}
 	
-	.cancel{
-		background: lightgray;
-	}
 	
 </style>
 </head>
@@ -111,7 +109,7 @@
 						
 						<div class="btnBox">
 							<button type="submit" id="joinBtn" class="defaultBtn" value="1단계완료">다음단계</button>
-							<button type="reset" id="goMain" class="defaultBtn cancel" onclick="goMain();">취소</button>
+							<button type="reset" id="goMain" class="defaultBtn cancelBtn" onclick='location.href="<%= request.getContextPath() %>/views/common/mainmenu.jsp"'>취소</button>
 						</div>
 					</form>
 				</div>	

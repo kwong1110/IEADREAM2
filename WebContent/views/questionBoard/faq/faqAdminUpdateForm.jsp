@@ -127,8 +127,8 @@
 						
 						<div class="btnBox" align="center">
 							<button class="defaultBtn" type="submit" id="updateFaqBtn">수정</button>
-							<button class="defaultBtn" type="button" onclick="location.href='javascript:history.go(-1);'" id="cancelBtn">취소</button>
-							<button class="defaultBtn" type="button" onclick="deleteFaq();" id="deleteBtn">삭제</button>
+							<button class="defaultBtn menuBtn" type="button" onclick="location.href='javascript:history.go(-1);'" id="cancelBtn">취소</button>
+							<button class="defaultBtn cancelBtn" type="button" onclick="deleteFaq();" id="deleteBtn">삭제</button>
 						</div>
 					</form>
 				</div>

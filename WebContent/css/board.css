@@ -102,12 +102,15 @@ table>tbody>tr>td{
 	text-align: justify;
 	vertical-align: middle;
 }
-
+.heartState li{
+	padding: 4px;
+}
 	/* 관리자 전용 부분 */
 	
 	/* 팝업 창 테이블 */
 .popTable{
 	padding: 20px;
+	margin: auto;
 	text-align: center;
 	background: white;
 	border-bottom: 1px solid rgb(224,224,224);

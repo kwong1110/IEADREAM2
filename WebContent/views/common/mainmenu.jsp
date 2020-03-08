@@ -33,7 +33,7 @@
 	.topMenu {
 		width: 100%; 
 		text-align: center; 
-		padding: 25px;
+		padding: 25px 0 25px 0;
 	}
 	
 	.topMenu a{
@@ -122,15 +122,15 @@
 							<ul class="dept01">	
 								<% if(loginUser != null) { // login상태일 경우 접근 가능 %>
 								<li id="nop"><a href="<%=request.getContextPath()%>/views/myPage/user/memberGradeUpForm.jsp">정회원 등업</a></li>
-								<li id="nop"><a href="<%= request.getContextPath()%>/selectProfileServlet">기본정보</a></li>
-								<li id="nop"><a href="<%= request.getContextPath() %>/views/myPage/user/updateUserInfoForm.jsp">나의 프로필</a></li>
-								<li id="nop"><a href="<%= request.getContextPath() %>/views/myPage/user/updateUserPreferForm.jsp">이상형 정보</a></li>
+								<li id="nop"><a href="<%= request.getContextPath()%>/selectProfileServlet">기본정보</a></li>	
+								<li id="nop"><a href="<%= request.getContextPath() %>/select.ui">나의 프로필</a></li>
+								<li id="nop"><a href="<%= request.getContextPath() %>/select.up">이상형 정보</a></li>
 								<li id="nop">
 									<a href="<%=request.getContextPath()%>/list.mwl?userNo=<%= loginUser.getUserNo() %>">작성글 조회</a>
 								</li>
 									<% if(loginUser.getGrade() == 2 || loginUser.getGrade() == 0) { // 로그인 + 등급이 관리자 혹은 정회원 %>
 								<li id="nop">
-									<a href="<%=request.getContextPath()%>/list.hh">하트 히스토리</a>
+									<a href="<%=request.getContextPath()%>/list.hh?userNo=<%= loginUser.getUserNo() %>">하트 히스토리</a>
 								</li>
 									<% } %>
 								<% } else { // 위 조건들이 하나도 맞지 않을 경우 %>
@@ -139,10 +139,10 @@
 									<li id="nop"><a href='<%= request.getContextPath() %>/views/account/accountLoginForm.jsp' onclick="question();">나의 프로필</a></li>
 									<li id="nop"><a href='<%= request.getContextPath() %>/views/account/accountLoginForm.jsp' onclick="question();">이상형 정보</a></li>
 									<li id="nop">
-										<a href='<%= request.getContextPath() %>/views/account/accountLoginForm.jsp' onclick="question();">작성글 조회</a>
+										<a href='<%= request.getContextPath() %>/views/account/accountLoginForm.jsp'' onclick="question();">작성글 조회</a>
 									</li>
 									<li id="nop">
-									<a href='<%= request.getContextPath() %>/views/account/accountLoginForm.jsp' onclick="question();">하트 히스토리</a>
+										<a href='<%= request.getContextPath() %>/views/account/accountLoginForm.jsp'' onclick="question();">하트 히스토리</a>
 									</li>
 								<% } %>
 								
@@ -169,13 +169,13 @@
 						<li style="width: 10%; height: 10%">
 							<ul>
 								<li style="margin: 5px;">
-									<span class="imageBox" style="border-bottom: none;">
+									<span class="imageBox" onclick="myPage();" style="border-bottom: none;">
 										<img id="loginPicture" src='<%=request.getContextPath()%>/images/common/user.png' onclick="goUpdateProfile();"> 
 									</span> 
 									<%-- <span id="alert"> <img id="redDot" src='<%=request.getContextPath()%>/images/common/redDot.png'></span> --%>
 							 	</li>
 							 	<li>
-									<span style="padding: 3px;"><%= loginUser.getUserName() %>님</span>
+									<span onclick="myPage();" style="padding: 3px;"><%= loginUser.getUserName() %>님</span>
 								</li>
 								<li style="margin: 5px;">
 									<span id="logoutBtn" onclick="logout();" style="font-size: 10px; padding: 10px; border-bottom: none;">로그아웃</span>
@@ -209,6 +209,10 @@
 	    
 		function memberJoin(){
 			location.href="<%= request.getContextPath()%>/views/account/joinAccountForm.jsp";
+		}
+		
+		function myPage(){
+			location.href="<%= request.getContextPath()%>/selectProfileServlet";
 		}
 			
 		var msg = "<%= msg %>";
