@@ -76,7 +76,7 @@ public class MatchService {
 	}
 	
 	public Match[] searchMatchList(int userNo) {
-		double minSync = 0.5;
+		double minSync = 0.3;
 		int maxMatch = 5;
 		
 		Connection conn = getConnection();
