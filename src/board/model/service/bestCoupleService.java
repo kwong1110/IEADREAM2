@@ -180,5 +180,32 @@ public class bestCoupleService {
 		return result;
 	}
 
+	public int getSearchListCount(String year, String month) {
+		Connection conn = getConnection();
+		
+		int result = new bestCoupleDAO().getSearchListCount(conn, year, month);
+		close(conn);
+		
+		return result;
+	}
+
+	public ArrayList<Board> searchbcList(int currentPage, String year, String month) {
+		Connection conn = getConnection();
+		ArrayList<Board> bcList = new bestCoupleDAO().searchbcList(conn, currentPage, year, month);
+		
+		close(conn);
+		
+		return bcList;
+	}
+
+	public ArrayList<Photo> searchpList() {
+		Connection conn = getConnection();
+		ArrayList<Photo> pList = new bestCoupleDAO().searchpList(conn);
+		
+		close(conn);
+		
+		return pList;
+	}
+
 
 }	

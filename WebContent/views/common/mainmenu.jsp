@@ -169,13 +169,13 @@
 						<li style="width: 10%; height: 10%">
 							<ul>
 								<li style="margin: 5px;">
-									<span class="imageBox" style="border-bottom: none;">
+									<span class="imageBox" onclick="myPage();" style="border-bottom: none;">
 										<img id="loginPicture" src='<%=request.getContextPath()%>/images/common/user.png' onclick="goUpdateProfile();"> 
 									</span> 
 									<%-- <span id="alert"> <img id="redDot" src='<%=request.getContextPath()%>/images/common/redDot.png'></span> --%>
 							 	</li>
 							 	<li>
-									<span style="padding: 3px;"><%= loginUser.getUserName() %>님</span>
+									<span onclick="myPage();" style="padding: 3px;"><%= loginUser.getUserName() %>님</span>
 								</li>
 								<li style="margin: 5px;">
 									<span id="logoutBtn" onclick="logout();" style="font-size: 10px; padding: 10px; border-bottom: none;">로그아웃</span>
@@ -209,6 +209,10 @@
 	    
 		function memberJoin(){
 			location.href="<%= request.getContextPath()%>/views/account/joinAccountForm.jsp";
+		}
+		
+		function myPage(){
+			location.href="<%= request.getContextPath()%>/selectProfileServlet";
 		}
 			
 		var msg = "<%= msg %>";
