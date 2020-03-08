@@ -75,7 +75,8 @@
     }
   </style>
 </head>
-<body style="height:100%; margin:0 auto;">
+<body>
+	<%@ include file="../common/mainmenu.jsp" %>
   <div class ="outer">
     <div class="wrapper">
       <div class ="main">
@@ -239,6 +240,7 @@
   </div>
 
   
+<%@ include file="../common/footer.jsp" %>
 </body>
 <script>
 

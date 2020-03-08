@@ -50,7 +50,6 @@ public class UserPreferDAO {
 				up.setStylePri(rs.getInt("STYLE_PRI"));
 				up.setAge(rs.getInt("AGE"));
 				up.setAgePri(rs.getInt("AGE_PRI"));
-				up.setRegion(rs.getInt("REGION"));
 				up.setRegionPri(rs.getInt("REGION_PRI"));
 				up.setReligion(rs.getString("RELIGION"));
 				up.setReligionPri(rs.getInt("RELIGION_PRI"));
@@ -88,7 +87,6 @@ public class UserPreferDAO {
 			pstmt.setInt(7, up.getStylePri());
 			pstmt.setInt(8, up.getAge());
 			pstmt.setInt(9, up.getAgePri());
-			pstmt.setInt(10, up.getRegion());
 			pstmt.setInt(11, up.getRegionPri());
 			pstmt.setString(12, up.getReligion());
 			pstmt.setInt(13, up.getReligionPri());
@@ -127,7 +125,6 @@ public class UserPreferDAO {
 			pstmt.setInt(6, up.getStylePri());
 			pstmt.setInt(7, up.getAge());
 			pstmt.setInt(8, up.getAgePri());
-			pstmt.setInt(9, up.getRegion());
 			pstmt.setInt(10, up.getRegionPri());
 			pstmt.setString(11, up.getReligion());
 			pstmt.setInt(12, up.getReligionPri());

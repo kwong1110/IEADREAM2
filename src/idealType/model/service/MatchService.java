@@ -28,6 +28,24 @@ public class MatchService {
 		Match[] result = mDAO.selectMatchList(conn, userNo);
 		return result;
 	}
+	
+	public Match[] getUncheckedMatchList(int userNo) {
+		Connection conn = getConnection();
+		MatchDAO mDAO = new MatchDAO();
+		Match[] mlist = mDAO.selectMatchList(conn, userNo);
+		
+		ArrayList<Match> ulist = new ArrayList<Match>();
+		for (int i=0; i<mlist.length; i++) {
+			if (mlist[i].getStatus().equals("D") || mlist[i].getStatus().equals("C")){
+				ulist.add(mlist[i]);
+			}
+		}
+		Match[] result = new Match[ulist.size()];
+		for (int i=0; i<ulist.size() ;i++) {
+			mlist[i] = ulist.get(i);
+		}
+		return result;
+	}
 
 	public int insertMatch(Match m) {
 		Connection conn = getConnection();
