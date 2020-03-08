@@ -20,21 +20,17 @@
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/common.css">
 <link rel="styleSheet" href="<%= request.getContextPath() %>/css/board.css">
 <style>
-	.outer{
-      width: 1000px; height: 100%; background: white;
-      margin-left: auto; margin-right: auto; margin-top: 50px; margin-bottom: 50px;}
-	.main{width: 80%; height: 100%;}
 	.pageTitle{margin: 1em auto;}
 
 /* .tableArea{margin: auto; padding: auto;} */
 	.listAtrea{width: 800px;}
-	.tableArea tr { width: -webkit-fill-available;}
+	.tableArea tr { width: -webkit-fill-available; font-size: 14px; }
 	.tableArea th {/* 게시판제목라인 */
 		padding:12px 0;
 		border-top:1px solid rgb(136, 136, 136); /* 상단라인색 */
 		border-bottom:1px solid rgb(224, 224, 224); /* 하단라인색 */
 		background:#f9f9f9;  /* 제목배경색 */ 
-		color:rgb(230, 141, 150); font-size:1em;/* 제목글자크기 */ 
+		color:rgb(230, 141, 150); font-size:14px;/* 제목글자크기 */ 
 		letter-spacing:0.1em}/* 제목띠어쓰기간격 */ 
 	.tableArea td {line-height: 10px;}
 		
@@ -68,6 +64,13 @@
 				<div class="pageTitle">
 					<h1>FAQ 관리</h1>
 				</div>
+				<div class="topBox" style="text-align: center;">
+					<div class="midBox">
+						<div class="searchMenu">검색어</div>
+							<input placeholder="검색어를 입력하세요!" class="search search2" name="searchCon" id="searchCon" type="text" width="30">
+							<button class="defaultBtn searchBtn" id="searchBtn" onclick="search();">검색</button>
+					</div>
+				</div>
 				<div class="tableArea">
 					<table id="listArea" style=" width: -webkit-fill-available;">
 						<%
@@ -81,6 +84,7 @@
 							<th class="post_no">글번호</th>
 							<th class="td_cate">카테고리</th>
 							<th class="post_title">글제목</th>
+							<th class="td_cate">게시날짜</th>
 						</tr>
 						<%
 								for (Board board : list) {
@@ -89,6 +93,7 @@
 										<td class="post_no"><%= board.getPostNo() %></td>
 										<td class="td_cate"><%= board.getCategory() %></td>
 										<td class="post_title"><%= board.getTitle() %></td>
+										<td class="td_cate"><%= board.getCreateDate() %></td>
 									</tr>
 						<%
 								}
@@ -97,7 +102,6 @@
 					</table>
 					
 					<div class="btnBox">
-						<button class="defaultBtn menuBtn" id="searchBtn" onclick="search();">검색</button><input name="searchCon" id="searchCon" type="text" width="30">
 						<button  class="defaultBtn" onclick="location.href='views/questionBoard/faq/faqInsertForm.jsp'" id="writeFaqBtn">글쓰기</button>
 					</div>
 					

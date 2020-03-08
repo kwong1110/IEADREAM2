@@ -65,11 +65,12 @@ public class Board {
 		this.category = category;
 	}
 
-	public Board(String category, int postNo, String title) {
+	public Board(String category, int postNo, String title, Date createDate) {
 		super();
 		this.postNo = postNo;
 		this.title = title;
 		this.category = category;
+		this.createDate = createDate;
 	}
 
 	// 파티 리뷰 1

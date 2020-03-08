@@ -36,20 +36,19 @@
 						<img class="image" src="<%= request.getContextPath() %>/images/bestCouple.png">
 					</a>
 				</div>
-				<% if(loginUser.getGrade() == 0 || loginUser.getGrade() == 2) { /* 로그인 + 등급이 정회원, 운영자 일 경우*/%>
-					<div class="indexBox">
-						<a href="<%=request.getContextPath()%>/list.hh?userNo=<%= loginUser.getUserNo() %>">
-							<img class="image" src="<%= request.getContextPath() %>/images/history.png">
-						</a>
-					</div>
-				<% } else { /* 등급이 준회원일 경우 */ %>
-					<div class="indexBox">
-						<a href='<%= request.getContextPath() %>/index.jsp' onclick="alert();">
-							<img class="image" src="<%= request.getContextPath() %>/images/history.png">
-						</a>
-					</div>
-				<% } %>
-				
+					<% if(loginUser.getGrade() == 0 || loginUser.getGrade() == 2) { /* 로그인 + 등급이 정회원, 운영자 일 경우*/%>
+						<div class="indexBox">
+							<a href="<%=request.getContextPath()%>/list.hh?userNo=<%= loginUser.getUserNo() %>">
+								<img class="image" src="<%= request.getContextPath() %>/images/history.png">
+							</a>
+						</div>
+					<% } else { /* 등급이 준회원일 경우 */ %>
+						<div class="indexBox">
+							<a href='<%= request.getContextPath() %>/index.jsp'>
+								<img class="image" src="<%= request.getContextPath() %>/images/history.png" onclick="alert();">
+							</a>
+						</div>
+					<% } %>
 				<div class="indexBox">
 					<a href="<%=request.getContextPath()%>/views/myPage/user/memberGradeUpForm.jsp">
 						<img class="image" src="<%= request.getContextPath() %>/images/upGrade.png">
@@ -67,7 +66,7 @@
 					</a>
 				</div>
 				<div class="indexBox">
-					<a href='<%= request.getContextPath() %>/views/account/accountLoginForm.jsp' onclick="question();">
+					<a class="nologin" href='<%= request.getContextPath() %>/views/account/accountLoginForm.jsp' onclick="question();">
 						<img class="image" src="<%= request.getContextPath() %>/images/history.png">
 					</a>
 				</div>
@@ -99,8 +98,9 @@ $(document).ready(function(){
     	//vertical:true,	/* 세로방향으로 슬라이드를 원하면 추가하기// 기본값 가로방향 슬라이드*/ 
     });
   });
-  
+
 	function question(){
+		console.log('오잉');
 		alert("로그인 후 사용 가능합니다.");
 	}
 	function alert() {

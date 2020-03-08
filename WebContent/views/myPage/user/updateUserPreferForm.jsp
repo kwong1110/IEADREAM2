@@ -224,13 +224,13 @@
 		case 1: ip2 = "checked"; break;
 		case 0: ip3 = "checked"; break;
 		}
-	
+		
 %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>이상형 정보 입력</title>
 </head>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/common.css">
 <body>
