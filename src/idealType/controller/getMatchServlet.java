@@ -43,7 +43,7 @@ public class getMatchServlet extends HttpServlet {
 		
 		int userNo = ((Account)request.getSession().getAttribute("loginUser")).getUserNo();
 		int matchNo = 0;
-		if (request.getParameter("matchNo") != null) {matchNo = Integer.parseInt(request.getParameter("matchNo"));}
+		if (request.getAttribute("matchNo") != null) {matchNo = (int)request.getAttribute("matchNo");}
 		
 		Match[] mlist = ms.getUncheckedMatchList(userNo);
 		
