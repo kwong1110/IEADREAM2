@@ -87,14 +87,7 @@
 								<li id="nop"><a href="<%=request.getContextPath()%>/get.ups">이용자 취향 통계</a></li>
 							</ul>
 						</li>
-						<li class="s-menu"><span onclick="goLoveParty();">러브파티</span>
-							<ul class="dept01">
-								<li id="nop"><a href="">베스트 후기</a></li>
-								<li id="nop"><a href="">러브파티</a></li>
-								<!-- views/loveParty/partyReview/partyReviewListView.jsp -->
-								<li id="nop"><a href="<%=request.getContextPath()%>/list.pr">파티참여 후기</a></li>
-							</ul>
-						</li>
+						
 						<li class="s-menu"><span onclick="goCoupleStory();">커플이야기</span>
 							<ul class="dept01">
 								<li id="nop"><a href="<%= request.getContextPath() %>/list.bc">베스트 커플</a></li>
@@ -106,7 +99,7 @@
 								<% if(loginUser != null && loginUser.getGrade() != 0){ %>
 									<li id="nop"><a href="<%=request.getContextPath() %>/list.qu?userNo=<%= loginUser.getUserNo() %>">1:1문의</a></li>
 								<% } else if(loginUser != null && loginUser.getGrade() == 0){%>
-									<li id="nop"><a href="<%=request.getContextPath() %>/Mlist.qu">1:1문의</a></li>
+									<li id="nop"><a href="<%=request.getContextPath() %>/Mlist.qu">1:1 문의</a></li>
 								<% }else{%>
 								<li id="nop"><a href="<%=request.getContextPath() %>/views/account/accountLoginForm.jsp" onclick="question();">1:1문의</a>
 								<% } %>
@@ -118,10 +111,24 @@
 							</ul>
 						</li>
 						
+						<li class="s-menu"><span onclick="goLoveParty();">정회원서비스</span>
+							<ul class="dept01">
+								<% if(loginUser != null) { %> <!-- 로그인만 했을 때 -->
+									<li id="nop"><a href="<%=request.getContextPath()%>/views/myPage/user/memberGradeUpForm.jsp">정회원 등업</a></li>
+									<% if(loginUser.getGrade() == 2 || loginUser.getGrade() == 0) {%> <!-- 정회원/관리자  -->
+										<li id="nop"><a href="<%=request.getContextPath()%>/list.hh?userNo=<%= loginUser.getUserNo() %>">하트 히스토리</a></li>
+									<% } %>
+								<% } else { %> <!-- 로그인 안했을 때 -->
+									<li id="nop"><a href='<%= request.getContextPath() %>/views/account/accountLoginForm.jsp' onclick="question();">정회원 등업</a></li>
+									<li id="nop"><a href='<%= request.getContextPath() %>/views/account/accountLoginForm.jsp'' onclick="question();">하트 히스토리</a></li>								
+								<% } %>
+							</ul>
+						</li>
+						
 						<li class="s-menu" id="myPage"><span onclick="">마이페이지</span>
 							<ul class="dept01">	
 								<% if(loginUser != null) { // login상태일 경우 접근 가능 %>
-								<li id="nop"><a href="<%=request.getContextPath()%>/views/myPage/user/memberGradeUpForm.jsp">정회원 등업</a></li>
+								<%-- <li id="nop"><a href="<%=request.getContextPath()%>/views/myPage/user/memberGradeUpForm.jsp">정회원 등업</a></li> --%>
 								<li id="nop"><a href="<%= request.getContextPath()%>/selectProfileServlet">기본정보</a></li>	
 								<li id="nop"><a href="<%= request.getContextPath() %>/select.ui">나의 프로필</a></li>
 								<li id="nop"><a href="<%= request.getContextPath() %>/select.up">이상형 정보</a></li>
@@ -129,21 +136,21 @@
 									<a href="<%=request.getContextPath()%>/list.mwl?userNo=<%= loginUser.getUserNo() %>">작성글 조회</a>
 								</li>
 									<% if(loginUser.getGrade() == 2 || loginUser.getGrade() == 0) { // 로그인 + 등급이 관리자 혹은 정회원 %>
-								<li id="nop">
+								<%-- <li id="nop">
 									<a href="<%=request.getContextPath()%>/list.hh?userNo=<%= loginUser.getUserNo() %>">하트 히스토리</a>
-								</li>
+								</li> --%>
 									<% } %>
 								<% } else { // 위 조건들이 하나도 맞지 않을 경우 %>
-									<li id="nop"><a href='<%= request.getContextPath() %>/views/account/accountLoginForm.jsp' onclick="question();">정회원 등업</a></li>
+									<%-- <li id="nop"><a href='<%= request.getContextPath() %>/views/account/accountLoginForm.jsp' onclick="question();">정회원 등업</a></li> --%>
 									<li id="nop"><a href='<%= request.getContextPath() %>/views/account/accountLoginForm.jsp' onclick="question();">기본정보</a></li>
 									<li id="nop"><a href='<%= request.getContextPath() %>/views/account/accountLoginForm.jsp' onclick="question();">나의 프로필</a></li>
 									<li id="nop"><a href='<%= request.getContextPath() %>/views/account/accountLoginForm.jsp' onclick="question();">이상형 정보</a></li>
 									<li id="nop">
 										<a href='<%= request.getContextPath() %>/views/account/accountLoginForm.jsp'' onclick="question();">작성글 조회</a>
 									</li>
-									<li id="nop">
+									<%-- <li id="nop">
 										<a href='<%= request.getContextPath() %>/views/account/accountLoginForm.jsp'' onclick="question();">하트 히스토리</a>
-									</li>
+									</li> --%>
 								<% } %>
 								
 								<% if(loginUser != null && loginUser.getGrade() == 0){ %>
