@@ -57,6 +57,7 @@ public class fillMatchListServlet extends HttpServlet {
 		for (int i = 0; stack+i < 5 ; i++) {
 			ms.insertMatch(newMlist[i]);
 		}
+		response.sendRedirect("index.jsp");
 		
 	}
 	/**
