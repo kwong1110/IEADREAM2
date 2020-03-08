@@ -25,18 +25,57 @@
 	</div>
 	<div class="bigBox">
 		<div class="conBox">
-			<div class="indexBox">
-				<img src="<%= request.getContextPath() %>/images/myIdeal.png">
-			</div>
-			<div class="indexBox">
-				<img src="<%= request.getContextPath() %>/images/bestCouple.png">
-			</div>
-			<div class="indexBox">
-				<img src="<%= request.getContextPath() %>/images/history.png">
-			</div>
-			<div class="indexBox">
-				<img src="<%= request.getContextPath() %>/images/upGrade.png">
-			</div>
+			<% if(loginUser != null) { /* 로그인 한 경우 */ %>
+				<div class="indexBox">
+					<a href="<%=request.getContextPath()%>/get.ist">
+						<img class="image" src="<%= request.getContextPath() %>/images/myIdeal.png">
+					</a>
+				</div>
+				<div class="indexBox">
+					<a href="<%= request.getContextPath() %>/list.bc">
+						<img class="image" src="<%= request.getContextPath() %>/images/bestCouple.png">
+					</a>
+				</div>
+				<% if(loginUser.getGrade() == 0 || loginUser.getGrade() == 2) { /* 로그인 + 등급이 정회원, 운영자 일 경우*/%>
+					<div class="indexBox">
+						<a href="<%=request.getContextPath()%>/list.hh?userNo=<%= loginUser.getUserNo() %>">
+							<img class="image" src="<%= request.getContextPath() %>/images/history.png">
+						</a>
+					</div>
+				<% } else { /* 등급이 준회원일 경우 */ %>
+					<div class="indexBox">
+						<a href='<%= request.getContextPath() %>/views/account/accountLoginForm.jsp' onclick="alert();">
+							<img class="image" src="<%= request.getContextPath() %>/images/history.png">
+						</a>
+					</div>
+				<% } %>
+				<div class="indexBox">
+					<a href="<%=request.getContextPath()%>/views/myPage/user/memberGradeUpForm.jsp">
+						<img class="image" src="<%= request.getContextPath() %>/images/upGrade.png">
+					</a>
+				</div>
+			<% } else { /* 로그인 하지 않은 경우 */%>
+				<div class="indexBox">
+					<a href='<%= request.getContextPath() %>/views/account/accountLoginForm.jsp' onclick="question();">
+						<img class="image" src="<%= request.getContextPath() %>/images/myIdeal.png">
+					</a>
+				</div>
+				<div class="indexBox">
+					<a href="<%= request.getContextPath() %>/list.bc">
+						<img class="image" src="<%= request.getContextPath() %>/images/bestCouple.png">
+					</a>
+				</div>
+				<div class="indexBox">
+					<a href='<%= request.getContextPath() %>/views/account/accountLoginForm.jsp' onclick="question();">
+						<img class="image" src="<%= request.getContextPath() %>/images/history.png">
+					</a>
+				</div>
+				<div class="indexBox">
+					<a href='<%= request.getContextPath() %>/views/account/accountLoginForm.jsp' onclick="question();">
+						<img class="image" src="<%= request.getContextPath() %>/images/upGrade.png">
+					</a>
+				</div>
+			<% } %>
 		</div>
 	</div>
 <%@ include file="views/common/footer.jsp"%>
@@ -59,5 +98,12 @@ $(document).ready(function(){
     	//vertical:true,	/* 세로방향으로 슬라이드를 원하면 추가하기// 기본값 가로방향 슬라이드*/ 
     });
   });
+  
+	function question(){
+		alert("로그인 후 사용 가능합니다.");
+	}
+	function alert() {
+		alert("정회원 서비스입니다.");
+	}
 </script>
 </html>
