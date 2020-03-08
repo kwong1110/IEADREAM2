@@ -323,7 +323,7 @@ public class UserInfoDAO {
 			  
 			  rs = pstmt.executeQuery();
 			  while(rs.next()) {
-				  list.add(rs.getInt("INTEREST"));
+				  list.add(rs.getInt("USER_NO"));
 			  }
 		  } catch (SQLException e) {
 			  e.printStackTrace(); 
