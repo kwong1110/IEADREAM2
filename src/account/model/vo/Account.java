@@ -2,7 +2,7 @@ package account.model.vo;
 
 import java.sql.Date;
 
-public class Account {
+public class Account { 
 	private int userNo;
 	private int grade;
 	private String id;
