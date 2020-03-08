@@ -71,8 +71,8 @@ public class UserInfoDAO {
 		try	{
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, userId);
-			rs.next();
 			rs = pstmt.executeQuery();
+			rs.next();
 				userNo = (rs.getInt("USER_NO"));
 		}catch(Exception e) { 
 			e.printStackTrace();
