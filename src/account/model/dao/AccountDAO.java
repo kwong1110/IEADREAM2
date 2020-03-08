@@ -298,6 +298,25 @@ public class AccountDAO {
 		return result;
 	}
 
+
+	public int adminPwdUpdate(Connection conn, String encPwd, String userId) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("adminPwdUpdate");
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, encPwd);
+			pstmt.setString(2, userId);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+
 	
 }
 	
