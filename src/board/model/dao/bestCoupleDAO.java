@@ -400,7 +400,6 @@ public class bestCoupleDAO {
 				result += pstmt.executeUpdate();
 				
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} finally {
 				close(pstmt);
@@ -460,6 +459,134 @@ public class bestCoupleDAO {
 		}
 		
 		return result;
+	}
+
+	public int getSearchListCount(Connection conn, String year, String month) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		ResultSet rset = null;
+		
+		String query = "";
+		if(year != null && month == "00") {
+			query = prop.getProperty("getSearchYearListCount");
+			//SELECT COUNT(*) FROM BCLIST WHERE TO_CHAR(CREATE_DATE, 'YYYY') LIKE ?
+		} else {
+			query = prop.getProperty("getSearchListCount");
+			//SELECT COUNT(*) FROM BCLIST WHERE TO_CHAR(CREATE_DATE, 'YYYY') LIKE ? AND TO_CHAR(CREATE_DATE, 'MM') LIKE ?
+		}
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			
+			if(year != null && month == "00") {
+				pstmt.setString(1, year);
+			} else {
+				pstmt.setString(1, year);
+				pstmt.setString(2, month);
+			}
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				result = rset.getInt(1); // 검색한 전체 개시글 개수 가져오기
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		
+		return result;
+	}
+
+	public ArrayList<Board> searchbcList(Connection conn, int currentPage, String year, String month) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Board> bcList = null;
+		
+		int posts = 3;
+		int startRow = (currentPage - 1) * posts + 1;
+		int endRow = startRow + posts - 1;
+		
+		String query = "";
+		
+		switch(month) {
+		case "00":
+			query = prop.getProperty("searchbcYearList");
+			break; 
+		default:
+			query = prop.getProperty("searchbcList");
+			break;
+		}
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			
+			if(month.equals("00")) {
+				pstmt.setString(1, year);
+				pstmt.setInt(2, startRow);
+				pstmt.setInt(3, endRow);
+			} else {
+				pstmt.setString(1, year);
+				pstmt.setString(2, month);
+				pstmt.setInt(3, startRow);
+				pstmt.setInt(4, endRow);
+			}
+			
+			rset = pstmt.executeQuery();
+			bcList = new ArrayList<Board>();
+			
+			while(rset.next()) {
+				Board bc = new Board(rset.getInt("POST_NO"),
+									rset.getString("ID"),
+									rset.getString("TITLE"),
+									rset.getDate("CREATE_DATE"),
+									rset.getInt("HIT"));
+				bcList.add(bc);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return bcList;
+	}
+
+	public ArrayList<Photo> searchpList(Connection conn) {
+		Statement stmt = null;
+		ResultSet rset = null;
+		ArrayList<Photo> pList = null;
+		
+		String query = prop.getProperty("selectpList");
+		
+		try {
+			stmt = conn.createStatement();
+			rset = stmt.executeQuery(query);
+			
+			pList = new ArrayList<Photo>();
+			
+			while(rset.next()) {
+				pList.add(new Photo(rset.getInt("PHOTO_NO"),
+									rset.getInt("POST_NO"),
+									rset.getString("ORIGIN_NAME"),
+									rset.getString("CHANGE_NAME"),
+									rset.getString("FILE_PATH"),
+									rset.getInt("FILE_LEVEL"),
+									rset.getString("DELETED")));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+		}
+		
+		return pList;
 	}
 
 

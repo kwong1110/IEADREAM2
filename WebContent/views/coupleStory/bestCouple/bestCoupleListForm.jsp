@@ -14,6 +14,10 @@
 	int maxPage = pi.getMaxPage();
 	int startPage = pi.getStartPage();
 	int endPage = pi.getEndPage();
+	
+	String year = (String)request.getAttribute("year");
+	String month = (String)request.getAttribute("month");
+	String search = (String)request.getAttribute("search");
 %>    
 <!DOCTYPE html>
 <html>
@@ -26,9 +30,7 @@
 	
 	.option{
 		padding: 3px 7px 6px 7px;
-		background: #e75a82;
 		border: none;
-		color: white;
 		font-weight: border;
 		border-radius: 5px;
 		cursor: pointer;
@@ -36,13 +38,17 @@
 		box-shadow: 0 1px 2px rgba(0,0,0,.2);
 	}
 	
+	.go{
+		display: inline-block;
+	}
+	
 	.optiondiv{
 		display: inline-block;
 	}
 	
 	.optionbox{
-		margin-left: 800px;
-		margin-bottom: .6%;
+		margin-left: 770px;
+		margin-bottom: .8%;
 	}
 	
 	.main{
@@ -146,35 +152,39 @@
 				<div class="main">
 					<div class="pageTitle"><h1>이달의 베스트 커플</h1></div>
 					
-					<div class="optionbox">
-						<div class="optiondiv">
-							<select  class="option" id="year">
-								<option>-----</option>
-								<option value="2019">2019년</option>
-								<option value="2020">2020년</option>
-								<option value="2021">2021년</option>
-								<option value="2022">2022년</option>
-							</select>					
+					<form action="<%= request.getContextPath()%>/search.bc" method="post" id="searchForm">
+						<div class="optionbox">
+							<div class="optiondiv">
+								<select class="option" id="year" name="year">
+									<option value="2020">2020년</option>
+									<option value="2021">2021년</option>
+									<option value="2022">2022년</option>
+								</select>					
+							</div>
+							
+							<div class="optiondiv">
+								<select class="option" id="month" name="month">
+									<option value="00">-----</option>
+									<option value="01">1월</option>
+									<option value="02">2월</option>
+									<option value="03">3월</option>
+									<option value="04">4월</option>
+									<option value="05">5월</option>
+									<option value="06">6월</option>
+									<option value="07">7월</option>
+									<option value="08">8월</option>
+									<option value="09">9월</option>
+									<option value="10">10월</option>
+									<option value="11">11월</option>
+									<option value="12">12월</option>
+								</select>
+							</div>
+							<div class="go">
+								<input type="hidden" name="search" value="on">
+								<input type="submit" class="defaultBtn searchBtn" id="search" value="Go">
+							</div>
 						</div>
-						
-						<div class="optiondiv">
-							<select class="option" id="month">
-								<option>-----</option>
-								<option value="1">1월</option>
-								<option value="2">2월</option>
-								<option value="3">3월</option>
-								<option value="4">4월</option>
-								<option value="5">5월</option>
-								<option value="6">6월</option>
-								<option value="7">7월</option>
-								<option value="8">8월</option>
-								<option value="9">9월</option>
-								<option value="10">10월</option>
-								<option value="11">11월</option>
-								<option value="12">12월</option>
-							</select>
-						</div>
-					</div>
+					</form>
 					
 					<div class="contents">
 						<div class="contns">
@@ -208,11 +218,46 @@
 						 <div class="clear-both"></div>
 						
 						 <div class="pagingArea">
-						 	<% if(!bcList.isEmpty()) { %>
+						 	<% if(search != null){ %><!-- 검색을 한 상태의 페이징 -->
+						 	<!-- 검색결과 페이징 -->
+						 	<% if(!bcList.isEmpty() && maxPage != 1) { %> <!-- 전체 페이지가 1개면 페이징 기능 없애기 -->
 								<div class="button">
+									<button onclick="location.href='<%= request.getContextPath() %>/search.bc?currentPage=1&year=<%= year %>&month=<%= month %>'">&lt;&lt;</button>
+									<button onclick="location.href='<%= request.getContextPath() %>/search.bc?currentPage=<%= currentPage-1 %>&year=<%= year %>&month=<%= month %>'" id="beforeBtn">PREV</button>
+								
+									<script>
+										if(<%= currentPage %> <= 1){
+											var before = $('#beforeBtn');
+											before.attr('disabled','true');
+										}
+									</script>
+									<% for(int p = startPage; p <= endPage; p++){ %>
+										<%if(p == currentPage){ %>
+											<button id="choosen" disabled><%= p %></button>
+										<% } else { %>
+											<button id="numBtn" onclick="location.href='<%= request.getContextPath() %>/search.bc?currentPage=<%= p %>&year=<%= year %>&month=<%= month %>'"><%= p %></button>
+										<% } %>
+									<% } %>
+								
+								<!-- 다음 페이지로 가는 버튼 -->
+								<button onclick="location.href='<%= request.getContextPath() %>/search.bc?currentPage=<%= currentPage + 1 %>&year=<%= year %>&month=<%= month %>'" id="afterBtn">NEXT</button>
+								<script>
+									if(<%= currentPage %> >= <%= maxPage %>){
+										var after= $("#afterBtn");
+										after.attr('disabled','true');
+									}
+								</script>
+								
+								<!-- 맨 끝으로 가는 버튼 -->
+								<button onclick="location.href='<%= request.getContextPath() %>/search.bc?currentPage=<%= maxPage %>&year=<%= year %>&month=<%= month %>'">&gt;&gt;</button>			
+								
+							<% } %>
+								
+							<% } else { %>
+								<% if(!bcList.isEmpty() && maxPage != 1) { %>
 									<button onclick="location.href='<%= request.getContextPath() %>/list.bc?currentPage=1'">&lt;&lt;</button>
-									
 									<button onclick="location.href='<%= request.getContextPath() %>/list.bc?currentPage=<%= currentPage-1 %>'" id="beforeBtn">PREV</button>
+									
 									<script>
 										if(<%= currentPage %> <= 1){
 											var before = $('#beforeBtn');
@@ -238,6 +283,7 @@
 								
 									<button onclick="location.href='<%= request.getContextPath() %>/list.bc?currentPage=<%= maxPage %>'">&gt;&gt;</button>
 								</div>
+								<% } %>
 							<% } %>
 						</div>
 					</div>

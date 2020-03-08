@@ -97,7 +97,7 @@
 					</table>
 					
 					<div class="btnBox">
-						<button  class="defaultBtn" id="searchBtn" onclick="search();">검색</button><input name="searchCon" id="searchCon" type="text" width="30">
+						<button class="defaultBtn menuBtn" id="searchBtn" onclick="search();">검색</button><input name="searchCon" id="searchCon" type="text" width="30">
 						<button  class="defaultBtn" onclick="location.href='views/questionBoard/faq/faqInsertForm.jsp'" id="writeFaqBtn">글쓰기</button>
 					</div>
 					

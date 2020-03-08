@@ -1,12 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="board.model.vo.*, java.util.*"%>
 <%
-	//String mName = (String)request.getAttribute("mName");
-	String mName = request.getParameter("mName");
-	String fName = request.getParameter("fName");
-	String content = request.getParameter("con");
-	String dtPeriod = request.getParameter("dtPeriod");
-	String fvDate = request.getParameter("fvDate");
+	String mName = request.getParameter("mName") == null ? "" : request.getParameter("mName");
+	String fName = request.getParameter("fName") == null ? "" : request.getParameter("fName");
+	String content = request.getParameter("con") == null ? "" : request.getParameter("con");
+	String dtPeriod = request.getParameter("dtPeriod") == null ? "1" : request.getParameter("dtPeriod");
+	String fvDate = request.getParameter("fvDate") == null ? "" : request.getParameter("fvDate");
 	BestCouple bc = (BestCouple)request.getAttribute("bc");
 %>
 <!DOCTYPE html>
@@ -48,7 +47,7 @@
 	}
 	
 	.contn1box{
-		margin: 1% 0;
+		margin: 1.6% 0;
 	}
 	
 	.contn2{

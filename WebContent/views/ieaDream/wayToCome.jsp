@@ -7,14 +7,6 @@
 <title>이어드림 - 오시는 길</title>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/common.css">
 <style>
-	.outer{
-		width: 1000px; height: 600px; background: white;
-		margin-left: auto; margin-right: auto; margin-top: 50px;
-	}
-
-	.container .content main .article{position: relative; float: right;
-    margin-right: 400px;}
-    
     #loadTable{
     	    border-top: 2px solid black;
 		    width: 500px;
@@ -26,6 +18,18 @@
     table>tbody>tr>td{
     	vertical-align: middle;
     	border-bottom: 1px solid lightgray;
+    	background: #f9f9f9;
+    }
+     table>tbody>tr>th{
+    	vertical-align: middle;
+    	border-bottom: 1px solid lightgray;
+    	font-size:smaller;
+    }
+    
+    #blueBusPicture, #redBusPicture{
+    	width: 15px;
+  	  	height: 15px;
+    	vertical-align: bottom;
     }
 
 </style>
@@ -86,15 +90,20 @@
 			<table id="loadTable">
 				<tr>
 					<td>주소</td>
-					<td>서울특별시 강남구 테헤란로 14길 6 남도빌딩 3F</td>
+					<th>서울특별시 강남구 테헤란로 14길 6 남도빌딩 3F</th>
 				</tr>
 				<tr>
 					<td>버스</td>
-					<td>역삼역.포스코P&S타워 정류장</td>
+					<th>
+						역삼역.포스코P&S타워 정류장<br>
+						<img id="blueBusPicture" src='<%=request.getContextPath()%>/images/common/blueBus.png'> 146 / 740 / 341 / 360 
+						&nbsp;&nbsp;
+						<img id="redBusPicture" src='<%=request.getContextPath()%>/images/common/redBus.png'> 1100 / 1700 / 2000 / 7007 / 8001
+					</th>
 				</tr>
 				<tr>
 					<td>지하철</td>
-					<td>지하철 2호선 역삼역 3번출구 100m</td>
+					<th>지하철 2호선 역삼역 3번출구 100m</th>
 				</tr>
 			</table>
 		</div>
