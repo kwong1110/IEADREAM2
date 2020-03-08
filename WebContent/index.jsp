@@ -28,51 +28,51 @@
 			<% if(loginUser != null) { /* 로그인 한 경우 */ %>
 				<div class="indexBox">
 					<a href="<%=request.getContextPath()%>/get.ist">
-						<img src="<%= request.getContextPath() %>/images/myIdeal.png">
+						<img class="image" src="<%= request.getContextPath() %>/images/myIdeal.png">
 					</a>
 				</div>
 				<div class="indexBox">
 					<a href="<%= request.getContextPath() %>/list.bc">
-						<img src="<%= request.getContextPath() %>/images/bestCouple.png">
+						<img class="image" src="<%= request.getContextPath() %>/images/bestCouple.png">
 					</a>
 				</div>
 				<% if(loginUser.getGrade() == 0 || loginUser.getGrade() == 2) { /* 로그인 + 등급이 정회원, 운영자 일 경우*/%>
 					<div class="indexBox">
 						<a href="<%=request.getContextPath()%>/list.hh?userNo=<%= loginUser.getUserNo() %>">
-							<img src="<%= request.getContextPath() %>/images/history.png">
+							<img class="image" src="<%= request.getContextPath() %>/images/history.png">
 						</a>
 					</div>
 				<% } else { /* 등급이 준회원일 경우 */ %>
 					<div class="indexBox">
 						<a href='<%= request.getContextPath() %>/views/account/accountLoginForm.jsp' onclick="alert();">
-							<img src="<%= request.getContextPath() %>/images/history.png">
+							<img class="image" src="<%= request.getContextPath() %>/images/history.png">
 						</a>
 					</div>
 				<% } %>
 				<div class="indexBox">
 					<a href="<%=request.getContextPath()%>/views/myPage/user/memberGradeUpForm.jsp">
-						<img src="<%= request.getContextPath() %>/images/upGrade.png">
+						<img class="image" src="<%= request.getContextPath() %>/images/upGrade.png">
 					</a>
 				</div>
 			<% } else { /* 로그인 하지 않은 경우 */%>
 				<div class="indexBox">
 					<a href='<%= request.getContextPath() %>/views/account/accountLoginForm.jsp' onclick="question();">
-						<img src="<%= request.getContextPath() %>/images/myIdeal.png">
+						<img class="image" src="<%= request.getContextPath() %>/images/myIdeal.png">
 					</a>
 				</div>
 				<div class="indexBox">
 					<a href="<%= request.getContextPath() %>/list.bc">
-						<img src="<%= request.getContextPath() %>/images/bestCouple.png">
+						<img class="image" src="<%= request.getContextPath() %>/images/bestCouple.png">
 					</a>
 				</div>
 				<div class="indexBox">
 					<a href='<%= request.getContextPath() %>/views/account/accountLoginForm.jsp' onclick="question();">
-						<img src="<%= request.getContextPath() %>/images/history.png">
+						<img class="image" src="<%= request.getContextPath() %>/images/history.png">
 					</a>
 				</div>
 				<div class="indexBox">
 					<a href='<%= request.getContextPath() %>/views/account/accountLoginForm.jsp' onclick="question();">
-						<img src="<%= request.getContextPath() %>/images/upGrade.png">
+						<img class="image" src="<%= request.getContextPath() %>/images/upGrade.png">
 					</a>
 				</div>
 			<% } %>
