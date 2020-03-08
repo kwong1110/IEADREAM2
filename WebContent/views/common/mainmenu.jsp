@@ -5,7 +5,7 @@
 	Account loginUser = (Account)session.getAttribute("loginUser");
 
 	String msg = (String)request.getAttribute("msg");
-%>
+%> 
 <!DOCTYPE html>
 <html>
 <head>
