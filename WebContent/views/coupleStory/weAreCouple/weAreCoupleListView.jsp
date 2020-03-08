@@ -26,7 +26,7 @@
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/board.css">
 <style>
 	.outer{
-		width: 1000px; background:white;
+		width: 1000px; height: 800px;background:white;
 		margin-left: auto; margin-right: auto; margin-top: 50px;
 	} 
 	.main{width: 80%; height: 100%;}
@@ -53,6 +53,9 @@
 			<div class="main">
 				<div class="pageTitle">
 					<h2>우리 커플 됐어요</h2>
+				</div>
+				<div class="information">
+					정성스레 작성된 리뷰는 이 달의 베스트 커플로 선정될 수 있습니다.
 				</div>
 				<form action="<%= request.getContextPath() %>/search.wac" method="post" id ="searchForm">
 			      <hr>
