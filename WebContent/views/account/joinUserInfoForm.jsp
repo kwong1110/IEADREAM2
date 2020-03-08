@@ -231,7 +231,8 @@
                </table> 
             </section>
             <section id="submit" style="text-align: center;">
-              <input type="submit" value="제출" style="font-size: 18px; padding:5px 40px;">
+				<button type="submit" id="joinBtn" class="defaultBtn" value="2단계">다음단계</button>
+				<button type="reset" id="goMain" class="defaultBtn cancelBtn" onclick='location.href="<%= request.getContextPath() %>/views/common/mainmenu.jsp"'>취소</button>
             </section>
           </form>
         </section>
