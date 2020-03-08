@@ -34,7 +34,7 @@
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/common.css">
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/board.css">
 <style>
-	.listArea{width: 600px; margin:0 0 100px 100px;}
+	.listArea{width: 600px; margin:0 0 10px 100px;}
 	.tableArea tr { width: -webkit-fill-available;}
 	.tableArea td {/* 게시판제목라인 */
 		padding:20px 0;
