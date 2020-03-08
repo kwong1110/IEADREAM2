@@ -310,7 +310,6 @@ public class UserService {
 			int drink = random.nextInt(4);
 			int smoke = random.nextInt(2);
 			
-			
 			ui.setUserNo(userNo);
 			ui.setHello(hello);
 			ui.setHeight(height);
@@ -325,7 +324,6 @@ public class UserService {
 			ui.setInterest(interest);
 			
 			uiDAO.insertUserInfo(conn, ui);
-			uiDAO.deleteInterest(conn, ui);
 			uiDAO.insertInterest(conn, ui);
 			
 			String savePath ="/images/common/heart.png";
@@ -363,7 +361,6 @@ public class UserService {
 			}
 			int stylePri = random.nextInt(2);
 			
-
 			int tage = -2+ random.nextInt(5);
 			int agePri = random.nextInt(2);
 			

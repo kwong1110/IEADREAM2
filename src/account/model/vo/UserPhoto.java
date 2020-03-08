@@ -1,8 +1,8 @@
 package account.model.vo;
 
 public class UserPhoto {
-	private int userNo; // 게시물 번호(한 게시물에 사잔이 여러개일 경우 중복 번호가 있을 수 있음)
-	private int photoNo; // 사진 번호
+	private int userNo;
+	private int photoNo;
 	private String originName;
 	private String changeName;
 	private String filePath;
