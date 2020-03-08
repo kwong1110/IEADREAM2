@@ -16,6 +16,7 @@ import="idealType.model.service.*"
 <!doctype html>
 <html>
 <head>
+<link rel="stylesheet" href="<%= request.getContextPath() %>/css/common.css">
   <title>이상형의 이상형</title>
   <meta charset="utf-8">
   <style>

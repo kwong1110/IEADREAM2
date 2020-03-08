@@ -14,6 +14,7 @@ import="idealType.model.service.*"
 <!doctype html>
 <html>
 <head>
+<link rel="stylesheet" href="<%= request.getContextPath() %>/css/common.css">
   <title>선호도 통계</title>
   <meta charset="utf-8">
   <style>
