@@ -146,6 +146,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" href="<%= request.getContextPath() %>/css/common.css">
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>

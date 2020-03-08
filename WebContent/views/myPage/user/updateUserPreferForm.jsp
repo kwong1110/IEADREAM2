@@ -232,6 +232,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
+<link rel="stylesheet" href="<%= request.getContextPath() %>/css/common.css">
 <body>
 	<%@ include file="../../common/mainmenu.jsp" %>
 
@@ -324,7 +325,7 @@
 						<label><input type="radio" name="religion" value="무교" <%=rel4%>>무교</label>
 						<label><input type="radio" name="religion" value="기타" <%=rel5%>>기타</label>
 					</td>
-				`	<td>
+					<td>
 	                    <select class="itemPriority" name="smokePri">
 	                      <option value="2" <%= relp1%>>중요</option>
 	                      <option value="1" <%= relp2%>>보통</option>
@@ -346,7 +347,6 @@
                       <option value="2" <%= dp1%>>중요</option>
                       <option value="1" <%= dp2%>>보통</option>
                       <option value="0" <%= dp3%>>무관</option>
-                    </select>
                     </select>
                   </td>
                 </tr>
@@ -385,7 +385,7 @@
                   </td>
                 </tr>
                 <tr class="itemBox">
-                  	<td class="itemName" id="">최종 학력</td class="itemName" id="">
+                  	<td class="itemName" id="">최종 학력</td>
                   	<td>
 						<label><input type="radio" name="scholar" value="0" <%= sc1 %>>고졸</label>
 						<label><input type="radio" name="scholar" value="2" <%= sc2 %>>초대졸</label>
