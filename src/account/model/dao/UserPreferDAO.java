@@ -35,7 +35,7 @@ public class UserPreferDAO {
 		PreparedStatement pstmt = null; 
 		ResultSet rs = null;
 		UserPrefer up = new UserPrefer();
-		String query = prop.getProperty("selectUserPreference");
+		String query = prop.getProperty("selectUserPrefer");
 		
 		try {
 			  pstmt = conn.prepareStatement(query);
@@ -75,7 +75,7 @@ public class UserPreferDAO {
 	
 	public int insertUserPrefer(Connection conn, UserPrefer up) {
 		PreparedStatement pstmt = null;
-		String query = prop.getProperty("insertUserPreference");
+		String query = prop.getProperty("insertUserPrefer");
 		int result= 0;
 		try {
 			pstmt = conn.prepareStatement(query);
@@ -114,7 +114,7 @@ public class UserPreferDAO {
 
 	public int updateUserPrefer(Connection conn, UserPrefer up) {
 		PreparedStatement pstmt = null;
-		String query = prop.getProperty("updateUserPreference");
+		String query = prop.getProperty("updateUserPrefer");
 		int result= 0;
 		try {
 			pstmt = conn.prepareStatement(query);

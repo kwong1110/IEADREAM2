@@ -314,7 +314,7 @@ public class UserInfoDAO {
 	public int[] searchUserNoList(Connection conn, String gender) {
 		PreparedStatement pstmt = null; 
 		ResultSet rs = null;
-		String query = prop.getProperty("selectInterest");
+		String query = prop.getProperty("searchUserNoList");
 		ArrayList<Integer> list = new ArrayList<Integer>();
 		
 		try {
