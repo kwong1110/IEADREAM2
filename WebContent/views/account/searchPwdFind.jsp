@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	String password = (String)request.getAttribute("password");
+	String mail = (String)request.getAttribute("email");
 %>
 <!DOCTYPE html>
 <html>
@@ -39,7 +39,7 @@
   	
   	<div class="boxingBox" >
   		<br><br><br>
-		회원님의 비밀번호는 <%= password %>입니다.
+		회원님의 이메일(<%= mail %>)로 임시 비밀번호를 전송하였습니다.
 		<!-- userPassword 결과값 출력!! ㅠㅠ  -->						
 	</div>				
 	

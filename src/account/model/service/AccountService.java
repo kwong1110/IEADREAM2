@@ -87,6 +87,19 @@ public class AccountService {
 		return result;
 	}
 
+	public int adminPwdUpdate(String encPwd, String userId) {
+		Connection conn = getConnection();
+		
+		AccountDAO dao = new AccountDAO();
+		
+		int result = dao.adminPwdUpdate(conn, encPwd, userId);
+		
+		if(result > 0) commit(conn);
+		else		   rollback(conn);
+		
+		return result;
+	}
+
 }
 
 
