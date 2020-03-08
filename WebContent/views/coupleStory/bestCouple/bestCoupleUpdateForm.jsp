@@ -51,9 +51,16 @@
 	
 	#subjbox{
 		width: 60%;
-		height: 20px;
+		height: 22px;
 		background: #f9f2f5;
+		border-radius: 5px;
 	}
+	
+	.datebx{
+      width: 180px;
+      height: 22px;
+      border-radius: 5px;
+   }
 	
 	.contn1{
 		width: 95%;
@@ -63,7 +70,7 @@
 	}
 	
 	.contn1box{
-		margin: 1% 0;
+		margin: 1.6% 0;
 	}
 	
 	.contn2{
@@ -81,6 +88,8 @@
 	
 	.bx{
 		width: 65px;
+		height: 20px;
+      	border-radius: 5px;
 	}
 	
 	.file{
@@ -99,7 +108,7 @@
 		/* display:table-cell;
 		vertical-align:middle; */
 		display: inline-block;
-		margin: 0 1.5% 0 3%;
+		margin: 0 1.5% 0 4.5%;
 	}
 	
 	#titlePt{
@@ -165,7 +174,7 @@
 									<div class="label">
 										<label>즐겨하는 데이트 : </label>
 									</div>
-									<input type="text" name="fvDate" maxlength="12" value="<%= fvDate %>">
+									<input type="text" name="fvDate" class="datebx" maxlength="12" value="<%= fvDate %>">
 								</div>
 							</div>
 							
@@ -249,7 +258,7 @@
 						
 						<div class="btnBox">
 							<button type="button" class="defaultBtn" id="updateBtn">완료</button>
-							<button type="reset" class="defaultBtn deleteBtn" onclick="location.href='<%= request.getContextPath() %>/list.bc'">취소</button>
+							<button type="reset" class="defaultBtn cancelBtn" onclick="location.href='<%= request.getContextPath() %>/list.bc'">취소</button>
 						</div>	
 					</form>
 				</div>	
