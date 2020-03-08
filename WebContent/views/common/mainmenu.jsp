@@ -157,6 +157,9 @@
 									<li id="nop">
 										<a href="<%=request.getContextPath()%>/views/myPage/admin/partyManageForm.jsp">파티 관리</a>
 									</li>
+									<li id="nop">
+										<a href="<%=request.getContextPath() %>/insertRandom" >랜덤 회원 추가</a>
+									</li>
 								<% } %>
 							</ul>
 						</li>
