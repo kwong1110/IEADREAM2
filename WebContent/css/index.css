@@ -31,10 +31,12 @@
 	background-size: auto 550px;
 }
 .slideBox:nth-of-type(3){
-	background: lightyellow;
+	background: url('../images/common/main2.jpeg') no-repeat center center;
+	background-size: auto 550px;
 }
 .slideBox:nth-of-type(4){
-	background: lightgreen;
+	background: url('../images/common/main3.jpeg') no-repeat center center;
+	background-size: auto 550px;
 }
 	/* 슬라이드 하단 점 표시 위치 수정  */
 .slick-dots{
