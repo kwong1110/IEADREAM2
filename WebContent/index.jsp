@@ -66,7 +66,7 @@
 					</a>
 				</div>
 				<div class="indexBox">
-					<a class="nologin" href='<%= request.getContextPath() %>/views/account/accountLoginForm.jsp' onclick="question();">
+					<a href='<%= request.getContextPath() %>/views/account/accountLoginForm.jsp' onclick="question();">
 						<img class="image" src="<%= request.getContextPath() %>/images/history.png">
 					</a>
 				</div>
@@ -100,7 +100,6 @@ $(document).ready(function(){
   });
 
 	function question(){
-		console.log('오잉');
 		alert("로그인 후 사용 가능합니다.");
 	}
 	function alert() {

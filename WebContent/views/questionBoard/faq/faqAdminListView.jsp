@@ -67,7 +67,7 @@
 				<div class="topBox" style="text-align: center;">
 					<div class="midBox">
 						<div class="searchMenu">검색어</div>
-							<input placeholder="검색어를 입력하세요!" class="search search2" name="searchCon" id="searchCon" type="text" width="30">
+							<input placeholder="검색할 내용을 입력하세요!" class="search search2" name="searchCon" id="searchCon" type="text" width="30">
 							<button class="defaultBtn searchBtn" id="searchBtn" onclick="search();">검색</button>
 					</div>
 				</div>

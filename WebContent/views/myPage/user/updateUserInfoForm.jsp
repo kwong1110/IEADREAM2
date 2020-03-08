@@ -151,17 +151,19 @@
 <title>내 정보 입력</title>
 <style>
 	.tableArea th {/* 게시판제목라인 */
-		padding:12px 0;
-		color:rgb(230, 141, 150); font-size:20px;/* 제목글자크기 */ 
-		letter-spacing:0.1em;
-		padding: 5px;
-		text-align: left;}/* 제목띠어쓰기간격 */ 
-	.tableArea td {/* 게시판제목라인 */
-		padding:12px 0;
-		border-top:1px solid rgb(224, 224, 224); /* 상단라인색 */
-		color:rgb(136, 136, 136); font-size:1em;/* 제목글자크기 */ 
-		letter-spacing:0.1em;
-		line-height: 30px;}/* 제목띠어쓰기간격 */ 
+      padding:12px 0;
+      color:rgb(230, 141, 150); font-size:20px;/* 제목글자크기 */ 
+      letter-spacing:0.1em;
+      padding: 5px;
+      padding-right: 50px;
+      text-align: left;}/* 제목띠어쓰기간격 */ 
+   .tableArea td {/* 게시판제목라인 */
+      padding:12px 0;
+      border-top:1px solid rgb(224, 224, 224); /* 상단라인색 */
+      color:rgb(136, 136, 136); font-size:1em;/* 제목글자크기 */ 
+      letter-spacing:0.1em;
+      line-height: 30px;}/* 제목띠어쓰기간격 */ 
+   .tableArea{margin-top: 40px; margin-bottom: 40px;}
 </style>
 </head>
 <body>
@@ -333,7 +335,7 @@
 								</tr>
 							</table>
 						</section>
-						<section id="submit" style="text-align: center;">
+						<section id="submit" style="text-align: center; padding: 30px;">
 							<input class="defaultBtn" type="submit" value="수정">
 						</section>
 					</form>
