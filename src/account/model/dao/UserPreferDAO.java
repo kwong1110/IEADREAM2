@@ -41,6 +41,7 @@ public class UserPreferDAO {
 			  pstmt = conn.prepareStatement(query);
 			  pstmt.setInt(1, userNo);
 			  rs = pstmt.executeQuery();
+			  rs.next();
 			  	up.setUserNo(userNo);
 				up.setHeight(rs.getInt("HEIGHT"));
 				up.setHeightPri(rs.getInt("HEIGHT_PRI"));

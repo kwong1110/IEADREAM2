@@ -43,6 +43,7 @@ public class UserInfoDAO {
 		try	{
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, userNo);
+			rs.next();
 			rs = pstmt.executeQuery();
 				ac.setUserNo(userNo);
 				ac.setGrade(rs.getInt("GRADE"));
@@ -69,6 +70,7 @@ public class UserInfoDAO {
 		try	{
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, userId);
+			rs.next();
 			rs = pstmt.executeQuery();
 				userNo = (rs.getInt("USER_NO"));
 		}catch(Exception e) { 
@@ -92,6 +94,7 @@ public class UserInfoDAO {
 			  pstmt = conn.prepareStatement(query);
 			  pstmt.setInt(1, userNo);
 			  rs = pstmt.executeQuery();
+			  rs.next();
 			  	ui.setUserNo(userNo);
 			  	ui.setHello(rs.getString("HELLO"));
 				ui.setHeight(rs.getInt("HEIGHT"));
