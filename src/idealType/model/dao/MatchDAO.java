@@ -71,7 +71,8 @@ public class MatchDAO {
 			close(pstmt);
 		}
 		return result;
-	}	
+	}
+	
 	
 	public Match[] selectMatchList(Connection conn, int userNo) {
 		PreparedStatement pstmt = null; 

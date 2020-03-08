@@ -19,6 +19,8 @@
 	}
 	String[] nameArr = checkName.split(",");
 	String[] noArr = checkNo.split(",");
+	
+	String loginNo = request.getParameter("loginNo");
 %>
 <!DOCTYPE html>
 <html>
@@ -30,7 +32,7 @@
 </head>
 <body onload='resizeWindow(this)'>
 	<div class="popMain" id="mainBox">
-		<form action="<%= request.getContextPath() %>/????????" method="get">
+		<form action="<%= request.getContextPath() %>/delete.hh" method="get">
 			<table class="popTable">
 				<thead>
 					<tr>
@@ -46,6 +48,7 @@
 						
 						<td style="display:none;"><input type="hidden" name="inOut" value="<%= nameArr[i] %>"></td>
 						<td style="display:none;"><input type="hidden" name="userNo" value="<%= noArr[i] %>"></td>
+						<td style="display:none;"><input type="hidden" name="loginNo" value="<%= loginNo %>"></td>
 					</tr>
 				<% } %>
 				</tbody>

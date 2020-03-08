@@ -10,7 +10,7 @@
 
 <script type="text/javascript" src="<%= request.getContextPath() %>/js/jquery-3.4.1.min.js"></script>
 <style>
-    #CEO_pic{margin: 10px; width: 400px; height: 300px; border-radius: 20px;}
+    #CEO_pic{margin: 8px; width: 300px; height: 300px; border-radius: 20px; background-size: contain;}
     .outer{
       width: 1000px; height: 100%; background: white;
       margin-left: auto; margin-right: auto; margin-top: 50px; margin-bottom: 50px;}
@@ -37,7 +37,7 @@
 					<table class="tableArea">
 						<tr>
 							<td>
-							<div class="article"><img id="CEO_pic" src="<%= request.getContextPath() %>/images/common/logo1.png"></div>
+							<div class="article"><img id="CEO_pic" src="<%= request.getContextPath() %>/images/common/CEO.PNG"></div>
 							</td>
 							<th style="width: 100px;">프로필</th>
 							<td style="width: 400px; vertical-align: top;">
