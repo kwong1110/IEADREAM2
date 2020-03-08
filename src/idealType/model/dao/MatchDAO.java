@@ -88,7 +88,7 @@ public class MatchDAO {
 					m.setUserNo(rs.getInt("USER_NO"));
 					m.setUserNo(rs.getInt("TARGET_NO"));
 					m.setStatus(rs.getString("STATUS"));
-					m.setMatchDate(rs.getDate("DATE"));
+					m.setMatchDate(rs.getDate("MATCH_DATE"));
 					m.setSync(rs.getDouble("SYNC"));
 			  }
 		  } catch (SQLException e) { 
