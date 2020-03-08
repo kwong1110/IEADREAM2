@@ -44,11 +44,12 @@
 					</div>
 				<% } else { /* 등급이 준회원일 경우 */ %>
 					<div class="indexBox">
-						<a href='<%= request.getContextPath() %>/views/account/accountLoginForm.jsp' onclick="alert();">
+						<a href='<%= request.getContextPath() %>/index.jsp' onclick="alert();">
 							<img class="image" src="<%= request.getContextPath() %>/images/history.png">
 						</a>
 					</div>
 				<% } %>
+				
 				<div class="indexBox">
 					<a href="<%=request.getContextPath()%>/views/myPage/user/memberGradeUpForm.jsp">
 						<img class="image" src="<%= request.getContextPath() %>/images/upGrade.png">
