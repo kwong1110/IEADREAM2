@@ -44,7 +44,7 @@
 							</tr>
 						</table>
 						<div class="btnBox">
-							<button class="defaultBtn" id="ok" onclick="check();" type="submit">탈퇴</button>
+							<button  class="defaultBtn cancelBtn" id="ok" onclick="check();" type="submit">탈퇴</button>
 						</div>
 					</form>
 				</div>

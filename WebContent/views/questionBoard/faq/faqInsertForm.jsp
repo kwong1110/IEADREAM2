@@ -93,7 +93,7 @@
 						<br>
 						<div class="btnBox" style="display: relative;">
 							<button type="submit" id="insertFaqBtn" class="defaultBtn">등록</button>
-							<button type="button" onclick="location.href='javascript:history.go(-1);'" class="defaultBtn" id="cancelBtn">취소</button>
+							<button type="button" onclick="location.href='javascript:history.go(-1);'" class="defaultBtn cancelBtn" id="cancelBtn">취소</button>
 						</div>
 					</form>
 				</div>
