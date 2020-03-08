@@ -48,9 +48,10 @@ public class fillMatchListServlet extends HttpServlet {
 			if (oldMlist[i].getStatus().equals("D")) { // 대기중인 매칭 수 구하기
 				stack++;
 			}
-			if (oldMlist[i].getStatus().equals("C") && date.format(oldMlist[i].getMatchDate()).equals(date.format(today))) { // 확인한 매칭 중 오늘 생성된 매칭 수 구하기
+			else if(date.format(oldMlist[i].getMatchDate()).equals(date.format(today))) { // 확인한 매칭 중 오늘 생성된 매칭 수 구하기
 				stack++;
 			}
+			
 		}
 		Match[] newMlist = ms.searchMatchList(userNo); // 빈 공간 채워넣기
 		for (int i = 0; stack+i < 5 ; i++) {

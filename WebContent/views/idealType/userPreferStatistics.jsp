@@ -117,7 +117,8 @@ import="idealType.model.service.*"
     }
   </style>
 </head>
-<body style="height:100%; margin:0 auto;">
+<body>
+	<%@ include file="../common/mainmenu.jsp" %>
   <div class ="outer">
     <div class="wrapper">
       <div class ="main">
@@ -269,5 +270,6 @@ import="idealType.model.service.*"
     </div>
   </div>
 
+<%@ include file="../common/footer.jsp" %>
 </body>
 </html>

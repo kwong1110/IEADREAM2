@@ -14,12 +14,15 @@ import="idealType.model.service.*"
 
 	Account ac = (Account)request.getAttribute("ac");
 	UserInfo ui = (UserInfo)request.getAttribute("ui");	
-	int sync = (int)request.getAttribute("sync");
 	String photoPath = (String)request.getAttribute("pPath");
-	int matchNo = (int)request.getAttribute("matchNO");
+	
+	int sync = (int)request.getAttribute("sync");
+	int matchNo = (int)request.getAttribute("matchNo");
 	String min = null; String max = null;
 	if (matchNo == 0){min="hidden";}
 	if (matchNo == 5){max="hidden";}
+	
+	int maxMatchNo = (int)request.getAttribute("maxMatchNo");
 	
 	String name = ac.getUserName();
 	String hello = ui.getHello();
@@ -225,7 +228,8 @@ import="idealType.model.service.*"
     }
   </style>
 </head>
-<body style="height:100%; margin:0 auto;">
+<body>
+	<%@ include file="../common/mainmenu.jsp" %>
   <div class ="outer">
     <div class="wrapper">
       <div class="main">
@@ -241,7 +245,7 @@ import="idealType.model.service.*"
             </div>
           </article>
           <article id="listNo" style="margin-left: 30%;">
-            <h3><%= matchNo %> / 5</h3>
+            <h3><%= matchNo %> / <%= maxMatchNo %></h3>
           </article>
         </section>
         <section id="itemProfile" style="display: flex;">
@@ -352,20 +356,7 @@ import="idealType.model.service.*"
     </div>
   </div>
 
-  <footer>
-    <div class="wrapper" style="display:inline-block;">
-      <div style="float:left; margin:20px;">
-        <img src="logo.png" width="100px" height="80px">
-      </div>
-      <div style="margin:5px;">
-        <p> 
-          대표이사 박소현 | 사업자 111-11-111111 | TEL 02)0202-0202<br>
-          본사 | 서울 특별시 연애하구 사랑동 행복로 잘되길 12-3<br>
-          E-MAIL love_manager@naver.com<br>
-          Copyright c 1998-2019 Couple Matching Service 
-        </p>
-      </div>
-    </div>      
-  </footer>
+
+<%@ include file="../common/footer.jsp" %>
 </body>
 </html>

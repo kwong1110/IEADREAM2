@@ -1,7 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="account.model.vo.*"%>
 <%
+
+	request.setCharacterEncoding("utf-8");
 	UserInfo ui = (UserInfo)request.getAttribute("ui");
+	String photoPath = (String)request.getAttribute("pPath");
 
 	int userNo = ui.getUserNo();
 	
@@ -159,7 +162,7 @@
 					<form action="<%= request.getContextPath() %>/update.ui" method="post" enctype="multipart/form-data">
 						 <section id="itemProfile" style="display:flex">
 			             	<article style="width: 400px; height: 250px;" >
-								<img src="" id='output' width="250" height="250"><br>
+								<img src="photoPath" id='output' width="250" height="250"><br>
 			              		<input type='file' accept='image/*' onchange='openFile(event)' id="imgInput" name="profileImg">
 			              	</article>
 			              	<article id="hello" style="text-align:center; margin-left:30px;">
