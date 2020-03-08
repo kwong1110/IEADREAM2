@@ -175,7 +175,7 @@ pageEncoding="UTF-8" import="account.model.vo.*"%>
                   </td>
                 </tr>
                 <tr class="itemBox">
-                  <td class="itemName" id="">체형</tdclass="itemName" id="">
+                  <td class="itemName" id="">체형</td>
                   <td>
                     <label><input type="radio" name="shape" value="마름">마름</label>
                     <label><input type="radio" name="shape" value="보통">보통</label>

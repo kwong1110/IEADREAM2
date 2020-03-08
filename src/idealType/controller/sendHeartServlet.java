@@ -1,7 +1,7 @@
 package idealType.controller;
 
 import java.io.IOException;
-import java.util.Date;
+import java.sql.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -35,7 +35,7 @@ public class sendHeartServlet extends HttpServlet {
 
 		int userNo = ((Account)request.getSession().getAttribute("loginUser")).getUserNo();
 		int matchNo = (int)request.getAttribute("matchNo");
-		Date date = new Date();
+		Date date = new Date(System.currentTimeMillis());
 
 		MatchService ms = new MatchService();
 		Match m = ms.getMatchList(userNo)[matchNo];
