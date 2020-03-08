@@ -83,6 +83,7 @@
 										<th>상태</th>
 										<th>데이트 장소 추천</th>
 										<th>남은 기간</th>
+										<th><input type="hidden" name="userNo" value="<%= loginUser.getUserNo() %>"></th>
 									</tr>
 								</thead>
 								<tbody>
@@ -206,7 +207,7 @@ function deleteHeart(){
 		var popLeft = Math.ceil(( window.screen.width - 400 )/2);
 		var popTop = Math.ceil(( window.screen.height - 500 )/2);
 		
-		window.open("views/myPage/user/heartDeleteForm.jsp?checkList="+checkList, "deleteBoard", "width=400, height=500, "+ ", left=" + popLeft + ", top="+ popTop);	
+		window.open("views/myPage/user/heartDeleteForm.jsp?checkList="+checkList+"&loginNo="+<%= loginUser.getUserNo() %>, "deleteBoard", "width=400, height=500, "+ ", left=" + popLeft + ", top="+ popTop);	
 	};
 }
 </script>

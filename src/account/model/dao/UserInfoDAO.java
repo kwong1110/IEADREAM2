@@ -43,8 +43,8 @@ public class UserInfoDAO {
 		try	{
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, userNo);
-			rs.next();
 			rs = pstmt.executeQuery();
+			if(rs.next()) {
 				ac.setUserNo(userNo);
 				ac.setGrade(rs.getInt("GRADE"));
 				ac.setId(rs.getString("ID"));
@@ -53,6 +53,7 @@ public class UserInfoDAO {
 				ac.setPhone(rs.getString("PHONE"));
 				ac.setEmail(rs.getString("EMAIL"));
 				ac.setBirth(rs.getDate("BIRTH"));
+			}
 		}catch(Exception e) { 
 			e.printStackTrace();
 		}finally {
@@ -94,7 +95,7 @@ public class UserInfoDAO {
 			  pstmt = conn.prepareStatement(query);
 			  pstmt.setInt(1, userNo);
 			  rs = pstmt.executeQuery();
-			  rs.next();
+			  if(rs.next()) {
 			  	ui.setUserNo(userNo);
 			  	ui.setHello(rs.getString("HELLO"));
 				ui.setHeight(rs.getInt("HEIGHT"));
@@ -106,6 +107,7 @@ public class UserInfoDAO {
 				ui.setJob(rs.getString("JOB"));
 				ui.setDrink(rs.getInt("DRINK"));
 				ui.setSmoke(rs.getInt("SMOKE"));
+			  }
 		  } catch (SQLException e) { 
 			  e.printStackTrace(); 
 		  } finally {
@@ -321,7 +323,7 @@ public class UserInfoDAO {
 			  
 			  rs = pstmt.executeQuery();
 			  while(rs.next()) {
-				  list.add(rs.getInt("USER_NO"));
+				  list.add(rs.getInt("INTEREST"));
 			  }
 		  } catch (SQLException e) {
 			  e.printStackTrace(); 
