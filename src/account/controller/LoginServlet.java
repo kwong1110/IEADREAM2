@@ -54,7 +54,7 @@ public class LoginServlet extends HttpServlet {
 				view.forward(request, response);
 			}else {
 				HttpSession session = request.getSession();
-				session.setMaxInactiveInterval(6000); // 로그인에 대한  시간을 설정해주는 것이다 . -> 10분(60 * 10) 
+				session.setMaxInactiveInterval(600); // 로그인에 대한  시간을 설정해주는 것이다 . -> 10분(60 * 10) 
 				session.setAttribute("loginUser", loginUser);
 
 				
