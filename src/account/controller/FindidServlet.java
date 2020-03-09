@@ -40,11 +40,11 @@ public class FindidServlet extends HttpServlet {
 			
 			String page = null;
 			if(a != null) {
-				page = "views/account/searchidFind.jsp";
+				page = "views/account/searchIdFind.jsp";
 				request.setAttribute("a", a);
 			} else {
-				page = "views/common/errorPage.jsp";
-				request.setAttribute("msg", "아이디 찾기에 실패하였습니다.");
+				page = "views/common/searchFailid.jsp";
+				
 			}
 			
 			request.getRequestDispatcher(page).forward(request, response);

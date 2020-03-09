@@ -101,6 +101,7 @@
 										<input type="hidden" value="<%= loginUser.getUserNo()%>" name="userNo">
 										<input type="hidden" value="<%= b.getCategory() %>" name="category">
 									</td>
+									<th> </th>
 								</tr>
 							</thead>
 							<tbody>

@@ -77,8 +77,8 @@ public class FindpwdServlet extends HttpServlet {
 				imsiPw += alphaNum.get(random);
 			}
 			
-			final String sender = "pow2345@naver.com"; // 보내는 사람 ID (Ex: @naver.com 까지..)
-			final String senderPassword = "tmddnrjekd1@"; // 보내는 사람 Password
+			final String sender = "pow2345@naver.com"; // 보내는 사람 ID (test할때  본인 아이디 이메일)
+			final String senderPassword = "tmddnrjekd!@"; // 보내는 사람 Password (test할때 실제 비밀번호 작성할것)
 
 			String host = "smtp.naver.com"; // 사용하는 메일
 
@@ -140,21 +140,18 @@ public class FindpwdServlet extends HttpServlet {
 				System.out.println("비밀번호 찾기 완료!!");
 				request.setAttribute("email", email);
 			} else {
-				page = "views/common/errorPage.jsp";
-				request.setAttribute("msg", "비밀번호 찾기에 실패하셨습니다.");
+				page = "views/common/searchFailpwd.jsp";
+			
 			}
 			
 		}else {
-			page = "views/common/errorPage.jsp";
-			request.setAttribute("msg", "비밀번호 찾기에 실패하셨습니다.");
+			page = "views/common/searchFailpwd.jsp";
+		
 		}
 		
 		request.getRequestDispatcher(page).forward(request, response);
 		
 	}
-		
-
-	
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */

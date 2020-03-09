@@ -153,10 +153,10 @@ public class MatchService {
 		
 		if (ti.getHeight() == up.getHeight()) 	{syncPoint += up.getHeightPri();}
 		else {double v = Math.abs((ti.getHeight() - up.getHeight())/5); syncPoint += (1-v)*up.getHeightPri();}
-		System.out.println(ti.getHeight() + " " + ti.getShape() + " " + up.getShape() + " " + up.getShapePri());
+		System.out.println(ti.getHeight() + " / " + ti.getShape() + " / " + up.getShape() + " / " + up.getShapePri());
 
+		System.out.println("타겟 스타일 : " + ti.getStyle() + "본인 선호 : " + up.getStyle() + "본인 선호도(pri) : " + up.getStylePri());
 		if (ti.getStyle().equals(up.getStyle())) 	{syncPoint += up.getStylePri();}
-		
 		int d = ti.getAge() - ui.getAge();
 		int ad = 0;
 		if (d > 3) {ad = 2;}
