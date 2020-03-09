@@ -61,8 +61,8 @@
 								</tr>
 								<tr>
 									<td>이름</td>
-									<td><input type="text" placeholder="이름을 입력해주세요" 
-										class="profile" name="user_name" id="user_name" required value="<%= name %>">
+									<td><input type="text" 
+										class="profile" name="user_name" id="user_name" readonly value="<%= name %>">
 									</td>
 									<td><input style="border: none;" type="text" name="nameResult" id="nameResult" readonly></td>
 								</tr>
