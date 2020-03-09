@@ -57,7 +57,7 @@
 		           		            
 			            <div>
 			            <button type="submit" class="defaultBtn loginBtn">로그인</button> 
-			            </div>
+			            </div> 
 			            
 			            <br>
 			            

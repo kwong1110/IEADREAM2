@@ -40,7 +40,7 @@ public class FindidServlet extends HttpServlet {
 			
 			String page = null;
 			if(a != null) {
-				page = "views/account/searchidFind.jsp";
+				page = "views/account/searchIdFind.jsp";
 				request.setAttribute("a", a);
 			} else {
 				page = "views/common/searchFailid.jsp";

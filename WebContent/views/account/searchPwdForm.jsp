@@ -52,37 +52,34 @@
 		<br><br>
 	</div>
 	
-	<form action="<%= request.getContextPath() %>/Findpwd.me" method="post">
+	<form action="<%= request.getContextPath() %>/Findpwd.me" onsubmit="return passworddate();" method="post">
 		<div class = "textbox">
-			<br><br>
 	  		<h3>▶아이디</h3><input style="text-align: center;"  type="text" class="inputBox" name="userId" id="findid" placeholder="아이디를 입력해주세요" >	
-	 		<h3>▶이메일</h3><input style="text-align: center;"  type="text" class="inputBox" name="email" id="Inputemail" placeholder="이메일를 입력해주세요" >
+	 		<h3>▶이메일</h3><input style="text-align: center;"  type="text" class="inputBox" name="email" id="Inputemail" placeholder="이메일를 입력해주세요">
 		</div>
 		<div class="btnBox">
 			<button type="submit" class="defaultBtn" id="btnfindid">비밀번호 찾기</button>
 		</div>
 	</form>
 	<script>
-	$(window).load(function(){
-		$("#btnfindpwd").click(btnfindpwd);	
-	});
-	
-	
-	function btnfindpwd(event){
-		var id = $("#findid");
-		if(id.val()==""){
-			alert("아이디를 입력하세요");
-			return;
+	function passworddate(){
+		if($('#findid').val().trim().length == 0){
+			alert('아이디를 입력해주세요.');
+			$('#findid').focus();
+			
+			return false;
+		}
 		
+		if($('#Inputemail').val().trim().length == 0){
+			alert('이메일을 입력해주세요');
+			$('#Inputemail').focus();
+			
+			return false;
 		}
-
-	var name = $("#email");
-	if(name.val() == ""){
-		alert("이메일 입력하세요");
-		return;
-
-		}
+		
+		return true;
 	}
+	
 	</script>
 </body>
 </html>

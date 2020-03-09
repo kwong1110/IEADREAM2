@@ -77,8 +77,8 @@ public class FindpwdServlet extends HttpServlet {
 				imsiPw += alphaNum.get(random);
 			}
 			
-			final String sender = "pow2345@naver.com"; // 보내는 사람 ID (Ex: @naver.com 까지..)
-			final String senderPassword = "tmddnrjekd1@"; // 보내는 사람 Password
+			final String sender = "pow2345@naver.com"; // 보내는 사람 ID (test할때  본인 아이디 이메일)
+			final String senderPassword = "tmddnrjekd!@"; // 보내는 사람 Password (test할때 실제 비밀번호 작성할것)
 
 			String host = "smtp.naver.com"; // 사용하는 메일
 
