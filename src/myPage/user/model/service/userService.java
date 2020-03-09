@@ -94,4 +94,18 @@ public class userService {
 		return result;
 	}
 
+	public int deleteHeart(String[] userNo, String[] targetNo) {
+		Connection conn = getConnection();
+		userDAO uDAO = new userDAO();
+		int result = uDAO.deleteHeart(conn, userNo, targetNo);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		return result;
+	}
+
 }

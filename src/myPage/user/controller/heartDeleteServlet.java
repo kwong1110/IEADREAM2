@@ -30,18 +30,25 @@ public class heartDeleteServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String[] userNo = request.getParameterValues("userNo");
-		String[] inOut = request.getParameterValues("inOut");
+		String[] targetNo = request.getParameterValues("targetNo");
 		String loginNo = request.getParameter("loginNo");
 		
-		for(int i=0; i < userNo.length; i++) {
+		
+		for(int i = 0; i < userNo.length; i++) {
+			if(targetNo[i].equals("나")){
+				targetNo[i] = loginNo;
+			} else if (userNo[i].equals("나")){
+				userNo[i] = loginNo;
+			}
+		}
+
+		for(int i = 0; i < userNo.length; i++) {
 			System.out.println("userNo " + userNo[i]);
-			System.out.println("inOut " + inOut[i]);
+			System.out.println("targetNo " + targetNo[i]);
 			System.out.println(loginNo);
 		}
 		
-		// int result = new userService().deleteHeart(userNo);
-
-		int result = 0;
+		int result = new userService().deleteHeart(userNo, targetNo);
 		
 		String page = null;
 		if(result > 0) {
@@ -49,7 +56,7 @@ public class heartDeleteServlet extends HttpServlet {
 			request.setAttribute("msg", "총 "+ userNo.length + "개의 하트를 삭제 하였습니다.");
 		} else {
 			page = "views/common/errorPage.jsp";
-			request.setAttribute("msg", "게시글 삭제에 실패하였습니다.");
+			request.setAttribute("msg", "하트 삭제에 실패하였습니다.");
 		}
 		
 		RequestDispatcher view = request.getRequestDispatcher(page);
