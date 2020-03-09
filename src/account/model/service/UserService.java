@@ -35,6 +35,7 @@ public class UserService {
 		Connection conn = getConnection();
 		UserInfoDAO uiDAO = new UserInfoDAO();
 		UserInfo result = uiDAO.selectUserInfo(conn, userNo);
+		String[] interest = uiDAO.selectInterest(conn, userNo);
 		
 		Date b = uiDAO.selectAccount(conn, userNo).getBirth();
 		Calendar birth = Calendar.getInstance();
@@ -53,6 +54,8 @@ public class UserService {
 		if (birthMonth * 100 + birthDay > currentMonth * 100 + currentDay) { age--;}
 
 		result.setAge(age);
+		
+		result.setInterest(interest);
 		
 		return result;
 	}
@@ -86,21 +89,15 @@ public class UserService {
 		return result;
 	}
 	
-	public ArrayList<UserPhoto> selectUserPhotoList(int userNo) {
-		Connection conn = getConnection();
-		UserInfoDAO uiDAO = new UserInfoDAO();
-		ArrayList<UserPhoto> result = uiDAO.selectUserPhoto(conn, userNo);
-		return result;
-	}
 	
 	public UserPhoto selectUserPhoto(int userNo) {
 		Connection conn = getConnection();
 		UserInfoDAO uiDAO = new UserInfoDAO();
-		ArrayList<UserPhoto> plist = uiDAO.selectUserPhoto(conn, userNo);
-
-		UserPhoto photo = plist.get(0);
+		UserPhoto photo = uiDAO.selectUserPhoto(conn, userNo);
 		return photo;
+	
 	}
+	
 	public int insertPhoto(UserPhoto p) {
 		Connection conn = getConnection();
 		UserInfoDAO uiDAO = new UserInfoDAO();
