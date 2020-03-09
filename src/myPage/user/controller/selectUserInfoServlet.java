@@ -47,12 +47,13 @@ public class selectUserInfoServlet extends HttpServlet {
 		
 		String page = null;
 		if(ui != null) {
-			page = "views/myPage/user/updateUserInfo.jsp";
+			page = "views/myPage/user/updateUserInfoForm.jsp";
 			request.setAttribute("ui", ui);
 			request.setAttribute("pPath", pPath);
 		} else {
-			page = "views/common/errorPage.jsp";
-			request.setAttribute("msg", "내 정보 불러오기에 실패했습니다.");
+			page = "views/account/joinUserInfoForm.jsp";
+			request.setAttribute("ui", ui);
+			request.setAttribute("pPath", pPath);
 		}
 		RequestDispatcher view = request.getRequestDispatcher(page);
 		view.forward(request, response);
