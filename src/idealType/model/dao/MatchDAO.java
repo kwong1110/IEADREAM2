@@ -91,6 +91,7 @@ public class MatchDAO {
 					m.setStatus(rs.getString("STATUS"));
 					m.setMatchDate(rs.getDate("MATCH_DATE"));
 					m.setSync(rs.getDouble("SYNC"));
+				list.add(m);
 			  }
 		  } catch (SQLException e) { 
 			  e.printStackTrace(); 
