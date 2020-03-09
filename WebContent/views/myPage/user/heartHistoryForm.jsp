@@ -107,7 +107,7 @@
 											} 
 									%>
 									<tr>
-										<td><input type="checkbox" id="all" name="checkselect" value="<%= m.getTargetNo() %>,<%= inOut %>" onclick="checkDetail();"></td>
+										<td><input type="checkbox" id="all" name="checkselect" value="<%= m.getTargetNo() %>,<%= m.getUserNo() %>" onclick="checkDetail();"></td>
 										<% if(inOut.equals("수신")){ %>
 										<td class="reception"></td>
 										<% } else { %>
