@@ -213,11 +213,10 @@ public class UserInfoDAO {
 			for(int i = 0; i < ui.getInterest().length; i++) {
 				pstmt.setInt(1, ui.getUserNo());
 				pstmt.setString(2, ui.getInterest()[i]);
-				pstmt.addBatch();
-				pstmt.clearParameters();
+				int r = pstmt.executeUpdate();
+				if (r < 0 ) { result  = -1;}
 			}
-			pstmt.executeBatch();
-
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

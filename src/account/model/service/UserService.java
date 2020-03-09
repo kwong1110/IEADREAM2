@@ -69,7 +69,7 @@ public class UserService {
 			rollback(conn);
 		}
 		close(conn);
-		return result;
+		return result + result2;
 	}
 
 	public int updateUserInfo(UserInfo ui) {
