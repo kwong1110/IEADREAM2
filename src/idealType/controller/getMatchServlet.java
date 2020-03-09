@@ -42,17 +42,15 @@ public class getMatchServlet extends HttpServlet {
 		if (request.getAttribute("matchNo") != null) {matchNo = (int)request.getAttribute("matchNo");}
 		
 		Match[] mlist = ms.getUncheckedMatchList(userNo);
+		Match m = mlist[matchNo];
 		
-		int targetNo = mlist[matchNo].getTargetNo();
-		int sync = (int)Math.round(100*mlist[matchNo].getSync());
+		int targetNo = m.getTargetNo();
+		int sync = (int)Math.round(100*m.getSync());
 		String pPath = us.selectUserPhoto(targetNo).getFilePath();
 		
 		Account ac = us.selectAccount(targetNo);
 		UserInfo ui = us.selectUserInfo(targetNo);
 		
-		Match m = new Match();
-		m.setUserNo(userNo);
-		m.setTargetNo(targetNo);
 		m.setStatus("C");
 		ms.updateMatch(m);
 		

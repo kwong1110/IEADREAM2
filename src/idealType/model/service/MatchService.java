@@ -2,16 +2,12 @@ package idealType.model.service;
 
 import static common.JDBCTemplate.*;
 
-import java.lang.reflect.Array;
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
 
 import account.model.dao.UserInfoDAO;
 import account.model.dao.UserPreferDAO;
-import account.model.service.AccountService;
 import account.model.vo.Account;
 import account.model.vo.UserInfo;
 import account.model.vo.UserPrefer;
@@ -35,16 +31,20 @@ public class MatchService {
 		Match[] mlist = mDAO.selectMatchList(conn, userNo);
 		
 		ArrayList<Match> ulist = new ArrayList<Match>();
+		
 		for (int i=0; i<mlist.length; i++) {
 			if (mlist[i].getStatus().equals("D") || mlist[i].getStatus().equals("C")){
 				ulist.add(mlist[i]);
 			}
 		}
+		
 		Match[] result = new Match[ulist.size()];
 		for (int i=0; i<ulist.size() ;i++) {
 			mlist[i] = ulist.get(i);
 		}
 		Arrays.sort(result);
+		System.out.println(result[0].getUserNo());
+		System.out.println(result[0].getTargetNo());
 		return result;
 	}
 
@@ -85,6 +85,7 @@ public class MatchService {
 		UserPreferDAO upDAO = new UserPreferDAO();
 		
 		UserInfo ui = uiDAO.selectUserInfo(conn, userNo);
+		ui.setInterest(uiDAO.selectInterest(conn, userNo));
 		UserPrefer up = upDAO.selectUserPrefer(conn, userNo);
 		
 		String targetGender = "F";
@@ -96,11 +97,20 @@ public class MatchService {
 		Match[] mlist = new Match[tlist.length];
 		
 		for (int i=0; i < tlist.length ; i++) {
-			UserInfo ti = uiDAO.selectUserInfo(conn, tlist[i]);
+			mlist[i] = new Match();
+			
+			mlist[i].setUserNo(userNo);
+			mlist[i].setTargetNo(tlist[i]);
+			
+			UserInfo ti = uiDAO.selectUserInfo(conn, tlist[i]);;
+			String[] tinterest = uiDAO.selectInterest(conn, tlist[i]);
+			ti.setInterest(tinterest);
 			UserPrefer tp = upDAO.selectUserPrefer(conn, tlist[i]);
-			System.out.println("매치리스트 타켓 체형 : " + ti.getShape() + " 매치리스트 타켓 스타일 : " + ti.getStyle());
-			mlist[i].setSync(getMatchSync(ui, up, ti, tp)); // 임시 매칭 리스트 생성, 싱크율 기준 정렬
-			mlist[i].setRsync(getMatchSync(ti, tp, ui, up)); // 상대방이 나를 볼 때의 싱크
+			
+			double sync = getMatchSync(ui, up, ti, tp);
+			mlist[i].setSync(sync); // 임시 매칭 리스트 생성, 싱크율 기준 정렬
+			double rsync = getMatchSync(ti, tp, ui, up);
+			mlist[i].setRsync(rsync); // 상대방이 나를 볼 때의 싱크
 		}
 		Arrays.sort(mlist);								//싱크로율순 정렬		
 		Match[] result = new Match[maxMatch];
