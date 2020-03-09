@@ -12,10 +12,12 @@
 	height: 25px;
 	border-radius: 10px;
 	margin: 4px;
+	text-align: center;
 }
 .loginBox{
 	margin-top: 35px;
 	text-align: center;
+	
 }
 .loginBtn{
 	width: 300px;
@@ -27,6 +29,12 @@
 
 }
 
+
+#p{
+	width: 100px;
+	height: 100px;
+
+}
 </style>
 </head>
 <body>
@@ -36,23 +44,20 @@
 	    </div>	
 	            <form id="loginForm" action="<%= request.getContextPath() %>/login.me" onsubmit="return validate();" method="post">
 		            <div class="loginBox">
-		            	<div>
-						
-		                <label>&nbsp;&nbsp;아이디</label>&nbsp;&nbsp;&nbsp;<input type="text" class="inputBox" name="userId" id="userId2" placeholder="ID">
+		            
+						<div class="loginBox">
+		                	<label>&nbsp;&nbsp;아이디</label>&nbsp;&nbsp;&nbsp;<input type="text" class="inputBox" name="userId" id="userId2" placeholder="ID">
 		                </div>
-		                <div>
-		              
+		                
 		                <label>비밀번호</label>&nbsp;&nbsp;<input type="password" class="inputBox" name="userPwd" id="userPwd2" placeholder="PASSWORD" >
 		                </div>
 		                
-		                <br>
-		                
-		            </div>
+		   
 		            <div class="btnBox">
 		           		            
 			            <div>
 			            <button type="submit" class="defaultBtn loginBtn">로그인</button> 
-			            </div>
+			            </div> 
 			            
 			            <br>
 			            
