@@ -89,8 +89,8 @@ pageEncoding="UTF-8" import="account.model.vo.*"%>
         <div class="pageTitle"><h1>이상형 정보 입력</h1></div>
           <form action="<%= request.getContextPath() %>/insert.up" method="post">
             	<div class="tableArea">
+	              <input type="hidden" name="userNo" id="userNo" value="<%= userNo %>">
 	              <table>
-	              	<input type="hidden" name="userNo" id="userNo" value="<%= userNo %>">
 	                <tr class="itemBox">
 	                  <th class="itemName" id="">키 (cm)</th>
 	                  <td>

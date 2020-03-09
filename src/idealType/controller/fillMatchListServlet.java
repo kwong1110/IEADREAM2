@@ -31,6 +31,8 @@ public class fillMatchListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
+		response.sendRedirect("index.jsp");
+		
 		MatchService ms = new MatchService();
 		
 		int userNo = ((Account)request.getSession().getAttribute("loginUser")).getUserNo();
@@ -40,18 +42,18 @@ public class fillMatchListServlet extends HttpServlet {
 		Date today = new Date(System.currentTimeMillis());
 		for (int i = 0; i < oldMlist.length ; i++) {
 			if (oldMlist[i].getStatus().equals("D")) { // 대기중인 매칭 수 구하기
+				oldMlist[i].setMatchDate(today);
+				ms.updateMatch(oldMlist[i]); //매치 날짜 갱신
 				stack++;
 			}
 			else if(oldMlist[i].getMatchDate() == today) { // 확인한 매칭 중 오늘 생성된 매칭 수 구하기
 				stack++;
 			}
-			
 		}
 		Match[] newMlist = ms.searchMatchList(userNo); // 빈 공간 채워넣기
 		for (int i = 0; stack+i < 5 ; i++) {
 			ms.insertMatch(newMlist[i]);
 		}
-		response.sendRedirect("index.jsp");
 		
 	}
 	/**

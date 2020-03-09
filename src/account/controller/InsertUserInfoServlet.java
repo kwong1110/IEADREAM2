@@ -85,6 +85,9 @@ public class InsertUserInfoServlet extends HttpServlet {
 		if(result1 > 0 && result2 > 0) {
 			page = "views/account/joinUserPreferenceForm.jsp";
 			request.setAttribute("ui", ui);
+		} else if (result2 > 0) {
+			page = "views/common/errorPage.jsp";
+			request.setAttribute("msg", "사진 저장에 실패하였습니다.");
 		} else {
 			page = "views/common/errorPage.jsp";
 			request.setAttribute("msg", "정보 입력에 실패하였습니다.");
