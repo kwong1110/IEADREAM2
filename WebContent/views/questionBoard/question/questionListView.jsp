@@ -103,12 +103,9 @@
 							
 										<td><%= list.get(i).getCreateDate() %></td>
 									</tr>
-							
 									<%}%>
 								<%}%>
 							</tbody>
-					
-					
 					</table>
 				</div>
 			</div>	
@@ -167,11 +164,7 @@
 					location.href='<%= request.getContextPath() %>/detail.qu?postNo=' + postNo;
 				<% } else if(loginUser != null && loginUser.getGrade()==0){ %>
 					location.href='<%= request.getContextPath() %>/Mdetail.qu?postNo=' + postNo;
-				<% } else{%> 
-					alert('회원만 이용할 수 있는 서비스 입니다.');
-					location.href='<%= request.getContextPath() %>/views/account/accountLoginForm.jsp';
 				<% } %> 
-
 			});
 			<% } %>
 		});
