@@ -70,7 +70,7 @@
 							<tr>
 								<th id="th_title">제목</th>
 								<th id="th_title_input">
-									<input type="text" size="80%" name="title" id="title" placeholder="제목을 넣어주세요">
+									<input type="text" size="80%" name="title" id="title" placeholder="제목을 넣어주세요" required>
 								</th>
 								<th id="th_cate">카테고리</th>
 								<th id="th_cate_select">
@@ -86,7 +86,7 @@
 							</tr>
 							<tr>
 								<td colspan="4">
-									<textarea id="con" name="con" rows="20" cols="100%" style="resize:none;" placeholder="내용을 입력해주세요"></textarea>
+									<textarea id="con" name="con" rows="20" cols="100%" style="resize:none;" placeholder="내용을 입력해주세요" required></textarea>
 								</td>
 							</tr>
 						</table>
