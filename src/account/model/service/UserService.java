@@ -97,11 +97,8 @@ public class UserService {
 		Connection conn = getConnection();
 		UserInfoDAO uiDAO = new UserInfoDAO();
 		ArrayList<UserPhoto> plist = uiDAO.selectUserPhoto(conn, userNo);
-		for (int i =0; i < plist.size(); i++) {
-			if (plist.get(i).getFileLevel() == 0) {return plist.get(i);}
-		}
+
 		UserPhoto photo = plist.get(0);
-		
 		return photo;
 	}
 	public int insertPhoto(UserPhoto p) {

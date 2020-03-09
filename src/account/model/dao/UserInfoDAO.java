@@ -83,8 +83,6 @@ public class UserInfoDAO {
 		}
 		return userNo;
 	}
-
-	
 	
 	public UserInfo selectUserInfo(Connection conn, int userNo) {
 		PreparedStatement pstmt = null; 
@@ -109,6 +107,9 @@ public class UserInfoDAO {
 				ui.setJob(rs.getString("JOB"));
 				ui.setDrink(rs.getInt("DRINK"));
 				ui.setSmoke(rs.getInt("SMOKE"));
+			  }
+			  else {
+				  System.out.println("selectUserInfo 에러");
 			  }
 		  } catch (SQLException e) { 
 			  e.printStackTrace(); 

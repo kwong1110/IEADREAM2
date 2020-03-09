@@ -33,7 +33,10 @@ public class InsertUserPreferServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");		
 		
-		int userNo = Integer.parseInt(request.getParameter("userNo"));
+		Account loginUser = (Account)request.getSession().getAttribute("loginUser");
+		int userNo = 0;
+		if(loginUser != null) {userNo = loginUser.getUserNo();}
+		else {userNo = Integer.parseInt(request.getParameter("userNo"));}
 		
 		int height = Integer.parseInt(request.getParameter("height"));
 		int heightPri = Integer.parseInt(request.getParameter("heightPri"));

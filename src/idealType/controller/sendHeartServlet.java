@@ -3,6 +3,7 @@ package idealType.controller;
 import java.io.IOException;
 import java.sql.Date;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -37,11 +38,22 @@ public class sendHeartServlet extends HttpServlet {
 		int matchNo = (int)request.getAttribute("matchNo");
 
 		MatchService ms = new MatchService();
-		Match m = ms.getMatchList(userNo)[matchNo];
+		Match m = ms.getUncheckedMatchList(userNo)[matchNo];
 		m.setStatus("S");
 		
-		ms.updateMatch(m);
+		int result = ms.updateMatch(m);
 		
+		String page = null;
+		if(result > 0) {
+			page = "/get.mc";
+			request.setAttribute("matchNo", matchNo);
+		}else {
+			page = "views/common/errorPage.jsp";
+			request.setAttribute("msg", "매칭 조회에 실패하였습니다.");
+		}
+		
+		RequestDispatcher view = request.getRequestDispatcher(page);
+		view.forward(request, response);
 	}
 
 	/**
