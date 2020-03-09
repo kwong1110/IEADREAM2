@@ -42,12 +42,13 @@ public class selectUserPreferServlet extends HttpServlet {
 		
 		String page = null;
 		if(ui != null) {
-			page = "views/myPage/user/updateUserPrefer.jsp";
+			page = "views/myPage/user/updateUserPreferForm.jsp";
 			request.setAttribute("ui", ui);
 			request.setAttribute("up", up);
 		} else {
-			page = "views/common/errorPage.jsp";
-			request.setAttribute("msg", "내 이상형 정보 불러오기에 실패했습니다.");
+			page = "views/account/joinUserPreferenceForm.jsp";
+			request.setAttribute("ui", ui);
+			request.setAttribute("up", up);
 		}
 		RequestDispatcher view = request.getRequestDispatcher(page);
 		view.forward(request, response);

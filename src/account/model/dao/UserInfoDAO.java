@@ -83,8 +83,6 @@ public class UserInfoDAO {
 		}
 		return userNo;
 	}
-
-	
 	
 	public UserInfo selectUserInfo(Connection conn, int userNo) {
 		PreparedStatement pstmt = null; 
@@ -109,6 +107,9 @@ public class UserInfoDAO {
 				ui.setJob(rs.getString("JOB"));
 				ui.setDrink(rs.getInt("DRINK"));
 				ui.setSmoke(rs.getInt("SMOKE"));
+			  }
+			  else {
+				  System.out.println("selectUserInfo 에러");
 			  }
 		  } catch (SQLException e) { 
 			  e.printStackTrace(); 
@@ -211,13 +212,12 @@ public class UserInfoDAO {
 			pstmt = conn.prepareStatement(query);
 			
 			for(int i = 0; i < ui.getInterest().length; i++) {
-				pstmt.setInt(1, ui.getUserNo());
-				pstmt.setString(2, ui.getInterest()[i]);
-				pstmt.addBatch();
-				pstmt.clearParameters();
+				pstmt.setString(1, ui.getInterest()[i]);
+				pstmt.setInt(2, ui.getUserNo());
+				int r = pstmt.executeUpdate();
+				if (r < 0 ) { result  = -1;}
 			}
-			pstmt.executeBatch();
-
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

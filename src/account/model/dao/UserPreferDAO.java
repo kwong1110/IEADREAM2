@@ -90,18 +90,18 @@ public class UserPreferDAO {
 			pstmt.setInt(7, up.getStylePri());
 			pstmt.setInt(8, up.getAge());
 			pstmt.setInt(9, up.getAgePri());
-			pstmt.setInt(11, up.getRegionPri());
-			pstmt.setString(12, up.getReligion());
-			pstmt.setInt(13, up.getReligionPri());
-			pstmt.setInt(14, up.getScholar());
-			pstmt.setInt(15, up.getScholarPri());
-			pstmt.setString(16, up.getJob());
-			pstmt.setInt(17, up.getJobPri());
-			pstmt.setInt(18, up.getDrink());
-			pstmt.setInt(19, up.getDrinkPri());
-			pstmt.setInt(20, up.getSmoke());
-			pstmt.setInt(21, up.getSmokePri());
-			pstmt.setInt(22, up.getInterestPri());
+			pstmt.setInt(10, up.getRegionPri());
+			pstmt.setString(11, up.getReligion());
+			pstmt.setInt(12, up.getReligionPri());
+			pstmt.setInt(13, up.getScholar());
+			pstmt.setInt(14, up.getScholarPri());
+			pstmt.setString(15, up.getJob());
+			pstmt.setInt(16, up.getJobPri());
+			pstmt.setInt(17, up.getDrink());
+			pstmt.setInt(18, up.getDrinkPri());
+			pstmt.setInt(19, up.getSmoke());
+			pstmt.setInt(20, up.getSmokePri());
+			pstmt.setInt(21, up.getInterestPri());
 			
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -128,20 +128,20 @@ public class UserPreferDAO {
 			pstmt.setInt(6, up.getStylePri());
 			pstmt.setInt(7, up.getAge());
 			pstmt.setInt(8, up.getAgePri());
-			pstmt.setInt(10, up.getRegionPri());
-			pstmt.setString(11, up.getReligion());
-			pstmt.setInt(12, up.getReligionPri());
-			pstmt.setInt(13, up.getScholar());
-			pstmt.setInt(14, up.getScholarPri());
-			pstmt.setString(15, up.getJob());
-			pstmt.setInt(16, up.getJobPri());
-			pstmt.setInt(17, up.getDrink());
-			pstmt.setInt(18, up.getDrinkPri());
-			pstmt.setInt(19, up.getSmoke());
-			pstmt.setInt(20, up.getSmokePri());
-			pstmt.setInt(21, up.getInterestPri());
+			pstmt.setInt(9, up.getRegionPri());
+			pstmt.setString(10, up.getReligion());
+			pstmt.setInt(11, up.getReligionPri());
+			pstmt.setInt(12, up.getScholar());
+			pstmt.setInt(13, up.getScholarPri());
+			pstmt.setString(14, up.getJob());
+			pstmt.setInt(15, up.getJobPri());
+			pstmt.setInt(16, up.getDrink());
+			pstmt.setInt(17, up.getDrinkPri());
+			pstmt.setInt(18, up.getSmoke());
+			pstmt.setInt(19, up.getSmokePri());
+			pstmt.setInt(20, up.getInterestPri());
 
-			pstmt.setInt(22, up.getUserNo());
+			pstmt.setInt(21, up.getUserNo());
 			
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {

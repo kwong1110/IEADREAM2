@@ -15,9 +15,7 @@
 	height:	150px;
 	text-align: center;
     background-color: #ddd; 
-   	transform: translate( 175%, -10% );
-   	box-shadow: 5px 5px 5px;
-
+   	box-shadow: 2px 2px 2px;
 }
 
 .btmbox{
@@ -26,26 +24,34 @@
 
 .pageTitle{
 	text-align: center;
-	margin-top: 200px;
+	margin-top: 80px;
 
 }
 </style>
 </head>
-
 <body>
- 	<div class="pageTitle">
-		<h2 style="text-align: center;">비밀번호 찾기</h2>
-	</div>
+	<%@ include file="../common/mainmenu.jsp"%>
+	<div class="outer">
+		<div class="wrapper">
+			<div class="main">
+				<div class="pageTitle">
+ 					<div class="pageTitle">
+		<h1 style="text-align: center;">비밀번호 찾기</h1>
+  	
+  	<br><br><br>
   	
   	<div class="boxingBox" >
   		<br><br><br>
 		회원님의 이메일(<%= mail %>)로 임시 비밀번호를 전송하였습니다.
 		<!-- userPassword 결과값 출력!! ㅠㅠ  -->						
-	</div>				
-	
-	<div class="btnBox">
-		<!-- 버튼 클릭하였을때 로그인 페이지 창으로 이동 -->
-		<button type="submit" class="defaultBtn findid" id="btnfindid" onclick="location.href='<%= request.getContextPath() %>/views/account/accountLoginForm.jsp'">로그인하러 가기</button>
-	</div>			
+			</div>	
+			<br>
+			<button type="submit" class="defaultBtn findid" id="btnfindid" onclick="location.href='<%= request.getContextPath() %>/views/account/accountLoginForm.jsp'">로그인하러 가기</button>			
+		</div>
+	</div>
+	</div>
+	</div>
+</div>
+		
 </body>
 </html>

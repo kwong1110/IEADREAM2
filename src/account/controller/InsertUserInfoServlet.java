@@ -44,7 +44,11 @@ public class InsertUserInfoServlet extends HttpServlet {
 		String originName = mrequest.getFilesystemName("profileImg");
 		String changeName = mrequest.getOriginalFileName("profileImg");
 		
-		int userNo = Integer.parseInt(mrequest.getParameter("userNo"));
+		Account loginUser = (Account)request.getSession().getAttribute("loginUser");
+		int userNo = 0;
+		if(loginUser != null) {userNo = loginUser.getUserNo();}
+		else {userNo = Integer.parseInt(mrequest.getParameter("userNo"));}
+		
 		String hello = mrequest.getParameter("hello");
 		int height = Integer.parseInt(mrequest.getParameter("height"));
 		String shape = mrequest.getParameter("shape");
