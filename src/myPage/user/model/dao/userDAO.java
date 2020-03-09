@@ -331,4 +331,35 @@ private Properties prop = new Properties();
 		
 		return result;
 	}
+
+	public int deleteHeart(Connection conn, String[] userNo, String[] targetNo) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("deleteHeart");
+		
+		try {
+			for(int i = 0; i < userNo.length; i++) {
+				// targetNo와 userNo가 반대로 였음.
+				pstmt = conn.prepareStatement(query);
+				pstmt.setString(1, targetNo[i]);
+				pstmt.setString(2, userNo[i]);
+				
+				result = pstmt.executeUpdate();
+				
+				if(result > 0) {
+					commit(conn);
+				} else {
+					rollback(conn);
+					break;
+				}
+			}			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
 }

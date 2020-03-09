@@ -129,7 +129,8 @@ public class FaqDAO {
 				Board board = new Board(
 								rs.getString("category"),
 								rs.getInt("post_no"),
-								rs.getString("title"));
+								rs.getString("title"),
+								rs.getDate("create_date"));
 				
 				list.add(board);
 			}
@@ -258,8 +259,8 @@ public class FaqDAO {
 				Board board = new Board(
 						rs.getString("category"),
 						rs.getInt("post_no"),
-						rs.getString("title"));
-				
+						rs.getString("title"),
+						rs.getDate("create_date"));
 				list.add(board);
 			}
 		} catch (SQLException e) {

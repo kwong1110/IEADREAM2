@@ -9,48 +9,45 @@
 <title>이어드림 - 회원가입</title>
 <style>
 	
-	.contents{
-		text-align: left;
-		width: 800px;
-		border: 8px solid pink;
-		box-shadow: 3px 3px 3px 3px gray;
-	}
-	
-	.table{
-		margin-top: 8%;
-		margin-left: 25%;
-	}
-	
-	.table td {
-		padding-bottom: 5%;
-	}
-	
 	#dubtn{
-		margin-left: 23%;
 		font-size: 12px;
 		background: #B2CCFF;
 	}
 	
-	.msg{
-		margin-left: 23%;
+	.thirdtd{
+		text-align: left;
+		padding-left: 10px;
 	}
 	
 	.box{
 		width: 200px;
-		height: 25px;
+		height: 30px;
 		border-radius: 8px;
-		margin-left: 20%;
 	}
 	
 	.rdbox{
-		margin-left: 20%;
+		margin-left: 20px;
 	}
 	
 	.btnBox{
-		margin-left: 630px;
 		padding: 5% 0 1% 0;
 	}
 	
+	.tableArea th {
+		padding:12px 0;
+		color:rgb(230, 141, 150); font-size:20px;
+		letter-spacing:0.1em;
+		padding: 5px;
+		padding-right: 70px;
+		text-align: left;}
+	.tableArea td {
+		padding-top:12px;
+		padding-bottom:12px;
+		border-top:1px solid rgb(224, 224, 224);
+		color:rgb(136, 136, 136); font-size:1em;
+		letter-spacing:0.1em;
+		line-height: 30px;}
+	.tableArea{margin-top: 40px; margin-bottom: 40px;}
 	
 </style>
 </head>
@@ -62,47 +59,50 @@
 				<div class="main">
 					<div class="pageTitle"><h1>회원가입</h1></div>
 					<form action="<%= request.getContextPath() %>/insert.ac" method="post" class="contents" id="contents" name="joinForm" onsubmit="return validate();">
-						<div class="table">
+						<div class="tableArea">
 							<table>
 								<tr>
-									<td>아이디</td>
-									<td><input type="text" name="joinUserId" id="joinUserId" class="box" placeholder=" 6~12자의 영문,숫자" required></td>
-									<td><button type="button" id="dubtn" class="defaultBtn" onclick="checkId();">중복체크</button></td>
+									<th>아이디</th>
+									<td><input type="text" name="joinUserId" id="joinUserId" class="box" placeholder="  6~12자의 영문,숫자" required></td>
+									<td class="thirdtd"><button type="button" id="dubtn" class="defaultBtn" onclick="checkId();">중복체크</button></td>
 								</tr>
 								<tr>
-									<td>비밀번호</td>
-									<td><input type="password" name="joinUserPwd" id="joinUserPwd" class="box" placeholder=" 8~15자의 영문,숫자,특수문자 " maxlength="15" required></td>
-									<td style="width:200px"><label id="pwdResult1" class="msg"></label></td>
+									<th>비밀번호</th>
+									<td><input type="password" name="joinUserPwd" id="joinUserPwd" class="box" placeholder="  8~15자의 영문,숫자,특수문자 " maxlength="15" required></td>
+									<td  class="thirdtd" style="width:200px"><label id="pwdResult1" class="msg"></label></td>
 								</tr>
 								<tr>
-									<td>비밀번호 확인</td>
+									<th>비밀번호 확인</th>
 									<td><input type="password" name="joinUserPwd2" id="joinUserPwd2" class="box" maxlength="15" required></td>
-									<td><label id="pwdResult2" class="msg"></label></td>
+									<td class="thirdtd"><label id="pwdResult2" class="msg"></label></td>
 								</tr>
 								<tr>
-									<td>이름</td>
+									<th>이름</th>
 									<td><input type="text" name="userName" id="userName" class="box" required></td>
-									<td><label id="nameResult" class="msg"></label></td>
+									<td class="thirdtd"><label id="nameResult" class="msg"></label></td>
 								</tr>
 								<tr>
-									<td>휴대전화</td>
+									<th>휴대전화</th>
 									<td><input type="tel" name="phone" placeholder="  (-없이)01012345678" class="box" required></td>
+									<td></td>
 								</tr>
 								<tr>
-									<td>이메일</td>
-										<td><input type="text" name="email" class="box" id="email" required></td>
-										<td><button type="button" id="dubtn" class="defaultBtn" onclick="checkEmail();">중복체크</button></td>
+									<th>이메일</th>
+									<td><input type="text" name="email" class="box" id="email" required></td>
+									<td class="thirdtd"><button type="button" id="dubtn" class="defaultBtn" onclick="checkEmail();">중복체크</button></td>
 								</tr>
 								<tr>
-									<td>성별</td>
+									<th>성별</th>
 									<td>
 										<label><input type="radio" name="gender" value="M" class="rdbox" required checked>남자</label>
 										<label><input type="radio" name="gender" value="F" class="rdbox" required>여자</label>
 									</td>
+									<td></td>
 								</tr>
 								<tr>
-									<td>생년월일</td>
+									<th>생년월일</th>
 									<td><input type="date" name="birth" class="box" required></td>
+									<td></td>
 								</tr>
 							</table>
 						</div>
