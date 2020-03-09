@@ -109,7 +109,7 @@
 						
 						<div class="btnBox">
 							<button type="submit" id="joinBtn" class="defaultBtn" value="1단계완료">다음단계</button>
-							<button type="reset" id="goMain" class="defaultBtn cancelBtn" onclick='location.href="<%= request.getContextPath() %>/views/common/mainmenu.jsp"'>취소</button>
+							<button type="reset" id="goMain" class="defaultBtn cancelBtn" onclick='location.href="<%= request.getContextPath() %>/index.jsp"'>취소</button>
 						</div>
 					</form>
 				</div>	
