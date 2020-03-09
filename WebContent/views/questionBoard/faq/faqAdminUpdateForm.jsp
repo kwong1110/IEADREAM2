@@ -126,7 +126,7 @@
 						<br>
 						
 						<div class="btnBox" align="center">
-							<button class="defaultBtn" type="submit" id="updateFaqBtn">수정</button>
+							<button class="defaultBtn" type="submit" id="updateFaqBtn" onclick="editcom();">수정</button>
 							<button  class="defaultBtn menuBtn" type="button" onclick="location.href='javascript:history.go(-1);'" id="cancelBtn">취소</button>
 							<button class="defaultBtn cancelBtn" type="button" onclick="deleteFaq();" id="deleteBtn">삭제</button>
 						</div>
@@ -142,6 +142,10 @@
 			if(del) {
 				location.href='<%= request.getContextPath() %>/delete.faq?no=' +'<%= board.getPostNo() %>';
 			}
+		}
+		
+		function editcom() {
+			alert('수정이 완료되었습니다.');
 		}
 	</script>
 	
