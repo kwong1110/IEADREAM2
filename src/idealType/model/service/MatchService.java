@@ -97,6 +97,7 @@ public class MatchService {
 		for (int i=0; i < tlist.length ; i++) {
 			UserInfo ti = uiDAO.selectUserInfo(conn, tlist[i]);
 			UserPrefer tp = upDAO.selectUserPrefer(conn, tlist[i]);
+			System.out.println("매치리스트 타켓 체형 : " + ti.getShape() + " 매치리스트 타켓 스타일 : " + ti.getStyle());
 			mlist[i].setSync(getMatchSync(ui, up, ti, tp)); // 임시 매칭 리스트 생성, 싱크율 기준 정렬
 			mlist[i].setRsync(getMatchSync(ti, tp, ui, up)); // 상대방이 나를 볼 때의 싱크
 		}
@@ -141,10 +142,10 @@ public class MatchService {
 		
 		if (ti.getHeight() == up.getHeight()) 	{syncPoint += up.getHeightPri();}
 		else {double v = Math.abs((ti.getHeight() - up.getHeight())/5); syncPoint += (1-v)*up.getHeightPri();}
-		System.out.println(ti.getHeight() + " " + ti.getShape() + " " + up.getShape() + " " + up.getShapePri());
+		System.out.println(ti.getHeight() + " / " + ti.getShape() + " / " + up.getShape() + " / " + up.getShapePri());
 
+		System.out.println("타겟 스타일 : " + ti.getStyle() + "본인 선호 : " + up.getStyle() + "본인 선호도(pri) : " + up.getStylePri());
 		if (ti.getStyle().equals(up.getStyle())) 	{syncPoint += up.getStylePri();}
-		
 		int d = ti.getAge() - ui.getAge();
 		int ad = 0;
 		if (d > 3) {ad = 2;}
