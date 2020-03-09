@@ -9,7 +9,10 @@
 <head>
 <meta charset="UTF-8">
 <title>아이디 찾기</title>
+<link rel="stylesheet" href="<%= request.getContextPath() %>/css/board.css">
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/common.css">
+<link rel="stylesheet" href="<%= request.getContextPath() %>/css/rest.css">
+<link rel="stylesheet" href="<%= request.getContextPath() %>/css/index.css">
 <style>
 .pageTitletwo{
 	text-align: center;
@@ -22,35 +25,27 @@
 	height:	150px;
 	text-align: center;
     background-color: #ddd; 
-   	transform: translate( 175%, -10% );
    	box-shadow: 2px 2px 2px;
-	
 }
-.pageTitle{
-	padding-left: 5px;
-	font-size: 10spx; font-weight: 150px; vertical-align: middle; padding: 11px 11px 11px 11px; border-bottom: 3px solid pink;
-	}
-	
-.img{
-	width: 30%;
-	height: 20%;
-}	
 
+.pageTitle{
+	text-align: center;
+	margin-top: 80px;
+
+}
 </style>
 </head>
 <body>
 	<%@ include file="../common/mainmenu.jsp"%>
 	<div class ="pageTitle">
-		<h1 style="text-align: left;  margin-top:60px; margin-left:350px;">아이디 찾기</h1>
+		<h1 style="text-align:center;">아이디 찾기</h1>
 	</div>
-	
-	<br><br>
 	
 	<h5 style="text-align:center; margin-top:30px;">입력하신 정보로 가입된 아이디가 있습니다</h5>
 	
 	<br><br>
 	
-	<div class="boxingBox" >
+	<div class="boxingBox">
 	<br><br>
 	이름 : <%= a.getUserName() %>
 	<!-- User이름 가져오는것 -->

@@ -8,16 +8,17 @@
 <head>
 <meta charset="UTF-8">
 <title>비밀번호 찾기</title>
+<link rel="stylesheet" href="<%= request.getContextPath() %>/css/board.css">
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/common.css">
+<link rel="stylesheet" href="<%= request.getContextPath() %>/css/rest.css">
+<link rel="stylesheet" href="<%= request.getContextPath() %>/css/index.css">
 <style>
 .boxingBox{
 	width: 300px;
 	height:	150px;
 	text-align: center;
     background-color: #ddd; 
-   	transform: translate( 175%, -10% );
-   	box-shadow: 5px 5px 5px;
-
+   	box-shadow: 2px 2px 2px;
 }
 
 .btmbox{
@@ -26,16 +27,18 @@
 
 .pageTitle{
 	text-align: center;
-	margin-top: 200px;
+	margin-top: 80px;
 
 }
 </style>
 </head>
-
 <body>
+	<%@ include file="../common/mainmenu.jsp"%>
  	<div class="pageTitle">
-		<h2 style="text-align: center;">비밀번호 찾기</h2>
+		<h1 style="text-align: center;">비밀번호 찾기</h1>
 	</div>
+  	
+  	<br><br><br>
   	
   	<div class="boxingBox" >
   		<br><br><br>
