@@ -41,8 +41,8 @@ public class InsertUserInfoServlet extends HttpServlet {
 		String savePath = root + "photo_uploadFiles/";
 
 		MultipartRequest mrequest = new MultipartRequest(request, savePath, maxSize, "UTF-8", new MyFileRenamePolicy());
-		String originName = mrequest.getFilesystemName("profileImg");
-		String changeName = mrequest.getOriginalFileName("profileImg");
+		String originName = mrequest.getOriginalFileName("profileImg");
+		String changeName = mrequest.getFilesystemName("profileImg");
 		
 		Account loginUser = (Account)request.getSession().getAttribute("loginUser");
 		int userNo = 0;
