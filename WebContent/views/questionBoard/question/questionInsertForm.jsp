@@ -19,15 +19,15 @@
 	}
 	textarea{margin-top:10px;}
 	.outer{
-		width:1000px; height: 500px; background: white;
+		width:1000px; height: 100%; background: white;
 		margin-left: auto; margin-right: auto; margin-top: 50px;
-	}
-	.tableArea{background: #f9f9f9;width: 670px; 	height:410px;}
+	} 
 		button, input[type='button']{cursor: pointer;}
 		.qinsertTable{
 			vertical-align: middle;
 		    margin: 0;
-		    margin-left: 10%;
+		    background: #f9f9f9;
+		    width: 670px;
 		}
 		
 		.qinsertTable td {/* 게시판제목라인 */
@@ -45,6 +45,7 @@
 		.qinsertTable{
 	border-top:1px solid rgb(136, 136, 136); 
 		background: #f9f9f9;
+		}
 </style>
 </head>
 <body>
@@ -101,4 +102,5 @@ $(function(){
 });
 </script>
 </body>
+<%@ include file="../../common/footer.jsp" %>
 </html>
