@@ -104,10 +104,9 @@ public class UserService {
 	public int insertPhoto(UserPhoto p) {
 		Connection conn = getConnection();
 		UserInfoDAO uiDAO = new UserInfoDAO();
-		int r = uiDAO.deletePhoto(conn, p);
 		int result = uiDAO.insertPhoto(conn, p);
 		
-		if(r > 0 && result > 0) {
+		if(result > 0) {
 			commit(conn);
 		} else {
 			rollback(conn);
