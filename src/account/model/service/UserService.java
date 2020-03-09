@@ -95,7 +95,9 @@ public class UserService {
 		UserInfoDAO uiDAO = new UserInfoDAO();
 		UserPhoto photo = uiDAO.selectUserPhoto(conn, userNo);
 		return photo;
+	
 	}
+	
 	public int insertPhoto(UserPhoto p) {
 		Connection conn = getConnection();
 		UserInfoDAO uiDAO = new UserInfoDAO();

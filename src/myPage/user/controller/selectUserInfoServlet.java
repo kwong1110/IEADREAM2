@@ -36,16 +36,16 @@ public class selectUserInfoServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		Account loginUser = (Account)session.getAttribute("loginUser");
+		int userNo = loginUser.getUserNo();
 		
 		UserService us = new UserService();
-		int userNo = loginUser.getUserNo();
 		
 		UserInfo ui = null;
 		String pPath = null;
 		
 		ui = us.selectUserInfo(userNo);
 		UserPhoto p = us.selectUserPhoto(userNo);
-		pPath = p.getFilePath();
+		pPath = p.getFilePath() + p.getChangeName();
 		
 		String page = null;
 		if(ui != null) {
