@@ -58,8 +58,6 @@
 	  		<h3>▶아이디</h3><input style="text-align: center;"  type="text" class="inputBox" name="userId" id="findid" placeholder="아이디를 입력해주세요" >	
 	 		<h3>▶이메일</h3><input style="text-align: center;"  type="text" class="inputBox" name="email" id="Inputemail" placeholder="이메일를 입력해주세요" >
 		</div>
-		<br><br>
-		
 		<div class="btnBox">
 			<button type="submit" class="defaultBtn" id="btnfindid">비밀번호 찾기</button>
 		</div>
@@ -78,7 +76,6 @@
 		
 		}
 
-	
 	var name = $("#email");
 	if(name.val() == ""){
 		alert("이메일 입력하세요");
@@ -87,6 +84,5 @@
 		}
 	}
 	</script>
-	
 </body>
 </html>

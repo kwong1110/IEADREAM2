@@ -140,21 +140,18 @@ public class FindpwdServlet extends HttpServlet {
 				System.out.println("비밀번호 찾기 완료!!");
 				request.setAttribute("email", email);
 			} else {
-				page = "views/common/errorPage.jsp";
-				request.setAttribute("msg", "비밀번호 찾기에 실패하셨습니다.");
+				page = "views/common/searchFailpwd.jsp";
+			
 			}
 			
 		}else {
-			page = "views/common/errorPage.jsp";
-			request.setAttribute("msg", "비밀번호 찾기에 실패하셨습니다.");
+			page = "views/common/searchFailpwd.jsp";
+		
 		}
 		
 		request.getRequestDispatcher(page).forward(request, response);
 		
 	}
-		
-
-	
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */

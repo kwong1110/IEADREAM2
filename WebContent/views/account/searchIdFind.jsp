@@ -11,13 +11,6 @@
 <title>아이디 찾기</title>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/common.css">
 <style>
-
-.pageTitle{
-	text-align: center;
-	margin-top: 200px;
-
-}
-
 .pageTitletwo{
 	text-align: center;
 	margin-top: 200px;
@@ -30,18 +23,32 @@
 	text-align: center;
     background-color: #ddd; 
    	transform: translate( 175%, -10% );
-   	box-shadow: 5px 5px 5px;
+   	box-shadow: 2px 2px 2px;
 	
-
 }
+.pageTitle{
+	padding-left: 5px;
+	font-size: 10spx; font-weight: 150px; vertical-align: middle; padding: 11px 11px 11px 11px; border-bottom: 3px solid pink;
+	}
+	
+.img{
+	width: 30%;
+	height: 20%;
+}	
+
 </style>
 </head>
 <body>
-
-	<div class="pageTitle">
-	<h2 style="text-align: center;">아이디 찾기</h2>
-	<h5 style="text-align: center;">입력하신 정보로 가입된 아이디가 있습니다</h5>
+	<%@ include file="../common/mainmenu.jsp"%>
+	<div class ="pageTitle">
+		<h1 style="text-align: left;  margin-top:60px; margin-left:350px;">아이디 찾기</h1>
 	</div>
+	
+	<br><br>
+	
+	<h5 style="text-align:center; margin-top:30px;">입력하신 정보로 가입된 아이디가 있습니다</h5>
+	
+	<br><br>
 	
 	<div class="boxingBox" >
 	<br><br>
