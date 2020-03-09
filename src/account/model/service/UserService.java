@@ -9,13 +9,8 @@ import java.sql.Date;
 import java.util.GregorianCalendar;
 import java.util.Random;
 
-import account.model.dao.UserPreferDAO;
-import account.model.dao.AccountDAO;
-import account.model.dao.UserInfoDAO;
-import account.model.vo.UserPrefer;
-import board.model.vo.Photo;
-import account.model.vo.Account;
-import account.model.vo.UserInfo;
+import account.model.dao.*;
+import account.model.vo.*;
 import account.model.vo.UserPhoto;
 
 
@@ -214,7 +209,7 @@ public class UserService {
 		UserInfoDAO uiDAO = new UserInfoDAO();
 		UserPreferDAO upDAO = new UserPreferDAO();
 		
-		Account ac = new Account();
+		Account a = new Account();
 		UserInfo ui = new UserInfo();
 		UserPhoto p = new UserPhoto();
 		UserPrefer up = new UserPrefer();
@@ -223,8 +218,7 @@ public class UserService {
 		for(int i=0; i<no; i++) {
 			String userId = "Experiment" + i;
 			String userPwd = "password1!";
-			String gender = "M";
-			if (random.nextBoolean()) {gender = "F";}
+			String gender = "M"; if (random.nextBoolean()) {gender = "F";}
 			String userName = "실험체" + i;
 			String phone = "01012345678" + i;
 			String email = "exp" + i + "@naver.com";
@@ -232,8 +226,7 @@ public class UserService {
 			int month = 1 + random.nextInt(12);
 			int day = 1+ random.nextInt(28);
 			Date birth = new Date(new GregorianCalendar(year, month, day).getTimeInMillis());
-			
-			Account a = new Account();
+
 			a.setId(userId);
 			a.setPassword(userPwd);
 			a.setGender(gender);

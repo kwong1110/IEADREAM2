@@ -34,7 +34,7 @@ public class UserPreferDAO {
 	public UserPrefer selectUserPrefer(Connection conn, int userNo) {
 		PreparedStatement pstmt = null; 
 		ResultSet rs = null;
-		UserPrefer up = new UserPrefer();
+		UserPrefer up = null;
 		String query = prop.getProperty("selectUserPrefer");
 		
 		try {
@@ -42,6 +42,7 @@ public class UserPreferDAO {
 			  pstmt.setInt(1, userNo);
 			  rs = pstmt.executeQuery();
 			  if(rs.next()) {
+				up = new UserPrefer();
 			  	up.setUserNo(userNo);
 				up.setHeight(rs.getInt("HEIGHT"));
 				up.setHeightPri(rs.getInt("HEIGHT_PRI"));

@@ -31,6 +31,8 @@ public class fillMatchListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
+		response.sendRedirect("index.jsp");
+		
 		MatchService ms = new MatchService();
 		
 		int userNo = ((Account)request.getSession().getAttribute("loginUser")).getUserNo();
@@ -51,7 +53,6 @@ public class fillMatchListServlet extends HttpServlet {
 		for (int i = 0; stack+i < 5 ; i++) {
 			ms.insertMatch(newMlist[i]);
 		}
-		response.sendRedirect("index.jsp");
 		
 	}
 	/**
