@@ -21,6 +21,14 @@
 	String[] noArr = checkNo.split(",");
 	
 	String loginNo = request.getParameter("loginNo");
+	
+	 for(int i = 0; i < nameArr.length; i++){
+		if(nameArr[i].equals(loginNo)){
+			nameArr[i] = "나";
+		} else if (noArr[i].equals(loginNo)){
+			noArr[i] = "나";
+		}
+	 }
 %>
 <!DOCTYPE html>
 <html>
@@ -36,8 +44,8 @@
 			<table class="popTable">
 				<thead>
 					<tr>
-						<th>분류</th>
-						<th>회원번호</th>
+						<th>보낸 회원</th>
+						<th>받는 회원</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -46,7 +54,7 @@
 						<td><%= nameArr[i] %></td>
 						<td><%= noArr[i] %></td>
 						
-						<td style="display:none;"><input type="hidden" name="inOut" value="<%= nameArr[i] %>"></td>
+						<td style="display:none;"><input type="hidden" name="targetNo" value="<%= nameArr[i] %>"></td>
 						<td style="display:none;"><input type="hidden" name="userNo" value="<%= noArr[i] %>"></td>
 						<td style="display:none;"><input type="hidden" name="loginNo" value="<%= loginNo %>"></td>
 					</tr>
