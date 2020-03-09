@@ -102,7 +102,7 @@
 								<td id="th_title">제목</td>
 								<td id="th_title_input">
 									<input type="hidden" name = postNo value="<%= board.getPostNo() %>">
-									<input type="text" size="80%" class="title" name="title" id="title" value="<%= board.getTitle() %>">
+									<input type="text" size="80%" class="title" name="title" id="title" required value="<%= board.getTitle() %>">
 								</td>
 								<td id="th_cate">카테고리</td>
 								<td id="th_cate_input">
@@ -118,7 +118,7 @@
 							</tr>
 							<tr>
 								<td colspan="4">
-									<textarea id="con" name="con" cols="100%" rows="20"style="resize:none;"><%= board.getContent() %></textarea>
+									<textarea id="con" name="con" cols="100%" rows="20" required style="resize:none;"><%= board.getContent() %></textarea>
 								</td>
 							</tr>
 						</table>
