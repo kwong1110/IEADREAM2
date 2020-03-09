@@ -44,6 +44,7 @@ public class MatchService {
 		for (int i=0; i<ulist.size() ;i++) {
 			mlist[i] = ulist.get(i);
 		}
+		Arrays.sort(result);
 		return result;
 	}
 

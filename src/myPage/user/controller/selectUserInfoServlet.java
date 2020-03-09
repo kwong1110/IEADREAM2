@@ -38,8 +38,12 @@ public class selectUserInfoServlet extends HttpServlet {
 		
 		UserService us = new UserService();
 		int userNo = loginUser.getUserNo();
-		UserInfo ui = us.selectUserInfo(userNo);
-		String pPath = us.selectUserPhoto(userNo).getFilePath();
+		
+		UserInfo ui = null;
+		String pPath = null;
+		
+		ui = us.selectUserInfo(userNo);
+		pPath = us.selectUserPhoto(userNo).getFilePath();
 		
 		String page = null;
 		if(ui != null) {

@@ -43,8 +43,8 @@ public class getMatchServlet extends HttpServlet {
 		
 		Match[] mlist = ms.getUncheckedMatchList(userNo);
 		
-		int targetNo = ms.getMatchList(userNo)[matchNo].getTargetNo();
-		int sync = (int)Math.round(100*ms.getMatchList(userNo)[matchNo].getSync());
+		int targetNo = mlist[matchNo].getTargetNo();
+		int sync = (int)Math.round(100*mlist[matchNo].getSync());
 		String pPath = us.selectUserPhoto(targetNo).getFilePath();
 		
 		Account ac = us.selectAccount(targetNo);
