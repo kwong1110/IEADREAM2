@@ -112,7 +112,9 @@ public class MatchDAO {
 		ResultSet rs = null;
 		String query = prop.getProperty("getUiCount");
 		//SELECT ?, COUNT AS PROP FROM USER_INFO JOIN ACCOUNT USING (USER_NO) GROUP BY ? ORDER BY PROP DESC WHERE GENDER = ?;
-		
+		if (item.equals("age")) {
+			query = prop.getProperty("getAgeCount");
+		}
 		ArrayList<Stat> list = new ArrayList<Stat>();
 		try {
 			  pstmt = conn.prepareStatement(query);
@@ -142,6 +144,7 @@ public class MatchDAO {
 	  	}
 		return result;	
 	}
+	
 	public Stat[] getUpProp(Connection conn, String item, String gender) {
 		PreparedStatement pstmt = null; 
 		ResultSet rs = null;
