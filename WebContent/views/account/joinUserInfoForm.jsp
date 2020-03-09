@@ -155,7 +155,7 @@
     			</tr>
     		</table>      
             <section id="items">
-            <input type="number" name="userNo" hidden="hidden" value="<%= userNo %>">
+            <input type="number" name="userNo" hidden="hidden" value="<%= userNo %>" >
             	<div class="tableArea">
              	<table>
 					<tr>

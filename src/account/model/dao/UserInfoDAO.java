@@ -212,13 +212,12 @@ public class UserInfoDAO {
 			pstmt = conn.prepareStatement(query);
 			
 			for(int i = 0; i < ui.getInterest().length; i++) {
-				pstmt.setInt(1, ui.getUserNo());
-				pstmt.setString(2, ui.getInterest()[i]);
-				pstmt.addBatch();
-				pstmt.clearParameters();
+				pstmt.setString(1, ui.getInterest()[i]);
+				pstmt.setInt(2, ui.getUserNo());
+				int r = pstmt.executeUpdate();
+				if (r < 0 ) { result  = -1;}
 			}
-			pstmt.executeBatch();
-
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
