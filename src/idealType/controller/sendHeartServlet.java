@@ -35,15 +35,13 @@ public class sendHeartServlet extends HttpServlet {
 
 		int userNo = ((Account)request.getSession().getAttribute("loginUser")).getUserNo();
 		int matchNo = (int)request.getAttribute("matchNo");
-		Date date = new Date(System.currentTimeMillis());
 
 		MatchService ms = new MatchService();
 		Match m = ms.getMatchList(userNo)[matchNo];
 		m.setStatus("S");
-		m.setMatchDate(date); //상태 변경된 날짜 전달
 		
 		ms.updateMatch(m);
-			
+		
 	}
 
 	/**
