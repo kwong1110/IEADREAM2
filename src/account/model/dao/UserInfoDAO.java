@@ -38,13 +38,14 @@ public class UserInfoDAO {
 	public Account selectAccount(Connection conn, int userNo) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		Account ac = new Account();
+		Account ac = null;
 		String query = prop.getProperty("selectAccount");
 		try	{
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, userNo);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
+				ac = new Account();
 				ac.setUserNo(userNo);
 				ac.setGrade(rs.getInt("GRADE"));
 				ac.setId(rs.getString("ID"));
@@ -88,7 +89,7 @@ public class UserInfoDAO {
 	public UserInfo selectUserInfo(Connection conn, int userNo) {
 		PreparedStatement pstmt = null; 
 		ResultSet rs = null;
-		UserInfo ui = new UserInfo();
+		UserInfo ui = null;
 		String query = prop.getProperty("selectUserInfo");
 		
 		try {
@@ -96,6 +97,7 @@ public class UserInfoDAO {
 			  pstmt.setInt(1, userNo);
 			  rs = pstmt.executeQuery();
 			  if(rs.next()) {
+				ui = new UserInfo();
 			  	ui.setUserNo(userNo);
 			  	ui.setHello(rs.getString("HELLO"));
 				ui.setHeight(rs.getInt("HEIGHT"));
