@@ -1,6 +1,6 @@
 package idealType.model.vo;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class Match implements Comparable<Match>{
 	private int userNo;			

@@ -71,8 +71,8 @@ public class UserInfoDAO {
 		try	{
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, userId);
-			rs.next();
 			rs = pstmt.executeQuery();
+			rs.next();
 				userNo = (rs.getInt("USER_NO"));
 		}catch(Exception e) { 
 			e.printStackTrace();
@@ -314,7 +314,7 @@ public class UserInfoDAO {
 	public int[] searchUserNoList(Connection conn, String gender) {
 		PreparedStatement pstmt = null; 
 		ResultSet rs = null;
-		String query = prop.getProperty("selectInterest");
+		String query = prop.getProperty("searchUserNoList");
 		ArrayList<Integer> list = new ArrayList<Integer>();
 		
 		try {
@@ -323,7 +323,7 @@ public class UserInfoDAO {
 			  
 			  rs = pstmt.executeQuery();
 			  while(rs.next()) {
-				  list.add(rs.getInt("INTEREST"));
+				  list.add(rs.getInt("USER_NO"));
 			  }
 		  } catch (SQLException e) {
 			  e.printStackTrace(); 
