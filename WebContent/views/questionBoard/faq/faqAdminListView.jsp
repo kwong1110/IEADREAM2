@@ -76,7 +76,7 @@
 						<%
 							if (list.isEmpty()) {
 						%>
-							존재하는 공지사항이 없습니다.
+							<div style="text-align: center; padding: 20px;">존재하는 공지사항이 없습니다.</div>
 						<%
 							} else {
 						%>
