@@ -41,7 +41,7 @@
 		<form action="<%= request.getContextPath() %>/Findeid.do" onsubmit="return IDdate();" method="post">
 		<div class ="textbox">
 		 <h3 style="text-align: center;">▶이름</h3><input type="text"  class="inputBox" name="userName" id="userName2" placeholder="이름을 입력해주세요" >
-		 <h3 style="text-align: center;">▶이메일</h3><input type="text" class="inputBox" name="email" id="email2" placeholder="이메일을 입력해주세요" >
+		 <h3 style="text-align: center;">▶이메일</h3><input type="email" class="inputBox" name="email" id="email2" placeholder="이메일을 입력해주세요" >
 		</div>
 		
 			<div class="btnBox">
