@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 import account.model.service.UserService;
 import account.model.vo.Account;
 import account.model.vo.UserInfo;
+import account.model.vo.UserPhoto;
 
 /**
  * Servlet implementation class selectUserInfoServlet
@@ -43,7 +44,8 @@ public class selectUserInfoServlet extends HttpServlet {
 		String pPath = null;
 		
 		ui = us.selectUserInfo(userNo);
-		pPath = us.selectUserPhoto(userNo).getFilePath();
+		UserPhoto p = us.selectUserPhoto(userNo);
+		pPath = p.getFilePath();
 		
 		String page = null;
 		if(ui != null) {

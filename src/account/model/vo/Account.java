@@ -13,12 +13,11 @@ public class Account {
 	private String email;
 	private Date birth;
 	private String deleted;
-	private String interest;	// 관심분야(DB상 다른 테이블)
 	
 	public Account() {}
 
 	public Account(int userNo, int grade, String id, String password, String gender, String userName, String phone,
-			String email, Date birth, String deleted, String interest) {
+			String email, Date birth, String deleted) {
 		this.userNo = userNo;
 		this.grade = grade;
 		this.id = id;
@@ -29,7 +28,6 @@ public class Account {
 		this.email = email;
 		this.birth = birth;
 		this.deleted = deleted;
-		this.interest = interest;
 	}
 
 	public Account(int userNo, int grade, String id, String gender, String userName, String phone, String deleted) {
@@ -65,20 +63,6 @@ public class Account {
 	public Account(String id, String password) {
 		this.id = id;
 		this.password = password;
-	}
-	
-	public Account(int userNo, int grade, String id, String password, String gender, String userName, String phone,
-			String email, Date birth, String deleted) {
-		this.userNo = userNo;
-		this.grade = grade;
-		this.id = id;
-		this.password = password;
-		this.gender = gender;
-		this.userName = userName;
-		this.phone = phone;
-		this.email = email;
-		this.birth = birth;
-		this.deleted = deleted;
 	}
 
 	public Account(int grade, String id, String password, String gender, String userName, String phone, String email,
@@ -187,19 +171,11 @@ public class Account {
 		this.deleted = deleted;
 	}
 
-	public String getInterest() {
-		return interest;
-	}
-
-	public void setInterest(String interest) {
-		this.interest = interest;
-	}
-
 	@Override
 	public String toString() {
 		return "Account [userNo=" + userNo + ", grade=" + grade + ", id=" + id + ", password=" + password + ", gender="
 				+ gender + ", userName=" + userName + ", phone=" + phone + ", email=" + email + ", birth=" + birth
-				+ ", deleted=" + deleted + ", interest=" + interest + "]";
+				+ ", deleted=" + deleted + "]";
 	}
 	
 	
