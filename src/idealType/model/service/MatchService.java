@@ -172,7 +172,7 @@ public class MatchService {
 		
 		return syncPoint/maxPoint;
 	}
-	public Stat[][] getUiStat(int userNo) {
+	/*public Stat[][] getUiStat(int userNo) {
 		Connection conn = getConnection();
 		MatchDAO mDAO = new MatchDAO();
 		
@@ -209,7 +209,7 @@ public class MatchService {
 		result[10] = interest;
 		
 		return result;
-	}	
+	}*/
 	
 	public Stat[][] getUpStat(int userNo) {
 		Connection conn = getConnection();
