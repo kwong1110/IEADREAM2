@@ -36,6 +36,26 @@
 		letter-spacing:0.1em}/* 제목띠어쓰기간격 */ 
 	.tableArea td {line-height: 10px;}
 	th{border-bottom: 1px solid grey;}
+		.blinking{
+		color: white;
+		background: pink;
+		-webkit-animation:blink .5s ease-in-out infinite alternate;
+		-moz-animation:blink .5s ease-in-out infinite alternate;
+		animation:blink .5s ease-in-out infinite alternate;
+    }
+    @-webkit-keyframes blink{
+        0% {opacity:0.4;}
+        100% {opacity:1;}
+    }
+    @-moz-keyframes blink{
+        0% {opacity:0.4;}
+        100% {opacity:1;}
+    }
+    @keyframes blink{
+        0% {opacity:0.4;}
+        100% {opacity:1;}
+    }
+	
 </style>
 </head>
 <body>
@@ -83,7 +103,7 @@
 										<% if(reply.get(i).getAnswerChecked().equals("N")){%>
 											<td>미답변</td>
 										<% } else{  %>
-											<td>답변 완료</td>
+											<td><span class="blinking" style="border-radius:5px;padding: 5px">답변 완료</span></td>
 										<%}%>
 											
 							
