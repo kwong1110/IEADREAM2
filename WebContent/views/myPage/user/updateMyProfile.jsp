@@ -61,10 +61,10 @@
 								</tr>
 								<tr>
 									<td>이름</td>
-									<td><input type="text" 
+									<td><input style="border: none;" type="text" 
 										class="profile" name="user_name" id="user_name" readonly value="<%= name %>">
 									</td>
-									<td><input style="border: none;" type="text" name="nameResult" id="nameResult" readonly></td>
+									<td></td>
 								</tr>
 								<tr>
 									<td>회원등급</td>
@@ -112,18 +112,6 @@
 	</div>
 	
 		<script>
-				
-				$("#user_name").blur(function(){
-					var nameExp = /^[가-힣]{2,}$/;
-					
-					if(!nameExp.test($(this).val())){
-						$('#nameResult').val('이름 오류!').css('color', 'red');
-						$(this).focus();
-					} else{
-						$('#nameResult').val('정상 입력 되었습니다').css('color', 'rgb(136, 136, 136)');
-						$(this).css("background", "initial");
-					}
-				});
 				
 				$('#pass').blur(function(){
 					var pwdExp = /[a-zA-Z](?=.*[a-zA-Z])(?=.*[!@#$%^&*])(?=.*[0-9]).{7,14}/;
