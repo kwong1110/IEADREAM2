@@ -104,7 +104,7 @@
 		}); --%>
 		
 		function goIndex(){
-			location.href="<%= request.getContextPath()%>/views/common/mainmenu.jsp";
+			location.href="<%= request.getContextPath()%>/index.jsp";
 		}
 		
 
