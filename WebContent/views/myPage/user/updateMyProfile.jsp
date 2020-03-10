@@ -51,6 +51,7 @@
 					<form action="<%= request.getContextPath() %>/update.mp" method="post" 
 					id="updateForm" name="updateForm" style="font-size: 20px; text-align: center;">
 						<table class="listArea" style="border-spacing: 20px;">
+									<input type="hidden" name="originPwd" value="<%= pwd %>">
 								<tr>
 									<td class="minW">아이디</td>
 									<td>
@@ -73,12 +74,14 @@
 								</tr>
 								<tr>
 									<td>비밀번호</td>
-									<td><input type="password" placeholder="비밀번호를 입력해주세요" class="profile" name="pass" id="pass" required></td>
+									<td>
+										<input type="password" placeholder="비밀번호를 입력해주세요" class="profile" name="pass" id="pass">
+										<input style="display: none;" type="text" name="pass1" id="pass1" value="off"></td>
 									<td><input style="border: none;" readonly type="text" name="passResult" id="passResult"></td>
 								</tr>
 								<tr>
 									<td>비밀번호 확인</td>
-									<td><input type="password" placeholder="비밀번호 확인" class="profile" name="passCheck" id="passCheck" required></td>
+									<td><input type="password" placeholder="비밀번호 확인" class="profile" name="passCheck" id="passCheck" ></td>
 									<td><input style="border: none;" readonly type="text" name="passResult2" id="passResult2"></td>
 								</tr>
 								<tr>
@@ -103,7 +106,7 @@
 								</tr>
 						</table>
 						<div class="btnBox">
-								<input class="defaultBtn" id="updateBtn" type="submit" name="submit" value="수정" onclick="checkPwdPwd();"> <!-- action으로 연결 -->
+								<input class="defaultBtn" id="updateBtn" type="submit" name="submit" value="수정">
 						</div>
 					</form>
 				</div>
@@ -112,8 +115,9 @@
 	</div>
 	
 		<script>
-			
-				$('#pass').blur(function(){
+				$('#pass').keyup(function(){
+						console.log('끝');
+						$('#pass1').val('on');
 					var pwdExp = /[a-zA-Z](?=.*[a-zA-Z])(?=.*[!@#$%^&*])(?=.*[0-9]).{7,14}/;
 					if(!pwdExp.test($('#pass').val())){
 						$('#passResult').val("비밀번호 오류!").css('color', 'red');
@@ -135,7 +139,11 @@
 				});
 			
 			$('#updateBtn').click(function() {
-				if($('#pass').val() != $('#passCheck').val()) {
+				if($('#pass').val() == "" && $('#passCheck').val() == "") {
+					/* 비밀번호가 비어있을 경우 */
+					alert('비밀번호!');
+				} else if (($('#pass').val() != $('#passCheck').val()) && ($('#pass').val() != "" || $('#pass').val() != "")) {
+					/* 비밀번호가 비어있지 않고 서로 일치하지 않을 경우 */
 					event.preventDefault();
 					alert('비밀번호가 일치하지않습니다.');
 					('#passCheck').focus();
@@ -144,5 +152,5 @@
 		</script>
 
 </body>
-<%@ include file="../../common/footer.jsp" %>
+	<%@ include file="../../common/footer.jsp" %>
 </html>
