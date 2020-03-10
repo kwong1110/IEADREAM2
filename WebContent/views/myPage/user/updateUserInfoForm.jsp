@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="account.model.vo.*"%>
 <%
-	/*
 	request.setCharacterEncoding("utf-8");
 	UserInfo ui = (UserInfo)request.getAttribute("ui");
 	String photoPath = (String)request.getAttribute("pPath");
@@ -140,7 +139,6 @@
 			 } 
 		 }
 	 };
-	*/
 %>
 
 <!DOCTYPE html>
@@ -204,8 +202,8 @@
 			            </section>
 			            <br><br>
 						<section id="items">
+							<input type="hidden" name="userNo" id="userNo" value="<%= userNo %>">
 							<table>
-								<input type="hidden" name="userNo" id="userNo" value="">
 								<tr>
 									<th class="itemName" id=""> 키 (cm) </th>
 									<td>

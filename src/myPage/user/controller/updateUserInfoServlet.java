@@ -38,17 +38,17 @@ public class updateUserInfoServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 디테일이 아니고 바로 정보를 불러와 수정해야하기 때문에 servlet에서 view 페이지로 넘어감
-		HttpSession session = request.getSession();
-		
+
 		int maxSize = 1024 * 1024 * 10;
 		String root = request.getSession().getServletContext().getRealPath("/");
 		String savePath = root + "photo_uploadFiles/";
 		MultipartRequest mrequest = new MultipartRequest(request, savePath, maxSize, "UTF-8", new MyFileRenamePolicy());
-		String originName = mrequest.getFilesystemName("profileImg");
-		String changeName = mrequest.getOriginalFileName("profileImg");
+		String originName = mrequest.getOriginalFileName("profileImg");
+		String changeName = mrequest.getFilesystemName("profileImg");
 		
-		int userNo = ((Account)request.getSession().getAttribute("loginUser")).getUserNo();
+		HttpSession session = request.getSession();
+		int userNo = ((Account)session.getAttribute("loginUser")).getUserNo();
+		
 		String hello = mrequest.getParameter("hello");
 		int height = Integer.parseInt(mrequest.getParameter("height"));
 		String shape = mrequest.getParameter("shape");

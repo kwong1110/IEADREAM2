@@ -86,5 +86,11 @@ public class Match implements Comparable<Match>{
 			return -1;
 	}
 
+	@Override
+	public String toString() {
+		return "Match [userNo=" + userNo + ", targetNo=" + targetNo + ", matchDate=" + matchDate + ", status=" + status
+				+ ", sync=" + sync + ", rsync=" + rsync + "]";
+	}
+
 }
 
