@@ -9,8 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import account.model.service.UserService;
-import account.model.vo.Account;
-import account.model.vo.UserInfo;
+import account.model.vo.*;
 import idealType.model.service.MatchService;
 import idealType.model.vo.Match;
 
