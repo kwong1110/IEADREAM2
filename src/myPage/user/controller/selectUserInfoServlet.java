@@ -54,8 +54,6 @@ public class selectUserInfoServlet extends HttpServlet {
 			request.setAttribute("pPath", pPath);
 		} else {
 			page = "views/account/joinUserInfoForm.jsp";
-			request.setAttribute("ui", ui);
-			request.setAttribute("pPath", pPath);
 		}
 		RequestDispatcher view = request.getRequestDispatcher(page);
 		view.forward(request, response);
