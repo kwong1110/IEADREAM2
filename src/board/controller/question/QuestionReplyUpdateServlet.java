@@ -42,12 +42,8 @@ public class QuestionReplyUpdateServlet extends HttpServlet {
 		r.setPostNo(postNo);
 		
 		ArrayList<Reply> list = new QuestionService().insertReply(r);
+		System.out.println("servlet" + r);
 		response.setContentType("application/json; charset=UTF-8");
-		//new Gson().toJson(list, response.getWriter());//list를 response.getWriter를 통해서 보내겠다.
-		
-		// 데이트 형식을 맞추기 위해 
-		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
-		gson.toJson(list, response.getWriter());
 	}
 
 	/**

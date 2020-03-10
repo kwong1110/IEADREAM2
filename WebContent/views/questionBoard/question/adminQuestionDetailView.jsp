@@ -20,7 +20,6 @@
 	}
 		.main{width: 80%; height: 100%;}
 	#listArea{text-align: center;}
-	.listArea{width:650px;	height:350px; margin-left:auto;	margin-right:auto;}
 	th, td, thead{
 		    border: 1px solid gray;
    	 border-radius: 5px;
@@ -45,7 +44,7 @@
 	#Mcommand{
 		background:#f9f9f9;
 	}
-	.tableArea {table-layout:fixed;width: 670px}
+	.tableArea {table-layout:fixed;width: 800px}
 	.tableArea tr { width: -webkit-fill-available;}
 	.tableArea th {/* 게시판제목라인 */
 		padding:12px 0;
@@ -71,7 +70,7 @@
 	}
 	.replyArea{
 		background:#f9f9f9;
-		width:676px;
+		width:800px;
 	}
 	#addReply, #updateBtn, #deleteBtn{
 		margin-bottom: 20px;
@@ -160,40 +159,7 @@
 				$('#detailForm').submit();
 			}
 		}
-
-			$('#updateBtn').click(function(){
-				//$('#reply').removeAttr("readonly");
-				var postNo = <%= b.getPostNo() %>;
-				var answerContent = $('#insertReply').val();
-				
-				console.log(answerContent);
-				if(answerContent== null){
-					alert("댓글 등록을 먼저 해주세요!");
-				}else{
-					$('#insertReply').css('background','white');
-					$('#insertReply').attr('readonly',false);
-				
-				$.ajax({
-					url: '<%= request.getContextPath() %>/updateReply.qu',
-					type: 'post',
-					data: {postNo: postNo, answerContent:answerContent},
-					success: function(data){
-						$replyTable = $('#replyTable');
-						
-						for(var key in data){
-						var $tr= $('<tr>');
-						var $writerTd = $('<td>').text('관리자');
-						var $contentTd = $('<td>').text(data[key].answerContent);
-						var $dateTd = $('<td>').text(data[key].answerDate);
-						}
-					
-					}
-				}); 
-				}
-			   });
-			
-			
-		   $('#addReply').click(function(){
+		$('#addReply').click(function(){
 			var postNo = <%= b.getPostNo() %>;
 			var answerContent = $('#insertReply').val();
 			$.ajax({
@@ -205,44 +171,28 @@
 					alert('등록되었습니다.');
 					$('#insertReply').css('background','lightgray');
 					$('#insertReply').attr('readonly',true);
-					for(var key in data){
-					var $tr= $('<tr>');
-					var $writerTd = $('<td>').text('관리자');
-					var $contentTd = $('<td>').text(data[key].answerContent);
-					var $dateTd = $('<td>').text(data[key].answerDate);
-					}
-				
 				}
 			}); 
 		   });
-		   
-	 	 <%--   $('.updateReply').click(function(){
+
+			$('#updateBtn').click(function(){
+				//$('#reply').removeAttr("readonly");
 				var postNo = <%= b.getPostNo() %>;
-				var answerContent = $('#updateReply').val();
-				console.log(answerContent);
-				if(answerContent.val().equals("")){
+				var answerContent = $('#insertReply').val();
+				
+				if(answerContent== null){
 					alert("댓글 등록을 먼저 해주세요!");
 				}else{
 					$('#insertReply').css('background','white');
-					$('#insertReply').attr('readonly','false');
-				}
+					$('#insertReply').attr('readonly',false);
+				
 				$.ajax({
-					url: '<%= request.getContextPath() %>/insertReply.qu',
+					url: '<%= request.getContextPath() %>/updateReply.qu',
 					type: 'post',
-					data: {postNo: postNo, answerContent:answerContent},
-					success: function(data){
-						
-						for(var key in data){
-							var $tr= $('<tr>');
-							var $writerTd = $('<td>').text('관리자');
-							var $contentTd = $('<td>').text(data[key].answerContent);
-							var $dateTd = $('<td>').text(data[key].answerDate);
-							}
-						
-						}
-					});
-				}); --%>
-			   
+					data: {postNo: postNo, answerContent:answerContent}
+				}); 
+				}
+			   });
 	</script>
 </body>
 <%@ include file="../../common/footer.jsp" %>

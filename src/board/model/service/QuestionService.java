@@ -115,7 +115,7 @@ public class QuestionService {
 		}
 
 
-	// 댓글
+	// 댓글 등록, 수정
 
 	public ArrayList<Reply> insertReply(Reply r) {
 		Connection conn = getConnection();
@@ -126,27 +126,13 @@ public class QuestionService {
 		if(result>0) {
 			commit(conn);
 			list = dao.selectReplyList(conn, r.getPostNo());
+			System.out.println("service의 list" + list);
 		}else {
 			rollback(conn);
 		}
 		return list;
 	}
 
-
-/*	public ArrayList<Reply> updateReply(Reply r) {
-		Connection conn = getConnection();
-		QuestionDAO dao = new QuestionDAO();// 두번 왔다갔다 할거기 때문에
-		
-		int result = dao.insertReply(conn, r);
-		ArrayList<Reply> list = null;
-		if(result>0) {
-			commit(conn);
-			list = dao.updateReplyList(conn, r.getPostNo());
-		}else {
-			rollback(conn);
-		}
-		return list;
-	}*/
 	//  페이징 - user 리스트 뷰
 	public ArrayList<Board> selectQBList(int currentPage, String userNo) {
 		Connection conn = getConnection();
