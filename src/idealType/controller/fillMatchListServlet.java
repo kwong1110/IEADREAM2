@@ -37,7 +37,6 @@ public class fillMatchListServlet extends HttpServlet {
 		int userNo = ((Account)request.getSession().getAttribute("loginUser")).getUserNo();
 		
 		ms.fillMatch(userNo);
-		System.out.println("Servlet : " + userNo);
 		response.sendRedirect("index.jsp");
 	}
 	/**

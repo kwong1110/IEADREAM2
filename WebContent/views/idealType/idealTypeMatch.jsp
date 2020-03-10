@@ -147,49 +147,6 @@ import="idealType.model.service.*"
     a:link { color: black; text-decoration: none}
     a:visited {color: black;}
     a:hover{ color : silver;}
-    .wrapper{
-      text-align: left;
-      width: 1200px;
-      margin:0 auto;
-      padding:0;
-      display : block;
-    }
-    .outer{
-      background-color: white;
-      text-align: center;
-      display:block;
-    }
-    nav{
-      background-color: white;
-      text-align: center;
-      width: 170px;
-      height: 100%;
-      margin: 0 auto;
-      padding:0;
-      float : left;
-    }
-    .main{
-      background-color: whites;
-      text-align: left;
-      max-width:1025px;
-      min-height: 775px;
-      margin:0 auto;
-      padding: 0px;
-      float : left;
-      border-left: 1px solid darkgray;
-    }
-    .pageTitle{
-      font-weight: 550;
-      font-size: 16pt;
-      margin: 30px;
-    }
-    section {padding: 15px;}
-    footer {
-      clear : left;
-      background-color: gray;
-      height: 120px;
-      text-align: center;
-    }
     .graph { 
       position: relative;
       width: 200px; 
@@ -232,9 +189,9 @@ import="idealType.model.service.*"
   <div class ="outer">
     <div class="wrapper">
       <div class="main">
-        <section class="pageTitle">
-          <label>이상형 추천</label>
-        </section>
+		<div class="pageTitle">
+			<h1> 이상형 추천 </h1>
+		</div>
         <section id="summary" style="display: flex">
           <article id="sync" style="text-align: center; margin-left: 40%;">
             <label style="margin:10px;">일치율</label>
@@ -247,17 +204,28 @@ import="idealType.model.service.*"
             <h3><%= matchNo %> / <%= maxMatchNo %></h3>
           </article>
         </section>
+       
         <section id="itemProfile" style="display: flex;">
-          <article id="thumb" style="margin-left:50px;">
-            <img src="<%= photoPath %>" width="250px" height="250px"></img>
-          </article>
-          <article id="hello" style="text-align:center; margin-left:30px;">
-            <label>소갯말</label><br>
-            <textarea style="width: 500px; height:200px; margin-top :15px; resize:none;;" readonly>
-            	<%= hello %>
-            </textarea>
-          </article>
+        <table>
+						 		<tr>
+						 			<th>사진</th>
+						 			<th style="text-align: center;">자기소개</th>
+						 		</tr>
+						 		<tr>
+						 			<td>
+						             	<article>
+											<img src="<%= photoPath %>" id='output' style="width: 200px; height: 200px;">
+						              	</article>
+						 			</td>
+						 			<td>
+						              	<article id="hello" style="text-align:center; margin-left:30px;">
+						                	<textarea style="width: 550px; height:200px; margin-top :15px; resize:none;" name="hello"><%= hello %></textarea>
+						              	</article>
+						 			</td>
+						 		</tr>
+						 	</table>
         </section>
+        
         <section id="items">  
           <article>
             <div class="itemBox">

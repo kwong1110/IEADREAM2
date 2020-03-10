@@ -264,13 +264,13 @@
       <div class ="main">
         <div class="pageTitle"><h1>이상형 정보 입력</h1></div>
           <form action="<%= request.getContextPath() %>/insert.up" method="post">
+               <input type="hidden" name="userNo" id="userNo" value="">
                <div class="tableArea">
                  <table>
-                    <input type="hidden" name="userNo" id="userNo" value="">
                    <tr class="itemBox">
                      <th class="itemName" id="">키 (cm)</th>
                      <td>
-                       <label><input type="radio" name="height" value="150" <%= h1 %>>155이하<%= height %></label>
+                       <label><input type="radio" name="height" value="150" <%= h1 %>>155이하</label>
                        <label><input type="radio" name="height" value="155" <%= h2 %>>155~160</label>
                        <label><input type="radio" name="height" value="160" <%= h3 %>>160~165</label>
                        <label><input type="radio" name="height" value="165" <%= h4 %>>165~170</label>

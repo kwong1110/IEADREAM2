@@ -89,7 +89,7 @@ public class MatchDAO {
 			  while(rs.next()) {
 				  	Match m = new Match();
 					m.setUserNo(rs.getInt("USER_NO"));
-					m.setUserNo(rs.getInt("TARGET_NO"));
+					m.setTargetNo(rs.getInt("TARGET_NO"));
 					m.setStatus(rs.getString("STATUS"));
 					m.setMatchDate(rs.getDate("MATCH_DATE"));
 					m.setSync(rs.getDouble("SYNC"));

@@ -39,21 +39,24 @@ public class MatchService {
 		for (int i=0; i<mlist.length; i++) {
 			if (mlist[i].getStatus().equals("D") || mlist[i].getStatus().equals("C")){
 				ulist.add(mlist[i]);
+				System.out.println("toString" + ulist.get(i).toString());
 			}
 		}
+		System.out.println("ulist size :" + ulist.size());
 		Match[] result = new Match[ulist.size()];
 		for (int i=0; i<ulist.size() ;i++) {
 			result[i] = new Match();
-			result[i].setUserNo(ulist.get(i).getTargetNo());
+			result[i].setUserNo(ulist.get(i).getUserNo());
 			result[i].setTargetNo(ulist.get(i).getTargetNo());
 			result[i].setMatchDate(ulist.get(i).getMatchDate());
 			result[i].setStatus(ulist.get(i).getStatus());
 			result[i].setSync(ulist.get(i).getSync());
+			
 			System.out.println(result[i].getUserNo());
 		}
 		Arrays.sort(result);
-		System.out.println("" + result[0].getUserNo());
-		System.out.println("" + result[0].getTargetNo());
+		System.out.println("gumc userNo" + result[0].getUserNo());
+		System.out.println("gumc targetNo" + result[0].getTargetNo());
 		return result;
 	}
 

@@ -33,6 +33,9 @@ public class UserService {
 	public UserInfo selectUserInfo(int userNo) {
 		Connection conn = getConnection();
 		UserInfoDAO uiDAO = new UserInfoDAO();
+		
+		System.out.println("Service userNo " + userNo);
+		
 		UserInfo ui = uiDAO.selectUserInfo(conn, userNo);
 		
 		String[] interest = uiDAO.selectInterest(conn, userNo);
@@ -55,6 +58,8 @@ public class UserService {
 		result.setAge(age);
 		
 		result.setInterest(interest);
+		
+		
 		
 		System.out.println("Service 체크 " + result.toString());
 		return result;
