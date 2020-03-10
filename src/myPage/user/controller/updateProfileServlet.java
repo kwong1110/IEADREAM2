@@ -59,10 +59,10 @@ public class updateProfileServlet extends HttpServlet {
 		
 		System.out.println("pass1 값 : " + p);
 		
-		if(p.equals("off")) {
+		if(p.equals("off")) { /* p값이 off일 경우 = 비밀번호가 빈칸으로 들어왔을 때 */
 			Account account = new Account(id, grade, email, phone);
 			result = new userProfileService().updateProfileNoPwd(account);
-		} else if (p.equals("on")){
+		} else if (p.equals("on")){ /* p값이 on일 경우 = 비밀번호가 채워져서 들어왔을 때 */
 			Account account = new Account(grade, id, password, gender, userName, phone, email, birth);
 			result = new userProfileService().updateProfile(account);
 		}

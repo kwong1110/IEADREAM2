@@ -43,7 +43,7 @@
 	.faq{text-align: center; cursor: pointer; display: none; font-size: 15px; line-height: 20px;}
 
 	.con{ /* 내용 css */
-		height: 100px; display: none; text-align: center;
+		height: 120%; display: none; text-align: left;
 		padding:12px 0;
 		border-top:1px solid rgb(136, 136, 136); /* 상단라인색 */
 		border-bottom:1px solid rgb(224, 224, 224); /* 하단라인색 */
