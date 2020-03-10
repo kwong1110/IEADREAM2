@@ -347,7 +347,7 @@ public class QuestionDAO {
 	public ArrayList<Reply> selectReplyList(Connection conn, int postNo) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		ArrayList<Reply> list = null;
+		ArrayList<Reply> list = new ArrayList<Reply>();
 		
 		String query = prop.getProperty("selectReplyList");
 		
@@ -356,13 +356,12 @@ public class QuestionDAO {
 			pstmt.setInt(1, postNo);
 			
 			rs = pstmt.executeQuery();
-			list = new ArrayList<Reply>();
 			
 			if(rs.next()) {
-				list.add(new Reply(rs.getString("answerChecked"),
-										rs.getString("answerContent"),
-										rs.getDate("answerDate")));
-				
+				list.add(new Reply(rs.getString("answer_checked"),
+										rs.getString("answer_content"),
+										rs.getDate("answer_date")));
+				System.out.println("dao의 list : " + list);
 			}
 			
 		} catch (SQLException e) {
