@@ -57,8 +57,7 @@ public class LoginServlet extends HttpServlet {
 				session.setMaxInactiveInterval(600); // 로그인에 대한  시간을 설정해주는 것이다 . -> 10분(60 * 10) 
 				session.setAttribute("loginUser", loginUser);
 
-				
-				if(loginUser.getGrade() >= 2) {
+				if(loginUser.getGrade() != 1) {
 				RequestDispatcher view = request.getRequestDispatcher("/fill.mc");
 				view.forward(request, response);
 				}

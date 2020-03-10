@@ -40,14 +40,16 @@ public class fillMatchListServlet extends HttpServlet {
 		Match[] oldMlist = ms.getMatchList(userNo);
 		int stack = 0;
 		Date today = new Date(System.currentTimeMillis());
-		for (int i = 0; i < oldMlist.length ; i++) {
-			if (oldMlist[i].getStatus().equals("D")) { // 대기중인 매칭 수 구하기
-				oldMlist[i].setMatchDate(today);
-				ms.updateMatch(oldMlist[i]); //매치 날짜 갱신
-				stack++;
-			}
-			else if(oldMlist[i].getMatchDate() == today) { // 확인한 매칭 중 오늘 생성된 매칭 수 구하기
-				stack++;
+		if (oldMlist != null) {
+			for (int i = 0; i < oldMlist.length ; i++) {
+				if (oldMlist[i].getStatus().equals("D")) { // 대기중인 매칭 수 구하기
+					oldMlist[i].setMatchDate(today);
+					ms.updateMatch(oldMlist[i]); //매치 날짜 갱신
+					stack++;
+				}
+				else if(oldMlist[i].getMatchDate() == today) { // 확인한 매칭 중 오늘 생성된 매칭 수 구하기
+					stack++;
+				}
 			}
 		}
 		Match[] newMlist = ms.searchMatchList(userNo); // 빈 공간 채워넣기

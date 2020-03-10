@@ -36,9 +36,6 @@ public class QuestionListServlet extends HttpServlet {
 		 QuestionService service = new QuestionService();
 		
 		  String userNo = request.getParameter("userNo");
-		  
-		  System.out.println(userNo);
-		  
 		  int listCount = service.getListCount(userNo);
 		 
 		  int currentPage; 
@@ -64,15 +61,8 @@ public class QuestionListServlet extends HttpServlet {
 		  
 		  PageInfo pi = new PageInfo(currentPage, listCount, limit, maxPage, startPage,endPage);
 		 
-		  //ArrayList<Board> list = service.selectList(currentPage, userNo);
-		  
 		  ArrayList<Board>  board = service.selectQBList(currentPage, userNo);
-		  
 		  ArrayList<Reply> reply = service.selectQRList(currentPage,userNo);
-		  System.out.println("board" + board);
-		  System.out.println("reply"+reply);
-		  
-		  
 		  
 		  String page = null; 
 		  if(board != null) { 
@@ -86,7 +76,6 @@ public class QuestionListServlet extends HttpServlet {
 		  }
 		  RequestDispatcher view = request.getRequestDispatcher(page);
 			view.forward(request, response);
-		 
 	}
 
 

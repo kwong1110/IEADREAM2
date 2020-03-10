@@ -33,7 +33,7 @@ public class randomInsertServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		UserService us = new UserService();
-		int result = us.randomInsert(500);
+		int result = us.randomInsert(100);
 		
 		String page = null;
 		if(result > 0) {

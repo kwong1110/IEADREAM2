@@ -35,6 +35,7 @@ public class UserService {
 		Connection conn = getConnection();
 		UserInfoDAO uiDAO = new UserInfoDAO();
 		UserInfo result = uiDAO.selectUserInfo(conn, userNo);
+		String[] interest = uiDAO.selectInterest(conn, userNo);
 		
 		Date b = uiDAO.selectAccount(conn, userNo).getBirth();
 		Calendar birth = Calendar.getInstance();
@@ -53,6 +54,8 @@ public class UserService {
 		if (birthMonth * 100 + birthDay > currentMonth * 100 + currentDay) { age--;}
 
 		result.setAge(age);
+		
+		result.setInterest(interest);
 		
 		return result;
 	}
@@ -86,21 +89,15 @@ public class UserService {
 		return result;
 	}
 	
-	public ArrayList<UserPhoto> selectUserPhotoList(int userNo) {
-		Connection conn = getConnection();
-		UserInfoDAO uiDAO = new UserInfoDAO();
-		ArrayList<UserPhoto> result = uiDAO.selectUserPhoto(conn, userNo);
-		return result;
-	}
 	
 	public UserPhoto selectUserPhoto(int userNo) {
 		Connection conn = getConnection();
 		UserInfoDAO uiDAO = new UserInfoDAO();
-		ArrayList<UserPhoto> plist = uiDAO.selectUserPhoto(conn, userNo);
-
-		UserPhoto photo = plist.get(0);
+		UserPhoto photo = uiDAO.selectUserPhoto(conn, userNo);
 		return photo;
+	
 	}
+	
 	public int insertPhoto(UserPhoto p) {
 		Connection conn = getConnection();
 		UserInfoDAO uiDAO = new UserInfoDAO();
@@ -211,6 +208,8 @@ public class UserService {
 		UserPrefer up = new UserPrefer();
 		Random random = new Random();
 		
+		int result = 0;
+		
 		for(int i=0; i<no; i++) {
 			String userId = "Experiment" + i;
 			String userPwd = "password1!";
@@ -231,14 +230,19 @@ public class UserService {
 			a.setEmail(email);
 			a.setBirth(birth);
 			
-			aDAO.insertAccount(conn, a);
+			result = aDAO.insertAccount(conn, a);
+			if(result > 0) {
+				commit(conn);
+			} else {
+				rollback(conn);
+			}
 			
 			int userNo = getUserNo(a.getId());
 
 			String hello = "안녕하세요";
 			
 			int height = 150 + 5*random.nextInt(8);
-			String shape="마름";
+			String shape=null;
 			switch(random.nextInt(5)) {
 			case 0: shape= "마름"; break;
 			case 1: shape= "보통"; break;
@@ -247,7 +251,7 @@ public class UserService {
 			case 4: shape= "글래머"; break;
 			}
 			
-			String style = "귀여운";
+			String style =null;
 			switch(random.nextInt(6)) {
 			case 0: style= "귀여운"; break;
 			case 1: style= "지적인"; break;
@@ -259,7 +263,7 @@ public class UserService {
 			
 			int region = 11 + random.nextInt(3);
 			
-			String religion="기독교";
+			String religion=null;
 			switch(random.nextInt(5)) {
 			case 0: religion= "기독교"; break;
 			case 1: religion= "천주교"; break;
@@ -270,7 +274,7 @@ public class UserService {
 			
 			int scholar = 2*random.nextInt(5);
 	
-			String job="학생";
+			String job=null;
 			switch(random.nextInt(8)) {
 			case 0: job = "학생"; break;
 			case 1: job = "사무직"; break;
@@ -312,8 +316,22 @@ public class UserService {
 			ui.setSmoke(smoke);
 			ui.setInterest(interest);
 			
-			uiDAO.insertUserInfo(conn, ui);
-			uiDAO.insertInterest(conn, ui);
+			result = uiDAO.insertUserInfo(conn, ui);
+			
+			if(result > 0) {
+				commit(conn);
+			} else {
+				rollback(conn);
+			}
+			
+			result = uiDAO.insertInterest(conn, ui);
+			
+			if(result > 0) {
+				commit(conn);
+			} else {
+				rollback(conn);
+			}
+			
 			
 			String savePath ="/images/common/heart.png";
 			String originName ="profile" + i;
@@ -324,29 +342,35 @@ public class UserService {
 			p.setOriginName(originName);
 			p.setChangeName(changeName);
 			
-			uiDAO.insertPhoto(conn, p);
+			result = uiDAO.insertPhoto(conn, p);
+			
+			if(result > 0) {
+				commit(conn);
+			} else {
+				rollback(conn);
+			}
 			
 			int theight = 150 + 5*random.nextInt(8);
 			int heightPri = random.nextInt(2);
 			
 			String tshape="마름";
 			switch(random.nextInt(5)) {
-			case 0: shape= "마름"; break;
-			case 1: shape= "보통"; break;
-			case 2: shape= "통통"; break;
-			case 3: shape= "근육질"; break;
-			case 4: shape= "글래머"; break;
+			case 0: tshape= "마름"; break;
+			case 1: tshape= "보통"; break;
+			case 2: tshape= "통통"; break;
+			case 3: tshape= "근육질"; break;
+			case 4: tshape= "글래머"; break;
 			}
 			int shapePri = random.nextInt(2);
 			
 			String tstyle = "귀여운";
 			switch(random.nextInt(6)) {
-			case 0: style= "귀여운"; break;
-			case 1: style= "지적인"; break;
-			case 2: style= "섹시한"; break;
-			case 3: style= "따뜻한"; break;
-			case 4: style= "우아한"; break;
-			case 5: style= "터프한"; break;
+			case 0: tstyle= "귀여운"; break;
+			case 1: tstyle= "지적인"; break;
+			case 2: tstyle= "섹시한"; break;
+			case 3: tstyle= "따뜻한"; break;
+			case 4: tstyle= "우아한"; break;
+			case 5: tstyle= "터프한"; break;
 			}
 			int stylePri = random.nextInt(2);
 			
@@ -357,11 +381,11 @@ public class UserService {
 			
 			String treligion="기독교";
 			switch(random.nextInt(5)) {
-			case 0: religion= "기독교"; break;
-			case 1: religion= "천주교"; break;
-			case 2: religion= "불교"; break;
-			case 3: religion= "무교"; break;
-			case 4: religion= "기타"; break; 
+			case 0: treligion= "기독교"; break;
+			case 1: treligion= "천주교"; break;
+			case 2: treligion= "불교"; break;
+			case 3: treligion= "무교"; break;
+			case 4: treligion= "기타"; break; 
 			}
 			int religionPri = random.nextInt(2);
 			
@@ -370,14 +394,14 @@ public class UserService {
 	
 			String tjob="학생";
 			switch(random.nextInt(8)) {
-			case 0: job = "학생"; break;
-			case 1: job = "사무직"; break;
-			case 2: job = "연구직"; break;
-			case 3: job = "교육직"; break;
-			case 4: job =  "예술"; break;
-			case 5: job =  "서비스"; break;
-			case 6: job = "전문직"; break;
-			case 7: job = "기타"; break;
+			case 0: tjob = "학생"; break;
+			case 1: tjob = "사무직"; break;
+			case 2: tjob = "연구직"; break;
+			case 3: tjob = "교육직"; break;
+			case 4: tjob =  "예술"; break;
+			case 5: tjob =  "서비스"; break;
+			case 6: tjob = "전문직"; break;
+			case 7: tjob = "기타"; break;
 			}
 			int jobPri = random.nextInt(2);
 						
@@ -411,16 +435,15 @@ public class UserService {
 			up.setSmokePri(smokePri);
 			up.setInterestPri(interestPri);
 			
-			upDAO.insertUserPrefer(conn, up);
+			result = upDAO.insertUserPrefer(conn, up);
 			
+			if(result > 0) {
+				commit(conn);
+			} else {
+				rollback(conn);
+			}
 		}
 		
-		int result = 0;
-		if(result > 0) {
-			commit(conn);
-		} else {
-			rollback(conn);
-		}
 		close(conn);
 		return result;
 

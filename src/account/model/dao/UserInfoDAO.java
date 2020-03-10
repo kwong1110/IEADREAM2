@@ -9,15 +9,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Properties;
 
 import account.model.vo.Account;
 import account.model.vo.UserInfo;
 import account.model.vo.UserPhoto;
-import board.model.vo.Board;
-import board.model.vo.Photo;
 
 public class UserInfoDAO {
 
@@ -73,8 +70,9 @@ public class UserInfoDAO {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, userId);
 			rs = pstmt.executeQuery();
-			rs.next();
-				userNo = (rs.getInt("USER_NO"));
+			if(rs.next()) {
+			userNo = (rs.getInt("USER_NO"));
+			}
 		}catch(Exception e) { 
 			e.printStackTrace();
 		}finally {
@@ -244,26 +242,23 @@ public class UserInfoDAO {
 		return result;
 	}
 	
-	public ArrayList<UserPhoto> selectUserPhoto(Connection conn, int userNo) {
+	public UserPhoto selectUserPhoto(Connection conn, int userNo) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		
-		ArrayList<UserPhoto> pList = null;
-		
+		UserPhoto p = null;
 		String query = prop.getProperty("selectPhoto");
 		try {
 			pstmt = conn.prepareStatement(query);
 			rset = pstmt.executeQuery(query);
-			pList = new ArrayList<UserPhoto>();
-			while(rset.next()) {
-				pList.add(new UserPhoto(
-						rset.getInt("USER_NO"),
-						rset.getInt("PHOTO_NO"),
-						rset.getString("ORIGIN_NAME"),
-						rset.getString("CHANGE_NAME"),
-						rset.getString("FILE_PATH"),
-						rset.getInt("FILE_LEVEL"),
-						rset.getString("DELETED")));
+			if(rset.next()) {
+				p = new UserPhoto();
+				p.setPhotoNo(rset.getInt("PHOTO_NO"));
+				p.setUserNo(rset.getInt("USER_NO"));
+				p.setOriginName(rset.getString("ORIGIN_NAME"));
+				p.setChangeName(rset.getString("CHANGE_NAME"));
+				p.setFilePath(rset.getString("FILE_PATH"));
+				p.setFileLevel(rset.getInt("FILE_LEVEL"));
+				p.setDeleted(rset.getString("DELETED"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -272,7 +267,7 @@ public class UserInfoDAO {
 			close(pstmt);
 		}
 		
-		return pList;
+		return p;
 	}
 	public int insertPhoto(Connection conn, UserPhoto p) {
 		PreparedStatement pstmt = null;
