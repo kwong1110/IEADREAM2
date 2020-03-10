@@ -122,4 +122,18 @@ public class userService {
 		return result;
 	}
 
+	public int searchDate(String userNo) {
+		Connection conn = getConnection();
+		userDAO uDAO = new userDAO();
+		int result = uDAO.searchDate(conn, userNo);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		return result;
+	}
+
 }

@@ -79,7 +79,6 @@
 									<tr>
 										<th><input type="checkbox" id="all" onclick="checkAll();"></th>
 										<th>분류</th>
-										<th>회원 이미지</th>
 										<th>상태</th>
 										<th>데이트 장소 추천</th>
 										<th>남은 기간</th>
@@ -89,14 +88,13 @@
 								<tbody>
 									<% if(list.isEmpty()){ %>
 									<tr>
-										<td colspan="6">조회된 리스트가 없습니다.</td>
+										<td colspan="5">조회된 리스트가 없습니다.</td>
 									</tr>
 									<% } else{ 
 											for(Match m : list){
 											switch(m.getMatchStatus()){
-											case "D": matchStatus = "상대방의 응답을 기다리고 있습니다."; break;
+											case "S": matchStatus = "상대방의 응답을 기다리고 있습니다."; break;
 											case "C": matchStatus = "확인 완료"; break;
-											case "S": matchStatus = "하트 보냄"; break;
 											case "A": matchStatus = "하트 수락"; break;
 											}
 											if(m.getUserNo() == loginUser.getUserNo()){
@@ -113,7 +111,6 @@
 										<% } else { %>
 										<td class="sent"></td>
 										<% } %>
-										<td>이미지 들어가야함</td>
 										<td>
 											<ul class="heartState">
 												<li>회원번호 <%= m.getTargetNo() %></li>
@@ -229,27 +226,29 @@
 	
 	window.onload = function(){
 		
-		var autoDTargetArr = [];
-		var autoDUserArr= [];
-		
-		$('.autoDTarget').each(function(){
-			autoDTargetArr.push($(this).val());
-		});
-		
-		$('.autoDUser').each(function(){
-			autoDUserArr.push($(this).val());
-		});
-		
-		$.ajaxSettings.traditional = true;
-		$.ajax({
-			url: '<%= request.getContextPath() %>/autodelete.hh',
-			type: 'get',
-			data: {autoDTargetArr:autoDTargetArr, autoDUserArr:autoDUserArr},
-			success: function(data){
-				window.location.reload();
-				alert(data);
-			}
-		});			
+		if($('.leftDays').val() != null){
+			var autoDTargetArr = [];
+			var autoDUserArr= [];
+			
+			$('.autoDTarget').each(function(){
+				autoDTargetArr.push($(this).val());
+			});
+			
+			$('.autoDUser').each(function(){
+				autoDUserArr.push($(this).val());
+			});
+			
+			$.ajaxSettings.traditional = true;
+			$.ajax({
+				url: '<%= request.getContextPath() %>/autodelete.hh',
+				type: 'get',
+				data: {autoDTargetArr:autoDTargetArr, autoDUserArr:autoDUserArr},
+				success: function(data){
+					window.location.reload();
+					alert(data);
+				}
+			});		
+		}
 	}
 </script>
 </html>

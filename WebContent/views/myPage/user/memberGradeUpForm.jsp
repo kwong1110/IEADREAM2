@@ -11,6 +11,7 @@
 <style>
 .gradeBtn{
 	font-size: 16px;
+	margin: 10px;
 	padding: 10px 20px 10px 20px;
 	margin: 0;
 }
@@ -20,7 +21,7 @@
 	height: 400px;
 	font-size: 12px;
 	background-size: contain; 
-	background-image: url('../../../images/common/memGradeUp.png');
+	background-image: url('../../../images/myPage/memGradeUp2.png');
 	background-repeat: no-repeat;
 }
 </style>
@@ -35,7 +36,7 @@
 				</div>
 				<div class="information">
 					정회원 가입하기 버튼을 누르면 결제페이지로 이동합니다.<br>
-					결제 후...<br>
+					결제 후 바로 정회원으로 서비스 이용 가능 합니다.<br>
 				</div>
 				<div class="contents">
 					<input type="button" class="defaultBtn gradeBtn" id="payment" value="정회원 가입하기">	
