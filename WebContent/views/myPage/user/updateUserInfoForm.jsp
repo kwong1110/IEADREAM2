@@ -183,12 +183,12 @@
 						 		<tr>
 						 			<td>
 						             	<article>
-											<img src="photoPath" id='output' style="width: 200px; height: 200px;">
+											<img src="<%= photoPath %>" id='output' style="width: 200px; height: 200px;">
 						              	</article>
 						 			</td>
 						 			<td>
 						              	<article id="hello" style="text-align:center; margin-left:30px;">
-						                	<textarea style="width: 550px; height:200px; margin-top :15px; resize:none;" name="hello"></textarea>
+						                	<textarea style="width: 550px; height:200px; margin-top :15px; resize:none;" name="hello"><%= hello %></textarea>
 						              	</article>
 						 			</td>
 						 		</tr>
