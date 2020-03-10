@@ -186,7 +186,7 @@ public class bestCoupleDAO {
 		int result = 0;
 		
 		String query = prop.getProperty("insertbcPhoto");
-		//INSERT INTO PHOTO VALUES(SEQ_PHOTONO.NEXTVAL, SEQ_POSTNO.CURRVAL, ?, ?, ?, ?, DEFAULT, NULL)
+		//INSERT INTO PHOTO VALUES(SEQ_PHOTONO.NEXTVAL, SEQ_POSTNO.CURRVAL, ?, ?, ?, ?, DEFAULT)
 		
 		try {
 			for(int i = 0; i < photoList.size(); i++) {

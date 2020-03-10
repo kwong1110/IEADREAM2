@@ -142,6 +142,10 @@
 	
 	button:hover{cursor: pointer;}
 	
+	.empty{
+		padding: 220px 0;
+	}
+	
 </style>
 </head>
 <body>
@@ -156,6 +160,10 @@
 						<div class="optionbox">
 							<div class="optiondiv">
 								<select class="option" id="year" name="year">
+									<option value="" selected disabled>-----</option>
+									<option value="2017">2017년</option>
+									<option value="2018">2018년</option>
+									<option value="2019">2019년</option>
 									<option value="2020">2020년</option>
 									<option value="2021">2021년</option>
 									<option value="2022">2022년</option>
@@ -164,8 +172,9 @@
 							
 							<div class="optiondiv">
 								<select class="option" id="month" name="month">
-									<option value="00">-----</option>
-									<option value="01" >1월</option>
+									<option value="" selected disabled>-----</option>
+									<option value="00">전체</option>
+									<option value="01">1월</option>
 									<option value="02">2월</option>
 									<option value="03">3월</option>
 									<option value="04">4월</option>
@@ -188,30 +197,34 @@
 					
 					<div class="contents">
 						<div class="contns">
-							<% 
-								for(int i = 0; i < bcList.size(); i++){
-									Board bc = bcList.get(i);
-							%>
-								<div class="contn">
-									<p class="hit">HIT : <%= bc.getHit() %></p>
-									<div class="img">
-										<input type="hidden" value="<%= bc.getPostNo() %>">
-										<% 
-											for(int j = 0; j < pList.size(); j++){
-												Photo p = pList.get(j);		
-										%>
-											<% if(bc.getPostNo() == p.getPostNo()){ %>
-												<img src="<%= request.getContextPath() %>/photo_uploadFiles/<%= p.getChangeName() %>" style="width:inherit; height:inherit;">
+							<% if(bcList.isEmpty()){ %>
+								<div class="empty">조회된 리스트가 없습니다.</div>
+							<% } else{ %>
+								<% 
+									for(int i = 0; i < bcList.size(); i++){
+										Board bc = bcList.get(i);
+								%>
+									<div class="contn">
+										<p class="hit">HIT : <%= bc.getHit() %></p>
+										<div class="img">
+											<input type="hidden" value="<%= bc.getPostNo() %>">
+											<% 
+												for(int j = 0; j < pList.size(); j++){
+													Photo p = pList.get(j);		
+											%>
+												<% if(bc.getPostNo() == p.getPostNo()){ %>
+													<img src="<%= request.getContextPath() %>/photo_uploadFiles/<%= p.getChangeName() %>" style="width:inherit; height:inherit;">
+												<% } %>
 											<% } %>
-										<% } %>
+										</div>
+										<div class="text">
+											<p id="text1"><%= bc.getTitle() %></p>
+											<p id="text2"><%= bc.getUserId() %></p>
+											<p id="text3"><%= bc.getCreateDate() %></p>
+										</div>
 									</div>
-									<div class="text">
-										<p id="text1"><%= bc.getTitle() %></p>
-										<p id="text2"><%= bc.getUserId() %></p>
-										<p id="text3"><%= bc.getCreateDate() %></p>
-									</div>
-								</div>
-									
+										
+									<% } %>
 								<% } %>
 							</div>
 							
