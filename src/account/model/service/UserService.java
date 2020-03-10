@@ -34,9 +34,10 @@ public class UserService {
 		Connection conn = getConnection();
 		UserInfoDAO uiDAO = new UserInfoDAO();
 		UserInfo ui = uiDAO.selectUserInfo(conn, userNo);
+		
 		String[] interest = uiDAO.selectInterest(conn, userNo);
-		Date b = uiDAO.selectAccount(conn, userNo).getBirth();
-		int age = getAge(b);
+		
+		int age = uiDAO.getUserAge(conn, userNo);
 
 		UserInfo result = new UserInfo();
 		result.setUserNo(userNo);

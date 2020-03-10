@@ -86,13 +86,13 @@ public class MatchDAO {
 			  pstmt.setInt(1, userNo);
 			  rs = pstmt.executeQuery();
 			  while(rs.next()) {
-				Match m = new Match();
+				  	Match m = new Match();
 					m.setUserNo(rs.getInt("USER_NO"));
 					m.setUserNo(rs.getInt("TARGET_NO"));
 					m.setStatus(rs.getString("STATUS"));
 					m.setMatchDate(rs.getDate("MATCH_DATE"));
 					m.setSync(rs.getDouble("SYNC"));
-				list.add(m);
+					list.add(m);
 			  }
 		  } catch (SQLException e) { 
 			  e.printStackTrace(); 
@@ -103,7 +103,7 @@ public class MatchDAO {
 		Match[] result = new Match[list.size()];
 			int size=0;
 		  	for(Match temp : list){
-		    result[size++] = temp;
+		  	result[size++] = temp;
 		  }
 		return result;
 	}

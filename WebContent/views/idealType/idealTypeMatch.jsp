@@ -9,20 +9,18 @@ import="idealType.model.service.*"
 %>
 <%
 
-	MatchService ms = new MatchService();
-	UserService us = new UserService();
-
-	Account ac = (Account)request.getAttribute("ac");
-	UserInfo ui = (UserInfo)request.getAttribute("ui");	
+	Account ac = new Account();
+	ac = (Account)request.getAttribute("ta");
+	UserInfo ui = new UserInfo();
+	ui = (UserInfo)request.getAttribute("ti");	
 	String photoPath = (String)request.getAttribute("pPath");
-	
 	int sync = (int)request.getAttribute("sync");
 	int matchNo = (int)request.getAttribute("matchNo");
-	String min = null; String max = null;
-	if (matchNo == 0){min="hidden";}
-	if (matchNo == 5){max="hidden";}
-	
 	int maxMatchNo = (int)request.getAttribute("maxMatchNo");
+	
+	String back = null; String next = null;
+	if (matchNo == 0){back="hidden";}
+	if (matchNo == maxMatchNo){next="hidden";}
 	
 	String name = ac.getUserName();
 	String hello = ui.getHello();
@@ -344,13 +342,13 @@ import="idealType.model.service.*"
         </section>
         <section id="move" style="display:flex;">
           <div style="text-align:left">
-            <img src="<%= request.getContextPath() %>/images/common/back.png" width="50px" height="100px" hidden="<%= min%>" onclick="<%= request.getContextPath()%>/get.mc?matchNo=<%= matchNo -1 %>" ></img>
+            <img src="<%= request.getContextPath() %>/images/common/back.png" width="50px" height="100px" hidden="<%= back%>" onclick="<%= request.getContextPath()%>/get.mc?matchNo=<%= matchNo -1 %>" ></img>
           </div>
           <div style="margin: 0 auto;">
             <img src="<%= request.getContextPath() %>/images/common/heart.png" width="100px" height="100px" onclick="<%= request.getContextPath()%>/sendHeart.mc?matchNo=<%= matchNo %>"></img>
           </div>
           <div  style="text-align:right">
-            <img src="<%= request.getContextPath() %>/images/common/next.png" width="50px" height="100px" hidden="<%= max%>" onclick="<%= request.getContextPath()%>/get.mc?matchNo=<%= matchNo +1 %>"></img>
+            <img src="<%= request.getContextPath() %>/images/common/next.png" width="50px" height="100px" hidden="<%= next%>" onclick="<%= request.getContextPath()%>/get.mc?matchNo=<%= matchNo +1 %>"></img>
           </div>
         </section>
       </div>

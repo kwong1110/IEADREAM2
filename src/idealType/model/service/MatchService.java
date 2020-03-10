@@ -3,8 +3,11 @@ package idealType.model.service;
 import static common.JDBCTemplate.*;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Arrays;
+
+import com.sun.corba.se.impl.orbutil.ObjectUtility;
 
 import account.model.dao.UserInfoDAO;
 import account.model.dao.UserPreferDAO;
@@ -38,11 +41,18 @@ public class MatchService {
 				ulist.add(mlist[i]);
 			}
 		}
-		
 		Match[] result = new Match[ulist.size()];
 		for (int i=0; i<ulist.size() ;i++) {
-			result[i] = ulist.get(i);
+			result[i] = new Match();
+			result[i].setUserNo(ulist.get(i).getTargetNo());
+			result[i].setTargetNo(ulist.get(i).getTargetNo());
+			result[i].setMatchDate(ulist.get(i).getMatchDate());
+			result[i].setStatus(ulist.get(i).getStatus());
+			result[i].setSync(ulist.get(i).getSync());
+			System.out.println(result[i].getUserNo());
+
 		}
+		System.out.println(result[0].getUserNo());
 		Arrays.sort(result);
 		System.out.println(result[0].getUserNo());
 		System.out.println(result[0].getTargetNo());
@@ -78,7 +88,7 @@ public class MatchService {
 	}
 	
 	public Match[] searchMatchList(int userNo) {
-		double minSync = 0.3;
+		double minSync = 0.1;
 		int maxMatch = 5;
 		Connection conn = getConnection();
 		
@@ -88,36 +98,38 @@ public class MatchService {
 		UserPrefer up = us.selectUserPrefer(userNo);
 		UserInfoDAO uiDAO = new UserInfoDAO();
 		
-		String targetGender = "F";
+		String targetGender = "F"; 							// 유저 성별 추출
 		if (getUserGender(userNo).equals("F")) {
 			targetGender = "M";
 		}
-	
-		int[] tlist = uiDAO.searchUserNoList(conn, targetGender); // 반대 성별 유저 리스트
+		
+		int[] tlist = uiDAO.searchUserNoList(conn, targetGender); // 타겟 성별 유저 리스트
 		Match[] mlist = new Match[tlist.length];
 		
 		for (int i=0; i < tlist.length ; i++) {
 			mlist[i] = new Match();
-			
 			mlist[i].setUserNo(userNo);
 			mlist[i].setTargetNo(tlist[i]);
-			
-			UserInfo ti = us.selectUserInfo(tlist[i]);
+			UserInfo ti = us.selectUserInfo(tlist[i]);		//상대방 데이터 추출
 			UserPrefer tp = us.selectUserPrefer(tlist[i]);
-			
-			double sync = getMatchSync(ui, up, ti, tp);
-			mlist[i].setSync(sync); // 임시 매칭 리스트 생성, 싱크율 기준 정렬
-			double rsync = getMatchSync(ti, tp, ui, up);
-			mlist[i].setRsync(rsync); // 상대방이 나를 볼 때의 싱크
+			double sync = getMatchSync(ui, up, ti, tp);		// 내가 상대를 볼 때의 취향 일치율 계산
+			mlist[i].setSync(sync); 
+			double rsync = getMatchSync(ti, tp, ui, up);	// 상대방이 나를 볼 때의 취향 일치율 계산
+			mlist[i].setRsync(rsync); 
 		}
-		Arrays.sort(mlist);								//싱크로율순 정렬		
+		Arrays.sort(mlist);									//일치율순 정렬
+		
 		Match[] result = new Match[maxMatch];
 		
 		int j = 0;
 		for (int i=0 ; i< maxMatch || j < mlist.length; i++) { 
-			for (; result[i] != null ; j++) {
-				if (checkMatch(mlist[j]) && (mlist[i].getRsync() > minSync)) { // 중복 검사, 상대의 싱크율 검사 후 리턴
-					result[i] = mlist[j];}
+			int k = 0;
+			for (; k == 0 ;j++) {
+				if (checkMatch(mlist[j]) && (mlist[j].getRsync() > minSync)) { // 중복 검사, 상대의 싱크율 검사 후 리턴
+					result[i] = new Match();
+					result[i] = mlist[j];
+					k = 1;
+				}
 			}
 		}
 		return result;
@@ -148,25 +160,14 @@ public class MatchService {
 		double syncPoint = 0;
 		int maxPoint = up.getHeightPri() + up.getShapePri() + up.getStylePri() + up.getAgePri() + up.getRegionPri() 
 						+ up.getReligionPri() + up.getScholarPri() + up.getJobPri() + up.getDrinkPri() + up.getSmokePri() + up.getInterestPri();
-		
 		if (ti.getHeight() == up.getHeight()) 	{syncPoint += up.getHeightPri();}
-		else {double v = Math.abs((ti.getHeight() - up.getHeight())/5); syncPoint += (1-v)*up.getHeightPri();}
-		System.out.println(ti.getHeight() + " " + ti.getShape() + " " + up.getShape() + " " + up.getShapePri());
-
+			else {double v = Math.abs((ti.getHeight() - up.getHeight())/5); syncPoint += (1-v)*up.getHeightPri();}
 		if (ti.getStyle().equals(up.getStyle())) {syncPoint += up.getStylePri();}
-		int d = ti.getAge() - ui.getAge();
-		int ad = 0;
-		if (d > 3) {ad = 2;}
-		else if (d > 0) {ad = 1;}
-		else if (d == 0) {ad = 0;}
-		else if (d > -3) {ad = -1;}
-		else {ad = -2;}
-		if (ad == up.getAge()) {syncPoint += up.getAgePri();}
-		else {double v = Math.abs((ti.getAge() - up.getAge())/2); syncPoint += (1-v)*up.getAgePri();}
+		if (getAgeDiff(ti.getAge(),ui.getAge()) == up.getAge()) {syncPoint += up.getAgePri();}
+			else {double v = Math.abs((ti.getAge() - up.getAge())/2); syncPoint += (1-v)*up.getAgePri();}
 		if (ti.getRegion() == ui.getRegion()) {syncPoint += up.getRegionPri();}
 			else if(ti.getRegion()%10 == ui.getRegion()%10){syncPoint += 0.5*up.getRegionPri();}
-			else {syncPoint -= 0.5*maxPoint;} // 도 단위애서 거주 지역이 다른 경우
-		
+			else {syncPoint -= 0.5*maxPoint;} // 도 단위에서 거주 지역이 다른 경우 페널티
 		if (ti.getReligion().equals(up.getReligion())) {syncPoint += up.getReligionPri();}
 		if (ti.getScholar() >= up.getScholar()) {syncPoint += up.getScholarPri();}
 			else {double v = Math.abs((ti.getScholar() - up.getScholar())/2); syncPoint += (1-v)*up.getScholarPri();}
@@ -174,12 +175,44 @@ public class MatchService {
 		if (ti.getDrink() == up.getDrink()) 	{syncPoint += up.getDrinkPri();}
 			else {double v = Math.abs((ti.getDrink() - up.getDrink())); syncPoint += (1-v)*up.getDrinkPri();}
 		if (ti.getSmoke() == up.getSmoke()) 	{syncPoint += up.getSmokePri();}
-		
 		for (int i = 0; i < ui.getInterest().length; i++){
 			if (Arrays.asList(ti.getInterest()).contains(ui.getInterest()[i])) {syncPoint += up.getInterestPri();}
 		}
-		
 		return syncPoint/maxPoint;
+	}
+	public int getAgeDiff(int uage, int tage) {
+		int d = tage - uage;
+		int ad = 0;
+		if (d > 3) {ad = 2;}
+		else if (d > 0) {ad = 1;}
+		else if (d == 0) {ad = 0;}
+		else if (d > -3) {ad = -1;}
+		else {ad = -2;}
+		return ad;
+	}
+	
+	public int fillMatch(int userNo) {
+		Match[] oldMlist = getMatchList(userNo);
+		int stack = 0;
+		Date today = new Date(System.currentTimeMillis());
+		if (oldMlist != null) {
+			for (int i = 0; i < oldMlist.length ; i++) {
+				if (
+					oldMlist[i].getStatus().equals("D")) { // 대기중인 매칭 수 구하기
+					oldMlist[i].setMatchDate(today);
+					updateMatch(oldMlist[i]); 				//매치 날짜 갱신
+					stack++;
+				}
+				else if(oldMlist[i].getMatchDate() == today) { // 확인한 매칭 중 오늘 생성된 매칭 수 구하기
+					stack++;
+				}
+			}
+		}
+		Match[] newMlist = searchMatchList(userNo); 		// 빈 공간 채워넣기
+		for (int i = 0; stack+i < 5 ; i++) {
+			insertMatch(newMlist[i]);
+		}
+		return 0;
 	}
 	/*public Stat[][] getUiStat(int userNo) {
 		Connection conn = getConnection();
@@ -241,7 +274,6 @@ public class MatchService {
 		Stat[] region = mDAO.getUiProp(conn, "REGION", gender);
 		
 		Stat[] interest = mDAO.getInterestProp(conn, gender);
-		
 		
 		Stat[][] result = new Stat[11][];
 		result[0] = height;

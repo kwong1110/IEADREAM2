@@ -18,53 +18,6 @@ import="idealType.model.service.*"
   <title>선호도 통계</title>
   <meta charset="utf-8">
   <style>
-    .wrapper{
-      text-align: left;
-      width: 1200px;
-      margin:0 auto;
-      padding:0;
-      display : block;
-    }
-    #profile {
-      text-align: right;
-    }
-
-    .outer{
-      background-color: white;
-      text-align: center;
-      display:block;
-    }
-    nav{
-      background-color: white;
-      text-align: center;
-      width: 170px;
-      height: 100%;
-      margin: 0 auto;
-      padding:0;
-      float : left;
-    }
-    .mainCategory{
-      font-size : 15pt;
-      font-weight : 500;
-      padding-top: 20px;
-      padding-bottom: 20px;
-      border-bottom: 1px solid darkgray;
-    }
-    .subCategory{
-      font-size : 13pt;
-      font-weight : 400;
-      padding-top: 20px;
-    }
-    .main{
-      background-color: whites;
-      text-align: left;
-      max-width:1025px;
-      min-height: 775px;
-      margin:0 auto;
-      padding:0;
-      float : left;
-      border-left: 1px solid darkgray;
-    }
     section {
       padding: 15px;
     }
@@ -123,18 +76,9 @@ import="idealType.model.service.*"
   <div class ="outer">
     <div class="wrapper">
       <div class ="main">
-        <section style="clear:left;">
-          <p style="font-weight: 550; font-size: 16pt;">이상형의 이상형</p>
-        </section>
-        <section id="summary" style="display: flex">
-          <article id="sync" style="text-align: center; margin-left: 40%;">
-            <label style="margin:10px;">나와의 일치율</label>
-            <label>65%</label>
-            <div class="graph">
-                <strong class="bar" style="width: 65%;"></strong>
-            </div>
-          </article>
-        </section>
+        <div class="pageTitle">
+			<h1> 이상형 통계</h1>
+		</div>
         <section id="items">  
           <article>
           <%
