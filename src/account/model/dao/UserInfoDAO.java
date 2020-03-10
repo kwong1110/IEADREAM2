@@ -249,6 +249,9 @@ public class UserInfoDAO {
 		String query = prop.getProperty("selectPhoto");
 		try {
 			pstmt = conn.prepareStatement(query);
+      
+			pstmt.setInt(1,userNo);
+      
 			rset = pstmt.executeQuery();
 			if(rset.next()) {
 				p.setPhotoNo(rset.getInt("PHOTO_NO"));
