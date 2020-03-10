@@ -362,4 +362,35 @@ private Properties prop = new Properties();
 		
 		return result;
 	}
+
+	public int heartAutoDelete(Connection conn, String[] autoDTarget, String[] autoDUser) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("deleteHeart");
+		
+		try {
+			for(int i = 0; i < autoDTarget.length; i++) {
+				pstmt = conn.prepareStatement(query);
+				pstmt.setString(1, autoDUser[i]);
+				pstmt.setString(2, autoDTarget[i]);
+				
+				
+				result = pstmt.executeUpdate();
+				
+				if(result > 0) {
+					commit(conn);
+				} else {
+					rollback(conn);
+					break;
+				}
+			}			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
 }
