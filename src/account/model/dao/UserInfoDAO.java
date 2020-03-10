@@ -103,18 +103,18 @@ public class UserInfoDAO {
 		return userNo;
 	}
 	
-	public UserInfo selectUserInfo(Connection conn, int userNo) {
+	public UserInfo selectUserInfo(Connection conn, int usNo) {
 		PreparedStatement pstmt = null; 
 		ResultSet rs = null;
-		UserInfo ui = null;
+		UserInfo ui = new UserInfo();
 		String query = prop.getProperty("selectUserInfo");
-		
+		int userNo = usNo;
+		System.out.println("DAO usNo:" + usNo);
 		try {
 			  pstmt = conn.prepareStatement(query);
 			  pstmt.setInt(1, userNo);
 			  rs = pstmt.executeQuery();
-			  rs.next(); 
-			  ui = new UserInfo();
+			  if(rs.next()) {
 			  	ui.setUserNo(userNo);
 			  	ui.setHello(rs.getString("HELLO"));
 				ui.setHeight(rs.getInt("HEIGHT"));
@@ -126,7 +126,8 @@ public class UserInfoDAO {
 				ui.setJob(rs.getString("JOB"));
 				ui.setDrink(rs.getInt("DRINK"));
 				ui.setSmoke(rs.getInt("SMOKE"));
-			  
+				System.out.println("DAO try 체크 : " + ui.toString());
+			  }
 		  } catch (SQLException e) { 
 			  e.printStackTrace(); 
 		  } finally {

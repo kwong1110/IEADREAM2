@@ -40,6 +40,7 @@ public class getMatchServlet extends HttpServlet {
 		
 		Account loginUser = (Account)session.getAttribute("loginUser");
 		int userNo = loginUser.getUserNo();
+		System.out.println("servlet userNo: " + userNo);
 		
 		int matchNo = 0;
 		if (request.getAttribute("matchNo") != null) {matchNo = (int)request.getAttribute("matchNo");}
@@ -48,7 +49,9 @@ public class getMatchServlet extends HttpServlet {
 		m =	ms.getUncheckedMatchList(userNo)[matchNo];
 		
 		int targetNo = m.getTargetNo();
+		
 		int sync = (int)Math.round(100*m.getSync());
+		
 		UserPhoto p = us.selectUserPhoto(targetNo);
 		String pPath = p.getFilePath();
 		
