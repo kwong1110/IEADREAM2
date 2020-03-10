@@ -103,7 +103,7 @@
 								</tr>
 						</table>
 						<div class="btnBox">
-								<input class="defaultBtn" id="updateBtn" type="submit" name="submit" value="수정"> <!-- action으로 연결 -->
+								<input class="defaultBtn" id="updateBtn" type="submit" name="submit" value="수정" onclick="checkPwdPwd();"> <!-- action으로 연결 -->
 						</div>
 					</form>
 				</div>
@@ -112,7 +112,7 @@
 	</div>
 	
 		<script>
-				
+			
 				$('#pass').blur(function(){
 					var pwdExp = /[a-zA-Z](?=.*[a-zA-Z])(?=.*[!@#$%^&*])(?=.*[0-9]).{7,14}/;
 					if(!pwdExp.test($('#pass').val())){
@@ -133,7 +133,14 @@
 						$(this).css("background","initial");
 					}
 				});
-				
+			
+			$('#updateBtn').click(function() {
+				if($('#pass').val() != $('#passCheck').val()) {
+					event.preventDefault();
+					alert('비밀번호가 일치하지않습니다.');
+					('#passCheck').focus();
+				}
+			})
 		</script>
 
 </body>
