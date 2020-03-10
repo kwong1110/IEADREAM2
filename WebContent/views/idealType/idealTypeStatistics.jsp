@@ -10,6 +10,7 @@ import="idealType.model.service.*"
 
 <%
 	Stat[][] st = (Stat[][])request.getAttribute("st");
+
 %>    
     
     
@@ -20,53 +21,13 @@ import="idealType.model.service.*"
   <title>이상형의 이상형</title>
   <meta charset="utf-8">
   <style>
-    .wrapper{
-      text-align: left;
-      width: 1200px;
-      margin:0 auto;
-      padding:0;
-      display : block;
-    }
-    #profile {
-      text-align: right;
-    }
-
-    .outer{
-      background-color: white;
-      text-align: center;
-      display:block;
-    }
-    nav{
-      background-color: white;
-      text-align: center;
-      width: 170px;
-      height: 100%;
-      margin: 0 auto;
-      padding:0;
-      float : left;
-    }
-    .mainCategory{
-      font-size : 15pt;
-      font-weight : 500;
-      padding-top: 20px;
-      padding-bottom: 20px;
-      border-bottom: 1px solid darkgray;
-    }
-    .subCategory{
-      font-size : 13pt;
-      font-weight : 400;
-      padding-top: 20px;
-    }
-    .main{
-      background-color: whites;
-      text-align: left;
-      max-width:1025px;
-      min-height: 775px;
-      margin:0 auto;
-      padding:0;
-      float : left;
-      border-left: 1px solid darkgray;
-    }
+  .outer{
+	width: 1000px; 
+	height: 800px;
+    margin: 50px auto 50px auto;
+    		/* 위       우      아래       좌     */
+	background: white
+	}
     section {
       padding: 15px;
     }
@@ -91,7 +52,7 @@ import="idealType.model.service.*"
     .graph .bar span { position: absolute; left: 1em; }
     .itemBox{
         display : flex;
-        height : 90px;
+        height : 80px;
         width : 1000px;
         margin : 0px 10px;
     }

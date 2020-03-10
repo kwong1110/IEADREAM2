@@ -38,6 +38,7 @@ public class fillMatchListServlet extends HttpServlet {
 		
 		ms.fillMatch(userNo);
 		response.sendRedirect("index.jsp");
+		
 	}
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

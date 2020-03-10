@@ -192,7 +192,7 @@ import="idealType.model.service.*"
 		<div class="pageTitle">
 			<h1> 이상형 추천 </h1>
 		</div>
-        <section id="summary" style="display: flex">
+        <section id="summary" style="display: flex;">
           <article id="sync" style="text-align: center; margin-left: 40%;">
             <label style="margin:10px;">일치율</label>
             <label><%= sync %>%</label>
@@ -201,31 +201,30 @@ import="idealType.model.service.*"
             </div>
           </article>
           <article id="listNo" style="margin-left: 30%;">
-            <h3><%= matchNo %> / <%= maxMatchNo %></h3>
+            <h3><%= matchNo +1 %> / <%= maxMatchNo %></h3>
           </article>
         </section>
        
-        <section id="itemProfile" style="display: flex;">
+        <section id="itemProfile" style="display: flex; margin-left: 5%; margin-top: 2%;">
         <table>
-						 		<tr>
-						 			<th>사진</th>
-						 			<th style="text-align: center;">자기소개</th>
-						 		</tr>
-						 		<tr>
-						 			<td>
-						             	<article>
-											<img src="<%= photoPath %>" id='output' style="width: 200px; height: 200px;">
-						              	</article>
-						 			</td>
-						 			<td>
-						              	<article id="hello" style="text-align:center; margin-left:30px;">
-						                	<textarea style="width: 550px; height:200px; margin-top :15px; resize:none;" name="hello"><%= hello %></textarea>
-						              	</article>
-						 			</td>
-						 		</tr>
-						 	</table>
+	 		<tr>
+	 			<th>사진</th>
+	 			<th style="text-align: center;">자기소개</th>
+	 		</tr>
+	 		<tr>
+	 			<td>
+	             	<article>
+						<img src="<%= photoPath %>" id='output' style="width: 200px; height: 200px;">
+	              	</article>
+	 			</td>
+	 			<td>
+	              	<article id="hello" style="text-align:center; margin-left:30px;">
+	                	<textarea style="width: 550px; height:200px; margin-top :15px; resize:none;" name="hello"><%= hello %></textarea>
+	              	</article>
+	 			</td>
+	 		</tr>
+	 	</table>
         </section>
-        
         <section id="items">  
           <article>
             <div class="itemBox">
@@ -308,15 +307,15 @@ import="idealType.model.service.*"
 			
         </article>
         </section>
-        <section id="move" style="display:flex;">
+        <section id="move" style="display:flex; margin: 5%;">
           <div style="text-align:left">
-            <img src="<%= request.getContextPath() %>/images/common/back.png" width="50px" height="100px" hidden="<%= back%>" onclick="<%= request.getContextPath()%>/get.mc?matchNo=<%= matchNo -1 %>" ></img>
+            <img src="<%= request.getContextPath() %>/images/common/back.png" width="25px" height="50px" hidden="<%= back%>" onclick="<%= request.getContextPath()%>/get.mc?matchNo=<%= matchNo -1 %>" ></img>
           </div>
           <div style="margin: 0 auto;">
-            <img src="<%= request.getContextPath() %>/images/common/heart.png" width="100px" height="100px" onclick="<%= request.getContextPath()%>/sendHeart.mc?matchNo=<%= matchNo %>"></img>
+            <img src="<%= request.getContextPath() %>/images/common/heart.png" width="50px" height="50px" onclick="<%= request.getContextPath()%>/sendHeart.mc?matchNo=<%= matchNo %>"></img>
           </div>
           <div  style="text-align:right">
-            <img src="<%= request.getContextPath() %>/images/common/next.png" width="50px" height="100px" hidden="<%= next%>" onclick="<%= request.getContextPath()%>/get.mc?matchNo=<%= matchNo +1 %>"></img>
+            <img src="<%= request.getContextPath() %>/images/common/next.png" width="25px" height="50px" hidden="<%= next%>" onclick="<%= request.getContextPath()%>/get.mc?matchNo=<%= matchNo +1 %>"></img>
           </div>
         </section>
       </div>
