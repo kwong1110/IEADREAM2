@@ -1,7 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.util.Enumeration" %>
 <%
-	StringBuffer searchDate = (StringBuffer)request.getAttribute("searchDate");
+	Enumeration<String> title = request.getAttributeNames();
+
+	while(title.hasMoreElements()){
+	    String attrName = title.nextElement();
+	    Object attrValue = application.getAttribute(attrName);
+	}
+
 %>
 <!DOCTYPE html>
 <html>
@@ -33,7 +40,8 @@
 											<td>
 												<ul>
 													<li>
-														<textarea><%= searchDate %></textarea>
+														<textarea><%= title %></textarea>
+														<textarea></textarea>
 													</li>
 												</ul>
 											</td>

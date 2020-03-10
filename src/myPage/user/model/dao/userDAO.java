@@ -393,4 +393,26 @@ private Properties prop = new Properties();
 		
 		return result;
 	}
+
+	public int searchDate(Connection conn, String userNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int locationNum = 0;
+		
+		String query = prop.getProperty("searchDatelocation");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, userNo);
+			
+			rset = pstmt.executeQuery();
+			locationNum = rset.getInt("region");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return locationNum;
+	}
 }
