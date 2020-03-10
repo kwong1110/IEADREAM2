@@ -108,4 +108,18 @@ public class userService {
 		return result;
 	}
 
+	public int heartAutoDelete(String[] autoDTarget, String[] autoDUser) {
+		Connection conn = getConnection();
+		userDAO uDAO = new userDAO();
+		int result = uDAO.heartAutoDelete(conn, autoDTarget, autoDUser);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		return result;
+	}
+
 }

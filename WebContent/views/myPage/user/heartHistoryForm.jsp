@@ -127,14 +127,23 @@
 										</td>
 										<td>
 											<% if(matchStatus.equals("하트 수락")){ %>
-												<input type="button" class="defaultBtn subBtn" value="데이트 장소 추천" onclick="">
+												<input type="button" class="defaultBtn subBtn" value="데이트 장소 추천" onclick="heartDate()">
+												<input type="hidden" id="okTarget" name="okTarget" value="<%= m.getTargetNo() %>">
+												<input type="hidden" id="okUser" name="okUser" value="<%= m.getUserNo() %>">
 											<% } %>
 										</td>
 										<% long leftDays = 7 - (sqlDate.getTime() - m.getMatchDate().getTime()) / (24*60*60*1000); %>
 										<% if(matchStatus.equals("하트 수락")){ %>
 										<td>없음</td>
 										<% } else { %>
-										<td><%= leftDays %>일</td>
+										<td>
+											<%= leftDays %>일
+											<% if(leftDays <= 0) {%>
+											<input type="hidden" class="leftDays" name="leftDays" value="<%= leftDays %>">
+											<input type="hidden" class="autoDTarget" name="autoDTarget" value="<%= m.getTargetNo() %>">
+											<input type="hidden" class="autoDUser" name="autoDUser" value="<%= m.getUserNo() %>">
+											<% } %>
+										</td>
 										<% } %>
 									</tr>			
 									<% 		}
@@ -192,23 +201,55 @@
 </body>
 <%@ include file="../../common/footer.jsp"%>
 <script>
-function deleteHeart(){
-	var checkList = [];
-	
-	if($("input:checkbox[name='checkselect']:checked").val() == null){
-		alert("삭제할 하트를 선택해주세요!");
-	}else {
-		$("input:checkbox[name='checkselect']:checked").each(function() {
-			checkList.push($(this).val());			
-		});
-			// 체크박스 체크된 값의 value를 checkList에 저장한다.
-			
-		// 새로열리는 창 크기 및 위치 설정
-		var popLeft = Math.ceil(( window.screen.width - 400 )/2);
-		var popTop = Math.ceil(( window.screen.height - 500 )/2);
+	function deleteHeart(){
+		var checkList = [];
 		
-		window.open("views/myPage/user/heartDeleteForm.jsp?checkList="+checkList+"&loginNo="+<%= loginUser.getUserNo() %>, "deleteBoard", "width=400, height=500, "+ ", left=" + popLeft + ", top="+ popTop);	
-	};
-}
+		if($("input:checkbox[name='checkselect']:checked").val() == null){
+			alert("삭제할 하트를 선택해주세요!");
+		}else {
+			$("input:checkbox[name='checkselect']:checked").each(function() {
+				checkList.push($(this).val());			
+			});
+				// 체크박스 체크된 값의 value를 checkList에 저장한다.
+				
+			// 새로열리는 창 크기 및 위치 설정
+			var popLeft = Math.ceil(( window.screen.width - 400 )/2);
+			var popTop = Math.ceil(( window.screen.height - 500 )/2);
+			
+			window.open("views/myPage/user/heartDeleteForm.jsp?checkList="+checkList+"&loginNo="+<%= loginUser.getUserNo() %>, "deleteBoard", "width=400, height=500, "+ ", left=" + popLeft + ", top="+ popTop);	
+		};
+	}
+	
+	function heartDate(){
+		var okTarget = $('#okTarget').val();
+		var okUser = $('#okUser').val();
+		
+		location.href="<%= request.getContextPath() %>/list.hhd?okTarget="+okTarget+"&okUser="+okUser;
+	}
+	
+	window.onload = function(){
+		
+		var autoDTargetArr = [];
+		var autoDUserArr= [];
+		
+		$('.autoDTarget').each(function(){
+			autoDTargetArr.push($(this).val());
+		});
+		
+		$('.autoDUser').each(function(){
+			autoDUserArr.push($(this).val());
+		});
+		
+		$.ajaxSettings.traditional = true;
+		$.ajax({
+			url: '<%= request.getContextPath() %>/autodelete.hh',
+			type: 'get',
+			data: {autoDTargetArr:autoDTargetArr, autoDUserArr:autoDUserArr},
+			success: function(data){
+				window.location.reload();
+				alert(data);
+			}
+		});			
+	}
 </script>
 </html>
