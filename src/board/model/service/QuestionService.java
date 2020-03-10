@@ -141,14 +141,13 @@ public class QuestionService {
 
 	public ArrayList<Reply> insertReply(Reply r) {
 		Connection conn = getConnection();
-		QuestionDAO dao = new QuestionDAO();// 두번 왔다갔다 할거기 때문에
+		QuestionDAO dao = new QuestionDAO();
 		
 		int result = dao.insertReply(conn, r);
 		ArrayList<Reply> list = null;
 		if(result>0) {
 			commit(conn);
 			list = dao.selectReplyList(conn, r.getPostNo());
-			System.out.println("service의 list" + list);
 		}else {
 			rollback(conn);
 		}

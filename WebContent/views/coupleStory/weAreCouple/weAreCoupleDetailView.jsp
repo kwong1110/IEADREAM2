@@ -47,6 +47,7 @@
    	border: 5px solid  rgb(230, 141, 150);
    	    margin: 30px;
     padding: 15px;
+    font-size : 15px;
    }
   
    table>thead>tr>th {

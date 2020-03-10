@@ -453,7 +453,9 @@ public class WeAreCoupleDAO {
 		String query = "";
 		switch(menu) {
 			case "TITLE": query = prop.getProperty("getTitleCount");break;
+			//SELECT COUNT(*) FROM WACLIST WHERE DELETED='N' AND TITLE LIKE ?
 			case "NICK" : query = prop.getProperty("getNickCount"); break;
+			//SELECT COUNT(*) FROM WACLIST WHERE DELETED='N' AND ID LIKE ?
 		}
 		
 		try {
@@ -463,15 +465,13 @@ public class WeAreCoupleDAO {
 			rset = pstmt.executeQuery();
 			
 			if(rset.next()) {
-				result=rset.getInt(1); // 검색한 게시글이 몇개인지 세는것
+				result=rset.getInt(1); 
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			close(pstmt);
 		}
-		
-		
 		return result;
 	}
 
