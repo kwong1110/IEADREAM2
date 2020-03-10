@@ -297,14 +297,14 @@
 							<% } %>
 						</div>
 					</div>
+				</div>
 					
-					<div class="btnBox">
-						<% if(loginUser != null && loginUser.getGrade() == 0) { %>
-							<button class="defaultBtn" onclick='location.href="views/coupleStory/bestCouple/bestCoupleInsertForm.jsp"'>작성하기</button>
-						<% } %>
-					</div>
-				</div>	
+			<div class="btnBox">
+				<% if(loginUser != null && loginUser.getGrade() == 0) { %>
+					<button class="defaultBtn" onclick='location.href="views/coupleStory/bestCouple/bestCoupleInsertForm.jsp"'>작성하기</button>
+				<% } %>
 			</div>
+			</div>	
 		</div>
 		
 		<script>
