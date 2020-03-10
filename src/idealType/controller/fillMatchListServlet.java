@@ -31,14 +31,14 @@ public class fillMatchListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
-		response.sendRedirect("index.jsp");
 		
 		MatchService ms = new MatchService();
 		
 		int userNo = ((Account)request.getSession().getAttribute("loginUser")).getUserNo();
 		
 		ms.fillMatch(userNo);
-		
+		System.out.println("Servlet : " + userNo);
+		response.sendRedirect("index.jsp");
 	}
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

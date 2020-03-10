@@ -61,7 +61,6 @@ public class LoginServlet extends HttpServlet {
 				RequestDispatcher view = request.getRequestDispatcher("/fill.mc");
 				view.forward(request, response);
 				}
-				response.sendRedirect("index.jsp");
 			}
 		} else { // 로그인 실패 시 출력코드 
 			request.setAttribute("msg", "아이디가 존재하지 않습니다.");

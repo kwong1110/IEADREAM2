@@ -50,12 +50,10 @@ public class MatchService {
 			result[i].setStatus(ulist.get(i).getStatus());
 			result[i].setSync(ulist.get(i).getSync());
 			System.out.println(result[i].getUserNo());
-
 		}
-		System.out.println(result[0].getUserNo());
 		Arrays.sort(result);
-		System.out.println(result[0].getUserNo());
-		System.out.println(result[0].getTargetNo());
+		System.out.println("" + result[0].getUserNo());
+		System.out.println("" + result[0].getTargetNo());
 		return result;
 	}
 
@@ -115,21 +113,21 @@ public class MatchService {
 			double sync = getMatchSync(ui, up, ti, tp);		// 내가 상대를 볼 때의 취향 일치율 계산
 			mlist[i].setSync(sync); 
 			double rsync = getMatchSync(ti, tp, ui, up);	// 상대방이 나를 볼 때의 취향 일치율 계산
-			mlist[i].setRsync(rsync); 
+			mlist[i].setRsync(rsync);
+			System.out.println(mlist[i].toString());
 		}
 		Arrays.sort(mlist);									//일치율순 정렬
 		
 		Match[] result = new Match[maxMatch];
 		
 		int j = 0;
-		for (int i=0 ; i< maxMatch || j < mlist.length; i++) { 
-			int k = 0;
-			for (; k == 0 ;j++) {
-				if (checkMatch(mlist[j]) && (mlist[j].getRsync() > minSync)) { // 중복 검사, 상대의 싱크율 검사 후 리턴
+		for (int i =0; i < maxMatch; j++) {
+			if (j == mlist.length) {break;}
+			System.out.println("" + mlist.length);
+			if (checkMatch(mlist[j]) && (mlist[j].getRsync() > minSync)) { // 중복 검사, 상대의 싱크율 검사 후 리턴
 					result[i] = new Match();
 					result[i] = mlist[j];
-					k = 1;
-				}
+					i++;
 			}
 		}
 		return result;
@@ -160,25 +158,49 @@ public class MatchService {
 		double syncPoint = 0;
 		int maxPoint = up.getHeightPri() + up.getShapePri() + up.getStylePri() + up.getAgePri() + up.getRegionPri() 
 						+ up.getReligionPri() + up.getScholarPri() + up.getJobPri() + up.getDrinkPri() + up.getSmokePri() + up.getInterestPri();
+		
 		if (ti.getHeight() == up.getHeight()) 	{syncPoint += up.getHeightPri();}
-			else {double v = Math.abs((ti.getHeight() - up.getHeight())/5); syncPoint += (1-v)*up.getHeightPri();}
+			else {double v = Math.abs((ti.getHeight() - up.getHeight())/10); syncPoint += (1-v)*up.getHeightPri();}
+		System.out.println("" + syncPoint);
+		
 		if (ti.getStyle().equals(up.getStyle())) {syncPoint += up.getStylePri();}
-		if (getAgeDiff(ti.getAge(),ui.getAge()) == up.getAge()) {syncPoint += up.getAgePri();}
-			else {double v = Math.abs((ti.getAge() - up.getAge())/2); syncPoint += (1-v)*up.getAgePri();}
+		System.out.println("" + syncPoint);
+		
+		if (getAgeDiff(ti.getAge(), ui.getAge()) == up.getAge()) {syncPoint += up.getAgePri();}
+			else {double v = Math.abs((getAgeDiff(ti.getAge(), ui.getAge()) - up.getAge())/2); syncPoint += (1-v)*up.getAgePri();}
+		System.out.println("" + syncPoint);
+	
 		if (ti.getRegion() == ui.getRegion()) {syncPoint += up.getRegionPri();}
-			else if(ti.getRegion()%10 == ui.getRegion()%10){syncPoint += 0.5*up.getRegionPri();}
+			else if(Math.floor(ti.getRegion()/10) == Math.floor(ui.getRegion()/10)){syncPoint += 0.5*up.getRegionPri();}
 			else {syncPoint -= 0.5*maxPoint;} // 도 단위에서 거주 지역이 다른 경우 페널티
+		System.out.println("" + syncPoint);
+		
 		if (ti.getReligion().equals(up.getReligion())) {syncPoint += up.getReligionPri();}
+		System.out.println("" + syncPoint);
+		
 		if (ti.getScholar() >= up.getScholar()) {syncPoint += up.getScholarPri();}
 			else {double v = Math.abs((ti.getScholar() - up.getScholar())/2); syncPoint += (1-v)*up.getScholarPri();}
+		System.out.println("" + syncPoint);
+		
 		if (ti.getJob().equals( up.getJob())) 	{syncPoint += up.getJobPri();}
+		System.out.println("" + syncPoint);
+		
+		
 		if (ti.getDrink() == up.getDrink()) 	{syncPoint += up.getDrinkPri();}
 			else {double v = Math.abs((ti.getDrink() - up.getDrink())); syncPoint += (1-v)*up.getDrinkPri();}
+		System.out.println("" + syncPoint);
+		
+		
 		if (ti.getSmoke() == up.getSmoke()) 	{syncPoint += up.getSmokePri();}
+		System.out.println("" + syncPoint);
+		
+		
 		for (int i = 0; i < ui.getInterest().length; i++){
 			if (Arrays.asList(ti.getInterest()).contains(ui.getInterest()[i])) {syncPoint += up.getInterestPri();}
-		}
-		return syncPoint/maxPoint;
+		}		
+		System.out.println("sync =" + syncPoint);
+		System.out.println("maxp =" + maxPoint);
+		return Math.round(100*syncPoint/maxPoint)/100;
 	}
 	public int getAgeDiff(int uage, int tage) {
 		int d = tage - uage;
@@ -192,13 +214,14 @@ public class MatchService {
 	}
 	
 	public int fillMatch(int userNo) {
+		System.out.println("Service " + userNo);
 		Match[] oldMlist = getMatchList(userNo);
-		int stack = 0;
+		int stack = 0; int result = 0;
 		Date today = new Date(System.currentTimeMillis());
 		if (oldMlist != null) {
 			for (int i = 0; i < oldMlist.length ; i++) {
-				if (
-					oldMlist[i].getStatus().equals("D")) { // 대기중인 매칭 수 구하기
+				if (oldMlist[i].getStatus().equals("D")) { // 대기중인 매칭 수 구하기
+					
 					oldMlist[i].setMatchDate(today);
 					updateMatch(oldMlist[i]); 				//매치 날짜 갱신
 					stack++;
@@ -206,13 +229,13 @@ public class MatchService {
 				else if(oldMlist[i].getMatchDate() == today) { // 확인한 매칭 중 오늘 생성된 매칭 수 구하기
 					stack++;
 				}
+				System.out.println("stack :" + stack);
 			}
 		}
-		Match[] newMlist = searchMatchList(userNo); 		// 빈 공간 채워넣기
-		for (int i = 0; stack+i < 5 ; i++) {
-			insertMatch(newMlist[i]);
+		for (int i = 0; stack+i < 5 ; i++) {// 빈 공간 채워넣기
+			result = insertMatch(searchMatchList(userNo)[i]);
 		}
-		return 0;
+		return result;
 	}
 	/*public Stat[][] getUiStat(int userNo) {
 		Connection conn = getConnection();

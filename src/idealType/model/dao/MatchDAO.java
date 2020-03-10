@@ -40,9 +40,10 @@ public class MatchDAO {
 		
 		try {
 			pstmt = conn.prepareStatement(query);
-			
+			System.out.println("DAO " + m.toString());
 			pstmt.setInt(1, m.getUserNo());
 			pstmt.setInt(2, m.getTargetNo());
+			pstmt.setDouble(3, m.getSync());
 
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -112,7 +113,7 @@ public class MatchDAO {
 		PreparedStatement pstmt = null; 
 		ResultSet rs = null;
 		String query = prop.getProperty("getUiCount");
-		//SELECT ?, COUNT AS PROP FROM USER_INFO JOIN ACCOUNT USING (USER_NO) GROUP BY ? ORDER BY PROP DESC WHERE GENDER = ?;
+
 		if (item.equals("age")) {
 			query = prop.getProperty("getAgeCount");
 		}
