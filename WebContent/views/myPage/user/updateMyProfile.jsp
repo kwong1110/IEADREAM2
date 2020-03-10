@@ -116,7 +116,6 @@
 	
 		<script>
 				$('#pass').keyup(function(){
-						console.log('끝');
 						$('#pass1').val('on');
 					var pwdExp = /[a-zA-Z](?=.*[a-zA-Z])(?=.*[!@#$%^&*])(?=.*[0-9]).{7,14}/;
 					if(!pwdExp.test($('#pass').val())){
@@ -139,10 +138,7 @@
 				});
 			
 			$('#updateBtn').click(function() {
-				if($('#pass').val() == "" && $('#passCheck').val() == "") {
-					/* 비밀번호가 비어있을 경우 */
-					alert('비밀번호!');
-				} else if (($('#pass').val() != $('#passCheck').val()) && ($('#pass').val() != "" || $('#pass').val() != "")) {
+				if (($('#pass').val() != $('#passCheck').val()) && ($('#pass').val() != "" || $('#pass').val() != "")) {
 					/* 비밀번호가 비어있지 않고 서로 일치하지 않을 경우 */
 					event.preventDefault();
 					alert('비밀번호가 일치하지않습니다.');
