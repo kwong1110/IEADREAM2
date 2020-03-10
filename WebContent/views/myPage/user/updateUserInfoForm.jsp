@@ -206,7 +206,7 @@
 								<tr>
 									<th class="itemName" id=""> 키 (cm) </th>
 									<td>
-                       <label><input type="radio" name="height" value="150" <%= h1 %>>155이하<%= height %></label>
+                       <label><input type="radio" name="height" value="150" <%= h1 %>>155이하</label>
                        <label><input type="radio" name="height" value="155" <%= h2 %>>155~160</label>
                        <label><input type="radio" name="height" value="160" <%= h3 %>>160~165</label>
                        <label><input type="radio" name="height" value="165" <%= h4 %>>165~170</label>

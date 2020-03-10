@@ -61,6 +61,27 @@ public class UserInfoDAO {
 		return ac;
 	}
 	
+	public int getUserAge(Connection conn, int userNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String query = prop.getProperty("getUserAGE");
+		int age = 0;
+		try	{
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, userNo);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+			age = (rs.getInt("AGE"));
+			}
+		}catch(Exception e) { 
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return age;
+	}
+	
 	public int getUserNo(Connection conn, String userId) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;

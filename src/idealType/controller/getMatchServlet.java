@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import account.model.service.UserService;
 import account.model.vo.*;
@@ -32,38 +33,41 @@ public class getMatchServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		HttpSession session = request.getSession();
+		
 		MatchService ms = new MatchService();
 		UserService us = new UserService();
 		
-		int userNo = ((Account)request.getSession().getAttribute("loginUser")).getUserNo();
+		Account loginUser = (Account)session.getAttribute("loginUser");
+		int userNo = loginUser.getUserNo();
+		
 		int matchNo = 0;
 		if (request.getAttribute("matchNo") != null) {matchNo = (int)request.getAttribute("matchNo");}
 		
-		Match[] mlist = ms.getUncheckedMatchList(userNo);
-		Match m = mlist[matchNo];
+		Match m = new Match(); 
+		m =	ms.getUncheckedMatchList(userNo)[matchNo];
 		
 		int targetNo = m.getTargetNo();
 		int sync = (int)Math.round(100*m.getSync());
 		UserPhoto p = us.selectUserPhoto(targetNo);
 		String pPath = p.getFilePath();
 		
-		Account ac = us.selectAccount(targetNo);
-		UserInfo ui = us.selectUserInfo(targetNo);
+		Account ta = us.selectAccount(targetNo);
+		UserInfo ti = us.selectUserInfo(targetNo);
+		System.out.println(ti.toString());
 		
 		m.setStatus("C");
 		ms.updateMatch(m);
 		
-		
 		String page = null;
-		if(ui != null) {
+		if(ti.getHello() != null) {
 			page = "views/idealType/idealTypeMatch.jsp";
-			request.setAttribute("ui", ui);
-			request.setAttribute("ac", ac);
+			request.setAttribute("ti", ti);
+			request.setAttribute("ta", ta);
 			request.setAttribute("sync", sync);
 			request.setAttribute("pPath", pPath);
 			request.setAttribute("matchNo", matchNo);
-			request.setAttribute("maxMatchNo", mlist.length);
+			request.setAttribute("maxMatchNo", ms.getUncheckedMatchList(userNo).length);
 		}else {
 			page = "views/common/errorPage.jsp";
 			request.setAttribute("msg", "매칭 조회에 실패하였습니다.");
