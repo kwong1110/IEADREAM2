@@ -51,5 +51,9 @@ public class Stat implements Comparable<Stat>{
 			return -1;
 	}
 	
+	@Override
+	public String toString() {
+		return "Stat [item=" + item + ", prop=" + prop + "]";
+	}
 	
 }

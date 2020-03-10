@@ -4,7 +4,6 @@ import static common.JDBCTemplate.*;
 
 import java.sql.Connection;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.sql.Date;
 import java.util.GregorianCalendar;
 import java.util.Random;
@@ -26,6 +25,13 @@ public class UserService {
 		Connection conn = getConnection();
 		UserInfoDAO uiDAO = new UserInfoDAO();
 		int result = uiDAO.getUserNo(conn, userId);
+		
+		return result;
+	}
+	public int[] getUserNoList(String targetGender) {
+		Connection conn = getConnection();
+		UserInfoDAO uiDAO = new UserInfoDAO();
+		int[] result = uiDAO.searchUserNoList(conn, targetGender);
 		
 		return result;
 	}
@@ -58,8 +64,6 @@ public class UserService {
 		result.setAge(age);
 		
 		result.setInterest(interest);
-		
-		
 		
 		System.out.println("Service 체크 " + result.toString());
 		return result;
