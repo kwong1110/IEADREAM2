@@ -56,9 +56,10 @@ public class UserService {
 		
 		result.setInterest(interest);
 		
+		System.out.println("Service 체크 " + result.toString());
 		return result;
 	}
-	public int getAge(Date b) {
+	/*public int getAge(Date b) {
 		Calendar birth = Calendar.getInstance();
 	    birth.setTime(b);
 		Calendar current = Calendar.getInstance();
@@ -74,12 +75,13 @@ public class UserService {
 		if (birthMonth * 100 + birthDay > currentMonth * 100 + currentDay) { age--;}
 		
 		return age;
-	}
+	}*/
 	
 	public int insertUserInfo(UserInfo ui) {
 		Connection conn = getConnection();
 		UserInfoDAO uiDAO = new UserInfoDAO();
 		int result = uiDAO.insertUserInfo(conn, ui);
+					uiDAO.deleteInterest(conn, ui);
 		int result2 = uiDAO.insertInterest(conn, ui);
 		
 		if(result > 0 && result2 > 0) {

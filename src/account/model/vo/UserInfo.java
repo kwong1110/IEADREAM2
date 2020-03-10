@@ -208,8 +208,7 @@ public class UserInfo {
 	public String toString() {
 		return "UserInfo [userNo=" + userNo + ", gender=" + gender + ", hello=" + hello + ", height=" + height
 				+ ", shape=" + shape + ", style=" + style + ", age=" + age + ", region=" + region + ", religion="
-				+ religion + ", scholar=" + scholar + ", job=" + job + ", drink=" + drink + ", smoke=" + smoke
-				+ ", interest=" + Arrays.toString(interest) + "]";
+				+ religion + ", scholar=" + scholar + ", job=" + job + ", drink=" + drink + ", smoke=" + smoke;
 	}
 	
 }

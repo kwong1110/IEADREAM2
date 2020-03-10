@@ -64,7 +64,7 @@ public class UserInfoDAO {
 	public int getUserAge(Connection conn, int userNo) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String query = prop.getProperty("getUserAGE");
+		String query = prop.getProperty("getUserAge");
 		int age = 0;
 		try	{
 			pstmt = conn.prepareStatement(query);
@@ -106,37 +106,34 @@ public class UserInfoDAO {
 	public UserInfo selectUserInfo(Connection conn, int userNo) {
 		PreparedStatement pstmt = null; 
 		ResultSet rs = null;
-		UserInfo ui = new UserInfo();
+		UserInfo ui = null;
 		String query = prop.getProperty("selectUserInfo");
 		
 		try {
 			  pstmt = conn.prepareStatement(query);
 			  pstmt.setInt(1, userNo);
 			  rs = pstmt.executeQuery();
-			  if(rs.next()) {
+			  rs.next(); 
+			  ui = new UserInfo();
 			  	ui.setUserNo(userNo);
 			  	ui.setHello(rs.getString("HELLO"));
 				ui.setHeight(rs.getInt("HEIGHT"));
 				ui.setShape(rs.getString("SHAPE"));
 				ui.setStyle(rs.getString("STYLE"));
-				
 				ui.setRegion(rs.getInt("REGION"));
 				ui.setReligion(rs.getString("RELIGION"));
 				ui.setScholar(rs.getInt("SCHOLAR"));
 				ui.setJob(rs.getString("JOB"));
 				ui.setDrink(rs.getInt("DRINK"));
 				ui.setSmoke(rs.getInt("SMOKE"));
-			  }
-			  else {
-				  System.out.println("selectUserInfo 에러");
-			  }
+			  
 		  } catch (SQLException e) { 
 			  e.printStackTrace(); 
 		  } finally {
 			close(rs);
 			close(pstmt);
 		  }
-		System.out.println("(DAO) 타겟 스타일 확인 : " + ui.getStyle());
+		System.out.println("DAO 체크 : " + ui.toString());
 		return ui;
 	}
 	
