@@ -187,7 +187,7 @@
 					$('#insertReply').attr('readonly',false);
 				
 				$.ajax({
-					url: '<%= request.getContextPath() %>/updateReply.qu',
+					url: '<%= request.getContextPath() %>/insertReply.qu',
 					type: 'post',
 					data: {postNo: postNo, answerContent:answerContent}
 				}); 
