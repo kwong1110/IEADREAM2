@@ -115,6 +115,7 @@ public class UserInfoDAO {
 			close(rs);
 			close(pstmt);
 		  }
+		System.out.println("(DAO) 타겟 스타일 확인 : " + ui.getStyle());
 		return ui;
 	}
 	
@@ -331,6 +332,7 @@ public class UserInfoDAO {
 	    for (int i=0; i < rList.length; i++)
 	    {
 	    	rList[i] = list.get(i).intValue();
+	    	// System.out.println("반대성별 유저 리스트 확인 : " + rList[i]);
 	    }
 		return rList;
 	}

@@ -102,7 +102,7 @@
 								<td id="th_title">제목</td>
 								<td id="th_title_input">
 									<input type="hidden" name = postNo value="<%= board.getPostNo() %>">
-									<input type="text" size="80%" class="title" name="title" id="title" value="<%= board.getTitle() %>">
+									<input type="text" size="80%" class="title" name="title" id="title" required value="<%= board.getTitle() %>">
 								</td>
 								<td id="th_cate">카테고리</td>
 								<td id="th_cate_input">
@@ -118,7 +118,7 @@
 							</tr>
 							<tr>
 								<td colspan="4">
-									<textarea id="con" name="con" cols="100%" rows="20"style="resize:none;"><%= board.getContent() %></textarea>
+									<textarea id="con" name="con" cols="100%" rows="20" required style="resize:none;"><%= board.getContent() %></textarea>
 								</td>
 							</tr>
 						</table>
@@ -126,7 +126,7 @@
 						<br>
 						
 						<div class="btnBox" align="center">
-							<button class="defaultBtn" type="submit" id="updateFaqBtn">수정</button>
+							<button class="defaultBtn" type="submit" id="updateFaqBtn" onclick="editcom();">수정</button>
 							<button  class="defaultBtn menuBtn" type="button" onclick="location.href='javascript:history.go(-1);'" id="cancelBtn">취소</button>
 							<button class="defaultBtn cancelBtn" type="button" onclick="deleteFaq();" id="deleteBtn">삭제</button>
 						</div>
@@ -142,6 +142,10 @@
 			if(del) {
 				location.href='<%= request.getContextPath() %>/delete.faq?no=' +'<%= board.getPostNo() %>';
 			}
+		}
+		
+		function editcom() {
+			alert('수정이 완료되었습니다.');
 		}
 	</script>
 	

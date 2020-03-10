@@ -101,6 +101,7 @@
 										<input type="hidden" value="<%= loginUser.getUserNo()%>" name="userNo">
 										<input type="hidden" value="<%= b.getCategory() %>" name="category">
 									</td>
+									<th> </th>
 								</tr>
 							</thead>
 							<tbody>
@@ -129,11 +130,11 @@
 						</div>
 						<% if(loginUser.getGrade() != 0){ %> 
 						<div class="btnBox">
+							<% if(r.getAnswerContent() == null) {%>
 							<button type="submit" class="defaultBtn" id="updateBtn" >수정</button>
+							<% } %>
 							<button type="button"class="defaultBtn menuBtn"  onclick="location.href='<%= request.getContextPath() %>/list.qu?userNo=<%= loginUser.getUserNo()%>'" id="menuBtn">메뉴로</button>
 							<button  type="button" class="defaultBtn cancelBtn"  onclick="deleteBoard();" id="deleteBtn">삭제</button>
-							<%-- <input type="button"  class="defaultBtn" onclick="location.href='<%= request.getContextPath() %>/list.qu?userNo=<%= loginUser.getUserNo()%>'" id="menuBtn" value="메뉴로" >
-							<input type="button" class="defaultBtn"  onclick="deleteBoard();" id="deleteBtn" value="삭제"> --%>
 						</div>
 						<% } %> 
 					</form>
