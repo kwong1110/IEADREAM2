@@ -21,6 +21,28 @@ public class QuestionService {
 		  close(conn); 
 		  return result; 
 	  }
+	  
+		//  페이징 - user 리스트 뷰
+		public ArrayList<Board> selectQBList(int currentPage, String userNo) {
+			Connection conn = getConnection();
+			QuestionDAO dao = new QuestionDAO();
+			
+			ArrayList<Board> list = new QuestionDAO().selectQBList(conn, currentPage,userNo); 
+			System.out.println("b : " + list);
+			close(conn);
+			return list;
+		}
+		
+		public ArrayList<Reply> selectQRList(int currentPage, String userNo) {
+			Connection conn = getConnection();
+			QuestionDAO dao = new QuestionDAO();
+			
+			ArrayList<Reply> r = dao.selectQRList(conn,currentPage, userNo);
+			System.out.println("r " + r);
+			close(conn);
+			  return r;
+			
+		}
 	 
 	  // 사용자 디테일 
 	  //	- 보드
@@ -133,27 +155,7 @@ public class QuestionService {
 		return list;
 	}
 
-	//  페이징 - user 리스트 뷰
-	public ArrayList<Board> selectQBList(int currentPage, String userNo) {
-		Connection conn = getConnection();
-		QuestionDAO dao = new QuestionDAO();
-		
-		ArrayList<Board> list = new QuestionDAO().selectQBList(conn, currentPage,userNo); 
-		System.out.println("b : " + list);
-		close(conn);
-		return list;
-	}
-	
-	public ArrayList<Reply> selectQRList(int currentPage, String userNo) {
-		Connection conn = getConnection();
-		QuestionDAO dao = new QuestionDAO();
-		
-		ArrayList<Reply> r = dao.selectQRList(conn,currentPage, userNo);
-		System.out.println("r " + r);
-		close(conn);
-		  return r;
-		
-	}
+
 
 
 	// 페이징 - 관리자 리스트 뷰

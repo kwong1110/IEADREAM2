@@ -70,9 +70,10 @@ public class QuestionDAO {
 		  
 		  try {
 			  pstmt = conn.prepareStatement(query);
-			  pstmt.setInt(1, startRow);
-			  pstmt.setInt(2, endRow);
-			  pstmt.setString(3, userNo);
+			  pstmt.setString(1, userNo);
+			  pstmt.setInt(2, startRow);
+			  pstmt.setInt(3, endRow);
+			  pstmt.setString(4, userNo);
 			  
 			  rset = pstmt.executeQuery();
 			  list = new ArrayList<Board>();
@@ -102,19 +103,20 @@ public class QuestionDAO {
 		}
 		
 		public ArrayList<Reply> selectQRList(Connection conn,int currentPage, String userNo) {
-				PreparedStatement pstmt = null; 
+			  PreparedStatement pstmt = null; 
 			  ResultSet rset =null; 
 			  ArrayList<Reply> reply = null;
 			  int posts = 10;
 			  int startRow = (currentPage -1) * posts +1;
 			  int endRow = startRow + posts -1;
-			  String query = prop.getProperty("selectQRList");
+			  String query = prop.getProperty("selectQBList");
 		  
 		  try {
 			  pstmt = conn.prepareStatement(query);
-			  pstmt.setInt(1, startRow);
-			  pstmt.setInt(2, endRow);
-			  pstmt.setString(3, userNo);
+			  pstmt.setString(1, userNo);
+			  pstmt.setInt(2, startRow);
+			  pstmt.setInt(3, endRow);
+			  pstmt.setString(4, userNo);
 			  rset = pstmt.executeQuery();
 			  reply = new ArrayList<Reply> ();
 			  while(rset.next()) {
