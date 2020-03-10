@@ -186,7 +186,7 @@ public class bestCoupleDAO {
 		int result = 0;
 		
 		String query = prop.getProperty("insertbcPhoto");
-		//INSERT INTO PHOTO VALUES(SEQ_PHOTONO.NEXTVAL, SEQ_POSTNO.CURRVAL, ?, ?, ?, ?, DEFAULT, NULL)
+		//INSERT INTO PHOTO VALUES(SEQ_PHOTONO.NEXTVAL, SEQ_POSTNO.CURRVAL, ?, ?, ?, ?, DEFAULT)
 		
 		try {
 			for(int i = 0; i < photoList.size(); i++) {
@@ -467,7 +467,7 @@ public class bestCoupleDAO {
 		ResultSet rset = null;
 		
 		String query = "";
-		if(year != null && month == "00") {
+		if(year != null && month.equals("00")) {
 			query = prop.getProperty("getSearchYearListCount");
 			//SELECT COUNT(*) FROM BCLIST WHERE TO_CHAR(CREATE_DATE, 'YYYY') LIKE ?
 		} else {
@@ -478,7 +478,7 @@ public class bestCoupleDAO {
 		try {
 			pstmt = conn.prepareStatement(query);
 			
-			if(year != null && month == "00") {
+			if(year != null && month.equals("00")) {
 				pstmt.setString(1, year);
 			} else {
 				pstmt.setString(1, year);

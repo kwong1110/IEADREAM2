@@ -104,12 +104,8 @@
 									<% if(reply.get(i).getAnswerChecked().equals("N")){%>
 										<td><span class="blinking" style="border-radius:5px;padding: 5px">미답변</span></td>
 									<% } else{  %>
-								<td>답변 완료</td>
-										
-							
+										<td>답변 완료</td>
 								<%}%>
-										
-						
 								<td><%= list.get(i).getCreateDate() %></td>
 							</tr>
 						

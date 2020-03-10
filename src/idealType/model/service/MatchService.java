@@ -8,6 +8,7 @@ import java.util.Arrays;
 
 import account.model.dao.UserInfoDAO;
 import account.model.dao.UserPreferDAO;
+import account.model.service.UserService;
 import account.model.vo.Account;
 import account.model.vo.UserInfo;
 import account.model.vo.UserPrefer;
@@ -40,7 +41,7 @@ public class MatchService {
 		
 		Match[] result = new Match[ulist.size()];
 		for (int i=0; i<ulist.size() ;i++) {
-			mlist[i] = ulist.get(i);
+			result[i] = ulist.get(i);
 		}
 		Arrays.sort(result);
 		System.out.println(result[0].getUserNo());
@@ -79,14 +80,13 @@ public class MatchService {
 	public Match[] searchMatchList(int userNo) {
 		double minSync = 0.3;
 		int maxMatch = 5;
-		
 		Connection conn = getConnection();
-		UserInfoDAO uiDAO = new UserInfoDAO();
-		UserPreferDAO upDAO = new UserPreferDAO();
 		
-		UserInfo ui = uiDAO.selectUserInfo(conn, userNo);
-		ui.setInterest(uiDAO.selectInterest(conn, userNo));
-		UserPrefer up = upDAO.selectUserPrefer(conn, userNo);
+		UserService us = new UserService();
+		
+		UserInfo ui = us.selectUserInfo(userNo);
+		UserPrefer up = us.selectUserPrefer(userNo);
+		UserInfoDAO uiDAO = new UserInfoDAO();
 		
 		String targetGender = "F";
 		if (getUserGender(userNo).equals("F")) {
@@ -102,10 +102,8 @@ public class MatchService {
 			mlist[i].setUserNo(userNo);
 			mlist[i].setTargetNo(tlist[i]);
 			
-			UserInfo ti = uiDAO.selectUserInfo(conn, tlist[i]);;
-			String[] tinterest = uiDAO.selectInterest(conn, tlist[i]);
-			ti.setInterest(tinterest);
-			UserPrefer tp = upDAO.selectUserPrefer(conn, tlist[i]);
+			UserInfo ti = us.selectUserInfo(tlist[i]);
+			UserPrefer tp = us.selectUserPrefer(tlist[i]);
 			
 			double sync = getMatchSync(ui, up, ti, tp);
 			mlist[i].setSync(sync); // 임시 매칭 리스트 생성, 싱크율 기준 정렬
@@ -153,10 +151,9 @@ public class MatchService {
 		
 		if (ti.getHeight() == up.getHeight()) 	{syncPoint += up.getHeightPri();}
 		else {double v = Math.abs((ti.getHeight() - up.getHeight())/5); syncPoint += (1-v)*up.getHeightPri();}
-		System.out.println(ti.getHeight() + " / " + ti.getShape() + " / " + up.getShape() + " / " + up.getShapePri());
+		System.out.println(ti.getHeight() + " " + ti.getShape() + " " + up.getShape() + " " + up.getShapePri());
 
-		System.out.println("타겟 스타일 : " + ti.getStyle() + "본인 선호 : " + up.getStyle() + "본인 선호도(pri) : " + up.getStylePri());
-		if (ti.getStyle().equals(up.getStyle())) 	{syncPoint += up.getStylePri();}
+		if (ti.getStyle().equals(up.getStyle())) {syncPoint += up.getStylePri();}
 		int d = ti.getAge() - ui.getAge();
 		int ad = 0;
 		if (d > 3) {ad = 2;}

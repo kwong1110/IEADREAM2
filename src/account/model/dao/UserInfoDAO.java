@@ -85,7 +85,7 @@ public class UserInfoDAO {
 	public UserInfo selectUserInfo(Connection conn, int userNo) {
 		PreparedStatement pstmt = null; 
 		ResultSet rs = null;
-		UserInfo ui = null;
+		UserInfo ui = new UserInfo();
 		String query = prop.getProperty("selectUserInfo");
 		
 		try {
@@ -93,12 +93,12 @@ public class UserInfoDAO {
 			  pstmt.setInt(1, userNo);
 			  rs = pstmt.executeQuery();
 			  if(rs.next()) {
-				ui = new UserInfo();
 			  	ui.setUserNo(userNo);
 			  	ui.setHello(rs.getString("HELLO"));
 				ui.setHeight(rs.getInt("HEIGHT"));
 				ui.setShape(rs.getString("SHAPE"));
 				ui.setStyle(rs.getString("STYLE"));
+				
 				ui.setRegion(rs.getInt("REGION"));
 				ui.setReligion(rs.getString("RELIGION"));
 				ui.setScholar(rs.getInt("SCHOLAR"));
@@ -245,13 +245,12 @@ public class UserInfoDAO {
 	public UserPhoto selectUserPhoto(Connection conn, int userNo) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		UserPhoto p = null;
+		UserPhoto p = new UserPhoto();
 		String query = prop.getProperty("selectPhoto");
 		try {
 			pstmt = conn.prepareStatement(query);
-			rset = pstmt.executeQuery(query);
+			rset = pstmt.executeQuery();
 			if(rset.next()) {
-				p = new UserPhoto();
 				p.setPhotoNo(rset.getInt("PHOTO_NO"));
 				p.setUserNo(rset.getInt("USER_NO"));
 				p.setOriginName(rset.getString("ORIGIN_NAME"));

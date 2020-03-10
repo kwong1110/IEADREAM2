@@ -9,8 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import account.model.service.UserService;
-import account.model.vo.Account;
-import account.model.vo.UserInfo;
+import account.model.vo.*;
 import idealType.model.service.MatchService;
 import idealType.model.vo.Match;
 
@@ -46,7 +45,8 @@ public class getMatchServlet extends HttpServlet {
 		
 		int targetNo = m.getTargetNo();
 		int sync = (int)Math.round(100*m.getSync());
-		String pPath = us.selectUserPhoto(targetNo).getFilePath();
+		UserPhoto p = us.selectUserPhoto(targetNo);
+		String pPath = p.getFilePath();
 		
 		Account ac = us.selectAccount(targetNo);
 		UserInfo ui = us.selectUserInfo(targetNo);

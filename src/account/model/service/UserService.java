@@ -11,7 +11,6 @@ import java.util.Random;
 
 import account.model.dao.*;
 import account.model.vo.*;
-import account.model.vo.UserPhoto;
 
 
 public class UserService {
@@ -34,13 +33,33 @@ public class UserService {
 	public UserInfo selectUserInfo(int userNo) {
 		Connection conn = getConnection();
 		UserInfoDAO uiDAO = new UserInfoDAO();
-		UserInfo result = uiDAO.selectUserInfo(conn, userNo);
+		UserInfo ui = uiDAO.selectUserInfo(conn, userNo);
 		String[] interest = uiDAO.selectInterest(conn, userNo);
-		
 		Date b = uiDAO.selectAccount(conn, userNo).getBirth();
+		int age = getAge(b);
+
+		UserInfo result = new UserInfo();
+		result.setUserNo(userNo);
+		result.setHello(ui.getHello());
+		result.setHeight(ui.getHeight());
+		result.setShape(ui.getShape());
+		result.setStyle(ui.getStyle());
+		result.setRegion(ui.getRegion());
+		result.setReligion(ui.getReligion());
+		result.setScholar(ui.getScholar());
+		result.setJob(ui.getJob());
+		result.setDrink(ui.getDrink());
+		result.setSmoke(ui.getSmoke());
+
+		result.setAge(age);
+		
+		result.setInterest(interest);
+		
+		return result;
+	}
+	public int getAge(Date b) {
 		Calendar birth = Calendar.getInstance();
 	    birth.setTime(b);
-		
 		Calendar current = Calendar.getInstance();
 		int currentYear  = current.get(Calendar.YEAR);
 		int currentMonth = current.get(Calendar.MONTH) + 1;
@@ -52,12 +71,8 @@ public class UserService {
 		
 		int age = currentYear - birthYear;
 		if (birthMonth * 100 + birthDay > currentMonth * 100 + currentDay) { age--;}
-
-		result.setAge(age);
 		
-		result.setInterest(interest);
-		
-		return result;
+		return age;
 	}
 	
 	public int insertUserInfo(UserInfo ui) {
@@ -211,10 +226,10 @@ public class UserService {
 		int result = 0;
 		
 		for(int i=0; i<no; i++) {
-			String userId = "Experiment" + i;
-			String userPwd = "password1!";
+			String userId = "experiment" + i;
+			String userPwd = "experiment";
 			String gender = "M"; if (random.nextBoolean()) {gender = "F";}
-			String userName = "실험체" + i;
+			String userName = "실험맨" + i;
 			String phone = "01012345678" + i;
 			String email = "exp" + i + "@naver.com";
 			int year = 1980 + random.nextInt(20);
@@ -230,12 +245,7 @@ public class UserService {
 			a.setEmail(email);
 			a.setBirth(birth);
 			
-			result = aDAO.insertAccount(conn, a);
-			if(result > 0) {
-				commit(conn);
-			} else {
-				rollback(conn);
-			}
+			aDAO.insertAccount(conn, a);
 			
 			int userNo = getUserNo(a.getId());
 
@@ -316,23 +326,9 @@ public class UserService {
 			ui.setSmoke(smoke);
 			ui.setInterest(interest);
 			
-			result = uiDAO.insertUserInfo(conn, ui);
-			
-			if(result > 0) {
-				commit(conn);
-			} else {
-				rollback(conn);
-			}
-			
-			result = uiDAO.insertInterest(conn, ui);
-			
-			if(result > 0) {
-				commit(conn);
-			} else {
-				rollback(conn);
-			}
-			
-			
+			uiDAO.insertUserInfo(conn, ui);
+			uiDAO.insertInterest(conn, ui);
+					
 			String savePath ="/images/common/heart.png";
 			String originName ="profile" + i;
 			String changeName ="profile" + i;
@@ -342,7 +338,7 @@ public class UserService {
 			p.setOriginName(originName);
 			p.setChangeName(changeName);
 			
-			result = uiDAO.insertPhoto(conn, p);
+			uiDAO.insertPhoto(conn, p);
 			
 			if(result > 0) {
 				commit(conn);
@@ -435,7 +431,7 @@ public class UserService {
 			up.setSmokePri(smokePri);
 			up.setInterestPri(interestPri);
 			
-			result = upDAO.insertUserPrefer(conn, up);
+			upDAO.insertUserPrefer(conn, up);
 			
 			if(result > 0) {
 				commit(conn);
@@ -443,7 +439,6 @@ public class UserService {
 				rollback(conn);
 			}
 		}
-		
 		close(conn);
 		return result;
 

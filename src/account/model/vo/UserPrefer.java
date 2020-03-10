@@ -224,6 +224,16 @@ public class UserPrefer {
 		this.interestPri = interestPri;
 	}
 
+	@Override
+	public String toString() {
+		return "UserPrefer [userNo=" + userNo + ", height=" + height + ", heightPri=" + heightPri + ", shape=" + shape
+				+ ", shapePri=" + shapePri + ", style=" + style + ", stylePri=" + stylePri + ", age=" + age
+				+ ", agePri=" + agePri + ", regionPri=" + regionPri + ", religion=" + religion + ", religionPri="
+				+ religionPri + ", scholar=" + scholar + ", scholarPri=" + scholarPri + ", job=" + job + ", jobPri="
+				+ jobPri + ", drink=" + drink + ", drinkPri=" + drinkPri + ", smoke=" + smoke + ", smokePri=" + smokePri
+				+ ", interestPri=" + interestPri + "]";
+	}
+
 	
 
 }

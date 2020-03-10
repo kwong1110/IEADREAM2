@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="board.model.vo.*, java.util.*"%>
 <%
+	String title = request.getParameter("title") == null ? "" : request.getParameter("title");
 	String mName = request.getParameter("mName") == null ? "" : request.getParameter("mName");
 	String fName = request.getParameter("fName") == null ? "" : request.getParameter("fName");
 	String content = request.getParameter("con") == null ? "" : request.getParameter("con");
@@ -98,7 +99,7 @@
 						<div class="contents">
 							<div class="subj">
 								<div id="subjtitle">제목</div>
-								<input type="text" name="title" id="subjbox" required>
+								<input type="text" name="title" id="subjbox" value="<%= title %>" required>
 							</div>
 							
 							<div class="contn1">
