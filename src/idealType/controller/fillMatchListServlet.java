@@ -35,6 +35,7 @@ public class fillMatchListServlet extends HttpServlet {
 		MatchService ms = new MatchService();
 		
 		int userNo = ((Account)request.getSession().getAttribute("loginUser")).getUserNo();
+		System.out.println("fill.mc" + userNo);
 		
 		ms.fillMatch(userNo);
 		response.sendRedirect("index.jsp");

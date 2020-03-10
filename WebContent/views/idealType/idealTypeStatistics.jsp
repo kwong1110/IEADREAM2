@@ -10,6 +10,7 @@ import="idealType.model.service.*"
 
 <%
 	Stat[][] st = (Stat[][])request.getAttribute("st");
+	
 %>
 <!doctype html>
 <html>
@@ -54,13 +55,18 @@ import="idealType.model.service.*"
         line-height: 70px;
     }
     .itemValue{
-        display: flex;
         text-align: center;
         margin : 0px  5px auto;
+        display : inline-block;
     }
     .itemValueName{
         margin: 0px 15px;
         line-height: 60px;
+        display : inline-block;
+        height : 60px;
+    }
+    .itemGraph{
+    	display : inline-block;
     }
     .itemSync{
     	display: block;
@@ -190,7 +196,7 @@ import="idealType.model.service.*"
                 	<div class="itemValueName">
                  		<label><%= st[i][j].getItem() %></label>
                 	</div>
-                	<div>
+                	<div class="itemGraph">
                 		<label class="itemSync" id=""><%= st[i][j].getProp() %>%</label>
                 		<% 
                 		String imagePath = null;

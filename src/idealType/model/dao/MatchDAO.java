@@ -37,7 +37,6 @@ public class MatchDAO {
 		PreparedStatement pstmt = null;
 		String query = prop.getProperty("insertMatch");
 		int result= 0;
-		System.out.println("DAO" + m.toString());
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, m.getUserNo());
