@@ -18,7 +18,8 @@
 	String year = (String)request.getAttribute("year");
 	String month = (String)request.getAttribute("month");
 	String search = (String)request.getAttribute("search");
-%>    
+	
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,7 +32,6 @@
 	.option{
 		padding: 3px 7px 6px 7px;
 		border: none;
-		font-weight: border;
 		border-radius: 5px;
 		cursor: pointer;
 		text-shadow: 0 1px 1px rgba(0,0,0,.3);
@@ -165,7 +165,7 @@
 							<div class="optiondiv">
 								<select class="option" id="month" name="month">
 									<option value="00">-----</option>
-									<option value="01">1월</option>
+									<option value="01" >1월</option>
 									<option value="02">2월</option>
 									<option value="03">3월</option>
 									<option value="04">4월</option>
@@ -218,9 +218,8 @@
 						 <div class="clear-both"></div>
 						
 						 <div class="pagingArea">
-						 	<% if(search != null){ %><!-- 검색을 한 상태의 페이징 -->
-						 	<!-- 검색결과 페이징 -->
-						 	<% if(!bcList.isEmpty() && maxPage != 1) { %> <!-- 전체 페이지가 1개면 페이징 기능 없애기 -->
+						 	<% if(search != null){ %><!-- 검색을 했을 때의 페이징 -->
+						 	<% if(!bcList.isEmpty() && maxPage != 1) { %>
 								<div class="button">
 									<button onclick="location.href='<%= request.getContextPath() %>/search.bc?currentPage=1&year=<%= year %>&month=<%= month %>'">&lt;&lt;</button>
 									<button onclick="location.href='<%= request.getContextPath() %>/search.bc?currentPage=<%= currentPage-1 %>&year=<%= year %>&month=<%= month %>'" id="beforeBtn">PREV</button>
@@ -239,7 +238,6 @@
 										<% } %>
 									<% } %>
 								
-								<!-- 다음 페이지로 가는 버튼 -->
 								<button onclick="location.href='<%= request.getContextPath() %>/search.bc?currentPage=<%= currentPage + 1 %>&year=<%= year %>&month=<%= month %>'" id="afterBtn">NEXT</button>
 								<script>
 									if(<%= currentPage %> >= <%= maxPage %>){
@@ -248,12 +246,11 @@
 									}
 								</script>
 								
-								<!-- 맨 끝으로 가는 버튼 -->
 								<button onclick="location.href='<%= request.getContextPath() %>/search.bc?currentPage=<%= maxPage %>&year=<%= year %>&month=<%= month %>'">&gt;&gt;</button>			
 								
 							<% } %>
 								
-							<% } else { %>
+							<% } else { %> <!-- 일반 페이징  -->
 								<% if(!bcList.isEmpty() && maxPage != 1) { %>
 									<button onclick="location.href='<%= request.getContextPath() %>/list.bc?currentPage=1'">&lt;&lt;</button>
 									<button onclick="location.href='<%= request.getContextPath() %>/list.bc?currentPage=<%= currentPage-1 %>'" id="beforeBtn">PREV</button>
