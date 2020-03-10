@@ -103,11 +103,7 @@
 								<% }else{%>
 								<li id="nop"><a href="<%=request.getContextPath() %>/views/account/accountLoginForm.jsp" onclick="question();">1:1문의</a>
 								<% } %>
-								
 								<li id="nop"><a href="<%=request.getContextPath() %>/list.faq">FAQ</a></li>
-								<% if(loginUser != null && loginUser.getGrade() == 0){ %>
-								<li id="nop"><a href="<%=request.getContextPath() %>/adminList.faq">FAQ 관리</a></li>
-								<% } %>
 							</ul>
 						</li>
 						
@@ -160,6 +156,9 @@
 									</li>
 									<li id="nop">
 										<a href="<%=request.getContextPath()%>/manage.bo">게시물 관리</a>
+									</li>
+									<li id="nop">
+										<a href="<%=request.getContextPath() %>/adminList.faq">FAQ 관리</a>
 									</li>
 									<li id="nop">
 										<a href="<%=request.getContextPath() %>/insertRandom" >랜덤 회원 추가</a>
