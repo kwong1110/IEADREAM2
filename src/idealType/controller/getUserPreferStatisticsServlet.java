@@ -34,13 +34,20 @@ public class getUserPreferStatisticsServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int userNo = ((Account)request.getSession().getAttribute("loginUser")).getUserNo();
 		MatchService mc = new MatchService();
-		Stat[][] st = mc.getUpStat(userNo);
 		
+		Stat[][]st = mc.getUpStat(userNo);
 		
+		for (int i=0; i< mc.getUpStat(userNo).length; i++) {
+			for (int j=0; j < mc.getUpStat(userNo)[i].length ; j++) {
+				st[i][j] = new Stat(); 
+				st[i][j] = mc.getUpStat(userNo)[i][j];
+			}
+		}
 		String page = null;
 		if(st != null) {
 			page = "views/idealType/userPreferStatistics.jsp";
 			request.setAttribute("st", st);
+			
 		}else {
 			page = "views/common/errorPage.jsp";
 			request.setAttribute("msg", "통계 조회에 실패하였습니다.");

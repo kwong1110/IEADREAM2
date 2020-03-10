@@ -64,7 +64,7 @@ public class UserPreferDAO {
 				up.setSmoke(rs.getInt("SMOKE"));
 				up.setSmokePri(rs.getInt("SMOKE_PRI"));
 				up.setInterestPri(rs.getInt("INTEREST_PRI"));
-			  }	
+			  }
 		  } catch (SQLException e) { 
 			  e.printStackTrace(); 
 		  } finally {

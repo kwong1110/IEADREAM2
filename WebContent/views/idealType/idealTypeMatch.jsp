@@ -147,6 +147,9 @@ import="idealType.model.service.*"
     a:link { color: black; text-decoration: none}
     a:visited {color: black;}
     a:hover{ color : silver;}
+    .outer{
+    	min-height = 800px;
+    }
     .graph { 
       position: relative;
       width: 200px; 
@@ -207,17 +210,17 @@ import="idealType.model.service.*"
        
         <section id="itemProfile" style="display: flex; margin-left: 5%; margin-top: 2%;">
         <table>
-	 		<tr>
-	 			<th>사진</th>
-	 			<th style="text-align: center;">자기소개</th>
-	 		</tr>
-	 		<tr>
-	 			<td>
+		 	<tr>
+		 			<th>사진</th>
+		 			<th style="text-align: center;">자기소개</th>
+		 	</tr>
+		 	<tr>
+	 		<td>
 	             	<article>
 						<img src="<%= photoPath %>" id='output' style="width: 200px; height: 200px;">
 	              	</article>
-	 			</td>
-	 			<td>
+	 		</td>
+	 		<td>
 	              	<article id="hello" style="text-align:center; margin-left:30px;">
 	                	<textarea style="width: 550px; height:200px; margin-top :15px; resize:none;" name="hello"><%= hello %></textarea>
 	              	</article>
@@ -309,13 +312,19 @@ import="idealType.model.service.*"
         </section>
         <section id="move" style="display:flex; margin: 5%;">
           <div style="text-align:left">
-            <img src="<%= request.getContextPath() %>/images/common/back.png" width="25px" height="50px" hidden="<%= back%>" onclick="<%= request.getContextPath()%>/get.mc?matchNo=<%= matchNo -1 %>" ></img>
+            <a href="<%= request.getContextPath()%>/get.mc?matchNo=<%= matchNo -1 %>">
+            <img src="<%= request.getContextPath() %>/images/common/back.png" width="25px" height="25px" hidden="<%= back%>">
+            </a>
           </div>
           <div style="margin: 0 auto;">
-            <img src="<%= request.getContextPath() %>/images/common/heart.png" width="50px" height="50px" onclick="<%= request.getContextPath()%>/sendHeart.mc?matchNo=<%= matchNo %>"></img>
+          	<a href="<%= request.getContextPath()%>/sendHeart.mc?matchNo=<%= matchNo %>">
+            <img src="<%= request.getContextPath() %>/images/common/heart.png" width="25px" height="25px">
+            </a>
           </div>
           <div  style="text-align:right">
-            <img src="<%= request.getContextPath() %>/images/common/next.png" width="25px" height="50px" hidden="<%= next%>" onclick="<%= request.getContextPath()%>/get.mc?matchNo=<%= matchNo +1 %>"></img>
+          	<a href="<%= request.getContextPath()%>/get.mc?matchNo=<%= matchNo +1 %>">
+            <img src="<%= request.getContextPath() %>/images/common/next.png" width="25px" height="25px" hidden="<%= next%>">
+            </a>
           </div>
         </section>
       </div>
