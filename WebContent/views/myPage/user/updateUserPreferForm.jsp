@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="account.model.vo.*"%>
 <%
-/* 
 	request.setCharacterEncoding("utf-8");
 	UserInfo ui = (UserInfo)request.getAttribute("ui");
 	UserPrefer up = (UserPrefer)request.getAttribute("up");
@@ -224,7 +223,6 @@
 		case 1: ip2 = "checked"; break;
 		case 0: ip3 = "checked"; break;
 		}
-		 */
 %>
 <!DOCTYPE html>
 <html>

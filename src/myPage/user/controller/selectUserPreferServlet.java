@@ -33,10 +33,12 @@ public class selectUserPreferServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		Account loginUser = (Account)session.getAttribute("loginUser");
+		Account user = (Account)session.getAttribute("loginUser");
+		
+		System.out.println(user.toString());
 		
 		UserService us = new UserService();
-		int userNo = loginUser.getUserNo();
+		int userNo = user.getUserNo();
 		UserInfo ui = us.selectUserInfo(userNo);
 		UserPrefer up = us.selectUserPrefer(userNo);
 		

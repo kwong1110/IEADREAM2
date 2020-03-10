@@ -45,7 +45,8 @@ public class getMatchServlet extends HttpServlet {
 		
 		int targetNo = m.getTargetNo();
 		int sync = (int)Math.round(100*m.getSync());
-		String pPath = us.selectUserPhoto(targetNo).getFilePath();
+		UserPhoto p = us.selectUserPhoto(targetNo);
+		String pPath = p.getFilePath();
 		
 		Account ac = us.selectAccount(targetNo);
 		UserInfo ui = us.selectUserInfo(targetNo);

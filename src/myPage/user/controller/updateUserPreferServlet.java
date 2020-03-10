@@ -34,10 +34,9 @@ public class updateUserPreferServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 디테일이 아니고 바로 정보를 불러와 수정해야하기 때문에 servlet에서 view 페이지로 넘어감
 		HttpSession session = request.getSession();
 
-		int userNo = ((Account)request.getSession().getAttribute("loginUser")).getUserNo();
+		int userNo = ((Account)session.getAttribute("loginUser")).getUserNo();
 		int height = Integer.parseInt(request.getParameter("height"));
 		int heightPri = Integer.parseInt(request.getParameter("heightPri"));
 		String shape = request.getParameter("shape");

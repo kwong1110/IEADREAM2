@@ -1,8 +1,8 @@
 package account.model.vo;
 
 public class UserPhoto {
-	private int userNo;
 	private int photoNo;
+	private int userNo;
 	private String originName;
 	private String changeName;
 	private String filePath;
@@ -11,11 +11,11 @@ public class UserPhoto {
 	
 	public UserPhoto() {}
 
-	public UserPhoto(int userNo, int photoNo, String originName, String changeName, String filePath, int fileLevel,
+	public UserPhoto(int photoNo, int userNo, String originName, String changeName, String filePath, int fileLevel,
 			String deleted) {
 		super();
-		this.userNo = userNo;
 		this.photoNo = photoNo;
+		this.userNo = userNo;
 		this.originName = originName;
 		this.changeName = changeName;
 		this.filePath = filePath;
@@ -77,6 +77,12 @@ public class UserPhoto {
 
 	public void setDeleted(String deleted) {
 		this.deleted = deleted;
+	}
+
+	@Override
+	public String toString() {
+		return "UserPhoto [userNo=" + userNo + ", photoNo=" + photoNo + ", originName=" + originName + ", changeName="
+				+ changeName + ", filePath=" + filePath + ", fileLevel=" + fileLevel + ", deleted=" + deleted + "]";
 	}
 	
 	

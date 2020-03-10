@@ -1,6 +1,6 @@
 package account.model.vo;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 
 public class UserInfo {
 
@@ -40,7 +40,58 @@ public class UserInfo {
 		this.smoke = smoke;
 		this.interest = interest;
 	}
-
+	
+	public UserInfo(int userNo, String gender, String hello, int height, String shape, String style,
+			int age, int region, String religion, int scholar, String job, int drink, int smoke) {
+		super();
+		this.userNo = userNo;
+		this.gender = gender;
+		this.hello = hello;
+		this.height = height;
+		this.shape = shape;
+		this.style = style;
+		this.age = age;
+		this.region = region;
+		this.religion = religion;
+		this.scholar = scholar;
+		this.job = job;
+		this.drink = drink;
+		this.smoke = smoke;
+	}
+	
+	public UserInfo(int userNo, String gender, String hello, int height, String shape, String style,
+			int region, String religion, int scholar, String job, int drink, int smoke) {
+		super();
+		this.userNo = userNo;
+		this.gender = gender;
+		this.hello = hello;
+		this.height = height;
+		this.shape = shape;
+		this.style = style;
+		this.region = region;
+		this.religion = religion;
+		this.scholar = scholar;
+		this.job = job;
+		this.drink = drink;
+		this.smoke = smoke;
+	}
+	
+	public UserInfo(int userNo, String hello, int height, String shape, String style,
+			int region, String religion, int scholar, String job, int drink, int smoke) {
+		super();
+		this.userNo = userNo;
+		this.hello = hello;
+		this.height = height;
+		this.shape = shape;
+		this.style = style;
+		this.region = region;
+		this.religion = religion;
+		this.scholar = scholar;
+		this.job = job;
+		this.drink = drink;
+		this.smoke = smoke;
+	}
+	
 	public int getUserNo() {
 		return userNo;
 	}
@@ -152,4 +203,13 @@ public class UserInfo {
 	public void setInterest(String[] interest) {
 		this.interest = interest;
 	}
+
+	@Override
+	public String toString() {
+		return "UserInfo [userNo=" + userNo + ", gender=" + gender + ", hello=" + hello + ", height=" + height
+				+ ", shape=" + shape + ", style=" + style + ", age=" + age + ", region=" + region + ", religion="
+				+ religion + ", scholar=" + scholar + ", job=" + job + ", drink=" + drink + ", smoke=" + smoke
+				+ ", interest=" + Arrays.toString(interest) + "]";
+	}
+	
 }
