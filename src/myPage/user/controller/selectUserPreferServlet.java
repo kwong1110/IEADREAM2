@@ -43,14 +43,13 @@ public class selectUserPreferServlet extends HttpServlet {
 		UserPrefer up = us.selectUserPrefer(userNo);
 		
 		String page = null;
-		if(ui != null) {
+		if(up != null) {
 			page = "views/myPage/user/updateUserPreferForm.jsp";
 			request.setAttribute("ui", ui);
 			request.setAttribute("up", up);
 		} else {
 			page = "views/account/joinUserPreferenceForm.jsp";
 			request.setAttribute("ui", ui);
-			request.setAttribute("up", up);
 		}
 		RequestDispatcher view = request.getRequestDispatcher(page);
 		view.forward(request, response);

@@ -245,7 +245,13 @@ public class UserService {
 			a.setEmail(email);
 			a.setBirth(birth);
 			
-			aDAO.insertAccount(conn, a);
+			result = aDAO.insertAccount(conn, a);
+			
+			if(result > 0) {
+				commit(conn);
+			} else {
+				rollback(conn);
+			}
 			
 			int userNo = getUserNo(a.getId());
 
@@ -340,13 +346,7 @@ public class UserService {
 			
 			uiDAO.insertPhoto(conn, p);
 			
-			if(result > 0) {
-				commit(conn);
-			} else {
-				rollback(conn);
-			}
-			
-			int theight = 150 + 5*random.nextInt(8);
+			int theight = 150 + (5*random.nextInt(8));
 			int heightPri = random.nextInt(2);
 			
 			String tshape="마름";
@@ -431,7 +431,7 @@ public class UserService {
 			up.setSmokePri(smokePri);
 			up.setInterestPri(interestPri);
 			
-			upDAO.insertUserPrefer(conn, up);
+			result = upDAO.insertUserPrefer(conn, up);
 			
 			if(result > 0) {
 				commit(conn);

@@ -23,9 +23,9 @@
 	int heightPri = up.getHeightPri();
 		String hp1 = null; String hp2 = null; String hp3 = null;
 		switch(heightPri) {
-		case 2: hp1 = "checked"; break;
-		case 1: hp2 = "checked"; break;
-		case 0: hp3 = "checked"; break;
+		case 2: hp1 = "selected"; break;
+		case 1: hp2 = "selected"; break;
+		case 0: hp3 = "selected"; break;
 		}
 		
 	String shape = up.getShape();
@@ -41,9 +41,9 @@
 	int shapePri = up.getShapePri();
 		String shp1 = null; String shp2 = null; String shp3 = null;
 		switch(shapePri) {
-		case 2: shp1 = "checked"; break;
-		case 1: shp2 = "checked"; break;
-		case 0: shp3 = "checked"; break;
+		case 2: shp1 = "selected"; break;
+		case 1: shp2 = "selected"; break;
+		case 0: shp3 = "selected"; break;
 		}
 		
 	String style = up.getStyle();
@@ -60,9 +60,9 @@
 	int stylePri = up.getStylePri();
 		String stp1 = null; String stp2 = null; String stp3 = null;
 		switch(stylePri) {
-		case 2: stp1 = "checked"; break;
-		case 1: stp2 = "checked"; break;
-		case 0: stp3 = "checked"; break;
+		case 2: stp1 = "selected"; break;
+		case 1: stp2 = "selected"; break;
+		case 0: stp3 = "selected"; break;
 		}	
 	int age = up.getAge();
 		String ag1 = null; String ag2 = null; String ag3 = null;
@@ -77,9 +77,9 @@
 	int agePri = up.getAgePri();
 		String agp1 = null; String agp2 = null; String agp3 = null;
 		switch(agePri) {
-		case 2: agp1 = "checked"; break;
-		case 1: agp2 = "checked"; break;
-		case 0: agp3 = "checked"; break;
+		case 2: agp1 = "selected"; break;
+		case 1: agp2 = "selected"; break;
+		case 0: agp3 = "selected"; break;
 		}
 		
 	String religion = up.getReligion();
@@ -95,9 +95,9 @@
 	int religionPri = up.getReligionPri();
 		String relp1 = null; String relp2 = null; String relp3 = null;
 		switch(religionPri) {
-		case 2: relp1 = "checked"; break;
-		case 1: relp2 = "checked"; break;
-		case 0: relp3 = "checked"; break;
+		case 2: relp1 = "selected"; break;
+		case 1: relp2 = "selected"; break;
+		case 0: relp3 = "selected"; break;
 		}
 		
 	int drink = up.getDrink();
@@ -111,23 +111,23 @@
 	int drinkPri = up.getDrinkPri();
 		String dp1 = null; String dp2 = null; String dp3 = null;
 		switch(drinkPri) {
-		case 2: dp1 = "checked"; break;
-		case 1: dp2 = "checked"; break;
-		case 0: dp3 = "checked"; break;
+		case 2: dp1 = "selected"; break;
+		case 1: dp2 = "selected"; break;
+		case 0: dp3 = "selected"; break;
 		}
 		
 	int smoke = up.getSmoke();
 		String s1 = null; String s0 = null;
 		switch(smoke) {
 		case 1: s1 = "checked"; break;
-		case 2: s0 = "checked"; break;
+		case 0: s0 = "checked"; break;
 		}
 	int smokePri = up.getSmokePri();
 		String sp1 = null; String sp2 = null; String sp3 = null;
 		switch(smokePri) {
-		case 2: sp1 = "checked"; break;
-		case 1: sp2 = "checked"; break;
-		case 0: sp3 = "checked"; break;
+		case 2: sp1 = "selected"; break;
+		case 1: sp2 = "selected"; break;
+		case 0: sp3 = "selected"; break;
 		}
 		
 	String job = up.getJob();
@@ -146,9 +146,9 @@
 	int jobPri = up.getJobPri();
 		String jp1 = null; String jp2 = null; String jp3 = null;
 		switch(jobPri) {
-		case 2: jp1 = "checked"; break;
-		case 1: jp2 = "checked"; break;
-		case 0: jp3 = "checked"; break;
+		case 2: jp1 = "selected"; break;
+		case 1: jp2 = "selected"; break;
+		case 0: jp3 = "selected"; break;
 		}
 		
 	int scholar = up.getScholar();
@@ -163,9 +163,9 @@
 	int scholarPri = up.getScholarPri();
 		String scp1 = null; String scp2 = null; String scp3 = null;
 		switch(scholarPri) {
-		case 2: scp1 = "checked"; break;
-		case 1: scp2 = "checked"; break;
-		case 0: scp3 = "checked"; break;
+		case 2: scp1 = "selected"; break;
+		case 1: scp2 = "selected"; break;
+		case 0: scp3 = "selected"; break;
 		}
 		
 	int region = ui.getRegion();
@@ -177,7 +177,7 @@
 		String re32 = null; String re54 = null;
 		String re33 = null; String re55 = null;
 		String re41 = null; String re60 = null;
-		 switch(region) {
+		switch(region) {
 		 case 11: re11 = "checked"; break;
 		 case 12: re12 = "checked"; break;
 		 case 13: re13 = "checked"; break;
@@ -198,9 +198,9 @@
 	int regionPri = up.getRegionPri();
 			String rep1 = null; String rep2 = null; String rep3 = null;
 			switch(regionPri) {
-			case 2: rep1 = "checked"; break;
-			case 1: rep2 = "checked"; break;
-			case 0: rep3 = "checked"; break;
+			case 2: rep1 = "selected"; break;
+			case 1: rep2 = "selected"; break;
+			case 0: rep3 = "selected"; break;
 			}
 		 
 	 String[] getInter = ui.getInterest(); // 가져온 배열
@@ -219,9 +219,9 @@
 	int interestPri = up.getInterestPri();
 		String ip1 = null; String ip2 = null; String ip3 = null;
 		switch(interestPri) {
-		case 2: ip1 = "checked"; break;
-		case 1: ip2 = "checked"; break;
-		case 0: ip3 = "checked"; break;
+		case 2: ip1 = "selected"; break;
+		case 1: ip2 = "selected"; break;
+		case 0: ip3 = "selected"; break;
 		}
 %>
 <!DOCTYPE html>
@@ -270,216 +270,216 @@
                    <tr class="itemBox">
                      <th class="itemName" id="">키 (cm)</th>
                      <td>
-                       <label><input type="radio" name="height" value="150">155이하</label>
-                       <label><input type="radio" name="height" value="155">155~160</label>
-                       <label><input type="radio" name="height" value="160">160~165</label>
-                       <label><input type="radio" name="height" value="165">165~170</label>
-                       <label><input type="radio" name="height" value="170">170~175</label>
-                       <label><input type="radio" name="height" value="175">175~180</label>
-                       <label><input type="radio" name="height" value="180">180~185</label>
-                       <label><input type="radio" name="height" value="185">185 이상</label>
+                       <label><input type="radio" name="height" value="150" <%= h1 %>>155이하<%= height %></label>
+                       <label><input type="radio" name="height" value="155" <%= h2 %>>155~160</label>
+                       <label><input type="radio" name="height" value="160" <%= h3 %>>160~165</label>
+                       <label><input type="radio" name="height" value="165" <%= h4 %>>165~170</label>
+                       <label><input type="radio" name="height" value="170" <%= h5 %>>170~175</label>
+                       <label><input type="radio" name="height" value="175" <%= h6 %>>175~180</label>
+                       <label><input type="radio" name="height" value="180" <%= h7 %>>180~185</label>
+                       <label><input type="radio" name="height" value="185" <%= h8 %>>185 이상</label>
                      </td>
                      <td>
                        <select class="itemPriority" name="heightPri">
-                         <option value="2">중요</option>
-                         <option value="1" selected="selected">보통</option>
-                         <option value="0">무관</option>
+                         <option value="2" <%= hp1 %>>중요</option>
+                         <option value="1" <%= hp2 %>>보통</option>
+                         <option value="0" <%= hp3 %>>무관</option>
                        </select>
                      </td>
                    </tr>
                    <tr class="itemBox">
                      <th class="itemName" id="">체형</th>
                      <td>
-                       <label><input type="radio" name="shape" value="마름">마름</label>
-                       <label><input type="radio" name="shape" value="보통">보통</label>
-                       <label><input type="radio" name="shape" value="통통">통통</label>
-                       <label><input type="radio" name="shape" value="근육질">근육질</label>
-                       <label><input type="radio" name="shape" value="글래머">글래머</label>
+                       <label><input type="radio" name="shape" value="마름" <%= sh1  %>>마름</label>
+                       <label><input type="radio" name="shape" value="보통" <%= sh2  %>>보통</label>
+                       <label><input type="radio" name="shape" value="통통" <%= sh3  %>>통통</label>
+                       <label><input type="radio" name="shape" value="근육질" <%= sh4  %>>근육질</label>
+                       <label><input type="radio" name="shape" value="글래머" <%= sh5  %>>글래머</label>
                      </td>
                      <td>
                        <select class="itemPriority" name="shapePri">
-                         <option value="2">중요</option>
-                         <option value="1" selected="selected">보통</option>
-                         <option value="0">무관</option>
+                         <option value="2" <%= shp1 %>>중요</option>
+                         <option value="1"  <%= shp2 %>>보통</option>
+                         <option value="0" <%= shp3 %>>무관</option>
                        </select>
                      </td>
                    </tr>
                    <tr class="itemBox">
                      <th class="itemName" id="">스타일</th>
                      <td>
-                       <label><input type="radio" name="style" value="귀여운">귀여운</label>
-                       <label><input type="radio" name="style" value="지적인">지적인</label>
-                       <label><input type="radio" name="style" value="섹시한">섹시한</label>
-                       <label><input type="radio" name="style" value="따뜻한">따뜻한</label>
-                       <label><input type="radio" name="style" value="우아한">우아한</label>
-                       <label><input type="radio" name="style" value="터프한">터프한</label>
+                       <label><input type="radio" name="style" value="귀여운" <%=st1  %>>귀여운</label>
+                       <label><input type="radio" name="style" value="지적인" <%=st2  %>>지적인</label>
+                       <label><input type="radio" name="style" value="섹시한" <%=st3  %>>섹시한</label>
+                       <label><input type="radio" name="style" value="따뜻한" <%=st4  %>>따뜻한</label>
+                       <label><input type="radio" name="style" value="우아한" <%=st5  %>>우아한</label>
+                       <label><input type="radio" name="style" value="터프한" <%=st6  %>>터프한</label>
                      </td>
                      <td>
                        <select class="itemPriority" name="stylePri">
-                         <option value="2">중요</option>
-                         <option value="1" selected="selected">보통</option>
-                         <option value="0">무관</option>
+                         <option value="2" <%=stp1  %>>중요</option>
+                         <option value="1" <%=stp2  %>>보통</option>
+                         <option value="0" <%=stp3  %>>무관</option>
                        </select>
                      </td>
                    </tr>
                    <tr class="itemBox">
                      <th class="itemName" id="">나이(만)</th>
                      <td>
-                       <label><input type="radio" name="age" value="-2">연하</label>
-                       <label><input type="radio" name="age" value="-1">1~3년 연하</label>
-                       <label><input type="radio" name="age" value="0">동갑</label>
-                       <label><input type="radio" name="age" value="1">1~3년 연상</label>
-                       <label><input type="radio" name="age" value="2">연상</label>
+                       <label><input type="radio" name="age" value="-2" <%=ag1  %>>연하</label>
+                       <label><input type="radio" name="age" value="-1" <%=ag2  %>>1~3년 연하</label>
+                       <label><input type="radio" name="age" value="0" <%=ag3  %>>동갑</label>
+                       <label><input type="radio" name="age" value="1" <%=ag4  %>>1~3년 연상</label>
+                       <label><input type="radio" name="age" value="2" <%=ag5  %>>연상</label>
                      </td>
                      <td>
                        <select class="itemPriority" name="agePri">
-                         <option value="2">중요</option>
-                         <option value="1" selected="selected">보통</option>
-                         <option value="0">무관</option>
+                         <option value="2" <%=agp1  %>>중요</option>
+                         <option value="1" <%=agp2  %>>보통</option>
+                         <option value="0" <%=agp3  %>>무관</option>
                        </select>
                      </td>
                    </tr>
                    <tr class="itemBox">
                      <th class="itemName" id="">종교</th>
                      <td>
-                       <label><input type="radio" name="religion" value="기독교">기독교</label>
-                       <label><input type="radio" name="religion" value="천주교">천주교</label>
-                       <label><input type="radio" name="religion" value="불교">불교</label>
-                       <label><input type="radio" name="religion" value="무교">무교</label>
-                       <label><input type="radio" name="religion" value="기타">기타</label>
+                       <label><input type="radio" name="religion" value="기독교" <%=rel1  %>>기독교</label>
+                       <label><input type="radio" name="religion" value="천주교" <%=rel2  %>>천주교</label>
+                       <label><input type="radio" name="religion" value="불교" <%=rel3  %>>불교</label>
+                       <label><input type="radio" name="religion" value="무교" <%=rel4  %>>무교</label>
+                       <label><input type="radio" name="religion" value="기타" <%=rel5  %>>기타</label>
                      </td>
                      <td>
                        <select class="itemPriority" name="religionPri">
-                         <option value="2">중요</option>
-                         <option value="1" selected="selected">보통</option>
-                         <option value="0">무관</option>
+                         <option value="2" <%=relp1  %>>중요</option>
+                         <option value="1" <%=relp2  %>>보통</option>
+                         <option value="0" <%=relp3  %>>무관</option>
                        </select>
                      </td>
                    </tr>
                    <tr class="itemBox">
                      <th class="itemName" id="">음주 습관</th>
                      <td>
-                       <label><input type="radio" name="drink" value="3">주 3회</label>
-                       <label><input type="radio" name="drink" value="2">주 1~2회</label>
-                       <label><input type="radio" name="drink" value="1">월 1회</label>
-                       <label><input type="radio" name="drink" value="0">안 마심</label>
+                       <label><input type="radio" name="drink" value="3" <%=d3  %>>주 3회</label>
+                       <label><input type="radio" name="drink" value="2" <%=d2  %>>주 1~2회</label>
+                       <label><input type="radio" name="drink" value="1" <%=d1  %>>월 1회</label>
+                       <label><input type="radio" name="drink" value="0" <%=d0  %>>안 마심</label>
                      </td>
                      <td>
                        <select class="itemPriority" name="drinkPri">
-                         <option value="2">중요</option>
-                         <option value="1" selected="selected">보통</option>
-                         <option value="0">무관</option>
+                         <option value="2" <%=dp1  %>>중요</option>
+                         <option value="1" <%=dp2  %>>보통</option>
+                         <option value="0" <%=dp3  %>>무관</option>
                        </select>
                      </td>
                    </tr>
                    <tr class="itemBox">
                      <th class="itemName" id="">흡연 여부</th>
                      <td>
-                       <label><input type="radio" name="smoke" value="1">흡연</label>
-                       <label><input type="radio" name="smoke" value="0">비흡연</label>
+                       <label><input type="radio" name="smoke" value="1" <%=s1  %>>흡연</label>
+                       <label><input type="radio" name="smoke" value="0" <%=s0  %>>비흡연</label>
                      </td>
                      <td>
                        <select class="itemPriority" name="smokePri">
-                         <option value="2">중요</option>
-                         <option value="1" selected="selected">보통</option>
-                         <option value="0">무관</option>
+                         <option value="2" <%=sp1  %>>중요</option>
+                         <option value="1" <%=sp2  %>>보통</option>
+                         <option value="0" <%=sp3  %>>무관</option>
                        </select>
                      </td>
                    </tr>
                    <tr class="itemBox">
                      <th class="itemName" id="">직업</th>
                      <td>
-                       <label><input type="radio" name="job" value="학생">학생</label>
-                       <label><input type="radio" name="job" value="사무직">사무직</label>
-                       <label><input type="radio" name="job" value="연구직">연구직</label>
-                       <label><input type="radio" name="job" value="교육직">교육직</label>
-                       <label><input type="radio" name="job" value="예술">예술</label>
-                       <label><input type="radio" name="job" value="서비스">서비스</label>
-                       <label><input type="radio" name="job" value="전문직">전문직</label>
-                       <label><input type="radio" name="job" value="기타">기타</label>
+                       <label><input type="radio" name="job" value="학생" 	<%=j1  %>>학생</label>
+                       <label><input type="radio" name="job" value="사무직" 	<%=j2  %>>사무직</label>
+                       <label><input type="radio" name="job" value="연구직" 	<%=j3  %>>연구직</label>
+                       <label><input type="radio" name="job" value="교육직" 	<%=j4  %>>교육직</label>
+                       <label><input type="radio" name="job" value="예술" 	<%=j5  %>>예술</label>
+                       <label><input type="radio" name="job" value="서비스" 	<%=j6  %>>서비스</label>
+                       <label><input type="radio" name="job" value="전문직" 	<%=j7  %>>전문직</label>
+                       <label><input type="radio" name="job" value="기타" 	<%=j8  %>>기타</label>
                      </td>
                      <td>
                        <select class="itemPriority" name="jobPri">
-                         <option value="2">중요</option>
-                         <option value="1" selected="selected">보통</option>
-                         <option value="0">무관</option>
+                         <option value="2" <%=jp1  %>>중요</option>
+                         <option value="1" <%=jp2  %>>보통</option>
+                         <option value="0" <%=jp3  %>>무관</option>
                        </select>
                      </td>
                    </tr>
                    <tr class="itemBox">
                      <th class="itemName" id="">최종 학력</th>
                      <td>
-                       <label><input type="radio" name="scholar" value="0">고등학교</label>
-                       <label><input type="radio" name="scholar" value="2">전문대</label>
-                       <label><input type="radio" name="scholar" value="4">대학교</label>
-                       <label><input type="radio" name="scholar" value="6">대학원</label>
-                       <label><input type="radio" name="scholar" value="8">박사</label>
+                       <label><input type="radio" name="scholar" value="0" <%=sc1  %>>고등학교</label>
+                       <label><input type="radio" name="scholar" value="2" <%=sc2  %>>전문대</label>
+                       <label><input type="radio" name="scholar" value="4" <%=sc3  %>>대학교</label>
+                       <label><input type="radio" name="scholar" value="6" <%=sc4  %>>대학원</label>
+                       <label><input type="radio" name="scholar" value="8" <%=sc5  %>>박사</label>
                      </td>
                      <td>
                        <select class="itemPriority" name="scholarPri">
-                         <option value="2">중요</option>
-                         <option value="1" selected="selected">보통</option>
-                         <option value="0">무관</option>
+                         <option value="2" <%=scp1  %>>중요</option>
+                         <option value="1" <%=scp2  %>>보통</option>
+                         <option value="0" <%=scp3  %>>무관</option>
                        </select>
                      </td>
                    </tr>
                    <tr class="itemBox">
                      <th class="itemName" id="">거주 지역</th>
                      <td>
-                       <label><input type="radio" name="region" value="11" disabled="disabled">서울</label>
-                       <label><input type="radio" name="region" value="12" disabled="disabled">인천</label>
-                       <label><input type="radio" name="region" value="13" disabled="disabled">경기</label>
-                       <label><input type="radio" name="region" value="20" disabled="disabled">강원</label>
-                       <label><input type="radio" name="region" value="31" disabled="disabled">충북</label>
-                       <label><input type="radio" name="region" value="32" disabled="disabled">충남</label>
-                       <label><input type="radio" name="region" value="33" disabled="disabled">대전</label>
-                       <label><input type="radio" name="region" value="41" disabled="disabled">전북</label><br>
-                       <label><input type="radio" name="region" value="42" disabled="disabled">전남</label>
-                       <label><input type="radio" name="region" value="43" disabled="disabled">광주</label>
-                       <label><input type="radio" name="region" value="51" disabled="disabled">경북</label>
-                       <label><input type="radio" name="region" value="52" disabled="disabled">대구</label>
-                       <label><input type="radio" name="region" value="53" disabled="disabled">경남</label>
-                       <label><input type="radio" name="region" value="54" disabled="disabled">부산</label>
-                       <label><input type="radio" name="region" value="55" disabled="disabled">울산</label>
-                       <label><input type="radio" name="region" value="60" disabled="disabled">제주</label>
+                       <label><input type="radio" name="region" value="11" disabled="disabled" <%=re11  %>>서울</label>
+                       <label><input type="radio" name="region" value="12" disabled="disabled" <%=re12  %>>인천</label>
+                       <label><input type="radio" name="region" value="13" disabled="disabled" <%=re13  %>>경기</label>
+                       <label><input type="radio" name="region" value="20" disabled="disabled" <%=re20  %>>강원</label>
+                       <label><input type="radio" name="region" value="31" disabled="disabled" <%=re31  %>>충북</label>
+                       <label><input type="radio" name="region" value="32" disabled="disabled" <%=re32  %>>충남</label>
+                       <label><input type="radio" name="region" value="33" disabled="disabled" <%=re33  %>>대전</label>
+                       <label><input type="radio" name="region" value="41" disabled="disabled" <%=re41  %>>전북</label><br>
+                       <label><input type="radio" name="region" value="42" disabled="disabled" <%=re42  %>>전남</label>
+                       <label><input type="radio" name="region" value="43" disabled="disabled" <%=re43  %>>광주</label>
+                       <label><input type="radio" name="region" value="51" disabled="disabled" <%=re51  %>>경북</label>
+                       <label><input type="radio" name="region" value="52" disabled="disabled" <%=re52  %>>대구</label>
+                       <label><input type="radio" name="region" value="53" disabled="disabled" <%=re53  %>>경남</label>
+                       <label><input type="radio" name="region" value="54" disabled="disabled" <%=re54  %>>부산</label>
+                       <label><input type="radio" name="region" value="55" disabled="disabled" <%=re55  %>>울산</label>
+                       <label><input type="radio" name="region" value="60" disabled="disabled" <%=re60  %>>제주</label>
                      </td>
                      <td>
                        <select class="itemPriority" name="regionPri">
-                         <option value="2">중요</option>
-                         <option value="1" selected="selected">보통</option>
-                         <option value="0">무관</option>
+                         <option value="2" <%=rep1  %>>중요</option>
+                         <option value="1" <%=rep2  %>>보통</option>
+                         <option value="0" <%=rep3  %>>무관</option>
                        </select>
                      </td>
                    </tr>
                    <tr class="itemBox">
                      <th class="itemName" id="">관심 분야</th>
                      <td>
-                          <label><input type="checkbox" name="interest" value="movie"     disabled="disabled">영화&드라마</label>
-                     <label><input type="checkbox" name="interest" value="musical"     disabled="disabled">연극&뮤지컬</label>
-                     <label><input type="checkbox" name="interest" value="comic"     disabled="disabled">만화&서브컬처</label>
-                     <label><input type="checkbox" name="interest" value="picture"     disabled="disabled">사진&영상 촬영</label> 
-                     <label><input type="checkbox" name="interest" value="books"     disabled="disabled">독서</label>
-                     <label><input type="checkbox" name="interest" value="music"     disabled="disabled">음악 감상</label><br> 
-                     <label><input type="checkbox" name="interest" value="sing"     disabled="disabled">노래&춤</label>
-                     <label><input type="checkbox" name="interest" value="instrument"disabled="disabled">악기 연주</label> 
-                     <label><input type="checkbox" name="interest" value="cook"     disabled="disabled">요리&음식</label>
-                     <label><input type="checkbox" name="interest" value="camp"     disabled="disabled">여행&캠핑</label> 
-                     <label><input type="checkbox" name="interest" value="exercise"  disabled="disabled">운동</label> 
-                     <label><input type="checkbox" name="interest" value="sports"     disabled="disabled">스포츠 경기</label> 
-                     <label><input type="checkbox" name="interest" value="vgame"    disabled="disabled">비디오 게임</label><br> 
-                     <label><input type="checkbox" name="interest" value="bgame"     disabled="disabled">보드게임</label> 
-                     <label><input type="checkbox" name="interest" value="sns"        disabled="disabled">SNS</label>
-                     <label><input type="checkbox" name="interest" value="drink"     disabled="disabled">술&모임</label> 
-                     <label><input type="checkbox" name="interest" value="beauty"     disabled="disabled">뷰티&패션</label> 
-                     <label><input type="checkbox" name="interest" value="pet"        disabled="disabled">반려동물</label>
-                     <label><input type="checkbox" name="interest" value="diy"        disabled="disabled">DIY</label> 
-                     <label><input type="checkbox" name="interest" value="money"    disabled="disabled">재테크</label>
+	                     <label><input type="checkbox" name="interest" value="movie" 		disabled="disabled" <%=check[0]  %>>영화&드라마</label>
+	                     <label><input type="checkbox" name="interest" value="musical"    	disabled="disabled" <%=check[1]  %>>연극&뮤지컬</label>
+	                     <label><input type="checkbox" name="interest" value="comic"    	disabled="disabled" <%=check[2]  %>>만화&서브컬처</label>
+	                     <label><input type="checkbox" name="interest" value="picture"    	disabled="disabled" <%=check[3]  %>>사진&영상 촬영</label> 
+	                     <label><input type="checkbox" name="interest" value="books"     	disabled="disabled" <%=check[4]  %>>독서</label>
+	                     <label><input type="checkbox" name="interest" value="music"     	disabled="disabled" <%=check[5]  %>>음악 감상</label><br> 
+	                     <label><input type="checkbox" name="interest" value="sing"     	disabled="disabled" <%=check[6]  %>>노래&춤</label>
+	                     <label><input type="checkbox" name="interest" value="instrument"	disabled="disabled" <%=check[7]  %>>악기 연주</label> 
+	                     <label><input type="checkbox" name="interest" value="cook"     	disabled="disabled" <%=check[8]  %>>요리&음식</label>
+	                     <label><input type="checkbox" name="interest" value="camp"     	disabled="disabled" <%=check[9]  %>>여행&캠핑</label> 
+	                     <label><input type="checkbox" name="interest" value="exercise"  	disabled="disabled" <%=check[10]  %>>운동</label> 
+	                     <label><input type="checkbox" name="interest" value="sports"     	disabled="disabled" <%=check[11]  %>>스포츠 경기</label> 
+	                     <label><input type="checkbox" name="interest" value="vgame"    	disabled="disabled" <%=check[12]  %>>비디오 게임</label><br> 
+	                     <label><input type="checkbox" name="interest" value="bgame"     	disabled="disabled" <%=check[13]  %>>보드게임</label> 
+	                     <label><input type="checkbox" name="interest" value="sns"        	disabled="disabled" <%=check[14]  %>>SNS</label>
+	                     <label><input type="checkbox" name="interest" value="drink"     	disabled="disabled" <%=check[15]  %>>술&모임</label> 
+	                     <label><input type="checkbox" name="interest" value="beauty"     	disabled="disabled" <%=check[16]  %>>뷰티&패션</label> 
+	                     <label><input type="checkbox" name="interest" value="pet"        	disabled="disabled" <%=check[17]  %>>반려동물</label>
+	                     <label><input type="checkbox" name="interest" value="diy"        	disabled="disabled" <%=check[18]  %>>DIY</label> 
+	                     <label><input type="checkbox" name="interest" value="money"    	disabled="disabled" <%=check[19]  %>>재테크</label>
                        </td>
                      <td>
                        <select class="itemPriority" name="interestPri">
-                         <option value="2">중요</option>
-                         <option value="1" selected="selected">보통</option>
-                         <option value="0">무관</option>
+                         <option value="2" <%=ip1  %>>중요</option>
+                         <option value="1" <%=ip2  %>>보통</option>
+                         <option value="0" <%=ip3  %>>무관</option>
                        </select>
                      </td>
                    </tr>
