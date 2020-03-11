@@ -10,6 +10,25 @@ import="idealType.model.service.*"
 
 <%
 	Stat[][] st = (Stat[][])request.getAttribute("st");
+	Stat[] h = (Stat[])request.getAttribute("h");
+
+	String[] itemName = new String[11];
+	itemName[0] = "키"; 
+	itemName[1] = "체형" ;
+	itemName[2] = "매력" ; 
+	itemName[3] = "나이" ; 
+	itemName[4] = "종교" ; 
+	itemName[5] = "음주" ; 
+	itemName[6] = "흡연" ; 
+	itemName[7] = "직업" ; 
+	itemName[8] = "학력" ; 
+	itemName[9] = "거주 지역" ; 
+	itemName[10] = "관심 분야" ;
+	
+	
+	
+	
+
 %>
 <!doctype html>
 <html>
@@ -81,29 +100,12 @@ import="idealType.model.service.*"
 		</div>
         <section id="items">  
           <article>
-          <%
-          	for (int i=0; i < st.length; i++){
-          		String itemName = null;
-          		switch(i){
-          		case 0: itemName = "키" ; break;
-          		case 1: itemName = "체형" ; break;
-          		case 2: itemName = "매력" ; break;
-          		case 3: itemName = "나이" ; break;
-          		case 4: itemName = "종교" ; break;
-          		case 5: itemName = "음주" ; break;
-          		case 6: itemName = "흡연" ; break;
-          		case 7: itemName = "직업" ; break;
-          		case 8: itemName = "학력" ; break;
-          		case 9: itemName = "거주 지역" ; break;
-          		case 10: itemName = "관심 분야" ; break;
-          		}
-          %>
             <div class="itemBox">
             	<div class="itemName" id="">
             		<label><%= itemName %></label>
               	</div>
-              <% 
-              	for (int j=0; j < 4 && j < st[i].length; j++){
+              <% for ( int i=0; i<st.length ; i++){
+              		for (int j=0; j < 4 && j < st[i].length; j++){
                   		switch(i){
                   		case 0:
                   			switch(st[i][j].getItem()){
@@ -202,13 +204,11 @@ import="idealType.model.service.*"
                 		<img src="<%= imagePath %>" width="50px" height="50px"></img>
                 	</div>
             	</div>
-              <%
-              }
+			<%
+					}
+              	}
               %>
             </div>
-           <%
-          	}
-           %>
           </article>
         </section>
       </div>

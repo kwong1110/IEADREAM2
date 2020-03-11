@@ -4,6 +4,7 @@ import static common.JDBCTemplate.*;
 
 import java.sql.Connection;
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -217,29 +218,29 @@ public class MatchService {
 	}
 	
 	public int fillMatch(int userNo) {
-		System.out.println("Service " + userNo);
 		Match[] oldMlist = getMatchList(userNo);
 		int stack = 0; int result = 0;
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd");
+		
 		Date today = new Date(System.currentTimeMillis());
 		if (oldMlist != null) {
 			for (int i = 0; i < oldMlist.length ; i++) {
-				oldMlist[i] = new Match();
 				oldMlist[i] = getMatchList(userNo)[i];
 				if (oldMlist[i].getStatus().equals("D")) { // 대기중인 매칭 수 구하기
 					oldMlist[i].setMatchDate(today);
-					updateMatch(oldMlist[i]); 				//매치 날짜 갱신
+					updateMatch(oldMlist[i]);		//매치 날짜 갱신
+					System.out.println("oldMlist" + oldMlist.toString() );
 					stack++;
 				}
-				else if(oldMlist[i].getMatchDate() == today) { // 확인한 매칭 중 오늘 생성된 매칭 수 구하기
+				else if(sdf.format(oldMlist[i].getMatchDate()).equals(sdf.format(today))) { // 확인한 매칭 중 오늘 생성된 매칭 수 구하기
 					stack++;
+					System.out.println("stack++");
 				}
 				System.out.println("stack :" + stack);
 			}
 		}
-		Match[] mlist = new Match[5]; 
+		Match[] mlist = searchMatchList(userNo); 
 		for (int i = 0; stack+i < 5 ; i++) {// 빈 공간 채워넣기
-			mlist[i] = new Match();
-			mlist[i] = searchMatchList(userNo)[i];
 			result = insertMatch(mlist[i]);
 		}
 		return result;
@@ -322,7 +323,7 @@ public class MatchService {
 	}
 	
 	public int[] searchIdealList(int userNo) {
-		double minSync = 0.1;
+		double minSync = 0.4;
 		UserService us = new UserService();
 		
 		UserInfo ui = us.selectUserInfo(userNo);

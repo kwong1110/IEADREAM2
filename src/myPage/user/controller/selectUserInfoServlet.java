@@ -45,7 +45,7 @@ public class selectUserInfoServlet extends HttpServlet {
 		
 		ui = us.selectUserInfo(userNo);
 		UserPhoto p = us.selectUserPhoto(userNo);
-		pPath = p.getFilePath() + p.getChangeName();
+		pPath = p.getChangeName();
 		
 		String page = null;
 		if(ui != null) {

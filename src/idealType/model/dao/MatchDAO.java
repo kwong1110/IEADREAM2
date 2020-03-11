@@ -39,6 +39,7 @@ public class MatchDAO {
 		int result= 0;
 		try {
 			pstmt = conn.prepareStatement(query);
+			System.out.println("insertMatch"+ m.toString());
 			pstmt.setInt(1, m.getUserNo());
 			pstmt.setInt(2, m.getTargetNo());
 			pstmt.setDouble(3, m.getSync());

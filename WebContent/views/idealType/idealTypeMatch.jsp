@@ -211,20 +211,20 @@ import="idealType.model.service.*"
         <section id="itemProfile" style="display: flex; margin-left: 5%; margin-top: 2%;">
         <table>
 		 	<tr>
-		 			<th>사진</th>
-		 			<th style="text-align: center;">자기소개</th>
+	 			<th>사진</th>
+	 			<th style="text-align: center;">자기소개</th>
 		 	</tr>
 		 	<tr>
 	 		<td>
-	             	<article>
-						<img src="<%= photoPath %>" id='output' style="width: 200px; height: 200px;">
-	              	</article>
+             	<article>
+					<img src="<%= photoPath %>" id='output' style="width: 200px; height: 200px;">
+              	</article>
 	 		</td>
 	 		<td>
-	              	<article id="hello" style="text-align:center; margin-left:30px;">
-	                	<textarea style="width: 550px; height:200px; margin-top :15px; resize:none;" name="hello"><%= hello %></textarea>
-	              	</article>
-	 			</td>
+              	<article id="hello" style="text-align:center; margin-left:30px;">
+                	<textarea style="width: 550px; height:200px; margin-top :15px; resize:none;" name="hello"><%= hello %></textarea>
+              	</article>
+ 			</td>
 	 		</tr>
 	 	</table>
         </section>
@@ -330,7 +330,6 @@ import="idealType.model.service.*"
       </div>
     </div>
   </div>
-
 
 <%@ include file="../common/footer.jsp" %>
 </body>
