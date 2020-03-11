@@ -120,8 +120,7 @@ import="idealType.model.service.*"
 						case "pet": st[i][j].setItem("반려동물"); break;
 						case "diy": st[i][j].setItem("DIY"); break;
 						case "money": st[i][j].setItem("재테크"); break;
-      			}
-      			break;
+      			}break;
       		}
   		}
 	}
