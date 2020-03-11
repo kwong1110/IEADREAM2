@@ -119,7 +119,7 @@
 	}
 	
 	.optionbox{
-		margin-left: 770px;
+		margin-left: 750px;
 		margin-bottom: .8%;
 	}
 	

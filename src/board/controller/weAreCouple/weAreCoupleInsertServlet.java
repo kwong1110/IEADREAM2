@@ -47,8 +47,7 @@ public class weAreCoupleInsertServlet extends HttpServlet {
 			// 어디에 저장할건지 지정하는것
 			String savePath = root + "photo_uploadFiles/";
 			
-			MultipartRequest multipartRequest
-				= new MultipartRequest(request, savePath, maxSize, "UTF-8", new MyFileRenamePolicy());
+			MultipartRequest multipartRequest= new MultipartRequest(request, savePath, maxSize, "UTF-8", new MyFileRenamePolicy());
 			
 			ArrayList<String> saveFiles = new ArrayList<String>();   // 바뀐 파일에 대한 이름을 저장할 ArrayList
 			ArrayList<String> originFiles = new ArrayList<String>(); // 원본 파일의 이름을 저장할 ArrayList
