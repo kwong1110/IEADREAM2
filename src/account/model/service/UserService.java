@@ -43,7 +43,6 @@ public class UserService {
 		System.out.println("Service userNo " + userNo);
 		
 		UserInfo ui = uiDAO.selectUserInfo(conn, userNo);
-		
 		String[] interest = uiDAO.selectInterest(conn, userNo);
 		
 		int age = uiDAO.getUserAge(conn, userNo);

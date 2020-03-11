@@ -3,6 +3,7 @@
 <%
 	request.setCharacterEncoding("utf-8");
 	UserInfo ui = (UserInfo)request.getAttribute("ui");
+	UserPhoto p = (UserPhoto)request.getAttribute("p");
 	String photoPath = (String)request.getAttribute("pPath");
 
 	int userNo = ui.getUserNo();
@@ -183,7 +184,7 @@
 						 		<tr>
 						 			<td>
 						             	<article>
-											<img src="<%= photoPath %>" id='output' style="width: 200px; height: 200px;">
+											<img src="<%= request.getContextPath() %>/photo_uploadFiles/<%= p.getChangeName() %>" id='output' style="width: 200px; height: 200px;">
 						              	</article>
 						 			</td>
 						 			<td>

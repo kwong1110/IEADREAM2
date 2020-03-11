@@ -9,25 +9,16 @@ import="idealType.model.service.*"
 %>
 
 <%
-	Stat[][] st = (Stat[][])request.getAttribute("st");
+	Stat[] height = new Stat[5];
 
-%>    
-    
-    
+%>
 <!doctype html>
 <html>
 <head>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/common.css">
-  <title>이상형의 이상형</title>
+  <title>선호도 통계</title>
   <meta charset="utf-8">
   <style>
-  .outer{
-	width: 1000px; 
-	height: 800px;
-    margin: 50px auto 50px auto;
-    		/* 위       우      아래       좌     */
-	background: white
-	}
     section {
       padding: 15px;
     }
@@ -52,7 +43,7 @@ import="idealType.model.service.*"
     .graph .bar span { position: absolute; left: 1em; }
     .itemBox{
         display : flex;
-        height : 80px;
+        height : 90px;
         width : 1000px;
         margin : 0px 10px;
     }
@@ -64,13 +55,18 @@ import="idealType.model.service.*"
         line-height: 70px;
     }
     .itemValue{
-        display: flex;
         text-align: center;
         margin : 0px  5px auto;
+        display : inline-block;
     }
     .itemValueName{
         margin: 0px 15px;
         line-height: 60px;
+        display : inline-block;
+        height : 60px;
+    }
+    .itemGraph{
+    	display : inline-block;
     }
     .itemSync{
     	display: block;
@@ -86,18 +82,9 @@ import="idealType.model.service.*"
   <div class ="outer">
     <div class="wrapper">
       <div class ="main">
-        <section style="clear:left;">
-          <p style="font-weight: 550; font-size: 16pt;">이상형의 이상형</p>
-        </section>
-        <section id="summary" style="display: flex">
-          <article id="sync" style="text-align: center; margin-left: 40%;">
-            <label style="margin:10px;">나와의 일치율</label>
-            <label>65%</label>
-            <div class="graph">
-                <strong class="bar" style="width: 65%;"></strong>
-            </div>
-          </article>
-        </section>
+        <div class="pageTitle">
+			<h1> 이상형 통계</h1>
+		</div>
         <section id="items">  
           <article>
           <%
@@ -209,7 +196,7 @@ import="idealType.model.service.*"
                 	<div class="itemValueName">
                  		<label><%= st[i][j].getItem() %></label>
                 	</div>
-                	<div>
+                	<div class="itemGraph">
                 		<label class="itemSync" id=""><%= st[i][j].getProp() %>%</label>
                 		<% 
                 		String imagePath = null;
@@ -218,7 +205,7 @@ import="idealType.model.service.*"
                 		else if (st[i][j].getProp() > 0.32) {imagePath = request.getContextPath() + "/images/common/wifi low.png";}
                 		else 								{imagePath = request.getContextPath() + "/images/common/wifi none.png";}
                 		%>
-                		<img src="<%= imagePath %>" width="50px" height="50px"></img>
+                		<img src="<%= imagePath %>" width="25px" height="25px">
                 	</div>
             	</div>
               <%

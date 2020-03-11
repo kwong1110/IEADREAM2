@@ -46,9 +46,9 @@ public class Stat implements Comparable<Stat>{
 		if (p1 == p2)
 			return 0;
 		else if (p1 > p2)
-			return 1;
-		else
 			return -1;
+		else
+			return +1;
 	}
 	
 	@Override

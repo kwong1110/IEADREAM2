@@ -37,11 +37,13 @@ public class getIdealStatisticsServlet extends HttpServlet {
 		int[] list = mc.searchIdealList(userNo);
 		Stat[][] st = mc.getIdealUpStat(list);
 		
-		
+		System.out.println("servlet" + st[0][0].getItem());
+	
 		String page = null;
 		if(st != null) {
 			page = "views/idealType/idealTypeStatistics.jsp";
 			request.setAttribute("st", st);
+			
 		}else {
 			page = "views/common/errorPage.jsp";
 			request.setAttribute("msg", "통계 조회에 실패하였습니다.");

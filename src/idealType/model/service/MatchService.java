@@ -4,6 +4,7 @@ import static common.JDBCTemplate.*;
 
 import java.sql.Connection;
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -39,10 +40,11 @@ public class MatchService {
 		for (int i=0; i<mlist.length; i++) {
 			if (mlist[i].getStatus().equals("D") || mlist[i].getStatus().equals("C")){
 				ulist.add(mlist[i]);
-				System.out.println("ulist" + ulist.get(i).toString());
 			}
 		}
 		System.out.println("ulist size :" + ulist.size());
+		
+		if (ulist.size() > 0) {
 		Match[] result = new Match[ulist.size()];
 		for (int i=0; i<ulist.size() ;i++) {
 			result[i] = new Match();
@@ -58,11 +60,16 @@ public class MatchService {
 		System.out.println("gumc userNo" + result[0].getUserNo());
 		System.out.println("gumc targetNo" + result[0].getTargetNo());
 		return result;
+		}
+		else {
+		return null;
+		}
 	}
 
 	public int insertMatch(Match m) {
 		Connection conn = getConnection();
 		MatchDAO mDAO = new MatchDAO();
+		
 		int result = mDAO.insertMatch(conn, m);
 		
 		if(result > 0) {
@@ -164,38 +171,29 @@ public class MatchService {
 		
 		if (ti.getHeight() == up.getHeight()) 	{syncPoint += up.getHeightPri();}
 			else {double v = Math.abs((ti.getHeight() - up.getHeight())/10); syncPoint += (1-v)*up.getHeightPri();}
-		System.out.println("" + syncPoint);
 		
 		if (ti.getStyle().equals(up.getStyle())) {syncPoint += up.getStylePri();}
-		System.out.println("" + syncPoint);
 		
 		if (getAgeDiff(ti.getAge(), ui.getAge()) == up.getAge()) {syncPoint += up.getAgePri();}
 			else {double v = Math.abs((getAgeDiff(ti.getAge(), ui.getAge()) - up.getAge())/2); syncPoint += (1-v)*up.getAgePri();}
-		System.out.println("" + syncPoint);
 	
 		if (ti.getRegion() == ui.getRegion()) {syncPoint += up.getRegionPri();}
 			else if(Math.floor(ti.getRegion()/10) == Math.floor(ui.getRegion()/10)){syncPoint += 0.5*up.getRegionPri();}
 			else {syncPoint -= 0.5*maxPoint;} // 도 단위에서 거주 지역이 다른 경우 페널티
-		System.out.println("" + syncPoint);
 		
 		if (ti.getReligion().equals(up.getReligion())) {syncPoint += up.getReligionPri();}
-		System.out.println("" + syncPoint);
 		
 		if (ti.getScholar() >= up.getScholar()) {syncPoint += up.getScholarPri();}
 			else {double v = Math.abs((ti.getScholar() - up.getScholar())/2); syncPoint += (1-v)*up.getScholarPri();}
-		System.out.println("" + syncPoint);
 		
 		if (ti.getJob().equals( up.getJob())) 	{syncPoint += up.getJobPri();}
-		System.out.println("" + syncPoint);
 		
 		
 		if (ti.getDrink() == up.getDrink()) 	{syncPoint += up.getDrinkPri();}
 			else {double v = Math.abs((ti.getDrink() - up.getDrink())); syncPoint += (1-v)*up.getDrinkPri();}
-		System.out.println("" + syncPoint);
 		
 		
 		if (ti.getSmoke() == up.getSmoke()) 	{syncPoint += up.getSmokePri();}
-		System.out.println("" + syncPoint);
 		
 		
 		for (int i = 0; i < ui.getInterest().length; i++){
@@ -217,26 +215,30 @@ public class MatchService {
 	}
 	
 	public int fillMatch(int userNo) {
-		System.out.println("Service " + userNo);
 		Match[] oldMlist = getMatchList(userNo);
 		int stack = 0; int result = 0;
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd");
+		
 		Date today = new Date(System.currentTimeMillis());
 		if (oldMlist != null) {
 			for (int i = 0; i < oldMlist.length ; i++) {
+				oldMlist[i] = getMatchList(userNo)[i];
 				if (oldMlist[i].getStatus().equals("D")) { // 대기중인 매칭 수 구하기
-					
 					oldMlist[i].setMatchDate(today);
-					updateMatch(oldMlist[i]); 				//매치 날짜 갱신
+					updateMatch(oldMlist[i]);		//매치 날짜 갱신
+					System.out.println("oldMlist" + oldMlist.toString() );
 					stack++;
 				}
-				else if(oldMlist[i].getMatchDate() == today) { // 확인한 매칭 중 오늘 생성된 매칭 수 구하기
+				else if(sdf.format(oldMlist[i].getMatchDate()).equals(sdf.format(today))) { // 확인한 매칭 중 오늘 생성된 매칭 수 구하기
 					stack++;
+					System.out.println("stack++");
 				}
 				System.out.println("stack :" + stack);
 			}
 		}
+		Match[] mlist = searchMatchList(userNo); 
 		for (int i = 0; stack+i < 5 ; i++) {// 빈 공간 채워넣기
-			result = insertMatch(searchMatchList(userNo)[i]);
+			result = insertMatch(mlist[i]);
 		}
 		return result;
 	}
@@ -318,9 +320,7 @@ public class MatchService {
 	}
 	
 	public int[] searchIdealList(int userNo) {
-		double minSync = 0.3;
-		
-		Connection conn = getConnection();
+		double minSync = 0.4;
 		UserService us = new UserService();
 		
 		UserInfo ui = us.selectUserInfo(userNo);
@@ -353,9 +353,9 @@ public class MatchService {
 		UserPreferDAO upDAO = new UserPreferDAO();
 				
 		Stat[] height = new Stat[8];
-		
 		for (int i = 0; i < height.length ;i++) {
 			height[i] = new Stat();
+			height[i].setProp(0);
 		}
 		height[0].setItem("150");
 		height[1].setItem("155");
@@ -369,6 +369,7 @@ public class MatchService {
 		Stat[] shape = new Stat[5];
 		for (int i = 0; i < shape.length ;i++) {
 			shape[i] = new Stat();
+			shape[i].setProp(0);
 		}
 		shape[0].setItem("마름");
 		shape[1].setItem("보통");
@@ -379,6 +380,7 @@ public class MatchService {
 		Stat[] style = new Stat[6];
 		for (int i = 0; i < style.length ;i++) {
 			style[i] = new Stat();
+			style[i].setProp(0);
 		}
 		style[0].setItem("귀여운");
 		style[1].setItem("지적인");
@@ -390,6 +392,7 @@ public class MatchService {
 		Stat[] age = new Stat[5];
 		for (int i = 0; i < age.length ;i++) {
 			age[i] = new Stat();
+			age[i].setProp(0);
 		}
 		age[0].setItem("-2");
 		age[1].setItem("-1");
@@ -397,14 +400,10 @@ public class MatchService {
 		age[3].setItem("1");
 		age[4].setItem("2");
 		
-		/*int minAge = 15;
-		for(int i=0; i < age.length; i++) {
-			age[i].setItem("" + Integer.toString(minAge+i));
-		}
-		*/
 		Stat[] religion = new Stat[5];
 		for (int i = 0; i < religion.length ;i++) {
 			religion[i] = new Stat();
+			religion[i].setProp(0);
 		}
 		religion[0].setItem("기독교");
 		religion[1].setItem("천주교");
@@ -415,6 +414,7 @@ public class MatchService {
 		Stat[] drink = new Stat[4];
 		for (int i = 0; i < drink.length ;i++) {
 			drink[i] = new Stat();
+			drink[i].setProp(0);
 		}
 		drink[0].setItem("3");
 		drink[1].setItem("2");
@@ -423,6 +423,7 @@ public class MatchService {
 
 		Stat[] smoke = new Stat[2];for (int i = 0; i < smoke.length ;i++) {
 			smoke[i] = new Stat();
+			smoke[i].setProp(0);
 		}
 		smoke[0].setItem("1");
 		smoke[1].setItem("0");
@@ -430,6 +431,7 @@ public class MatchService {
 		Stat[] job = new Stat[8];
 		for (int i = 0; i < job.length ;i++) {
 			job[i] = new Stat();
+			job[i].setProp(0);
 		}
 		job[0].setItem("학생");
 		job[1].setItem("사무직");
@@ -443,6 +445,7 @@ public class MatchService {
 		Stat[] scholar = new Stat[5];
 		for (int i = 0; i < scholar.length ;i++) {
 			scholar[i] = new Stat();
+			scholar[i].setProp(0);
 		}
 		scholar[0].setItem("0");
 		scholar[1].setItem("2");
@@ -453,6 +456,7 @@ public class MatchService {
 		Stat[] region = new Stat[16];
 		for (int i = 0; i < region.length ;i++) {
 			region[i] = new Stat();
+			region[i].setProp(0);
 		}
 		region[0].setItem("11");
 		region[1].setItem("12");
@@ -475,6 +479,7 @@ public class MatchService {
 		Stat[] interest = new Stat[20];
 		for (int i = 0; i < interest.length ;i++) {
 			interest[i] = new Stat();
+			interest[i].setProp(0);
 		}
 		interest[0].setItem("movie");
 		interest[1].setItem("musical");
@@ -497,8 +502,101 @@ public class MatchService {
 		interest[18].setItem("diy");
 		interest[19].setItem("money");
 
+		
+		for (int n=0; n<list.length; n++ ) {
+			System.out.println("루프 시작");
+			UserInfo ui = uiDAO.selectUserInfo(conn, list[n]);
+			UserPrefer up = upDAO.selectUserPrefer(conn, list[n]);
+			
+			for (int j=0; j<height.length ; j++) {
+				if (up.getHeight() == Integer.parseInt(height[j].getItem())) {
+					height[j].addProp();}
+			}
+			
+			for (int j=0; j<shape.length ; j++) {
+				if (up.getShape().equals(shape[j].getItem())) {
+					shape[j].addProp();}
+			}
+			
+			for (int j=0; j<style.length ; j++) {
+				if (up.getStyle().equals(style[j].getItem())) {
+					style[j].addProp();}
+			}
+			
+			for (int j=0; j<age.length ; j++) {
+				if (up.getAge() == Integer.parseInt(age[j].getItem())) {
+					age[j].addProp();}
+			}
+			
+			for (int j=0; j<religion.length ; j++) {
+				if (up.getReligion().equals(religion[j].getItem())) {
+					religion[j].addProp();}
+			}
+			
+			for (int j=0; j<drink.length ; j++) {
+				if (up.getDrink() == Integer.parseInt(drink[j].getItem())) {
+					drink[j].addProp();}
+			}
+			
+			for (int j=0; j<smoke.length ; j++) {
+				if (up.getSmoke() == Integer.parseInt(smoke[j].getItem())) {
+					smoke[j].addProp();}
+			}
+			
+			for (int j=0; j<job.length ; j++) {
+				if (up.getJob().equals(job[j].getItem())) {
+					job[j].addProp();}
+			}
+			
+			for (int j=0; j<scholar.length ; j++) {
+				if (up.getScholar() == Integer.parseInt(scholar[j].getItem())) {
+					scholar[j].addProp();}
+			}
+			
+			for (int j=0; j<region.length ; j++) {
+				if (ui.getRegion() == Integer.parseInt(region[j].getItem())) {
+					region[j].addProp();}
+			}
+			
+			for (int j=0; j<interest.length ; j++) {
+				String[] interestList = ui.getInterest();
+				for (int k=0; k< interestList.length ; k++) {
+					if (interestList[k].equals(interest[j].getItem())) {
+						interest[j].addProp();
+					}
+				}
+			}
+			System.out.println("before sort" + height[0].toString() + height[1].toString() + height[2].toString());
+			for (int j=0; j< height.length; j++) { height[j].divProp(list.length);}
+			Arrays.sort(height);			
+			System.out.println("after sort" + height[0].toString() + height[1].toString() + height[2].toString());
+
+			for (int j=0; j< shape.length; j++) { shape[j].divProp(list.length);}
+			Arrays.sort(shape);
+			for (int j=0; j< style.length; j++) { style[j].divProp(list.length);}
+			Arrays.sort(style);
+			for (int j=0; j< age.length; j++) { age[j].divProp(list.length);}
+			Arrays.sort(age);
+			for (int j=0; j< religion.length; j++) { religion[j].divProp(list.length);}
+			Arrays.sort(religion);
+			for (int j=0; j< drink.length; j++) { drink[j].divProp(list.length);}
+			Arrays.sort(drink);
+			for (int j=0; j< smoke.length; j++) { smoke[j].divProp(list.length);}
+			Arrays.sort(smoke);
+			for (int j=0; j< job.length; j++) { job[j].divProp(list.length);}
+			Arrays.sort(job);
+			for (int j=0; j< scholar.length; j++) { scholar[j].divProp(list.length);}
+			Arrays.sort(scholar);
+			for (int j=0; j< region.length; j++) { region[j].divProp(list.length);}
+			Arrays.sort(region);
+			for (int j=0; j< interest.length; j++) { interest[j].divProp(list.length);}
+			Arrays.sort(interest);
+		}
+		
 		Stat[][] result = new Stat[11][];
 		result[0] = height;
+		System.out.println("result" + result[0][0] + result[0][1]);
+		System.out.println("height" + height[0] + height[1]);
 		result[1] = shape;
 		result[2] = style;
 		result[3] = age;
@@ -509,86 +607,6 @@ public class MatchService {
 		result[8] = scholar;
 		result[9] = region;
 		result[10] = interest;
-		
-		for (int i=0; i< result.length ;i++) { // 초기화
-			for (int j=0; j< result[i].length; j++) {
-				result[i][j].setProp(0);
-				System.out.println(result[i][j].toString());
-			}
-		}
-		
-		
-		for (int n=0; n<list.length; n++ ) {
-			UserInfo ui = uiDAO.selectUserInfo(conn, list[n]);
-			UserPrefer up = upDAO.selectUserPrefer(conn, list[n]);
-			
-			for (int j=0; j<height.length ; j++) {
-				if (up.getHeight() == Integer.parseInt(height[j].getItem())) {
-					height[j].addProp();
-				}
-			}
-			for (int j=0; j<shape.length ; j++) {
-				if (up.getShape().equals(shape[j].getItem())) {
-					shape[j].addProp();
-				}
-			}
-			for (int j=0; j<style.length ; j++) {
-				if (up.getStyle().equals(style[j].getItem())) {
-					style[j].addProp();
-				}
-			}
-			for (int j=0; j<age.length ; j++) {
-				if (up.getAge() == Integer.parseInt(age[j].getItem())) {
-					age[j].addProp();
-				}
-			}
-			for (int j=0; j<religion.length ; j++) {
-				if (up.getReligion().equals(religion[j].getItem())) {
-					religion[j].addProp();
-				}
-				
-			}
-			for (int j=0; j<drink.length ; j++) {
-				if (up.getDrink() == Integer.parseInt(drink[j].getItem())) {
-					drink[j].addProp();
-				}
-			}
-			for (int j=0; j<smoke.length ; j++) {
-				if (up.getSmoke() == Integer.parseInt(smoke[j].getItem())) {
-					smoke[j].addProp();
-				}
-			}
-			for (int j=0; j<job.length ; j++) {
-				if (up.getJob().equals(job[j].getItem())) {
-					job[j].addProp();
-				}
-			}
-			for (int j=0; j<scholar.length ; j++) {
-				if (up.getScholar() == Integer.parseInt(scholar[j].getItem())) {
-					scholar[j].addProp();
-				}
-			}
-			for (int j=0; j<region.length ; j++) {
-				if (ui.getRegion() == Integer.parseInt(region[j].getItem())) {
-					region[j].addProp();
-				}
-			}
-			for (int j=0; j<interest.length ; j++) {
-				String[] interestList = ui.getInterest();
-				for (int k=0; k< interestList.length ; k++) {
-					if (interestList[k].equals(interest[j].getItem())) {
-						interest[j].addProp();
-					}
-				}
-			}
-		}
-		
-		for (int p=0; p< result.length ;p++) { // 전체 인원수로 나눠 비율 구하기
-			for (int j=0; j< result[p].length; j++) {
-				result[p][j].divProp(list.length);
-			}
-			Arrays.sort(result[p]);
-		}
 		return result;
 	}
 }

@@ -33,6 +33,7 @@ public class getMatchServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String page = null;
 		HttpSession session = request.getSession();
 		
 		MatchService ms = new MatchService();
@@ -41,13 +42,10 @@ public class getMatchServlet extends HttpServlet {
 		Account loginUser = (Account)session.getAttribute("loginUser");
 		int userNo = loginUser.getUserNo();
 		System.out.println("servlet userNo: " + userNo);
-		
-		int matchNo = 0;
-		if (request.getAttribute("matchNo") != null) {matchNo = (int)request.getAttribute("matchNo");}
-		
-		Match m = new Match(); 
-		m =	ms.getUncheckedMatchList(userNo)[matchNo];
-		
+				
+		if (ms.getUncheckedMatchList(userNo) != null) {
+			Match m = ms.getUncheckedMatchList(userNo)[0];
+
 		int targetNo = m.getTargetNo();
 		
 		int sync = (int)Math.round(100*m.getSync());
@@ -62,18 +60,17 @@ public class getMatchServlet extends HttpServlet {
 		m.setStatus("C");
 		ms.updateMatch(m);
 		
-		String page = null;
-		if(ti.getHello() != null) {
-			page = "views/idealType/idealTypeMatch.jsp";
-			request.setAttribute("ti", ti);
-			request.setAttribute("ta", ta);
-			request.setAttribute("sync", sync);
-			request.setAttribute("pPath", pPath);
-			request.setAttribute("matchNo", matchNo);
-			request.setAttribute("maxMatchNo", ms.getUncheckedMatchList(userNo).length);
-		}else {
-			page = "views/common/errorPage.jsp";
-			request.setAttribute("msg", "매칭 조회에 실패하였습니다.");
+		page = "views/idealType/idealTypeMatch.jsp";
+		request.setAttribute("p", p);
+		request.setAttribute("ti", ti);
+		request.setAttribute("ta", ta);
+		request.setAttribute("sync", sync);
+		request.setAttribute("pPath", pPath);
+		request.setAttribute("maxMatchNo", ms.getUncheckedMatchList(userNo).length);
+		}
+		else {
+		page = "views/common/errorPage.jsp";
+		request.setAttribute("msg", "남은 매칭이 없습니다. 내일을 기다려주세요.");
 		}
 		RequestDispatcher view = request.getRequestDispatcher(page);
 		view.forward(request, response);

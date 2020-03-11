@@ -37,10 +37,9 @@ public class MatchDAO {
 		PreparedStatement pstmt = null;
 		String query = prop.getProperty("insertMatch");
 		int result= 0;
-		
 		try {
 			pstmt = conn.prepareStatement(query);
-			System.out.println("DAO " + m.toString());
+			System.out.println("insertMatch"+ m.toString());
 			pstmt.setInt(1, m.getUserNo());
 			pstmt.setInt(2, m.getTargetNo());
 			pstmt.setDouble(3, m.getSync());
@@ -124,12 +123,11 @@ public class MatchDAO {
 			  pstmt.setString(2, item);
 			  pstmt.setString(3, gender);
 			  rs = pstmt.executeQuery();
-			  int total = rs.getInt("TOTAL");
 			  
 			  while(rs.next()) {
 				  Stat stat = new Stat();
 				  stat.setItem(rs.getString(item));
-				  stat.setProp(rs.getInt("PROP")/total);
+				  stat.setProp(rs.getInt("COUNT"));
 				  list.add(stat);
 			  }
 			  
@@ -159,12 +157,11 @@ public class MatchDAO {
 			  pstmt.setString(2, item);
 			  pstmt.setString(3, gender);
 			  rs = pstmt.executeQuery();
-			  int total = rs.getInt("TOTAL");
 			  
 			  while(rs.next()) {
 				  Stat stat = new Stat();
 				  stat.setItem(rs.getString(item));
-				  stat.setProp(rs.getInt("PROP")/total);
+				  stat.setProp(rs.getInt("COUNT"));
 				  list.add(stat);
 			  }
 			  

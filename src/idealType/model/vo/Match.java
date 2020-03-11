@@ -81,9 +81,9 @@ public class Match implements Comparable<Match>{
 		if (sync1 == sync2)
 			return 0;
 		else if (sync1 > sync2)
-			return 1;
-		else
 			return -1;
+		else
+			return +1;
 	}
 
 	@Override
