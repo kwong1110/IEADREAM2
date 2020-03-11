@@ -197,8 +197,6 @@ public class getUserPreferStatisticsServlet extends HttpServlet {
 		
 		
 		
-		
-		
 		String page = null;
 		if(st != null) {
 			page = "views/idealType/userPreferStatistics.jsp";

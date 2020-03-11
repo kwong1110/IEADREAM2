@@ -17,6 +17,7 @@ import="idealType.model.service.*"
 	int sync = (int)request.getAttribute("sync");
 	int matchNo = (int)request.getAttribute("matchNo");
 	int maxMatchNo = (int)request.getAttribute("maxMatchNo");
+	UserPhoto p = (UserPhoto)request.getAttribute("p");
 	
 	String back = null; String next = null;
 	if (matchNo == 0){back="hidden";}
@@ -217,7 +218,7 @@ import="idealType.model.service.*"
 		 	<tr>
 	 		<td>
              	<article>
-					<img src="<%= photoPath %>" id='output' style="width: 200px; height: 200px;">
+					<img src="<%= request.getContextPath() %>/photo_uploadFiles/<%= p.getChangeName() %>" id='output' style="width: 200px; height: 200px;">
               	</article>
 	 		</td>
 	 		<td>

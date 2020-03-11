@@ -65,6 +65,7 @@ public class getMatchServlet extends HttpServlet {
 		String page = null;
 		if(ti.getHello() != null) {
 			page = "views/idealType/idealTypeMatch.jsp";
+			request.setAttribute("p", p);
 			request.setAttribute("ti", ti);
 			request.setAttribute("ta", ta);
 			request.setAttribute("sync", sync);
