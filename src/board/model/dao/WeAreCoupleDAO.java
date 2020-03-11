@@ -85,7 +85,8 @@ public class WeAreCoupleDAO {
 		int result = 0;
 		
 		String query = prop.getProperty("insertPhoto");
-		
+//insertPhoto = INSERT INTO PHOTO VALUES(SEQ_PHOTONO.NEXTVAL, SEQ_POSTNO.CURRVAL, ?, ?, ?, ?, DEFAULT)
+
 		try {
 			for(int i = 0; i< fileList.size(); i++) {
 				Photo p = fileList.get(i);

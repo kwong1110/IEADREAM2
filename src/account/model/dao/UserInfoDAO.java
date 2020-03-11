@@ -293,8 +293,8 @@ public class UserInfoDAO {
 		
 		try {
 			pstmt = conn.prepareStatement(query);
-			
-			pstmt = conn.prepareStatement(query);
+//insertPhoto=INSERT INTO USER_PHOTO VALUES(SEQ_PHOTONO.NEXTVAL, ?, ?, ?, ?, 0, DEFAULT)
+
 			pstmt.setInt(1,p.getUserNo());
 			pstmt.setString(2, p.getOriginName());
 			pstmt.setString(3, p.getChangeName());
