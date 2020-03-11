@@ -184,7 +184,7 @@
 						 		<tr>
 						 			<td>
 						             	<article>
-											<img src="<%= request.getContextPath() %>/photo_uploadFiles/<%= p.getChangeName() %>"" id='output' style="width: 200px; height: 200px;">
+											<img src="<%= request.getContextPath() %>/photo_uploadFiles/<%= p.getChangeName() %>" id='output' style="width: 200px; height: 200px;">
 						              	</article>
 						 			</td>
 						 			<td>
