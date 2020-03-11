@@ -15,13 +15,10 @@ import="idealType.model.service.*"
 	ui = (UserInfo)request.getAttribute("ti");	
 	String photoPath = (String)request.getAttribute("pPath");
 	int sync = (int)request.getAttribute("sync");
-	int matchNo = (int)request.getAttribute("matchNo");
 	int maxMatchNo = (int)request.getAttribute("maxMatchNo");
 	UserPhoto p = (UserPhoto)request.getAttribute("p");
 	
 	String back = null; String next = null;
-	if (matchNo == 0){back="hidden";}
-	if (matchNo == maxMatchNo){next="hidden";}
 	
 	String name = ac.getUserName();
 	String hello = ui.getHello();
@@ -205,7 +202,7 @@ import="idealType.model.service.*"
             </div>
           </article>
           <article id="listNo" style="margin-left: 30%;">
-            <h3><%= matchNo +1 %> / <%= maxMatchNo %></h3>
+            <h3>1 / <%= maxMatchNo %></h3>
           </article>
         </section>
        
@@ -313,12 +310,12 @@ import="idealType.model.service.*"
         </section>
         <section id="move" style="display:flex; margin: 5%;">
           <div style="margin: 0 auto;">
-          	<a href="<%= request.getContextPath()%>/sendHeart.mc?matchNo=<%= matchNo %>">
+          	<a href="<%= request.getContextPath()%>/sendHeart.mc">
             <img src="<%= request.getContextPath() %>/images/common/heart.png" width="25px" height="25px">
             </a>
           </div>
           <div  style="text-align:right">
-          	<a href="<%= request.getContextPath()%>/disband.mc?matchNo=<%= matchNo %>">
+          	<a href="<%= request.getContextPath()%>/disband.mc">
             <img src="<%= request.getContextPath() %>/images/common/next.png" width="25px" height="25px" hidden="<%= next%>">
             </a>
           </div>

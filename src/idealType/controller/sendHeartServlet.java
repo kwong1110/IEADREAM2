@@ -35,12 +35,11 @@ public class sendHeartServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		int userNo = ((Account)request.getSession().getAttribute("loginUser")).getUserNo();
-		int matchNo = Integer.parseInt(request.getParameter("matchNo"));
 
 		MatchService ms = new MatchService();
 		Match m = new Match();
 		m.setUserNo(userNo);
-		m.setTargetNo(ms.getUncheckedMatchList(userNo)[matchNo].getTargetNo());
+		m.setTargetNo(ms.getUncheckedMatchList(userNo)[0].getTargetNo());
 		m.setStatus("S");
 		System.out.println(m.toString());
 		int result = ms.updateMatch(m);
@@ -48,7 +47,6 @@ public class sendHeartServlet extends HttpServlet {
 		String page = null;
 		if(result > 0) {
 			page = "/get.mc";
-			request.setAttribute("matchNo", matchNo);
 		}else {
 			page = "views/common/errorPage.jsp";
 			request.setAttribute("msg", "하트 보내기에 실패하였습니다.");

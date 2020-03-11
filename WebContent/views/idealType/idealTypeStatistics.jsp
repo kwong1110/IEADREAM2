@@ -9,7 +9,7 @@ import="idealType.model.service.*"
 %>
 
 <%
-	height = Stat[]
+	Stat[] height = new Stat[5];
 
 %>
 <!doctype html>

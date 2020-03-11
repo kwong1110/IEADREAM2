@@ -43,6 +43,8 @@ public class MatchService {
 			}
 		}
 		System.out.println("ulist size :" + ulist.size());
+		
+		if (ulist.size() > 0) {
 		Match[] result = new Match[ulist.size()];
 		for (int i=0; i<ulist.size() ;i++) {
 			result[i] = new Match();
@@ -58,6 +60,10 @@ public class MatchService {
 		System.out.println("gumc userNo" + result[0].getUserNo());
 		System.out.println("gumc targetNo" + result[0].getTargetNo());
 		return result;
+		}
+		else {
+		return null;
+		}
 	}
 
 	public int insertMatch(Match m) {
