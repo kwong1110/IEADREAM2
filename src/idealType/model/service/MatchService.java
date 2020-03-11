@@ -358,6 +358,7 @@ public class MatchService {
 		Stat[] height = new Stat[8];
 		for (int i = 0; i < height.length ;i++) {
 			height[i] = new Stat();
+			height[i].setProp(0);
 		}
 		height[0].setItem("150");
 		height[1].setItem("155");
@@ -509,18 +510,7 @@ public class MatchService {
 		interest[18].setItem("diy");
 		interest[19].setItem("money");
 
-		Stat[][] result = new Stat[11][];
-		result[0] = height;
-		result[1] = shape;
-		result[2] = style;
-		result[3] = age;
-		result[4] = religion;
-		result[5] = drink;
-		result[6] = smoke;
-		result[7] = job;
-		result[8] = scholar;
-		result[9] = region;
-		result[10] = interest;
+		
 		
 		for (int n=0; n<list.length; n++ ) {
 			UserInfo ui = uiDAO.selectUserInfo(conn, list[n]);
@@ -531,60 +521,50 @@ public class MatchService {
 					height[j].addProp();}
 			}
 			
-			
 			for (int j=0; j<shape.length ; j++) {
 				if (up.getShape().equals(shape[j].getItem())) {
 					shape[j].addProp();}
 			}
-			
 			
 			for (int j=0; j<style.length ; j++) {
 				if (up.getStyle().equals(style[j].getItem())) {
 					style[j].addProp();}
 			}
 			
-			
 			for (int j=0; j<age.length ; j++) {
 				if (up.getAge() == Integer.parseInt(age[j].getItem())) {
 					age[j].addProp();}
 			}
-			
 			
 			for (int j=0; j<religion.length ; j++) {
 				if (up.getReligion().equals(religion[j].getItem())) {
 					religion[j].addProp();}
 			}
 			
-			
 			for (int j=0; j<drink.length ; j++) {
 				if (up.getDrink() == Integer.parseInt(drink[j].getItem())) {
 					drink[j].addProp();}
 			}
-			
 			
 			for (int j=0; j<smoke.length ; j++) {
 				if (up.getSmoke() == Integer.parseInt(smoke[j].getItem())) {
 					smoke[j].addProp();}
 			}
 			
-			
 			for (int j=0; j<job.length ; j++) {
 				if (up.getJob().equals(job[j].getItem())) {
 					job[j].addProp();}
 			}
-			
 			
 			for (int j=0; j<scholar.length ; j++) {
 				if (up.getScholar() == Integer.parseInt(scholar[j].getItem())) {
 					scholar[j].addProp();}
 			}
 			
-			
 			for (int j=0; j<region.length ; j++) {
 				if (ui.getRegion() == Integer.parseInt(region[j].getItem())) {
 					region[j].addProp();}
 			}
-			
 			
 			for (int j=0; j<interest.length ; j++) {
 				String[] interestList = ui.getInterest();
@@ -618,6 +598,20 @@ public class MatchService {
 			Arrays.sort(interest);
 		}
 		
+		Stat[][] result = new Stat[11][];
+		result[0] = height;
+		System.out.println("result" + result[0][0] + result[0][1]);
+		System.out.println("height" + height[0] + height[1]);
+		result[1] = shape;
+		result[2] = style;
+		result[3] = age;
+		result[4] = religion;
+		result[5] = drink;
+		result[6] = smoke;
+		result[7] = job;
+		result[8] = scholar;
+		result[9] = region;
+		result[10] = interest;
 		return result;
 	}
 }

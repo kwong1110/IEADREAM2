@@ -11,6 +11,7 @@ import="idealType.model.service.*"
 <%
 	Stat[][] st = (Stat[][])request.getAttribute("st");
 	
+	
 %>
 <!doctype html>
 <html>
@@ -205,7 +206,7 @@ import="idealType.model.service.*"
                 		else if (st[i][j].getProp() > 0.32) {imagePath = request.getContextPath() + "/images/common/wifi low.png";}
                 		else 								{imagePath = request.getContextPath() + "/images/common/wifi none.png";}
                 		%>
-                		<img src="<%= imagePath %>" width="25px" height="25px"></img>
+                		<img src="<%= imagePath %>" width="25px" height="25px">
                 	</div>
             	</div>
               <%
