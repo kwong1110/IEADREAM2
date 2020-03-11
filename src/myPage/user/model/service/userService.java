@@ -164,4 +164,12 @@ public class userService {
 		return result;
 	}
 
+	public String[] searchDateI(String okTarget) {
+		Connection conn = getConnection();
+		userDAO uDAO = new userDAO();
+		String[] result = uDAO.searchDateI(conn, okTarget);
+				
+		return result;
+	}
+
 }
