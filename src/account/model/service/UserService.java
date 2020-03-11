@@ -442,7 +442,7 @@ public class UserService {
 			up.setSmokePri(smokePri);
 			up.setInterestPri(interestPri);
 			
-			result = upDAO.insertUserPrefer(conn, up);
+			upDAO.insertUserPrefer(conn, up);
 			
 			if(result > 0) {
 				commit(conn);

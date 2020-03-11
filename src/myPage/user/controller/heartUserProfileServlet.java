@@ -1,31 +1,28 @@
-package board.controller.question;
+package myPage.user.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
-import board.model.service.QuestionService;
-import board.model.vo.Reply;
+import account.model.vo.Account;
+import myPage.user.model.service.userProfileService;
 
 /**
- * Servlet implementation class QuestionReplyInserServlet
+ * Servlet implementation class heartUserProfileServlet
  */
-@WebServlet("/insertReply.qu")
-public class QuestionReplyInserServlet extends HttpServlet {
+@WebServlet("/profile.hh")
+public class heartUserProfileServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public QuestionReplyInserServlet() {
+    public heartUserProfileServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,21 +31,26 @@ public class QuestionReplyInserServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String answerContent  = request.getParameter("answerContent");
-		int postNo = Integer.parseInt(request.getParameter("postNo"));
+		String userNo = request.getParameter("userNo");
 		
-		Reply r = new Reply();
-		r.setAnswerContent(answerContent);
-		r.setPostNo(postNo);
+		Account account = new userProfileService().selectProfile(userNo);
 		
-		ArrayList<Reply> list = new QuestionService().insertReply(r);
+		String page = null;
+		if(account != null) {
+			page = "views/myPage/user/selectMyProfileView.jsp";
+			request.setAttribute("account", account);
+		} else {
+			page = "views/common/errorPage.jsp";
+			request.setAttribute("msg", "내 정보 보기에 실패했습니다.");
+		}
+		RequestDispatcher view = request.getRequestDispatcher(page);
+		view.forward(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

@@ -106,7 +106,7 @@
 								</td>
 								<td id="th_cate">카테고리</td>
 								<td id="th_cate_input">
-									<div class="cateCss" style="width: 20px;">
+									<div class="cateCss">
 										<select class="select" name="category">
 											<option value="결제" <%= selected[0] %>>결제</option>
 											<option value="서비스" <%= selected[1] %>>서비스</option>

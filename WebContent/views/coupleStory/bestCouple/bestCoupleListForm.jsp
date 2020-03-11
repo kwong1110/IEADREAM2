@@ -19,6 +19,78 @@
 	String month = (String)request.getAttribute("month");
 	String search = (String)request.getAttribute("search");
 	
+/* 	String[] selectedYear = new String[3];
+	
+	if(year.equals("2018")){
+		selectedYear[0] = "selected";
+		selectedYear[1] = "";
+		selectedYear[2] = "";
+	} else if(year.equals("2019")){
+		selectedYear[0] = "";
+		selectedYear[1] = "selected";
+		selectedYear[2] = "";
+	} else{
+		selectedYear[0] = "";
+		selectedYear[1] = "";
+		selectedYear[2] = "selected";
+	} */
+	
+	
+	/* String[] selectedMonth = new String[13];
+	
+	if(month.equals("00")){
+		selectedMonth[0] = "selected"; selectedMonth[1] = ""; selectedMonth[2] = ""; selectedMonth[3] = ""; selectedMonth[4] = "";
+		selectedMonth[5] = ""; selectedMonth[6] = ""; selectedMonth[7] = ""; selectedMonth[8] = ""; selectedMonth[9] = "";
+		selectedMonth[10] = ""; selectedMonth[11] = ""; selectedMonth[12] = "";
+	} else if(month.equals("01")){
+		selectedMonth[0] = ""; selectedMonth[1] = "selected"; selectedMonth[2] = ""; selectedMonth[3] = ""; selectedMonth[4] = "";
+		selectedMonth[5] = ""; selectedMonth[6] = ""; selectedMonth[7] = ""; selectedMonth[8] = ""; selectedMonth[9] = "";
+		selectedMonth[10] = ""; selectedMonth[11] = ""; selectedMonth[12] = "";
+	} else if(month.equals("02")){
+		selectedMonth[0] = ""; selectedMonth[1] = ""; selectedMonth[2] = "selected"; selectedMonth[3] = ""; selectedMonth[4] = "";
+		selectedMonth[5] = ""; selectedMonth[6] = ""; selectedMonth[7] = ""; selectedMonth[8] = ""; selectedMonth[9] = "";
+		selectedMonth[10] = ""; selectedMonth[11] = ""; selectedMonth[12] = "";
+	} else if(month.equals("03")){
+		selectedMonth[0] = ""; selectedMonth[1] = ""; selectedMonth[2] = ""; selectedMonth[3] = "selected"; selectedMonth[4] = "";
+		selectedMonth[5] = ""; selectedMonth[6] = ""; selectedMonth[7] = ""; selectedMonth[8] = ""; selectedMonth[9] = "";
+		selectedMonth[10] = ""; selectedMonth[11] = ""; selectedMonth[12] = "";
+	} else if(month.equals("04")){
+		selectedMonth[0] = ""; selectedMonth[1] = ""; selectedMonth[2] = ""; selectedMonth[3] = ""; selectedMonth[4] = "selected";
+		selectedMonth[5] = ""; selectedMonth[6] = ""; selectedMonth[7] = ""; selectedMonth[8] = ""; selectedMonth[9] = "";
+		selectedMonth[10] = ""; selectedMonth[11] = ""; selectedMonth[12] = "";
+	} else if(month.equals("05")){
+		selectedMonth[0] = ""; selectedMonth[1] = ""; selectedMonth[2] = ""; selectedMonth[3] = ""; selectedMonth[4] = "";
+		selectedMonth[5] = "selected"; selectedMonth[6] = ""; selectedMonth[7] = ""; selectedMonth[8] = ""; selectedMonth[9] = "";
+		selectedMonth[10] = ""; selectedMonth[11] = ""; selectedMonth[12] = "";
+	} else if(month.equals("06")){
+		selectedMonth[0] = ""; selectedMonth[1] = ""; selectedMonth[2] = ""; selectedMonth[3] = ""; selectedMonth[4] = "";
+		selectedMonth[5] = ""; selectedMonth[6] = "selected"; selectedMonth[7] = ""; selectedMonth[8] = ""; selectedMonth[9] = "";
+		selectedMonth[10] = ""; selectedMonth[11] = ""; selectedMonth[12] = "";
+	} else if(month.equals("07")){
+		selectedMonth[0] = ""; selectedMonth[1] = ""; selectedMonth[2] = ""; selectedMonth[3] = ""; selectedMonth[4] = "";
+		selectedMonth[5] = ""; selectedMonth[6] = ""; selectedMonth[7] = "selected"; selectedMonth[8] = ""; selectedMonth[9] = "";
+		selectedMonth[10] = ""; selectedMonth[11] = ""; selectedMonth[12] = "";
+	} else if(month.equals("08")){
+		selectedMonth[0] = ""; selectedMonth[1] = ""; selectedMonth[2] = ""; selectedMonth[3] = ""; selectedMonth[4] = "";
+		selectedMonth[5] = ""; selectedMonth[6] = ""; selectedMonth[7] = ""; selectedMonth[8] = "selected"; selectedMonth[9] = "";
+		selectedMonth[10] = ""; selectedMonth[11] = ""; selectedMonth[12] = "";
+	} else if(month.equals("09")){
+		selectedMonth[0] = ""; selectedMonth[1] = ""; selectedMonth[2] = ""; selectedMonth[3] = ""; selectedMonth[4] = "";
+		selectedMonth[5] = ""; selectedMonth[6] = ""; selectedMonth[7] = ""; selectedMonth[8] = ""; selectedMonth[9] = "selected";
+		selectedMonth[10] = ""; selectedMonth[11] = ""; selectedMonth[12] = "";
+	} else if(month.equals("10")){
+		selectedMonth[0] = ""; selectedMonth[1] = ""; selectedMonth[2] = ""; selectedMonth[3] = ""; selectedMonth[4] = "";
+		selectedMonth[5] = ""; selectedMonth[6] = ""; selectedMonth[7] = ""; selectedMonth[8] = ""; selectedMonth[9] = "";
+		selectedMonth[10] = "selected"; selectedMonth[11] = ""; selectedMonth[12] = "";
+	} else if(month.equals("11")){
+		selectedMonth[0] = ""; selectedMonth[1] = ""; selectedMonth[2] = ""; selectedMonth[3] = ""; selectedMonth[4] = "";
+		selectedMonth[5] = ""; selectedMonth[6] = ""; selectedMonth[7] = ""; selectedMonth[8] = ""; selectedMonth[9] = "";
+		selectedMonth[10] = ""; selectedMonth[11] = "selected"; selectedMonth[12] = "";
+	} else{
+		selectedMonth[0] = ""; selectedMonth[1] = ""; selectedMonth[2] = ""; selectedMonth[3] = ""; selectedMonth[4] = "";
+		selectedMonth[5] = ""; selectedMonth[6] = ""; selectedMonth[7] = ""; selectedMonth[8] = ""; selectedMonth[9] = "";
+		selectedMonth[10] = ""; selectedMonth[11] = ""; selectedMonth[12] = "selected";
+	} */
 %>
 <!DOCTYPE html>
 <html>
@@ -47,7 +119,7 @@
 	}
 	
 	.optionbox{
-		margin-left: 770px;
+		margin-left: 750px;
 		margin-bottom: .8%;
 	}
 	
@@ -142,6 +214,10 @@
 	
 	button:hover{cursor: pointer;}
 	
+	.empty{
+		padding: 220px 0;
+	}
+	
 </style>
 </head>
 <body>
@@ -156,16 +232,18 @@
 						<div class="optionbox">
 							<div class="optiondiv">
 								<select class="option" id="year" name="year">
+									<option value="" selected disabled>-----</option>
+									<option value="2018">2018년</option>
+									<option value="2019">2019년</option>
 									<option value="2020">2020년</option>
-									<option value="2021">2021년</option>
-									<option value="2022">2022년</option>
 								</select>					
 							</div>
 							
 							<div class="optiondiv">
 								<select class="option" id="month" name="month">
-									<option value="00">-----</option>
-									<option value="01" >1월</option>
+									<option value="" selected disabled>-----</option>
+									<option value="00">전체</option>
+									<option value="01">1월</option>
 									<option value="02">2월</option>
 									<option value="03">3월</option>
 									<option value="04">4월</option>
@@ -188,30 +266,34 @@
 					
 					<div class="contents">
 						<div class="contns">
-							<% 
-								for(int i = 0; i < bcList.size(); i++){
-									Board bc = bcList.get(i);
-							%>
-								<div class="contn">
-									<p class="hit">HIT : <%= bc.getHit() %></p>
-									<div class="img">
-										<input type="hidden" value="<%= bc.getPostNo() %>">
-										<% 
-											for(int j = 0; j < pList.size(); j++){
-												Photo p = pList.get(j);		
-										%>
-											<% if(bc.getPostNo() == p.getPostNo()){ %>
-												<img src="<%= request.getContextPath() %>/photo_uploadFiles/<%= p.getChangeName() %>" style="width:inherit; height:inherit;">
+							<% if(bcList.isEmpty()){ %>
+								<div class="empty">조회된 리스트가 없습니다.</div>
+							<% } else{ %>
+								<% 
+									for(int i = 0; i < bcList.size(); i++){
+										Board bc = bcList.get(i);
+								%>
+									<div class="contn">
+										<p class="hit">HIT : <%= bc.getHit() %></p>
+										<div class="img">
+											<input type="hidden" value="<%= bc.getPostNo() %>">
+											<% 
+												for(int j = 0; j < pList.size(); j++){
+													Photo p = pList.get(j);		
+											%>
+												<% if(bc.getPostNo() == p.getPostNo()){ %>
+													<img src="<%= request.getContextPath() %>/photo_uploadFiles/<%= p.getChangeName() %>" style="width:inherit; height:inherit;">
+												<% } %>
 											<% } %>
-										<% } %>
+										</div>
+										<div class="text">
+											<p id="text1"><%= bc.getTitle() %></p>
+											<p id="text2"><%= bc.getUserId() %></p>
+											<p id="text3"><%= bc.getCreateDate() %></p>
+										</div>
 									</div>
-									<div class="text">
-										<p id="text1"><%= bc.getTitle() %></p>
-										<p id="text2"><%= bc.getUserId() %></p>
-										<p id="text3"><%= bc.getCreateDate() %></p>
-									</div>
-								</div>
-									
+										
+									<% } %>
 								<% } %>
 							</div>
 							
@@ -284,14 +366,14 @@
 							<% } %>
 						</div>
 					</div>
+				</div>
 					
-					<div class="btnBox">
-						<% if(loginUser != null && loginUser.getGrade() == 0) { %>
-							<button class="defaultBtn" onclick='location.href="views/coupleStory/bestCouple/bestCoupleInsertForm.jsp"'>작성하기</button>
-						<% } %>
-					</div>
-				</div>	
+			<div class="btnBox">
+				<% if(loginUser != null && loginUser.getGrade() == 0) { %>
+					<button class="defaultBtn" onclick='location.href="views/coupleStory/bestCouple/bestCoupleInsertForm.jsp"'>작성하기</button>
+				<% } %>
 			</div>
+			</div>	
 		</div>
 		
 		<script>

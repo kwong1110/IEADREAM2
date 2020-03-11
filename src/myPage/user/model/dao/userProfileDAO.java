@@ -63,7 +63,7 @@ public class userProfileDAO {
 		}
 		return account;
 	}
-
+/* 회원정보 수정(비밀번호 포함)*/
 	public int updateProfile(Connection conn, Account account) {
 		PreparedStatement pstmt = null;
 		int result = 0;
@@ -78,6 +78,28 @@ public class userProfileDAO {
 			pstmt.setString(3, account.getEmail());
 			pstmt.setString(4, account.getPhone());
 			pstmt.setString(5, account.getId());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+/* 회원정보 수정(비밀번호 미포함) */	
+	public int updateProfileNoPwd(Connection conn, Account account) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("updateProfileNoPwd");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			
+			pstmt.setString(1, account.getPhone());
+			pstmt.setString(2, account.getEmail());
+			pstmt.setString(3, account.getId());
 			
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {

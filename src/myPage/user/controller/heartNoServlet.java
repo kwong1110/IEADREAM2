@@ -1,31 +1,27 @@
-package board.controller.question;
+package myPage.user.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
-import board.model.service.QuestionService;
-import board.model.vo.Reply;
+import myPage.user.model.service.userService;
 
 /**
- * Servlet implementation class QuestionReplyInserServlet
+ * Servlet implementation class heartNoServlet
  */
-@WebServlet("/insertReply.qu")
-public class QuestionReplyInserServlet extends HttpServlet {
+@WebServlet("/heartno.hh")
+public class heartNoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public QuestionReplyInserServlet() {
+    public heartNoServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,14 +30,23 @@ public class QuestionReplyInserServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String answerContent  = request.getParameter("answerContent");
-		int postNo = Integer.parseInt(request.getParameter("postNo"));
+		String okTarget = request.getParameter("okTarget");
+		String okUser = request.getParameter("okUser");
+		String userNo = request.getParameter("userNo");
 		
-		Reply r = new Reply();
-		r.setAnswerContent(answerContent);
-		r.setPostNo(postNo);
+		int result = new userService().heartNo(okTarget, okUser);
 		
-		ArrayList<Reply> list = new QuestionService().insertReply(r);
+		String page = null;
+		if(result > 0) {
+			page = "/list.hh";
+			request.setAttribute("msg", "하트 거절 하였습니다.");
+		} else {
+			page = "views/common/errorPage.jsp";
+			request.setAttribute("msg", "하트 거절에 실패하였습니다.");
+		}
+		
+		RequestDispatcher view = request.getRequestDispatcher(page);
+		view.forward(request, response);
 	}
 
 	/**

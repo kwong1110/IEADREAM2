@@ -90,6 +90,15 @@ public class Account {
 		this.userName = userName;
 		this.email = email;
 	}
+/* 회원정보 수정(비밀번호 없이)*/
+	public Account(String id, int grade, String email, String phone) {
+		super();
+		this.id = id;
+		this.grade = grade;
+		this.email = email;
+		this.phone = phone;
+	}
+	
 
 	public int getUserNo() {
 		return userNo;

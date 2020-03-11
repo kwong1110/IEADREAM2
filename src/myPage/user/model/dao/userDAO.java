@@ -362,4 +362,101 @@ private Properties prop = new Properties();
 		
 		return result;
 	}
+
+	public int heartAutoDelete(Connection conn, String[] autoDTarget, String[] autoDUser) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("deleteHeart");
+		
+		try {
+			for(int i = 0; i < autoDTarget.length; i++) {
+				pstmt = conn.prepareStatement(query);
+				pstmt.setString(1, autoDUser[i]);
+				pstmt.setString(2, autoDTarget[i]);
+				
+				
+				result = pstmt.executeUpdate();
+				
+				if(result > 0) {
+					commit(conn);
+				} else {
+					rollback(conn);
+					break;
+				}
+			}			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int searchDate(Connection conn, String userNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int locationNum = 0;
+		
+		String query = prop.getProperty("searchDatelocation");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, userNo);
+			
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				locationNum = rset.getInt("region");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return locationNum;
+	}
+
+	public int heartOk(Connection conn, String okTarget, String okUser) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("heartOk");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, okUser);
+			pstmt.setString(2, okTarget);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int heartNo(Connection conn, String okTarget, String okUser) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("heartNo");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, okUser);
+			pstmt.setString(2, okTarget);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
 }

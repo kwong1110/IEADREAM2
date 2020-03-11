@@ -79,9 +79,8 @@
 									<tr>
 										<th><input type="checkbox" id="all" onclick="checkAll();"></th>
 										<th>분류</th>
-										<th>회원 이미지</th>
 										<th>상태</th>
-										<th>데이트 장소 추천</th>
+										<th>상태변경</th>
 										<th>남은 기간</th>
 										<th><input type="hidden" name="userNo" value="<%= loginUser.getUserNo() %>"></th>
 									</tr>
@@ -89,21 +88,22 @@
 								<tbody>
 									<% if(list.isEmpty()){ %>
 									<tr>
-										<td colspan="6">조회된 리스트가 없습니다.</td>
+										<td colspan="4">조회된 리스트가 없습니다.</td>
 									</tr>
 									<% } else{ 
 											for(Match m : list){
 											switch(m.getMatchStatus()){
-											case "D": matchStatus = "상대방의 응답을 기다리고 있습니다."; break;
-											case "C": matchStatus = "확인 완료"; break;
-											case "S": matchStatus = "하트 보냄"; break;
+											case "S": matchStatus = "상대방의 응답을 기다리고 있습니다."; break;
+											case "C": matchStatus = "거절 완료"; break;
 											case "A": matchStatus = "하트 수락"; break;
 											}
 											if(m.getUserNo() == loginUser.getUserNo()){
 												inOut = "발신";
 											} else {
 												inOut = "수신";
-												matchStatus = "하트가 날아왔습니다! 확인해주세요!";
+												if(!m.getMatchStatus().equals("A") && !m.getMatchStatus().equals("C")){
+													matchStatus = "하트가 날아왔습니다! 확인해주세요!";
+												}
 											} 
 									%>
 									<tr>
@@ -113,28 +113,51 @@
 										<% } else { %>
 										<td class="sent"></td>
 										<% } %>
-										<td>이미지 들어가야함</td>
 										<td>
+											<input type="hidden" id="profileT" name="profileT" value="<%= m.getTargetNo() %>">
+											<input type="hidden" id="profileU" name="profileU" value="<%= m.getUserNo() %>">
 											<ul class="heartState">
-												<li>회원번호 <%= m.getTargetNo() %></li>
 												<% if(inOut.equals("수신")){ %>
+												<li>회원번호 <%= m.getUserNo() %></li>
+													<%if(matchStatus.equals("하트가 날아왔습니다! 확인해주세요!")) {%>
 												<li class="blinking"><%= matchStatus %></li>
+													<%} else {%>
+												<li><%= matchStatus %></li>
+													<% } %>
 												<% } else { %>
+												<li>회원번호 <%= m.getTargetNo() %></li>
 												<li><%= matchStatus %></li>
 												<% } %>
 												<li><%= m.getMatchDate() %></li>
 											</ul>
 										</td>
 										<td>
+											<% if(matchStatus.equals("하트가 날아왔습니다! 확인해주세요!")){ %>
+											<input type="hidden" id="okTarget" name="okTarget" value="<%= m.getTargetNo() %>">
+											<input type="hidden" id="okUser" name="okUser" value="<%= m.getUserNo() %>">
+											<input type="button" class="defaultBtn subBtn" value="수락" onclick="heartOk();">
+											<input type="button" class="defaultBtn subBtn" value="거절" onclick="heartNo();">
+											<% } %>
+										</td>
+										<td>
 											<% if(matchStatus.equals("하트 수락")){ %>
-												<input type="button" class="defaultBtn subBtn" value="데이트 장소 추천" onclick="">
+												<input type="button" class="defaultBtn subBtn" value="데이트 장소 추천" onclick="heartDate()">
+												<input type="hidden" id="okTarget" name="okTarget" value="<%= m.getTargetNo() %>">
+												<input type="hidden" id="okUser" name="okUser" value="<%= m.getUserNo() %>">
 											<% } %>
 										</td>
 										<% long leftDays = 7 - (sqlDate.getTime() - m.getMatchDate().getTime()) / (24*60*60*1000); %>
 										<% if(matchStatus.equals("하트 수락")){ %>
 										<td>없음</td>
 										<% } else { %>
-										<td><%= leftDays %>일</td>
+										<td>
+											<%= leftDays %>일
+											<% if(leftDays <= 0) {%>
+											<input type="hidden" class="leftDays" name="leftDays" value="<%= leftDays %>">
+											<input type="hidden" class="autoDTarget" name="autoDTarget" value="<%= m.getTargetNo() %>">
+											<input type="hidden" class="autoDUser" name="autoDUser" value="<%= m.getUserNo() %>">
+											<% } %>
+										</td>
 										<% } %>
 									</tr>			
 									<% 		}
@@ -192,23 +215,98 @@
 </body>
 <%@ include file="../../common/footer.jsp"%>
 <script>
-function deleteHeart(){
-	var checkList = [];
-	
-	if($("input:checkbox[name='checkselect']:checked").val() == null){
-		alert("삭제할 하트를 선택해주세요!");
-	}else {
-		$("input:checkbox[name='checkselect']:checked").each(function() {
-			checkList.push($(this).val());			
-		});
-			// 체크박스 체크된 값의 value를 checkList에 저장한다.
-			
-		// 새로열리는 창 크기 및 위치 설정
-		var popLeft = Math.ceil(( window.screen.width - 400 )/2);
-		var popTop = Math.ceil(( window.screen.height - 500 )/2);
+	function deleteHeart(){
+		var checkList = [];
 		
-		window.open("views/myPage/user/heartDeleteForm.jsp?checkList="+checkList+"&loginNo="+<%= loginUser.getUserNo() %>, "deleteBoard", "width=400, height=500, "+ ", left=" + popLeft + ", top="+ popTop);	
-	};
-}
+		if($("input:checkbox[name='checkselect']:checked").val() == null){
+			alert("삭제할 하트를 선택해주세요!");
+		}else {
+			$("input:checkbox[name='checkselect']:checked").each(function() {
+				checkList.push($(this).val());			
+			});
+				// 체크박스 체크된 값의 value를 checkList에 저장한다.
+				
+			// 새로열리는 창 크기 및 위치 설정
+			var popLeft = Math.ceil(( window.screen.width - 400 )/2);
+			var popTop = Math.ceil(( window.screen.height - 500 )/2);
+			
+			window.open("views/myPage/user/heartDeleteForm.jsp?checkList="+checkList+"&loginNo="+<%= loginUser.getUserNo() %>, "deleteBoard", "width=400, height=500, "+ ", left=" + popLeft + ", top="+ popTop);	
+		};
+	}
+	
+	function heartDate(){
+		var okTarget = $('#okTarget').val();
+		var okUser = $('#okUser').val();
+		
+		location.href="<%= request.getContextPath() %>/list.hhd?okTarget="+okTarget+"&okUser="+okUser;
+	}
+	
+	window.onload = function(){
+		
+		if($('.leftDays').val() != null){
+			var autoDTargetArr = [];
+			var autoDUserArr= [];
+			
+			$('.autoDTarget').each(function(){
+				autoDTargetArr.push($(this).val());
+			});
+			
+			$('.autoDUser').each(function(){
+				autoDUserArr.push($(this).val());
+			});
+			
+			$.ajaxSettings.traditional = true;
+			$.ajax({
+				url: '<%= request.getContextPath() %>/autodelete.hh',
+				type: 'get',
+				data: {autoDTargetArr:autoDTargetArr, autoDUserArr:autoDUserArr},
+				success: function(data){
+					window.location.reload();
+					alert(data);
+				}
+			});		
+		}
+	}
+	
+	function heartOk(){
+		var okTarget = $('#okTarget').val();
+		var okUser = $('#okUser').val();
+		
+		location.href="<%= request.getContextPath() %>/heartok.hh?okTarget="+okTarget+"&okUser="+okUser+"&userNo=<%= loginUser.getUserNo() %>";
+	}
+	
+	function heartNo(){
+		var okTarget = $('#okTarget').val();
+		var okUser = $('#okUser').val();
+		
+		location.href="<%= request.getContextPath() %>/heartno.hh?okTarget="+okTarget+"&okUser="+okUser+"&userNo=<%= loginUser.getUserNo() %>";
+	}
+	
+	$(function(){
+		$('#boManageForm td li').mouseenter(function(){
+			$(this).parent().css({'background':'darkgray','cursor':'pointer'});
+		}).mouseout(function(){
+			$(this).parent().css('background','none');
+		}).click(function(){
+			
+			var profileT = $(this).parent().prev().prev().val();
+			var profileU = $(this).parent().prev().val();
+			
+			// console.log(profileT+profileU);
+			
+			var userNo = "";
+			if(profileT == <%= loginUser.getUserNo() %>){
+				userNo = profileU;
+			} else if(profileU == <%= loginUser.getUserNo() %>) {
+				userNo = profileT
+			}
+			
+			if (checkboxYn == 0) {
+				var popLeft = Math.ceil(( window.screen.width - 1200 )/2);
+				var popTop = Math.ceil(( window.screen.height - 600 )/2);
+				window.open('<%=request.getContextPath()%>/profile.hh?no=' + userNo, "heartUserProfile", "width=1200, height=600, "+ ", left=" + popLeft + ", top="+ popTop);
+			}
+		});
+	});
 </script>
 </html>

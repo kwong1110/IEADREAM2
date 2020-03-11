@@ -40,17 +40,19 @@
 <style>
 	.tableArea{width:700px;	height:100%; margin:auto; box-sizing: border-box;}
 	.category{cursor: pointer; font-size:20px; text-align: center; padding: 10px;}
-	.faq{text-align: center; cursor: pointer; display: none; font-size: 15px; padding: 2px;}
-	.con{height: 100px; display: none; text-align: center;
-		 border-top: 1px solid rgb(200, 200, 200); border-bottom: 1px solid rgb(200, 200, 200);}
+	.faq{text-align: center; cursor: pointer; display: none; font-size: 15px; line-height: 20px;}
 
 	.con{ /* 내용 css */
+		height: 120%; display: none; text-align: left;
 		padding:12px 0;
 		border-top:1px solid rgb(136, 136, 136); /* 상단라인색 */
 		border-bottom:1px solid rgb(224, 224, 224); /* 하단라인색 */
-		background:#f9f9f9;  /* 제목배경색 */ 
+		background:rgb(230, 141, 150, 0.2);  /* 배경색 */ 
 		color:rgb(51, 51, 51); font-size:1em;/* 제목글자크기 */ 
 		letter-spacing:0.1em}/* 제목띠어쓰기간격 */ 
+	.bor {
+		 border-top: 1px solid rgb(200, 200, 200); border-bottom: 1px solid rgb(200, 200, 200); line-height: 40px;
+	}
 </style>
 </head>
 <body>
@@ -65,32 +67,34 @@
 				</div>
 				<br>
 				<div class="tableArea">
-					<% if(list.isEmpty()) { %>
+					<% if(list.isEmpty()) { /* list에 아무것도 담겨있지 않을 때 */%>
 							조회된 FAQ가 없습니다.
-					<% } else { %>		
-						<div class="category" id="cate1"><label>결제</label>
+					<% } else { /* list에 값이 있을 경우 */%>		
+						<div class="category" id="cate1"><div class="bor">결제</div>
 							<% for(Board board : cate1) { %>
 							<div class="faq" id="faq1"><%= board.getTitle() %>
 								<div class="con"><%= board.getContent() %></div>
 							</div>
-							
 							<% } %>
+						<br><br>
 						</div>
-						<div class="category" id="cate2"><label>서비스</label>
+						<div class="category" id="cate2"><div class="bor">서비스</div>
 							<% for(Board board : cate2) { %>
 							<div class="faq"><%= board.getTitle() %>
 								<div class="con"><%= board.getContent() %></div>
 							</div>
 							<% } %>
+						<br><br>
 						</div>
-						<div class="category" id="cate3"><label>회원/등급</label>
+						<div class="category" id="cate3"><div class="bor">회원/등급</div>
 							<% for(Board board : cate3) { %>
 							<div class="faq"><%= board.getTitle() %>
 								<div class="con"><%= board.getContent() %></div>
 							</div>
 							<% } %>
+						<br><br>
 						</div>
-						<div class="category" id="cate4"><label>기타</label>
+						<div class="category" id="cate4"><div class="bor">기타</div>
 							<% for(Board board : cate4) { %>
 							<div class="faq"><%= board.getTitle() %>
 								<div class="con"><%= board.getContent() %></div>

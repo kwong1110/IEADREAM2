@@ -131,17 +131,13 @@
 										<textarea cols= 60 rows= 4 name="content1"  class="Insertwac" placeholder="만족하신 서비스를 작성해주세요" required></textarea>
 									</td>
 								</tr>
-								<tr>
-									<td>후기</td>
-								</tr>
+								<tr><td>후기</td></tr>
 								<tr>
 									<td colspan=2 width=100%>
 										<textarea  cols= 60 rows= 8 name="content2" class="Insertwac" placeholder="후기를 작성해주세요" required></textarea>
 									</td>
 								</tr>
-								<tr>
-									<td>커플 사진</td>
-								</tr>
+								<tr><td>커플 사진</td></tr>
 								<tr>
 									<td><img id="titleImg" width="150" height="200" ></td>
 									<td><img id="contentImg1" width="150" height="200" ></td>
@@ -191,7 +187,6 @@
 						<div class="btnArea">
 							<button type="submit" class="defaultBtn" id="insertBtn">작성완료</button>
 							<button type="button" class="defaultBtn cancelBtn" id="cancelBtn" onclick="location.href='<%= request.getContextPath() %>/list.wac'">취소</button>
-							<%-- <input type="button" class="defaultBtn" id="cancelBtn" onclick="location.href='<%= request.getContextPath() %>/list.wac'" value="취소"> --%>
 						</div>
 					</div>
 				</form>

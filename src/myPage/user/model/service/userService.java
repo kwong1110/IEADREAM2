@@ -108,4 +108,60 @@ public class userService {
 		return result;
 	}
 
+	public int heartAutoDelete(String[] autoDTarget, String[] autoDUser) {
+		Connection conn = getConnection();
+		userDAO uDAO = new userDAO();
+		int result = uDAO.heartAutoDelete(conn, autoDTarget, autoDUser);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		return result;
+	}
+
+	public int searchDate(String userNo) {
+		Connection conn = getConnection();
+		userDAO uDAO = new userDAO();
+		int result = uDAO.searchDate(conn, userNo);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		return result;
+	}
+
+	public int heartOk(String okTarget, String okUser) {
+		Connection conn = getConnection();
+		userDAO uDAO = new userDAO();
+		int result = uDAO.heartOk(conn, okTarget, okUser);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		return result;
+	}
+
+	public int heartNo(String okTarget, String okUser) {
+		Connection conn = getConnection();
+		userDAO uDAO = new userDAO();
+		int result = uDAO.heartNo(conn, okTarget, okUser);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		return result;
+	}
+
 }

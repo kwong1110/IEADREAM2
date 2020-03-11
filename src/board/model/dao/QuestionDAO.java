@@ -67,12 +67,12 @@ public class QuestionDAO {
 			  int endRow = startRow + posts -1;
 		  
 			  String query = prop.getProperty("selectQBList");
-		  
 		  try {
 			  pstmt = conn.prepareStatement(query);
-			  pstmt.setInt(1, startRow);
-			  pstmt.setInt(2, endRow);
-			  pstmt.setString(3, userNo);
+			  pstmt.setString(1, userNo);
+			  pstmt.setInt(2, startRow);
+			  pstmt.setInt(3, endRow);
+			  pstmt.setString(4, userNo);
 			  
 			  rset = pstmt.executeQuery();
 			  list = new ArrayList<Board>();
@@ -102,19 +102,20 @@ public class QuestionDAO {
 		}
 		
 		public ArrayList<Reply> selectQRList(Connection conn,int currentPage, String userNo) {
-				PreparedStatement pstmt = null; 
+			  PreparedStatement pstmt = null; 
 			  ResultSet rset =null; 
 			  ArrayList<Reply> reply = null;
 			  int posts = 10;
 			  int startRow = (currentPage -1) * posts +1;
 			  int endRow = startRow + posts -1;
-			  String query = prop.getProperty("selectQRList");
+			  String query = prop.getProperty("selectQBList");
 		  
 		  try {
 			  pstmt = conn.prepareStatement(query);
-			  pstmt.setInt(1, startRow);
-			  pstmt.setInt(2, endRow);
-			  pstmt.setString(3, userNo);
+			  pstmt.setString(1, userNo);
+			  pstmt.setInt(2, startRow);
+			  pstmt.setInt(3, endRow);
+			  pstmt.setString(4, userNo);
 			  rset = pstmt.executeQuery();
 			  reply = new ArrayList<Reply> ();
 			  while(rset.next()) {
@@ -361,7 +362,6 @@ public class QuestionDAO {
 				list.add(new Reply(rs.getString("answer_checked"),
 										rs.getString("answer_content"),
 										rs.getDate("answer_date")));
-				System.out.println("dao의 list : " + list);
 			}
 			
 		} catch (SQLException e) {
@@ -505,44 +505,7 @@ public class QuestionDAO {
 		}
 		return board;
 	}
-	/*
-	// 사용자 디테일 뷰
-		public Board userSelectQuestion(Connection conn, int post) {
-			PreparedStatement pstmt = null;
-			ResultSet rs = null;
-			Board board = null;
-			
-			String query = prop.getProperty("selectQuestion1");
-			
-			try {
-				pstmt = conn.prepareStatement(query);
-				pstmt.setInt(1, post);
-				pstmt.setString(2, userNo);
-				rs = pstmt.executeQuery();
-				
-				if(rs.next()) {
-					board = new Board(rs.getInt("BOARD_NO"), 
-											rs.getInt("POST_NO"), 
-											rs.getInt("USER_NO"),
-											rs.getString("ID"), 
-											rs.getString("title"), 
-											rs.getString("content"),
-											rs.getDate("CREATE_DATE"),
-											rs.getInt("hit"), 
-											rs.getString("deleted"),
-											rs.getString("category"));
-				}
-				
-			} catch (SQLException e) {
-				e.printStackTrace();
-			} finally {
-				close(rs);
-				close(pstmt);
-			}
-			return board;
-		}
-*/
-
+	
 	public Reply selectRQuestion(Connection conn, int post) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -576,6 +539,7 @@ public class QuestionDAO {
 		int result = 0;
 		
 		String query = prop.getProperty("insertReply");
+		//UPDATE QUESTION SET ANSWER_CHECKED='Y', ANSWER_CONTENT=?, ANSWER_DATE = SYSDATE WHERE POST_NO=?
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, r.getAnswerContent());

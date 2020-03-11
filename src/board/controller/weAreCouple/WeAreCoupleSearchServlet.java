@@ -34,8 +34,8 @@ public class WeAreCoupleSearchServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
-		String menu = request.getParameter("menu");
-		String content = request.getParameter("content");
+		String menu = request.getParameter("menu"); //검색할 카테고리(제목,작성자)
+		String content = request.getParameter("content");// 검색할 내용
 		
 		
 		WeAreCoupleService service = new WeAreCoupleService();

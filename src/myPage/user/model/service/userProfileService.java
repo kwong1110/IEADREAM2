@@ -19,11 +19,25 @@ public class userProfileService {
 		close(conn);
 		return account;
 	}
-
+	/* 회원정보 변경 (비밀번호 포함)*/
 	public int updateProfile(Account account) {
 		Connection conn = getConnection();
 		userProfileDAO dao = new userProfileDAO();
 		int result = dao.updateProfile(conn, account);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+	/* 회원정보 변경 (비밀번호 미포함) */
+	public int updateProfileNoPwd(Account account) {
+		Connection conn = getConnection();
+		userProfileDAO dao = new userProfileDAO();
+		int result = dao.updateProfileNoPwd(conn, account);
 		
 		if(result > 0) {
 			commit(conn);
@@ -81,5 +95,7 @@ public class userProfileService {
 		userProfileDAO dao = new userProfileDAO();
 		
 	}
+
+	
 	
 }

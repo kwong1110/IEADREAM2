@@ -32,9 +32,10 @@ public class updateProfileServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int result = 0;
+		
 		String id = request.getParameter("id");
 		String userName = request.getParameter("user_name");
-		String password = request.getParameter("pass");
 		String gr = request.getParameter("grade");
 			int grade = 0;
 			switch(gr) {
@@ -53,9 +54,19 @@ public class updateProfileServlet extends HttpServlet {
 		String bi = request.getParameter("birth");
 		Date birth = Date.valueOf(bi);
 		
-		Account account = new Account(grade, id, password, gender, userName, phone, email, birth);
+		String password = request.getParameter("pass");
+		String p = request.getParameter("pass1");
 		
-		int result = new userProfileService().updateProfile(account);
+		System.out.println("pass1 값 : " + p);
+		
+		if(p.equals("off")) { /* p값이 off일 경우 = 비밀번호가 빈칸으로 들어왔을 때 */
+			Account account = new Account(id, grade, email, phone);
+			result = new userProfileService().updateProfileNoPwd(account);
+		} else if (p.equals("on")){ /* p값이 on일 경우 = 비밀번호가 채워져서 들어왔을 때 */
+			Account account = new Account(grade, id, password, gender, userName, phone, email, birth);
+			result = new userProfileService().updateProfile(account);
+		}
+		
 		
 		String page = null;
 		if(result > 0) {
