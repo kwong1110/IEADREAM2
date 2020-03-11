@@ -311,18 +311,13 @@ import="idealType.model.service.*"
         </article>
         </section>
         <section id="move" style="display:flex; margin: 5%;">
-          <div style="text-align:left">
-            <a href="<%= request.getContextPath()%>/get.mc?matchNo=<%= matchNo -1 %>">
-            <img src="<%= request.getContextPath() %>/images/common/back.png" width="25px" height="25px" hidden="<%= back%>">
-            </a>
-          </div>
           <div style="margin: 0 auto;">
           	<a href="<%= request.getContextPath()%>/sendHeart.mc?matchNo=<%= matchNo %>">
             <img src="<%= request.getContextPath() %>/images/common/heart.png" width="25px" height="25px">
             </a>
           </div>
           <div  style="text-align:right">
-          	<a href="<%= request.getContextPath()%>/get.mc?matchNo=<%= matchNo +1 %>">
+          	<a href="<%= request.getContextPath()%>/disband.mc?matchNo=<%= matchNo %>">
             <img src="<%= request.getContextPath() %>/images/common/next.png" width="25px" height="25px" hidden="<%= next%>">
             </a>
           </div>
