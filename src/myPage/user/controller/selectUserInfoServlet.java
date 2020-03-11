@@ -51,6 +51,7 @@ public class selectUserInfoServlet extends HttpServlet {
 		if(ui != null) {
 			page = "views/myPage/user/updateUserInfoForm.jsp";
 			request.setAttribute("ui", ui);
+			request.setAttribute("p", p);
 			request.setAttribute("pPath", pPath);
 		} else {
 			page = "views/account/joinUserInfoForm.jsp";
