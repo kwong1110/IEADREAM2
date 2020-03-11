@@ -80,7 +80,7 @@
 										<th><input type="checkbox" id="all" onclick="checkAll();"></th>
 										<th>분류</th>
 										<th>상태</th>
-										<th>데이트 장소 추천</th>
+										<th>상태변경</th>
 										<th>남은 기간</th>
 										<th><input type="hidden" name="userNo" value="<%= loginUser.getUserNo() %>"></th>
 									</tr>
@@ -88,20 +88,22 @@
 								<tbody>
 									<% if(list.isEmpty()){ %>
 									<tr>
-										<td colspan="5">조회된 리스트가 없습니다.</td>
+										<td colspan="4">조회된 리스트가 없습니다.</td>
 									</tr>
 									<% } else{ 
 											for(Match m : list){
 											switch(m.getMatchStatus()){
 											case "S": matchStatus = "상대방의 응답을 기다리고 있습니다."; break;
-											case "C": matchStatus = "확인 완료"; break;
+											case "C": matchStatus = "거절 완료"; break;
 											case "A": matchStatus = "하트 수락"; break;
 											}
 											if(m.getUserNo() == loginUser.getUserNo()){
 												inOut = "발신";
 											} else {
 												inOut = "수신";
-												matchStatus = "하트가 날아왔습니다! 확인해주세요!";
+												if(!m.getMatchStatus().equals("A") && !m.getMatchStatus().equals("C")){
+													matchStatus = "하트가 날아왔습니다! 확인해주세요!";
+												}
 											} 
 									%>
 									<tr>
@@ -112,15 +114,30 @@
 										<td class="sent"></td>
 										<% } %>
 										<td>
+											<input type="hidden" id="profileT" name="profileT" value="<%= m.getTargetNo() %>">
+											<input type="hidden" id="profileU" name="profileU" value="<%= m.getUserNo() %>">
 											<ul class="heartState">
-												<li>회원번호 <%= m.getTargetNo() %></li>
 												<% if(inOut.equals("수신")){ %>
+												<li>회원번호 <%= m.getUserNo() %></li>
+													<%if(matchStatus.equals("하트가 날아왔습니다! 확인해주세요!")) {%>
 												<li class="blinking"><%= matchStatus %></li>
+													<%} else {%>
+												<li><%= matchStatus %></li>
+													<% } %>
 												<% } else { %>
+												<li>회원번호 <%= m.getTargetNo() %></li>
 												<li><%= matchStatus %></li>
 												<% } %>
 												<li><%= m.getMatchDate() %></li>
 											</ul>
+										</td>
+										<td>
+											<% if(matchStatus.equals("하트가 날아왔습니다! 확인해주세요!")){ %>
+											<input type="hidden" id="okTarget" name="okTarget" value="<%= m.getTargetNo() %>">
+											<input type="hidden" id="okUser" name="okUser" value="<%= m.getUserNo() %>">
+											<input type="button" class="defaultBtn subBtn" value="수락" onclick="heartOk();">
+											<input type="button" class="defaultBtn subBtn" value="거절" onclick="heartNo();">
+											<% } %>
 										</td>
 										<td>
 											<% if(matchStatus.equals("하트 수락")){ %>
@@ -250,5 +267,46 @@
 			});		
 		}
 	}
+	
+	function heartOk(){
+		var okTarget = $('#okTarget').val();
+		var okUser = $('#okUser').val();
+		
+		location.href="<%= request.getContextPath() %>/heartok.hh?okTarget="+okTarget+"&okUser="+okUser+"&userNo=<%= loginUser.getUserNo() %>";
+	}
+	
+	function heartNo(){
+		var okTarget = $('#okTarget').val();
+		var okUser = $('#okUser').val();
+		
+		location.href="<%= request.getContextPath() %>/heartno.hh?okTarget="+okTarget+"&okUser="+okUser+"&userNo=<%= loginUser.getUserNo() %>";
+	}
+	
+	$(function(){
+		$('#boManageForm td li').mouseenter(function(){
+			$(this).parent().css({'background':'darkgray','cursor':'pointer'});
+		}).mouseout(function(){
+			$(this).parent().css('background','none');
+		}).click(function(){
+			
+			var profileT = $(this).parent().prev().prev().val();
+			var profileU = $(this).parent().prev().val();
+			
+			// console.log(profileT+profileU);
+			
+			var userNo = "";
+			if(profileT == <%= loginUser.getUserNo() %>){
+				userNo = profileU;
+			} else if(profileU == <%= loginUser.getUserNo() %>) {
+				userNo = profileT
+			}
+			
+			if (checkboxYn == 0) {
+				var popLeft = Math.ceil(( window.screen.width - 1200 )/2);
+				var popTop = Math.ceil(( window.screen.height - 600 )/2);
+				window.open('<%=request.getContextPath()%>/profile.hh?no=' + userNo, "heartUserProfile", "width=1200, height=600, "+ ", left=" + popLeft + ", top="+ popTop);
+			}
+		});
+	});
 </script>
 </html>
