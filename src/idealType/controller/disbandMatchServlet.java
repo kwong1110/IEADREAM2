@@ -1,6 +1,7 @@
-package myPage.user.controller;
+package idealType.controller;
 
 import java.io.IOException;
+import java.sql.Date;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -8,24 +9,22 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import account.model.service.UserService;
 import account.model.vo.Account;
-import account.model.vo.UserInfo;
-import account.model.vo.UserPhoto;
+import idealType.model.service.MatchService;
+import idealType.model.vo.Match;
 
 /**
- * Servlet implementation class selectUserInfoServlet
+ * Servlet implementation class sendHeartServlet
  */
-@WebServlet("/select.ui")
-public class selectUserInfoServlet extends HttpServlet {
+@WebServlet("/disband.mc")
+public class disbandMatchServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public selectUserInfoServlet() {
+    public disbandMatchServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,27 +33,27 @@ public class selectUserInfoServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
-		Account loginUser = (Account)session.getAttribute("loginUser");
-		int userNo = loginUser.getUserNo();
-		
-		UserService us = new UserService();
-		
-		UserInfo ui = null;
-		String pPath = null;
-		
-		ui = us.selectUserInfo(userNo);
-		UserPhoto p = us.selectUserPhoto(userNo);
-		pPath = p.getChangeName();
+
+		int userNo = ((Account)request.getSession().getAttribute("loginUser")).getUserNo();
+		int matchNo = Integer.parseInt(request.getParameter("matchNo"));
+
+		MatchService ms = new MatchService();
+		Match m = new Match();
+		m.setUserNo(userNo);
+		m.setTargetNo(ms.getUncheckedMatchList(userNo)[matchNo].getTargetNo());
+		m.setStatus("X");
+		System.out.println(m.toString());
+		int result = ms.updateMatch(m);
 		
 		String page = null;
-		if(ui != null) {
-			page = "views/myPage/user/updateUserInfoForm.jsp";
-			request.setAttribute("ui", ui);
-			request.setAttribute("pPath", pPath);
-		} else {
-			page = "views/account/joinUserInfoForm.jsp";
+		if(result > 0) {
+			page = "/get.mc";
+			request.setAttribute("matchNo", matchNo);
+		}else {
+			page = "views/common/errorPage.jsp";
+			request.setAttribute("msg", "매치 업데이트에 실패하였습니다.");
 		}
+		
 		RequestDispatcher view = request.getRequestDispatcher(page);
 		view.forward(request, response);
 	}

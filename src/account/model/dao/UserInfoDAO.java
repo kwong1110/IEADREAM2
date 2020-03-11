@@ -109,7 +109,6 @@ public class UserInfoDAO {
 		UserInfo ui = new UserInfo();
 		String query = prop.getProperty("selectUserInfo");
 		int userNo = usNo;
-		System.out.println("DAO usNo:" + usNo);
 		try {
 			  pstmt = conn.prepareStatement(query);
 			  pstmt.setInt(1, userNo);
@@ -126,7 +125,6 @@ public class UserInfoDAO {
 				ui.setJob(rs.getString("JOB"));
 				ui.setDrink(rs.getInt("DRINK"));
 				ui.setSmoke(rs.getInt("SMOKE"));
-				System.out.println("DAO try 체크 : " + ui.toString());
 			  }
 		  } catch (SQLException e) { 
 			  e.printStackTrace(); 
@@ -297,8 +295,8 @@ public class UserInfoDAO {
 		
 		try {
 			pstmt = conn.prepareStatement(query);
-			
-			pstmt = conn.prepareStatement(query);
+//insertPhoto=INSERT INTO USER_PHOTO VALUES(SEQ_PHOTONO.NEXTVAL, ?, ?, ?, ?, 0, DEFAULT)
+
 			pstmt.setInt(1,p.getUserNo());
 			pstmt.setString(2, p.getOriginName());
 			pstmt.setString(3, p.getChangeName());

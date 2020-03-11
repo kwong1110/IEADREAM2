@@ -183,7 +183,7 @@
 						 		<tr>
 						 			<td>
 						             	<article>
-											<img src="<%= photoPath %>" id='output' style="width: 200px; height: 200px;">
+											<img src="<%= request.getContextPath() %>/photo_uploadFiles/<%=photoPath%>" id='output' style="width: 200px; height: 200px;">
 						              	</article>
 						 			</td>
 						 			<td>
