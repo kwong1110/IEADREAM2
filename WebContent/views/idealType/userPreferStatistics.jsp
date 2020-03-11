@@ -196,28 +196,54 @@ import="idealType.model.service.*"
 		</div>
         <section id="items">  
           <article>
+          <% 
+          for (int i=0; i<st.length ; i++){
           
+        	  String itemName = null;
+        		switch(i){
+        		case 0: itemName = "키" ; break;
+        		case 1: itemName = "체형" ; break;
+        		case 2: itemName = "매력" ; break;
+        		case 3: itemName = "나이" ; break;
+        		case 4: itemName = "종교" ; break;
+        		case 5: itemName = "음주" ; break;
+        		case 6: itemName = "흡연" ; break;
+        		case 7: itemName = "직업" ; break;
+        		case 8: itemName = "학력" ; break;
+        		case 9: itemName = "거주 지역" ; break;
+        		case 10: itemName = "관심 분야" ; break;
+        		}
+
+          %>
             <div class="itemBox">
             	<div class="itemName" id="">
-            		<label></label>
+            		<label><%= itemName %></label>
               	</div>
+              	<%
+              	for (int j=0; j<st[i].length ; j++){
+              	%>
             	<div class="itemValue" id="">
                 	<div class="itemValueName">
                  		<label></label>
                 	</div>
                 	<div class="">
-                		<label class="itemSync" id="">%</label>
-                		<%/*
+                		<label class="itemSync" id=""><%= %></label>
+                		<%
                 			String imagePath = null;
                 			if (st[i][j].getProp() > 0.65) {imagePath = request.getContextPath() + "/images/common/wifi high.png";}
                 		else if (st[i][j].getProp() > 0.5) {imagePath = request.getContextPath() + "/images/common/wifi mid.png";}
                 		else if (st[i][j].getProp() > 0.32) {imagePath = request.getContextPath() + "/images/common/wifi low.png";}
                 		else 								{imagePath = request.getContextPath() + "/images/common/wifi none.png";}
-                		*/%>
-                		<img src="" width="50px" height="50px">
+                		%>
+                		<img src="imagePath" width="50px" height="50px">
                 	</div>
             	</div>
+            	<%
+            	if (j == 3){break;}
+            	} 
+            	%>
             </div>
+          <%}%>
           </article>
         </section>
       </div>
