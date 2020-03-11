@@ -136,4 +136,32 @@ public class userService {
 		return result;
 	}
 
+	public int heartOk(String okTarget, String okUser) {
+		Connection conn = getConnection();
+		userDAO uDAO = new userDAO();
+		int result = uDAO.heartOk(conn, okTarget, okUser);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		return result;
+	}
+
+	public int heartNo(String okTarget, String okUser) {
+		Connection conn = getConnection();
+		userDAO uDAO = new userDAO();
+		int result = uDAO.heartNo(conn, okTarget, okUser);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		return result;
+	}
+
 }

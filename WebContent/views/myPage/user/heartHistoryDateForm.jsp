@@ -1,14 +1,36 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="java.util.Enumeration" %>
 <%
-	Enumeration<String> title = request.getAttributeNames();
-
-	while(title.hasMoreElements()){
-	    String attrName = title.nextElement();
-	    Object attrValue = application.getAttribute(attrName);
+	String data = (String)request.getAttribute("data");
+	
+	String[] array;
+	array = data.split("\"");
+	String[] title = new String[3];
+	String[] link = new String[3];
+	String[] category = new String[3];
+	String[] description = new String[3];
+	String[] telephone = new String[3];
+	String[] address = new String[3];
+	String[] mapx = new String[3];
+	String[] mapy = new String[3];
+	
+	int k = 0;
+	for (int i = 0; i < array.length; i++) {
+	    if (array[i].equals("title"))
+	    	title[k] = array[i + 2];
+	    if (array[i].equals("link"))
+	        link[k] = array[i + 2];
+	    if (array[i].equals("description"))
+	        description[k] = array[i + 2];
+	    if (array[i].equals("bloggername"))
+	        telephone[k] = array[i + 2];
+	    if (array[i].equals("bloggerlink"))
+	        address[k] = array[i + 2];
+	    if (array[i].equals("postdate")) {
+	        mapx[k] = array[i + 2];
+	        k++;
+	    }
 	}
-
 %>
 <!DOCTYPE html>
 <html>
@@ -40,8 +62,10 @@
 											<td>
 												<ul>
 													<li>
-														<textarea><%= title %></textarea>
-														<textarea></textarea>
+														<textarea><%= title[0] %><%= title[1] %><%= title[2] %></textarea>
+														<div><a href="<%= link[0] %>">하이</a></div>
+														<div><%= link[1] %></div>
+														<div><%= link[2] %></div>
 													</li>
 												</ul>
 											</td>

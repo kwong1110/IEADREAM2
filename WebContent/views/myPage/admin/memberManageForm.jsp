@@ -277,21 +277,7 @@
 			$(this).parent().css({'background':'darkgray','cursor':'pointer'});
 		}).mouseout(function(){
 			$(this).parent().css('background','none');
-		}).click(function(){
-			var checkboxYn = $(this).find("input[type='checkbox']").length;
-			var postNo = $(this).parent().children().children('input').val();
-			
-			 if (checkboxYn == 0) {
-				<%if(loginUser != null && loginUser.getGrade()!=0){ %>
-					location.href='<%= request.getContextPath() %>/detail.qu?postNo=' + postNo;
-				<% } else if(loginUser != null && loginUser.getGrade()==0){ %>
-					location.href='<%= request.getContextPath() %>/Mdetail.qu?postNo=' + postNo;
-				<% } else{%> 
-					alert('회원만 이용할 수 있는 서비스 입니다.');
-					location.href='<%= request.getContextPath() %>/views/account/accountLoginForm.jsp';
-				<% } %> 
-			 }
-		});
+		})
 	});
 </script>
 </html>

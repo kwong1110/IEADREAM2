@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import myPage.user.model.service.userService;
+import myPage.user.model.vo.SearchBlog;
 
 /**
  * Servlet implementation class heartHistoryDateServlet
@@ -48,8 +49,8 @@ public class heartHistoryDateServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String okTarget = request.getParameter("okTarget");
 		String okUser = request.getParameter("okUser");
-        
-        userService us = new userService();
+
+		userService us = new userService();
         
         int searchT = us.searchDate(okTarget);
         String searchlocation = "";
@@ -79,7 +80,7 @@ public class heartHistoryDateServlet extends HttpServlet {
         
         try {
             text = URLEncoder.encode(text, "UTF-8");
-            String apiURL = "https://openapi.naver.com/v1/search/blog?query=" + text + "&display=3";
+            String apiURL = "https://openapi.naver.com/v1/search/blog?query=" + text + "&display=3&";
             
             URL url = new URL(apiURL);
             HttpURLConnection con = (HttpURLConnection)url.openConnection();
@@ -103,48 +104,46 @@ public class heartHistoryDateServlet extends HttpServlet {
             }
             br.close();
             con.disconnect();
-            System.out.println(sb); 
             String data = sb.toString();
+            
             String[] array;
-            array = data.split("\"");
-            String[] title = new String[3];
-            String[] link = new String[3];
-            String[] category = new String[3];
-            String[] description = new String[3];
-            String[] telephone = new String[3];
-            String[] address = new String[3];
-            String[] mapx = new String[3];
-            String[] mapy = new String[3];
-            int k = 0;
-            for (int i = 0; i < array.length; i++) {
-                if (array[i].equals("title"))
-                    title[k] = array[i + 2];
-                if (array[i].equals("link"))
-                    link[k] = array[i + 2];
-                if (array[i].equals("category"))
-                    category[k] = array[i + 2];
-                if (array[i].equals("description"))
-                    description[k] = array[i + 2];
-                if (array[i].equals("telephone"))
-                    telephone[k] = array[i + 2];
-                if (array[i].equals("address"))
-                    address[k] = array[i + 2];
-                if (array[i].equals("mapx"))
-                    mapx[k] = array[i + 2];
-                if (array[i].equals("mapy")) {
-                    mapy[k] = array[i + 2];
-                    k++;
-                }
-            }
+        	array = data.split("\"");
+        	String[] title = new String[3];
+        	String[] link = new String[3];
+        	String[] category = new String[3];
+        	String[] description = new String[3];
+        	String[] telephone = new String[3];
+        	String[] address = new String[3];
+        	String[] mapx = new String[3];
+        	String[] mapy = new String[3];
+        	
+        	int k = 0;
+        	for (int i = 0; i < array.length; i++) {
+        	    if (array[i].equals("title"))
+        	    	title[k] = array[i + 2];
+        	    if (array[i].equals("link"))
+        	        link[k] = array[i + 2];
+        	    if (array[i].equals("description"))
+        	        description[k] = array[i + 2];
+        	    if (array[i].equals("bloggername"))
+        	        telephone[k] = array[i + 2];
+        	    if (array[i].equals("bloggerlink"))
+        	        address[k] = array[i + 2];
+        	    if (array[i].equals("postdate")) {
+        	        mapx[k] = array[i + 2];
+        	        k++;
+        	    }
+        	}
             
             System.out.println(sb);
             System.out.println("----------------------------");
             System.out.println("첫번째 타이틀 : " + title[0]);
             System.out.println("두번째 타이틀 : " + title[1]);
+            System.out.println("세번째 타이틀 : " + title[2]);
             
             response.setContentType("text/html;charset=UTF-8"); 
-			request.setAttribute("title", title);
-            RequestDispatcher view = request.getRequestDispatcher("views/myPage/user/heartHistoryDateForm.jsp");
+			request.setAttribute("data", data);
+			RequestDispatcher view = request.getRequestDispatcher("views/myPage/user/heartHistoryDateForm.jsp");
     		view.forward(request, response);
     		            
         } catch (UnsupportedEncodingException e) {

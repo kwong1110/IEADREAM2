@@ -406,7 +406,9 @@ private Properties prop = new Properties();
 			pstmt.setString(1, userNo);
 			
 			rset = pstmt.executeQuery();
-			locationNum = rset.getInt("region");
+			while(rset.next()) {
+				locationNum = rset.getInt("region");
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -414,5 +416,47 @@ private Properties prop = new Properties();
 		}
 		
 		return locationNum;
+	}
+
+	public int heartOk(Connection conn, String okTarget, String okUser) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("heartOk");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, okUser);
+			pstmt.setString(2, okTarget);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int heartNo(Connection conn, String okTarget, String okUser) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("heartNo");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, okUser);
+			pstmt.setString(2, okTarget);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
 	}
 }
