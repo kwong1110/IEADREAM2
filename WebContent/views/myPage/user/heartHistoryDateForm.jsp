@@ -58,17 +58,13 @@
 								<table class="mainBoard" id="boManageForm">
 									<tbody>
 										<tr>
-											<td><img src="" alt="블로그 메인 사진"/></td>
-											<td>
-												<ul>
-													<li>
-														<textarea><%= title[0] %><%= title[1] %><%= title[2] %></textarea>
+											<td> </td>
+														<%= title[0] %><%= title[1] %><%= title[2] %></textarea>
 														<div><a href="<%= link[0] %>">하이</a></div>
 														<div><%= link[1] %></div>
 														<div><%= link[2] %></div>
-													</li>
-												</ul>
-											</td>
+													
+											
 										</tr>				
 									</tbody>
 								</table>

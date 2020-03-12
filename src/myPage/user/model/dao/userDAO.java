@@ -459,4 +459,54 @@ private Properties prop = new Properties();
 		
 		return result;
 	}
+
+	public String[] searchDateI(Connection conn, String okTarget) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String[] searchI = new String[20];
+		
+		String query = prop.getProperty("searchDateInterest");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, okTarget);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				if(rset.next()) {
+					for(int i = 0; i < searchI.length; i++) {
+						switch(rset.getString("INTEREST")) {
+				        case "instrurment" : searchI[0] = rset.getString("INTEREST"); break;
+				        case "camp": searchI[1] = rset.getString("INTEREST"); break;
+				        case "sports": searchI[2] = rset.getString("INTEREST"); break;
+				        case "diy": searchI[3] = rset.getString("INTEREST"); break;
+				        case "money": searchI[4] = rset.getString("INTEREST"); break;
+				        case "musical": searchI[5] = rset.getString("INTEREST"); break;
+				        case "picture": searchI[6] = rset.getString("INTEREST"); break;
+				        case "music": searchI[7] = rset.getString("INTEREST"); break;
+				        case "movie": searchI[8] = rset.getString("INTEREST"); break;
+				        case "comic": searchI[9] = rset.getString("INTEREST"); break;
+				        case "books": searchI[10] = rset.getString("INTEREST"); break;
+				        case "sing": searchI[11] = rset.getString("INTEREST"); break;
+				        case "cook": searchI[12] = rset.getString("INTEREST"); break;
+				        case "exercise": searchI[13] = rset.getString("INTEREST"); break;
+				        case "vgame": searchI[14] = rset.getString("INTEREST"); break;
+				        case "bgame": searchI[15] = rset.getString("INTEREST"); break;
+				        case "sns": searchI[16] = rset.getString("INTEREST"); break;
+				        case "drink": searchI[17] = rset.getString("INTEREST"); break;
+				        case "beauty": searchI[18] = rset.getString("INTEREST"); break;
+				        case "pet": searchI[19] = rset.getString("INTEREST"); break;
+				        }
+					}
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return searchI;
+	}
 }

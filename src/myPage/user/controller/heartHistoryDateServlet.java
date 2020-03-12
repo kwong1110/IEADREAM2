@@ -53,6 +53,7 @@ public class heartHistoryDateServlet extends HttpServlet {
 		userService us = new userService();
         
         int searchT = us.searchDate(okTarget);
+        
         String searchlocation = "";
         switch(searchT) {
         case 11: searchlocation="서울"; break;
@@ -73,7 +74,53 @@ public class heartHistoryDateServlet extends HttpServlet {
         case 60: searchlocation="제주"; break;
         }
         
-        String text = searchlocation + "맛집";
+        String[] searchTI = us.searchDateI(okTarget);
+        String[] searchUI = us.searchDateI(okUser);
+        String[] commonInter = new String[20];
+        for(int i = 0; i < searchTI.length; i ++) {
+        	if(searchTI[i] != null && searchUI[i] != null) {
+        		commonInter[i] = searchTI[i];
+        	}
+        }
+        
+       
+        String commonInterS = "";
+        
+		while(commonInterS != null){    
+			int ranNum = (int)(Math.random() * 20);
+	    	if(commonInter[ranNum] != null) {
+	    		commonInterS = commonInter[ranNum];
+	    		if(commonInterS != null) { break; }
+	    	}
+		}
+        
+		System.out.println("공통 관심사 중 랜덤 확인 : " + commonInterS);
+		
+        String searchInterest = "";
+        switch(commonInterS) {
+        case "instrurment" : searchInterest="악기"; break;
+        case "camp": searchInterest="캠핑"; break;
+        case "sports": searchInterest="스포츠"; break;
+        case "diy": searchInterest="diy"; break;
+        case "money": searchInterest="방탈출"; break;
+        case "musical": searchInterest="뮤지컬"; break;
+        case "picture": searchInterest="사진 찍기 좋은 곳"; break;
+        case "music": searchInterest="콘서트"; break;
+        case "movie": searchInterest="영화"; break;
+        case "comic": searchInterest="만화 카페"; break;
+        case "books": searchInterest="독서실"; break;
+        case "sing": searchInterest="코인노래방"; break;
+        case "cook": searchInterest="쿠킹 클래스"; break;
+        case "exercise": searchInterest="헬스장"; break;
+        case "vgame": searchInterest="vr"; break;
+        case "bgame": searchInterest="보드게임방"; break;
+        case "sns": searchInterest="SNS"; break;
+        case "drink": searchInterest="술집"; break;
+        case "beauty": searchInterest="쇼핑몰"; break;
+        case "pet": searchInterest="애견 카페"; break;
+        }
+        
+        String text = searchlocation + searchInterest;
         
         String clientId = "ukOYt4rgn6AgUshnXDfi"; //애플리케이션 클라이언트 아이디값"
         String clientSecret = "pCzKblPfs4"; //애플리케이션 클라이언트 시크릿값"
