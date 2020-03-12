@@ -33,6 +33,8 @@ public class heartUserProfileServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String userNo = request.getParameter("userNo");
 		
+		System.out.println(userNo);
+		
 		Account account = new userProfileService().selectProfile(userNo);
 		
 		String page = null;
@@ -41,7 +43,7 @@ public class heartUserProfileServlet extends HttpServlet {
 			request.setAttribute("account", account);
 		} else {
 			page = "views/common/errorPage.jsp";
-			request.setAttribute("msg", "내 정보 보기에 실패했습니다.");
+			request.setAttribute("msg", "유저 정보 보기에 실패했습니다.");
 		}
 		RequestDispatcher view = request.getRequestDispatcher(page);
 		view.forward(request, response);

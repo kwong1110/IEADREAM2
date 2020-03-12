@@ -68,6 +68,15 @@ table>tbody>tr>td{
 	vertical-align: middle;
 	line-height: 10px
 }
+
+table>tbody>tr>th{
+	padding:12px 0;
+	border-top:1px solid rgb(136, 136, 136); 	/* 상단라인색 */
+	border-bottom:1px solid rgb(224, 224, 224); /* 하단라인색 */
+	background:#f9f9f9;  					/* 제목배경색 */ 
+	color:rgb(230, 141, 150); font-size:1em;/* 제목글자크기 */ 
+	letter-spacing:0.1em;		
+}
 .mainBoard>thead>tr>th{
 	padding:12px 0;
 	border-top:1px solid rgb(136, 136, 136); 	/* 상단라인색 */

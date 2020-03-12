@@ -239,8 +239,8 @@
 			
 				
 			// 새로열리는 창 크기 및 위치 설정
-			var popLeft = Math.ceil(( window.screen.width - 400 )/2);
-			var popTop = Math.ceil(( window.screen.height - 500 )/2);
+			var popLeft = Math.ceil(( window.screen.width - 1920 )/2);
+			var popTop = Math.ceil(( window.screen.height - 1080 )/2);
 			
 			window.open("views/myPage/admin/memberDeleteForm.jsp?checkList="+checkList, "deleteMember", "width=400, height=500, "+ ", left=" + popLeft + ", top="+ popTop); 	
 		};

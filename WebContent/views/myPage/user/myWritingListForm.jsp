@@ -273,8 +273,8 @@
 				} else if(categoryNo == 6) {
 					eachLocation='<%=request.getContextPath()%>/faqDetail.faq?no=' + postNo;
 				}
-				var popLeft = Math.ceil(( window.screen.width - 1200 )/2);
-				var popTop = Math.ceil(( window.screen.height - 600 )/2);
+				var popLeft = Math.ceil(( window.screen.width - 1920 )/2);
+				var popTop = Math.ceil(( window.screen.height - 1080 )/2);
 				window.open(eachLocation, "eachBoardDetail", "width=1200, height=600, "+ ", left=" + popLeft + ", top="+ popTop);
 			}
 		});
