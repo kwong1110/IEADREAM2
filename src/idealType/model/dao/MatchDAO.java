@@ -113,7 +113,7 @@ public class MatchDAO {
 		ResultSet rs = null;
 		String query = prop.getProperty("getUiCount");
 		if (item.equals("AGE")) {
-			String query = prop.getProperty("getAgeCount");
+			query = prop.getProperty("getAgeCount");
 		}
 		ArrayList<Stat> list = new ArrayList<Stat>();
 		try {
