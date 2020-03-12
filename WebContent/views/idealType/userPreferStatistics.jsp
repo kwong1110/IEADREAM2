@@ -4,18 +4,14 @@
 import="account.model.vo.*"
 import="account.model.service.*"
 import="idealType.model.vo.*"
-import="idealType.model.service.*"        
-    
+import="idealType.model.service.*"
+import="java.util.Arrays"
 %>
 
 <%
-
 	
-	Stat[] height = new Stat[4];
-	String[] hval = (String[])request.getAttribute("hval");
-	double[] hprop = (double[])request.getAttribute("hprop");
-	System.out.println("" + hval + ", " + hprop);
 	
+	/*
 	Stat[] shape = (Stat[])request.getAttribute("shape");
 	Stat[] style = (Stat[])request.getAttribute("style");
 	Stat[] age = (Stat[])request.getAttribute("age");
@@ -26,25 +22,120 @@ import="idealType.model.service.*"
 	Stat[] scholar = (Stat[])request.getAttribute("scholar");
 	Stat[] region = (Stat[])request.getAttribute("region");
 	Stat[] interest = (Stat[])request.getAttribute("interest");
+	*/
 	
-	Stat[][] st = new Stat[11][];
-	st[0] = height;
-	st[1] = shape;
-	st[2] = style;
-	st[3] = age;
-	st[4] = religion;
-	st[5] = drink;
-	st[6] = smoke;
-	st[7] = job;
-	st[8] = scholar;
-	st[9] = region;
-	st[10] = interest;
+	Stat[][] st = new Stat[10][];
+	/*
+	String[] hval = (String[])request.getAttribute("hval");
+	double[] hprop = (double[])request.getAttribute("hprop");
+	String[] shval = (String[])request.getAttribute("shval");
+	double[] shprop = (double[])request.getAttribute("shprop");
+	String[] stval = (String[])request.getAttribute("stval");
+	double[] stprop = (double[])request.getAttribute("stprop");
+	String[] relval = (String[])request.getAttribute("relval");
+	double[] relprop = (double[])request.getAttribute("relprop");
+	String[] dval = (String[])request.getAttribute("dval");
+	double[] dprop = (double[])request.getAttribute("dprop");
+	String[] sval = (String[])request.getAttribute("sval");
+	double[] sprop = (double[])request.getAttribute("sprop");
+	String[] jval = (String[])request.getAttribute("jval");
+	double[] jprop = (double[])request.getAttribute("jprop");
+	String[] scval = (String[])request.getAttribute("scval");
+	double[] scprop = (double[])request.getAttribute("scprop");
+	String[] reval = (String[])request.getAttribute("reval");
+	double[] reprop = (double[])request.getAttribute("reprop");
+	String[] ival = (String[])request.getAttribute("ival");
+	double[] iprop = (double[])request.getAttribute("iprop");
+	*/
+	String[] hval = {"150", "155", "160", "165", "170", "175", "180", "185"};
+	double[] hprop = {0.05, 0.05, 0.05, 0.1, 0.1, 0.17, 0.25, 0.05, 0.05};
+	String[] shval = {"마름", "보통", "통통", "근육질"};
+	double[] shprop = {0.26, 0.43, 0.05, 0.21, 0.05};
+	String[] stval = {"귀여운", "지적인", "섹시한", "따뜻한", "우아한", "터프한"};
+	double[] stprop = {0.2, 0.2, 0.2, 0.2, 0.1, 0.1, 0.1};
+	String[] relval = {"기독교", "천주교", "불교", "무교", "기타"};
+	double[] relprop = {0.2, 0.2, 0.1, 0.45, 0.05};
+	String[] dval = {"3", "2", "1", "0"};
+	double[] dprop = {0.1, 0.2, 0.4, 0.3};
+	String[] sval = {"1", "0"};
+	double[] sprop = {0.2, 0.8};
+	String[] jval = {"학생", "사무직", "연구직", "교육직", "예술", "서비스", "전문직", "기타"};
+	double[] jprop = {0.3, 0.05, 0.05, 0.1, 0.2, 0.05, 0.2, 0.05};
+	String[] scval = {"0", "2", "4", "6", "8"};
+	double[] scprop = {0.1, 0.05, 0.6, 0.15, 0.1};
+	String[] reval = {"11", "12", "13", "20", "31,", "32", "33", "41", "42", "43", "51", "52", "53", "54", "55", "60"};
+	double[] reprop = {0.2, 0.1, 0.3, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.15, 0.1, 0.05, 0.05};
 	
-	for ( int i=0; i<st.length ; i++){
-  		for (int j=0; j < 4 && j < st[i].length; j++){
-  			st[i][j] = new Stat();		
-  		}
-  	}
+	String[] ival = {"movie", "musical", "comic", "picture", "books", "music",
+            "sing", "instrurment", "cook", "camp", "exercise", "sports",
+            "vgame", "bgame", "sns", "drink", "beauty", "pet", "diy", "money"};
+	double[] iprop = {0.2, 0.1, 0.1, 0.1, 0.4, 0.4, 0.1, 0.1, 0.1, 0.1, 0.2, 0.2, 0.2, 0.1, 0.1, 0.2, 0.2, 0.2, 0.2, 0.1};
+	
+	
+	st[0] = new Stat[hval.length];
+	for(int i=0; i<hval.length ;i++){
+		st[0][i] = new Stat();
+		st[0][i].setItem(hval[i]);
+		st[0][i].setProp(hprop[i]);
+	}
+	
+	st[1] = new Stat[shval.length];
+	for(int i=0; i<shval.length ;i++){
+		st[1][i] = new Stat();
+		st[1][i].setItem(shval[i]);
+		st[1][i].setProp(shprop[i]);
+	}
+	st[2] = new Stat[stval.length];
+	for(int i=0; i<stval.length ;i++){
+		st[2][i] = new Stat();
+		st[2][i].setItem(stval[i]);
+		st[2][i].setProp(stprop[i]);
+	}
+	st[3] = new Stat[relval.length];
+	for(int i=0; i<relval.length ;i++){
+		st[3][i] = new Stat();
+		st[3][i].setItem(relval[i]);
+		st[3][i].setProp(relprop[i]);
+	}
+	st[4] = new Stat[dval.length];
+	for(int i=0; i<dval.length ;i++){
+		st[4][i] = new Stat();
+		st[4][i].setItem(dval[i]);
+		st[4][i].setProp(dprop[i]);
+	}
+	st[5] = new Stat[sval.length];
+	for(int i=0; i<sval.length ;i++){
+		st[5][i] = new Stat();
+		st[5][i].setItem(sval[i]);
+		st[5][i].setProp(sprop[i]);
+	}
+	st[6] = new Stat[jval.length];
+	for(int i=0; i<jval.length ;i++){
+		st[6][i] = new Stat();
+		st[6][i].setItem(jval[i]);
+		st[6][i].setProp(jprop[i]);
+	}
+	st[7] = new Stat[scval.length];
+	for(int i=0; i<scval.length ;i++){
+		st[7][i] = new Stat();
+		st[7][i].setItem(scval[i]);
+		st[7][i].setProp(scprop[i]);
+	}
+	st[8] = new Stat[reval.length];
+	for(int i=0; i<reval.length ;i++){
+		st[8][i] = new Stat();
+		st[8][i].setItem(reval[i]);
+		st[8][i].setProp(reprop[i]);
+	}
+	st[9] = new Stat[ival.length];
+	for(int i=0; i<ival.length ;i++){
+		st[9][i] = new Stat();
+		st[9][i].setItem(ival[i]);
+		st[9][i].setProp(iprop[i]);
+	}
+	for(int i=0; i<10; i++){
+	Arrays.sort(st[i]);
+	}
 	for (int i=0; i<st.length ; i++){
 		for (int j=0; j<st[i].length ; j++){
       		switch(i){
@@ -60,6 +151,7 @@ import="idealType.model.service.*"
       				case "185" :st[i][j].setItem("185 이상");break;
       				}
       			break;
+      		/*
       		case 3:
       			switch(st[i][j].getItem()){
       				case "-2" :st[i][j].setItem("3살 초과 연하");break;
@@ -69,7 +161,8 @@ import="idealType.model.service.*"
       				case "2" :st[i][j].setItem("3상 초과 연상");break;
       				}
 				break;
-      		case 5:
+			*/
+      		case 4:
       			switch(st[i][j].getItem()){
       				case "3" :st[i][j].setItem("주 3회 이상");break;
       				case "2" :st[i][j].setItem("주 1회");break;
@@ -77,13 +170,13 @@ import="idealType.model.service.*"
       				case "0" :st[i][j].setItem("안 마심");break;
       				}
 				break;
-      		case 6:
+      		case 5:
       			switch(st[i][j].getItem()){
       				case "1" :st[i][j].setItem("피움");break;
       				case "0" :st[i][j].setItem("안 피움");break;
       				}
       			break;
-      		case 8:
+      		case 7:
       			switch(st[i][j].getItem()){
       				case "0" :st[i][j].setItem("고졸");break;
       				case "2" :st[i][j].setItem("초대졸");break;
@@ -92,7 +185,7 @@ import="idealType.model.service.*"
       				case "8" :st[i][j].setItem("박사");break;
       				}		
       			break;
-      		case 9:
+      		case 8:
       			switch(st[i][j].getItem()){
       				case "11" :st[i][j].setItem("서울");break;
       				case "12" :st[i][j].setItem("인천");break;
@@ -112,7 +205,7 @@ import="idealType.model.service.*"
       				case "60" :st[i][j].setItem("제주");break;
       				}		
       			break;
-      		case 10:
+      		case 9:
       			switch(st[i][j].getItem()){
 						case "movie": st[i][j].setItem("영화&드라마"); break;
 						case "musical": st[i][j].setItem("연극&뮤지컬"); break;
@@ -138,6 +231,8 @@ import="idealType.model.service.*"
       		}
 		}
 	}
+	
+	
 		
 %>
 <!doctype html>
@@ -232,14 +327,13 @@ import="idealType.model.service.*"
         		case 0: itemName = "키" ; break;
         		case 1: itemName = "체형" ; break;
         		case 2: itemName = "매력" ; break;
-        		case 3: itemName = "나이" ; break;
-        		case 4: itemName = "종교" ; break;
-        		case 5: itemName = "음주" ; break;
-        		case 6: itemName = "흡연" ; break;
-        		case 7: itemName = "직업" ; break;
-        		case 8: itemName = "학력" ; break;
-        		case 9: itemName = "거주 지역" ; break;
-        		case 10: itemName = "관심 분야" ; break;
+        		case 3: itemName = "종교" ; break;
+        		case 4: itemName = "음주" ; break;
+        		case 5: itemName = "흡연" ; break;
+        		case 6: itemName = "직업" ; break;
+        		case 7: itemName = "학력" ; break;
+        		case 8: itemName = "거주 지역" ; break;
+        		case 9: itemName = "관심 분야" ; break;
         		}
           %>
             <div class="itemBox">
@@ -247,7 +341,7 @@ import="idealType.model.service.*"
             		<label><%= itemName %></label>
               	</div>
               	<%
-              	for (int j=0; j<height.length ; j++){
+              	for (int j=0; j < st[0].length ; j++){
               	%>
             	<div class="itemValue" id="">
                 	<div class="itemValueName">
@@ -255,7 +349,7 @@ import="idealType.model.service.*"
                 	</div>
                 	<div class="itemSync">
                 		<div class="itemSyncNo">
-                			<label class="" id=""><%= st[i][j].getProp() %>%</label>
+                			<label class="" id=""><%= 100*st[i][j].getProp() %>%</label>
                 		</div>
                 		<div class="itemSyncGraph">
                 		<%
@@ -271,7 +365,7 @@ import="idealType.model.service.*"
                 	</div>
             	</div>
             	<%
-            	if (j == 3){break;}
+            	if ((i==5 && j==1 ) || (j == 3)){break;}
             	} 
             	%>
             </div>
