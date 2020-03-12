@@ -9,8 +9,13 @@ import="idealType.model.service.*"
 %>
 
 <%
+
 	
-	Stat[] height = (Stat[])request.getAttribute("height");
+	Stat[] height = new Stat[4];
+	String[] hval = (String[])request.getAttribute("hval");
+	double[] hprop = (double[])request.getAttribute("hprop");
+	System.out.println("" + hval + ", " + hprop);
+	
 	Stat[] shape = (Stat[])request.getAttribute("shape");
 	Stat[] style = (Stat[])request.getAttribute("style");
 	Stat[] age = (Stat[])request.getAttribute("age");
@@ -22,7 +27,7 @@ import="idealType.model.service.*"
 	Stat[] region = (Stat[])request.getAttribute("region");
 	Stat[] interest = (Stat[])request.getAttribute("interest");
 	
-	Stat[][] st = new Stat[11][4];
+	Stat[][] st = new Stat[11][];
 	st[0] = height;
 	st[1] = shape;
 	st[2] = style;
@@ -35,13 +40,13 @@ import="idealType.model.service.*"
 	st[9] = region;
 	st[10] = interest;
 	
-	for (int i=0; i < st.length ; i++){
-  		for (int j=0; j < st[i].length; j++){
-  			System.out.println("" + st[i][j]);
-  		}
-	}
 	for ( int i=0; i<st.length ; i++){
   		for (int j=0; j < 4 && j < st[i].length; j++){
+  			st[i][j] = new Stat();		
+  		}
+  	}
+	for (int i=0; i<st.length ; i++){
+		for (int j=0; j<st[i].length ; j++){
       		switch(i){
       		case 0:
       			switch(st[i][j].getItem()){
@@ -55,6 +60,15 @@ import="idealType.model.service.*"
       				case "185" :st[i][j].setItem("185 이상");break;
       				}
       			break;
+      		case 3:
+      			switch(st[i][j].getItem()){
+      				case "-2" :st[i][j].setItem("3살 초과 연하");break;
+      				case "-1" :st[i][j].setItem("3살 이내 연하");break;
+      				case "0" :st[i][j].setItem("동갑");break;
+      				case "1" :st[i][j].setItem("3살 이내 연상");break;
+      				case "2" :st[i][j].setItem("3상 초과 연상");break;
+      				}
+				break;
       		case 5:
       			switch(st[i][j].getItem()){
       				case "3" :st[i][j].setItem("주 3회 이상");break;
@@ -122,18 +136,26 @@ import="idealType.model.service.*"
 						case "money": st[i][j].setItem("재테크"); break;
       			}break;
       		}
-  		}
+		}
 	}
+		
 %>
 <!doctype html>
 <html>
 <head>
+
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/common.css">
   <title>선호도 통계 </title>
   <meta charset="utf-8">
   <style>
+  	.outer{
+  		min-height: 1000px;
+  	}
     section {
       padding: 15px;
+    }
+    .pageTitle{
+    	height : 50px;
     }
     .graph { 
       position: relative;
@@ -157,7 +179,6 @@ import="idealType.model.service.*"
     .itemBox{
         display : flex;
         height : 90px;
-        width : 1000px;
         margin : 0px 10px;
     }
     .itemName{
@@ -166,6 +187,7 @@ import="idealType.model.service.*"
         font-size : 20pt;
         font-weight: 500;
         line-height: 70px;
+        color:rgb(230, 141, 150);
     }
     .itemValue{
         display: flex;
@@ -173,11 +195,18 @@ import="idealType.model.service.*"
         margin : 0px  5px auto;
     }
     .itemValueName{
-        margin: 0px 15px;
+    	width : 110px;
         line-height: 60px;
     }
     .itemSync{
     	display: block;
+    }
+    .itemSyncNo{
+    	color:rgb(30, 180, 180);
+    }
+    .itemSyncGraph{
+    	width: 100px;
+    	height: 100px;
     }
     .itemCheck{
       width:50px;
@@ -212,21 +241,23 @@ import="idealType.model.service.*"
         		case 9: itemName = "거주 지역" ; break;
         		case 10: itemName = "관심 분야" ; break;
         		}
-
           %>
             <div class="itemBox">
             	<div class="itemName" id="">
             		<label><%= itemName %></label>
               	</div>
               	<%
-              	for (int j=0; j<st[i].length ; j++){
+              	for (int j=0; j<height.length ; j++){
               	%>
             	<div class="itemValue" id="">
                 	<div class="itemValueName">
-                 		<label></label>
+                 		<label><%= st[i][j].getItem() %></label>
                 	</div>
-                	<div class="">
-                		<label class="itemSync" id=""><%= %></label>
+                	<div class="itemSync">
+                		<div class="itemSyncNo">
+                			<label class="" id=""><%= st[i][j].getProp() %>%</label>
+                		</div>
+                		<div class="itemSyncGraph">
                 		<%
                 			String imagePath = null;
                 			if (st[i][j].getProp() > 0.65) {imagePath = request.getContextPath() + "/images/common/wifi high.png";}
@@ -234,7 +265,9 @@ import="idealType.model.service.*"
                 		else if (st[i][j].getProp() > 0.32) {imagePath = request.getContextPath() + "/images/common/wifi low.png";}
                 		else 								{imagePath = request.getContextPath() + "/images/common/wifi none.png";}
                 		%>
-                		<img src="imagePath" width="50px" height="50px">
+                		
+                			<img src="<%= imagePath %>" width="50px" height="50px">
+                		</div>
                 	</div>
             	</div>
             	<%
@@ -242,7 +275,7 @@ import="idealType.model.service.*"
             	} 
             	%>
             </div>
-          <%}%>
+            <% } %>
           </article>
         </section>
       </div>

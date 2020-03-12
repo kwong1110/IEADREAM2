@@ -566,11 +566,8 @@ public class MatchService {
 					}
 				}
 			}
-			System.out.println("before sort" + height[0].toString() + height[1].toString() + height[2].toString());
 			for (int j=0; j< height.length; j++) { height[j].divProp(list.length);}
-			Arrays.sort(height);			
-			System.out.println("after sort" + height[0].toString() + height[1].toString() + height[2].toString());
-
+			Arrays.sort(height);
 			for (int j=0; j< shape.length; j++) { shape[j].divProp(list.length);}
 			Arrays.sort(shape);
 			for (int j=0; j< style.length; j++) { style[j].divProp(list.length);}

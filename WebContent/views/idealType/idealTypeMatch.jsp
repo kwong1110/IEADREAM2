@@ -178,11 +178,17 @@ import="idealType.model.service.*"
     .itemName{
       float : left;
       margin : 5px 5px auto;
+      color:rgb(230, 141, 150);
     }
     .itemValue{
       text-align : right;
       margin : 5px  5px auto;
+      color:rgb(51, 51, 51);
     }
+    #sync, #listNo{
+   	color:rgb(230, 141, 150);
+    }
+    th{color:rgb(230, 141, 150);}
   </style>
 </head>
 <body>
