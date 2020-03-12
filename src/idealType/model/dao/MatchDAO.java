@@ -112,22 +112,24 @@ public class MatchDAO {
 		PreparedStatement pstmt = null; 
 		ResultSet rs = null;
 		String query = prop.getProperty("getUiCount");
-
-		if (item.equals("age")) {
+		if (item.equals("AGE")) {
 			query = prop.getProperty("getAgeCount");
 		}
 		ArrayList<Stat> list = new ArrayList<Stat>();
 		try {
 			  pstmt = conn.prepareStatement(query);
-			  pstmt.setString(1, item);
-			  pstmt.setString(2, item);
-			  pstmt.setString(3, gender);
 			  rs = pstmt.executeQuery();
 			  
 			  while(rs.next()) {
 				  Stat stat = new Stat();
-				  stat.setItem(rs.getString(item));
-				  stat.setProp(rs.getInt("COUNT"));
+				  
+				  switch(item) {
+				  case "SHAPE": case "STYLE": case "JOB" :
+					  stat.setItem(rs.getString(item));break;				  
+				  default : stat.setItem("" + rs.getInt(item)); break;
+				  }
+				  
+				  stat.setProp(rs.getInt(2));
 				  list.add(stat);
 			  }
 			  
@@ -144,24 +146,28 @@ public class MatchDAO {
 	  	}
 		return result;	
 	}
-	
+
 	public Stat[] getUpProp(Connection conn, String item, String gender) {
 		PreparedStatement pstmt = null; 
 		ResultSet rs = null;
-		String query = prop.getProperty("getUpCount");
+		String query = "SELECT "+item+", COUNT(USER_NO) FROM USER_PREFER JOIN ACCOUNT USING (USER_NO) WHERE GENDER = "+gender+" GROUP BY "+item+" ORDER BY COUNT(*) DESC";
 		
 		ArrayList<Stat> list = new ArrayList<Stat>();
 		try {
 			  pstmt = conn.prepareStatement(query);
 			  pstmt.setString(1, item);
-			  pstmt.setString(2, item);
-			  pstmt.setString(3, gender);
+			  pstmt.setString(2, gender);
+			  pstmt.setString(3, item);
 			  rs = pstmt.executeQuery();
 			  
 			  while(rs.next()) {
 				  Stat stat = new Stat();
-				  stat.setItem(rs.getString(item));
-				  stat.setProp(rs.getInt("COUNT"));
+				  switch(item) {
+				  case "SHAPE": case "STYLE": case "JOB" :
+					  stat.setItem(rs.getString(item));break;				  
+				  default : stat.setItem("" + rs.getInt(item)); break;
+				  }
+				  stat.setProp(rs.getInt(2));
 				  list.add(stat);
 			  }
 			  
@@ -188,12 +194,11 @@ public class MatchDAO {
 			  pstmt = conn.prepareStatement(query);
 			  pstmt.setString(1, gender);
 			  rs = pstmt.executeQuery();
-			  int total = rs.getInt("TOTAL");
 			  
 			  while(rs.next()) {
 				  Stat stat = new Stat();
-				  stat.setItem(rs.getString("INTEREST"));
-				  stat.setProp(rs.getInt("PROP")/total);
+				  stat.setItem(rs.getString(1));
+				  stat.setProp(rs.getInt(2));
 				  list.add(stat);
 			  }
 			  
@@ -209,6 +214,58 @@ public class MatchDAO {
 				result[size++] = temp;
 	  	}
 		return result;	
+	}
+	public int getUserInfoCount(Connection conn, String gender) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int result = 0;
+		
+		String query = prop.getProperty("getUserInfoCount");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, gender);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				result = rset.getInt(1);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	public int getUserPreferCount(Connection conn, String gender) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int result = 0;
+		
+		String query = prop.getProperty("getUserPreferCount");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, gender);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				result = rset.getInt(1);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return result;
 	}
 	
 }

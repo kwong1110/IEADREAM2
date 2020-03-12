@@ -179,10 +179,12 @@ import="idealType.model.service.*"
     .itemName{
       float : left;
       margin : 5px 5px auto;
+      color:rgb(230, 141, 150);
     }
     .itemValue{
       text-align : right;
       margin : 5px  5px auto;
+      color:rgb(51, 51, 51);
     }
     
     .img{
@@ -193,6 +195,12 @@ import="idealType.model.service.*"
     .pageTitle{
     	margin-bottom: 30px;
     }
+
+    #sync, #listNo{
+   	color:rgb(230, 141, 150);
+    }
+    th{color:rgb(230, 141, 150);}
+>>>>>>> branch 'master' of https://github.com/kwong1110/IeaDream2.git
   </style>
 </head>
 <body>
