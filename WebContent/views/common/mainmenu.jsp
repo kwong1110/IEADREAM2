@@ -83,7 +83,6 @@
 						<li class="s-menu"><span onclick="goIdealType();">이상형</span>
 							<ul class="dept01">
 								<li id="nop"><a href="<%=request.getContextPath()%>/get.mc">이상형 매칭</a></li>
-								<li id="nop"><a href="<%=request.getContextPath()%>/get.ist">이상형의 이상형 찾기</a></li>
 								<li id="nop"><a href="<%=request.getContextPath()%>/get.ups">이용자 취향 통계</a></li>
 							</ul>
 						</li>
@@ -159,9 +158,6 @@
 									</li>
 									<li id="nop">
 										<a href="<%=request.getContextPath() %>/adminList.faq">FAQ 관리</a>
-									</li>
-									<li id="nop">
-										<a href="<%=request.getContextPath() %>/insertRandom" >랜덤 회원 추가</a>
 									</li>
 								<% } %>
 							</ul>

@@ -82,8 +82,8 @@ import="idealType.model.service.*"
 	int smoke = ui.getSmoke();
 		String sVal = null;
 		switch(smoke) {
-		case 1: sVal = "피움"; break;
-		case 2: sVal = "안 피움"; break;
+		case 0: sVal = "피움"; break;
+		case 1: sVal = "안 피움"; break;
 		}
 		
 	String job = ui.getJob();
@@ -139,6 +139,7 @@ import="idealType.model.service.*"
 <html>
 <head>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/common.css">
+<link rel="stylesheet" href="<%= request.getContextPath() %>/css/board.css">
   <title>이상형 매칭</title>
   <meta charset="utf-8">
   <style>
@@ -153,7 +154,7 @@ import="idealType.model.service.*"
       width: 200px; 
       border: 1px solid #B1D632; 
       font-size:11px;
-      margin-bottom:3px;
+      margin-bottom:5%;
       border-radius: 25px 25px;
     }
     .graph .bar { 
@@ -183,6 +184,15 @@ import="idealType.model.service.*"
       text-align : right;
       margin : 5px  5px auto;
     }
+    
+    .img{
+    	width: 50%;
+    	height: 50%;
+    }
+    
+    .pageTitle{
+    	margin-bottom: 30px;
+    }
   </style>
 </head>
 <body>
@@ -195,18 +205,16 @@ import="idealType.model.service.*"
 		</div>
         <section id="summary" style="display: flex;">
           <article id="sync" style="text-align: center; margin-left: 40%;">
-            <label style="margin:10px;">일치율</label>
+            <label style="margin:5%;">일치율</label>
             <label><%= sync %>%</label>
             <div class="graph">
-                <strong class="bar" style="width: <%= sync %>%;"></strong>
+                <strong class="bar" style="width: <%= sync %>%; font-size: 15px;"></strong>
             </div>
           </article>
-          <article id="listNo" style="margin-left: 30%;">
+          <article id="listNo" style="margin-left: 30%; font-size: 13px;" >
             <h3>1 / <%= maxMatchNo %></h3>
           </article>
-        </section>
-       
-        <section id="itemProfile" style="display: flex; margin-left: 5%; margin-top: 2%;">
+        </section>       
         <table>
 		 	<tr>
 	 			<th>사진</th>
@@ -220,58 +228,45 @@ import="idealType.model.service.*"
 	 		</td>
 	 		<td>
               	<article id="hello" style="text-align:center; margin-left:30px;">
-                	<textarea style="width: 550px; height:200px; margin-top :15px; resize:none;" name="hello"><%= hello %></textarea>
+                	<textarea style="width: 550px; height:200px; margin-top :15px; resize:none;" name="hello" readonly><%= hello %></textarea>
               	</article>
  			</td>
 	 		</tr>
 	 	</table>
-        </section>
-        <section id="items">  
-          <article>
-            <div class="itemBox">
-              <div class="itemName" id="">이름</div>
-              <div class="itemValue" id="name"><%= name %></div>
-            </div>
-            <div class="itemBox">
-                <div class="itemName" id="">나이</div>
-                <div class="itemValue" id="age"><%= ageVal %></div>
-            </div>
-            <div class="itemBox">
-                <div class="itemName" id="">키</div>
-                <div class="itemValue" id="height"><%= hVal %></div>
-            </div>
-            <div class="itemBox">
-                <div class="itemName" id="">체형</div>
-                <div class="itemValue" id="shape"><%= shVal %></div>
-            </div>
-            <div class="itemBox">
-                <div class="itemName" id="">스타일</div>
-                <div class="itemValue" id="style"><%= stVal %></div>
-            </div>
-            <div class="itemBox">
-                <div class="itemName" id="">지역</div>
-                <div class="itemValue" id="region"><%= reVal %></div>
-            </div>
-            <div class="itemBox">
-                <div class="itemName" id="">종교</div>
-                <div class="itemValue" id="religion"><%= relVal %></div>
-            </div>
-            <div class="itemBox">
-                <div class="itemName" id="">학력</div>
-                <div class="itemValue" id="scholar"><%= scVal %></div>
-            </div>
-            <div class="itemBox">
-                <div class="itemName" id="">직업</div>
-                <div class="itemValue" id="job"><%= jVal %></div>
-            </div>
-            <div class="itemBox">
-                <div class="itemName" id="">음주</div>
-                <div class="itemValue" id="drink"><%= dVal %></div>
-            </div>
-            <div class="itemBox">
-                <div class="itemName" id="">흡연</div>
-                <div class="itemValue" id="smoke"><%= sVal %></div>
-            </div>
+        <table class="mainBoard" id="boManageForm">
+        	<tbody>
+        	<tr>
+        		<th>이름</th>
+        		<td><%= name %></td>
+        		<th>나이</th>
+        		<td><%= ageVal %></td>
+        		<th>키</th>
+        		<td><%= hVal %></td>
+        		<th>체형</th>
+        		<td><%= shVal %></td>
+        	</tr>
+        	<tr>
+        		<th>스타일</th>
+        		<td><%= stVal %></td>
+        		<th>지역</th>
+        		<td><%= reVal %></td>
+        		<th>종교</th>
+        		<td><%= relVal %></td>
+        		<th>학력</th>
+        		<td><%= scVal %></td>
+        	</tr>
+        	<tr>
+        		<th>직업</th>
+        		<td><%= jVal %></td>
+        		<th>음주</th>
+        		<td><%= dVal %></td>
+        		<th>흡연</th>
+        		<td><%= sVal %></td>
+        		<th>회원번호</th>
+        		<td><%= ac.getUserNo() %></td>
+        	</tr>
+        	<tr>
+        	<th>관심분야</th>
 			<%
 			String[] interestVal = new String[interestList.length];
 			for(int i = 0; i < interestList.length; i++){
@@ -300,23 +295,20 @@ import="idealType.model.service.*"
 				}
 				
 			%>
-            <div class="itemBox">
-                <div class="itemName" id="">관심분야</div>
-                <div class="itemValue" id="interest[<%= i %>]"><%= interestVal[i] %></div>
-            </div>
+            <td><%= interestVal[i] %><td>
 			<% } %>
-			
-        </article>
-        </section>
-        <section id="move" style="display:flex; margin: 5%;">
-          <div style="margin: 0 auto;">
+			</tbody>
+        </table>
+        <section id="move" style="display:flex; margin: 5%; text-align: center; 
+	vertical-align: middle;">
+          <div style="margin: 0 auto; width: 100px; height:100px;">
           	<a href="<%= request.getContextPath()%>/sendHeart.mc">
-            <img src="<%= request.getContextPath() %>/images/common/heart.png" width="25px" height="25px">
+            <img src="<%= request.getContextPath() %>/images/common/heart.png">
             </a>
           </div>
-          <div  style="text-align:right">
+          <div  style="margin: 0 auto; text-align:right; width: 100px; height:100px;">
           	<a href="<%= request.getContextPath()%>/disband.mc">
-            <img src="<%= request.getContextPath() %>/images/common/next.png" width="25px" height="25px" hidden="<%= next%>">
+            <img src="<%= request.getContextPath() %>/images/common/next.png" hidden="<%= next%>">
             </a>
           </div>
         </section>

@@ -49,11 +49,11 @@ public class heartHistoryDateServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String okTarget = request.getParameter("okTarget");
 		String okUser = request.getParameter("okUser");
-
+		System.out.println("okUser 확인 : " + okUser);
 		userService us = new userService();
         
-        int searchT = us.searchDate(okTarget);
-        
+        int searchT = us.searchDate(okUser);
+        System.out.println("검색지역 : " + searchT);
         String searchlocation = "";
         switch(searchT) {
         case 11: searchlocation="서울"; break;
@@ -77,22 +77,43 @@ public class heartHistoryDateServlet extends HttpServlet {
         String[] searchTI = us.searchDateI(okTarget);
         String[] searchUI = us.searchDateI(okUser);
         String[] commonInter = new String[20];
+        
+        
+   
         for(int i = 0; i < searchTI.length; i ++) {
+        	System.out.println("타겟   유저 관심사 확인" + searchTI[i] + searchUI[i]);
         	if(searchTI[i] != null && searchUI[i] != null) {
         		commonInter[i] = searchTI[i];
         	}
+        	System.out.println("공통 관심사 확인" + commonInter[i]);
         }
         
        
+       
         String commonInterS = "";
         
-		while(commonInterS != null){    
+        for(int i = 0; i < commonInter.length; i ++) {
+        	if(commonInter[i] != null) {
+        		commonInterS = commonInter[i]; 
+        		break;
+        	}
+    		if(searchTI[i] != null) {
+    			commonInterS = searchTI[i];
+    		}
+    		if(searchUI[i] != null) {
+    			commonInterS = searchUI[i];
+    		}
+        }
+        
+        System.out.println("공통 관심사 검색어 확인 : " + commonInterS);
+        
+		/*while(commonInterS != null){    
 			int ranNum = (int)(Math.random() * 20);
 	    	if(commonInter[ranNum] != null) {
 	    		commonInterS = commonInter[ranNum];
 	    		if(commonInterS != null) { break; }
 	    	}
-		}
+		}*/
         
 		System.out.println("공통 관심사 중 랜덤 확인 : " + commonInterS);
 		
@@ -106,7 +127,6 @@ public class heartHistoryDateServlet extends HttpServlet {
         case "musical": searchInterest="뮤지컬"; break;
         case "picture": searchInterest="사진 찍기 좋은 곳"; break;
         case "music": searchInterest="콘서트"; break;
-        case "movie": searchInterest="영화"; break;
         case "comic": searchInterest="만화 카페"; break;
         case "books": searchInterest="독서실"; break;
         case "sing": searchInterest="코인노래방"; break;
@@ -118,6 +138,7 @@ public class heartHistoryDateServlet extends HttpServlet {
         case "drink": searchInterest="술집"; break;
         case "beauty": searchInterest="쇼핑몰"; break;
         case "pet": searchInterest="애견 카페"; break;
+        case "movie": searchInterest="영화관"; break;
         }
         
         String text = searchlocation + searchInterest;
@@ -190,6 +211,8 @@ public class heartHistoryDateServlet extends HttpServlet {
             
             response.setContentType("text/html;charset=UTF-8"); 
 			request.setAttribute("data", data);
+			request.setAttribute("searchlocation", searchlocation);
+			request.setAttribute("searchInterest", searchInterest);
 			RequestDispatcher view = request.getRequestDispatcher("views/myPage/user/heartHistoryDateForm.jsp");
     		view.forward(request, response);
     		            

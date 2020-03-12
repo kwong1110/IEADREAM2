@@ -485,7 +485,6 @@ private Properties prop = new Properties();
 				        case "musical": searchI[5] = rset.getString("INTEREST"); break;
 				        case "picture": searchI[6] = rset.getString("INTEREST"); break;
 				        case "music": searchI[7] = rset.getString("INTEREST"); break;
-				        case "movie": searchI[8] = rset.getString("INTEREST"); break;
 				        case "comic": searchI[9] = rset.getString("INTEREST"); break;
 				        case "books": searchI[10] = rset.getString("INTEREST"); break;
 				        case "sing": searchI[11] = rset.getString("INTEREST"); break;
@@ -497,7 +496,9 @@ private Properties prop = new Properties();
 				        case "drink": searchI[17] = rset.getString("INTEREST"); break;
 				        case "beauty": searchI[18] = rset.getString("INTEREST"); break;
 				        case "pet": searchI[19] = rset.getString("INTEREST"); break;
+				        case "movie": searchI[8] = rset.getString("INTEREST"); break;
 				        }
+						System.out.println("(DAO) searchI" + i + "번쨰" + searchI[i]);
 					}
 				}
 			}

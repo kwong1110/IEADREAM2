@@ -80,7 +80,7 @@
 										<th><input type="checkbox" id="all" onclick="checkAll();"></th>
 										<th>분류</th>
 										<th>상태</th>
-										<th>상태변경</th>
+										<th colspan=2>상태변경</th>
 										<th>남은 기간</th>
 										<th><input type="hidden" name="userNo" value="<%= loginUser.getUserNo() %>"></th>
 									</tr>
@@ -92,6 +92,7 @@
 									</tr>
 									<% } else{ 
 											for(Match m : list){
+												int i = 1;
 											switch(m.getMatchStatus()){
 											case "S": matchStatus = "상대방의 응답을 기다리고 있습니다."; break;
 											case "C": matchStatus = "거절 완료"; break;
@@ -117,8 +118,12 @@
 											<input type="hidden" id="profileT" name="profileT" value="<%= m.getTargetNo() %>">
 											<input type="hidden" id="profileU" name="profileU" value="<%= m.getUserNo() %>">
 											<ul class="heartState">
-												<% if(inOut.equals("수신")){ %>
+												<% if(inOut.equals("수신") || matchStatus.equals("상대방의 응답을 기다리고 있습니다.")){ %>
+													<%if(matchStatus.equals("상대방의 응답을 기다리고 있습니다.")) { %>
+												<li>회원번호 <%= m.getTargetNo() %></li>
+													<% } else { %>
 												<li>회원번호 <%= m.getUserNo() %></li>
+													<% } %>
 													<%if(matchStatus.equals("하트가 날아왔습니다! 확인해주세요!")) {%>
 												<li class="blinking"><%= matchStatus %></li>
 													<%} else {%>
@@ -133,17 +138,17 @@
 										</td>
 										<td>
 											<% if(matchStatus.equals("하트가 날아왔습니다! 확인해주세요!")){ %>
-											<input type="hidden" id="okTarget" name="okTarget" value="<%= m.getTargetNo() %>">
-											<input type="hidden" id="okUser" name="okUser" value="<%= m.getUserNo() %>">
+											<input type="hidden" id="okTarget2" name="okTarget" value="<%= m.getTargetNo() %>">
+											<input type="hidden" id="okUser2" name="okUser" value="<%= m.getUserNo() %>">
 											<input type="button" class="defaultBtn subBtn" value="수락" onclick="heartOk();">
 											<input type="button" class="defaultBtn subBtn" value="거절" onclick="heartNo();">
 											<% } %>
 										</td>
 										<td>
 											<% if(matchStatus.equals("하트 수락")){ %>
-												<input type="button" class="defaultBtn subBtn" value="데이트 장소 추천" onclick="heartDate()">
-												<input type="hidden" id="okTarget" name="okTarget" value="<%= m.getTargetNo() %>">
-												<input type="hidden" id="okUser" name="okUser" value="<%= m.getUserNo() %>">
+												<input type="button" class="defaultBtn subBtn heartDate" value="데이트 장소 추천">
+												<input type="hidden" id="okTarget"  name="okTarget" value="<%= m.getTargetNo() %>">
+												<input type="hidden" id="okUser"  name="okUser" value="<%= m.getUserNo() %>">
 											<% } %>
 										</td>
 										<% long leftDays = 7 - (sqlDate.getTime() - m.getMatchDate().getTime()) / (24*60*60*1000); %>
@@ -241,6 +246,15 @@
 		location.href="<%= request.getContextPath() %>/list.hhd?okTarget="+okTarget+"&okUser="+okUser;
 	}
 	
+	$(function(){
+		$('.heartDate').click(function(){
+
+			var okTarget = $(this).next().val();
+			var okUser = $(this).next().next().val();
+			
+			location.href="<%= request.getContextPath() %>/list.hhd?okTarget="+okTarget+"&okUser="+okUser;
+		});
+	});
 	window.onload = function(){
 		
 		if($('.leftDays').val() != null){
@@ -269,15 +283,15 @@
 	}
 	
 	function heartOk(){
-		var okTarget = $('#okTarget').val();
-		var okUser = $('#okUser').val();
+		var okTarget = $('#okTarget2').val();
+		var okUser = $('#okUser2').val();
 		
 		location.href="<%= request.getContextPath() %>/heartok.hh?okTarget="+okTarget+"&okUser="+okUser+"&userNo=<%= loginUser.getUserNo() %>";
 	}
 	
 	function heartNo(){
-		var okTarget = $('#okTarget').val();
-		var okUser = $('#okUser').val();
+		var okTarget = $('#okTarget2').val();
+		var okUser = $('#okUser2').val();
 		
 		location.href="<%= request.getContextPath() %>/heartno.hh?okTarget="+okTarget+"&okUser="+okUser+"&userNo=<%= loginUser.getUserNo() %>";
 	}
@@ -288,7 +302,7 @@
 		}).mouseout(function(){
 			$(this).parent().css('background','none');
 		}).click(function(){
-			
+			// var checkboxYn = $(this).find("input[type='checkbox']").length;
 			var profileT = $(this).parent().prev().prev().val();
 			var profileU = $(this).parent().prev().val();
 			
@@ -302,9 +316,9 @@
 			}
 			
 			if (checkboxYn == 0) {
-				var popLeft = Math.ceil(( window.screen.width - 1200 )/2);
-				var popTop = Math.ceil(( window.screen.height - 600 )/2);
-				window.open('<%=request.getContextPath()%>/profile.hh?no=' + userNo, "heartUserProfile", "width=1200, height=600, "+ ", left=" + popLeft + ", top="+ popTop);
+				var popLeft = Math.ceil(( window.screen.width - 1920 )/2);
+				var popTop = Math.ceil(( window.screen.height - 1080 )/2);
+				window.open('<%=request.getContextPath()%>/profile.hh?userNo=' + userNo, "heartUserProfile", "width=1200, height=600, "+ ", left=" + popLeft + ", top="+ popTop);
 			}
 		});
 	});

@@ -49,17 +49,12 @@
 </body>
 <%@ include file="../../common/footer.jsp"%>
 	<script>
-		/* $(function(){
-			$('#imageChange').click(function(){
-				$("#inputImage").click();
-			});
-		}); */
 		var IMP = window.IMP; // 생략가능
 		IMP.init('imp40839518');
 		
 		$("#payment").click(function(){
 			IMP.request_pay({
-			    pg : 'html5_inicis', // version 1.1.0부터 지원.
+			    pg : 'html5_inicis', 
 			    pay_method : 'card',
 			    merchant_uid : 'merchant_' + new Date().getTime(),
 			    name : '이어드림(IEADREAM) 정회원(365일) 이용권 구매',
@@ -67,8 +62,6 @@
 			    buyer_email : '<%= loginUser.getEmail() %>',
 			    buyer_name : '<%= loginUser.getUserName() %>',
 			    buyer_tel : '<%= loginUser.getPhone() %>',
-			   /*  buyer_addr : '서울특별시 강남구 삼성동', */
-			   /*  buyer_postcode : '123-456', */
 			    m_redirect_url : 'http://www.iamport.kr/mobile/landing'
 			}, function(rsp) {
 			    if ( rsp.success ) {
